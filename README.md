@@ -1,0 +1,1 @@
+Example [Hexo](http://hexo.io/) site using GitLab Pages. Read more at https://doc.gitlab.com/ee/pages/
