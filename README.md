@@ -52,7 +52,6 @@ To work locally with this project, you'll have to follow the steps below:
 1. Fork, clone or download this project
 1. [Install][] Hexo
 1. Install dependencies: `npm install`
-1. Generate the website: `hexo generate`
 1. Preview your project: `hexo server`
 1. Add content
 
