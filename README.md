@@ -9,7 +9,19 @@ documentation http://doc.gitlab.com/ee/pages/README.html.
 
 ---
 
-## `.gitlab-ci.yml` contents
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [GitLab CI](#gitlab-ci)
+- [Building locally](#building-locally)
+- [GitLab User or Group Pages](#gitlab-user-or-group-pages)
+- [Did you fork this project?](#did-you-fork-this-project)
+- [Troubleshooting](#troubleshooting)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## GitLab CI
 
 This project's static Pages are built by [GitLab CI][ci], following the steps
 defined in [`.gitlab-ci.yml`](.gitlab-ci.yml):
