@@ -50,11 +50,11 @@ pages:
 To work locally with this project, you'll have to follow the steps below:
 
 1. Fork, clone or download this project
-1. [Install][] Hexo
+1. [Install][] Hexo and [Hexo Sever][hexo-server]
 1. Install dependencies: `npm install`
-1. Generate the website: `hexo generate`
-1. Preview your project: `hexo server`
+1. Preview your site: `hexo server`
 1. Add content
+1. Generate your site (optional): `hexo generate`
 
 Read more at Hexo's [documentation][].
 
@@ -87,3 +87,4 @@ unless you want to contribute back to the upstream project.
 [documentation]: https://hexo.io/docs/
 [userpages]: http://doc.gitlab.com/ee/pages/README.html#user-or-group-pages
 [projpages]: http://doc.gitlab.com/ee/pages/README.html#project-pages
+[hexo-server]: https://hexo.io/docs/server.html
