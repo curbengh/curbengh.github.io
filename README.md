@@ -81,6 +81,10 @@ unless you want to contribute back to the upstream project.
     your static generator has a configuration option that needs to be explicitly
     set in order to serve static assets under a relative URL.
 
+----
+
+Forked from @VeraKolotyuk
+
 [ci]: https://about.gitlab.com/gitlab-ci/
 [hexo]: https://hexo.io
 [install]: https://hexo.io/docs/index.html#Installation
