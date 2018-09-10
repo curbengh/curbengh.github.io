@@ -1,0 +1,93 @@
+# Lang
+language: en
+
+# Dark Mode
+dark: false
+
+# Header
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+# Your Feed Location
+#rss: /atom.xml
+
+# Content
+fancybox: true
+
+
+# Miscellaneous
+google_analytics:
+favicon: /favicon.ico
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:
+
+
+# Profile
+nickname: NickName
+description: Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Aliquam eleifend dolor vitae [libero pharetra](http://hexo.io) adipiscing. Etiam adipiscing dolor a quam tempor, eu convallis nulla varius. Aliquam sollicitudin risus a porta aliquam.
+
+# Load fontawesome icons? Also see the links option
+icons: false
+
+# Footer area links
+# NOTICE) If you set "icons: false" link names will be clear text
+# If "icons: true" link names will interpreted as fontawesome icon names
+# NOTICE) Use the fontawesome icon names without the fa- prefix (http://fontawesome.io/cheatsheet/)
+links:
+  book: /archives/
+  globe: https://github.com/geekplux/hexo-theme-typing
+  twitter: https://twitter.com/
+  github-alt: https://github.com/
+  youtube-play: https://www.youtube.com/
+  stack-overflow: https://stackoverflow.com/
+  google-plus: https://plus.google.com/
+  rss: /atom.xml
+
+# nav position (top, left. top is default)
+nav: left
+
+# Info
+archive_footer_content: Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Archive
+post_footer_content: ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Post
+
+# Gitment
+gitment:
+  owner:
+  repo:
+  client:
+    id:
+    secret:
+
+# Utterances
+# NOTICE) make sure the app is installed on the repo before using this commit system
+# see https://utteranc.es/ for more
+utterances:
+  enable: false
+  repo: # your repo in this format: 'username/reponame', note that there is no '.git' suffix
+
+# If you want to use valine,you should get the appId and appKey form https://leancloud.cn ,more setting please see https://valine.js.org
+valine:
+  enable: false # !!if you want use valine comment system,please set enable: true
+  appId:  #your leancloud appId
+  appKey:  #your leancloud appKey
+  guest_info: nick,mail,link #valine comment header info
+  placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
+  avatar: mm # gravatar style https://valine.js.org/avatar
+  pageSize: 10 # comment list page size
+  verify: false # valine verify code (true/false)
+  notify: false # valine mail notify (true/false)
+  lang: zh-cn
+
+# Donate
+donate:
+  enable: false
+  github: https://github.com/geekplux
+  paypal: https://www.paypal.me/geekplux
+  bitcoin: 1AVngxh56oLvAzXsEFnzccUohZdHswjC7j
+  BTCQR: http://7b1evr.com1.z0.glb.clouddn.com/donate/bitcoin.png
+  AliPayQR: http://7b1evr.com1.z0.glb.clouddn.com/donate/alipayQR.jpg
+  WeChatQR: http://7b1evr.com1.z0.glb.clouddn.com/donate/wechatQR.jpg
