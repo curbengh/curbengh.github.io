@@ -15,15 +15,8 @@ menu:
 # Content
 fancybox: true
 
-
 # Miscellaneous
-#google_analytics:
 favicon:
-#twitter:
-#google_plus:
-#fb_admins:
-#fb_app_id:
-
 
 # Profile
 nickname: curben's blog
@@ -62,33 +55,3 @@ donate:
   BTCQR: 
   AliPayQR: 
   WeChatQR: 
-
-# Following are configs for various comment system supported by the typing theme
-# Gitment
-gitment:
-  owner:
-  repo:
-  client:
-    id:
-    secret:
-
-# Utterances
-# NOTICE) make sure the app is installed on the repo before using this commit system
-# see https://utteranc.es/ for more
-utterances:
-  enable: false
-  repo: # your repo in this format: 'username/reponame', note that there is no '.git' suffix
-
-# If you want to use valine,you should get the appId and appKey form https://leancloud.cn ,more setting please see https://valine.js.org
-valine:
-  enable: false # !!if you want use valine comment system,please set enable: true
-  appId:  #your leancloud appId
-  appKey:  #your leancloud appKey
-  guest_info: nick,mail,link #valine comment header info
-  placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
-  avatar: mm # gravatar style https://valine.js.org/avatar
-  pageSize: 10 # comment list page size
-  verify: false # valine verify code (true/false)
-  notify: false # valine mail notify (true/false)
-  lang: zh-cn
-
