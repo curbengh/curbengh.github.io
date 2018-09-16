@@ -6,7 +6,6 @@ dark: true
 
 # Header
 menu:
-  #To-do: Change home page to /archives
   Home: /
   Archives: /archives
   About: /about
@@ -39,7 +38,7 @@ icons: false
 # If "icons: true" link names will interpreted as fontawesome icon names
 # NOTICE) Use the fontawesome icon names without the fa- prefix (http://fontawesome.io/cheatsheet/)
 links:
-  Archives: /archives/
+  Home: /
 #  globe: 
 #  twitter: 
 #  github-alt: 
@@ -52,8 +51,8 @@ links:
 nav: left
 
 # Info
-archive_footer_content: Lorem ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Archive
-post_footer_content: ipsum dolor sit amet, **consectetur adipiscing elit.** Fusce eget urna vitae velit *eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque* penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Post
+archive_footer_content:
+post_footer_content:
 
 # Donate
 donate:
