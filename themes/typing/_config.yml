@@ -7,7 +7,6 @@ dark: true
 # Header
 menu:
   Home: /
-  Archives: /archives
   About: /about
 
 # Your Feed Location
