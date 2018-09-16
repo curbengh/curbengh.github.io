@@ -1,31 +1,9 @@
-<% if (is_home()) { %>
+<%/* Display footer only on /about page */%>
+<% if (is_current('about/index.html')) { %>
   <footer id="footer" class="home-footer footer">
     <div id="copyright" class="copyright">
-      &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>.       <%= __('powered_by') %> <a href="https://hexo.io/" target="_blank">Hexo</a>  with <a href="https://github.com/geekplux/hexo-theme-typing" target="_blank">Typing</a> theme.
-<% } else if (is_archive()) { %>
-  <footer id="footer" class="archive-footer footer">
-    <% if (theme.icons){ %>
-      <ul class="footer-links">
-        <% for (var key in theme.links) { %>
-          <li><a href="<%= theme.links[key] %>"><span class="fa fa-<%= key %>"></span></a></li>
-        <% } %>
-      </ul>
-	  <% } %>
-  <hr/>
-  <div id="footerContent" class="footer-content">
-    <!--%- markdown(theme.archive_footer_content) %-->
-<% } else {%>
-    <footer id="footer" class="post-footer footer">
-      <% if (theme.icons){ %>
-        <ul class="footer-links">
-          <% for (var key in theme.links) { %>
-            <li><a href="<%= theme.links[key] %>"><span class="fa fa-<%= key %>"></span></a></li>
-          <% } %>
-        </ul>
-	    <% } %>
-      <hr/>
-      <div id="footerContent" class="footer-content">
-        <!--%- markdown(theme.post_footer_content) %-->
+      &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>. <%= __('powered_by') %> <a href="https://hexo.io/" target="_blank">Hexo</a> with <a href="https://github.com/geekplux/hexo-theme-typing" target="_blank">Typing</a> theme.
 <% } %>
       </div>
     </footer>
+
