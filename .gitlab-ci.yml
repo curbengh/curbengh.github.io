@@ -1,16 +1,19 @@
+# Use latest version of Node.js
 image: node:latest
 
+
 pages:
-  cache:
+  cache: # add cache to 'node_modules' for speeding up builds
     paths:
-    - node_modules/
+      - node_modules/ # Node modules and dependencies
 
   script:
-  - npm install hexo-cli -g
-  - npm install
-  - hexo deploy
+    - npm install hexo-cli -g
+    - npm install
+    - hexo deploy # deploy the site
+    - find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \; # Compress files
   artifacts:
     paths:
-    - public
+      - public # deploy to the 'public' folder
   only:
-  - master
+    - master # this job will affect only the 'master' branch
