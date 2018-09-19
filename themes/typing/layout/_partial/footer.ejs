@@ -1,9 +1,7 @@
-<%/* Display footer only on /about page */%>
-<% if (is_current('about/index.html')) { %>
-  <footer id="footer" class="home-footer footer">
-    <div id="copyright" class="copyright">
-      &copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>. <%= __('powered_by') %> <a href="https://hexo.io/" target="_blank">Hexo</a> with <a href="https://github.com/geekplux/hexo-theme-typing" target="_blank">Typing</a> theme.
-    </div>
-  </footer>
-<% } %>
+<%/* Display footer on every page */%>
+<footer id="footer" class="footer">
+  <div id="copyright" class="copyright">
+      &copy; <%= date(new Date(), 'YYYY') %> <%= config.author %>. <%= __('powered_by') %> <%- link_to('https://hexo.io/', 'Hexo', {external: true}) %> with <%- link_to('https://github.com/geekplux/hexo-theme-typing', 'Typing', {external: true}) %> theme. Content is licensed under <%- link_to('https://creativecommons.org/licenses/by-sa/4.0/', 'CC-BY-SA 4.0', {external: true}) %>
+  </div>
+</footer>
 
