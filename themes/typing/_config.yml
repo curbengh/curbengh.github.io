@@ -8,6 +8,7 @@ dark: true
 menu:
   Home: /
   About: /about
+  GitLab: https://gitlab.com/curben/curben.gitlab.io
 
 # Your Feed Location
 #rss: /atom.xml
@@ -26,18 +27,12 @@ description: Troubleshooting, tips & tricks, etc.
 icons: false
 
 # Footer area links
-# NOTICE) If you set "icons: false" link names will be clear text
+# If you set "icons: false" link names will be clear text
 # If "icons: true" link names will interpreted as fontawesome icon names
-# NOTICE) Use the fontawesome icon names without the fa- prefix (http://fontawesome.io/cheatsheet/)
+# Use only the brand icon names (https://fontawesome.com/cheatsheet#brands)
 links:
   Home: /
-#  globe: 
-#  twitter: 
-#  github-alt: 
-#  youtube-play: 
-#  stack-overflow: 
-#  google-plus: 
-#  rss: 
+  GitLab: https://gitlab.com/curben/curben.gitlab.io
 
 # nav position (top, left. top is default)
 nav: left
@@ -45,13 +40,3 @@ nav: left
 # Info
 archive_footer_content:
 post_footer_content:
-
-# Donate
-donate:
-  enable: false
-  github: 
-  paypal: 
-  bitcoin: 
-  BTCQR: 
-  AliPayQR: 
-  WeChatQR: 
