@@ -16,9 +16,6 @@ menu:
 # Content
 fancybox: true
 
-# Miscellaneous
-favicon: /favicon.png
-
 # Profile
 nickname: curben's blog
 description: Troubleshooting, tips & tricks, etc.
@@ -36,7 +33,3 @@ links:
 
 # nav position (top, left. top is default)
 nav: left
-
-# Info
-archive_footer_content:
-post_footer_content:
