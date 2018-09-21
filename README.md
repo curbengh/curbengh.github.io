@@ -8,6 +8,10 @@ Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing]
 
 ---
 
+## Contents
+{:.no_toc}
+
+- TOC
 {:toc}
 
 ---
