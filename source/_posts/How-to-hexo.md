@@ -1,5 +1,5 @@
 ---
-title: Create a Hexo blog using GitLab Pages
+title: How to create a Hexo blog
 date: 2018-09-21 00:00:00
 tags:
 ---
