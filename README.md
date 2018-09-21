@@ -6,16 +6,6 @@ curben.gitlab.io
 
 Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing](https://github.com/geekplux/hexo-theme-typing) theme.
 
----
-
-## Contents
-{:.no_toc}
-
-- TOC
-{:toc}
-
----
-
 ## Installation
 
 1. Change `<folder>` to a preferred name.
