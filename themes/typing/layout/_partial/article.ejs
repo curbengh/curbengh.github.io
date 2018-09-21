@@ -17,7 +17,7 @@
           </p>
         <% } %>
       <% } else { %>
-        <%- toc(page.content) %>
+        <%- toc(page.content, {list_number: false}) %>
         <%- post.content %>
       <% } %>
     </div>
