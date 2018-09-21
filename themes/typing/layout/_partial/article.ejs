@@ -13,10 +13,11 @@
         <%- post.excerpt %>
         <% if (theme.excerpt_link){ %>
           <p class="article-more-link">
-            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
+            <%- link_to(url_for(post.path)+'#more', theme.excerpt_link) %>
           </p>
         <% } %>
       <% } else { %>
+        <%- toc(page.content) %>
         <%- post.content %>
       <% } %>
     </div>
