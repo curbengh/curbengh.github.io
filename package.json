@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "hexo": {
-    "version": "latest"
+    "version": "3.7.1"
   },
   "dependencies": {
     "hexo": "latest",
