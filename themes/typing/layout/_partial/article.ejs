@@ -25,7 +25,7 @@
       <ul class="article-meta">
         <li>
           <span class="label"><%= __('date_published') %>:</span>
-          <%- partial('post/date', {class_name: 'article-date', date_format: null}) %>
+          <%- partial('post/date', {class_name: 'article-date', date_format: 'D MMM YYYY'}) %>
         </li>
         <% if (post.categories && post.categories.length) { %>
           <li>
