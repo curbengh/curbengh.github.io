@@ -65,6 +65,11 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: typing
 
+# hexo-autonofollow
+## https://github.com/liuzc/hexo-autonofollow
+nofollow:
+  enable: true
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
