@@ -79,7 +79,7 @@ The following are the major changes I made from the upstream.
 - Homepage shows index of posts.
 - Remove header and footer display (except for `/about` page).
 - Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases) and [Font Awesome](https://github.com/FortAwesome/Font-Awesome/releases)
-- All js and css files are self-hosted.
+- All js and css files are self-hosted and [pre-compressed](https://docs.gitlab.com/ee/user/project/pages/introduction.html#serving-compressed-assets).
 - Remove analytic, comment system and donation links.
 
 ---
