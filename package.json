@@ -16,6 +16,12 @@
     "hexo-renderer-ejs": "latest",
     "hexo-renderer-stylus": "latest",
     "hexo-renderer-marked": "latest",
-    "hexo-server": "latest"
-  }
+    "hexo-server": "latest",
+    "snyk": "^1.97.1"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
