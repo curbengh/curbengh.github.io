@@ -31,16 +31,23 @@ Create a website/blog (hosted by [GitLab](https://about.gitlab.com/features/page
 ```bash
 $ git clone https://gitlab.com/curben/curben.gitlab.io <folder>
 ```
-3. Install Node.js.
+3. Install Node.js 10.
 ```bash
 # Installing npm will also install nodejs as dependency.
-# Ubuntu/Debian
-$ sudo apt-get install npm
-# Fedora/Red Hat
-$ sudo yum install npm
+# Ubuntu 16.04 or newer
+$ sudo snap install node --classic --channel=10
+# Debian
+$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+# Fedora 29
+$ sudo dnf install npm
+# Fedora 28 or older
+$ curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+$ sudo yum -y install nodejs
 # Arch Linux
 $ sudo pacman -S npm
 ```
+For other distro, see [here](https://nodejs.org/en/download/package-manager/) or [here](https://github.com/nodesource/distributions).
 4. Install Hexo and its dependencies (defined in [package.json](package.json)).
 ```bash
 $ sudo npm install -g hexo-cli
