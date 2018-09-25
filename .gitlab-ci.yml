@@ -9,22 +9,21 @@ cache: # add cache to 'node_modules' for speeding up builds
   paths:
     - node_modules/ # Node modules and dependencies
 
-before_script: # install tools before jobs
-  - npm install -g hexo-cli snyk
-  - snyk auth $SNYK_TOKEN
-
 snyk-test:
   stage: test
   script:
     - npm install # install node modules
+    - npm install -g snyk
+    - snyk auth $SNYK_TOKEN
     - snyk protect # Apply patches to node modules
-    - snyk test # Verify node modules for vulnerability
+    - snyk test # Check node modules for vulnerability
   only:
     - master
 
 pages:
   stage: deploy
   script:
+    - npm install -g hexo-cli
     - hexo deploy # deploy the site
     - find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \; # Compress files
   artifacts:
