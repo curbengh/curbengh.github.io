@@ -1,19 +1,37 @@
 # Use latest version of Node.js
 image: node:latest
 
+stages:
+  - build
+  - test
+  - deploy
+
+cache: # add cache to 'node_modules' for speeding up builds
+  paths:
+    - node_modules/ # Node modules and dependencies
+
+only:
+  - master # CI will affect only the 'master' branch
+
+build-job:
+  stage: build
+  script:
+    - npm install -g hexo-cli snyk
+    - npm install
+    - snyk auth $SNYK_TOKEN
+
+snyk-test:
+  stage: test
+  script:
+    - snyk test # Test node modules for vulnerability
 
 pages:
-  cache: # add cache to 'node_modules' for speeding up builds
-    paths:
-      - node_modules/ # Node modules and dependencies
-
+  stage: deploy
   script:
-    - npm install hexo-cli -g
-    - npm install
+    - snyk protect # Apply patches to node modules
     - hexo deploy # deploy the site
     - find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \; # Compress files
   artifacts:
     paths:
       - public # deploy to the 'public' folder
-  only:
-    - master # this job will affect only the 'master' branch
+  when: on_success
