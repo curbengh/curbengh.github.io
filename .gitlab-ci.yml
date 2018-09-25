@@ -2,7 +2,6 @@
 image: node:latest
 
 stages:
-  - build
   - test
   - deploy
 
@@ -10,26 +9,22 @@ cache: # add cache to 'node_modules' for speeding up builds
   paths:
     - node_modules/ # Node modules and dependencies
 
-build-job:
-  stage: build
-  script:
-    - npm install -g hexo-cli snyk
-    - npm install
-    - snyk auth $SNYK_TOKEN
-  only:
-    - master # job will affect only the 'master' branch
+before_script: # install tools before jobs
+  - npm install -g hexo-cli snyk
+  - snyk auth $SNYK_TOKEN
 
 snyk-test:
   stage: test
   script:
-    - snyk test # Test node modules for vulnerability
+    - npm install # install node modules
+    - snyk protect # Apply patches to node modules
+    - snyk test # Verify node modules for vulnerability
   only:
     - master
 
 pages:
   stage: deploy
   script:
-    - snyk protect # Apply patches to node modules
     - hexo deploy # deploy the site
     - find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \; # Compress files
   artifacts:
