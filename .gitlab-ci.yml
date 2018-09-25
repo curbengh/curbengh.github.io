@@ -10,20 +10,21 @@ cache: # add cache to 'node_modules' for speeding up builds
   paths:
     - node_modules/ # Node modules and dependencies
 
-only:
-  - master # CI will affect only the 'master' branch
-
 build-job:
   stage: build
   script:
     - npm install -g hexo-cli snyk
     - npm install
     - snyk auth $SNYK_TOKEN
+  only:
+    - master # job will affect only the 'master' branch
 
 snyk-test:
   stage: test
   script:
     - snyk test # Test node modules for vulnerability
+  only:
+    - master
 
 pages:
   stage: deploy
@@ -34,4 +35,6 @@ pages:
   artifacts:
     paths:
       - public # deploy to the 'public' folder
+  only:
+    - master
   when: on_success
