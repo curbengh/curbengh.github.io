@@ -114,7 +114,7 @@ pre{
 hr{
     border:none;
     border-bottom:1px solid #cfcfcf;
-    margin-bottom:.8em;
+    margin-bottom:1em;
     height:10px
 }
 .typo-small,figcaption,small{
@@ -274,8 +274,8 @@ dfn{
     font-style:italic
 }
 h1{
-    font-size:2em;
-    margin:.67em 0
+    font-size:1.5em;
+    margin:.5em 0
 }
 mark{
     background-color:#ff0;
@@ -304,7 +304,7 @@ svg:not(:root){
 }
 code,kbd,pre,samp{
     font-family:monospace,monospace;
-    font-size:1em
+    font-size:0.9em
 }
 figure{
     margin:1em 40px
@@ -409,7 +409,7 @@ body,h1,h2,h3,h4,h5,h6{
 }
 body{
     font-family:Baskerville,Times New Roman,Liberation Serif,STFangsong,FangSong,FangSong_GB2312,CWTEX\\-F,serif;
-    font-size:20px
+    font-size:1.2em
 }
 h1,h2,h3,h4,h5,h6{
     font-family:Baskerville,Georgia,Liberation Serif,Kaiti SC,STKaiti,AR PL UKai CN,AR PL UKai HK,AR PL UKai TW,AR PL UKai TW MBE,AR PL KaitiM GB,KaiTi,KaiTi_GB2312,DFKai-SB,TW\\-Kai,serif
@@ -445,7 +445,7 @@ blockquote{
 .archive-footer,.post-footer{
     width:100%;
     margin:0 auto;
-    padding:50px 0;
+    padding:1em 0;
     color:#cacdd0
 }
 .archive-footer a,.archive-footer b,.archive-footer strong,.post-footer a,.post-footer b,.post-footer strong{
@@ -457,7 +457,7 @@ blockquote{
 .copyright,.footer-content,.footer-links{
     text-align:center;
     width:100%;
-    font-size:90%;
+    font-size:0.9em;
     color:#cacdd0
 }
 .copyright li,.footer-content li,.footer-links li{
@@ -478,7 +478,7 @@ blockquote{
     text-align:left
 }
 .footer-links{
-    font-size:100%;
+    font-size:0.9em;
     padding:0
 }
 .footer-links a{
@@ -550,7 +550,7 @@ blockquote{
     position:relative;
     line-height:1;
     text-align:left;
-    font-size:18px;
+    font-size:1em;
     padding-top:50px;
     max-width:700px
 }
@@ -561,7 +561,7 @@ blockquote{
     border:0
 }
 .archive-container .header,.category-container .header,.tag-container .header{
-    font-size:18px
+    font-size:1em
 }
 .archive-container .archive-article-header>a,.archive-container .archive-article-header>h1,.category-container .archive-article-header>a,.category-container .archive-article-header>h1,.tag-container .archive-article-header>a,.tag-container .archive-article-header>h1{
     display:inline-block;
@@ -572,7 +572,7 @@ blockquote{
 }
 .archive-container .archive-article-header h1,.category-container .archive-article-header h1,.tag-container .archive-article-header h1{
     width:calc(100% - 120px);
-    font-size:100%;
+    font-size:1em;
     margin:0
 }
 .archive-container hr,.category-container hr,.tag-container hr{
@@ -581,7 +581,7 @@ blockquote{
     background-image:-webkit-linear-gradient(0deg,#d5d5d5,#d5d5d5,transparent)
 }
 .archive-container .archive-article-date,.category-container .archive-article-date,.tag-container .archive-article-date{
-    font-size:80%;
+    font-size:0.9em;
     color:#cacdd0
 }
 .archive-container .archive-article-title,.category-container .archive-article-title,.tag-container .archive-article-title{
@@ -607,8 +607,7 @@ blockquote{
     margin:0 auto
 }
 .article .header{
-    font-size:18px;
-    padding-top:50px
+    font-size:1.1em
 }
 .article .main-nav-link:hover{
     border:0
@@ -627,14 +626,13 @@ blockquote{
 }
 .article hr{
     width:80%;
-    margin:20px 0 40px;
     background-image:-webkit-linear-gradient(0deg,#d5d5d5,#d5d5d5,transparent)
 }
 .article h1,.article h2,.article h3,.article h4,.article h5,.article h6{
     font-weight:bolder
 }
 .article .article-title{
-    font-size:2.5em
+    font-size:2em
 }
 .article a.fancybox,.article a.fancybox-item{
     border:0
@@ -706,8 +704,6 @@ blockquote{
 }
 .article .article-nav{
     max-width:100%;
-    margin-top:50px;
-    font-size:80%
 }
 .article .article-nav-link-wrap{
     display:inline-block;
@@ -731,10 +727,10 @@ blockquote{
     text-align:left
 }
 .article .article-footer,.article .article-footer hr{
-    margin-top:50px
+    margin-top:1em
 }
 .article .article-meta{
-    font-size:80%;
+    font-size:0.9em;
     color:#aeb4b9
 }
 .article .article-meta a{
@@ -830,16 +826,16 @@ blockquote{
     background:#444
 }
 .article-entry .highlight,.article-entry pre{
-    padding:20px;
+    padding:1em;
     background:#f3f5f6;
     color:#4d4d4c;
-    font-size:14px;
+    font-size:0.9em;
     overflow:auto;
     line-height:1.8
 }
 .article-entry .highlight .gutter pre{
     color:#aeb4b9;
-    font-size:14px
+    font-size:0.9em
 }
 .article-entry figure.highlight{
     margin:0
@@ -897,13 +893,13 @@ pre .javascript .function,pre .keyword{
 }
 @media (max-width:768px){
     body{
-        font-size:18px
+        font-size:1.2em
     }
     .archive-container,.archive-footer,.article,.home .content,.post-footer{
         width:80%
     }
     .article-title{
-        font-size:2rem
+        font-size:1.8rem
     }
     .comments{
         width:80%
@@ -923,7 +919,7 @@ pre .javascript .function,pre .keyword{
 }
 @media (max-width:468px){
     body{
-        font-size:16px
+        font-size:1em
     }
     .home{
         color:#222
@@ -980,6 +976,6 @@ pre .javascript .function,pre .keyword{
         padding:30px
     }
     .footer,.footer-content{
-        font-size:100%
+        font-size:0.9em
     }
 }
