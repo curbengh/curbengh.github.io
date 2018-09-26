@@ -471,7 +471,7 @@ blockquote{
 }
 .archive-footer,.post-footer{
     width:60%;
-    max-width:700px
+    max-width:600px
 }
 .footer-content{
     margin:0 auto;
@@ -602,8 +602,8 @@ blockquote{
     margin-right:15px
 }
 .article{
-    width:60%;
-    max-width:700px;
+    width:80%;
+    max-width:1000px;
     margin:0 auto
 }
 .article .header{
@@ -626,7 +626,7 @@ blockquote{
     display:block
 }
 .article hr{
-    width:60%;
+    width:80%;
     margin:20px 0 40px;
     background-image:-webkit-linear-gradient(0deg,#d5d5d5,#d5d5d5,transparent)
 }

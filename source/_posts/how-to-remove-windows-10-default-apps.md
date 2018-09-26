@@ -8,13 +8,13 @@ Windows 10 comes bundled with many unused apps. Worse, it even install third-par
 ## Stop uninstalled games from returning
 Stop included games like Candy Crush and Minecraft to reappear after you remove them.
 
-### Windows 10 Pro:
+### Windows 10 Pro
 1. Right click on Start button and open Run.
 2. Enter `gpedit.msc` and run.
 3. Go to `Computer Configuration > Administrative Templates > Windows Components > Cloud Content`.
 4. Enable `Turn off Microsoft consumer experiences`.
 
-### Windows 10 Home:
+### Windows 10 Home
 1. Open Notepad, copy and paste the following text (make sure you don't copy the line number),
 	```
 	Windows Registry Editor Version 5.00
