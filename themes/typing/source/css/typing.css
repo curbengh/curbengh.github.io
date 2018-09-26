@@ -581,8 +581,11 @@ blockquote{
     background-image:-webkit-linear-gradient(0deg,#d5d5d5,#d5d5d5,transparent)
 }
 .archive-container .archive-article-date,.category-container .archive-article-date,.tag-container .archive-article-date{
-    font-size:0.9em;
+    font-size:1em;
     color:#cacdd0
+}
+.archive-article-date{
+    margin-right:0.5em
 }
 .archive-container .archive-article-title,.category-container .archive-article-title,.tag-container .archive-article-title{
     font-weight:200
@@ -607,7 +610,8 @@ blockquote{
     margin:0 auto
 }
 .article .header{
-    font-size:1.1em
+    font-size:1.1em;
+    margin:0.5em 0
 }
 .article .main-nav-link:hover{
     border:0
