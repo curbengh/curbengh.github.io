@@ -551,7 +551,7 @@ blockquote{
     line-height:1;
     text-align:left;
     font-size:1em;
-    padding-top:50px;
+    padding-top:3em;
     max-width:700px
 }
 .archive-container article,.category-container article,.tag-container article{
@@ -902,6 +902,9 @@ pre .javascript .function,pre .keyword{
     .archive-container,.archive-footer,.article,.home .content,.post-footer{
         width:80%
     }
+    .archive-container,.category-container,.tag-container{
+        padding-top:1em;
+    }
     .article-title{
         font-size:1.8rem
     }
@@ -932,7 +935,7 @@ pre .javascript .function,pre .keyword{
         color:$111
     }
     .archive-container .archive-footer,.archive-container .post-footer{
-        padding:40px
+        padding:1em
     }
     .archive-container .archive-article-header>a,.archive-container .archive-article-header>h1{
         width:100%
@@ -971,13 +974,13 @@ pre .javascript .function,pre .keyword{
 }
 @media (max-width:320px){
     body{
-        font-size:14px
+        font-size:0.9em
     }
     .article{
-        font-size:16px
+        font-size:1em
     }
     .archive-container .archive-footer,.archive-container .post-footer{
-        padding:30px
+        padding:1em
     }
     .footer,.footer-content{
         font-size:0.9em
