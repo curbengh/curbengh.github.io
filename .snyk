@@ -10,23 +10,4 @@ ignore:
 patch:
   'npm:lodash:20180130':
     - hexo-autonofollow > cheerio > lodash:
-        patched: '2018-09-24T08:27:51.828Z'
-  'npm:tunnel-agent:20170305':
-    - hexo-all-minifier > imagemin-gifsicle > gifsicle > bin-build > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-jpegtran > jpegtran-bin > bin-build > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-mozjpeg > mozjpeg > bin-build > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-optipng > optipng-bin > bin-build > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-gifsicle > gifsicle > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-jpegtran > jpegtran-bin > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-mozjpeg > mozjpeg > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-optipng > optipng-bin > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
-    - hexo-all-minifier > imagemin-pngquant > pngquant-bin > bin-wrapper > download > caw > tunnel-agent:
-        patched: '2018-09-24T08:27:51.828Z'
+        patched: '2018-09-27T12:12:15.086Z'
