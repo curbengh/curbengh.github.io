@@ -7,15 +7,15 @@
   },
   "dependencies": {
     "hexo": "latest",
-    "hexo-all-minifier": "latest",
     "hexo-autonofollow": "latest",
     "hexo-generator-archive": "latest",
     "hexo-generator-category": "latest",
     "hexo-generator-index": "latest",
     "hexo-generator-tag": "latest",
     "hexo-renderer-ejs": "latest",
-    "hexo-renderer-stylus": "latest",
     "hexo-renderer-marked": "latest",
-    "hexo-server": "latest"
+    "hexo-renderer-stylus": "latest",
+    "hexo-server": "latest",
+    "hexo-yam": "latest"
   }
 }

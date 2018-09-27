@@ -70,9 +70,9 @@ theme: typing
 nofollow:
   enable: true
 
-# hexo-all-minifier
-## https://github.com/chenzhutian/hexo-all-minifier
-all_minifier: true
+# hexo-yam
+## https://github.com/weyusi/hexo-yam
+neat_enable: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
