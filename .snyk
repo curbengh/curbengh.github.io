@@ -7,7 +7,4 @@ ignore:
         reason: Patch/update unavailable
         expires: 2018-12-31T00:00:00.000Z
 # patches apply the minimum changes required to fix a vulnerability
-patch:
-  'npm:lodash:20180130':
-    - hexo-autonofollow > cheerio > lodash:
-        patched: '2018-09-27T12:12:15.086Z'
+
