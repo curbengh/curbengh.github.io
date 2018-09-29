@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "hexo": "latest",
-    "hexo-filter-nofollow": "latest",
+    "hexo-nofollow": "latest",
     "hexo-generator-archive": "latest",
     "hexo-generator-category": "latest",
     "hexo-generator-index": "latest",
