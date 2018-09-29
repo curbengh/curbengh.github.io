@@ -1,5 +1,8 @@
-<%- js('js/jquery.min') %>
-<%- js('js/clipboard.min') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<script>(window.jQuery) || document.write('<%= js('js/jquery.min') %>');</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js" integrity="sha384-JbuAF+8+4FF8uR/7D07/5IWwIj2FoNw5jJQGg1s8GtGIfQXFxWPRdMNWYmU35KjP" crossorigin="anonymous"></script> 
+<script>if (typeof ClipboardJS === "undefined") document.write('<%= js('js/clipboard.min') %>');</script>
 
 <% if (theme.fancybox){ %>
   <%- css('fancybox/jquery.fancybox.min') %>
