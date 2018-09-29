@@ -12,9 +12,10 @@ pages:
     - snyk protect # Apply patches to node modules
     - snyk test # Check node modules for vulnerability
     - hexo deploy # deploy the site
-    - find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \; # Compress files
+
   artifacts:
     paths:
       - public # deploy to the 'public' folder
+
   only:
     - master # this job will affect only the 'master' branch

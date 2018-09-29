@@ -115,7 +115,7 @@ description:
 ### Project page
 If you prefer to have a project page on GitLab:
 1. go to `Settings -> General -> Advanced -> Rename repository`. Change the Path to `<directory>`, so the website is available at `<your-username>.gitlab.io/<directory>`, `<directory>` can be any name, like `blog` or `hexo`.
-1. Edit `_config.yml`, change the `root:` value from `""` to `"/<directory/"`.
+1. Edit `_config.yml`, change the `root:` value from `""` to `"/<directory>/"`.
 1. Commit and push.
 
 ### Remove fork relationship
