@@ -97,7 +97,7 @@ theme_config:
   #rss: /atom.xml
 
   # Content
-  fancybox: true
+  fancybox: false
 
   # Profile
   nickname: curben's blog
