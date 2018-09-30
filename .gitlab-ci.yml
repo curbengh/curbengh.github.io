@@ -11,11 +11,11 @@ pages:
     - snyk auth $SNYK_TOKEN
     - snyk protect # Apply patches to node modules
     - snyk test # Check node modules for vulnerability
-    - hexo deploy # deploy the site
+    # - hexo deploy # deploy the site. Uncomment this line for gitlab pages
 
   artifacts:
     paths:
-      - public # deploy to the 'public' folder
+      # - public # deploy to the 'public' folder. Uncomment this line for gitlab pages
 
   only:
     - master # this job will affect only the 'master' branch
