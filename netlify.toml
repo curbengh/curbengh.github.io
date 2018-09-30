@@ -10,16 +10,16 @@
     X-Content-Type-Options = "nosniff"
 
 [[headers]]
-  for = "*.html"
+  for = "/*.html"
   [headers.value]
     Content-Encoding = "gzip, br"
 
 [[headers]]
-  for = "*.css"
+  for = "/*.css"
   [headers.value]
     Content-Encoding = "gzip, br"
 
 [[headers]]
-  for = "*.js"
+  for = "/*.js"
   [headers.value]
     Content-Encoding = "gzip, br"

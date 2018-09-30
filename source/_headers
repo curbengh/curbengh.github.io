@@ -1,0 +1,13 @@
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+
+/*.html
+  Content-Encoding: gzip, br
+
+/*.css"
+  Content-Encoding: gzip, br
+
+/*.js"
+  Content-Encoding: gzip, br
