@@ -1,0 +1,17 @@
+[build]
+  command = "snyk auth $SNYK_TOKEN && snyk protect && snyk test"
+
+[context.production]
+  publish = "public/"
+  command = "hexo generate"
+
+[[headers]]
+  for = "/*"
+  [headers.value]
+    X-Frame-Options: DENY
+    X-XSS-Protection: 1; mode=block
+    X-Content-Type-Options: nosniff
+
+  for = "/*\.(html|css|js)"
+  [headers.value]
+    Content-Encoding: gzip, br

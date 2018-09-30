@@ -16,6 +16,7 @@
     "hexo-renderer-marked": "latest",
     "hexo-renderer-stylus": "latest",
     "hexo-server": "latest",
-    "hexo-yam": "latest"
+    "hexo-yam": "latest",
+    "snyk": "latest"
   }
 }
