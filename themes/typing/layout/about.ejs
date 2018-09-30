@@ -9,14 +9,23 @@
     <hr/>
   </div>
 </div>
-    <ul class="footer-links">
-      <% for (var key in theme.links) { %>
-        <li>
-	  <% if (theme.icons){ %>
-            <a href="<%= theme.links[key] %>"><span class="fa fa-<%= key %>"></span></a>
-	  <% } else { %>
-	    <a href="<%= theme.links[key] %>"><%= key %></a>
-	  <% } %>
-        </li>
+  <ul class="footer-links">
+  <% for (var key in theme.links.solid) { %>
+    <li>
+      <% if (theme.icons){ %>
+      <a href="<%= theme.links.solid[key] %>"><span class="fas fa-<%= key %>"></span></a>
+      <% } else { %>
+      <a href="<%= theme.links.solid[key] %>"><%= key %></a>
       <% } %>
-    </ul>
+    </li>
+  <% } %>
+  <% for (var key in theme.links.brands) { %>
+    <li>
+      <% if (theme.icons){ %>
+      <a href="<%= theme.links.brands[key] %>"><span class="fab fa-<%= key %>"></span></a>
+      <% } else { %>
+      <a href="<%= theme.links.brands[key] %>"><%= key %></a>
+  <% } %>
+      </li>
+    <% } %>
+  </ul>

@@ -109,10 +109,13 @@ theme_config:
   # Footer area links
   # If you set "icons: false" link names will be clear text
   # If "icons: true" link names will interpreted as fontawesome icon names
-  # Use only the brand icon names (https://fontawesome.com/cheatsheet#brands)
+  # Use link names that correspond to the icon style (solid or brands)
+  # https://fontawesome.com/cheatsheet
   links:
-    Home: /
-    GitLab: https://gitlab.com/curben/curben.gitlab.io
+    solid:
+      Home: /
+    brands:
+      GitLab: https://gitlab.com/curben/curben.gitlab.io
 
   # nav position (top, left. top is default)
   nav: left
