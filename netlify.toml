@@ -8,10 +8,21 @@
 [[headers]]
   for = "/*"
   [headers.value]
-    X-Frame-Options: DENY
-    X-XSS-Protection: 1; mode=block
-    X-Content-Type-Options: nosniff
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
 
-  for = "/*\.(html|css|js)"
+[[headers]]
+  for = "*.html"
   [headers.value]
-    Content-Encoding: gzip, br
+    Content-Encoding = "gzip, br"
+
+[[headers]]
+  for = "*.css"
+  [headers.value]
+    Content-Encoding = "gzip, br"
+
+[[headers]]
+  for = "*.js"
+  [headers.value]
+    Content-Encoding = "gzip, br"
