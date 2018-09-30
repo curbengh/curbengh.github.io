@@ -22,24 +22,24 @@
     $('.fancybox').fancybox()
   }
 
+  //Add "Copy" button to code snippet
+  var code = document.getElementsByClassName('code');
+
+  for (var i = 0; i < code.length; i++) {
+    var button = document.createElement('button');
+      button.className = 'copy-button';
+      button.textContent = 'Copy';
+
+      code[i].appendChild(button);
+  }
 
   $(document).ready(function() {
 
-    // Add "Copy" button to code snippet
-    var pre = document.getElementsByTagName('pre');
-
-    for (var i = 0; i < pre.length; i++) {
-      var button = document.createElement('button');
-        button.className = 'copy-button';
-        button.textContent = 'Copy';
-
-        pre[i].appendChild(button);
-    }
-
+    // Add copy to clipboard button for code snippet
     var copyCode = new ClipboardJS('.copy-button', {
-      target: function(trigger) {
-          return trigger.previousElementSibling;
-      }
+        target: function(trigger) {
+            return trigger.previousElementSibling;
+        }
     });
 
     copyCode.on('success', function(event) {
@@ -74,4 +74,3 @@
     });
   });
 })(jQuery)
-
