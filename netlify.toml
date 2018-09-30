@@ -1,9 +1,6 @@
-[build]
-  command = "snyk auth $SNYK_TOKEN && snyk protect && snyk test"
-
 [context.production]
-  publish = "public/"
-  command = "hexo generate"
+  publish = "public"
+  command = "snyk auth $SNYK_TOKEN && snyk protect && snyk test && hexo generate"
 
 [[headers]]
   for = "/*"
