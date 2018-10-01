@@ -11,7 +11,7 @@ Create a website/blog (hosted by [GitLab](https://about.gitlab.com/features/page
 3. Shared Runners should be enabled. Go to your (forked) project `Settings -> CI / CD -> Shared Runners`.
 4. Change project website to a user website. This is so that the website's home page is `<your-username>.gitlab.io/`, instead of `<your-username>.gitlab.io/hexo`.
     Go to `Settings -> General -> Advanced -> Rename repository`. Change the Path to `<your-username>.gitlab.io`.
-5. You can start writing a new post straightaway without [installing](#installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming).
+5. You can start writing a new post straightaway without [installing](#installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
 	1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
 	2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 	```
