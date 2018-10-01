@@ -1,6 +1,7 @@
 /*
-*  Put {% cloudinary filename.jpg %} in your post.
-*  Change the username in data-src.
+*  Put {% cloudinary folder/filename.jpg %} in your post.
+*  Change the username in data-src tag,
+*  and cloud name in layout/_partial/after-footer.ejs
 *  src is an animated svg generated from https://loading.io/
 *  More info:
 *  https://hexo.io/docs/tag-plugins

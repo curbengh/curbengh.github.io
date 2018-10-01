@@ -6,6 +6,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-jquery-file-upload/2.5.0/cloudinary-jquery-file-upload.min.js" x-sri-fallback="/js/cloudinary-jquery-file-upload.min.js" integrity="sha384-HQ/p/NgiMN4n/1y5RLzK/2SvlQeYmwEazCnpg6Vbi8dSfBcOJDvWYnvDain31AU9" crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+  var cl = cloudinary.Cloudinary.new({cloud_name: "curben"}); 
+  cl.responsive();
+</script>
+
 <% if (theme.fancybox){ %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.2/jquery.fancybox.min.js" x-sri-fallback="/fancybox/jquery.fancybox.min.js" integrity="sha384-j11bx3Frya+us3LfRdSq1uXZ7hsQU0UV5P3PEyRajHEHp87c8VLeM4jC/NE6SDsE" crossorigin="anonymous"></script>
 
