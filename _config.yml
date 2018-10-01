@@ -117,7 +117,7 @@ theme_config:
     solid:
       Home: /
     brands:
-      GitLab: https://gitlab.com/curben/curben.gitlab.io
+      GitLab: https://gitlab.com/curben/blog
 
   # nav position (top, left. top is default)
   nav: left
