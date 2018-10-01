@@ -305,7 +305,7 @@ svg:not(:root){
 code,kbd,pre,samp{
     font-family:monospace,monospace;
     font-size:0.9em;
-    background-color:#333
+    background-color:#f3f5f6
 }
 figure{
     margin:1em 40px
@@ -785,6 +785,11 @@ blockquote{
 }
 .dark .home a:hover{
     border-bottom:1px solid #fff
+}
+.dark code,kbd,pre,samp{
+    font-family:monospace,monospace;
+    font-size:0.9em;
+    background-color:#333
 }
 .dark .archive-container .header .main-nav-link,.dark .article .header .main-nav-link,.dark .category-container .header .main-nav-link,.dark .tag-container .header .main-nav-link{
     color:#aaa
