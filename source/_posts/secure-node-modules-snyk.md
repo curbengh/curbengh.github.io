@@ -48,3 +48,5 @@ Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-min
 
 Alternatively, you could integrate directly to your remote repo (github/gitlab). This integration allows Snyk to automatically create pull/merge request. Enable this by going to your Snyk account and Integrations tab.
 {% cloudinary 20181001/snyk-integration.png %}
+
+More info: [NodeJS](https://snyk.io/docs/snyk-for-nodejs), [GitHub](https://snyk.io/docs/github), [GitLab](https://snyk.io/docs/gitlab)
