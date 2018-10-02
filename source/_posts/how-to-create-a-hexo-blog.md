@@ -63,6 +63,10 @@ $ npm install hexo-server --save
 $ hexo server
 ```
 7. Commit the changes and push them. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/curben.gitlab.io/blob/master/.gitignore), as CI will generate them during build.
+	1. I have migrated to [Netlify](https://www.netlify.com/) and removed my GitLab page.
+	2. Since I don't have a gitlab page anymore, I removed the deploy command in the `.gitlab-ci.yml`.
+	3. The config now has two parts. To use in gitlab page, simply uncomment the second part and comment out the first part.
+	4. Make sure you double-check the CI config before you push.
 8. Check the build status by going to your project `CI /CD -> Pipelines`. Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
 9.  If there is no error, the generated website can be accessed on `<your-username>.gitlab.io/` or the link shown on your project `Settings -> Pages`.
 

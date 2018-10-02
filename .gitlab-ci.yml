@@ -16,7 +16,8 @@ test:
     - master # this job will affect only the 'master' branch
 
 
-# Uncomment below (and comment/remove above) lines for gitlab pages
+# # Uncomment below (and comment/remove above) lines for gitlab pages
+# image: node:latest # Use latest version of Node.js
 # pages:
   # cache: # add cache to 'node_modules' for speeding up builds
     # paths:
