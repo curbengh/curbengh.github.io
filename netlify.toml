@@ -13,16 +13,19 @@
   for = "/js/typing.js.br"
   [headers.values]
     Content-Encoding = "br"
+    Content-Type = "application/javascript; charset=utf-8"
 
 [[headers]]
   for = "/js/sri-fallback.min.js.br"
   [headers.values]
     Content-Encoding = "br"
+    Content-Type = "application/javascript; charset=utf-8"
 
 [[headers]]
   for = "/css/typing.css.br"
   [headers.values]
     Content-Encoding = "br"
+    Content-Type = "text/css; charset=utf-8"
 
 [[redirects]]
   from = "/js/typing.js"
@@ -41,4 +44,3 @@
   to = "/css/typing.css.br"
   status = 200
   force = true
-

@@ -5,10 +5,12 @@
 
 /js/typing.js.br
   Content-Encoding: br
+  Content-Type: application/javascript; charset=utf-8
 
 /js/sr-fallback.min.js.br
   Content-Encoding: br
+  Content-Type: application/javascript; charset=utf-8
 
 /css/typing.css.br
   Content-Encoding: br
-
+  Content-Type: text/css; charset=utf-8
