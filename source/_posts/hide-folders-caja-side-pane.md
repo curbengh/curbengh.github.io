@@ -10,7 +10,7 @@ The side pane of Caja shows many media folders by default. You might not have al
 {% cloudinary 20181002/caja-side-pane.png %}
 *from github [issue](https://github.com/mate-desktop/caja/issues/480).*
 
-You can hide some folder through `~/.config/user-dirs.dirs` or `/home/<user>/.config/user-dirs.dirs` (you need to show hidden file/folder if you're going to browse through Caja).
+You can hide some folder through `~/.config/user-dirs.dirs` or `/home/your-username/.config/user-dirs.dirs` (you need to show hidden file/folder if you're going to browse through Caja).
 
 Default config:
 ```
@@ -24,6 +24,6 @@ XDG_PICTURES_DIR="$HOME/Pictures"
 XDG_VIDEOS_DIR="$HOME/Videos"
 ```
 
-To hide the Videos folder, simply edit the line to `XDG_VIDEOS_DIR="$HOME"`. Repeat this for other folders.
+To hide the Videos folder, simply edit the line to `XDG_VIDEOS_DIR="$HOME"`. Repeat this for other folders, **except** for Desktop folder. If you hide the Desktop folder, all folders in Home will show up on the desktop.
 
 Re-launch Caja. Those folders will show up under Bookmarks, instead of Computer. Hide them by right click > Remove.
