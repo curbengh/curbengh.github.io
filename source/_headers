@@ -2,15 +2,3 @@
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
-
-/js/typing.js.br
-  Content-Encoding: br
-  Content-Type: application/javascript; charset=utf-8
-
-/js/sr-fallback.min.js.br
-  Content-Encoding: br
-  Content-Type: application/javascript; charset=utf-8
-
-/css/typing.css.br
-  Content-Encoding: br
-  Content-Type: text/css; charset=utf-8
