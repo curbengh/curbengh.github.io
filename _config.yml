@@ -93,7 +93,7 @@ theme_config:
   menu:
     Home: /
     About: /about
-    GitLab: https://gitlab.com/curben/curben.gitlab.io
+    GitLab: https://gitlab.com/curben/blog
 
   # Your Feed Location
   #rss: /atom.xml
