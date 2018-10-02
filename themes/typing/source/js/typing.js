@@ -1,8 +1,9 @@
 (function ($) {
-  // Caption
+  // Fancybox caption
   $('.article-entry').each(function (i) {
     $(this).find('img').each(function () {
-      if ($(this).parent().hasClass('fancybox')) return
+      // Don't insert fancybox element to cloudinary's cld-responsive img class
+      if ($(this).hasClass('cld-responsive') || $(this).parent().hasClass('fancybox')) return
 
       var alt = this.alt
 
@@ -21,6 +22,7 @@
   if ($.fancybox) {
     $('.fancybox').fancybox()
   }
+
 
   //Add "Copy" button to code snippet
   var code = document.getElementsByClassName('code');
