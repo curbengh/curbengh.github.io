@@ -34,7 +34,7 @@ Despite the convenience of hexo-all-minifier, I don't use it due to the vulnerab
 
 Thus, I switch to hexo-yam which doesn't offer image compression. To use, add the following line to `package.json`:
 ```json
-    "hexo-yam": "^0.3.0"
+    "hexo-yam": "latest"
 ```
 2. `$ npm install` and enable the plugin by putting `neat_enable: true` to `_config.yml`.
 3. Deploy.
@@ -42,9 +42,13 @@ Thus, I switch to hexo-yam which doesn't offer image compression. To use, add th
 # Compression
 [Compression](https://en.wikipedia.org/wiki/Data_compression) uses more advanced technique to reduce the file size even further. Most modern web browsers support gzip decompression and prefer it (with appropriate HTTP header). As you might know from zipping a text file, this can yield significant reduction in file size. For example, my home page `index.html` is less than half smaller (3.3KB > 1.2KB). Check it out [here](https://gitlab.com/curben/curben.gitlab.io/-/jobs/101703188/artifacts/browse/public/).
 
-1. To compress, simply run the following command after you generate static files into the `public` folder,
+***Update:*** hexo-yam v0.5.0 onwards offer gzip and brotli compressions. After you install it, it will automatically compress assets files to `.gz` and `.br` whenever hexo generate/deploy/server. This means the command `$ find ....` as shown below is no longer required.
+
+1. Linux distro has built-in gzip. Install brotli through apt/dnf/yum/pacman.
+2. To compress, simply run the following commands after you generate static files (`$ hexo generate`),
 	```bash
-	find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \;
+	$ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \;
+	$ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir brotli -f --keep {} \;
 	```
-2. If you use CI like `.gitlab-ci.yml` or `.travis.yml`, simply add the above command under `script:`, next line after `hexo deploy`.
-3. Deploy.
+3. If you use CI like `.gitlab-ci.yml` or `.travis.yml`, simply add the above command under `script:`, next line after `hexo deploy`.
+4. Deploy.
