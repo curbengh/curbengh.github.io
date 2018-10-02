@@ -3,3 +3,12 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
 
+/js/typing.js.br
+  Content-Encoding: br
+
+/js/sr-fallback.min.js.br
+  Content-Encoding: br
+
+/css/typing.css.br
+  Content-Encoding: br
+
