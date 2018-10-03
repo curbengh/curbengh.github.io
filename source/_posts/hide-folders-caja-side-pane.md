@@ -3,6 +3,8 @@ title: Hide folders of Caja side pane
 date: 2018-10-02 00:00:00
 tags:
 ---
+The side pane of Caja shows many media folders by default. Most of them not important enough to show up on side pane.
+<!-- more -->
 Caja is a file manager originally forked from Nautilus. It's used in MATE desktop environment, found in Ubuntu MATE or Linux Mint. Since it shares similar base with Nautilus, following guide also applies to Nautilus too (I haven't tested it though).
 
 The side pane of Caja shows many media folders by default. You might not have all the media types or not important enough to bookmark it.
