@@ -565,7 +565,6 @@ blockquote{
     font-size:1em
 }
 .archive-container .archive-article-header>a,.archive-container .archive-article-header>h1,.category-container .archive-article-header>a,.category-container .archive-article-header>h1,.tag-container .archive-article-header>a,.tag-container .archive-article-header>h1{
-    display:inline-block;
     vertical-align:middle
 }
 .archive-container .archive-article-header h1,.category-container .archive-article-header h1,.tag-container .archive-article-header h1{
