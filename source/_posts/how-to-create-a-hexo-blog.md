@@ -29,7 +29,7 @@ Create a website/blog (hosted by [GitLab](https://about.gitlab.com/features/page
 1. Having Hexo means you can debug locally, rather than waiting for [CI](https://docs.gitlab.com/ee/ci/). You can even run a local server to preview your blog (see step 6 below).
 2. Clone this project to your workstation. Change `<folder>` to a preferred name.
 ```bash
-$ git clone https://gitlab.com/curben/curben.gitlab.io <folder>
+$ git clone https://gitlab.com/curben/blog <folder>
 ```
 3. Install Node.js 10. Other distro, see this [guide](https://nodejs.org/en/download/package-manager/) or [here](https://github.com/nodesource/distributions).
 ```bash
@@ -62,7 +62,7 @@ $ hexo generate
 $ npm install hexo-server --save
 $ hexo server
 ```
-7. Commit the changes and push them. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/curben.gitlab.io/blob/master/.gitignore), as CI will generate them during build.
+7. Commit the changes and push them. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/blog/blob/master/.gitignore), as CI will generate them during build.
 	1. I have migrated to [Netlify](https://www.netlify.com/) and removed my GitLab page.
 	2. Since I don't have a gitlab page anymore, I removed the deploy command in the `.gitlab-ci.yml`.
 	3. The config now has two parts. To use in gitlab page, simply uncomment the second part and comment out the first part.
