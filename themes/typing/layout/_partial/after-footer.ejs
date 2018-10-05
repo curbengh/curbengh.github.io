@@ -1,4 +1,8 @@
-<%- js('js/main') %>
+<%/* javascript of Typing theme */%>
+<%- js('js/typing') %>
+
+<%/* Fallback function for SRI */%>
+<%- js('js/sri-fallback.min') %>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" x-sri-fallback="/js/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
 
@@ -6,14 +10,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-jquery-file-upload/2.5.0/cloudinary-jquery-file-upload.min.js" x-sri-fallback="/js/cloudinary-jquery-file-upload.min.js" integrity="sha384-HQ/p/NgiMN4n/1y5RLzK/2SvlQeYmwEazCnpg6Vbi8dSfBcOJDvWYnvDain31AU9" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-  var cl = cloudinary.Cloudinary.new({cloud_name: "curben"}); 
-  cl.responsive();
-</script>
-
 <% if (theme.fancybox){ %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.2/jquery.fancybox.min.js" x-sri-fallback="/fancybox/jquery.fancybox.min.js" integrity="sha384-j11bx3Frya+us3LfRdSq1uXZ7hsQU0UV5P3PEyRajHEHp87c8VLeM4jC/NE6SDsE" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.2/jquery.fancybox.min.css" x-sri-fallback="/fancybox/jquery.fancybox.min.css" integrity="sha384-GZkso4ketQR1gAuHEB2yZXtW5SF8uLAsjUsKhaHm4y33ZyPDmwnfZ8rQ4Tvqh1Et" crossorigin="anonymous">
 <% } %>
 
+<%/* Initialize cloudinary responsive function */%>
+<script type="text/javascript">
+  var cl = cloudinary.Cloudinary.new({cloud_name: "curben"}); 
+  cl.responsive();
+</script>
