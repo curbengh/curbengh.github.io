@@ -32,7 +32,7 @@ and deploy.
 # Compression
 [Compression](https://en.wikipedia.org/wiki/Data_compression) uses more advanced technique to reduce the file size even further. Most modern web browsers support gzip decompression and prefer it (with appropriate HTTP header). As you might know from zipping a text file, this can yield significant reduction in file size. For example, my home page `index.html` is less than half smaller (3.3KB > 1.2KB). Check it out [here](https://gitlab.com/curben/blog/-/jobs/101703188/artifacts/browse/public/).
 
-***Update:*** hexo-yam v0.5.0 onwards offer gzip and brotli compressions. After you install it, it will automatically compress assets files to `.gz` and `.br` whenever hexo generate/deploy/server. This means the command `$ find ....` as shown below is no longer required.
+***Update:*** hexo-yam 0.5.0+ offers gzip and brotli compressions. After you install it, it will automatically compress assets files to `.gz` and `.br` whenever hexo generate/deploy/server. This means the command `$ find ....` as shown below is no longer required.
 
 1. Linux distro has built-in gzip. Install brotli through apt/dnf/yum/pacman.
 2. To compress, simply run the following commands after you generate static files (`$ hexo generate`), only `public` folder is affected,
