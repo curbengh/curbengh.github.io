@@ -14,6 +14,7 @@ In Hexo, there are two approaches.
     ``` bash
     $ npm install hexo-all-minifier --save
     ```
+2. If there is any error during installation, run `$ sudo apt install libpng-dev` and `node node_modules/optipng-bin/lib/install.js`.
 2. Above command will add hexo-all-minifer to your `package.json` and install it.
 3. To enable it, put `all_minifier: true` line at `_config.yml`.
 4. Deploy.
