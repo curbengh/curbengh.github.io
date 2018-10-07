@@ -126,5 +126,11 @@ If you prefer to have a project page on GitLab:
 If you don't have any plan to send merge requests to the upstream, you can remove fork relationship permanently by going to `Settings -> General -> Advanced -> Remove fork relationship`. 
 
 ## Useful links:
+Configuration files for this blog deployment:
+- [.gitlab-ci.yml](https://gitlab.com/curben/blog/blob/master/.gitlab-ci.yml)
+- [_config.yml](https://gitlab.com/curben/blog/blob/master/_config.yml)
+- [package.json](https://gitlab.com/curben/blog/blob/master/package.json)
+- [netlify.toml](https://gitlab.com/curben/blog/blob/master/netlify.toml) *for Netlify deployment only*
+
 [Hexo Docs](https://hexo.io/docs/)
 [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/index.html)
