@@ -8,7 +8,7 @@ tags:
 
 Node.js is infamous for the [left-pad](https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068) [controversy](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), removing just a single package can break many websites. 
 
-The package dependency can also cause security issue ([example](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes)).
+The package dependency can also cause security issue ([example 1](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), [example 2](https://blog.npmjs.org/post/173526807575/reported-malicious-module-getcookies)).
 
 Say you use Package A, which depends on Package B, which depends on Package C and so on.
 ```
