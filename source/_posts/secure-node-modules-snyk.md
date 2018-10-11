@@ -8,7 +8,8 @@ tags:
 
 Node.js is infamous for the [left-pad](https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068) [controversy](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), removing just a single package can break many websites. 
 
-The package dependency can also cause security issue. Let me illustrate.
+The package dependency can also cause security issue ([example](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes)).
+
 Say you use Package A, which depends on Package B, which depends on Package C and so on.
 ```
 A > B > C > D > E
@@ -26,7 +27,7 @@ Now, what if E is vulnerable? For example, [hexo-fs](https://snyk.io/test/npm/he
 So, you fork, fix it and republish with a new name. Cool. Here comes the fun part, you also need to instruct tar to go for the *renamed* package. Fork, fix and republish. Repeat this for all the packages along the path.
 
 ## Installation
-Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-minifier](https://snyk.io/test/npm/hexo-all-minifier). Much like any other security products, Snyk is not a silver bullet to the NodeJS issue. Some like [hexo-fs](https://snyk.io/test/npm/hexo-fs) can't be fixed (at the time of writing).
+Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-minifier](https://snyk.io/test/npm/hexo-all-minifier). Snyk is [free](https://snyk.io/plans) for open-source projects. Much like any other security products, Snyk is not a silver bullet to the NodeJS issue. Some like [hexo-fs](https://snyk.io/test/npm/hexo-fs) can't be fixed (at the time of writing).
 
 1. [Sign up](https://app.snyk.io/signup) for a new Snyk account.
 2. Snyk only supports [SSO](https://en.wikipedia.org/wiki/Single_sign-on), no e-mail sign up. You need to have GitHub, Bitbucket, or Google account. It can be a separate account from your current GitHub account. Linking your current GitHub repo to Snyk is *optional*. 
