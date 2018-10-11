@@ -11,6 +11,7 @@ test:
     - snyk auth $SNYK_TOKEN
     - snyk protect # Apply patches to node modules
     - snyk test # Check node modules for vulnerability
+    - hexo generate # Generate static files for debugging
 
   only:
     - master # this job will affect only the 'master' branch
