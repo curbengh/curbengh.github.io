@@ -1,4 +1,4 @@
-image: node:latest # Use latest version of Node.js
+image: node:alpine # Use latest version of Node.js on Alpine
 
 test:
   cache: # add cache to 'node_modules' for speeding up builds
