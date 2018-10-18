@@ -102,7 +102,7 @@ mark{
     margin:0 5px
 }
 code,pre,pre tt{
-    font-family:Courier,Courier New,monospace
+    font-family:monospace,monospace
 }
 pre{
     background:#f8f8f8;
@@ -145,14 +145,11 @@ b,strong{
 .textwrap-table{
     table-layout:fixed
 }
-.serif{
-    font-family:Palatino,Optima,Georgia,serif
-}
 .typo-dl,.typo-form,.typo-hr,.typo-ol,.typo-p,.typo-pre,.typo-table,.typo-ul,.typo dl,.typo form,.typo hr,.typo ol,.typo p,.typo pre,.typo table,.typo ul,blockquote{
     margin-bottom:1.2em
 }
 h1,h2,h3,h4,h5,h6{
-    font-family:PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+    font-family:sans-serif;
     font-weight:100;
     color:#000;
     line-height:1.35
@@ -409,11 +406,11 @@ body,h1,h2,h3,h4,h5,h6{
     transition:all .25s ease
 }
 body{
-    font-family:Baskerville,Times New Roman,Liberation Serif,STFangsong,FangSong,FangSong_GB2312,CWTEX\\-F,serif;
+    font-family:serif;
     font-size:1.2em
 }
 h1,h2,h3,h4,h5,h6{
-    font-family:Baskerville,Georgia,Liberation Serif,Kaiti SC,STKaiti,AR PL UKai CN,AR PL UKai HK,AR PL UKai TW,AR PL UKai TW MBE,AR PL KaitiM GB,KaiTi,KaiTi_GB2312,DFKai-SB,TW\\-Kai,serif
+    font-family:serif
 }
 a{
     color:#222;
@@ -1000,7 +997,7 @@ pre .javascript .function,pre .keyword{
     font-size: 0.8em;
     font-weight: 700;
     line-height: 1em;
-    font-family:Courier,Courier New,monospace;
+    font-family:monospace,monospace;
     -webkit-transition: opacity .3s ease-in-out;
     -o-transition: opacity .3s ease-in-out;
     transition: opacity .3s ease-in-out;
