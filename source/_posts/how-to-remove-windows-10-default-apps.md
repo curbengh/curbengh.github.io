@@ -151,5 +151,31 @@ Get-AppxPackage -AllUsers| Foreach {Add-AppxPackage -DisableDevelopmentMode -Reg
 ```
 3. Restart Windows.
 
+**Update (*19/10/2018*):** Windows 10 version 1903 (to be released in April 2019) will include the ability to uninstall:
+
+- 3D viewer
+- Calculator
+- Calendar
+- Groove Music
+- Mail
+- Movies & TV
+- Paint 3D
+- Snip & Sketch
+- Sticky Notes
+- Voice Recorder
+
+Above ability is introduced in Insider Preview build [18262](https://blogs.windows.com/windowsexperience/2018/10/17/announcing-windows-10-insider-preview-build-18262/).
+
+On a side note, version 1809 (October 2018 Update) is able to uninstall:
+
+- Microsoft Solitaire Collection
+- My Office
+- OneNote
+- Print 3D
+- Skype
+- Tips
+- Weather
+
+
 Source: [1](https://www.howtogeek.com/224798/how-to-uninstall-windows-10s-built-in-apps-and-how-to-reinstall-them/), [2](https://www.addictivetips.com/windows-tips/remove-default-windows-10-apps-using-powershell/), [3](https://docs.microsoft.com/en-us/windows/application-management/remove-provisioned-apps-during-update), [4](https://docs.microsoft.com/en-gb/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services)
 
