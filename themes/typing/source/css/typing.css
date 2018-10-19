@@ -1196,16 +1196,9 @@ pre .javascript .function,pre .keyword {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-appearance: none;
   font-size: .8em;
   font-weight: 700;
   line-height: 1em;
   font-family: monospace,monospace;
-  transition: opacity .3s ease-in-out;
   padding: 2px;
-  opacity: 0;
-}
-
-.highlight:hover .copy-button {
-  opacity: 1;
 }
