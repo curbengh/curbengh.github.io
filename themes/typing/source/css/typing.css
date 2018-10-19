@@ -1189,15 +1189,20 @@ pre .javascript .function,pre .keyword {
 }
 
 .copy-button {
-  -moz-appearance: button;
-  -webkit-appearance: button;
+  background-color: #3f3f3f;
+  border: 1px solid #999;
+  border-radius: 5px;
+  color: #d8d8d8;
   cursor: pointer;
+  font-family: inherit;
+  font-size: .8em;
+  line-height: 1em;
+  overflow: visible;
+  padding: 5px;
+  text-transform: none;
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
-  font-size: .8em;
-  line-height: 1em;
-  font-family: monospace,monospace;
-  padding: 2px;
+  -webkit-appearance: button;
 }
