@@ -1190,15 +1190,11 @@ pre .javascript .function,pre .keyword {
   border-radius: 5px;
   color: #d8d8d8;
   cursor: pointer;
-  font-family: inherit;
   font-size: .8em;
   line-height: 1em;
-  overflow: visible;
   padding: 5px;
-  text-transform: none;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  -webkit-appearance: button;
 }
