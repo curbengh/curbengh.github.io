@@ -1185,7 +1185,7 @@ pre .javascript .function,pre .keyword {
 }
 
 .copy-button {
-  background-color: #3f3f3f;
+  background-color: #333;
   border: 1px solid #999;
   border-radius: 5px;
   color: #d8d8d8;
@@ -1197,4 +1197,8 @@ pre .javascript .function,pre .keyword {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+.copy-button:hover {
+  background-color: #3f3f3f;
 }
