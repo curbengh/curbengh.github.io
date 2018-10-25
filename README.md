@@ -88,6 +88,7 @@ The content of this blog itself is licensed under the [Creative Commons Attribut
 
 ---
 Useful links:
-[Hexo Docs](https://hexo.io/docs/)
-[GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/index.html)
+
+- [Hexo Docs](https://hexo.io/docs/)
+- [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/index.html)
 
