@@ -1,5 +1,5 @@
-curben.gitlab.io
-================
+[curben.netlify.com](https://curben.netlify.com/)
+===
 
 ![Build Status](https://gitlab.com/curben/curben.gitlab.io/badges/master/pipeline.svg)
 ![https://www.npmjs.com/package/hexo](https://img.shields.io/badge/hexo-3.7.1-blue.svg)
@@ -68,19 +68,19 @@ $ hexo deploy
 More info: [Deployment](https://hexo.io/docs/deployment.html)
 
 ## Changes
-The following are the major changes I made from the upstream.
+The following are the major changes I made compared to the upstream.
 
-### Hexo
-- Update [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in the Docker image.
+### [Hexo](https://gitlab.com/pages/hexo) site
+- Update [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in Alpine docker image.
 - Update [package.json](package.json) to use latest version of [hexo](https://www.npmjs.com/package/hexo) and its related packages.
 - Replace the bundled Landscape theme with Typing theme.
+- [Pre-compressed](https://docs.gitlab.com/ee/user/project/pages/introduction.html#serving-compressed-assets) the assets using [hexo-yam](https://github.com/weyusi/hexo-yam).
 
-### Typing theme
+### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts.
 - Remove header and footer display (except for `/about` page).
-- Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases) and [Font Awesome](https://github.com/FortAwesome/Font-Awesome/releases)
-- All js and css files are self-hosted and [pre-compressed](https://docs.gitlab.com/ee/user/project/pages/introduction.html#serving-compressed-assets).
-- Remove analytic, comment system and donation links.
+- Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases), [Font Awesome](https://github.com/FortAwesome/Font-Awesome/releases) and [clipboard.js](https://github.com/zenorocha/clipboard.js/).
+- Remove web analytics, comment systems and donation links.
 
 
 ## License
