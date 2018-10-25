@@ -82,6 +82,10 @@ The following are the major changes I made from the upstream.
 - All js and css files are self-hosted and [pre-compressed](https://docs.gitlab.com/ee/user/project/pages/introduction.html#serving-compressed-assets).
 - Remove analytic, comment system and donation links.
 
+
+## License
+The content of this blog itself is licensed under the [Creative Commons Attribution Share Alike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md).
+
 ---
 Useful links:
 [Hexo Docs](https://hexo.io/docs/)
