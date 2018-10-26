@@ -6,12 +6,8 @@ test:
       - node_modules/ # Node modules and dependencies
 
   script:
-    - npm install -g snyk hexo-cli
-    - npm install # install node modules
-    - snyk auth $SNYK_TOKEN
-    - snyk protect # Apply patches to node modules
-    - snyk test # Check node modules for vulnerability
-    - hexo generate # Generate static files for debugging
+    - npm install
+    - npm run build
 
   only:
     - master # this job will affect only the 'master' branch

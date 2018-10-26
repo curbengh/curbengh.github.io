@@ -1,6 +1,6 @@
 [context.production]
   publish = "public"
-  command = "snyk auth $SNYK_TOKEN && snyk protect && snyk test && hexo generate"
+  command = "npm run build"
 
 [[headers]]
   for = "/*"
