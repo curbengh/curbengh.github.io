@@ -3,11 +3,17 @@ title: Edit multiple questions on LimeSurvey
 date: 2018-10-18 00:00:00
 tags:
 ---
-On LimeSurvey, making minor edits to multiple questions can be quite a chore. `ListQuestions` view allows you to edit multiple questions at the same time.
+On LimeSurvey, making minor edits to multiple questions can be quite a chore. `List Questions` view allows you to edit multiple questions at the same time.
 
 <!-- more -->
 
-`ListQuestions` view allows you to delete, set 'mandatory', 'other', CSS class, and randomise multiple questions at the same time.
+`List Questions` view allows you to delete, set 'mandatory', 'other', CSS class, and randomise multiple questions at the same time.
+
+Edit: The view is accessible through (Survey) Settings > Survey menu > List questions.
+
+{% cloudinary 20181018/listquestions.png %}
+
+Ignore the rest...
 
 I stumbled upon ListQuestions view after I deleted a question from a question group. But the view is not accessible through the interface, there's no button which can take you to that view.
 
