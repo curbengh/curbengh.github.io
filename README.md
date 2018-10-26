@@ -2,7 +2,7 @@
 ===
 
 ![Build Status](https://gitlab.com/curben/curben.gitlab.io/badges/master/pipeline.svg)
-![https://www.npmjs.com/package/hexo](https://img.shields.io/badge/hexo-3.7.1-blue.svg)
+![https://www.npmjs.com/package/hexo](https://img.shields.io/badge/hexo-3.8.0-blue.svg)
 
 Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing](https://github.com/geekplux/hexo-theme-typing) theme.
 
