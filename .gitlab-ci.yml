@@ -1,17 +1,25 @@
 image: node:alpine # Use latest version of Node.js on Alpine
 
-test:
-  cache: # add cache to 'node_modules' for speeding up builds
-    paths:
-      - node_modules/ # Node modules and dependencies
+cache: # add cache to 'node_modules' for speeding up builds
+  paths:
+    - node_modules/ # Node modules and dependencies
 
+before_script:
+  - npm install
+
+test:
   script:
-    - npm install
     - npm run build
+
+  only:
+    - master # only trigger when 'master' branch is pushed
+
+renovate: # Check dependency update
+  script:
     - npm run renovate
 
   only:
-    - master # this job will affect only the 'master' branch
+    - schedules # only triggered by schedules
 
 
 # # Uncomment below (and comment/remove above) lines for gitlab pages
