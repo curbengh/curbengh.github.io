@@ -29,9 +29,9 @@ ignore:
 patch:
   'npm:lodash:20180130':
     - renovate > docker-registry-client > restify-clients > restify-errors > lodash:
-        patched: '2018-10-28T06:48:30.342Z'
+        patched: '2018-10-27T00:00:00.000Z'
     - renovate > docker-registry-client > restify-errors > lodash:
-        patched: '2018-10-28T06:48:30.342Z'
+        patched: '2018-10-27T00:00:00.000Z'
   'npm:tough-cookie:20160722':
     - renovate > docker-registry-client > tough-cookie:
-        patched: '2018-10-28T06:48:30.342Z'
+        patched: '2018-10-27T00:00:00.000Z'
