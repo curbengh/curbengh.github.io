@@ -6,7 +6,8 @@
     "version": "3.8.0"
   },
   "scripts": {
-    "build": "snyk auth $SNYK_TOKEN && snyk protect && snyk test && hexo generate"
+    "build": "snyk auth $SNYK_TOKEN && snyk protect && snyk test && hexo generate",
+    "renovate": "renovate --token $BOT_TOKEN --platform 'gitlab' --onboarding false --update-lock-files false --labels 'renovate' --recreate-closed true curben/blog"
   },
   "dependencies": {
     "hexo": "^3.8.0",
@@ -21,6 +22,7 @@
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
     "hexo-yam": "^1.0.3",
+    "renovate": "^13.110.1",
     "snyk": "^1.105.0"
   }
 }

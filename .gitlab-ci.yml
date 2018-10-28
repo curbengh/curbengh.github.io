@@ -8,6 +8,7 @@ test:
   script:
     - npm install
     - npm run build
+    - npm run renovate
 
   only:
     - master # this job will affect only the 'master' branch
