@@ -10,4 +10,28 @@ ignore:
     - '*':
         reason: Patch/update unavailable
         expires: '2018-12-31T00:00:00.000Z'
-patch: {}
+  'npm:base64url:20180511':
+    - renovate > docker-registry-client > base64url:
+        reason: Patch/update unavailable
+        expires: '2018-12-31T00:00:00.000Z'
+    - renovate > docker-registry-client > jws > base64url:
+        reason: Patch/update unavailable
+        expires: '2018-12-31T00:00:00.000Z'
+  'npm:mem:20180117':
+    - renovate > npm > libnpx > yargs > os-locale > mem:
+        reason: Patch/update unavailable
+        expires: '2018-12-31T00:00:00.000Z'
+  'npm:tough-cookie:20170905':
+    - renovate > docker-registry-client > tough-cookie:
+        reason: Patch/update unavailable
+        expires: '2018-12-31T00:00:00.000Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:lodash:20180130':
+    - renovate > docker-registry-client > restify-clients > restify-errors > lodash:
+        patched: '2018-10-28T06:48:30.342Z'
+    - renovate > docker-registry-client > restify-errors > lodash:
+        patched: '2018-10-28T06:48:30.342Z'
+  'npm:tough-cookie:20160722':
+    - renovate > docker-registry-client > tough-cookie:
+        patched: '2018-10-28T06:48:30.342Z'
