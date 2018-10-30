@@ -45,7 +45,9 @@ Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-min
 13. If fix is available, run `$ snyk protect`.
 14. In step 10, if you choose to ignore, Snyk will ignore the issue for 30 days by default (even after you run `snyk test`. Once elapsed, `$ snyk test` will say there is vulnerability again (and fail your build/CI). If you find it annoying, you can delay the expiry date in `.snyk`.
 15. Lastly, link the project to your Snyk account, `$ snyk monitor`. Your project will shows up at your Snyk account. Go to the project setting and add your github repo link. This is necessary to remove usage quota for open-source projects.
-16. Optional: add `snyk test` and `snyk protect` command to your CI script to protect your CI build image.
+16. Optional: add `snyk test`, `snyk protect` and `snyk monitor` commands to your CI script to protect your CI build image.
+
+***Attention:*** Snyk depends on GNU version of `patch` utility, so you need to install it if the CI build environment is Alpine or BSD. Otherwise, `snyk protect` won't work.
 
 Alternatively, you could integrate directly to your remote repo (github/gitlab). This integration allows Snyk to automatically create pull/merge request. Enable this by going to your Snyk account and Integrations tab.
 {% cloudinary 20181001/snyk-integration.png %}
