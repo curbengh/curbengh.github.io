@@ -6,7 +6,7 @@
     "version": "3.8.0"
   },
   "scripts": {
-    "build": "snyk auth $SNYK_TOKEN && snyk protect && snyk test && hexo generate",
+    "build": "snyk auth $SNYK_TOKEN && snyk protect && snyk test && snyk monitor && hexo generate",
     "renovate": "renovate --token $BOT_TOKEN --platform 'gitlab' --onboarding false --update-lock-files false --labels 'renovate' --recreate-closed true curben/blog"
   },
   "dependencies": {
