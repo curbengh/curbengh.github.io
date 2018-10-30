@@ -25,17 +25,13 @@ ignore:
     - renovate > docker-registry-client > tough-cookie:
         reason: Patch/update unavailable
         expires: '2018-12-31T00:00:00.000Z'
-  'npm:lodash:20180130':
-    - renovate > docker-registry-client > restify-clients > restify-errors > lodash:
-        reason: Patch failure
-        expires: '2018-11-31T00:00:00.000Z'
-    - renovate > docker-registry-client > restify-errors > lodash:
-        reason: Patch failure
-        expires: '2018-11-31T00:00:00.000Z'
-  'npm:tough-cookie:20160722':
-    - renovate > docker-registry-client > tough-cookie:
-        reason: Patch failure
-        expires: '2018-11-31T00:00:00.000Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
-
+  'npm:lodash:20180130':
+    - renovate > docker-registry-client > restify-clients > restify-errors > lodash:
+        patched: '2018-10-27T00:00:00.000Z'
+    - renovate > docker-registry-client > restify-errors > lodash:
+        patched: '2018-10-27T00:00:00.000Z'
+  'npm:tough-cookie:20160722':
+    - renovate > docker-registry-client > tough-cookie:
+        patched: '2018-10-27T00:00:00.000Z'

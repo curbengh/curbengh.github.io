@@ -9,6 +9,7 @@ before_script:
 
 test:
   script:
+    - apk add patch # Install GNU version of patch for snyk
     - npm run build
 
   only:
