@@ -49,3 +49,4 @@ I tested the tools on Alpine and Ubuntu, and noted their behaviour. BusyBox = BB
 - **unzip**: GNU doesn't support stdin as input. Use funzip to decompress stdin, but only extract the first file like zcat. BB support stdin and extract all files, through `unzip -`.
 - **sed**: BB doesn't support -z argument which is used to find/replace \n new line character. A [workaround](https://stackoverflow.com/a/1252191) is `sed ':a;N;$!ba;s/\n/<new character>/g' file` or `sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/<new character>/g' file`. GNU `sed -z 's/\n/<new character>/g' ` works.
 - **bsdtar**: Since GNU's zcat and funzip can only extract the first file, in addition to BB's unzip, another alternative is bsdtar. bsdtar can be installed through `libarchive-tools` package. To extract zip from stdin, use `$ bsdtar -xf -`.
+- **patch**: BB doesn't support `--backup` option. BSD doesn't support `--verbose` option.
