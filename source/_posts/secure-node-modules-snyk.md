@@ -48,9 +48,10 @@ Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-min
 15. Lastly, link the project to your Snyk account, `$ snyk monitor`. Your project will shows up at your Snyk account. Go to the project setting and add your github repo link. This is necessary to remove usage quota for open-source projects.
 16. Optional: add `snyk test`, `snyk protect` and `snyk monitor` commands to your CI script to protect your CI build image.
 
-***Attention:*** Snyk depends on GNU version of `patch` utility, so you need to install it if the CI build environment is Alpine or BSD. Otherwise, `snyk protect` won't work.
+***Attention:*** Snyk depends on GNU version of `patch` utility, so you need to install it if the CI build environment is Alpine or BSD. Otherwise, `snyk protect` won't work. Read my [newer post]({% post_path snyk-failed-to-patch-in-alpine-docker %}) for more info.
 
 Alternatively, you could integrate directly to your remote repo (github/gitlab). This integration allows Snyk to automatically create pull/merge request. Enable this by going to your Snyk account and Integrations tab.
+
 {% cloudinary 20181001/snyk-integration.png %}
 
 More info: [NodeJS](https://snyk.io/docs/snyk-for-nodejs), [GitHub](https://snyk.io/docs/github), [GitLab](https://snyk.io/docs/gitlab)
