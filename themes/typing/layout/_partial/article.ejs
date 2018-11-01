@@ -3,7 +3,7 @@
   <hr/>
   <div class="article-inner">
     <%- partial('post/gallery') %>
-    <% if (post.link || post.title){ %>
+    <% if (post.link || post.title) { %>
       <header class="article-header">
         <%- partial('post/title', {class_name: 'article-title'}) %>
       </header>
@@ -11,7 +11,7 @@
     <div class="article-entry typo" itemprop="articleBody">
       <% if (post.excerpt && index){ %>
         <%- post.excerpt %>
-        <% if (theme.excerpt_link){ %>
+        <% if (theme.excerpt_link) { %>
           <p class="article-more-link">
             <%- link_to(url_for(post.path)+'#more', theme.excerpt_link) %>
           </p>
@@ -23,6 +23,12 @@
     </div>
     <footer class="article-footer">
       <ul class="article-meta">
+    <% if (post.lastUpdated) { %>
+        <li>
+          <span class="label"><%= __('date_updated') %>:</span>
+          <%- partial('post/updated-date', {class_name: 'article-date', date_format: 'D MMM YYYY'}) %>
+        </li>
+    <% } %>
         <li>
           <span class="label"><%= __('date_published') %>:</span>
           <%- partial('post/date', {class_name: 'article-date', date_format: 'D MMM YYYY'}) %>
@@ -33,7 +39,7 @@
             <%- partial('post/category') %>
           </li>
         <% } %>
-        <% if (post.tags && post.tags.length){ %>
+        <% if (post.tags && post.tags.length) { %>
           <li>
             <span class="label"><%= __('tag') %>:</span>
             <%- partial('post/tag') %>
@@ -43,7 +49,7 @@
       </ul>
     </footer>
   </div>
-  <% if (!index){ %>
+  <% if (!index) { %>
     <%- partial('post/nav') %>
   <% } %>
 </article>

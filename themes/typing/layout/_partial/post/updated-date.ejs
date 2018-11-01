@@ -1,0 +1,5 @@
+<%/* User-specified updated date */%>
+<%/* default post.updated is (almost) always is the time 'hexo generate' is executed */%>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  <time datetime="<%= date_xml(post.lastUpdated) %>" itemprop="dateUpdated"><%= date(post.lastUpdated, date_format) %></time>
+</a>
