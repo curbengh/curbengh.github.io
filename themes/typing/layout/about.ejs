@@ -10,18 +10,18 @@
   </div>
 </div>
   <ul class="footer-links">
-  <% for (var key in theme.links.solid) { %>
+  <% for (let key in theme.links.solid) { %>
     <li>
-      <% if (theme.icons){ %>
+      <% if (theme.icons) { %>
       <a href="<%= theme.links.solid[key] %>"><span class="fas fa-<%= key.toLowerCase() %>"></span></a>
       <% } else { %>
       <a href="<%= theme.links.solid[key] %>"><%= key %></a>
       <% } %>
     </li>
   <% } %>
-  <% for (var key in theme.links.brands) { %>
+  <% for (let key in theme.links.brands) { %>
     <li>
-      <% if (theme.icons){ %>
+      <% if (theme.icons) { %>
       <a href="<%= theme.links.brands[key] %>"><span class="fab fa-<%= key.toLowerCase() %>"></span></a>
       <% } else { %>
       <a href="<%= theme.links.brands[key] %>"><%= key %></a>

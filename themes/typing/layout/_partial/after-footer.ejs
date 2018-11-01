@@ -7,7 +7,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/cloudinary-jquery@2.5.0/cloudinary-jquery.min.js" x-sri-fallback="/js/cloudinary-jquery.min.js" integrity="sha384-oiCwTbCyQCCCk6ynsZWQIw6FPjjlX4/tPiboPLVURHvD0FXTXnG6Ew7QdRNkipYz" crossorigin="anonymous"></script>
 
-<% if (theme.fancybox){ %>
+<% if (theme.fancybox) { %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.2/jquery.fancybox.min.js" x-sri-fallback="/fancybox/jquery.fancybox.min.js" integrity="sha384-j11bx3Frya+us3LfRdSq1uXZ7hsQU0UV5P3PEyRajHEHp87c8VLeM4jC/NE6SDsE" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.2/jquery.fancybox.min.css" x-sri-fallback="/fancybox/jquery.fancybox.min.css" integrity="sha384-GZkso4ketQR1gAuHEB2yZXtW5SF8uLAsjUsKhaHm4y33ZyPDmwnfZ8rQ4Tvqh1Et" crossorigin="anonymous">
@@ -15,8 +15,8 @@
 
 <%/* Initialize cloudinary responsive function */%>
 <script type="text/javascript">
-  var cl = cloudinary.Cloudinary.new({cloud_name: "curben"}); 
-  cl.responsive();
+  const cl = cloudinary.Cloudinary.new({cloud_name: "curben"})
+  cl.responsive()
 </script>
 
 <%/* javascript of Typing theme */%>
