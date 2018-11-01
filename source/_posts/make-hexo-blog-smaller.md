@@ -1,6 +1,7 @@
 ---
 title: Make Hexo blog smaller
 date: 2018-09-28 00:00:00
+lastUpdated: 2018-10-06 00:00:00
 tags:
 ---
 Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth.

@@ -1,6 +1,7 @@
 ---
 title: How to create a Hexo blog
 date: 2018-09-21 00:00:00
+lastUpdated: 2018-10-07 00:00:00
 tags:
 ---
 Create a website/blog (hosted by [GitLab](https://about.gitlab.com/features/pages/) for free) using the following guide:
