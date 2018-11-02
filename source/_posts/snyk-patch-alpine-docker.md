@@ -7,7 +7,7 @@ Snyk initially runs fine on Alpine, until you try to `snyk protect` to patch the
 
 <!-- more -->
 
-Snyk is used to patch vulnerabilities of node_modules (read my {% post_link secure-node-modules-snyk 'previous post' %}"> for installation guide). I never had any issue with it running on Alpine docker image. That was because there was no modules to patch.
+Snyk is used to patch vulnerabilities of node_modules (read my {% post_link secure-node-modules-snyk 'previous post' %} for installation guide). I never had any issue with it running on Alpine docker image. That was because there was no modules to patch.
 
 That is until I install [renovate](https://github.com/renovatebot/renovate), which has [vulnerabilities](https://snyk.io/test/npm/renovate) that can be patched.
 
