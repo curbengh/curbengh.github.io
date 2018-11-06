@@ -1,6 +1,6 @@
 [context.production]
   publish = "public"
-  command = "npm run build"
+  command = "npm run snyk && npm run hexo"
 
 [[headers]]
   for = "/*"
