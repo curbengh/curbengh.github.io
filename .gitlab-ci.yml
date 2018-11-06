@@ -16,6 +16,11 @@ test:
   only:
     - master # only trigger when 'master' branch is pushed
 
+# Don't run this job when renovate job runs
+  except:
+    - schedules
+    - web
+
 renovate: # Check dependency update
   script:
     - npm run renovate
