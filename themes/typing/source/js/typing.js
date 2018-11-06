@@ -56,21 +56,5 @@
         event.trigger.textContent = 'Copy'
       }, 2000)
     })
-
-    // Navigation menu
-    $('#menu').click(function (event) {
-      var nav = $('#main-nav')
-      nav.toggle('fast')
-    })
-
-    // Show navigation button for smaller screen
-    $(window).resize(function () {
-      var viewportWidth = $(window).width()
-      if (viewportWidth > 468) {
-        $('#main-nav').show('fast')
-      } else {
-        $('#main-nav').hide('fast')
-      }
-    })
   })
 })(jQuery)

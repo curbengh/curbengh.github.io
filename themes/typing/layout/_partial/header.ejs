@@ -1,17 +1,21 @@
 <header id="header" class="header">
-    <div class="mobile-nav">
-      <h1 class="nickname"><%= theme.nickname %></h1>
-      <a id="menu">
-        &#9776; Menu
-      </a>
-    </div>
-    <% if (theme.nav === 'left') { %>
-        <nav id="main-nav" class="main-nav nav-left">
-    <% } else { %>
-        <nav id="main-nav" class="main-nav">
-    <% } %>
+  <%/* Nav menu for desktop */%>
+  <nav id="main-nav" class="main-nav <% if (theme.nav === 'left') { %>nav-left<% } %>">
     <% for (let i in theme.menu) { %>
       <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
     <% } %>
+  </nav>
+  <%/* Nav menu for mobile */%>
+  <nav class="mobile-nav">
+    <h1 class="nickname"><%= theme.nickname %></h1>
+    <ul id="mobile-nav-menu">
+    <label for="menu-toggle"><a>&#9776; Menu</a></label>
+    <input type="checkbox" id="menu-toggle"/>
+    <ul id="menu">
+    <% for (let i in theme.menu) { %>
+      <a href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+    <% } %>
+    </ul>
+    </ul>
   </nav>
 </header>

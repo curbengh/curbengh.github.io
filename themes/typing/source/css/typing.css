@@ -1077,6 +1077,19 @@ pre .javascript .function,pre .keyword {
   color: #8959a8;
 }
 
+/* hide mobile nav menu and its checkbox */
+/* when it's not mobile */
+.mobile-nav,#menu-toggle,#menu{
+  display: none
+}
+
+/* align the text (in nav menu) to right */
+/* set line-height in /archives page */
+#mobile-nav-menu{
+  text-align: right;
+  line-height: 1.8
+}
+
 @media (max-width:768px) {
   body {
     font-size: 1.2em;
@@ -1098,19 +1111,26 @@ pre .javascript .function,pre .keyword {
     width: 80%;
   }
 
-  .nav-left {
-    position: relative;
-    left: auto;
-    text-align: initial;
-  }
-
-  .nav-left .main-nav-link {
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-
   .header-hr-left {
     display: block;
+  }
+
+  /* hide desktop nav */
+  .main-nav{
+    display:none
+  }
+
+  /* display mobile nav */
+  .mobile-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between
+  }
+
+  /* display links when menu button is clicked */
+  /* use grid to display each link in new line */
+  #menu-toggle:checked + #menu{
+    display:grid
   }
 }
 
@@ -1133,36 +1153,6 @@ pre .javascript .function,pre .keyword {
 
   .archive-container .archive-article-header>a,.archive-container .archive-article-header>h1 {
     width: 100%;
-  }
-
-  .mobile-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .main-nav {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    width: 50%;
-    padding: 20px;
-    border: 2px solid #777;
-    box-shadow: 5px 5px 5px #777;
-  }
-
-  .main-nav .main-nav-link {
-    display: block;
-    padding-bottom: 10px;
-  }
-
-  .article .nav-left {
-    position: absolute;
-  }
-
-  .article .nav-left .main-nav-link {
-    display: block;
-    padding-bottom: 10px;
   }
 }
 
