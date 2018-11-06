@@ -34,7 +34,12 @@ Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-min
 2. Snyk only supports [SSO](https://en.wikipedia.org/wiki/Single_sign-on), no e-mail sign up. You need to have GitHub, Bitbucket, or Google account. It can be a separate account from your current GitHub account. Linking your current GitHub repo to Snyk is *optional*. 
 3. Once you signed up, go to your account setting, grab the API token and save it in your password manager (or somewhere safe).
 {% cloudinary 20181001/snyk-api.png %}
-4. Install Snyk, `$ sudo npm install -g snyk`.
+4. Install Snyk, 
+```bash
+$ npm install snyk
+# Add 'node_modules/.bin' to $PATH, if you haven't done so. Check ~/.profile before running the following command.
+$ echo 'PATH="./node_modules/.bin:$PATH"' >> ~/.profile
+```
 5. `cd` into your repo folder.
 6. Login to Snyk, `$ snyk auth`. Snyk website will pop-up.
 7. Once authenticated, you can start to use it.

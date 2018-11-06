@@ -1,7 +1,7 @@
 ---
 title: How to create a Hexo blog
 date: 2018-09-21 00:00:00
-lastUpdated: 2018-10-07 00:00:00
+lastUpdated: 2018-11-06 00:00:00
 tags:
 ---
 Create a website/blog (hosted by [GitLab](https://about.gitlab.com/features/pages/) for free) using the following guide:
@@ -48,11 +48,11 @@ $ sudo yum -y install nodejs
 # Arch Linux
 $ sudo pacman -S npm
 ```
-4. Install Hexo and its dependencies (defined in `package.json`). Re-launch the terminal program before continue.
+4. Install Hexo and its dependencies (defined in `package.json`). Re-launch the terminal program before continue. After installation, append `node_modules/.bin` to $PATH.
 ```bash
 $ cd <folder>
-$ sudo npm install -g hexo-cli
 $ npm install
+$ echo 'PATH="./node_modules/.bin:$PATH"' >> ~/.profile
 ```
 5. Generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 ```bash
@@ -60,7 +60,6 @@ $ hexo generate
 ```
 6. (Optional) Start Hexo server on localhost:4000 to preview the blog. ([more info](https://hexo.io/docs/server))
 ```bash
-$ npm install hexo-server --save
 $ hexo server
 ```
 7. Commit the changes and push them. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/blog/blob/master/.gitignore), as CI will generate them during build.
