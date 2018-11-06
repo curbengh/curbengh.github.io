@@ -1130,7 +1130,8 @@ pre .javascript .function,pre .keyword {
   /* display links when menu button is clicked */
   /* use grid to display each link in new line */
   #menu-toggle:checked + #menu{
-    display:grid
+    display:grid;
+    display:-ms-grid
   }
 }
 
