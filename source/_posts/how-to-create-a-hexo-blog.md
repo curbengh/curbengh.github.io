@@ -52,7 +52,7 @@ $ sudo pacman -S npm
 ```bash
 $ cd <folder>
 $ npm install
-$ echo 'PATH="./node_modules/.bin:$PATH"' >> ~/.profile
+$ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
 ```
 5. Generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 ```bash

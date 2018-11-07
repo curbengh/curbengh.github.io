@@ -38,7 +38,7 @@ Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-min
 ```bash
 $ npm install snyk
 # Add 'node_modules/.bin' to $PATH, if you haven't done so. Check ~/.profile before running the following command.
-$ echo 'PATH="./node_modules/.bin:$PATH"' >> ~/.profile
+$ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
 ```
 5. `cd` into your repo folder.
 6. Login to Snyk, `$ snyk auth`. Snyk website will pop-up.
