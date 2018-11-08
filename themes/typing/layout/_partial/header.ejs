@@ -8,10 +8,10 @@
   <%/* Nav menu for mobile */%>
   <nav class="mobile-nav">
     <h1 class="nickname"><%= theme.nickname %></h1>
-    <ul id="mobile-nav-menu">
-    <label for="menu-toggle"><a>&#9776; Menu</a></label>
-    <input type="checkbox" id="menu-toggle"/>
-    <ul id="menu">
+    <ul class="mobile-nav-menu">
+    <label for="mobile-menu-toggle"><a>&#9776; Menu</a></label>
+    <input id="mobile-menu-toggle" type="checkbox"/>
+    <ul class="mobile-nav-link">
     <% for (let i in theme.menu) { %>
       <a href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
     <% } %>

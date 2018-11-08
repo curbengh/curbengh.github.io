@@ -1079,13 +1079,13 @@ pre .javascript .function,pre .keyword {
 
 /* hide mobile nav menu and its checkbox */
 /* when it's not mobile */
-.mobile-nav,#menu-toggle,#menu{
+.mobile-nav,#mobile-menu-toggle,.mobile-nav-link{
   display: none
 }
 
 /* align the text (in nav menu) to right */
 /* set line-height in /archives page */
-#mobile-nav-menu{
+.mobile-nav-menu{
   text-align: right;
   line-height: 1.8
 }
@@ -1129,7 +1129,7 @@ pre .javascript .function,pre .keyword {
 
   /* display links when menu button is clicked */
   /* use grid to display each link in new line */
-  #menu-toggle:checked + #menu{
+  #mobile-menu-toggle:checked + .mobile-nav-link{
     display: grid;
     display: -ms-grid;
     border: 2px solid #999;
