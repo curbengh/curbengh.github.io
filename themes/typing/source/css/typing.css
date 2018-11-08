@@ -826,22 +826,6 @@ blockquote {
   font-weight: 300;
 }
 
-.nav-left {
-  position: absolute;
-  left: -130px;
-  text-align: right;
-}
-
-.nav-left .main-nav-link {
-  display: block;
-  padding-bottom: 10px;
-}
-
-.header-hr-left,
-.mobile-nav {
-  display: none;
-}
-
 .archive-container,
 .category-container,
 .tag-container {
@@ -965,21 +949,6 @@ blockquote {
 
 .article .main-nav-link:hover {
   border: 0;
-}
-
-.article .nav-left {
-  position: relative;
-  left: auto;
-  text-align: initial;
-}
-
-.article .nav-left .main-nav-link {
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-.article .header-hr-left {
-  display: block;
 }
 
 .article hr {
@@ -1473,10 +1442,6 @@ pre .keyword {
 
   .comments {
     width: 80%;
-  }
-
-  .header-hr-left {
-    display: block;
   }
 
   /* hide desktop nav */

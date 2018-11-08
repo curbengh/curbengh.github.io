@@ -1,6 +1,6 @@
 <header id="header" class="header">
   <%/* Nav menu for desktop */%>
-  <nav id="main-nav" class="main-nav <% if (theme.nav === 'left') { %>nav-left<% } %>">
+  <nav id="main-nav" class="main-nav">
     <% for (let i in theme.menu) { %>
       <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
     <% } %>
