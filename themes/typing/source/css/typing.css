@@ -1463,8 +1463,9 @@ pre .keyword {
     display: -ms-grid;
     border: 2px solid #999;
     border-radius: 5px;
-    padding: 5px;
-    text-align: center;
+    margin-left: 5px;
+    padding: 10px;
+    text-align: left;
   }
 }
 
