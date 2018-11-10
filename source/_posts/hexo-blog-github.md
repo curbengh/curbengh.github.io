@@ -10,7 +10,7 @@ In {% post_link how-to-create-a-hexo-blog 'previous post' %}, I showed you how t
 
 ## GitHub repository
 1. Register a free [GitHub](https://github.com/join) account or use your current one.
-2. Create a repo named <b>*username*.gitlab.io</b>, where username is your username (or organization name) on GitHub.
+2. Create a repo named <b>*username*.github.io</b>, where username is your username on GitHub.
 3. Clone this [repo](https://gitlab.com/curben/blog).
 4. Install [Travis CI](https://github.com/marketplace/travis-ci). It's free for open source repo.
 5. Go to [Applications settings](https://github.com/settings/installations), configure Travis CI to have access to the repo.
@@ -55,7 +55,7 @@ deploy:
 	```
 
 	3. Write your post after the second `---` using [Markdown](https://guides.github.com/features/mastering-markdown/) [style](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
-11. After you create a new post, the website can be accessed on <b>*username*.gitlab.io</b>. Check your repo settings, under the GitHub Pages, make sure the Source is `gh-pages` branch.
+11. After you create a new post, the website can be accessed on <b>*username*.github.io</b>. Check your repo settings, under the GitHub Pages, make sure the Source is `gh-pages` branch.
 
 ## Installation
 1. Having Hexo means you can debug locally, rather than waiting for [Travis](https://travis-ci.com/). You can even run a local server to preview your blog (see step 6 below).
@@ -99,7 +99,7 @@ $ hexo server
 ```
 
 8. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
-9.  If there is no error, the generated website can be accessed on <b>*username*.gitlab.io</b>
+9.  If there is no error, the generated website can be accessed on <b>*username*.github.io</b>
 
 ## Writing
 1. Create a new post (using Hexo)
@@ -158,7 +158,7 @@ description:
 ### Project page
 If you prefer to have a project page on GitLab:
 
-1. Navigate to your repo on GitHub. Go to the **Settings** tab. Change the **Repository name** so your blog is available at <b>username.gitlab.io/*repository*</b>,  **repository** can be any name, like *blog* or *hexo*.
+1. Navigate to your repo on GitHub. Go to the **Settings** tab. Change the **Repository name** so your blog is available at <b>username.github.io/*repository*</b>,  **repository** can be any name, like *blog* or *hexo*.
 1. Edit **_config.yml**, change the `root:` value to the name.
 1. Commit and push.
 
