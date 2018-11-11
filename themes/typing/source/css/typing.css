@@ -830,12 +830,11 @@ blockquote {
 .category-container,
 .tag-container {
   width: 60%;
-  margin: 0 auto;
+  margin: 1em auto 0;
   position: relative;
   line-height: 1;
   text-align: left;
   font-size: 1em;
-  padding-top: 3em;
   max-width: 700px;
 }
 
@@ -857,7 +856,7 @@ blockquote {
 .archive-container .header,
 .category-container .header,
 .tag-container .header {
-  font-size: 1em;
+  font-size: 1.1em;
 }
 
 .archive-container .archive-article-header > a,
@@ -881,7 +880,7 @@ blockquote {
 .category-container hr,
 .tag-container hr {
   width: 60%;
-  margin: 20px 0 40px;
+  margin: 1em 0;
   background-image: -webkit-linear-gradient(
     0deg,
     #d5d5d5,
@@ -944,7 +943,7 @@ blockquote {
 
 .article .header {
   font-size: 1.1em;
-  margin: 0.5em 0;
+  margin-top: 1em;
 }
 
 .article .main-nav-link:hover {
@@ -1129,12 +1128,6 @@ blockquote {
 
 .article-type-page .article-footer {
   display: none;
-}
-
-.comments {
-  width: 60%;
-  max-width: 700px;
-  margin: 50px auto 0;
 }
 
 .dark {
@@ -1430,18 +1423,8 @@ pre .keyword {
     width: 80%;
   }
 
-  .archive-container,
-  .category-container,
-  .tag-container {
-    padding-top: 1em;
-  }
-
   .article-title {
     font-size: 1.8rem;
-  }
-
-  .comments {
-    width: 80%;
   }
 
   /* hide desktop nav */
