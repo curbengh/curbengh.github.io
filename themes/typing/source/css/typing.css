@@ -1410,6 +1410,54 @@ pre .keyword {
   line-height: 1.8;
 }
 
+/* search bar */
+.searchContainer{
+  width: 10em;
+  color:#d8d8d8;
+  background-color:#333;
+  outline: 0;
+  float: right;
+  height: 1.8em;
+  position: relative;
+}
+
+/* inline-block to position them in same line */
+.searchBox,
+.searchBtn{
+  display:inline-block;
+  color: inherit;
+  background-color: inherit;
+}
+
+/* hide the border and fill the height to parent's */
+.searchBox {
+  border: 0;
+  height:100%;
+  width: 85%;
+  padding-left: 0.2em;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+/* highlight the text box when focused */
+.searchBox:focus {
+  border: 1px solid #1abc9c;
+}
+
+/* align the button to center */
+.searchBtn {
+  width: 10%;
+  position: absolute;
+  top: 50%;
+  transform: translate(30%, -50%);
+}
+
+/* fill the svg with parent's font color */
+svg {
+  fill: currentColor;
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 1.2em;
