@@ -609,9 +609,7 @@ textarea {
 }
 
 .article .article-entry blockquote footer cite a:hover,
-.article .article-nav-link-wrap:hover,
-.dark a:hover,
-a:hover {
+.article .article-nav-link-wrap:hover {
   color: #22c5e5;
   border-bottom: 1px solid;
   transition: color 0.1s linear;
@@ -939,6 +937,7 @@ blockquote {
   width: 80%;
   max-width: 1000px;
   margin: 0 auto;
+  position: relative;
 }
 
 .article .header {
@@ -1432,14 +1431,6 @@ pre .keyword {
   position: relative;
 }
 
-/* don't underline the search icon */
-.searchContainer a:hover,
-.searchContainer a:visited,
-.searchContainer a:link,
-.searchContainer a:active {
-  border-bottom: none;
-}
-
 /* inline-block to position them in same line */
 .searchBox,
 .searchBtn{
@@ -1476,6 +1467,11 @@ pre .keyword {
 /* fill the svg with parent's font color */
 svg {
   fill: currentColor;
+}
+
+/* don't underline specific <a> tag */
+.no-underline {
+  border-bottom: none;
 }
 
 @media (max-width: 768px) {
