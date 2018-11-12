@@ -1403,11 +1403,21 @@ pre .keyword {
   display: none;
 }
 
-/* align the text (in nav menu) to right */
 /* set line-height in /archives page */
 .mobile-nav-menu {
-  text-align: right;
   line-height: 1.8;
+}
+
+/* overlap other elements */
+.mobile-nav-link {
+  background: #3f3f3f;
+  border: 2px solid #999;
+  border-radius: 5px;
+  right: 0;
+  margin-left: 5px;
+  padding: 10px;
+  position: absolute;
+  text-align: left;
 }
 
 /* search bar */
@@ -1502,11 +1512,6 @@ svg {
   #mobile-menu-toggle:checked + .mobile-nav-link {
     display: grid;
     display: -ms-grid;
-    border: 2px solid #999;
-    border-radius: 5px;
-    margin-left: 5px;
-    padding: 10px;
-    text-align: left;
   }
 }
 
