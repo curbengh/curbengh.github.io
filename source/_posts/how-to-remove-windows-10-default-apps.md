@@ -1,7 +1,7 @@
 ---
 title: How to remove Windows 10 default apps
 date: 2018-09-26 00:00:00
-lastUpdated: 2018-10-19 00:00:00
+lastUpdated: 2019-01-03 00:00:00
 tags:
 ---
 Windows 10 comes bundled with many unused apps. Worse, it even install third-party apps from time to time by *itself* (even after you remove it!). Here's how to get rid of these bloatware.
@@ -36,6 +36,8 @@ This is the easiest method to remove all preinstalled apps. Note: this will remo
 	```
 	Get-AppxPackage -AllUsers | Remove-AppxPackage
 	```
+
+For more thorough removal including tracking or telemetry, use [Debloat Windows 10](https://github.com/W4RH4WK/Debloat-Windows-10) powershell script. I haven't test it myself, but it looks like it's regularly updated.
 
 ## Uninstall specific preinstalled app
 1. Launch PowerShell as administrator (right click `Run as administrator`).
