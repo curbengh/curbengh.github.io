@@ -4,7 +4,7 @@ date: 2019-01-07 00:00:00
 tags:
 ---
 
-Following are the apps that I'm currently using and recommend to everyone. Most are alternatives to Google Apps after I switched to microG.
+Following are the apps that I'm currently using and recommend to everyone. Most are alternatives to Google Apps after I switched to microG. They are free and contain no ads.
 
 <!-- more -->
 
@@ -13,12 +13,13 @@ Following are the apps that I'm currently using and recommend to everyone. Most 
 Name | Previous | Comment
 --- | --- | ---
 [F-Droid](https://f-droid.org/) + [Yalp Store](https://github.com/yeriomin/YalpStore) | Play Store | Compatible with microG. F-Droid is an app store for open source apps. Yalp Store is to browse and install apps listed in Google Play *without* a Google account.
-[Fennec F-Droid](https://f-droid.org/en/packages/org.mozilla.fennec_fdroid/) | Firefox | It's an official Firefox build for [F-Droid](https://f-droid.org/) with less proprietary components (Google Services Framework?). Particularly useful for [microG](https://microg.org/).
-[Simple Calendar](https://github.com/SimpleMobileTools/Simple-Calendar) | Google Calendar | Google Calendar no longer works after I switched to microG. It's part of [Simple Mobile Tools](https://simplemobiletools.github.io/), so it's open source, no ads and include dark theme. Install Pro version for free from F-Droid.
-[Simple Gallery](https://github.com/SimpleMobileTools/Simple-Gallery) | Google Photos | The only reason I use Google Photos is the ability to view panoramas, despite having no issue with microG. Since Simple Gallery is part of Simple Mobile Tools and supports panoramas, I switched.
+[Fennec F-Droid](https://f-droid.org/en/packages/org.mozilla.fennec_fdroid/) | Firefox | It's an official build by Mozilla for F-Droid with less proprietary components (Google Services Framework?). Particularly suitable for [microG](https://microg.org/).
+[Simple Calendar](https://github.com/SimpleMobileTools/Simple-Calendar) | Google Calendar | Google Calendar doesn't work with microG. It's part of [Simple Mobile Tools](https://simplemobiletools.github.io/), so it's open source and include dark theme. Install Pro version for free from F-Droid.
+[Simple Gallery](https://github.com/SimpleMobileTools/Simple-Gallery) | Google Photos | The only reason I use Google Photos is the ability to view panoramas, despite having no issue with microG. Since Simple Gallery is part of Simple Mobile Tools and supports panoramas, I gladly switched.
 [uNote](https://gitlab.com/Varlorg/uNote) | OI Notepad | Smallest (71KB) open source notepad app that I could find.
 [KeePass DX](https://www.keepassdx.com/) | [KeePassDroid](http://www.keepassdroid.com/) | Utilise Material theme so it looks more modern and feels lighter.
-[Unit Converter Ultimate](https://github.com/physphil/UnitConverterUltimate) | | The only unit converter app that you would ever need. Supports every practically possible units including currency. Open source.
+[Lithium](https://play.google.com/store/apps/details?id=com.faultexception.reader&hl=en) | FBReader | Free proprietary EPUB reader. The best feature is read by scrolling; each chapter is displayed as a long text and you scroll down as you read. I find this feature faster than flip-by-swipe and without the accidental touch issue of flip-by-tap.
+[Unit Converter Ultimate](https://github.com/physphil/UnitConverterUltimate) |  | The only unit converter app that you would ever need. Supports every practically possible units including currency. Open source.
 [andOTP](https://github.com/andOTP/andOTP) | Google Authenticator | Open source and dark theme.
 [Stocard](https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=en_US) | Google Pay | Simply to store loyalty cards with barcode. Compatible with microG.
 [HERE WeGo](https://play.google.com/store/apps/details?id=com.here.app.maps&hl=en) | Google Maps | I use it simply for compatibility microG (which Google Maps doesn't work with). Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. Maybe I'll consider [OsmAnd](https://github.com/osmandapp) or [MAPS.ME](https://github.com/mapsme/omim) which are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/).
