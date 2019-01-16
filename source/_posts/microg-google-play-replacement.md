@@ -23,42 +23,42 @@ Personally I use [microG-bundled LineageOS](https://lineage.microg.org/) as I'm 
 
 microG is not 100% replacement of Google Play Services, possibly will never be—it [hasn't implement](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) all the APIs. Following are the problematic apps and their alternatives. (**Edit**: I wrote a {% post_link recommended-android-apps 'list of alternative apps' %} including the apps below plus some others which are not necessarily incompatible with microG.)
 
-**App**: Play Store<br/>
-**Issue**: No app or in-app purchase ([NanoDroid](http://nanolx.org/nanolx/nanodroid) claimed to support).<br/>
-**Alternative**: F-Droid + Yalp Store<br/>
-**Info**: F-Droid is an app store for open source apps. Many of the apps I'm going to recommend can be installed through it. With [privileged extension](https://f-droid.org/en/packages/org.fdroid.fdroid.privileged.ota/) (usually installed alongside with microG), it can auto update installed apps.<br/>
+**App**: Play Store
+**Issue**: No app or in-app purchase ([NanoDroid](http://nanolx.org/nanolx/nanodroid) claimed to support).
+**Alternative**: F-Droid + Yalp Store
+**Info**: F-Droid is an app store for open source apps. Many of the apps I'm going to recommend can be installed through it. With [privileged extension](https://f-droid.org/en/packages/org.fdroid.fdroid.privileged.ota/) (usually installed alongside with microG), it can auto update installed apps.
 For proprietary apps, use Yalp Store. You can use built-in credential to install free apps or use your credential to install purchased apps. Purchase apps through Play Store's [website](https://play.google.com/store). I recommend installing it as a system app (flash the [OTA.zip](https://github.com/yeriomin/YalpStore/releases) in recovery) to automatically install once an APK is downloaded. Root is required for auto-download updates. Go to the Yalp setting, set "*Only the chosen apps will be checked for updates*" and whitelist any apps you installed via F-Droid.
 
 ---
 
-**App**: Google Maps<br/>
-**Issue**: No location, possibly due to absence of [incomplete/outdated](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) [Maps API](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/4/).<br/>
-**Alternative**: HERE WeGo, OsmAnd, MAPS.ME<br/>
-**Info**: HERE WeGo supports public transit. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. OsmAnd and MAPS.ME are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/), but doesn't support public transit (AFAIK).<br/>
+**App**: Google Maps
+**Issue**: No location, possibly due to absence of [incomplete/outdated](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) [Maps API](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/4/).
+**Alternative**: HERE WeGo, OsmAnd, MAPS.ME
+**Info**: HERE WeGo supports public transit. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. OsmAnd and MAPS.ME are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/), but doesn't support public transit (AFAIK).
 
 ---
 
-**App**: Google Calendar<br/>
-**Issue**: Crash on boot. Depends on proprietary GoogleCalendarSyncAdapter.apk. Possibly due to incomplete [Account Authentication API](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status).<br/>
-**Alternative**: [Simple Calendar](https://github.com/SimpleMobileTools/Simple-Calendar) + [DAVx⁵](https://gitlab.com/bitfireAT/davx5-ose)<br/>
+**App**: Google Calendar
+**Issue**: Crash on boot. Depends on proprietary GoogleCalendarSyncAdapter.apk. Possibly due to incomplete [Account Authentication API](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status).
+**Alternative**: [Simple Calendar](https://github.com/SimpleMobileTools/Simple-Calendar) + [DAVx⁵](https://gitlab.com/bitfireAT/davx5-ose)
 **Info**: It's still problematic even with GoogleCalendarSyncAdapter.apk installed. Google Account is not well-supported in microG. While you can use DAVx⁵ to sync calendar events in Google Account, it's a hit-or-miss and reminders are not supported. This is due to the [lack](https://forums.bitfire.at/post/9235) of OAuth 2.0 support in DAVx⁵. Alternatively, you can migrate your data to free email providers that supports CalDAV/CardDav, i.e. [Disroot](https://disroot.org/en) (using [Nextcloud](https://www.davx5.com/tested-with/nextcloud)), [GMX](https://www.davx5.com/tested-with/gmx) and [Yandex](https://www.davx5.com/tested-with/yandex).
 
 ---
 
-**App**. Google Contacts<br/>
-**Issue**: Depends on proprietary GoogleContactsSyncAdapter.apk<br/>
-**Alternative**: [Simple Contacts](https://github.com/SimpleMobileTools/Simple-Contacts) + DAVx⁵<br/>
+**App**. Google Contacts
+**Issue**: Depends on proprietary GoogleContactsSyncAdapter.apk
+**Alternative**: [Simple Contacts](https://github.com/SimpleMobileTools/Simple-Contacts) + DAVx⁵
 **Info**: Email providers mentioned in Google Calendar section can sync contacts using CardDAV.
 
 ---
 
-**App**. Google Pay<br/>
-**Issue**: Failed SafetyNet<br/>
-**Alternative**: [Loyalty Card Keychain](https://f-droid.org/packages/protect.card_locker/) (for loyalty cards only)<br/>
+**App**. Google Pay
+**Issue**: Failed SafetyNet
+**Alternative**: [Loyalty Card Keychain](https://f-droid.org/packages/protect.card_locker/) (for loyalty cards only)
 **Info**: SafetyNet can be bypassed through 1) DroidGuard Helper (available from microG's F-Droid [repo](https://microg.org/download.html), install as a system app) or 2) [Magisk Module](https://magiskroot.net/bypass-safetynet-issue-cts/).
 
 ---
 
-**App**. Whatsapp, Facebook Messenger and other chatting apps<br/>
-**Issue**: A delay in receiving message<br/>
+**App**. Whatsapp, Facebook Messenger and other chatting apps
+**Issue**: A delay in receiving message
 **Info**: Enable "Google Cloud Messaging" in microG Settings and allow relevant apps to register.

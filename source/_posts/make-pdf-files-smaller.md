@@ -10,6 +10,8 @@ The most effective ways of reducing the file size of a PDF is by converting to g
 
 Requirement: ghostscript (installed by default in Ubuntu)
 
+## Single PDF
+
 Save the following script as "pdfcompress.sh".
 
 Usage: `sh pdfcompress.sh input.pdf`
@@ -45,7 +47,8 @@ Options ([more info](https://ghostscript.com/doc/current/Ps2pdf.htm#Options)):
 	- */printer* selects output similar to the Acrobat Distiller "Print Optimized" setting. 300 DPI.
 	- */prepress* selects output similar to Acrobat Distiller "Prepress Optimized" setting. 300 DPI.
 
-</br>
+## PDFs in a folder
+
 Use the following script to compress all PDFs in a folder.
 
 Usage: `sh pdfcompress.sh 'target folder'`
@@ -77,5 +80,6 @@ for i in *.pdf; do
 done
 ```
 
+<br/>
 Source: [Internal Pointers](https://www.internalpointers.com/post/compress-pdf-file-ghostscript-linux), [firstdoit](https://gist.github.com/firstdoit/6390547), [ahmed-musallam](https://gist.github.com/ahmed-musallam/27de7d7c5ac68ecbd1ed65b6b48416f9), [Ghostscript Docs](https://ghostscript.com/doc/current/Ps2pdf.htm)
 

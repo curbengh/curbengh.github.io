@@ -27,10 +27,10 @@ Screenshots:
 StarHub | China Unicom HK
 ---|---
 Pros:<br/>- Support [more countries](http://www.starhub.com/personal/mobile/mobile-phones-plans/prepaid-cards/happy-roam.html#hr_plans)<br/>- Can be kept active | Pros:<br/>- Widely available online<br/>- Does not require ID
-Cons:<br/>- Only available at Singapore Airport | Cons:<br/>- One-time use only* <br/>- Support only Mainland China.*
+Cons:<br/>- Only available at Singapore Airport | Cons:<br/>- One-time use only\* <br/>- Support only Mainland China.\**
 
-\* Except for [this product](https://res.cloudinary.com/curben/image/upload/20181231/unicom-cross-border.jpg).<br/>
-**Some plans include Hong Kong, Macau or Taiwan.
+\* Except for [this product](https://res.cloudinary.com/curben/image/upload/20181231/unicom-cross-border.jpg).
+\** Some plans include Hong Kong, Macau or Taiwan.
 
 
 StarHub SIM is available at the Singapore Changi Airport, so it's a good option if you transit over there. You can top-up the prepaid value to keep it active. However, I think this SIM is not available online, so if you're not transiting through Singapore, your next option would be the China Unicom SIM.
@@ -39,7 +39,7 @@ China Unicom SIMs shown here are provided by its Hong Kong subsidiary, so they a
 
 Do note the SIM package cover must be one of four examples provided above, otherwise the SIM could be China Unicom domestic SIM ([example](https://res.cloudinary.com/curben/image/upload/20181231/unicom-domestic.jpg)). The SIM is one-time use only. The SIM is activated once you start using it and when you reach the validity period, it can no longer be used.
 
-If you haven't noticed, the SIMs I mentioned here (including Starhub and China Unicom) are **data-only**. So you can't make/send/receive calls and SMS.
+If you haven't noticed, the SIMs I mentioned here (including Starhub and China Unicom) are **data-only** (some can call/text, read below). So you can't make/send/receive calls and SMS.
 
 **Edit**: I found China Unicom SIMs that can call (not sure about text) between Mainland and Hong Kong; [3-day](https://res.cloudinary.com/curben/image/upload/20181231/unicom-3-day.jpg) and [5-day](https://res.cloudinary.com/curben/image/upload/20181231/unicom-5-day.jpg) SIMs. They are Hong Kong SIMs, so they should work. They include data but the SIMs are one-time use only.
 
