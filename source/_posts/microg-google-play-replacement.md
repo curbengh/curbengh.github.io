@@ -33,8 +33,8 @@ For proprietary apps, use Yalp Store. You can use built-in credential to install
 
 **App**: Google Maps
 **Issue**: No location, possibly due to absence of [incomplete/outdated](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) [Maps API](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/4/).
-**Alternative**: HERE WeGo, OsmAnd, MAPS.ME
-**Info**: HERE WeGo supports public transit. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. OsmAnd and MAPS.ME are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/), but doesn't support public transit (AFAIK).
+**Alternative**: Waze, HERE WeGo, OsmAnd, MAPS.ME
+**Info**: HERE WeGo supports public transit and offline maps, while Waze doesn't. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. OsmAnd and MAPS.ME are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/), but doesn't support public transit (AFAIK).
 
 ---
 

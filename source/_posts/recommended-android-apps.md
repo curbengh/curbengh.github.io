@@ -24,4 +24,4 @@ Name | Previous | Comment
 [Unit Converter Ultimate](https://github.com/physphil/UnitConverterUltimate) |  | The only unit converter app that you would ever need. Supports every practically possible units including currency.
 [andOTP](https://github.com/andOTP/andOTP) | Google Authenticator | Open source and dark theme.
 [Loyalty Card Keychain](https://f-droid.org/packages/protect.card_locker/) | Google Pay | Simply to store loyalty cards with barcode.
-[HERE WeGo](https://play.google.com/store/apps/details?id=com.here.app.maps&hl=en) | Google Maps | I use it simply for compatibility microG (which Google Maps doesn't work with). Maybe I'll consider [OsmAnd](https://github.com/osmandapp) or [MAPS.ME](https://github.com/mapsme/omim) which are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/).
+Waze, HERE WeGo | Google Maps | Google Maps doesn't work with microG. Maybe I'll consider [OsmAnd](https://github.com/osmandapp) or [MAPS.ME](https://github.com/mapsme/omim) which are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/).
