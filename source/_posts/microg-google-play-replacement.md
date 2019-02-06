@@ -11,17 +11,17 @@ tags:
 
 Adding to this issue is having all the APIs packaged into a single monolithic Play Services APK. So, all the APIs are loaded at all time, even though some APIs like Cast is not going to be used 24/7. This leads to memory bloat. Despite [effort](https://arstechnica.com/gadgets/2017/09/android-8-0-oreo-thoroughly-reviewed/8/#h3) to split it into separate APKs, subsequent [updates](https://www.apkmirror.com/apk/google-inc/google-play-services/) are seldom smaller. The current version (as of writing) is [40+ MB](https://www.apkmirror.com/apk/google-inc/google-play-services/google-play-services-14-7-99-release/), while microG's implementation is merely [2.6 MB](https://microg.org/download.html).
 
-Despite the minimal size of microG, it's actually usable if you can shift away from the Google Apps (which is the goal of microG anyway). Most of us have grown to rely on services offered by Google and moving away from them is not easy. The good news is, there are pretty good alternatives out there.
+Despite the minimal size of microG, it's actually usable if you can shift away from the Google Apps (which is the goal of microG anyway). Most of us have grown to rely on services offered by Google and moving away from them is not easy. The good news is, there are plenty of great alternatives out there.
 
 microG requires Signature Spoofing to function on behalf of Google Play Services APK (com.google.android.gms). As summarised by lee.wp14 in this [XDA thread](https://forum.xda-developers.com/showpost.php?p=71042083), there are 3 options to install microG:
 
 1. FakeGApps Xposed Module ([Xposed Repo](https://repo.xposed.info/module/com.thermatk.android.xf.fakegapps), [GitHub](https://github.com/thermatk/FakeGApps))
 2. /system Patch ([NanoDroid](https://gitlab.com/Nanolx/NanoDroid), [Haystack](https://github.com/Lanchon/haystack), [Tingle](https://github.com/ale5000-git/tingle))
-3. Custom ROMs. See the thread for a list of supported ROMs and more info on the above options.
+3. Custom ROMs. See the [thread](https://forum.xda-developers.com/showpost.php?p=71042083) for a list of supported ROMs and more info on the above options.
 
 Personally I use [microG-bundled LineageOS](https://lineage.microg.org/) as I'm already using LineageOS. It basically mirrors all the [upstream ROMs](https://download.lineageos.org/), so you can get similar updates as upstream's.
 
-microG is not 100% replacement of Google Play Services, possibly will never be—it [hasn't implement](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) all the APIs. Following are the problematic apps and their alternatives. (**Edit**: I wrote a {% post_link recommended-android-apps 'list of alternative apps' %} including the apps below plus some others which are not necessarily incompatible with microG.)
+microG is not an 100% replacement of the Google Play Services, possibly will never be—it [hasn't implement](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) all the APIs. Following are the problematic apps and their alternatives. (**Edit**: I wrote a {% post_link recommended-android-apps 'list of alternative apps' %} which includes the apps below plus some others which are not necessarily incompatible with microG.)
 
 **App**: Play Store
 **Issue**: No app or in-app purchase ([NanoDroid](http://nanolx.org/nanolx/nanodroid) claimed to support).
