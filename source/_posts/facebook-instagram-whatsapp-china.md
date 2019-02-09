@@ -3,6 +3,7 @@ title: Access Facebook/Instagram/Whatsapp/Google in China
 date: 2018-12-31 00:00:00
 lastUpdated: 2019-01-13 00:00:00
 tags:
+- Security
 ---
 Facebook/Instagram/Whatsapp/Google are blocked in China. You can either use data roaming or VPN to access them. Roll your own VPN if you don't trust commercial VPN provider.
 

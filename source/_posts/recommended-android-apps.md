@@ -3,6 +3,7 @@ title: Recommended Android apps
 date: 2019-01-07 00:00:00
 lastUpdated: 2019-02-05 00:00:00
 tags:
+- Android
 ---
 
 Following my switch to [microG](https://microg.org/) (an open source re-implementation of Google Play), some Google Apps stopped working ({% post_link microg-google-play-replacement 'read here' %}). During my search for replacements, I discover many open source alternatives. These are the apps I'm currently using and recommend to everyone.

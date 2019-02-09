@@ -3,6 +3,7 @@ title: microG, a replacement for the proprietary Google Play Services
 date: 2019-01-12 00:00:00
 lastUpdated: 2019-02-05 00:00:00
 tags:
+- Android
 ---
 
 [microG](https://microg.org/) is an open source re-implementation of Google Play Service/Services Framework. While the core of the Android OS is still open source, much of the core apps, libraries and APIs are proprietary. Refer to [this article](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/) for more info.

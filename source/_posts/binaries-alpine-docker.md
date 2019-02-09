@@ -2,6 +2,8 @@
 title: Default binaries in Alpine docker image
 date: 2018-10-10 00:00:00
 tags:
+- Linux
+- Alpine
 ---
 Here is the list of binaries shipped with the Docker image of Alpine Linux `alpine:3.8`
 

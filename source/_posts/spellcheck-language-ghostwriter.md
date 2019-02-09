@@ -2,6 +2,7 @@
 title: Change spellcheck language in Ghostwriter
 date: 2018-10-14 00:00:00
 tags:
+- Markdown
 ---
 Ghostwriter is a Markdown editor with html preview. Previously I used [StackEdit](https://stackedit.io/app), but it's web-based.
 

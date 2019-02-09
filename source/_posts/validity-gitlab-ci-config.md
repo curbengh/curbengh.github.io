@@ -2,6 +2,7 @@
 title: How to check validity of GitLab CI config
 date: 2018-10-25 00:00:00
 tags:
+- GitLab
 ---
 It can be frustrating after you push the changes you made to `.gitlab-ci.yml`, only to discover it's invalid on gitlab.com. Here's how to verify/lint the config.
 

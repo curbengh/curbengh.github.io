@@ -2,6 +2,7 @@
 title: How to disable Control+Alt+S shortcut in MATE
 date: 2018-10-24 00:00:00
 tags:
+- Linux
 ---
 The default Control+Alt+S shortcut conflicts with Notepad++ 'Save As' shortcut, here's how to disable it.
 

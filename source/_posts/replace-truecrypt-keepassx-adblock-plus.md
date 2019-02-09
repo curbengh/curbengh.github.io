@@ -2,6 +2,8 @@
 title: You should switch to these replacements of TrueCrypt/KeePassX/Adblock Plus
 date: 2019-01-15 00:00:00
 tags:
+- Linux
+- Web
 ---
 
 TrueCrypt and KeePassX have been discontinued while Adblock Plus has been [commercialised](https://en.wikipedia.org/wiki/Adblock_Plus#Controversy_over_ad_filtering_and_ad_whitelisting). Their replacements are [VeraCrypt](https://www.veracrypt.fr/), [KeePassXC](https://keepassxc.org/) and [uBlock Origin](https://github.com/gorhill/uBlock/) respectively.

@@ -1,7 +1,8 @@
 ---
 title: Which statistical test should I use?
 date: 2019-02-09 00:00:00
-tags: stats
+tags:
+- Stats
 ---
 
 Choosing a suitable statistical test depends on the design of the experiment, notably the number and the type of variables. Following are the guides (or rather cheat sheets) that I have gathered so far.

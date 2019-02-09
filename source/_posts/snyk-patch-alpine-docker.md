@@ -2,7 +2,12 @@
 title: Snyk failed to patch in Alpine docker
 date: 2018-10-31 00:00:00
 tags:
+- Snyk
+- Linux
+- Security
+- Alpine
 ---
+
 Snyk initially runs fine on Alpine, until you try to `snyk protect` to patch the modules. Turns out Synk depends on GNU version of `patch` utility.
 
 <!-- more -->

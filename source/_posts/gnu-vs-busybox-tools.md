@@ -3,6 +3,8 @@ title: GNU vs BusyBox Unix tools
 date: 2018-10-13 00:00:00
 lastUpdated: 2018-10-31 00:00:00
 tags:
+- Linux
+- Alpine
 ---
 TL;DR Alpine uses BusyBox while Ubuntu uses GNU tools, and they behave differently. Here's how they differ.
 

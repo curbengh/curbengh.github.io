@@ -2,6 +2,7 @@
 title: How to create a Hexo blog on GitHub Pages
 date: 2018-11-10 00:00:00
 tags:
+- Hexo
 ---
 
 In {% post_link how-to-create-a-hexo-blog 'previous post' %}, I showed you how to create a blog using [Hexo](https://hexo.io) and host it on [GitLab Pages](https://about.gitlab.com/features/pages/). Here's how to host it on [GitHub Pages](https://pages.github.com/):

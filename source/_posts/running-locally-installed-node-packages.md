@@ -2,6 +2,7 @@
 title: Running locally installed node packages
 date: 2018-10-24 00:00:00
 tags:
+- Node
 ---
 Installing a package with `--global` introduce more trouble than convenience. Here's how to run binaries of locally installed node packages.
 
