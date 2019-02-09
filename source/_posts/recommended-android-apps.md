@@ -1,7 +1,7 @@
 ---
 title: Recommended Android apps
 date: 2019-01-07 00:00:00
-lastUpdated: 2019-01-12 00:00:00
+lastUpdated: 2019-02-05 00:00:00
 tags:
 ---
 
