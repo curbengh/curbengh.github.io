@@ -30,3 +30,9 @@ Note: The previews are displayed in dark theme, but hi-res downloads are in ligh
 **Download:** [PDF](https://mega.nz/#!KN0jjaoS!cqr4sXCabLuD7jIs1GDGUuNrZP0okYRck24-V5QpS8U) | [DOCX](https://mega.nz/#!vV1TXaBb!Rq6x3--CRizMLCJFJ4wgADQmo-NPRMNERSIHeWSwW1o)
 
 Credit: James D. Leeper, Ph.D. (University of Alabama) [(Source)](https://statranalysis.net/2015/07/27/choosing-the-correct-statistical-test/)
+
+## Statistics mathematical symbols
+
+{% cloudinary 20190209/statistics-mathematical-symbols-preview.png %}
+
+**Download:** [PDF](https://mega.nz/#!Sc8hUISZ!B-j-ULD7CKDltjBYBRiX7_EPRe0P_YiUDmMzFBLlaEY) | [ODT](https://mega.nz/#!LA0XlAwa!FvU91TB43vgj7fLmNLTq_uMHlSGFHjB1EwVYuv8zlBQ)
