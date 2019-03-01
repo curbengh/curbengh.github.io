@@ -1,7 +1,7 @@
 ---
 title: How to remove Windows 10 default apps
 date: 2018-09-26 00:00:00
-lastUpdated: 2019-01-03 00:00:00
+lastUpdated: 2019-03-01 00:00:00
 tags:
 - Microsoft
 ---
@@ -46,7 +46,7 @@ For more thorough removal including tracking or telemetry, use [Debloat Windows 
 	```
 	Get-AppxPackage *<app-name>* | Remove-AppxPackage
 	```
-3. Substitute `<app-name>` with the package name listed below:
+3. Substitute `<app-name>` with the package name listed below. Right click on PowerShell to paste.
 For example to remove 3D Builder,
 	```
 	Get-AppxPackage *3dbuilder* | Remove-AppxPackage
@@ -58,6 +58,7 @@ App name | Package name
 3D Viewer | 3dviewer
 Alarms and Clock¹ | windowsalarms
 Calendar and Mail¹ | windowscommunicationsapps
+Calculator | windowscalculator
 Camera | windowscamera
 Get Office | officehub
 Get Skype | skypeapp
@@ -69,6 +70,7 @@ Money | bingfinance
 Movies & TV | zunevideo
 News | bingnews
 OneNote | onenote
+Paint | mspaint
 People | people
 Phone Companion | windowsphone
 Photos² | photos
@@ -79,11 +81,11 @@ Voice Recorder | soundrecorder
 Wallet | wallet
 Weather | bingweather
 Xbox | xboxapp
+Your Phone | yourphone
 ¹ These are *not* the time and date view you get at the bottom right. Safe to remove.
 ² This is a full-screen/[UWP](https://en.wikipedia.org/wiki/Universal_Windows_Platform_apps) image viewer. Safe to remove.
 ³ You might need it. Safe to remove if you don't.
 
-4. You can even remove Calculator `windowscalculator` and Paint `mspaint` if you're really sure you don't need them.
 
 
 ## Prevent removed default apps from returning during an update
@@ -179,6 +181,8 @@ On a side note, version 1809 (October 2018 Update) is able to uninstall:
 - Skype
 - Tips
 - Weather
+
+**Update (*01/03/2019*):** Windows 10 version 1809 (released in October 2018) includes Your Phone app. [Instruction](#uninstall-specific-preinstalled-app) has been updated.
 
 
 Source: [1](https://www.howtogeek.com/224798/how-to-uninstall-windows-10s-built-in-apps-and-how-to-reinstall-them/), [2](https://www.addictivetips.com/windows-tips/remove-default-windows-10-apps-using-powershell/), [3](https://docs.microsoft.com/en-us/windows/application-management/remove-provisioned-apps-during-update), [4](https://docs.microsoft.com/en-gb/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services)
