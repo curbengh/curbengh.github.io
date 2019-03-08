@@ -1,13 +1,16 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.13.3
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:braces:20180219':
-    - '*':
-        reason: Patch/update unavailable
-        expires: 2019-12-31T00:00:00.000Z
-  'npm:chownr:20180731':
-    - '*':
+    - hexo > hexo-fs > chokidar > anymatch > micromatch > braces:
         reason: Patch/update unavailable
         expires: '2019-12-31T00:00:00.000Z'
-
+    - hexo > hexo-cli > hexo-fs > chokidar > anymatch > micromatch > braces:
+        reason: Patch/update unavailable
+        expires: '2019-12-31T00:00:00.000Z'
+  SNYK-JS-LODASHMERGE-173732:
+    - hexo > cheerio > lodash.merge:
+        reason: Patch/update unavailable
+        expires: '2019-12-31T00:00:00.000Z'
+patch: {}
