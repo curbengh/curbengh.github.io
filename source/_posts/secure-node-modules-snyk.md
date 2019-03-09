@@ -1,7 +1,7 @@
 ---
 title: Secure node modules with Snyk
 date: 2018-10-01 00:00:00
-lastUpdated: 2018-10-30 00:00:00
+lastUpdated: 2019-03-09 00:00:00
 tags:
 - Node
 - Snyk
@@ -57,6 +57,8 @@ $ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
 16. Optional: add `snyk test`, `snyk protect` and `snyk monitor` commands to your CI script to protect your CI build image.
 
 ***Attention:*** Snyk depends on GNU version of `patch` utility, so you need to install it if the CI build environment is Alpine or BSD. Otherwise, `snyk protect` won't work. Read my {% post_link snyk-patch-alpine-docker 'newer post' %} for more info.
+
+***Edit:*** Snyk [v1.131.0](https://github.com/snyk/snyk/releases/tag/v1.131.0) onwards no longer use `patch`.
 
 Alternatively, you could integrate directly to your remote repo (github/gitlab). This integration allows Snyk to automatically create pull/merge request. Enable this by going to your Snyk account and Integrations tab.
 
