@@ -19,9 +19,9 @@ Note: The previews are displayed in dark theme, but hi-res downloads are in ligh
 
 ## Flowchart
 
-{% cloudinary 20190209/statistical-tests-flowchart-preview.png %}
+{% cloudinary 20190209/statistical-test-flowchart-preview.png %}
 
-**Download:** [PDF](https://mega.nz/#!Sc1V1SyY!7fNjEdFzqlYgWwjKW32HPWxJOHXT2Kv6UMGGSDcXfG0) | [PNG](https://mega.nz/#!2VljQADK!QFvsHsaVfMxVAc608HxdBPaS60oPfb3nz7kTNifboI8) | [VSDX](https://mega.nz/#!rJ91TCAK!UCteuqa2z04ZMwWz3aj3_yq2kdDEDP-CjmWjh0_9dh4)
+**Download:** [PDF](https://mega.nz/#!CV8DAYaD!r9NaOEZ4VfeF-peNQm7jbEP6MqO4mRIBsRiHBd2DgsU) | [PNG](https://mega.nz/#!fc9H2KbS!LDp8FmX2W46d58zjIgItZiYDEkmnwkza6EbBxtDSl2g) | [VSDX](https://mega.nz/#!GM0jyKRQ!CEaKcoNBlYmT3bTmEgdatWAkshteinDeby5_FVYcHu8)
 
 ## Table
 
