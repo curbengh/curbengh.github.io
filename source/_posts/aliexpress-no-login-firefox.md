@@ -1,11 +1,11 @@
 ---
-title: How to solve "Cannot login to AliExpress on Firefox"
+title: How to solve 'Cannot login to AliExpress on Firefox'
 date: 2019-02-28 00:00:00
 tags:
 - firefox
 ---
 
-AliExpress login doesn't shown up on Firefox. This is due to X-Frame-Options restriction. Here's how to whitelist it.
+AliExpress login doesn't show up on Firefox. This is due to X-Frame-Options restriction. Here's how to whitelist it.
 
 <!-- more -->
 
