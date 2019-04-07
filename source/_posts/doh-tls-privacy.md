@@ -34,4 +34,4 @@ Android getting "DNS over TLS" support to stop ISPs from knowing what websites y
 
 
 
-***TL;DR*** DoT/DoH doesn't hide your IP. Use Tor/VPN for that.
+***TL;DR*** DoT/DoH doesn't hide your destination IPs. Use Tor/VPN for that.
