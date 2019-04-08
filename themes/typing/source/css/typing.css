@@ -635,7 +635,7 @@ textarea {
 
 .main-nav-link {
   margin-right: 10px;
-  color: #777;
+  color: #cacdd0;
   padding-bottom: 5px;
   display: inline-block;
   border: 0;
@@ -645,9 +645,8 @@ body,
 html {
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
   box-sizing: border-box;
-  color: #222;
 }
 
 body,
@@ -715,7 +714,7 @@ blockquote {
 .post-footer a,
 .post-footer b,
 .post-footer strong {
-  color: #aeb4b9;
+  color: #cacdd0;;
 }
 
 .container {
@@ -740,22 +739,19 @@ blockquote {
 .copyright a,
 .footer-content a,
 .footer-links a {
-  color: #777;
+  color: #cacdd0;
 }
 
 .copyright a:hover,
 .footer-content a:hover,
 .footer-links a:hover {
-  color: #22c5e5;
+  color: #fff;
 }
 
 .archive-footer,
 .post-footer {
-  margin: 0 auto;
   padding: 1em 0;
   color: #cacdd0;
-  width: 60%;
-  max-width: 600px;
 }
 
 .footer-content {
@@ -827,7 +823,7 @@ blockquote {
 .archive-container,
 .category-container,
 .tag-container {
-  width: 60%;
+  width: 80%;
   margin: 1em auto 0;
   position: relative;
   line-height: 1;
@@ -915,13 +911,13 @@ blockquote {
 .tag-container .page-nav {
   text-align: center;
   margin-top: 30px;
-  color: #aeb4b9;
+  color: #cacdd0;;
 }
 
 .archive-container .page-nav a,
 .category-container .page-nav a,
 .tag-container .page-nav a {
-  color: #777;
+  color: #cacdd0;
 }
 
 .archive-container .extend,
@@ -978,7 +974,7 @@ blockquote {
 }
 
 .article .caption {
-  color: #aeb4b9;
+  color: #cacdd0;
   display: block;
   font-size: 14px;
   text-align: center;
@@ -996,7 +992,7 @@ blockquote {
 .article .article-entry blockquote footer {
   text-align: center;
   font-size: 80%;
-  color: #aeb4b9;
+  color: #cacdd0;
 }
 
 .article .article-entry blockquote footer cite {
@@ -1004,7 +1000,7 @@ blockquote {
 }
 
 .article .article-entry blockquote footer cite a {
-  color: #aeb4b9;
+  color: #cacdd0;
   border-bottom: 1px solid #eee;
   transition: color 0.25s linear;
 }
@@ -1015,7 +1011,7 @@ blockquote {
 }
 
 .article .article-entry blockquote footer strong {
-  color: #777;
+  color: #cacdd0;
   font-weight: 400;
 }
 
@@ -1065,7 +1061,7 @@ blockquote {
 
 .article .article-nav-link-wrap {
   display: inline-block;
-  color: #aeb4b9;
+  color: #cacdd0;
   padding: 0 10px;
   width: 49%;
   box-sizing: border-box;
@@ -1074,7 +1070,7 @@ blockquote {
 }
 
 .article .article-nav-link-wrap strong {
-  color: #777;
+  color: #cacdd0;
 }
 
 .article .article-nav-link-wrap:hover {
@@ -1096,11 +1092,11 @@ blockquote {
 
 .article .article-meta {
   font-size: 0.9em;
-  color: #aeb4b9;
+  color: #cacdd0;
 }
 
 .article .article-meta a {
-  color: #777;
+  color: #cacdd0;
 }
 
 .article .article-meta .label {
@@ -1130,17 +1126,17 @@ blockquote {
 }
 
 .dark {
-  color: #d8d8d8;
+  color: #e6e6e6;
 }
 
 .dark,
 .dark .container,
 .dark .footer {
-  background-color: #3f3f3f;
+  background-color: #000;
 }
 
 .dark a {
-  color: #ddd;
+  color: #e6e6e6;
 }
 
 .dark a:hover {
@@ -1148,16 +1144,16 @@ blockquote {
 }
 
 .dark .home {
-  color: #d8d8d8;
+  color: #e6e6e6;
 }
 
 .dark .home h1,
 .dark .home strong {
-  color: #ddd;
+  color: #e6e6e6;
 }
 
 .dark .home a {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .dark .home a:hover {
@@ -1177,7 +1173,7 @@ samp {
 .dark .article .header .main-nav-link,
 .dark .category-container .header .main-nav-link,
 .dark .tag-container .header .main-nav-link {
-  color: #aaa;
+  color: #e6e6e6;
 }
 
 .dark .archive-container .header .main-nav-link:hover,
@@ -1195,7 +1191,7 @@ samp {
 .dark .category-container .page-nav,
 .dark .tag-container .article-nav,
 .dark .tag-container .page-nav {
-  color: #aaa;
+  color: #e6e6e6;
 }
 
 .dark .archive-container .article-nav a,
@@ -1206,7 +1202,7 @@ samp {
 .dark .category-container .page-nav a,
 .dark .tag-container .article-nav a,
 .dark .tag-container .page-nav a {
-  color: #bbb;
+  color: #e6e6e6;
 }
 
 .dark .archive-container .article-nav a:hover,
@@ -1228,11 +1224,11 @@ samp {
 .dark .category-container .article-meta a,
 .dark .tag-container .article-entry blockquote footer strong,
 .dark .tag-container .article-meta a {
-  color: #bbb;
+  color: #e6e6e6;
 }
 
 .dark blockquote {
-  color: #aaa;
+  color: #e6e6e6;
 }
 
 .dark b,
@@ -1243,26 +1239,26 @@ samp {
 .dark h5,
 .dark h6,
 .dark strong {
-  color: #ddd;
+  color: #e6e6e6;
 }
 
 .dark .typo em,
 .dark .typo-em,
 .dark caption,
 .dark legend {
-  color: #bbb;
+  color: #e6e6e6;
 }
 
 .dark .typo table caption,
 .dark .typo table td,
 .dark .typo-table td {
   border: 1px solid #ddd;
-  color: #aaa;
+  color: #e6e6e6;
 }
 
 .dark .article-entry .highlight,
 .dark .article-entry pre {
-  color: #d8d8d8;
+  color: #e6e6e6;
   background-color: #333;
 }
 
@@ -1287,7 +1283,7 @@ samp {
 }
 
 .article-entry .highlight .gutter pre {
-  color: #aeb4b9;
+  color: #cacdd0;
   font-size: 0.9em;
 }
 
@@ -1409,7 +1405,7 @@ pre .keyword {
 
 /* overlap other elements */
 .mobile-nav-link {
-  background: #3f3f3f;
+  background: #000;
   border: 2px solid #999;
   border-radius: 5px;
   right: 0;
@@ -1423,7 +1419,7 @@ pre .keyword {
 .searchContainer {
   border-radius: 5px;
   width: 10em;
-  color:#d8d8d8;
+  color:#e6e6e6;
   background-color:#333;
   outline: 0;
   float: right;
@@ -1479,14 +1475,6 @@ svg {
     font-size: 1.2em;
   }
 
-  .archive-container,
-  .archive-footer,
-  .article,
-  .home .content,
-  .post-footer {
-    width: 80%;
-  }
-
   .article-title {
     font-size: 1.8rem;
   }
@@ -1517,11 +1505,11 @@ svg {
   }
 
   .home {
-    color: #222;
+    color: #e6e6e6;
   }
 
   .home a {
-    color: #111;
+    color: #e6e6e6;
   }
 
   .archive-container .archive-footer,
