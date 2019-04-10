@@ -5,7 +5,7 @@
       // Don't insert fancybox element to cloudinary's cld-responsive img class
       if ($(this).hasClass('cld-responsive') || $(this).parent().hasClass('fancybox')) return
 
-      var alt = this.alt
+      const alt = this.alt
 
       if (alt) {
         $(this).after('<span class="caption">' + alt + '</span>')
@@ -24,10 +24,10 @@
   }
 
   // Add "Copy" button to code snippet
-  var code = document.getElementsByClassName('code')
+  const code = document.getElementsByClassName('code')
 
-  for (var i = 0; i < code.length; i++) {
-    var button = document.createElement('button')
+  for (let i = 0; i < code.length; i++) {
+    const button = document.createElement('button')
     button.className = 'copy-button'
     button.textContent = 'Copy'
 
@@ -36,7 +36,7 @@
 
   $(document).ready(function () {
     // Add copy to clipboard button for code snippet
-    var copyCode = new ClipboardJS('.copy-button', {
+    const copyCode = new ClipboardJS('.copy-button', {
       target: function (trigger) {
         return trigger.previousElementSibling
       }
