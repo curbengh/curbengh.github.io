@@ -1,6 +1,7 @@
 [curben.netlify.com](https://curben.netlify.com/)
 ===
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aaf73659-db84-4c41-a700-de3926022674/deploy-status)](https://app.netlify.com/sites/curben/deploys)
 ![Build Status](https://gitlab.com/curben/curben.gitlab.io/badges/master/pipeline.svg)
 ![https://www.npmjs.com/package/hexo](https://img.shields.io/badge/hexo-3.8.0-blue.svg)
 
