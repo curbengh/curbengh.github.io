@@ -80,12 +80,12 @@ The following are the major changes I made compared to the upstream.
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts.
 - Remove header and footer display (except for `/about` page).
-- Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases), [Font Awesome](https://github.com/FortAwesome/Font-Awesome/releases) and [clipboard.js](https://github.com/zenorocha/clipboard.js/).
+- Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases), [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) and [clipboard.js](https://github.com/zenorocha/clipboard.js/).
 - Remove web analytics, comment systems and donation links.
 
 
 ## License
-The content of this blog itself is licensed under the [Creative Commons Attribution Share Alike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md).
+The content of this blog is licensed under the [Creative Commons Attribution Share Alike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md).
 
 ---
 Useful links:

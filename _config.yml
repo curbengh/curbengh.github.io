@@ -67,8 +67,8 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: typing
 
-# hexo-autonofollow
-## https://github.com/liuzc/hexo-autonofollow
+# hexo-nofollow
+## https://github.com/weyusi/hexo-nofollow
 nofollow:
   enable: true
 
@@ -96,26 +96,25 @@ theme_config:
     GitLab: https://gitlab.com/curben/blog
 
   # Your Feed Location
+  # https://github.com/hexojs/hexo-generator-feed
   #rss: /atom.xml
 
-  # Content
+  # Media display enhancement
+  # https://github.com/fancyapps/fancyBox
   fancybox: false
 
   # Profile
   nickname: curben's blog
   description: Troubleshooting, tips & tricks, etc.
 
-  # Load fontawesome icons? Also see the links option
+  # Load forkawesome icons? See the links option below.
   icons: false
 
   # Footer area links
   # If you set "icons: false" link names will be clear text
   # If "icons: true" link names will interpreted as fontawesome icon names
-  # Use link names that correspond to the icon style (solid or brands)
-  # https://fontawesome.com/cheatsheet
+  # Use the forkawesome icon names (https://forkaweso.me/Fork-Awesome/icons/) without the fa- prefix
   links:
-    solid:
-      Home: /
-    brands:
-      GitLab: https://gitlab.com/curben/blog
+    Home: /
+    GitLab: https://gitlab.com/curben/blog
 
