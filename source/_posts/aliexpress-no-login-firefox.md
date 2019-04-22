@@ -14,7 +14,7 @@ When you try to login to AliExpress on Firefox, the login box is just blank.
 
 {% cloudinary 20190228/no-login.png %}
 
-When I inspected the element (right click on the blank login and select ``Inspect Element`), the login box is an iframe of `https://passport.aliexpress.com`. From the Web Console (`Ctrl + Shift + K`), the following error message suggested it's caused by [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
+When I inspected the element (right click on the blank login and select `Inspect Element`), the login box is an iframe of `https://passport.aliexpress.com`. From the Web Console (`Ctrl + Shift + K`), the following error message suggested it's caused by [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
 
 {% cloudinary 20190228/iframe.png %}
 
