@@ -21,7 +21,7 @@
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
-    "hexo-yam": "^1.2.0"
+    "hexo-yam": "^2.0.0"
   },
   "devDependencies": {
     "renovate": "^15.0.0",
