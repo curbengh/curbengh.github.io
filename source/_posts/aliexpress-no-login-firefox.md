@@ -1,7 +1,7 @@
 ---
 title: How to solve 'Cannot login to AliExpress on Firefox'
 date: 2019-02-28 00:00:00
-lastUpdated: 2019-04-15 00:00:00
+lastUpdated: 2019-04-25 00:00:00
 tags:
 - firefox
 ---
@@ -40,12 +40,8 @@ That's how the whitelist works on the extension; you add the domain of the ifram
 
 {% cloudinary 20190228/invalid-login.png %}
 
-I found the new login is shown if you use aliexpress.com, but sometimes it does not, it is kinda random.
+To use the old login page, mouse-over on the **Account** link at the top right corner and click on **My Orders**. It should redirects to `https://login.aliexpress.com/...`
 
-{% cloudinary 20190228/new-login.png %}
+{% cloudinary 20190228/my-orders.png %}
 
-Use www.aliexpress.com to revert it to the previous method. When you mouse-over the right corner, it should looks like this,
-
-{% cloudinary 20190228/old-login.png %}
-
-If that does not work, the last resort is to use the direct login page https://login.aliexpress.com/express/mulSiteLogin.htm
+If that does not work, the last resort is to use the direct link https://login.aliexpress.com/express/mulSiteLogin.htm
