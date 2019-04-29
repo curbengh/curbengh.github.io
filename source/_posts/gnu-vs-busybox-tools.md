@@ -12,7 +12,7 @@ TL;DR Alpine uses BusyBox while Ubuntu uses GNU tools, and they behave different
 
 ## Intro
 
-> Skip to the [list](#list).
+> Skip to the [list](#List).
 
 Alpine Linux is known for its minimal size. The '[mini root filesystem](https://www.alpinelinux.org/downloads/)' flavour is only 2MB. This size makes it suitable as a Docker image, so CI job can start running script sooner instead of downloading larger image like Ubuntu.
 

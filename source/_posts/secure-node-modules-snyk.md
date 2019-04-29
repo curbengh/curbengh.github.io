@@ -8,7 +8,7 @@ tags:
 - Security
 ---
 ## Intro
-> Click [here](#installation) to go straight to installation guide.
+> Click [here](#Installation) to go straight to installation guide.
 
 Node.js is infamous for the [left-pad](https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068) [controversy](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), removing just a single package can break many websites. 
 

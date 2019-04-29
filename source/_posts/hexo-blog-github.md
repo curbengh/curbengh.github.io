@@ -42,7 +42,7 @@ deploy:
   local-dir: public
 ```
 
-10. You can start writing a new post straightaway without [installing](#installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
+10. You can start writing a new post straightaway without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
 	1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
 	2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
