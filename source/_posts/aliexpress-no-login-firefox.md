@@ -54,7 +54,7 @@ To use the old login page, mouse-over on the **Account** link at the top right c
 
 ## "Ignore X-Frame-Options" extension
 
-**[Ignore X-Frame-Options](https://addons.mozilla.org/en-US/firefox/addon/ignore-x-frame-options-header/)** Firefox extension is a way to whitelist the domain from the restriction. By default, the extension whitelist all domains. This is highly discouraged because it nullifies the security benefits of x-frame-options (e.g. prevent a banking website from being iframe-d inside a phishing website). Instead, we can whitelist the login page only.
+[**Ignore X-Frame-Options**](https://addons.mozilla.org/en-US/firefox/addon/ignore-x-frame-options-header/) Firefox extension is a way to whitelist the domain from the restriction. By default, the extension whitelist all domains. This is highly discouraged because it nullifies the security benefits of x-frame-options (e.g. prevent a banking website from being iframe-d inside a phishing website). Instead, we can whitelist the login page only.
 
 ```
 https://passport.aliexpress.com/*
