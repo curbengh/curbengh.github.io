@@ -1,7 +1,7 @@
 ---
 title: microG, a replacement for the proprietary Google Play Services
 date: 2019-01-12 00:00:00
-lastUpdated: 2019-02-05 00:00:00
+lastUpdated: 2019-04-30 00:00:00
 tags:
 - Android
 ---
@@ -34,20 +34,20 @@ For proprietary apps, use Yalp Store. You can use built-in credential to install
 
 **App**: Google Maps
 **Issue**: ~~No location, possibly due to absence of [incomplete/outdated](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) [Maps API](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/4/).~~ Edit: Google Maps v10.6.2 works again on microG v0.2.6.13280
-**Alternative**: OsmAnd, [Maps](https://f-droid.org/en/packages/com.github.axet.maps/)/MAPS.ME, Waze, HERE WeGo
-**Info**: HERE WeGo supports public transit and offline maps, while Waze doesn't. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. OsmAnd and MAPS.ME are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/), but doesn't support public transit. *Maps* is a fork of MAPS.ME without the proprietary bits and it's available on F-Droid (https://f-droid.org/en/packages/com.github.axet.maps/).
+**Alternative**: [OsmAnd](https://f-droid.org/en/packages/net.osmand.plus/), [*Maps*](https://f-droid.org/en/packages/com.github.axet.maps/)/MAPS.ME, Waze, HERE WeGo
+**Info**: HERE WeGo supports public transit and offline maps, while Waze doesn't. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. **OsmAnd** and **MAPS.ME** are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/). They do not have public transport info though. Use [**Transportr**](https://f-droid.org/en/packages/de.grobox.liberario/) for that. **Maps** is a fork of MAPS.ME without the proprietary bits and it's available on F-Droid.
 
 ---
 
 **App**: Google Calendar
-**Issue**: Crash on boot. Depends on proprietary GoogleCalendarSyncAdapter.apk. Possibly due to incomplete [Account Authentication API](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status).
+**Issue**: Crash on boot. Depends on the proprietary GoogleCalendarSyncAdapter.apk. Possibly due to incomplete [Account Authentication API](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status).
 **Alternative**: [Simple Calendar](https://github.com/SimpleMobileTools/Simple-Calendar) + [DAVx⁵](https://gitlab.com/bitfireAT/davx5-ose)
 **Info**: It's still problematic even with GoogleCalendarSyncAdapter.apk installed. Google Account is not well-supported in microG. While you can use DAVx⁵ to sync calendar events in Google Account, it's a hit-or-miss and reminders are not supported. This is due to the [lack](https://forums.bitfire.at/post/9235) of OAuth 2.0 support in DAVx⁵. Alternatively, you can migrate your data to free email providers that supports CalDAV/CardDav, i.e. [Disroot](https://disroot.org/en) (using [Nextcloud](https://www.davx5.com/tested-with/nextcloud)), [GMX](https://www.davx5.com/tested-with/gmx) and [Yandex](https://www.davx5.com/tested-with/yandex).
 
 ---
 
 **App**. Google Contacts
-**Issue**: Depends on proprietary GoogleContactsSyncAdapter.apk
+**Issue**: Depends on the proprietary GoogleContactsSyncAdapter.apk
 **Alternative**: [Simple Contacts](https://github.com/SimpleMobileTools/Simple-Contacts) + DAVx⁵
 **Info**: Email providers mentioned in Google Calendar section can sync contacts using CardDAV.
 
