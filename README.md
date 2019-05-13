@@ -11,7 +11,7 @@ Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing]
 
 1. Change `<folder>` to a preferred name.
 ```bash
-git clone https://gitlab.com/curben/curben.gitlab.io <folder>
+git clone https://gitlab.com/curben/blog <folder>
 ```
 2. Install Node.js.
 ```bash
@@ -23,11 +23,11 @@ sudo yum install npm
 # Arch Linux
 sudo pacman -S npm
 ```
-3. Install Hexo and its dependencies (defined in [package.json](package.json)).
+3. Install Hexo and its dependencies (defined in [package.json](package.json)). `hexo-cli` installation step can be skipped if you use [this shortcut](https://curben.netlify.com/2018/10/24/running-locally-installed-node-packages/#Method-1).
 ```bash
 $ sudo npm install -g hexo-cli
 $ cd <folder>
-$ npm install
+$ npm install --only=prod
 ```
 4. Generate static files to check for any error. You should _always_ do this before pushing/merging commits to the `master` branch.
 ```bash
@@ -82,6 +82,7 @@ The following are the major changes I made compared to the upstream.
 - Remove header and footer display (except for `/about` page).
 - Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases), [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) and [clipboard.js](https://github.com/zenorocha/clipboard.js/).
 - Remove web analytics, comment systems and donation links.
+- Use more [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
 
 
 ## License
