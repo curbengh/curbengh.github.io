@@ -36,16 +36,15 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 ## Installation
 1. Having Hexo means you can debug locally, rather than waiting for [CI](https://docs.gitlab.com/ee/ci/). You can even run a local server to preview your blog (see step 6 below).
 2. Clone your repo to your workstation.
-3. Install Node.js 10. Other distro, see this [guide](https://nodejs.org/en/download/package-manager/) or [here](https://github.com/nodesource/distributions).
+3. Install Node.js 10 (current [active LTS](https://github.com/nodejs/Release)). Other distro, see this [guide](https://nodejs.org/en/download/package-manager/) or [here](https://github.com/nodesource/distributions).
 
 ```bash
-# Installing npm will also install nodejs as dependency.
 # Ubuntu 16.04 or newer
 $ sudo snap install node --classic --channel=10
 # Debian
 $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
-# Fedora 29
+# Fedora 29 or newer
 $ sudo dnf install npm
 # Fedora 28 or older
 $ curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
@@ -58,7 +57,7 @@ $ sudo pacman -S npm
 
 ```bash
 $ cd <folder>
-$ npm install
+$ npm install --only=prod
 $ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
 ```
 

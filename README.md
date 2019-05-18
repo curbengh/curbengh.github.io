@@ -9,19 +9,26 @@ Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing]
 
 ## Installation
 
+> Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
+
 1. Change `<folder>` to a preferred name.
 ```bash
 git clone https://gitlab.com/curben/blog <folder>
 ```
 2. Install Node.js.
 ```bash
-# Installing npm will also install nodejs as dependency.
-# Ubuntu/Debian
-sudo apt-get install npm
-# Fedora/Red Hat
-sudo yum install npm
+# Ubuntu 16.04 or newer
+$ sudo snap install node --classic --channel=10
+# Debian
+$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+# Fedora 29
+$ sudo dnf install npm
+# Fedora 28 or older
+$ curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+$ sudo yum -y install nodejs
 # Arch Linux
-sudo pacman -S npm
+$ sudo pacman -S npm
 ```
 3. Install Hexo and its dependencies (defined in [package.json](package.json)). `hexo-cli` installation step can be skipped if you use [this shortcut](https://curben.netlify.com/2018/10/24/running-locally-installed-node-packages/#Method-1).
 ```bash
