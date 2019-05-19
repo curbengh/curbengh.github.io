@@ -1,6 +1,6 @@
 ---
 title: Make PDF files smaller
-date: 2019-01-05 00:00:00
+date: 2019-01-05
 tags:
 - PDF
 ---

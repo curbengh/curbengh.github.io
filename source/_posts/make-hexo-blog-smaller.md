@@ -1,7 +1,7 @@
 ---
 title: Make Hexo blog smaller
-date: 2018-09-28 00:00:00
-lastUpdated: 2018-10-06 00:00:00
+date: 2018-09-28
+lastUpdated: 2018-10-06
 tags:
 - Hexo
 ---

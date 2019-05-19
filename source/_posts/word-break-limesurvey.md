@@ -1,6 +1,6 @@
 ---
 title: Prevent word break in array question on LimeSurvey
-date: 2018-10-31 00:00:00
+date: 2018-10-31
 tags:
 - Stats
 - LimeSurvey

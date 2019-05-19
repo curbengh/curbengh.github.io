@@ -1,6 +1,6 @@
 ---
 title: How to check validity of GitLab CI config
-date: 2018-10-25 00:00:00
+date: 2018-10-25
 tags:
 - GitLab
 ---

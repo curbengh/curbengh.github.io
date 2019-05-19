@@ -1,6 +1,6 @@
 ---
 title: DNS-over-TLS/DNS-over-HTTPS does not protect your privacy
-date: 2019-04-04 00:00:00
+date: 2019-04-04
 tags:
 - Privacy
 - Security

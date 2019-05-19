@@ -1,7 +1,7 @@
 ---
 title: Access Facebook/Instagram/Whatsapp/Google in China
-date: 2018-12-31 00:00:00
-lastUpdated: 2019-01-13 00:00:00
+date: 2018-12-31
+lastUpdated: 2019-01-13
 tags:
 - Security
 ---

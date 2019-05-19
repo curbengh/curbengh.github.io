@@ -1,6 +1,6 @@
 ---
 title: How to run more than one Firefox instance
-date: 2019-04-07 00:00:00
+date: 2019-04-07
 tags:
 - Firefox
 - Privacy

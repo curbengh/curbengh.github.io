@@ -1,7 +1,7 @@
 ---
 title: GNU vs BusyBox Unix tools
-date: 2018-10-13 00:00:00
-lastUpdated: 2018-10-31 00:00:00
+date: 2018-10-13
+lastUpdated: 2018-10-31
 tags:
 - Linux
 - Alpine

@@ -1,6 +1,6 @@
 ---
 title: Default binaries in Alpine docker image
-date: 2018-10-10 00:00:00
+date: 2018-10-10
 tags:
 - Linux
 - Alpine

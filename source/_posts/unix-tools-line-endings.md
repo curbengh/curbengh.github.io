@@ -1,6 +1,6 @@
 ---
 title: Use Unix line endings in Unix tools
-date: 2018-11-08 00:00:00
+date: 2018-11-08
 tags:
 - Linux
 ---

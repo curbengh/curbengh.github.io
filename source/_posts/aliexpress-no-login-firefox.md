@@ -1,7 +1,7 @@
 ---
 title: Firefox, Cross-Origin and AliExpress
-date: 2019-02-28 00:00:00
-lastUpdated: 2019-04-29 00:00:00
+date: 2019-02-28
+lastUpdated: 2019-04-29
 tags:
 - firefox
 ---

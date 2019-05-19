@@ -1,7 +1,7 @@
 ---
 title: microG, a replacement for the proprietary Google Play Services
-date: 2019-01-12 00:00:00
-lastUpdated: 2019-04-30 00:00:00
+date: 2019-01-12
+lastUpdated: 2019-04-30
 tags:
 - Android
 ---

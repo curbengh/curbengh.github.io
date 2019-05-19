@@ -1,7 +1,7 @@
 ---
 title: How to remove Windows 10 default apps
-date: 2018-09-26 00:00:00
-lastUpdated: 2019-03-01 00:00:00
+date: 2018-09-26
+lastUpdated: 2019-03-01
 tags:
 - Microsoft
 ---

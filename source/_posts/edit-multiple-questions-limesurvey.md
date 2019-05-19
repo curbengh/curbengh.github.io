@@ -1,7 +1,7 @@
 ---
 title: Edit multiple questions on LimeSurvey
-date: 2018-10-18 00:00:00
-lastUpdated: 2018-10-26 00:00:00
+date: 2018-10-18
+lastUpdated: 2018-10-26
 tags:
 - Stats
 - LimeSurvey

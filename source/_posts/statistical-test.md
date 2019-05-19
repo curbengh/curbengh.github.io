@@ -1,6 +1,6 @@
 ---
 title: Which statistical test should I use?
-date: 2019-02-09 00:00:00
+date: 2019-02-09
 tags:
 - Stats
 ---

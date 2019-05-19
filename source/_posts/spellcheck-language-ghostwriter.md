@@ -1,6 +1,6 @@
 ---
 title: Change spellcheck language in Ghostwriter
-date: 2018-10-14 00:00:00
+date: 2018-10-14
 tags:
 - Markdown
 ---

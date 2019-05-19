@@ -1,6 +1,6 @@
 ---
 title: How to disable Control+Alt+S shortcut in MATE
-date: 2018-10-24 00:00:00
+date: 2018-10-24
 tags:
 - Linux
 ---

@@ -1,7 +1,7 @@
 ---
 title: Snyk failed to patch in Alpine docker
-date: 2018-10-31 00:00:00
-lastUpdated: 2019-03-09 00:00:00
+date: 2018-10-31
+lastUpdated: 2019-03-09
 tags:
 - Snyk
 - Linux

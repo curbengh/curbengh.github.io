@@ -1,6 +1,6 @@
 ---
 title: Hide folders of Caja side pane
-date: 2018-10-02 00:00:00
+date: 2018-10-02
 tags:
 - Linux
 ---

@@ -1,6 +1,6 @@
 ---
 title: How to create a Hexo blog on GitHub Pages
-date: 2018-11-10 00:00:00
+date: 2018-11-10
 tags:
 - Hexo
 ---

@@ -1,6 +1,6 @@
 ---
 title: You should switch to these replacements of TrueCrypt/KeePassX/Adblock Plus
-date: 2019-01-15 00:00:00
+date: 2019-01-15
 tags:
 - Linux
 - Web

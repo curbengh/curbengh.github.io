@@ -1,6 +1,6 @@
 ---
 title: Running locally installed node packages
-date: 2018-10-24 00:00:00
+date: 2018-10-24
 tags:
 - Node
 ---

@@ -1,7 +1,7 @@
 ---
 title: Secure node modules with Snyk
-date: 2018-10-01 00:00:00
-lastUpdated: 2019-03-09 00:00:00
+date: 2018-10-01
+lastUpdated: 2019-03-09
 tags:
 - Node
 - Snyk

@@ -1,7 +1,7 @@
 ---
 title: How to create a Hexo blog on GitLab Pages
-date: 2018-09-21 00:00:00
-lastUpdated: 2018-11-10 00:00:00
+date: 2018-09-21
+lastUpdated: 2018-11-10
 tags:
 - Hexo
 - GitLab
