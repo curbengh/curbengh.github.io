@@ -8,3 +8,7 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "default-src https; script-src https://cdnjs.cloudflare.com https://curben.netlify.com https://*--curben.netlify.com 'unsafe-inline'; style-src https://cdnjs.cloudflare.com https://curben.netlify.com https://*--curben.netlify.com; block-all-mixed-content; form-action 'none'; frame-ancestors 'none'"
+    Referrer-Policy = "no-referrer"
+    Strict-Transport-Security = "max-age=31536000"
+    Feature-Policy = "accelerometer 'none'; autoplay 'none'; camera 'none'; document.domain 'none'; display-capture 'none'; encrypted-media 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; sync-xhr 'none'; usb 'none'"
