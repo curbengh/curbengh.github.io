@@ -9,5 +9,5 @@
 *  https://cloudinary.com/documentation/responsive_images
 */
 hexo.extend.tag.register('cloudinary', (fileName) => {
-  return '<img class="cld-responsive" data-src="https://res.cloudinary.com/curben/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,w_500/' + fileName + '" src="/loading.svg" />'
+  return '<img class="cld-responsive" data-src="https://res.cloudinary.com/curben/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,w_500/' + fileName + '" src="/svg/loading.svg" />'
 })
