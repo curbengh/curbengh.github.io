@@ -56,5 +56,9 @@
         event.trigger.textContent = 'Copy'
       }, 2000)
     })
+
+    // Initialize Cloudinary responsive function
+    const cl = cloudinary.Cloudinary.new({cloud_name: "curben"})
+    cl.responsive()
   })
 })(jQuery)
