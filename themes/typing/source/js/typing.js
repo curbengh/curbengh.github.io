@@ -1,7 +1,7 @@
-(function ($) {
+(($) => {
   // Fancybox caption
-  $('.article-entry').each(function (i) {
-    $(this).find('img').each(function () {
+  $('.article-entry').each((i) => {
+    $(this).find('img').each(() => {
       // Don't insert fancybox element to cloudinary's cld-responsive img class
       if ($(this).hasClass('cld-responsive') || $(this).parent().hasClass('fancybox')) return
 
@@ -14,7 +14,7 @@
       $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>')
     })
 
-    $(this).find('.fancybox').each(function () {
+    $(this).find('.fancybox').each(() => {
       $(this).attr('rel', 'article' + i)
     })
   })
@@ -34,31 +34,31 @@
     code[i].appendChild(button)
   }
 
-  $(document).ready(function () {
+  $(document).ready(() => {
     // Add copy to clipboard button for code snippet
     const copyCode = new ClipboardJS('.copy-button', {
-      target: function (trigger) {
+      target: (trigger) => {
         return trigger.previousElementSibling
       }
     })
 
-    copyCode.on('success', function (event) {
+    copyCode.on('success', (event) => {
       event.clearSelection()
       event.trigger.textContent = 'Copied'
-      window.setTimeout(function () {
+      window.setTimeout(() => {
         event.trigger.textContent = 'Copy'
       }, 2000)
     })
 
-    copyCode.on('error', function (event) {
+    copyCode.on('error', (event) => {
       event.trigger.textContent = 'Press "Ctrl + C" to copy'
-      window.setTimeout(function () {
+      window.setTimeout(() => {
         event.trigger.textContent = 'Copy'
       }, 2000)
     })
 
     // Initialize Cloudinary responsive function
-    const cl = cloudinary.Cloudinary.new({cloud_name: "curben"})
+    const cl = cloudinary.Cloudinary.new({ cloud_name: 'curben' })
     cl.responsive()
   })
 })(jQuery)
