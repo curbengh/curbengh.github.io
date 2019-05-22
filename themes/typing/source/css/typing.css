@@ -968,11 +968,6 @@ blockquote {
   font-size: 2em;
 }
 
-.article a.fancybox,
-.article a.fancybox-item {
-  border: 0;
-}
-
 .article .caption {
   color: #cacdd0;
   display: block;

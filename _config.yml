@@ -101,10 +101,6 @@ theme_config:
   # https://github.com/hexojs/hexo-generator-feed
   #rss: /atom.xml
 
-  # Media display enhancement
-  # https://github.com/fancyapps/fancyBox
-  fancybox: false
-
   # Profile
   nickname: curben's blog
   description: Troubleshooting, tips & tricks, etc.
