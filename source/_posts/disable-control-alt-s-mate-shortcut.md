@@ -22,7 +22,7 @@ If you use Compiz, the shortcut is not shown in Keyboard Shortcuts due to confli
 
 Launch dconf-editor and search (click on the search icon on top right corner or just Ctrl+F) for 'shaded'.
 
-{% cloudinary 20181024/dconf.png %}
+{% cloudinary '20181024/dconf.png' "Search for 'shaded' in dconf-editor" %}
 
 Simply navigate into
 ```
@@ -33,4 +33,4 @@ Toggle 'Use default value' to off, and set the custom value as `disabled`.
 
 Finally, disable the shortcut in CCSM. Go to General Options > Key bindings (tab) > Toggle Window Shaded (last value).
 
-{% cloudinary 20181024/ccsm.png %}
+{% cloudinary '20181024/ccsm.png' "Disable Shaded Window in CCSM" %}

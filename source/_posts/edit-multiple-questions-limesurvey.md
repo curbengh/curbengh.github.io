@@ -14,7 +14,7 @@ On LimeSurvey, making minor edits to multiple questions can be quite a chore. `L
 
 Edit: The view is accessible through (Survey) Settings > Survey menu > List questions.
 
-{% cloudinary 20181018/listquestions.png %}
+{% cloudinary '20181018/listquestions.png' 'List all question in LimeSurvey' %}
 
 Ignore the rest...
 
@@ -32,8 +32,8 @@ Replace `questiongroups` to `survey` and replace `view` to `listquestions`, so t
 
 This is what ListQuestions view looks like,
 
-{% cloudinary 20181018/limesurvey.png %}
+{% cloudinary '20181018/limesurvey.png' 'LimeSurvey ListQuestions page' %}
 
 The view is also useful for quickly open multiple questions. Simply ctrl + left click or just middle click on the Edit button to open the question (to edit) in new tab.
 
-{% cloudinary 20181018/limesurvey-edit.png %}
+{% cloudinary '20181018/limesurvey-edit.png' 'Edit button on LimeSurvey' %}
