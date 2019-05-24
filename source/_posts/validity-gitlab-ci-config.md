@@ -4,7 +4,8 @@ date: 2018-10-25
 tags:
 - GitLab
 ---
-It can be frustrating after you push the changes you made to `.gitlab-ci.yml`, only to discover it's invalid on gitlab.com. Here's how to verify/lint the config.
+
+It can be frustrating after you push the changes you made to `.gitlab-ci.yml`, only to discover later that it's invalid on gitlab.com. Here's how to verify/lint the config.
 
 <!-- more -->
 
@@ -20,6 +21,6 @@ https://gitlab.com/curben/blog/-/ci/lint
 
 This is what it looks like,
 
-{% cloudinary 20181025/lint.png %}
+{% cloudinary '20181025/lint.png' 'Verify .gitlab-ci.yml online' %}
 
 Simply paste the content of your `.gitlab-ci.yml` and 'Validate'.

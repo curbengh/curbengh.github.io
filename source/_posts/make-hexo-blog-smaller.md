@@ -5,14 +5,17 @@ lastUpdated: 2018-10-06
 tags:
 - Hexo
 ---
+
 Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth.
+
 <!-- more -->
+
 # Minify
-[Minify](https://en.wikipedia.org/wiki/Minification_(programming)) html, css and js to remove characters that are not required for the code to function. This process involves removing white space/tab, line break and comments. I read somewhere that Google saves gigabytes of bandwidth just by removing line break, which surprised me how much line break alone costs when you have the popularity of Google.com.
+[Minify](https://en.wikipedia.org/wiki/Minification_(programming)) html, css, js and svg to remove characters that are not required for the code to function. This process involves removing white space/tab, line break and comments. I read somewhere that Google saves gigabytes of bandwidth just by removing line break, which surprised me how much line break alone costs when you have the popularity of Google.com.
 In Hexo, there are two approaches.
 
 ### hexo-all-minifier
-1. The easiest way is using hexo-all-minifier. Unlike others, this plugin also compress images as well. To use it, simply run the following command in your hexo folder:
+1. The easiest way is using hexo-all-minifier. Unlike most, this plugin also compress images as well. To use it, simply run the following command in your hexo folder:
     ``` bash
     $ npm install hexo-all-minifier --save
     ```
@@ -24,9 +27,9 @@ In Hexo, there are two approaches.
 To see this in action, check out this [job log](https://gitlab.com/curben/blog/-/jobs/101703188). As you can see, the resulting files are around 20% smaller. However, do note that its image compression dependencies have some [vulnerabilities](https://snyk.io/test/npm/hexo-all-minifier). This can be patched using [Snyk](https://snyk.io/).
 
 ### hexo-yam
-Despite the convenience of hexo-all-minifier, I don't use it due to the vulnerability. I don't need its image compression since the [Cloudinary](https://cloudinary.com/) image hosting offers [auto compression](https://cloudinary.com/documentation/responsive_images#responsive_images_with_automatic_quality_selection).
+Despite the convenience of hexo-all-minifier, I don't use it due to potential vulnerability. I don't need its image compression since the image hosting I'm currently using, [Cloudinary](https://cloudinary.com/), offers [auto compression](https://cloudinary.com/documentation/responsive_images#responsive_images_with_automatic_quality_selection).
 
-Thus, I switch to leaner hexo-yam. To use it, simply run the following command in your hexo folder:
+So, I switch to a leaner plugin, [hexo-yam](https://github.com/weyusi/hexo-yam). To use it, simply run the following command in your hexo folder:
 ``` bash
 $ npm install hexo-yam --save
 ```
@@ -43,5 +46,5 @@ and deploy.
 	$ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \;
 	$ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir brotli -f --keep {} \;
 	```
-3. If you use CI like `.gitlab-ci.yml` or `.travis.yml`, simply add the above command under `script:`, next line after `hexo deploy`.
+3. If you use CI like `.gitlab-ci.yml` or `.travis.yml`, simply add the above command under `script:`, after `hexo generate`.
 4. Deploy.
