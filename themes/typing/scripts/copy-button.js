@@ -1,4 +1,7 @@
-// Add "Copy" button to code snippet
+/*
+* Add "Copy" button to code snippet
+* cheerio is provided by hexo package
+*/
 
 const cheerio = require('cheerio')
 
