@@ -9,13 +9,13 @@ searchClick.onclick = function() {
 // Add "Copy" button to code snippet
 const code = document.getElementsByClassName('code')
 
-for (let i = 0; i < code.length; i++) {
+Array.from(code).forEach((element) => {
   const button = document.createElement('button')
   button.className = 'copy-button'
   button.textContent = 'Copy'
 
-  code[i].appendChild(button)
-}
+  element.appendChild(button)
+})
 
 /*
 * Copy button and Cloudinary functions.
