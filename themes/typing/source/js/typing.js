@@ -1,6 +1,6 @@
 // Search button function
 const searchClick = document.getElementById('searchClick')
-searchClick.onclick = function() {
+searchClick.onclick = function () {
   window.open('https://gitlab.com/search?utf8=%E2%9C%93&search=' +
   document.getElementById('searchTxt').value +
   '&group_id=&project_id=8306723&search_code=true&repository_ref=master')
@@ -38,4 +38,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Cloudinary responsive function
   const cl = cloudinary.Cloudinary.new({ cloud_name: 'curben' })
   cl.responsive()
-}, false);
+}, false)
