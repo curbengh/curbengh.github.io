@@ -6,17 +6,6 @@ searchClick.onclick = function() {
   '&group_id=&project_id=8306723&search_code=true&repository_ref=master')
 }
 
-// Add "Copy" button to code snippet
-const code = document.getElementsByClassName('code')
-
-Array.from(code).forEach((element) => {
-  const button = document.createElement('button')
-  button.className = 'copy-button'
-  button.textContent = 'Copy'
-
-  element.appendChild(button)
-})
-
 /*
 * Copy button and Cloudinary functions.
 * Following functions only execute after
