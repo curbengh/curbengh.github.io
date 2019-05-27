@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for post in posts %}
+  <url>
+    <loc>{{ post.permalink | uriencode }}</loc>
+    {% if post.updated %}
+    <lastmod>{{ post.updated.toISOString() }}</lastmod>
+    {% elif post.date %}
+    <lastmod>{{ post.date.toISOString() }}</lastmod>
+    {% endif %}
+  </url>
+  {% endfor %}
+
+  {# ------------- home page - with now date #}
+  <url>
+      <loc>{{ config.url }}</loc>
+      <lastmod>{{ sNow }}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1.0</priority>
+   </url>
+
+  {# ------------- tag pages #}
+  {% for tag in tags %}
+    <url>
+      <loc>{{ tag.permalink }}</loc>
+      <lastmod>{{ sNow }}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.6</priority>
+    </url>
+  {% endfor %}
+
+  {# ------------- categories pages #}
+  {% for cat in categories %}
+    <url>
+      <loc>{{ cat.permalink }}</loc>
+      <lastmod>{{ sNow }}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.6</priority>
+    </url>
+  {% endfor %}
+
+</urlset>
