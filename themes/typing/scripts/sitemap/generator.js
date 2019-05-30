@@ -5,10 +5,9 @@ const template = require('./template')
 
 module.exports = function (locals) {
   const config = this.config
-  const skipRenderList = [
+  let skipRenderList = [
     '*.js',
-    '*.css',
-    'google5149b8b3449442e3.html'
+    '*.css'
   ]
 
   if (Array.isArray(config.skip_render)) {

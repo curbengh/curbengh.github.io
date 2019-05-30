@@ -13,7 +13,7 @@ timezone:
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://curben.netlify.com
-root: ""
+root: ''
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -26,8 +26,9 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - 'google5149b8b3449442e3.html'
 include:
-  - _headers # Netlify header file
+  - '_headers' # Netlify header file
 
 # Writing
 new_post_name: :title.md # File name of new posts
