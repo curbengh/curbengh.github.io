@@ -23,6 +23,10 @@ module.exports = function (locals) {
     .sort((a, b) => {
       return b.updated - a.updated
     })
+    .map((post) => ({
+      ...post,
+      permalink: post.permalink.replace('index.html', '')
+    }))
 
   // configuration dictionary
   const xmlConfig = {
