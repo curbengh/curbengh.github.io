@@ -7,7 +7,8 @@ module.exports = function (locals) {
   const config = this.config
   const skipRenderList = [
     '*.js',
-    '*.css'
+    '*.css',
+    'google5149b8b3449442e3.html'
   ]
 
   if (Array.isArray(config.skip_render)) {
