@@ -5,10 +5,7 @@ const template = require('./template')
 
 module.exports = function (locals) {
   const config = this.config
-  let skipRenderList = [
-    '*.js',
-    '*.css'
-  ]
+  let skipRenderList = ['*.js', '*.css']
 
   if (Array.isArray(config.skip_render)) {
     skipRenderList = skipRenderList.concat(config.skip_render)
