@@ -23,9 +23,20 @@
     <label for="mobile-menu-toggle"><a class="no-underline">&#9776; Menu</a></label>
     <input id="mobile-menu-toggle" type="checkbox"/>
     <ul class="mobile-nav-link">
-    <% for (let i in theme.menu) { %>
-      <a href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
-    <% } %>
+      <div class="searchContainer">
+        <input class="searchBox" type="text" id="searchTxtMob" placeholder="Search...">
+        <a class="searchBtn no-underline" id="searchClickMob" href="#">
+          <svg viewBox="0 0 512 512">
+            <title>Search</title>
+            <desc>Search icon</desc>
+            <use href="/svg/search.svg#search"/>
+          </svg>
+        </a>
+      </div>
+      <p><br></p>
+      <% for (let i in theme.menu) { %>
+        <a class="mobile-nav-link-a" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+      <% } %>
     </ul>
     </ul>
   </nav>

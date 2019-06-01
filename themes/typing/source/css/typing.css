@@ -1407,7 +1407,10 @@ pre .keyword {
   margin-left: 5px;
   padding: 10px;
   position: absolute;
-  text-align: left;
+}
+
+.mobile-nav-link-a {
+  text-align: center;
 }
 
 /* search bar */

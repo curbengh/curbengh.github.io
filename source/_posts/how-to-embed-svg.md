@@ -12,7 +12,7 @@ Website usually embed SVG using `<img>` tag or directly use the `<svg>` tag. Usi
 
 ## Embed SVG file
 
-Utilise `<use>` tag to embed an SVG file in `svg`. For example in this blog, I have a search button on the top right corner (I haven't implement it for mobile). This is how I embed the [search.svg](/svg/search.svg):
+Utilise `<use>` tag to embed an SVG file in `svg`. For example in this blog, I have a search button on the top right corner. This is how I embed the [search.svg](/svg/search.svg):
 
 ```html
 <svg viewBox="0 0 512 512">
