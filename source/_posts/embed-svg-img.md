@@ -1,5 +1,5 @@
 ---
-title: How to embed SVG without using img tag
+title: Embed SVG without using img tag
 date: 2019-06-01
 tags:
 - SVG
