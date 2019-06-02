@@ -24,7 +24,7 @@
     "hexo-yam": "^2.0.0"
   },
   "devDependencies": {
-    "renovate": "^17.0.0",
+    "renovate": "^18.0.0",
     "snyk": "^1.136.1"
   }
 }
