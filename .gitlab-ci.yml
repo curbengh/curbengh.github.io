@@ -5,6 +5,7 @@ cache: # add cache to 'node_modules' for speeding up builds
     - node_modules/ # Node modules and dependencies
 
 before_script:
+  - apk update && apk add git
   - npm install
 
 test:
