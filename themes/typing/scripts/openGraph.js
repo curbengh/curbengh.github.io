@@ -48,7 +48,8 @@ function openGraphHelper (options = {}) {
   const url = options.url || this.url
   const siteName = options.site_name || config.title
   const twitterCard = options.twitter_card || 'summary'
-  const updated = options.updated !== false ? options.updated || page.updated : false
+  const published = page.date || false
+  const updated = page.lastUpdated || false
   const language = options.language || page.lang || page.language || config.language
   let result = ''
 
@@ -116,9 +117,18 @@ function openGraphHelper (options = {}) {
     result += og('og:image', path, false)
   })
 
+
+  if (published) {
+    if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf())) {
+      // Skip timezone conversion
+      result += og('article:published_time', moment(published).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'))
+    }
+  }
+
   if (updated) {
     if ((moment.isMoment(updated) || moment.isDate(updated)) && !isNaN(updated.valueOf())) {
-      result += og('og:updated_time', updated.toISOString())
+      result += og('article:modified_time', moment(updated).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'))
+      result += og('og:updated_time', moment(updated).format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]'))
     }
   }
 
@@ -158,4 +168,4 @@ function openGraphHelper (options = {}) {
   return result.trim()
 }
 
-hexo.extend.helper.register('open_graph_cloudinary', openGraphHelper)
+hexo.extend.helper.register('openGraph', openGraphHelper)
