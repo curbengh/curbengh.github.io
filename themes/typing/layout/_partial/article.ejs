@@ -25,13 +25,17 @@
       <ul class="article-meta">
     <% if (post.lastUpdated) { %>
         <li>
-          <span class="label"><%= __('date_updated') %>:</span>
-          <%- partial('post/updated-date', {class_name: 'article-date', date_format: 'D MMM YYYY'}) %>
+          <span class="label">
+            <%= __('date_updated') %>: 
+            <%- partial('post/updated-date') %>
+          </span>
         </li>
     <% } %>
         <li>
-          <span class="label"><%= __('date_published') %>:</span>
-          <%- partial('post/date', {class_name: 'article-date', date_format: 'D MMM YYYY'}) %>
+          <span class="label">
+            <%= __('date_published') %>: 
+            <%- partial('post/date') %>
+          </span>
         </li>
         <% if (post.categories && post.categories.length) { %>
           <li>

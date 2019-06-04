@@ -1,4 +1,2 @@
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  <%/* Date format is specified to skip timezone conversion */%>
-  <time datetime="<%= date(post.date, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="datePublished"><%= date(post.date, date_format) %></time>
-</a>
+<%/* Date format is specified to skip timezone conversion */%>
+<time datetime="<%= date(post.date, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="datePublished"><%= date(post.date, 'D MMM YYYY') %></time>
