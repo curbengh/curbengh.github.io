@@ -2,7 +2,7 @@
 
 const pathFn = require('path')
 const fs = require('fs')
-let sitemapTmpl = ""
+let sitemapTmpl = ''
 
 module.exports = function (config) {
   if (sitemapTmpl) return sitemapTmpl

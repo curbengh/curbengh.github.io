@@ -1,10 +1,10 @@
+'use strict'
+/* global hexo */
+
 /*
 * Add sitemap.xml
 * Based on https://github.com/hexojs/hexo-generator-sitemap/pull/26
 */
-
-/* global hexo */
-'use strict'
 
 const pathFn = require('path')
 

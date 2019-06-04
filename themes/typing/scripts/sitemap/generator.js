@@ -2,6 +2,7 @@
 
 const nanomatch = require('nanomatch')
 const template = require('./template')
+const moment = require('moment')
 
 module.exports = function (locals) {
   const config = this.config
@@ -18,11 +19,16 @@ module.exports = function (locals) {
       return post.sitemap !== false && !isMatch(post.source, skipRenderList)
     })
     .sort((a, b) => {
-      return b.updated - a.updated
+      return b.date - a.date
     })
     .map((post) => ({
       ...post,
-      permalink: post.permalink.replace('index.html', '')
+      permalink: post.permalink.replace('index.html', ''),
+      date: moment(post.date).format('YYYY-MM-DD[T00:00:00.000Z]'),
+      lastUpdated: () => {
+        if (post.lastUpdated) return moment(post.lastUpdated).format('YYYY-MM-DD[T00:00:00.000Z]')
+        else return false
+      }
     }))
 
   // configuration dictionary
@@ -30,7 +36,7 @@ module.exports = function (locals) {
     config: config,
     posts: posts,
     // add the sNow variable for creation of the home page and potential tags/cats
-    sNow: new Date().toISOString()
+    sNow: moment().format('YYYY-MM-DD[T00:00:00.000Z]')
   }
 
   // add tags array available in the template

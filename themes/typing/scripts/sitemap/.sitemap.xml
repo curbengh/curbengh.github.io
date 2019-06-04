@@ -3,10 +3,10 @@
   {% for post in posts %}
   <url>
     <loc>{{ post.permalink | uriencode }}</loc>
-    {% if post.updated %}
-    <lastmod>{{ post.updated.toISOString() }}</lastmod>
+    {% if post.lastUpdated() %}
+    <lastmod>{{ post.lastUpdated() }}</lastmod>
     {% elif post.date %}
-    <lastmod>{{ post.date.toISOString() }}</lastmod>
+    <lastmod>{{ post.date }}</lastmod>
     {% endif %}
   </url>
   {% endfor %}
