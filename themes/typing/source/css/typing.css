@@ -202,6 +202,8 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
+  width: 50%;
+  margin-left: 25%;
 }
 
 .typo-small,
@@ -725,9 +727,11 @@ blockquote {
 .footer-content,
 .footer-links {
   text-align: center;
-  width: 100%;
-  font-size: 0.9em;
+  font-size: 0.95em;
   color: #cacdd0;
+  max-width: 80ch;
+  padding: 0 2ch;
+  margin: auto;
 }
 
 .copyright li,
@@ -750,7 +754,6 @@ blockquote {
 
 .archive-footer,
 .post-footer {
-  padding: 1em 0;
   color: #cacdd0;
 }
 
@@ -820,22 +823,22 @@ blockquote {
   font-weight: 300;
 }
 
+/* https://jrl.ninja/etc/1/ */
 .archive-container,
 .category-container,
 .tag-container {
-  width: 80%;
-  margin: 1em auto 0;
   position: relative;
-  line-height: 1;
-  text-align: left;
   font-size: 1em;
-  max-width: 700px;
+  max-width: 80ch;
+  padding: 2ch;
+  margin: auto;
 }
 
 .archive-container article,
 .category-container article,
 .tag-container article {
-  margin-bottom: 15px;
+  margin-bottom: 1em;
+  line-height: 1em;
 }
 
 .archive-container a,
@@ -849,7 +852,8 @@ blockquote {
 
 .archive-container .header,
 .category-container .header,
-.tag-container .header {
+.tag-container .header,
+.article .header {
   font-size: 1.1em;
 }
 
@@ -873,8 +877,8 @@ blockquote {
 .archive-container hr,
 .category-container hr,
 .tag-container hr {
-  width: 60%;
-  margin: 1em 0;
+  width: 100%;
+  margin-left: 0;
   background-image: -webkit-linear-gradient(
     0deg,
     #d5d5d5,
@@ -930,15 +934,10 @@ blockquote {
 }
 
 .article {
-  width: 80%;
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 80ch;
+  padding: 2ch;
+  margin: auto;
   position: relative;
-}
-
-.article .header {
-  font-size: 1.1em;
-  margin-top: 1em;
 }
 
 .article .main-nav-link:hover {
@@ -946,7 +945,8 @@ blockquote {
 }
 
 .article hr {
-  width: 80%;
+  width: 100%;
+  margin-left: 0;
   background-image: -webkit-linear-gradient(
     0deg,
     #d5d5d5,
