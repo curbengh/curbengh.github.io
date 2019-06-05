@@ -18,7 +18,7 @@
   </nav>
   <%/* Nav menu for mobile */%>
   <nav class="mobile-nav">
-    <h1 class="nickname"><%= theme.nickname %></h1>
+    <h1 class="nickname"><a href="<%- url_for(theme.menu['Home']) %>"><%= theme.nickname %></a></h1>
     <ul class="mobile-nav-menu">
     <label for="mobile-menu-toggle"><a class="no-underline">&#9776; Menu</a></label>
     <input id="mobile-menu-toggle" type="checkbox"/>
