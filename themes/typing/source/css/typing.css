@@ -259,62 +259,7 @@ small {
 .typo-table,
 .typo-ul,
 blockquote {
-  margin-bottom: 1.2em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 100;
-  color: #000;
-  line-height: 1.35;
-}
-
-.typo h1,
-.typo h2,
-.typo h3,
-.typo h4,
-.typo h5,
-.typo h6,
-.typo-h1,
-.typo-h2,
-.typo-h3,
-.typo-h4,
-.typo-h5,
-.typo-h6 {
-  margin-top: 1.2em;
-  margin-bottom: 0.6em;
-  line-height: 1.35;
-}
-
-.typo h1,
-.typo-h1 {
-  font-size: 2em;
-}
-
-.typo h2,
-.typo-h2 {
-  font-size: 1.8em;
-}
-
-.typo h3,
-.typo-h3 {
-  font-size: 1.6em;
-}
-
-.typo h4,
-.typo-h4 {
-  font-size: 1.4em;
-}
-
-.typo h5,
-.typo h6,
-.typo-h5,
-.typo-h6 {
-  font-size: 1.2em;
+  margin-bottom: 1em;
 }
 
 .typo ul,
@@ -474,6 +419,14 @@ dfn {
 h1 {
   font-size: 1.5em;
   margin: 0.5em 0;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+h3 {
+  font-size: 1.1em;
 }
 
 mark {
@@ -677,6 +630,10 @@ h4,
 h5,
 h6 {
   font-family: serif;
+  font-weight: bolder;
+  line-height: 1.35;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
 
 a,
@@ -962,10 +919,6 @@ blockquote {
 .article h5,
 .article h6 {
   font-weight: bolder;
-}
-
-.article .article-title {
-  font-size: 2em;
 }
 
 .article .caption {
