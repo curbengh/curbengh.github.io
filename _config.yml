@@ -23,7 +23,7 @@ public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
-code_dir: downloads/code
+code_dir: ''
 i18n_dir: :lang
 skip_render:
   - 'google5149b8b3449442e3.html'
