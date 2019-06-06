@@ -1,6 +1,7 @@
 ---
 title: Change spellcheck language in Ghostwriter
 date: 2018-10-14
+lastUpdated: 2019-06-06
 tags:
 - Markdown
 ---
@@ -97,3 +98,5 @@ hunspell-th | Thai
 hunspell-uk | Ukrainian
 hunspell-uz | Uzbek
 hunspell-vi | Vietnamese
+
+**Edit (06/06/2019)**: Recently discovered [Inkdrop](https://inkdrop.app/) through [HN](https://news.ycombinator.com/item?id=20103589). It's a note-taking app that supports Markdown and can sync across devices. I think the best feature is its ability to sync the scrolling in editor and HTML output, which is absent in Ghostwriter. It's overkill for my current use case, though I might consider it when I have >50 posts.
