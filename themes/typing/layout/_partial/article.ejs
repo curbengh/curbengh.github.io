@@ -9,17 +9,8 @@
       </header>
     <% } %>
     <div class="article-entry typo" itemprop="articleBody">
-      <% if (post.excerpt && index) { %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <p class="article-more-link">
-            <%- link_to(url_for(post.path)+'#more', theme.excerpt_link) %>
-          </p>
-        <% } %>
-      <% } else { %>
-        <%- toc(page.content, {list_number: false}) %>
-        <%- post.content %>
-      <% } %>
+      <%- toc(page.more, {list_number: false}) %>
+      <%- post.more %>
     </div>
     <footer class="article-footer">
       <ul class="article-meta">
