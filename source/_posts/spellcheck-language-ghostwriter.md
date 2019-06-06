@@ -99,4 +99,6 @@ hunspell-uk | Ukrainian
 hunspell-uz | Uzbek
 hunspell-vi | Vietnamese
 
-**Edit (06/06/2019)**: Recently discovered [Inkdrop](https://inkdrop.app/) through [HN](https://news.ycombinator.com/item?id=20103589). It's a note-taking app that supports Markdown and can sync across devices. I think the best feature is its ability to sync the scrolling in editor and HTML output, which is absent in Ghostwriter. It's overkill for my current use case, though I might consider it when I have >50 posts.
+**Edit (06/06/2019)**: Recently discovered [Inkdrop](https://inkdrop.app/) through [HN](https://news.ycombinator.com/item?id=20103589). It's a note-taking app that supports Markdown and can sync across devices. I think the best feature is its ability to sync the scrolling in editor and HTML output, which is absent in Ghostwriter. I only need a simple editor for my current use case, though I might consider it when I have >50 posts.
+
+Reading through the HN comments, I also discovered [Visual Studio Code](https://code.visualstudio.com/) also supports Markdown and HTML preview. For a Markdown editor, it's probably overkill though.
