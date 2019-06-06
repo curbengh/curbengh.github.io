@@ -9,11 +9,13 @@ tags:
 - Alpine
 ---
 
+Synk depends on GNU version of `patch` utility.
+
+<!-- more -->
+
 Snyk initially runs fine on Alpine, until you try to `snyk protect` to patch the modules. Turns out Synk depends on GNU version of `patch` utility.
 
 ***Edit:*** Snyk [v1.131.0](https://github.com/snyk/snyk/releases/tag/v1.131.0) onwards no longer use `patch`.
-
-<!-- more -->
 
 Snyk is used to patch vulnerabilities of node_modules (read my {% post_link secure-node-modules-snyk 'previous post' %} for installation guide). I never had any issue with it running on Alpine docker image. That was because there was no modules to patch.
 

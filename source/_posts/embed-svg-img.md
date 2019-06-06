@@ -6,9 +6,11 @@ tags:
 - Web
 ---
 
-Website usually embed SVG using `<img>` tag or directly use the `<svg>` tag. Using `<img>` tag prevents the use of CSS to change property of SVG. As for inline `<svg>`, I prefer to have a separate file that is easier to keep track.
+Using `<img>` tag prevents the use of CSS to change property of SVG. Use `<use>` instead.
 
 <!-- more -->
+
+Website usually embed SVG using `<img>` tag or directly use the `<svg>` tag. Using `<img>` tag prevents the use of CSS to change property of SVG. As for inline `<svg>`, I prefer to have a separate file that is easier to keep track.
 
 ## Embed SVG file
 

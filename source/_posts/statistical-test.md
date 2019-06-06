@@ -5,7 +5,7 @@ tags:
 - Stats
 ---
 
-Choosing a suitable statistical test depends on the design of the experiment, notably the number and the type of variables. Following are the guides (or rather cheat sheets) that I have gathered so far.
+Choosing a suitable statistical test depends on the design of the experiment, notably the number and the type of variables.
 
 <!-- more -->
 

@@ -6,9 +6,12 @@ tags:
 - Hexo
 - GitLab
 ---
-Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/features/pages/) for free using the following guide. Refer to my {% post_link hexo-blog-github 'another guide' %} for [GitHub Pages](https://pages.github.com/).
+
+Create a website/blog using Hexo on GitLab Pages for free using this detailed guide.
 
 <!-- more -->
+
+Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/features/pages/) for free using the following guide. Refer to my {% post_link hexo-blog-github 'another guide' %} for [GitHub Pages](https://pages.github.com/).
 
 ## GitLab project
 1. Register a free [GitLab](https://gitlab.com/users/sign_in#register-pane) account or use your current one.

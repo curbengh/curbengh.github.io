@@ -6,11 +6,14 @@ tags:
 - Stats
 - LimeSurvey
 ---
-On LimeSurvey, making minor edits to multiple questions can be quite a chore. `List Questions` view allows you to edit multiple questions at the same time.
+
+**List Questions** view allows you to edit multiple questions at the same time.
 
 <!-- more -->
 
-`List Questions` view allows you to delete, set 'mandatory', 'other', CSS class, and randomise multiple questions at the same time.
+On LimeSurvey, making minor edits to multiple questions can be quite a chore. `List Questions` view allows you to edit multiple questions at the same time.
+
+**List Questions** view allows you to delete, set 'mandatory', 'other', CSS class, and randomise multiple questions at the same time.
 
 Edit: The view is accessible through (Survey) Settings > Survey menu > List questions.
 

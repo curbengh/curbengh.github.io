@@ -6,9 +6,11 @@ tags:
 - Android
 ---
 
-[microG](https://microg.org/) is an open source re-implementation of Google Play Service/Services Framework. While the core of the Android OS is still open source, much of the core apps, libraries and APIs are proprietary. Refer to [this article](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/) for more info.
+The core of the Android OS is open source, but much of the core apps, libraries and APIs are proprietary.
 
 <!-- more -->
+
+[microG](https://microg.org/) is an open source re-implementation of Google Play Service/Services Framework. While the core of the Android OS is still open source, much of the core apps, libraries and APIs are proprietary. Refer to [this article](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/) for more info.
 
 Adding to this issue is having all the APIs packaged into a single monolithic Play Services APK. So, all the APIs are loaded at all time, even though some APIs like Cast is not going to be used 24/7. This leads to memory bloat. Despite [effort](https://arstechnica.com/gadgets/2017/09/android-8-0-oreo-thoroughly-reviewed/8/#h3) to split it into separate APKs, subsequent [updates](https://www.apkmirror.com/apk/google-inc/google-play-services/) are seldom smaller. The current version (as of writing) is [40+ MB](https://www.apkmirror.com/apk/google-inc/google-play-services/google-play-services-14-7-99-release/), while microG's implementation is merely [2.6 MB](https://microg.org/download.html).
 

@@ -5,9 +5,11 @@ tags:
 - Hexo
 ---
 
-In {% post_link how-to-create-a-hexo-blog 'previous post' %}, I showed you how to create a blog using [Hexo](https://hexo.io) and host it on [GitLab Pages](https://about.gitlab.com/features/pages/). Here's how to host it on [GitHub Pages](https://pages.github.com/):
+Host your Hexo blog for free on GitHub Pages.
 
 <!-- more -->
+
+In {% post_link how-to-create-a-hexo-blog 'previous post' %}, I showed you how to create a blog using [Hexo](https://hexo.io) and host it on [GitLab Pages](https://about.gitlab.com/features/pages/). Here's how to host it on [GitHub Pages](https://pages.github.com/):
 
 ## GitHub repository
 1. Register a free [GitHub](https://github.com/join) account or use your current one.

@@ -7,9 +7,11 @@ tags:
 - DoH
 ---
 
-Recently I stumbled upon this [bug report](https://lists.zx2c4.com/pipermail/wireguard/2019-February/003902.html), and as a side note, the reporter wants to use DNS-over-TLS (DoT) for privacy reasons; to prevent the ISP from knowing visited website. It turns out many also believe this after a brief search for news articles on DoT or DNS-over-HTTPS (DoH). Actually, DoT/DoH does not completely eliminate ISP surveillance. Here's why,
+DoT/DoH does not completely eliminate ISP surveillance.
 
 <!-- more -->
+
+Recently I stumbled upon this [bug report](https://lists.zx2c4.com/pipermail/wireguard/2019-February/003902.html), and as a side note, the reporter wants to use DNS-over-TLS (DoT) for privacy reasons; to prevent the ISP from knowing visited website. It turns out many also believe this after a brief search for news articles on DoT or DNS-over-HTTPS (DoH). Actually, DoT/DoH does not completely eliminate ISP surveillance.
 
 ISP still knows what **IP address** you are connecting to. Even with HTTPS and DoT/DoH, ISP currently can sniff the website domain you are visiting/visited including the complete URL due to a security weakness in the [Server Name Indication](https://en.wikipedia.org/wiki/Server_Name_Indication). This weakness can be fixed by using [Encrypted SNI](https://blog.cloudflare.com/esni/) (ESNI).
 

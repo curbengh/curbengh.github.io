@@ -6,9 +6,11 @@ tags:
 - Web
 ---
 
-TrueCrypt and KeePassX have been discontinued while Adblock Plus has been [commercialised](https://en.wikipedia.org/wiki/Adblock_Plus#Controversy_over_ad_filtering_and_ad_whitelisting). Their replacements are [VeraCrypt](https://www.veracrypt.fr/), [KeePassXC](https://keepassxc.org/) and [uBlock Origin](https://github.com/gorhill/uBlock/) respectively.
+Some have been discontinued while others have been commercialised.
 
 <!-- more -->
+
+TrueCrypt and KeePassX have been discontinued while Adblock Plus has been [commercialised](https://en.wikipedia.org/wiki/Adblock_Plus#Controversy_over_ad_filtering_and_ad_whitelisting). Their replacements are [VeraCrypt](https://www.veracrypt.fr/), [KeePassXC](https://keepassxc.org/) and [uBlock Origin](https://github.com/gorhill/uBlock/) respectively.
 
 ## VeraCrypt
 

@@ -5,9 +5,11 @@ tags:
 - PDF
 ---
 
-The most effective ways of reducing the file size of a PDF is by converting to grayscale and reduce the resolution.
+Convert to grayscale and reduce the resolution.
 
 <!-- more -->
+
+The most effective ways of reducing the file size of a PDF is by converting to grayscale and reduce the resolution.
 
 Requirement: ghostscript (installed by default in Ubuntu)
 

@@ -6,7 +6,8 @@ tags:
 - Linux
 - Alpine
 ---
-TL;DR Alpine uses BusyBox while Ubuntu uses GNU tools, and they behave differently. Here's how they differ.
+
+Alpine uses BusyBox while Ubuntu uses GNU tools, and they behave differently.
 
 <!-- more -->
 

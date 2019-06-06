@@ -6,7 +6,7 @@ tags:
 - Hexo
 ---
 
-Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth.
+Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth and speed up the website.
 
 <!-- more -->
 

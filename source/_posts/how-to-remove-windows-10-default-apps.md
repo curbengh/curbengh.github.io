@@ -6,9 +6,12 @@ tags:
 - Microsoft
 ---
 
-Windows 10 comes bundled with many unused apps. Worse, it even install third-party apps from time to time by *itself* (even after you remove it!). Here's how to get rid of these bloatware.
+How to get rid of these bloatware.
 
 <!-- more -->
+
+Windows 10 comes bundled with many unused apps. Worse, it even install third-party apps from time to time by *itself* (even after you remove it!). Here's how to get rid of these bloatware.
+
 
 ## Stop uninstalled games from returning
 Stop included games like Candy Crush and Minecraft to reappear after you remove them.

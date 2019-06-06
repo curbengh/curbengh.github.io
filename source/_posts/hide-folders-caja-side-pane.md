@@ -4,7 +4,8 @@ date: 2018-10-02
 tags:
 - Linux
 ---
-The side pane of Caja shows many media folders by default. Most of them not important enough to show up on side pane.
+
+How to hide them.
 
 <!-- more -->
 

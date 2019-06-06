@@ -4,6 +4,7 @@ date: 2018-10-24
 tags:
 - Linux
 ---
+
 The default Control+Alt+S shortcut conflicts with Notepad++ 'Save As' shortcut, here's how to disable it.
 
 <!-- more -->

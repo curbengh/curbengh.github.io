@@ -6,9 +6,11 @@ tags:
 - Privacy
 ---
 
-Running more than one Firefox instance allows you to use multiple cookies for a website. By default, you are limited to two separate cookies through *regular* and *private* windows. Using Firefox's **profiles**, you can use more than two.
+Using Firefox profiles, you can use more than two instances.
 
 <!-- more -->
+
+Running more than one Firefox instance allows you to use multiple cookies for a website. By default, you are limited to two separate cookies through *regular* and *private* windows. Using Firefox's **profiles**, you can use more than two.
 
 For example, you are looking for item A and B at a shopping website using the private window but you prefer to keep the browsing separate as not to let the website knows that you are browsing both of them. Or you want to login to more than two accounts of a website.
 

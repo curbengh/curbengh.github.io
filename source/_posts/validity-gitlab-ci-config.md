@@ -5,9 +5,11 @@ tags:
 - GitLab
 ---
 
-It can be frustrating after you push the changes you made to `.gitlab-ci.yml`, only to discover later that it's invalid on gitlab.com. Here's how to verify/lint the config.
+How to verify/lint the config.
 
 <!-- more -->
+
+It can be frustrating after you push the changes you made to `.gitlab-ci.yml`, only to discover later that it's invalid on gitlab.com. Here's how to verify/lint the config.
 
 Login to GitLab.com and navigate to any of your repo or project. It must be under your account. If you don't have one, simply create a new project or fork one.
 

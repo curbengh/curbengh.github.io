@@ -8,9 +8,11 @@ tags:
 - DoH
 ---
 
-Many criticise Firefox for using Cloudflare by default in DNS-over-HTTPS. In reality, it's **not enabled** by default and you can **easily switch** to other providers.
+It's not enabled by default and you can easily switch to other providers.
 
 <!-- more -->
+
+Many criticise Firefox for using Cloudflare by default in DNS-over-HTTPS. In reality, it's **not enabled** by default and you can **easily switch** to other providers.
 
 {% cloudinary '20190525/firefox-doh.png' "'DNS over HTTPS' setting in Firefox" %}
 

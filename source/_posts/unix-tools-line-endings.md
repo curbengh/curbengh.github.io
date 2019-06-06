@@ -5,9 +5,11 @@ tags:
 - Linux
 ---
 
-Before you use any Unix tools to process some file, make sure the file only use Unix [line endings](https://en.wikipedia.org/wiki/Newline#Representation).
+Before you use any Unix tools to process some file, make sure the file only use Unix line endings.
 
 <!-- more -->
+
+Before you use any Unix tools to process some file, make sure the file only use Unix [line endings](https://en.wikipedia.org/wiki/Newline#Representation).
 
 Note that many text files you downloaded most probably use Windows line endings.
 

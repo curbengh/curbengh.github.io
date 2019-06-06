@@ -4,11 +4,14 @@ date: 2018-10-14
 tags:
 - Markdown
 ---
-Ghostwriter is a Markdown editor with html preview. Previously I used [StackEdit](https://stackedit.io/app), but it's web-based.
 
-Ghostwriter has built-in US English spellcheck. It supports [Hunspell](https://hunspell.github.io/) dictionaries for other languages.
+It supports Hunspell dictionaries for spellcheck of other languages.
 
 <!-- more -->
+
+Ghostwriter is a Markdown editor with html preview. Previously I used [StackEdit](https://stackedit.io/app), but it's web-based.
+
+It has built-in US English spellcheck. It supports [Hunspell](https://hunspell.github.io/) dictionaries for other languages.
 
 To install other languages is easy, for Danish:
 

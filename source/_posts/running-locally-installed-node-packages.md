@@ -4,9 +4,12 @@ date: 2018-10-24
 tags:
 - Node
 ---
-Installing a package with `--global` introduce more trouble than convenience. Here's how to run binaries of locally installed node packages.
+
+How to run binaries of locally installed node packages.
 
 <!-- more -->
+
+Installing a package with `--global` introduce more trouble than convenience. Here's how to run binaries of locally installed node packages.
 
 By default, `npm install` installs packages as listed in `package.json` at 'node_modules' of your project folder. When a package ships with executables/binaries, usually user would install it globally using `sudo npm install --global/-g`.
 
