@@ -76,7 +76,7 @@ button,
 input,
 select,
 textarea {
-  font: 300 1em/1.8 sans-serif;
+  font: normal 1em/1.8 sans-serif;
 }
 
 button::-moz-focus-inner,
@@ -630,7 +630,7 @@ h4,
 h5,
 h6 {
   font-family: serif;
-  font-weight: bolder;
+  font-weight: bold;
   line-height: 1.35;
   margin-top: 1em;
   margin-bottom: 0.5em;
@@ -729,7 +729,7 @@ blockquote {
 }
 
 .footer-links li {
-  margin: 0 5px;
+  margin-right: 1em;
 }
 
 .home-body {
@@ -826,8 +826,7 @@ blockquote {
 .archive-container .archive-article-header h1,
 .category-container .archive-article-header h1,
 .tag-container .archive-article-header h1 {
-  width: calc(100% - 120px);
-  font-size: 1em;
+  font-size: 1.2em;
   margin: 0;
 }
 
@@ -847,7 +846,7 @@ blockquote {
 .archive-container .archive-article-date,
 .category-container .archive-article-date,
 .tag-container .archive-article-date {
-  font-size: 1em;
+  font-size: 0.8em;
   color: #cacdd0;
 }
 
@@ -855,23 +854,11 @@ blockquote {
   margin-right: 0.5em;
 }
 
-.archive-container .archive-article-title,
-.category-container .archive-article-title,
-.tag-container .archive-article-title {
-  font-weight: 200;
-}
-
-.archive-container .archive-year-wrap,
-.category-container .archive-year-wrap,
-.tag-container .archive-year-wrap {
-  margin-bottom: 20px;
-}
-
 .archive-container .page-nav,
 .category-container .page-nav,
 .tag-container .page-nav {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 2em;
   color: #cacdd0;;
 }
 
@@ -887,7 +874,7 @@ blockquote {
 .category-container .page-number,
 .tag-container .extend,
 .tag-container .page-number {
-  margin-right: 15px;
+  margin-right: 1em;
 }
 
 .article {
@@ -910,15 +897,6 @@ blockquote {
     #d5d5d5,
     transparent
   );
-}
-
-.article h1,
-.article h2,
-.article h3,
-.article h4,
-.article h5,
-.article h6 {
-  font-weight: bolder;
 }
 
 .article .caption {
