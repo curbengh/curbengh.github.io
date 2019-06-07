@@ -1,16 +1,24 @@
 // Search button function
 const searchClick = document.getElementById('searchClick')
 searchClick.addEventListener('click', () => {
-  window.open('https://gitlab.com/search?utf8=%E2%9C%93&search=' +
-  document.getElementById('searchTxt').value +
-  '&group_id=&project_id=8306723&search_code=true&repository_ref=master')
-}, false);
+  const searchTxt = document.getElementById('searchTxt')
+  const searchForm = document.getElementById('searchForm')
+
+  searchTxt.value = searchTxt.value + ' site:curben.netlify.com'
+  searchForm.submit()
+
+  searchTxt.value = searchTxt.value.replace(' site:curben.netlify.com', '')
+}, false)
 
 const searchClickMob = document.getElementById('searchClickMob')
 searchClickMob.addEventListener('click', () => {
-  window.open('https://gitlab.com/search?utf8=%E2%9C%93&search=' +
-  document.getElementById('searchTxtMob').value +
-  '&group_id=&project_id=8306723&search_code=true&repository_ref=master')
+  const searchTxt = document.getElementById('searchTxtMob')
+  const searchForm = document.getElementById('searchFormMob')
+
+  searchTxt.value = searchTxt.value + ' site:curben.netlify.com'
+  searchForm.submit()
+
+  searchTxt.value = searchTxt.value.replace(' site:curben.netlify.com', '')
 }, false)
 
 /*
@@ -20,6 +28,7 @@ searchClickMob.addEventListener('click', () => {
 * <script src> is executed.
 */
 document.addEventListener('DOMContentLoaded', () => {
+
   // Copy button
   const copyCode = new ClipboardJS('.copy-button', {
     target: (trigger) => {

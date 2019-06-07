@@ -6,14 +6,19 @@
     <% } %>
 
     <div class="searchContainer">
-      <input class="searchBox" type="text" id="searchTxt" placeholder="Search...">
-      <a class="searchBtn no-underline" id="searchClick" href="#">
+      <form id="searchForm" method="post" action="https://duckduckgo.com/" target="_blank">
+      <input type="text" name="q" class="searchBox" id="searchTxt" placeholder="Search..." title="Search using DuckDuckGo">
+      <input type="hidden" name="kd" value="-1">
+      <input type="hidden" name="kg" value="p">
+      <input type="hidden" name="kae" value="#000">
+      <a class="searchBtn no-underline" id="searchClick">
         <svg viewBox="0 0 512 512">
-          <title>Search</title>
+          <title>Search using DuckDuckGo</title>
           <desc>Search icon</desc>
           <use href="/svg/search.svg#search"/>
         </svg>
       </a>
+      </form>
     </div>
   </nav>
   <%/* Nav menu for mobile */%>
@@ -24,14 +29,19 @@
     <input id="mobile-menu-toggle" type="checkbox"/>
     <ul class="mobile-nav-link">
       <div class="searchContainer">
-        <input class="searchBox" type="text" id="searchTxtMob" placeholder="Search...">
-        <a class="searchBtn no-underline" id="searchClickMob" href="#">
+        <form id="searchFormMob" method="post" action="https://duckduckgo.com/" target="_blank">
+        <input type="text" name="q" class="searchBox" id="searchTxtMob" placeholder="Search..." title="Search using DuckDuckGo">
+        <input type="hidden" name="kd" value="-1">
+        <input type="hidden" name="kg" value="p">
+        <input type="hidden" name="kae" value="#000">
+        <a class="searchBtn no-underline" id="searchClickMob">
           <svg viewBox="0 0 512 512">
-            <title>Search</title>
+            <title>Search using DuckDuckGo</title>
             <desc>Search icon</desc>
             <use href="/svg/search.svg#search"/>
           </svg>
         </a>
+        </form>
       </div>
       <p><br></p>
       <% for (let i in theme.menu) { %>
