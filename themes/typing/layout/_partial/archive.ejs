@@ -1,10 +1,10 @@
 <% if (pagination === 2) { %>
-  <% page.posts.each(function(post) { %>
+  <% page.posts.each((post) => { %>
     <%- partial('article', {post: post, index: true}) %>
   <% }) %>
 <% } else { %>
   <% let last %>
-  <% page.posts.each(function(post, i) { %>
+  <% page.posts.each((post, i) => { %>
     <% const year = post.date.year() %>
     <% if (last !== year) { %>
       <% if (last !== null) { %>
