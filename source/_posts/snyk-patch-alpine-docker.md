@@ -1,5 +1,6 @@
 ---
 title: Snyk failed to patch in Alpine docker
+subtitle: Synk depends on GNU version of patch utility.
 date: 2018-10-31
 lastUpdated: 2019-03-09
 tags:
@@ -8,10 +9,6 @@ tags:
 - Security
 - Alpine
 ---
-
-Synk depends on GNU version of `patch` utility.
-
-<!-- more -->
 
 Snyk initially runs fine on Alpine, until you try to `snyk protect` to patch the modules. Turns out Synk depends on GNU version of `patch` utility.
 

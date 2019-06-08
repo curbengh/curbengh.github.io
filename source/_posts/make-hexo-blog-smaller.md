@@ -1,14 +1,11 @@
 ---
 title: Make Hexo blog smaller
+subtitle: Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth and speed up the website.
 date: 2018-09-28
 lastUpdated: 2018-10-06
 tags:
 - Hexo
 ---
-
-Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth and speed up the website.
-
-<!-- more -->
 
 # Minify
 [Minify](https://en.wikipedia.org/wiki/Minification_(programming)) html, css, js and svg to remove characters that are not required for the code to function. This process involves removing white space/tab, line break and comments. I read somewhere that Google saves gigabytes of bandwidth just by removing line break, which surprised me how much line break alone costs when you have the popularity of Google.com.

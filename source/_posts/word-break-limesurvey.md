@@ -1,14 +1,11 @@
 ---
 title: Prevent word break in array question on LimeSurvey
+subtitle: In array type question, when you add many answer options, some words might break into next line, especially when the word is long.
 date: 2018-10-31
 tags:
 - Stats
 - LimeSurvey
 ---
-
-In array type question, when you add many answer options, some words might break into next line, especially when the word is long.
-
-<!-- more -->
 
 When you have many answer options, the word can break into next line, like this:
 

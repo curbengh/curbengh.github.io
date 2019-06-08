@@ -1,13 +1,10 @@
 ---
 title: How to disable Control+Alt+S shortcut in MATE
+subtitle: The shortcut conflicts with Notepad++, here's how to disable it.
 date: 2018-10-24
 tags:
 - Linux
 ---
-
-The default Control+Alt+S shortcut conflicts with Notepad++ 'Save As' shortcut, here's how to disable it.
-
-<!-- more -->
 
 Control+Alt+S shortcut is used for toggling shaded state in MATE desktop environment. Once toggled, a window's content is hidden except for the title bar. It's useful for peeking at the content behind a window. I personally never use it as I usually just Alt+Tab or place two windows side by side. I prefer to disable it so I can use the 'Save As' shortcut in Notepad++.
 

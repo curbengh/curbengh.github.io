@@ -1,5 +1,6 @@
 ---
 title: Cloudflare in Firefox is not the end of the world
+subtitle: It's not enabled by default and you can easily switch to other providers.
 date: 2019-05-25
 tags:
 - Firefox
@@ -7,10 +8,6 @@ tags:
 - Security
 - DoH
 ---
-
-It's not enabled by default and you can easily switch to other providers.
-
-<!-- more -->
 
 Many criticise Firefox for using Cloudflare by default in DNS-over-HTTPS. In reality, it's **not enabled** by default and you can **easily switch** to other providers.
 

@@ -1,13 +1,10 @@
 ---
 title: Make PDF files smaller
+subtitle: Convert to grayscale and reduce the resolution.
 date: 2019-01-05
 tags:
 - PDF
 ---
-
-Convert to grayscale and reduce the resolution.
-
-<!-- more -->
 
 The most effective ways of reducing the file size of a PDF is by converting to grayscale and reduce the resolution.
 

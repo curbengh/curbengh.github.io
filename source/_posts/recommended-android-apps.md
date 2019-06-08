@@ -1,14 +1,11 @@
 ---
 title: Recommended Android apps
+subtitle: Apps I'm currently using and recommend to everyone.
 date: 2019-01-07
 lastUpdated: 2019-04-30
 tags:
 - Android
 ---
-
-Apps I'm currently using and recommend to everyone.
-
-<!-- more -->
 
 Following my switch to [microG](https://microg.org/) (an open source re-implementation of Google Play), some Google Apps stopped working ({% post_link microg-google-play-replacement 'read here' %}). During my search for replacements, I discover many open source alternatives. These are the apps I'm currently using and recommend to everyone.
 

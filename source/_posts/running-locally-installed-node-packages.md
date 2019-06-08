@@ -1,13 +1,10 @@
 ---
 title: Running locally installed node packages
+subtitle: How to run binaries of locally installed node packages.
 date: 2018-10-24
 tags:
 - Node
 ---
-
-How to run binaries of locally installed node packages.
-
-<!-- more -->
 
 Installing a package with `--global` introduce more trouble than convenience. Here's how to run binaries of locally installed node packages.
 

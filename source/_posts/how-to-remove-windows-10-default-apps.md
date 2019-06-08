@@ -1,14 +1,11 @@
 ---
 title: How to remove Windows 10 default apps
+subtitle: How to get rid of these bloatware.
 date: 2018-09-26
 lastUpdated: 2019-03-01
 tags:
 - Microsoft
 ---
-
-How to get rid of these bloatware.
-
-<!-- more -->
 
 Windows 10 comes bundled with many unused apps. Worse, it even install third-party apps from time to time by *itself* (even after you remove it!). Here's how to get rid of these bloatware.
 

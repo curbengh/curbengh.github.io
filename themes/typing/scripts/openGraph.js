@@ -38,15 +38,15 @@ function og (name, content, escape) {
 function openGraphHelper (options = {}) {
   if (!cheerio) cheerio = require('cheerio')
 
-  const { config, page } = this
+  const { config, page, theme } = this
   const { content } = page
-  let images = options.image || options.images || page.photos || []
-  let description = options.description || page.description || page.excerpt || content || config.description
+  let images = page.photos || []
+  let description = page.subtitle || theme.description
   const keywords = page.keywords || (page.tags && page.tags.length ? page.tags : undefined) || config.keywords
-  const title = options.title || page.title || config.title
-  const type = options.type || (this.is_post() ? 'article' : 'website')
-  const url = options.url || this.url
-  const siteName = options.site_name || config.title
+  const title = page.title || theme.nickname
+  const type = (this.is_post() ? 'article' : 'website')
+  const url = this.url
+  const siteName = theme.nickname
   const twitterCard = options.twitter_card || 'summary'
   const published = page.date || false
   const updated = page.lastUpdated || false
