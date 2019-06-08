@@ -86,9 +86,8 @@ The following are the major changes I made compared to the upstream.
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts.
-- Remove header and footer display (except for `/about` page).
-- Use the latest version of [jQuery](https://jquery.com/download/), [fancyBox](https://github.com/fancyapps/fancyBox/releases), [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) and [clipboard.js](https://github.com/zenorocha/clipboard.js/).
-- Remove web analytics, comment systems and donation links.
+- Use the latest version of [clipboard.js](https://github.com/zenorocha/clipboard.js/) and [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) (disabled by default).
+- Remove jQuery, fancyBox, web analytics, comment plugins and donation links.
 - Use more [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
 
 
