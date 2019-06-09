@@ -4,7 +4,7 @@ subtitle: AliExpress login doesn't show up on Firefox when there is a strict cro
 date: 2019-02-28
 lastUpdated: 2019-04-29
 tags:
-- firefox
+- Firefox
 ---
 
 AliExpress login doesn't show up on Firefox when there is a strict cross-origin policy (i.e. `network.http.referer.XOriginPolicy`). Here's how to whitelist it.

@@ -1,5 +1,5 @@
 ---
-title: Prevent Engadget from redirect to Guce
+title: Prevent Engadget from redirect to guce
 subtitle: Block its cookies
 date: 2019-06-09
 tags:
@@ -40,6 +40,6 @@ Firefox can block cookie by website. To block Engadget from setting a cookie, in
   {% cloudinary '20190609/uncheck-site.png' 'Settings for clearing history' %}
 
 
-That's it. If you want to know what is the purpose of `guce.advertising.com` and why Engadget redirects to it, read on.
+That's it. If you want to know what is the purpose of `guce.advertising.com`, read on.
 
 The previous owner of Engadget, AOL Inc was acquired by Verizon Media (previously known as Oath Inc) in May 2015. With Yahoo! and other media companies as part of its portfolio, Verizon Media can track readers across those websites. One way to do it is through cookie. So, `guce.advertising.com` is essentially a [cookie consent form](https://archive.fo/ik3Pu) (page archived using [archive.today](https://archive.fo/)).
