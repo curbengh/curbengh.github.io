@@ -80,6 +80,5 @@ for i in *.pdf; do
 done
 ```
 
-<br/>
+<br/><br/>
 Source: [Internal Pointers](https://www.internalpointers.com/post/compress-pdf-file-ghostscript-linux), [firstdoit](https://gist.github.com/firstdoit/6390547), [ahmed-musallam](https://gist.github.com/ahmed-musallam/27de7d7c5ac68ecbd1ed65b6b48416f9), [Ghostscript Docs](https://ghostscript.com/doc/current/Ps2pdf.htm)
-
