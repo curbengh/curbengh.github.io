@@ -2,7 +2,7 @@
 title: Secure node modules with Snyk
 subtitle: The package dependency on Node can cause security issue. Here's how to use Snyk to mitigate it.
 date: 2018-10-01
-lastUpdated: 2019-03-09
+lastUpdated: 2019-06-11
 tags:
 - Node
 - Snyk
@@ -14,7 +14,7 @@ tags:
 
 Node.js is infamous for the [left-pad](https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068) [controversy](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), removing just a single package can break many websites. 
 
-The package dependency can also cause security issue ([example 1](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), [example 2](https://blog.npmjs.org/post/173526807575/reported-malicious-module-getcookies)).
+The package dependency can also cause security issue ([example 1](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), [example 2](https://blog.npmjs.org/post/173526807575/reported-malicious-module-getcookies), [example 3](https://blog.npmjs.org/post/185397814280/plot-to-steal-cryptocurrency-foiled-by-the-npm)).
 
 Say you use Package A, which depends on Package B, which depends on Package C and so on.
 ```
@@ -24,7 +24,7 @@ What if Package A uses outdated version of Package B?
 
 If newer version(s) of Package A has updated its `package.json` to use updated version of Package B, you simply update your `package.json` to update Package A.
 
-What if Package A is no longer maintained? You can fork its repo, update the package and re-publish under a new name. For example, hexo-autonofollow uses [vulnerable](https://snyk.io/test/npm/hexo-autonofollow) version of cheerio, hexo-filter-nofollow [updates](https://github.com/SukkaW/hexo-filter-nofollow/commit/ff122123f08d1765ab3272303914d8a29e0bcd7f) it.
+What if Package A is no longer maintained? You can fork its repo, update the package and re-publish under a new name. For example, hexo-autonofollow uses [outdated](https://snyk.io/test/npm/hexo-autonofollow) version of cheerio, hexo-filter-nofollow meanwhile uses [more recent](https://github.com/SukkaW/hexo-filter-nofollow/commit/ff122123f08d1765ab3272303914d8a29e0bcd7f) version.
 
 If you have time to fork and more importantly fix any compatibility issue ([example](https://github.com/mamboer/hexo-filter-cleanup/commit/8d9f2da8276652ef270e943dbf9dcb648e14ed55)), why not?
 
@@ -67,3 +67,5 @@ Alternatively, you could integrate directly to your remote repo (github/gitlab).
 {% cloudinary '20181001/snyk-integration.png' 'Available integrations offered by Snyk' %}
 
 More info: [NodeJS](https://snyk.io/docs/snyk-for-nodejs), [GitHub](https://snyk.io/docs/github), [GitLab](https://snyk.io/docs/gitlab)
+
+Recommended reading: [Hackernoon's article](https://hackernoon.com/im-harvesting-credit-card-numbers-and-passwords-from-your-site-here-s-how-9a8cb347c5b5) and the [follow-up post](https://hackernoon.com/part-2-how-to-stop-me-harvesting-credit-card-numbers-and-passwords-from-your-site-844f739659b9).
