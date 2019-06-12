@@ -11,15 +11,15 @@
   </url>
   {% endfor %}
 
-  {# ------------- home page - with now date #}
+  {# home page #}
   <url>
-      <loc>{{ config.url }}</loc>
+      <loc>{{ config.url + '/' + config.archive_dir + '/' }}</loc>
       <lastmod>{{ sNow }}</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
    </url>
 
-  {# ------------- tag pages #}
+  {# tag pages #}
   {% for tag in tags %}
     <url>
       <loc>{{ tag.permalink }}</loc>
@@ -29,7 +29,7 @@
     </url>
   {% endfor %}
 
-  {# ------------- categories pages #}
+  {# categories pages #}
   {% for cat in categories %}
     <url>
       <loc>{{ cat.permalink }}</loc>
