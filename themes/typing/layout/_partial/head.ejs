@@ -12,6 +12,9 @@
       title += ': ' + page.year + '/' + page.month
     } else if (is_year()) {
       title += ': ' + page.year
+    } else if (page.current_url) {
+      const pageNum = Number(page.current_url.charAt(page.current_url.length - 2))
+      if (Number.isInteger(pageNum)) title += ': Page ' + pageNum
     }
   } else if (is_category()) {
     title = __('category') + ': ' + page.category
