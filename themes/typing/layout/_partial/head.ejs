@@ -6,7 +6,7 @@
   let title = page.title
 
   if (is_archive()) {
-    title = __('archive_a')
+    title = titlecase(config.archive_dir)
 
     if (is_month()) {
       title += ': ' + page.year + '/' + page.month
