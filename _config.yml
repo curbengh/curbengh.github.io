@@ -116,6 +116,6 @@ theme_config:
   # If "icons: true" link names will interpreted as fontawesome icon names
   # Use the forkawesome icon names (https://forkaweso.me/Fork-Awesome/icons/) without the fa- prefix
   links:
-    Home: /
+    Home: /blog
     GitLab: https://gitlab.com/curben/blog
 
