@@ -105,7 +105,7 @@ theme_config:
   #rss: /atom.xml
 
   # Profile
-  nickname: curben's blog
+  nickname: Curben's blog
   description: Troubleshooting, tips & tricks, etc.
 
   # Load forkawesome icons? See the links option below.
