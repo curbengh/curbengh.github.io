@@ -2,13 +2,6 @@
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  'npm:braces:20180219':
-    - hexo > hexo-fs > chokidar > anymatch > micromatch > braces:
-        reason: Patch/update unavailable
-        expires: '2019-12-31T00:00:00.000Z'
-    - hexo > hexo-cli > hexo-fs > chokidar > anymatch > micromatch > braces:
-        reason: Patch/update unavailable
-        expires: '2019-12-31T00:00:00.000Z'
   SNYK-JS-LODASHMERGE-173732:
     - hexo > cheerio > lodash.merge:
         reason: Patch/update unavailable
@@ -17,8 +10,12 @@ ignore:
     - hexo > cheerio > lodash.merge:
         reason: Patch/update unavailable
         expires: '2019-12-31T00:00:00.000Z'
-  SNYK-JS-MARKED-174116:
-    - hexo-renderer-marked > marked:
+  SNYK-JS-SETVALUE-450213:
+    - '*':
+        reason: Patch/update unavailable
+        expires: '2019-12-31T00:00:00.000Z'
+  SNYK-JS-MIXINDEEP-450212:
+    - '*':
         reason: Patch/update unavailable
         expires: '2019-12-31T00:00:00.000Z'
 patch: {}
