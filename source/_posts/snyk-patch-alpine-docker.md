@@ -4,10 +4,10 @@ subtitle: Synk depends on GNU version of patch utility.
 date: 2018-10-31
 lastUpdated: 2019-03-09
 tags:
-- Snyk
-- Linux
-- Security
-- Alpine
+- snyk
+- linux
+- security
+- alpine
 ---
 
 Snyk initially runs fine on Alpine, until you try to `snyk protect` to patch the modules. Turns out Synk depends on GNU version of `patch` utility.

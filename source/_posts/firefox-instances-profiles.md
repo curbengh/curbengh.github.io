@@ -3,8 +3,8 @@ title: How to run more than one Firefox instance
 subtitle: Using Firefox profiles, you can use more than two instances.
 date: 2019-04-07
 tags:
-- Firefox
-- Privacy
+- firefox
+- privacy
 ---
 
 Running more than one Firefox instance allows you to use multiple cookies for a website. By default, you are limited to two separate cookies through *regular* and *private* windows. Using Firefox's **profiles**, you can use more than two.

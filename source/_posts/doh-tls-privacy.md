@@ -3,9 +3,9 @@ title: DNS-over-TLS/DNS-over-HTTPS does not protect your privacy
 subtitle: DoT/DoH does not completely eliminate ISP surveillance.
 date: 2019-04-04
 tags:
-- Privacy
-- Security
-- DoH
+- privacy
+- security
+- doh
 ---
 
 Recently I stumbled upon this [bug report](https://lists.zx2c4.com/pipermail/wireguard/2019-February/003902.html), and as a side note, the reporter wants to use DNS-over-TLS (DoT) for privacy reasons; to prevent the ISP from knowing visited website. It turns out many also believe this after a brief search for news articles on DoT or DNS-over-HTTPS (DoH). Actually, DoT/DoH does not completely eliminate ISP surveillance.

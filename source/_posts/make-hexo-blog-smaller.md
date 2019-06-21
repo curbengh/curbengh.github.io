@@ -4,7 +4,7 @@ subtitle: Static site serves html, css, javascript and images. These files can b
 date: 2018-09-28
 lastUpdated: 2018-10-06
 tags:
-- Hexo
+- hexo
 ---
 
 # Minify

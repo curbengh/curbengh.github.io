@@ -4,9 +4,9 @@ subtitle: The package dependency on Node can cause security issue. Here's how to
 date: 2018-10-01
 lastUpdated: 2019-06-11
 tags:
-- Node
-- Snyk
-- Security
+- node
+- snyk
+- security
 ---
 
 ## Intro

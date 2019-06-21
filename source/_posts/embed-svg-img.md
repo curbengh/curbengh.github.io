@@ -3,8 +3,8 @@ title: Embed SVG without using img tag
 subtitle: Using img tag prevents the use of CSS to change property of SVG. There is a workaround.
 date: 2019-06-01
 tags:
-- SVG
-- Web
+- svg
+- web
 ---
 
 Website usually embed SVG using `<img>` tag or directly use the `<svg>` tag. Using `<img>` tag prevents the use of CSS to change property of SVG. As for inline `<svg>`, I prefer to have a separate file that is easier to keep track.

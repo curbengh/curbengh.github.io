@@ -4,7 +4,7 @@ subtitle: It supports Hunspell dictionaries for spellcheck of other languages.
 date: 2018-10-14
 lastUpdated: 2019-06-06
 tags:
-- Markdown
+- markdown
 ---
 
 Ghostwriter is a Markdown editor with html preview. Previously I used [StackEdit](https://stackedit.io/app), but it's web-based.

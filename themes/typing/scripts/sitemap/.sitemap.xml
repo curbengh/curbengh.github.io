@@ -13,7 +13,7 @@
 
   {# home page #}
   <url>
-      <loc>{{ config.url + '/' + config.archive_dir + '/' }}</loc>
+      <loc>{{ config.url + '/' + config.archive_dir + '/' | uriencode }}</loc>
       <lastmod>{{ sNow }}</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
@@ -22,7 +22,7 @@
   {# tag pages #}
   {% for tag in tags %}
     <url>
-      <loc>{{ tag.permalink }}</loc>
+      <loc>{{ tag.permalink | uriencode }}</loc>
       <lastmod>{{ sNow }}</lastmod>
       <changefreq>daily</changefreq>
       <priority>0.6</priority>
@@ -32,7 +32,7 @@
   {# categories pages #}
   {% for cat in categories %}
     <url>
-      <loc>{{ cat.permalink }}</loc>
+      <loc>{{ cat.permalink | uriencode }}</loc>
       <lastmod>{{ sNow }}</lastmod>
       <changefreq>daily</changefreq>
       <priority>0.6</priority>

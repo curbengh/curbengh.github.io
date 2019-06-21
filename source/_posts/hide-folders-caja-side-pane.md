@@ -3,7 +3,7 @@ title: Hide folders of Caja side pane
 subtitle: How to hide them.
 date: 2018-10-02
 tags:
-- Linux
+- linux
 ---
 
 Caja is a file manager originally forked from Nautilus. It's used in MATE desktop environment, found in Ubuntu MATE or Linux Mint. Since it shares similar base with Nautilus, following guide also applies to Nautilus too (I haven't tested it though).

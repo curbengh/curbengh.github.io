@@ -3,7 +3,7 @@ title: Use Unix line endings in Unix tools
 subtitle: Before you use any Unix tools to process some file, make sure the file only use Unix line endings.
 date: 2018-11-08
 tags:
-- Linux
+- linux
 ---
 
 Before you use any Unix tools to process some file, make sure the file only use Unix [line endings](https://en.wikipedia.org/wiki/Newline#Representation).
