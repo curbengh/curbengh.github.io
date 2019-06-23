@@ -7,13 +7,13 @@
 
     <div class="searchContainer">
       <form id="searchForm" method="post" action="https://duckduckgo.com/" target="_blank">
-      <input type="text" name="q" class="searchBox" id="searchTxt" placeholder="Search..." title="Search with DuckDuckGo">
+      <input type="text" name="q" class="searchBox" id="searchTxt" placeholder="Search..." title="Powered by DuckDuckGo">
       <input type="hidden" name="kd" value="-1">
       <input type="hidden" name="kg" value="p">
       <input type="hidden" name="kae" value="#000">
       <a class="searchBtn no-underline" id="searchClick">
         <svg viewBox="0 0 512 512">
-          <title>Search using DuckDuckGo</title>
+          <title>Powered by DuckDuckGo</title>
           <desc>Search icon</desc>
           <use href="/svg/search.svg#search"/>
         </svg>
@@ -30,20 +30,20 @@
     <ul class="mobile-nav-link">
       <div class="searchContainer">
         <form id="searchFormMob" method="post" action="https://duckduckgo.com/" target="_blank">
-        <input type="text" name="q" class="searchBox" id="searchTxtMob" placeholder="Search..." title="Search with DuckDuckGo">
+        <input type="text" name="q" class="searchBox" id="searchTxtMob" placeholder="Search..." title="Powered by DuckDuckGo">
         <input type="hidden" name="kd" value="-1">
         <input type="hidden" name="kg" value="p">
         <input type="hidden" name="kae" value="#000">
         <a class="searchBtn no-underline" id="searchClickMob">
           <svg viewBox="0 0 512 512">
-            <title>Search using DuckDuckGo</title>
+            <title>Powered by DuckDuckGo</title>
             <desc>Search icon</desc>
             <use href="/svg/search.svg#search"/>
           </svg>
         </a>
         </form>
       </div>
-      <p><br></p>
+      <i>Powered by DuckDuckGo</i>
       <% for (let i in theme.menu) { %>
         <a class="mobile-nav-link-a" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
       <% } %>
