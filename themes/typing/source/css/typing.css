@@ -572,6 +572,11 @@ textarea {
   transition: color 0.1s linear;
 }
 
+/* Hide post's subtitle in article */
+.entry-summary {
+  display: none;
+}
+
 .archive-container hr,
 .archive-footer hr,
 .article .article-footer hr,
