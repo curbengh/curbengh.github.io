@@ -1,2 +1,6 @@
 <%/* Date format is specified to skip timezone conversion */%>
-<time class="published" datetime="<%= date(post.date, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="datePublished"><%= date(post.date, 'D MMM YYYY') %></time>
+<% if (is_post()) { %>
+  <time class="published" datetime="<%= date(post.date, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="datePublished"><%= date(post.date, 'D MMM YYYY') %></time>
+<% } else { %>
+  <time datetime="<%= date(post.date, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="datePublished"><%= date(post.date, 'D MMM YYYY') %></time>
+<% } %>
