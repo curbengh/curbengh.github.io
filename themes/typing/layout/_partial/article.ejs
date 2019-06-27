@@ -11,7 +11,7 @@
     <% if (post.subtitle) { %>
       <p class="entry-summary"><%- post.subtitle %></p>
     <% } %>
-    <div class="entry-content article-entry typo" itemprop="articleBody">
+    <div class="entry-content article-entry typo" itemprop="text">
       <%- toc(page.content, {list_number: false}) %>
       <%- post.content %>
     </div>
