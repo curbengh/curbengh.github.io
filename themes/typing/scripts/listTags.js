@@ -34,7 +34,7 @@ function listTagsHelper(tags, options) {
   if (options.amount) tags = tags.limit(options.amount)
 
   if (style === 'list') {
-    result += `<ul class="${className}-list">`
+    result += `<ul class="${className}-list" itemprop="keywords">`
 
     tags.forEach(tag => {
       result += `<li class="${className}-list-item">`
