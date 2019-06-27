@@ -1,4 +1,4 @@
-<article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemscope itemprop="blogPost">
+<article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <%- partial('_partial/header') %>
   <hr/>
   <div class="hentry article-inner">
@@ -11,7 +11,7 @@
     <% if (post.subtitle) { %>
       <p class="entry-summary"><%- post.subtitle %></p>
     <% } %>
-    <div class="entry-content article-entry typo" itemprop="text">
+    <div class="entry-content article-entry typo" itemprop="articleBody">
       <%- toc(page.content, {list_number: false}) %>
       <%- post.content %>
     </div>
