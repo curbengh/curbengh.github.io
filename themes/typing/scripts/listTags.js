@@ -39,7 +39,7 @@ function listTagsHelper(tags, options) {
     tags.forEach(tag => {
       result += `<li class="${className}-list-item">`
 
-      result += `<a class="${className}-list-link" href="${self.url_for(tag.path)}${suffix}" rel="tag">`
+      result += `<a class="p-category ${className}-list-link" href="${self.url_for(tag.path)}${suffix}" rel="tag">`
       result += transform ? transform(tag.name) : tag.name
       result += '</a>'
 
