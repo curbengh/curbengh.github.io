@@ -15,7 +15,7 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 2. Fork the [repo of this blog](https://gitlab.com/curben/blog).
 3. Shared Runners should be enabled. Go to your (forked) project `Settings -> CI / CD -> Shared Runners`.
 4. Change project website to a user website. This is so that the website's home page is <b>*username*.gitlab.io</b>, instead of username.gitlab.io/hexo.
-    Go to `Settings -> General -> Advanced -> Rename repository`. Change the Path to <b>*username*.gitlab.io</b>, where username is your username on GitLab.
+    Go to `Settings -> General -> Advanced -> Change path`. Change the value to <b>*username*.gitlab.io</b>, where username is your username on GitLab.
 5. You can start writing a new post straight away without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#Naming)).
 	1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
 	2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
@@ -139,8 +139,8 @@ description:
 ### Project page
 If you prefer to have a project page on GitLab:
 
-1. Go to `Settings -> General -> Advanced -> Rename repository`. Change the Path to a name, so the website is available at <b>username.gitlab.io/*name*</b>. It can be any name, like *blog* or *hexo*.
-1. Edit **_config.yml**, change the `root:` value from `""` to "*name*".
+1. Go to `Settings -> General -> Advanced -> Change path`. Change the value to a name, so the website is available at <b>username.gitlab.io/*name*</b>. It can be any name, like *blog* or *hexo*.
+1. Edit **_config.yml**, change the `root:` value from `""` to `"name"`.
 1. Commit and push.
 
 ### Remove fork relationship
