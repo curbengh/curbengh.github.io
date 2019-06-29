@@ -16,5 +16,5 @@ hexo.extend.tag.register('cloudinary', (args) => {
     alt = args[1]
   }
 
-  return '<img class="cld-responsive" data-src="https://res.cloudinary.com/curben/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,w_500/' + fileName + '" src="/svg/loading.svg" alt="' + alt + '">'
+  return '<a href="https://res.cloudinary.com/curben/' + fileName + '"><img class="cld-responsive" data-src="https://res.cloudinary.com/curben/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,w_600,h_400/' + fileName + '" src="/svg/loading.svg" alt="' + alt + '"></a>'
 })
