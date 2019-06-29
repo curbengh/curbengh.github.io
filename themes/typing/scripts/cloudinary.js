@@ -10,7 +10,7 @@
 */
 hexo.extend.tag.register('cloudinary', (args) => {
   const fileName = args[0]
-  let alt = ""
+  let alt = ''
 
   if (args[1]) {
     alt = args[1]
