@@ -33,10 +33,6 @@ The above CSS is to override the default CSS used by FF to display an image. The
 
 ```css
 @media not print {
-  body {
-    margin: 0;
-  }
-
   img {
     text-align: center;
     position: absolute;
@@ -46,6 +42,7 @@ The above CSS is to override the default CSS used by FF to display an image. The
     bottom: 0;
     left: 0;
   }
+}
 ```
 
 The `bottom: 0;` rule is the source of the issue, though it's more of a compatibility issue between DR and FF.
