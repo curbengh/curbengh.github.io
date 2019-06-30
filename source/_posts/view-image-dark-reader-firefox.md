@@ -1,5 +1,5 @@
 ---
-title: Image view is broken when using Dark Reader
+title: Dark Reader breaks image view in Firefox
 subtitle: Use this workaround to view the whole image.
 date: 2019-06-28
 tags:
@@ -7,7 +7,7 @@ tags:
 - firefox-ext
 ---
 
-When using Dark Reader (DR) add-on with "Filter" or "Filter+" mode in Firefox (FF 67 as of writing), you may encounter this issue where only the lower half of an image is shown.
+When using [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/) (DR) add-on with "Filter" or "Filter+" mode in Firefox (FF 67 as of writing), you may encounter this issue where only the lower half of an image is shown.
 
 {% cloudinary '20190628/dark-reader-before.png' 'Image is only shown half' %}
 
