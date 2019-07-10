@@ -10,11 +10,7 @@
 */
 hexo.extend.tag.register('cloudinary', (args) => {
   const fileName = args[0]
-  let alt = ''
-
-  if (args[1]) {
-    alt = args[1]
-  }
+  const alt = args[1] || ''
 
   return '<a href="https://res.cloudinary.com/curben/' + fileName + '"><img class="cld-responsive" data-src="https://res.cloudinary.com/curben/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,w_600,h_400/' + fileName + '" src="/svg/loading.svg" alt="' + alt + '"></a>'
 })
