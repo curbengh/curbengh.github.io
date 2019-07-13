@@ -11,7 +11,7 @@
 const urlFn = require('url')
 const moment = require('moment')
 const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
-let cheerio
+const cheerio = require('cheerio')
 
 function meta (name, content, escape) {
   if (escape !== false && typeof content === 'string') {
@@ -36,8 +36,6 @@ function og (name, content, escape) {
 }
 
 function openGraphHelper (options = {}) {
-  if (!cheerio) cheerio = require('cheerio')
-
   const { config, page, theme } = this
   const { content } = page
   let images = page.photos || []
