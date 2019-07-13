@@ -25,7 +25,7 @@ Utilise `<use>` tag to embed an SVG file in `svg`. For example in this blog, I h
 
 The `<title>` is for tooltip and `<desc>` stands for description and functions similarly to the `alt` attribute in `<img>`. These two tags are optional but recommended for [SEO purpose](https://support.google.com/webmasters/answer/114016?hl=en).
 
-The `viewBox` attribute is mandatory. I simply use the value from the SVG file.
+The `viewBox` value is based on the layout you want to use. I simply use the value from the SVG file.
 
 Notice `#search` value in the href attribute. It refers to the `id` attribute in the SVG file, which you need to manually add it. Following is an excerpt from the search.svg.
 
@@ -45,7 +45,7 @@ svgo --disable=cleanupIDs test.svg -o test.min.svg
 For [hexo-yam](https://github.com/weyusi/hexo-yam),
 ```json
 neat_svg:
-  plugins: [{cleanupIDs: false}]
+  plugins: [{ cleanupIDs: false }]
 ```
 
 ## img tag
@@ -58,7 +58,7 @@ svg {
 }
 ```
 
-to set the SVG to use the same colour as the font's. The `fill` attribute is not supported in `<img>` tag. Since `<image>` property in SVG is [defined as a synonym](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image) for `<img>`, it also shares similar limitation. So, the following method would not work,
+to set the SVG to use the same colour as the font's. The `fill` attribute is not supported in `<img>` tag. Since `<image>` property in SVG is [defined as a synonym](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image) for `<img>`, it also shares similar limitation. So, the following method *would not* work,
 
 ```html
 <svg viewBox="0 0 512 512">
