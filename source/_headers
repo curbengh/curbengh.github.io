@@ -7,3 +7,19 @@
   Referrer-Policy: no-referrer
   Strict-Transport-Security: max-age=31536000
   Feature-Policy: accelerometer 'none'; autoplay 'none'; camera 'none'; document.domain 'none'; display-capture 'none'; encrypted-media 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; sync-xhr 'none'; usb 'none'
+  Expires: 0
+
+/*.html
+  Cache-Control: max-age=86400, public
+/*.css
+  Cache-Control: max-age=604800, public
+/*.js
+  Cache-Control: max-age=604800, public
+/*.ico
+  Cache-Control: max-age=604800, public
+/*.png
+  Cache-Control: max-age=604800, public
+/*.webp
+  Cache-Control: max-age=604800, public
+/*.jpg
+  Cache-Control: max-age=604800, public
