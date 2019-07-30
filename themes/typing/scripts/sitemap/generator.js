@@ -1,6 +1,6 @@
 'use strict'
 
-const nanomatch = require('nanomatch')
+const micromatch = require('micromatch')
 const template = require('./template')
 const moment = require('moment')
 
@@ -59,7 +59,7 @@ module.exports = function (locals) {
 
 function isMatch (path, patterns) {
   if (patterns && patterns.length) {
-    if (nanomatch.some(path, patterns, { matchBase: true })) return true
+    if (micromatch.isMatch(path, patterns, { matchBase: true })) return true
   }
 
   return false
