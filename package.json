@@ -11,14 +11,14 @@
     "renovate": "renovate --token $BOT_TOKEN --platform 'gitlab' --onboarding false --update-lock-files false --labels 'renovate' --recreate-closed true --require-config false curben/blog"
   },
   "dependencies": {
-    "hexo": "^3.9.0",
-    "hexo-generator-archive": "^0.1.5",
-    "hexo-generator-tag": "^0.2.0",
+    "hexo": "hexojs/hexo",
+    "hexo-generator-archive": "hexojs/hexo-generator-archive",
+    "hexo-generator-tag": "hexojs/hexo-generator-tag",
     "hexo-nofollow": "curbengh/hexo-nofollow#v2.0",
-    "hexo-renderer-ejs": "^0.3.1",
-    "hexo-renderer-marked": "^1.0.0",
-    "hexo-server": "^0.3.3",
-    "hexo-yam": "^2.0.0"
+    "hexo-renderer-ejs": "hexojs/hexo-generator-ejs",
+    "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
+    "hexo-server": "hexojs/hexo-server",
+    "hexo-yam": "curbengh/hexo-yam"
   },
   "devDependencies": {
     "renovate": "^19.0.0",
