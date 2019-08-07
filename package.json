@@ -19,9 +19,5 @@
     "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
     "hexo-server": "hexojs/hexo-server",
     "hexo-yam": "curbengh/hexo-yam"
-  },
-  "devDependencies": {
-    "renovate": "^19.0.0",
-    "snyk": "^1.136.1"
   }
 }
