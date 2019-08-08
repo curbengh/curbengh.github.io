@@ -18,12 +18,12 @@ ignore:
   # snapdragon > base > cache-base > set-value
     - '*':
         reason: Patch/update unavailable
-        expires: '2019-12-31T00:00:00.000Z'
+        expires: '2019-08-01T00:00:00.000Z'
   SNYK-JS-MIXINDEEP-450212:
   # snapdragon > base > mixin-deep
     - '*':
         reason: Patch/update unavailable
-        expires: '2019-12-31T00:00:00.000Z'
+        expires: '2019-08-01T00:00:00.000Z'
   SNYK-JS-LODASH-450202:
     - '*':
         reason: >-
