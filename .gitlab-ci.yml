@@ -10,8 +10,7 @@ before_script:
 
 test:
   script:
-    - npm install snyk
-    - npm run snyk # Refer to "scripts" in package.json
+    - npm install snyk && npm run snyk # Refer to "scripts" in package.json
     - npm run hexo
 
   only:
