@@ -1,39 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
-ignore:
-  SNYK-JS-LODASHMERGE-173732:
-    - hexo > cheerio > lodash.merge:
-        reason: >-
-          Patch to be released in lodash@4.17.12. Tracking this PR for release:
-          https://github.com/lodash/lodash/pull/4337
-        expires: '2019-08-01T00:00:00.000Z'
-  SNYK-JS-LODASHMERGE-173733:
-    - hexo > cheerio > lodash.merge:
-        reason: >-
-          Patch to be released in lodash@4.17.12. Tracking this PR for release:
-          https://github.com/lodash/lodash/pull/4337
-        expires: '2019-08-01T00:00:00.000Z'
-  SNYK-JS-SETVALUE-450213:
-  # snapdragon > base > cache-base > set-value
-    - '*':
-        reason: Patch/update unavailable
-        expires: '2019-08-01T00:00:00.000Z'
-  SNYK-JS-MIXINDEEP-450212:
-  # snapdragon > base > mixin-deep
-    - '*':
-        reason: Patch/update unavailable
-        expires: '2019-08-01T00:00:00.000Z'
-  SNYK-JS-LODASH-450202:
-    - '*':
-        reason: >-
-          Patch to be released in lodash@4.17.12. Tracking this PR for release:
-          https://github.com/lodash/lodash/pull/4336
-        expires: '2019-08-01T00:00:00.000Z'
-  SNYK-JS-MARKED-451341:
-    - '*':
-        reason: >-
-          Patch is released in marked@0.7.0. Tracking this PR for release:
-          https://github.com/hexojs/hexo-renderer-marked/pull/102
-        expires: '2019-08-01T00:00:00.000Z'
+ignore: {}
 patch: {}
