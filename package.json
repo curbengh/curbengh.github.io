@@ -15,7 +15,7 @@
     "hexo-generator-archive": "hexojs/hexo-generator-archive",
     "hexo-generator-tag": "hexojs/hexo-generator-tag",
     "hexo-nofollow": "curbengh/hexo-nofollow#v2.0",
-    "hexo-renderer-ejs": "hexojs/hexo-generator-ejs",
+    "hexo-renderer-ejs": "hexojs/hexo-renderer-ejs",
     "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
     "hexo-server": "hexojs/hexo-server",
     "hexo-yam": "curbengh/hexo-yam"
