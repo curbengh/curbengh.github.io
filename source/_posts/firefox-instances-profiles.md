@@ -12,6 +12,8 @@ Running more than one Firefox instance allows you to use multiple cookies for a 
 
 For example, you are looking for item A and B at a shopping website using the private window but you prefer to keep the browsing separate as not to let the website knows that you are browsing both of them. Or you want to login to more than two accounts of a website.
 
+**Edit:** Similar functionality can be achieved by using [Multi-Account Containers](#Multi-Account-Containers).
+
 A useful feature of Firefox is that it allows more than one profile, which otherwise would requires multiple operating system accounts. The feature even allows you to run multiple profiles at the same time by having multiple instances.
 
 {% cloudinary '20190407/firefox-error.png' "'Firefox is currently running' error" %}
@@ -79,4 +81,6 @@ Path=profile z
 firefox --no-remote -P 'Profile Z'
 ```
 
-**Edit:** Similar functionality can be achieved by using Multi-Account Containers. It is a built-in feature introduced since Firefox 50, but disabled by default (as of Firefox 68). Follow this link [[wiki.mozilla.org]](https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers) for instruction and more details. The feature was initially available as an add-on and it is still available (as of August 2019) and may offer [better user experience](https://support.mozilla.org/en-US/kb/containers). Install it from [[addons.mozilla.org]](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/).
+## Multi-Account Containers
+
+Multi-Account Containers is a built-in feature introduced since Firefox 50, but disabled by default (as of Firefox 68). Follow this link [[wiki.mozilla.org]](https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers) for instruction and more details. The feature was initially available as an add-on and it is still available (as of August 2019) and may offer [better user experience](https://support.mozilla.org/en-US/kb/containers). Install it from [[addons.mozilla.org]](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/).
