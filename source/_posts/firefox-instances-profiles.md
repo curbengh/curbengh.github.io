@@ -2,6 +2,7 @@
 title: How to run more than one Firefox instance
 subtitle: Using Firefox profiles, you can use more than two instances.
 date: 2019-04-07
+lastUpdated: 2019-08-09
 tags:
 - firefox
 - privacy
@@ -77,3 +78,5 @@ Path=profile z
 ```
 firefox --no-remote -P 'Profile Z'
 ```
+
+**Edit:** Similar functionality can be achieved by using Multi-Account Containers. It is a built-in feature introduced since Firefox 50, but disabled by default (as of Firefox 68). Follow this link [[wiki.mozilla.org]](https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers) for instruction and more details. The feature was initially available as an add-on and it is still available (as of August 2019) and may offer [better user experience](https://support.mozilla.org/en-US/kb/containers). Install it from [[addons.mozilla.org]](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/).
