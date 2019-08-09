@@ -1,3 +1,6 @@
+'use strict'
+/* global hexo */
+
 /*
 * Modified from the hexo version,
 * https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js
@@ -8,7 +11,6 @@
 
 'use strict'
 
-const urlFn = require('url')
 const moment = require('moment')
 const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
 const cheerio = require('cheerio')
@@ -102,10 +104,10 @@ function openGraphHelper (options = {}) {
   }
 
   images = images.map(path => {
-    if (!urlFn.parse(path).host) {
+    if (!new URL(path).host) {
       // resolve `path`'s absolute path relative to current page's url
       // `path` can be both absolute (starts with `/`) or relative.
-      return urlFn.resolve(url || config.url, path)
+      return new URL(path, url || config.url)
     }
 
     return path
@@ -114,7 +116,6 @@ function openGraphHelper (options = {}) {
   images.forEach(path => {
     result += og('og:image', path, false)
   })
-
 
   if (published) {
     if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf())) {

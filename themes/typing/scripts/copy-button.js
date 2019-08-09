@@ -1,3 +1,6 @@
+'use strict'
+/* global hexo */
+
 /*
 * Add "Copy" button to code snippet
 * cheerio is provided by hexo package

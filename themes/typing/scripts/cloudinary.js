@@ -1,3 +1,6 @@
+'use strict'
+/* global hexo */
+
 /*
 *  Put {% cloudinary 'folder/filename.jpg' 'description' %} in your post.
 *  Change the username in data-src tag

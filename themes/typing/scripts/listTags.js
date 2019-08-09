@@ -1,3 +1,6 @@
+'use strict'
+/* global hexo */
+
 /*
 * Modified from the hexo version,
 * https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/list_tags.js
@@ -7,8 +10,8 @@
 
 'use strict'
 
-function listTagsHelper(tags, options) {
-  if (!options && (!tags || !tags.hasOwnProperty('length'))) {
+function listTagsHelper (tags, options) {
+  if (!options && (!tags || !Object.prototype.hasOwnProperty.call(tags, 'length'))) {
     options = tags
     tags = this.site.tags
   }
@@ -17,7 +20,7 @@ function listTagsHelper(tags, options) {
   options = options || {}
 
   const { style = 'list', transform, separator = ', ', suffix = '' } = options
-  const showCount = options.hasOwnProperty('show_count') ? options.show_count : true
+  const showCount = Object.prototype.hasOwnProperty.call(options, 'show_count') ? options.show_count : true
   const className = options.class || 'tag'
   const orderby = options.orderby || 'name'
   const order = options.order || 1

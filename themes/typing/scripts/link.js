@@ -1,3 +1,6 @@
+'use strict'
+/* global hexo */
+
 /*
 * Modified from the hexo version,
 * https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_to.js
@@ -8,7 +11,7 @@
 
 const { htmlTag } = require('hexo-util')
 
-function linkHelper(path, text) {
+function linkHelper (path, text) {
   if (!text) text = path.replace(/^https?:\/\/|\/$/g, '')
 
   const attrs = Object.assign({
