@@ -1,6 +1,6 @@
 ---
 title: Make Hexo blog smaller
-subtitle: Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth and speed up the website.
+excerpt: Static site serves html, css, javascript and images. These files can be compressed to reduce bandwidth and speed up the website.
 date: 2018-09-28
 lastUpdated: 2018-10-06
 tags:

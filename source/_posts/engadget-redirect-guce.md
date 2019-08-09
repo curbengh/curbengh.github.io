@@ -1,6 +1,6 @@
 ---
 title: Prevent Engadget from redirect to guce
-subtitle: Block its cookies
+excerpt: Block its cookies
 date: 2019-06-09
 tags:
 - firefox

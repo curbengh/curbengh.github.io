@@ -1,6 +1,6 @@
 ---
 title: Change spellcheck language in Ghostwriter
-subtitle: It supports Hunspell dictionaries for spellcheck of other languages.
+excerpt: It supports Hunspell dictionaries for spellcheck of other languages.
 date: 2018-10-14
 lastUpdated: 2019-06-06
 tags:

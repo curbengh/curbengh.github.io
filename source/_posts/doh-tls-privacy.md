@@ -1,6 +1,6 @@
 ---
 title: DNS-over-TLS/DNS-over-HTTPS does not protect your privacy
-subtitle: DoT/DoH does not completely eliminate ISP surveillance.
+excerpt: DoT/DoH does not completely eliminate ISP surveillance.
 date: 2019-04-04
 tags:
 - privacy

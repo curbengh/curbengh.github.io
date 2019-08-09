@@ -1,6 +1,6 @@
 ---
 title: microG, a replacement for the proprietary Google Play Services
-subtitle: The core of the Android OS is open source, but much of the core apps, libraries and APIs are proprietary.
+excerpt: The core of the Android OS is open source, but much of the core apps, libraries and APIs are proprietary.
 date: 2019-01-12
 lastUpdated: 2019-04-30
 tags:

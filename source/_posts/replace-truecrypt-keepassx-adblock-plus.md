@@ -1,6 +1,6 @@
 ---
 title: You should switch to these replacements of TrueCrypt/KeePassX/Adblock Plus
-subtitle: Some have been discontinued while others have been commercialised.
+excerpt: Some have been discontinued while others have been commercialised.
 date: 2019-01-15
 tags:
 - linux

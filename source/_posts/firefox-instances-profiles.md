@@ -1,6 +1,6 @@
 ---
 title: How to run more than one Firefox instance
-subtitle: Using Firefox profiles, you can use more than two instances.
+excerpt: Using Firefox profiles, you can use more than two instances.
 date: 2019-04-07
 lastUpdated: 2019-08-09
 tags:

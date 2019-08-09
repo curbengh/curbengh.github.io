@@ -1,6 +1,6 @@
 ---
 title: Cloudflare in Firefox is not the end of the world
-subtitle: It's not enabled by default and you can easily switch to other providers.
+excerpt: It's not enabled by default and you can easily switch to other providers.
 date: 2019-05-25
 tags:
 - firefox

@@ -1,6 +1,6 @@
 ---
 title: Dark Reader breaks image view in Firefox
-subtitle: Use this workaround to view the whole image.
+excerpt: Use this workaround to view the whole image.
 date: 2019-06-28
 tags:
 - firefox

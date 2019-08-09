@@ -1,6 +1,6 @@
 ---
 title: Firefox, Cross-Origin and AliExpress
-subtitle: AliExpress login doesn't show up on Firefox when there is a strict cross-origin policy.
+excerpt: AliExpress login doesn't show up on Firefox when there is a strict cross-origin policy.
 date: 2019-02-28
 lastUpdated: 2019-04-29
 tags:

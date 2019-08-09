@@ -1,6 +1,6 @@
 ---
 title: Secure node modules with Snyk
-subtitle: The package dependency on Node can cause security issue. Here's how to use Snyk to mitigate it.
+excerpt: The package dependency on Node can cause security issue. Here's how to use Snyk to mitigate it.
 date: 2018-10-01
 lastUpdated: 2019-06-11
 tags:

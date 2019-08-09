@@ -1,6 +1,6 @@
 ---
 title: Hide folders of Caja side pane
-subtitle: How to hide them.
+excerpt: How to hide them.
 date: 2018-10-02
 tags:
 - linux

@@ -1,6 +1,6 @@
 ---
 title: How to create a Hexo blog on GitLab Pages
-subtitle: Create a website/blog using Hexo on GitLab Pages for free using this detailed guide.
+excerpt: Create a website/blog using Hexo on GitLab Pages for free using this detailed guide.
 date: 2018-09-21
 lastUpdated: 2018-11-10
 tags:
@@ -111,7 +111,7 @@ Change the website's author and name
 
 ```yml
 title:
-subtitle:
+excerpt:
 description:
 author:
 ```

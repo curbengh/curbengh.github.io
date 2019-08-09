@@ -572,8 +572,8 @@ textarea {
   transition: color 0.1s linear;
 }
 
-/* Hide post's subtitle in article */
-.entry-summary {
+/* Hide post's excerpt in article */
+.p-summary {
   display: none;
 }
 

@@ -1,6 +1,6 @@
 ---
 title: How to create a Hexo blog on GitHub Pages
-subtitle: Host your Hexo blog for free on GitHub Pages.
+excerpt: Host your Hexo blog for free on GitHub Pages.
 date: 2018-11-10
 tags:
 - hexo
@@ -130,7 +130,7 @@ Change the website's author and name
 
 ```yml
 title:
-subtitle:
+excerpt:
 description:
 author:
 ```

@@ -1,6 +1,6 @@
 ---
 title: Recommended Android apps
-subtitle: Apps I'm currently using and recommend to everyone.
+excerpt: Apps I'm currently using and recommend to everyone.
 date: 2019-01-07
 lastUpdated: 2019-04-30
 tags:

@@ -1,6 +1,6 @@
 ---
 title: Default binaries in Alpine docker image
-subtitle: Here is the list of binaries shipped with the Docker image of Alpine Linux.
+excerpt: Here is the list of binaries shipped with the Docker image of Alpine Linux.
 date: 2018-10-10
 tags:
 - linux

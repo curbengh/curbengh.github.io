@@ -1,6 +1,6 @@
 ---
 title: Make PDF files smaller
-subtitle: Convert to grayscale and reduce the resolution.
+excerpt: Convert to grayscale and reduce the resolution.
 date: 2019-01-05
 tags:
 - pdf

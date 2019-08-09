@@ -8,12 +8,12 @@
         <%- partial('post/title', {class_name: 'p-name entry-title article-title'}) %>
       </header>
     <% } %>
-    <% if (post.subtitle) { %>
-      <p class="p-summary"><%- post.subtitle %></p>
+    <% if (post.excerpt) { %>
+      <p class="p-summary"><%- post.excerpt %></p>
     <% } %>
     <div class="e-content article-entry typo" itemprop="articleBody">
       <%- toc(page.content, {list_number: false}) %>
-      <%- post.content %>
+      <%- post.more %>
     </div>
     <footer class="article-footer">
       <ul class="article-meta">

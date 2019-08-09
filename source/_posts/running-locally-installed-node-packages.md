@@ -1,6 +1,6 @@
 ---
 title: Running locally installed node packages
-subtitle: How to run binaries of locally installed node packages.
+excerpt: How to run binaries of locally installed node packages.
 date: 2018-10-24
 tags:
 - node

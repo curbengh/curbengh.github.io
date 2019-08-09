@@ -1,6 +1,6 @@
 ---
 title: How to check validity of GitLab CI config
-subtitle: How to verify/lint the config.
+excerpt: How to verify/lint the config.
 date: 2018-10-25
 tags:
 - gitlab

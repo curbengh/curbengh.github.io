@@ -1,6 +1,6 @@
 ---
 title: How to disable Control+Alt+S shortcut in MATE
-subtitle: The shortcut conflicts with Notepad++, here's how to disable it.
+excerpt: The shortcut conflicts with Notepad++, here's how to disable it.
 date: 2018-10-24
 tags:
 - linux
