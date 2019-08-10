@@ -1,24 +1,10 @@
 // Search button function
-const searchClick = document.getElementById('searchClick')
-searchClick.addEventListener('click', () => {
-  const searchTxt = document.getElementById('searchTxt')
-  const searchForm = document.getElementById('searchForm')
-
-  searchTxt.value = searchTxt.value + ' site:curben.netlify.com'
+document.getElementById('searchClick').addEventListener('click', () => {
   searchForm.submit()
-
-  searchTxt.value = searchTxt.value.replace(' site:curben.netlify.com', '')
 }, false)
 
-const searchClickMob = document.getElementById('searchClickMob')
-searchClickMob.addEventListener('click', () => {
-  const searchTxt = document.getElementById('searchTxtMob')
-  const searchForm = document.getElementById('searchFormMob')
-
-  searchTxt.value = searchTxt.value + ' site:curben.netlify.com'
-  searchForm.submit()
-
-  searchTxt.value = searchTxt.value.replace(' site:curben.netlify.com', '')
+document.getElementById('searchClickMob').addEventListener('click', () => {
+  searchFormMob.submit()
 }, false)
 
 /*
