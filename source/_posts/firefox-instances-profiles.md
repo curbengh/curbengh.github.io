@@ -83,4 +83,14 @@ firefox --no-remote -P 'Profile Z'
 
 ## Multi-Account Containers
 
-Multi-Account Containers is a built-in feature introduced since Firefox 50, but disabled by default (as of Firefox 68). Follow this link [[wiki.mozilla.org]](https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers) for instruction and more details. The feature was initially available as an add-on and it is still available (as of August 2019) and may offer [better user experience](https://support.mozilla.org/en-US/kb/containers). Install it from [[addons.mozilla.org]](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/).
+Multi-Account Containers is a built-in feature introduced since Firefox 50, but disabled by default (as of Firefox 68). Follow this link [[wiki.mozilla.org]](https://wiki.mozilla.org/Security/Contextual_Identity_Project/Containers) for instruction and more details.
+
+Quick start: Go to `about:config`
+
+```
+privacy.userContext.enabled;true
+privacy.userContext.ui.enabled;true
+privacy.userContext.longPressBehavior;2
+```
+
+The feature was initially available as an add-on and it is still available (as of August 2019) and may offer [better user experience](https://support.mozilla.org/en-US/kb/containers). Install it from [[addons.mozilla.org]](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/).
