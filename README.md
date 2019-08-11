@@ -19,14 +19,21 @@ The following are the major changes I made compared to the upstream.
 - Update [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in Alpine docker image.
 - Update [package.json](package.json) to use latest version of [hexo](https://www.npmjs.com/package/hexo) and its related packages.
 - Replace the bundled Landscape theme with Typing theme.
-- [Pre-compressed](https://docs.gitlab.com/ee/user/project/pages/introduction.html#serving-compressed-assets) the assets using [hexo-yam](https://github.com/weyusi/hexo-yam).
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts (same as /archives).
 - Use the latest version of [clipboard.js](https://github.com/zenorocha/clipboard.js/) and [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) (disabled by default).
 - Remove jQuery, fancyBox, web analytics, comment plugins and donation links.
 - Use more [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
+- Add a "Copy" button to each code block.
 
+### Hexo packages
+- All dependencies are installed from their respective master branch, instead of npm published version.
+- Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
+
+### Plugins
+- Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
+- Installed [hexo-yam](https://github.com/curbengh/hexo-yam) to pre-compress static assets (html, css, js and svg).
 
 ## License
 The content of this blog is licensed under the [CC-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md), unless indicated otherwise.
