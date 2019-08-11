@@ -23,7 +23,6 @@ The following are the major changes I made compared to the upstream.
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts (same as /archives).
-- Latest version of [clipboard.js](https://github.com/zenorocha/clipboard.js/) and [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) (disabled by default).
 - Removed jQuery, fancyBox, web analytics, comment plugins and donation links.
 - Utilise [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
 - Add a "Copy" button to each code block.
