@@ -13,7 +13,7 @@
 
 const moment = require('moment')
 const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
-const cheerio = require('cheerio')
+let cheerio
 
 function meta (name, content, escape) {
   if (escape !== false && typeof content === 'string') {
@@ -69,6 +69,7 @@ function openGraphHelper (options = {}) {
   if (!images.length && content) {
     images = images.slice()
 
+    if (!cheerio) cheerio = require('cheerio');
     const $ = cheerio.load(content)
 
     $('img').each(function () {
