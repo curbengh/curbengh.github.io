@@ -66,7 +66,7 @@ function openGraphHelper (options = {}) {
       .replace(/\n/g, ' ') // Replace new lines by spaces
   }
 
-  if (!images.length && content) {
+  if (!images.length && content && content.includes('<img')) {
     images = images.slice()
 
     if (!cheerio) cheerio = require('cheerio');
