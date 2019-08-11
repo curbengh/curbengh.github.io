@@ -72,8 +72,8 @@ function openGraphHelper (options = {}) {
     if (!cheerio) cheerio = require('cheerio');
     const $ = cheerio.load(content)
 
-    $('img').each(function () {
-      const src = $(this).attr('data-src')
+    $('img').each((index, element) => {
+      const src = $(element).attr('data-src')
       if (src) images.push(src)
     })
   }
