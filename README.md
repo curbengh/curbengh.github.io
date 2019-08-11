@@ -9,71 +9,8 @@ Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing]
 
 ## Installation
 
-> Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
+Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
 
-1. Change `<folder>` to a preferred name.
-```bash
-git clone https://gitlab.com/curben/blog <folder>
-```
-2. Install Node.js.
-```bash
-# Ubuntu 16.04 or newer
-$ sudo snap install node --classic --channel=10
-# Debian
-$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-$ sudo apt-get install -y nodejs
-# Fedora 29
-$ sudo dnf install npm
-# Fedora 28 or older
-$ curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
-$ sudo yum -y install nodejs
-# Arch Linux
-$ sudo pacman -S npm
-```
-3. Install Hexo and its dependencies (defined in [package.json](package.json)). `hexo-cli` installation step can be skipped if you use [this shortcut](https://curben.netlify.com/2018/10/24/running-locally-installed-node-packages/#Method-1).
-```bash
-$ sudo npm install -g hexo-cli
-$ cd <folder>
-$ npm install --only=prod
-```
-4. Generate static files to check for any error. You should _always_ do this before pushing/merging commits to the `master` branch.
-```bash
-$ hexo generate
-```
-
-## Quick Start
-
-### Create a new post
-
-``` bash
-$ hexo new "My New Post"
-```
-
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
 
 ## Changes
 The following are the major changes I made compared to the upstream.
@@ -85,7 +22,7 @@ The following are the major changes I made compared to the upstream.
 - [Pre-compressed](https://docs.gitlab.com/ee/user/project/pages/introduction.html#serving-compressed-assets) the assets using [hexo-yam](https://github.com/weyusi/hexo-yam).
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
-- Homepage shows index of posts.
+- Homepage shows index of posts (same as /archives).
 - Use the latest version of [clipboard.js](https://github.com/zenorocha/clipboard.js/) and [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) (disabled by default).
 - Remove jQuery, fancyBox, web analytics, comment plugins and donation links.
 - Use more [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
