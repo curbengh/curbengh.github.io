@@ -16,16 +16,16 @@ Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-
 The following are the major changes I made compared to the upstream.
 
 ### [Hexo](https://gitlab.com/pages/hexo) site
-- Update [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in Alpine docker image.
+- Updated [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in Alpine docker image.
 - [All packages](package.json) are installed from their respective master branch, instead of npm published version.
 - Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
-- Replace the bundled Landscape theme with Typing theme.
+- Replaced the bundled Landscape theme with Typing theme.
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts (same as /archives).
-- Use the latest version of [clipboard.js](https://github.com/zenorocha/clipboard.js/) and [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) (disabled by default).
-- Remove jQuery, fancyBox, web analytics, comment plugins and donation links.
-- Use more [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
+- Latest version of [clipboard.js](https://github.com/zenorocha/clipboard.js/) and [Fork Awesome](https://github.com/ForkAwesome/Fork-Awesome/releases) (disabled by default).
+- Removed jQuery, fancyBox, web analytics, comment plugins and donation links.
+- Utilise [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
 - Add a "Copy" button to each code block.
 
 ### Plugins
