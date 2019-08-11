@@ -132,10 +132,6 @@ function openGraphHelper (options = {}) {
   }
 
   result += meta('twitter:card', twitterCard)
-  result += meta('twitter:title', title)
-  if (description) {
-    result += meta('twitter:description', description, false)
-  }
 
   if (images.length) {
     result += meta('twitter:image', images[0], false)
