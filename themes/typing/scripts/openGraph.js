@@ -138,29 +138,6 @@ function openGraphHelper (options = {}) {
     result += meta('twitter:image', images[0], false)
   }
 
-  if (options.twitter_id) {
-    let twitterId = options.twitter_id
-    if (twitterId[0] !== '@') twitterId = `@${twitterId}`
-
-    result += meta('twitter:creator', twitterId)
-  }
-
-  if (options.twitter_site) {
-    result += meta('twitter:site', options.twitter_site, false)
-  }
-
-  if (options.google_plus) {
-    result += `${htmlTag('link', { rel: 'publisher', href: options.google_plus })}\n`
-  }
-
-  if (options.fb_admins) {
-    result += og('fb:admins', options.fb_admins)
-  }
-
-  if (options.fb_app_id) {
-    result += og('fb:app_id', options.fb_app_id)
-  }
-
   return result.trim()
 }
 
