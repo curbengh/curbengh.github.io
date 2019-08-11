@@ -69,7 +69,7 @@ function openGraphHelper (options = {}) {
   if (!images.length && content && content.includes('<img')) {
     images = images.slice()
 
-    if (!cheerio) cheerio = require('cheerio');
+    if (!cheerio) cheerio = require('cheerio')
     const $ = cheerio.load(content)
 
     $('img').each((index, element) => {
