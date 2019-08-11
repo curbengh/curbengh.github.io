@@ -17,7 +17,8 @@ The following are the major changes I made compared to the upstream.
 
 ### [Hexo](https://gitlab.com/pages/hexo) site
 - Update [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in Alpine docker image.
-- Update [package.json](package.json) to use latest version of [hexo](https://www.npmjs.com/package/hexo) and its related packages.
+- [All packages](package.json) are installed from their respective master branch, instead of npm published version.
+- Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
 - Replace the bundled Landscape theme with Typing theme.
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
@@ -26,10 +27,6 @@ The following are the major changes I made compared to the upstream.
 - Remove jQuery, fancyBox, web analytics, comment plugins and donation links.
 - Use more [relative length](https://www.w3schools.com/CSSref/css_units.asp), instead of absolute length in the css.
 - Add a "Copy" button to each code block.
-
-### Hexo packages
-- All dependencies are installed from their respective master branch, instead of npm published version.
-- Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
 
 ### Plugins
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
