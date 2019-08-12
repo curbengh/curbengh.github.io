@@ -72,7 +72,7 @@ function openGraphHelper (options = {}) {
     let img
     const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
     while ((img = imgPattern.exec(content)) !== null) {
-      images.push(img[1])
+      if (!img[1].endsWith('.svg')) images.push(img[1])
     }
   }
 
