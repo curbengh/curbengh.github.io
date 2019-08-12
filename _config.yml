@@ -88,6 +88,9 @@ deploy:
 
 meta_generator: false
 
+feed:
+  icon: 'svg/rss.svg'
+
 # theme config
 theme_config:
   # Lang
@@ -104,7 +107,7 @@ theme_config:
 
   # Your Feed Location
   # https://github.com/hexojs/hexo-generator-feed
-  #rss: /atom.xml
+  rss: /atom.xml
 
   # Profile
   nickname: Curben's blog
