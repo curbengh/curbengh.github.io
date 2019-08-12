@@ -154,15 +154,6 @@ q:before {
   vertical-align: baseline;
 }
 
-.typo a {
-  border-bottom: 1px solid #1abc9c;
-}
-
-.typo a:hover {
-  border-bottom-color: #555;
-  color: #555;
-}
-
 .typo a:hover,
 a,
 ins {
@@ -908,6 +899,14 @@ blockquote {
   word-break: break-word;
 }
 
+.article .article-entry a {
+  border-bottom: 1px solid #1abc9c;
+}
+
+.article .article-entry a:hover {
+  border-bottom: none;
+}
+
 .article .article-entry img {
   display: block;
   margin: auto;
@@ -1395,6 +1394,16 @@ svg {
 
 /* don't underline specific <a> tag */
 .no-underline {
+  border-bottom: none;
+}
+
+/* fill the link icon with link's color */
+svg#link {
+  fill: #1abc9c;
+}
+
+/* don't underline link icon */
+.article .article-entry a.headerlink {
   border-bottom: none;
 }
 
