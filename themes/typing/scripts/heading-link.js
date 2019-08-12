@@ -12,7 +12,7 @@ hexo.extend.filter.register('after_render:html', (str) => {
   const $ = cheerio.load(str)
   const svg = `<svg height="0.8em" viewBox="15 15 1635 1635">
                <desc>Link icon</desc>
-               <use href="/hexo-testing/svg/link.svg#link"/>
+               <use href="/svg/link.svg#link"/>
                </svg>`
 
   const headings = ['h2', 'h3']
