@@ -911,6 +911,7 @@ blockquote {
 .article .article-entry img {
   display: block;
   margin: auto;
+  margin-bottom: 0.5em;
 }
 
 .article .article-entry blockquote footer {
