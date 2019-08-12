@@ -13,7 +13,6 @@
 
 const moment = require('moment')
 const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
-let cheerio
 
 function meta (name, content, escape) {
   if (escape !== false && typeof content === 'string') {
@@ -69,13 +68,12 @@ function openGraphHelper (options = {}) {
   if (!images.length && content && content.includes('<img')) {
     images = images.slice()
 
-    if (!cheerio) cheerio = require('cheerio')
-    const $ = cheerio.load(content)
-
-    $('img').each((index, element) => {
-      const src = $(element).attr('data-src')
-      if (src) images.push(src)
-    })
+    // https://github.com/hexojs/hexo/pull/3680
+    let img
+    const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
+    while ((img = imgPattern.exec(content)) !== null) {
+      images.push(img[1])
+    }
   }
 
   if (description) {
