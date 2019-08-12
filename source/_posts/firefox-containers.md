@@ -38,7 +38,7 @@ There are two ways of using the Containers. We can open a link on a webpage in a
 
 We also can open a new container tab by long-pressing the plus (+) button, next to a tab.
 
-{% cloudinary '20190812/containers-tab.png' "New Container Tab" %}
+{% cloudinary '20190812/containers-tabs.png' "New Container Tab" %}
 
 {% cloudinary '20190812/containers-webp.webp' "Container Tab in action" %}
 
