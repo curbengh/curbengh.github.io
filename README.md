@@ -20,6 +20,7 @@ The following are the major changes I made compared to the upstream.
 - [All packages](package.json) are installed from their respective master branch, instead of npm published version.
 - Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
 - Replaced the bundled Landscape theme with Typing theme.
+- Add `lastUpdated` to the front-matter to manually set updated time of a post, instead of using `post.updated`.
 
 ### [Typing](https://github.com/geekplux/hexo-theme-typing) theme
 - Homepage shows index of posts (same as /archives).
