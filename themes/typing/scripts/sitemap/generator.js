@@ -21,6 +21,7 @@ module.exports = function (locals) {
     .sort((a, b) => {
       return b.date - a.date
     })
+    // https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889
     .map((post) => ({
       ...post,
       permalink: post.permalink.replace('index.html', ''),
@@ -35,16 +36,14 @@ module.exports = function (locals) {
   const xmlConfig = {
     config: config,
     posts: posts,
-    // add the sNow variable for creation of the home page and potential tags/cats
+    // add current time to <lastmod> of homepage and tags
     sNow: moment().format('YYYY-MM-DD[T00:00:00.000Z]')
   }
 
-  // add tags array available in the template
   if (config.sitemap.tags !== false) {
     xmlConfig.tags = locals.tags.toArray()
   }
 
-  // add categories available in the template
   if (config.sitemap.categories !== false) {
     xmlConfig.categories = locals.categories.toArray()
   }
