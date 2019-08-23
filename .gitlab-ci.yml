@@ -6,11 +6,11 @@ cache: # add cache to 'node_modules' for speeding up builds
 
 before_script:
   - apk update && apk add git
-  - npm install
+  - npm install --only=prod
 
 test:
   script:
-    - npm install snyk && npm run snyk # Refer to "scripts" in package.json
+    - npm install --only=prod snyk && npm run snyk # Refer to "scripts" in package.json
     - npm run hexo
 
   only:
@@ -23,7 +23,7 @@ test:
 
 renovate: # Check dependency update
   script:
-    - npm install renovate
+    - npm install --only=prod renovate
     - npm run renovate
 
   only:
