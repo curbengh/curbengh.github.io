@@ -14,6 +14,8 @@ There are situations where you may want to use more than one account on a websit
 
 Firefox Multi-Account Containers feature offers an easy way to separate cookies (login sessions). It was first mentioned in [blog.mozilla.org](https://blog.mozilla.org/tanvi/2016/06/16/contextual-identities-on-the-web/) in June 2016. By tracing the `privacy.userContext.enabled` and `privacy.userContext.ui` configs in previous Firefox versions, we can see the groundwork was laid in Firefox 44, albeit with limited functionality and there was no UI. UI was later landed in Firefox 50.
 
+This feature could also be utilised to minimise cookie tracking, a form of [web tracking](https://en.wikipedia.org/wiki/Web_tracking), when used correctly. It does not stop cooking tracking by default, you need to manually separate certain websites to different containers. Anyhow, [Firefox 67.0.1](https://www.mozilla.org/en-US/firefox/67.0.1/releasenotes/) onwards block third-party tracking cookie by default and there are suggestions that its use [is dwindling](https://digiday.com/media/were-building-for-media-businesses-of-tomorrow-how-the-washington-post-is-preparing-for-a-cookieless-future/).
+
 The feature was later spun off as [an extension](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/), while the built-in feature is still being developed. As of writing (Firefox 68), the feature is disabled by default, but we can easily enable it. Simply go to `about:config`,
 
 ```
