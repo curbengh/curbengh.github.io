@@ -15,7 +15,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
   let modern = ''
   let legacy = ''
   const cloudinary = 'https://res.cloudinary.com/' + user +
-    '/image/upload/f_auto,q_auto/c_limit,'
+    '/image/upload/f_auto,q_auto'
 
   if (fileName.endsWith('.png')) {
     modern = fileName.replace(/\.png$/, '.webp')
@@ -23,57 +23,38 @@ hexo.extend.tag.register('cloudinary', (args) => {
   } else if (fileName.endsWith('.webp')) {
     modern = fileName
     legacy = fileName.replace(/\.webp$/, '.gif')
+  } else {
+    legacy = fileName
   }
+
+  const img = `<img
+            srcset="${cloudinary}/c_limit,w_320/${legacy} 320w,
+                  ${cloudinary}/c_limit,w_468/${legacy} 468w,
+                  ${cloudinary}/c_limit,w_768/${legacy} 768w,
+                  ${cloudinary}/${legacy} 800w"
+            sizes="(max-width: 320px) 320px,
+                  (max-width: 468px) 468px,
+                  (max-width: 768px) 768px,
+                  800px">
+            src="${cloudinary}w_768/${legacy}"
+            alt="${alt}">`
 
   if (fileName.endsWith('.png') || fileName.endsWith('.webp')) {
     return `<a href="https://res.cloudinary.com/curben/${fileName}">
       <picture>
       <source type="image/webp"
-        srcset="${cloudinary}w_300/${modern} 300w,
-              ${cloudinary}w_450/${modern} 450w,
-              ${cloudinary}w_600/${modern} 600w,
-              ${cloudinary}w_900/${modern} 900w,
-              ${cloudinary}w_1200/${modern} 1200w,
-              ${cloudinary}w_1500/${modern} 1500w"
-        sizes="(max-width: 300px) 280px,
-              (max-width: 450px) 430px,
-              (max-width: 600px) 580px,
-              (max-width: 900px) 880px,
-              (max-width: 1200px) 1180px,
-              1500px">
-      <img
-        srcset="${cloudinary}w_300/${legacy} 300w,
-              ${cloudinary}w_450/${legacy} 450w,
-              ${cloudinary}w_600/${legacy} 600w,
-              ${cloudinary}w_900/${legacy} 900w,
-              ${cloudinary}w_1200/${legacy} 1200w,
-              ${cloudinary}w_1500/${legacy} 1500w"
-        sizes="(max-width: 300px) 280px,
-              (max-width: 450px) 430px,
-              (max-width: 600px) 580px,
-              (max-width: 900px) 880px,
-              (max-width: 1200px) 1180px,
-              1500px"
-        src="${cloudinary}w_600/${legacy}"
-        alt="${alt}">
+        srcset="${cloudinary}/c_limit,w_320/${modern} 320w,
+              ${cloudinary}/c_limit,w_468/${modern} 468w,
+              ${cloudinary}/c_limit,w_768/${modern} 768w,
+              ${cloudinary}/${modern} 800w"
+        sizes="(max-width: 320px) 320px,
+              (max-width: 468px) 468px,
+              (max-width: 768px) 768px,
+              800px">
+      ${img}
       </picture></a>`
   } else {
     return `<a href="https://res.cloudinary.com/curben/${fileName}">
-      <img
-        srcset="${cloudinary}w_300/${fileName} 300w,
-              ${cloudinary}w_450/${fileName} 450w,
-              ${cloudinary}w_600/${fileName} 600w,
-              ${cloudinary}w_900/${fileName} 900w,
-              ${cloudinary}w_1200/${fileName} 1200w,
-              ${cloudinary}w_1500/${fileName} 1500w"
-        sizes="(max-width: 300px) 280px,
-              (max-width: 450px) 430px,
-              (max-width: 600px) 580px,
-              (max-width: 900px) 880px,
-              (max-width: 1200px) 1180px,
-              1500px"
-        src="${cloudinary}w_600/${fileName}"
-        alt="${alt}">
-      </a>`
+      ${img}</a>`
   }
 })
