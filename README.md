@@ -31,13 +31,13 @@ The following are the major changes I made compared to the upstream.
 ### Plugins
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
 - Installed [hexo-yam](https://github.com/curbengh/hexo-yam) to pre-compress static assets (html, css, js and svg).
-- [cloudinary.js](/themes/typing/scripts/cloudinary.js) - A [tag](https://hexo.io/api/tag) plugin to easily embed [Cloudinary](https://cloudinary.com/) in a post.
-- [copy-button.js](/themes/typing/scripts/copy-button.js) - A [filter](https://hexo.io/api/filter) plugin to add a copy button to each code block.
-- [heading-link.js](/themes/typing/scripts/heading-link.js) - A filter plugin to add a link button next to each heading.
-- [link.js](/themes/typing/scripts/heading-link.js) - A [helper](https://hexo.io/api/helper) plugin to add a link. Modified from [link_to.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_to.js) to remove title attribute and 'external' option.
-- [listTags](/themes/typing/scripts/listTags.js) - A helper plugin to display tags. Modified from [link_tags.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_tags.js) to add [rel="tag"](http://microformats.org/wiki/rel-tag) and [itemprop="keywords"](https://schema.org/keywords) attributes.
-- [openGraph](/themes/typing/scripts/openGraph.js) - A helper plugin to add [Open Graph](https://ogp.me/) tags. Modified from [open_graph.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js) to be compatible with "cloudinary.js".
-- [sitemap](/themes/typing/scripts/sitemap) - A [generator](https://hexo.io/api/generator) plugin to generate [a sitemap](https://en.wikipedia.org/wiki/Sitemaps). Modified from [hexo-generator-sitemap](https://github.com/hexojs/hexo-generator-sitemap) with this [patch](https://github.com/hexojs/hexo-generator-sitemap/pull/26) to include tags/categories and [remove](https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889) [index.html](https://github.com/hexojs/hexo-generator-sitemap/pull/59) from the URL.
+- [cloudinary.js](/scripts/cloudinary.js) - A [tag](https://hexo.io/api/tag) plugin to easily embed [Cloudinary](https://cloudinary.com/) in a post.
+- [copy-button.js](/scripts/copy-button.js) - A [filter](https://hexo.io/api/filter) plugin to add a copy button to each code block.
+- [heading-link.js](/scripts/heading-link.js) - A filter plugin to add a link button next to each heading.
+- [link.js](/scripts/link.js) - A [helper](https://hexo.io/api/helper) plugin to add a link. Modified from [link_to.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_to.js) to remove title attribute and 'external' option.
+- [listTags](/scripts/listTags.js) - A helper plugin to display tags. Modified from [link_tags.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_tags.js) to add [rel="tag"](http://microformats.org/wiki/rel-tag) and [itemprop="keywords"](https://schema.org/keywords) attributes.
+- [openGraph](/scripts/openGraph.js) - A helper plugin to add [Open Graph](https://ogp.me/) tags. Modified from [open_graph.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js) to be compatible with "cloudinary.js".
+- [sitemap](/scripts/sitemap) - A [generator](https://hexo.io/api/generator) plugin to generate [a sitemap](https://en.wikipedia.org/wiki/Sitemaps). Modified from [hexo-generator-sitemap](https://github.com/hexojs/hexo-generator-sitemap) with this [patch](https://github.com/hexojs/hexo-generator-sitemap/pull/26) to include tags/categories and [remove](https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889) [index.html](https://github.com/hexojs/hexo-generator-sitemap/pull/59) from the URL.
 
 ## License
 The content of this blog is licensed under the [CC-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md), unless indicated otherwise.
