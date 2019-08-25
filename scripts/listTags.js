@@ -8,8 +8,6 @@
 * http://microformats.org/wiki/rel-tag
 */
 
-'use strict'
-
 function listTagsHelper (tags, options) {
   if (!options && (!tags || !Object.prototype.hasOwnProperty.call(tags, 'length'))) {
     options = tags

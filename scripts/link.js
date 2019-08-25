@@ -7,8 +7,6 @@
 * to remove title attribute and 'external' option
 */
 
-'use strict'
-
 const { htmlTag } = require('hexo-util')
 
 function linkHelper (path, text) {

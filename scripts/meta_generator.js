@@ -1,4 +1,5 @@
 'use strict'
+/* global hexo */
 
 function metaGeneratorHelper () {
   return '<meta name="generator" content="Hexo %s">'.replace('%s', this.env.version)
