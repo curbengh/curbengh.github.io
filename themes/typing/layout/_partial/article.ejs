@@ -11,7 +11,7 @@
     <% if (post.excerpt) { %>
       <p class="p-summary"><%- post.excerpt %></p>
     <% } %>
-    <div class="e-content article-entry typo" itemprop="articleBody">
+    <div class="e-content article-entry" itemprop="articleBody">
       <%- toc(page.content, {list_number: false}) %>
       <%- post.more %>
     </div>
