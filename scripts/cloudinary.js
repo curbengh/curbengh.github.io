@@ -14,8 +14,9 @@ hexo.extend.tag.register('cloudinary', (args) => {
   const alt = args[1] || ''
   let modern = ''
   let legacy = ''
-  const cloudinary = 'https://res.cloudinary.com/' + user +
-    '/image/upload/f_auto,q_auto'
+  const cloudinary = 'https://cdn.statically.io/img/res.cloudinary.com/' + user +
+    '/image/upload/q_auto'
+  const original = 'https://cdn.statically.io/img/res.cloudinary.com/' + user + '/' + fileName
 
   if (fileName.endsWith('.png')) {
     modern = fileName.replace(/\.png$/, '.webp')
@@ -40,7 +41,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
             alt="${alt}">`
 
   if (fileName.endsWith('.png') || fileName.endsWith('.webp')) {
-    return `<a href="https://res.cloudinary.com/curben/${fileName}">
+    return `<a href="${original}">
       <picture>
       <source type="image/webp"
         srcset="${cloudinary}/c_limit,w_320/${modern} 320w,
@@ -54,7 +55,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
       ${img}
       </picture></a>`
   } else {
-    return `<a href="https://res.cloudinary.com/curben/${fileName}">
+    return `<a href="${original}">
       ${img}</a>`
   }
 })
