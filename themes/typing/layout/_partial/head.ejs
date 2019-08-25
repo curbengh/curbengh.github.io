@@ -44,8 +44,8 @@
   <%/* Fallback function for SRI */%>
   <%- js('js/sri.min') %>
 
-  <%- css('css/typing') %>
+  <%- addCss('css/typing.css') %>
   <% if (theme.icons) { %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.7/css/fork-awesome.min.css" data-sri-fallback="/forkawesome/css/fork-awesome.min.css" integrity="sha384-mByhW6NjnxyShh67P9+fepUvYSd7Uz/qV6e2u4kA2Fi4ZkjXxIP2mRkyK9dwK24W" crossorigin="anonymous">
+    <%- addCss({ href: 'https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.7/css/fork-awesome.min.css', 'data-sri-fallback': '/forkawesome/css/fork-awesome.min.css', integrity: 'sha384-mByhW6NjnxyShh67P9+fepUvYSd7Uz/qV6e2u4kA2Fi4ZkjXxIP2mRkyK9dwK24W', crossorigin: 'anonymous' }) %>
   <% } %>
 </head>
