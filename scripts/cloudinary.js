@@ -5,7 +5,6 @@
 *  Put {% cloudinary 'folder/filename.jpg' 'description' %} in your post.
 *  Change the username in data-src tag
 *  and cloud name in typing.js
-*  src is an animated svg generated from https://loading.io/
 *  More info:
 *  https://hexo.io/docs/tag-plugins
 *  https://hexo.io/api/tag
