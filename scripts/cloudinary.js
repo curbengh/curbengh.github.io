@@ -3,20 +3,19 @@
 
 /*
 *  Put {% cloudinary 'folder/filename.jpg' 'description' %} in your post.
-*  Change the username in data-src tag
-*  and cloud name in typing.js
+*  Change the username in 'user' variable
 *  More info:
-*  https://hexo.io/docs/tag-plugins
-*  https://hexo.io/api/tag
-*  https://cloudinary.com/documentation/responsive_images
+*  https://cloudinary.com/blog/responsive_images_with_srcset_sizes_and_cloudinary
 */
 
 hexo.extend.tag.register('cloudinary', (args) => {
+  const user = 'curben'
   const fileName = args[0]
   const alt = args[1] || ''
   let modern = ''
   let legacy = ''
-  const cloudinary = 'https://res.cloudinary.com/curben/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,'
+  const cloudinary = 'https://res.cloudinary.com/' + user +
+    '/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,'
 
   if (fileName.endsWith('.png')) {
     modern = fileName.replace(/\.png$/, '.webp')
