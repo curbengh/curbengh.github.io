@@ -13,6 +13,7 @@
 
 const moment = require('moment')
 const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
+const micromatch = require('micromatch')
 
 function meta (name, content, escape) {
   if (escape !== false && typeof content === 'string') {
@@ -70,9 +71,12 @@ function openGraphHelper (options = {}) {
 
     // https://github.com/hexojs/hexo/pull/3680
     let img
-    const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
+    const imgPattern = /<a [^>]*href=['"]([^'"]+)([^>]*>)/gi
     while ((img = imgPattern.exec(content)) !== null) {
-      if (!img[1].endsWith('.svg')) images.push(img[1])
+      const imgExt = ['*.jpg', '*.png', '*.webp']
+      if (micromatch.isMatch(img[1], imgExt, { basename: true })) {
+        images.push(img[1])
+      }
     }
   }
 

@@ -8,7 +8,7 @@ document.getElementById('searchClickMob').addEventListener('click', () => {
 }, false)
 
 /*
-* Copy button and Cloudinary functions.
+* Copy button
 * Following functions only execute after
 * the 'document' is ready or
 * <script src> is executed.
@@ -36,8 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
       event.trigger.textContent = 'Copy'
     }, 2000)
   })
-
-  // Initialize Cloudinary responsive function
-  const cl = cloudinary.Cloudinary.new({ cloud_name: 'curben' })
-  cl.responsive()
 }, false)
