@@ -911,6 +911,7 @@ blockquote {
   display: block;
   margin: auto;
   margin-bottom: 0.5em;
+  max-height: 30em;
 }
 
 .article .article-entry blockquote footer {
