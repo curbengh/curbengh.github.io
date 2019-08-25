@@ -41,10 +41,15 @@
   <meta name="msapplication-config" content="/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
   <%/* Fallback function for SRI */%>
   <%- addJs('js/sri.min.js') %>
 
+  <%/* Polyfill for <img loading="lazy"> */%>
+  <%- addJs('/js/loading-attribute-polyfill.min.js') %>
+
   <%- addCss('css/typing.css') %>
+
   <% if (theme.icons) { %>
     <%- addCss({ href: 'https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.7/css/fork-awesome.min.css', 'data-sri-fallback': '/forkawesome/css/fork-awesome.min.css', integrity: 'sha384-mByhW6NjnxyShh67P9+fepUvYSd7Uz/qV6e2u4kA2Fi4ZkjXxIP2mRkyK9dwK24W', crossorigin: 'anonymous' }) %>
   <% } %>

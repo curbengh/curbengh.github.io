@@ -38,11 +38,11 @@ hexo.extend.tag.register('cloudinary', (args) => {
                   (max-width: 768px) 768px,
                   800px"
             src="${cloudinary}w_768/${legacy}"
-            alt="${alt}">`
+            alt="${alt}" loading="lazy">`
 
   if (fileName.endsWith('.png') || fileName.endsWith('.webp')) {
     return `<a href="${original}">
-      <picture>
+      <picture><noscript>
       <source type="image/webp"
         srcset="${cloudinary}/c_limit,w_320/${modern} 320w,
               ${cloudinary}/c_limit,w_468/${modern} 468w,
@@ -53,9 +53,8 @@ hexo.extend.tag.register('cloudinary', (args) => {
               (max-width: 768px) 768px,
               800px">
       ${img}
-      </picture></a>`
+      </noscript></picture></a>`
   } else {
-    return `<a href="${original}">
-      ${img}</a>`
+    return `<a href="${original}"><noscript>${img}</noscript></a>`
   }
 })
