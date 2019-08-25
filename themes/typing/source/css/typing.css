@@ -100,12 +100,6 @@ blockquote {
   font-weight: 400;
 }
 
-@media only screen and (max-width: 640px) {
-  blockquote {
-    margin: 1em 0;
-  }
-}
-
 abbr,
 acronym {
   border-bottom: 1px dotted;
