@@ -36,7 +36,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
             sizes="(max-width: 320px) 320px,
                   (max-width: 468px) 468px,
                   (max-width: 768px) 768px,
-                  800px">
+                  800px"
             src="${cloudinary}w_768/${legacy}"
             alt="${alt}">`
 
