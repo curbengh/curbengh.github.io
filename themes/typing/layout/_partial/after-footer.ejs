@@ -1,6 +1,6 @@
 <% if (is_post()) { %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" data-sri-fallback="/js/clipboard.min.js" integrity="sha384-8CYhPwYlLELodlcQV713V9ZikA3DlCVaXFDpjHfP8Z36gpddf/Vrt47XmKDsCttu" crossorigin="anonymous"></script>
+<%- addJs({ src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js', 'data-sri-fallback': '/js/clipboard.min.js', integrity: 'sha384-8CYhPwYlLELodlcQV713V9ZikA3DlCVaXFDpjHfP8Z36gpddf/Vrt47XmKDsCttu', crossorigin: 'anonymous'}) %>
 <% } %>
 
 <%/* javascript of Typing theme */%>
-<%- js('js/typing') %>
+<%- addJs('js/typing') %>
