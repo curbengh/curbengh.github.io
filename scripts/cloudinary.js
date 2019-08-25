@@ -15,7 +15,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
   let modern = ''
   let legacy = ''
   const cloudinary = 'https://res.cloudinary.com/' + user +
-    '/image/upload/w_auto,f_auto,q_auto,c_scale/c_limit,'
+    '/image/upload/f_auto,q_auto/c_limit,'
 
   if (fileName.endsWith('.png')) {
     modern = fileName.replace(/\.png$/, '.webp')
