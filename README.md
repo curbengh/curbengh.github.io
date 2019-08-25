@@ -33,6 +33,7 @@ The following are the major changes I made compared to the upstream.
 - Installed [hexo-yam](https://github.com/curbengh/hexo-yam) to pre-compress static assets (html, css, js and svg).
 - [cloudinary.js](/scripts/cloudinary.js) - A [tag](https://hexo.io/api/tag) plugin to easily embed [Cloudinary](https://cloudinary.com/) in a post.
 - [copy-button.js](/scripts/copy-button.js) - A [filter](https://hexo.io/api/filter) plugin to add a copy button to each code block.
+- [feed](/scripts/feed) - A generator plugin to generate [an RSS feed](https://en.wikipedia.org/wiki/Web_feed). Modified from [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) to use `post.lastUpdated` instead of `post.updated`.
 - [heading-link.js](/scripts/heading-link.js) - A filter plugin to add a link button next to each heading.
 - [link.js](/scripts/link.js) - A [helper](https://hexo.io/api/helper) plugin to add a link. Modified from [link_to.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_to.js) to remove title attribute and 'external' option.
 - [listTags](/scripts/listTags.js) - A helper plugin to display tags. Modified from [link_tags.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_tags.js) to add [rel="tag"](http://microformats.org/wiki/rel-tag) and [itemprop="keywords"](https://schema.org/keywords) attributes.
