@@ -6,7 +6,7 @@
 * https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js
 * for compatibility with cloudinary.js
 * the <meta name="og:image"> now use
-* data-src attribute of <img>, instead of src
+* <a> where href value links to an image
 */
 
 'use strict'
