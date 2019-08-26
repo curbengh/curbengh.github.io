@@ -2,6 +2,7 @@
 title: Firefox Multi-Account Containers
 excerpt: Separate website cookies in a single session
 date: 2019-08-12
+lastUpdated: 2019-08-27
 tags:
 - firefox
 - privacy
@@ -14,9 +15,9 @@ There are situations where you may want to use more than one account on a websit
 
 Firefox Multi-Account Containers feature offers an easy way to separate cookies (login sessions). It was first mentioned in [blog.mozilla.org](https://blog.mozilla.org/tanvi/2016/06/16/contextual-identities-on-the-web/) in June 2016. By tracing the `privacy.userContext.enabled` and `privacy.userContext.ui` configs in previous Firefox versions, we can see the groundwork was laid in Firefox 44, albeit with limited functionality and there was no UI. UI was later landed in Firefox 50.
 
-This feature could also be utilised to minimise cookie tracking, a form of [web tracking](https://en.wikipedia.org/wiki/Web_tracking), when used correctly. It does not stop cooking tracking by default, you need to manually separate certain websites to different containers. FYI, [Firefox 67.0.1](https://www.mozilla.org/en-US/firefox/67.0.1/releasenotes/) onwards block third-party tracking cookie by default. iOS 12.2 and Safari 12.1 on macOS High Sierra and Mojave limit storage of tracking cookie to [seven days[(https://webkit.org/blog/8613/intelligent-tracking-prevention-2-1/). There are suggestions that its use [is dwindling](https://digiday.com/media/were-building-for-media-businesses-of-tomorrow-how-the-washington-post-is-preparing-for-a-cookieless-future/), but not without some pushback from major players (e.g. [Google](https://www.blog.google/products/chrome/building-a-more-private-web/)).
+This feature could also be utilised to minimise cookie tracking, a form of [web tracking](https://en.wikipedia.org/wiki/Web_tracking), when used correctly. It does not stop cooking tracking by default, you need to manually separate certain websites to different containers. FYI, [Firefox 67.0.1](https://www.mozilla.org/en-US/firefox/67.0.1/releasenotes/) onwards block third-party tracking cookie by default. iOS 12.2 and Safari 12.1 on macOS High Sierra and Mojave limit storage of tracking cookie to [seven days[(https://webkit.org/blog/8613/intelligent-tracking-prevention-2-1/). There are suggestions that its use [is dwindling](https://digiday.com/media/were-building-for-media-businesses-of-tomorrow-how-the-washington-post-is-preparing-for-a-cookieless-future/), but it's [not going](http://www.prnewswire.com/news-releases/major-ad-trade-groups-release-joint-letter-outlining-deep-concerns-over-cookie-handling-functionality-of-apples-safari-11-browser-300519829.html) [away soon](https://www.blog.google/products/chrome/building-a-more-private-web/).
 
-But I digressed. Back to Container; the feature was later spun off as [an extension](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/), while the built-in feature is still being developed. As of writing (Firefox 68), the feature is disabled by default, but we can easily enable it. Simply go to `about:config`,
+Anyway I digressed. Back to Container; the feature was later spun off as [an extension](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/), while the built-in feature is still being developed. As of writing (Firefox 68), the feature is still disabled by default, but we can easily enable it. Simply go to `about:config`,
 
 ```
 privacy.userContext.enabled;true
