@@ -10,13 +10,12 @@
 */
 
 const autoprefixer = require('autoprefixer')
-const micromatch = require('micromatch')
 const normalize = require('postcss-normalize')
 const postcss = require('postcss')
 
 hexo.extend.renderer.register('css', 'css', (data, options) => {
   if (data.path) {
-    if (micromatch.isMatch(data.path, '*.min.css', { basename: true })) return data.text
+    if (data.path.endsWith('.min.css')) return data.text
   }
 
   return new Promise((resolve, reject) => {
