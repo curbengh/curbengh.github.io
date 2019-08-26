@@ -6,7 +6,7 @@
 * https://github.com/hexojs/hexo/pull/3690
 */
 
-function cssHelper (...args) {
+hexo.extend.helper.register('addCss', (...args) => {
   let result = '\n'
   let items = args
 
@@ -29,6 +29,4 @@ function cssHelper (...args) {
     }
   })
   return result
-}
-
-hexo.extend.helper.register('addCss', cssHelper)
+})

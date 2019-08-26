@@ -6,30 +6,28 @@
 * https://github.com/hexojs/hexo/pull/3681
 */
 
-function jsHelper (...args) {
-  let result = '\n';
-  let items = args;
+hexo.extend.helper.register('addJs', (...args) => {
+  let result = '\n'
+  let items = args
 
   if (!Array.isArray(args)) {
-    items = [args];
+    items = [args]
   }
 
   items.forEach(item => {
     // Old syntax
     if (typeof item === 'string' || item instanceof String) {
-      result += `<script src="${item}"></script>\n`;
+      result += `<script src="${item}"></script>\n`
     } else {
       // New syntax
-      let tmpResult = '<script';
+      let tmpResult = '<script'
       for (const attribute in item) {
-        if (item[attribute] === true) tmpResult += ' ' + attribute;
-        else tmpResult += ` ${attribute}="${item[attribute]}"`;
+        if (item[attribute] === true) tmpResult += ' ' + attribute
+        else tmpResult += ` ${attribute}="${item[attribute]}"`
       }
-      tmpResult += '></script>\n';
-      result += tmpResult;
+      tmpResult += '></script>\n'
+      result += tmpResult
     }
-  });
-  return result;
-}
-
-hexo.extend.helper.register('addJs', jsHelper)
+  })
+  return result
+})

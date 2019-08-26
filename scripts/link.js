@@ -9,11 +9,13 @@
 
 const { htmlTag } = require('hexo-util')
 
-function linkHelper (path, text) {
+hexo.extend.helper.register('link', (path, text) => {
+  const urlFor = hexo.extend.helper.get('url_for').bind(hexo)
+
   if (!text) text = path.replace(/^https?:\/\/|\/$/g, '')
 
   const attrs = Object.assign({
-    href: this.url_for(path)
+    href: urlFor(path)
   })
 
   if (attrs.class && Array.isArray(attrs.class)) {
@@ -21,6 +23,4 @@ function linkHelper (path, text) {
   }
 
   return htmlTag('a', attrs, text)
-}
-
-hexo.extend.helper.register('link', linkHelper)
+})
