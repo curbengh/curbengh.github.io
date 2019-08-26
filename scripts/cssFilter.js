@@ -14,17 +14,21 @@ const micromatch = require('micromatch')
 const normalize = require('postcss-normalize')
 const postcss = require('postcss')
 
-hexo.extend.renderer.register('css', 'css', (data, options, callback) => {
+hexo.extend.renderer.register('css', 'css', (data, options) => {
   const exclude = '*.min.css'
 
-  if (micromatch.isMatch(data.path, exclude, { basename: true })) callback(null, data.text)
+  if (data.path) {
+    if (micromatch.isMatch(data.path, exclude, { basename: true })) return data.text
+  }
 
-  postcss([normalize, autoprefixer])
-    .process(data.text, { from: data.path })
-    .then(result => {
-      callback(null, result.css)
-    },
-    error => {
-      callback(error)
-    })
+  return new Promise((resolve, reject) => {
+    postcss([normalize, autoprefixer])
+      .process(data.text, { from: data.path })
+      .then(result => {
+        resolve(result.css)
+      },
+      error => {
+        reject(error)
+      })
+  })
 })
