@@ -4,28 +4,27 @@
 /*
 * Normalize typing.css using sanitize.css
 * Add browser prefixes using autoprefixer
+*
+* renderer is used (instead of filter) due to
+* incompatible with hexo-yam
 */
 
-const micromatch = require('micromatch')
-const postcss = require('postcss')
-const normalize = require('postcss-normalize')
 const autoprefixer = require('autoprefixer')
+const micromatch = require('micromatch')
+const normalize = require('postcss-normalize')
+const postcss = require('postcss')
 
-function cssFilter (str, data) {
-  const path = data.path
+hexo.extend.renderer.register('css', 'css', (data, options, callback) => {
   const exclude = '*.min.css'
 
-  if (path && exclude && exclude.length) {
-    if (micromatch.isMatch(path, exclude, { basename: true })) return str
-  }
+  if (micromatch.isMatch(data.path, exclude, { basename: true })) callback(null, data.text)
 
-  const output = postcss([normalize, autoprefixer])
-    .process(str, {from: path})
+  postcss([normalize, autoprefixer])
+    .process(data.text, { from: data.path })
     .then(result => {
-      return result.css
+      callback(null, result.css)
+    },
+    error => {
+      callback(error)
     })
-
-  return output
-}
-
-hexo.extend.filter.register('after_render:css', cssFilter)
+})
