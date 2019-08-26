@@ -15,10 +15,8 @@ const normalize = require('postcss-normalize')
 const postcss = require('postcss')
 
 hexo.extend.renderer.register('css', 'css', (data, options) => {
-  const exclude = '*.min.css'
-
   if (data.path) {
-    if (micromatch.isMatch(data.path, exclude, { basename: true })) return data.text
+    if (micromatch.isMatch(data.path, '*.min.css', { basename: true })) return data.text
   }
 
   return new Promise((resolve, reject) => {
