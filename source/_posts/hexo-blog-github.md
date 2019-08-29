@@ -42,7 +42,7 @@ deploy:
 ```
 
 10. You can start writing a new post straightaway without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
-	1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
+	1. To create a new post (through [GitHub.com](https://help.github.com/en/articles/creating-new-files)), create a new `<post-title>.md` file in `source/_posts` folder.
 	2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
 	```
@@ -55,7 +55,8 @@ deploy:
 	```
 
 	3. Write your post after the second `---` using [Markdown](https://guides.github.com/features/mastering-markdown/) [style](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
-11. After you create a new post, the website can be accessed on <b>*username*.github.io</b>. Check your repo settings, under the GitHub Pages, make sure the Source is `gh-pages` branch.
+	4. Save the file by clicking on "Commit changes".
+11. After you create a new post, the website can be accessed on <b>*username*.github.io</b>. Check your repo settings, under the GitHub Pages, make sure the Source is `gh-pages` branch. Read on if you prefer to manage the blog from your workstation.
 
 ## Installation
 1. Having Hexo means you can debug locally, rather than waiting for [Travis](https://travis-ci.com/). You can even run a local server to preview your blog (see step 6 below).
@@ -81,12 +82,13 @@ $ sudo pacman -S npm
 4. Install Hexo and its dependencies (defined in `package.json`). Re-launch the terminal program before continue. After installation, append `node_modules/.bin` to $PATH (skip the `echo` step if you've already {% post_link running-locally-installed-node-packages 'done so' %}).
 
 ```bash
+$ git clone https://github.com/username/repo <project>
 $ cd <project>
 $ npm install --only=prod
 $ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
 ```
 
-5. Generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
+5. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 
 ```bash
 $ hexo generate
@@ -98,7 +100,15 @@ $ hexo generate
 $ hexo server
 ```
 
-8. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
+7. Git add, commit and push the file to your GitHub repo.
+
+``` bash
+$ git add 'source/_posts/your-post.md'
+$ git commit -a -m 'Commit Message'
+$ git push -u
+```
+
+8. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to a limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
 9.  If there is no error, the generated website can be accessed on <b>*username*.github.io</b>
 
 ## Writing
@@ -119,7 +129,7 @@ categories:
 ---
 ```
 
-4. Write your post after the second `---` using [Markdown](https://about.gitlab.com/handbook/product/technical-writing/markdown-guide/) [style](https://docs.gitlab.com/ee/user/markdown.html).
+4. Write your post after the second `---` using [Markdown](https://guides.github.com/features/mastering-markdown/) [style](https://help.github.com/en/articles/basic-writing-and-formatting-syntax).
 
 More info: [Writing](https://hexo.io/docs/writing.html)
 
@@ -139,7 +149,7 @@ author:
 
 ```yml
 menu:
-  GitLab: <your-gitlab-project-link>
+  GitHub: <your-github-project-link>
 # Customize /about page
 nickname: 
 description: 
@@ -163,9 +173,9 @@ If you prefer to have a project page on GitLab:
 1. Commit and push.
 
 ## Useful links:
-Configuration files for this blog deployment:
+Sample configuration files:
 
-- [.gitlab-ci.yml](https://gitlab.com/curben/blog/blob/master/.gitlab-ci.yml) *for GitLab Pages deployment only*
+- [.travis.yml](https://github.com/curbengh/hexo-testing/blob/master/.travis.yml)
 - [_config.yml](https://gitlab.com/curben/blog/blob/master/_config.yml)
 - [package.json](https://gitlab.com/curben/blog/blob/master/package.json)
 - [netlify.toml](https://gitlab.com/curben/blog/blob/master/netlify.toml) *for Netlify deployment only*
