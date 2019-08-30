@@ -333,8 +333,7 @@ blockquote {
 
 .home hr {
   width: 80%;
-  max-width: 300px;
-  margin: 20px auto;
+  margin: 1em auto;
 }
 
 .home li {
