@@ -44,6 +44,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
   if (fileName.endsWith('.png') || fileName.endsWith('.webp')) {
     return `<a href="${legacyLink}">
       <picture>
+      <noscript class="loading-lazy">
       <source type="image/webp"
         srcset="${modernLink}&w=320 320w,
               ${modernLink}&w=468 468w,
@@ -54,8 +55,8 @@ hexo.extend.tag.register('cloudinary', (args) => {
               (max-width: 768px) 768px,
               800px">
       ${img}
-      </picture></a>`
+      </noscript></picture></a>`
   } else {
-    return `<a href="${legacyLink}">${img}</a>`
+    return `<a href="${legacyLink}"><noscript class="loading-lazy">${img}</noscript></a>`
   }
 })
