@@ -43,7 +43,7 @@
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
   <%/* Fallback function for SRI */%>
-  <%- addJs('/js/sri.min.js') %>
+  <%- addJs({ src: '/js/sri.min.js', 'async': true }) %>
 
   <%- addCss('/css/typing.css') %>
 
