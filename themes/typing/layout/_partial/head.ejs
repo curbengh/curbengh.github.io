@@ -45,11 +45,6 @@
   <%/* Fallback function for SRI */%>
   <%- addJs('/js/sri.min.js') %>
 
-  <%/* Polyfill for <img loading="lazy"> */%>
-  <% if (is_post()) { %>
-  <%- addJs({ src: 'https://cdn.statically.io/gh/mfranzke/loading-attribute-polyfill/65fca968/loading-attribute-polyfill.min.js', 'data-sri-fallback': '/js/loading-attribute-polyfill.min.js', integrity: 'sha384-8jTDDmc3bqX0o3YImTHy8PKVewXMkZLzo1aXpDhU3ezHoimhZxF5psMm7PjKnSt9', crossorigin: 'anonymous'}) %>
-  <% } %>
-
   <%- addCss('/css/typing.css') %>
 
   <% if (theme.icons) { %>
