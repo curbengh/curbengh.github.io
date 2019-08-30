@@ -20,7 +20,10 @@ hexo.extend.tag.register('cloudinary', (args) => {
     modern = fileName.replace(/\.png$/, '.webp')
     legacy = fileName
   } else if (fileName.endsWith('.webp')) {
-    modern = fileName
+    // Statically doesn't support animated webp
+    // https://github.com/marsble/statically/issues/36
+    // modern = fileName
+    modern = fileName.replace(/\.webp$/, '.gif')
     legacy = fileName.replace(/\.webp$/, '.gif')
   } else {
     legacy = fileName
