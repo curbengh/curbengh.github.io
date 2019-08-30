@@ -10,7 +10,7 @@
 
 hexo.extend.tag.register('cloudinary', (args) => {
   const user = 'curben'
-  const fileName = args[0]
+  let fileName = args[0]
   const alt = args[1] || ''
   let modern = ''
   let legacy = ''
@@ -26,36 +26,37 @@ hexo.extend.tag.register('cloudinary', (args) => {
     legacy = fileName
   }
 
-  const modernLink = link + '/' + modern + '?auto_format=false'
-  const legacyLink = link + '/' + legacy + '?auto_format=false'
+  fileName += '?auto_format=false'
+  modern += '?auto_format=false'
+  legacy += '?auto_format=false'
 
   const img = `<img
-            srcset="${legacyLink}&w=320 320w,
-                  ${legacyLink}&w=468 468w,
-                  ${legacyLink}&w=768 768w,
-                  ${legacyLink} 800w"
+            srcset="${link}/${legacy}&w=320 320w,
+                  ${link}/${legacy}&w=468 468w,
+                  ${link}/${legacy}&w=768 768w,
+                  ${link}/${legacy} 800w"
             sizes="(max-width: 320px) 320px,
                   (max-width: 468px) 468px,
                   (max-width: 768px) 768px,
                   800px"
-            src="${legacyLink}"
+            src="${link}/${legacy}"
             alt="${alt}" loading="lazy">`
 
   if (fileName.endsWith('.png') || fileName.endsWith('.webp')) {
-    return `<a href="${legacyLink}">
-      <picture>
+    return `<a href="${link}/${fileName}">
+      <picture><noscript>
       <source type="image/webp"
-        srcset="${modernLink}&w=320 320w,
-              ${modernLink}&w=468 468w,
-              ${modernLink}&w=768 768w,
-              ${modernLink} 800w"
+        srcset="${link}/${modern}&w=320 320w,
+              ${link}/${modern}&w=468 468w,
+              ${link}/${modern}&w=768 768w,
+              ${link}/${modern} 800w"
         sizes="(max-width: 320px) 320px,
               (max-width: 468px) 468px,
               (max-width: 768px) 768px,
               800px">
       ${img}
-      </picture></a>`
+      </noscript></picture></a>`
   } else {
-    return `<a href="${legacyLink}">${img}</a>`
+    return `<a href="${link}/${fileName}"><noscript>${img}</noscript></a>`
   }
 })
