@@ -794,10 +794,6 @@ samp {
   font-size: 0.9em;
 }
 
-.article-entry figure.highlight {
-  margin: 0;
-}
-
 .article-entry pre code {
   background: 0 0;
   text-shadow: none;
