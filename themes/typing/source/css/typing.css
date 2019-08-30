@@ -226,7 +226,7 @@ h6 {
 
 /*
  * Restrict sizing to the page width in all browsers (opinionated).
- * sanitize.css/page.css
+ * sanitize/page
  */
 iframe,
 img,
@@ -983,6 +983,15 @@ pre .keyword {
   width: 85%;
   padding-left: 0.2em;
   box-sizing: border-box;
+}
+
+/*
+ * Override sanitize/forms
+ * to prevent conflict with
+ * .searchBox padding-left
+ */
+input {
+  padding: 0;
 }
 
 /* highlight the text box when focused */
