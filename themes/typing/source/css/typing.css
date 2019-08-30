@@ -153,10 +153,6 @@ samp {
   background-color: #f3f5f6;
 }
 
-figure {
-  margin: 1em 40px;
-}
-
 .article .article-entry blockquote footer cite a:hover,
 .article .article-nav-link-wrap:hover {
   color: #22c5e5;
