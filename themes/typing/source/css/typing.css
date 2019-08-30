@@ -611,8 +611,11 @@ blockquote {
 }
 
 .article .article-meta {
-  font-size: 0.9em;
   color: #cacdd0;
+  font-size: 0.9em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .article .article-meta a {
@@ -626,6 +629,8 @@ blockquote {
 .article .article-meta .article-category,
 .article .article-meta .article-tag-list {
   display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
 .article .article-meta .article-tag-list-item {
