@@ -77,7 +77,7 @@ nofollow:
 
 # hexo-yam
 ## https://github.com/weyusi/hexo-yam
-neat_enable: true
+neat_enable: false
 neat_svg:
   plugins: [{cleanupIDs: false}]
 
