@@ -635,7 +635,7 @@ blockquote {
 
 .article .article-meta .article-tag-list-item {
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 1em;
 }
 
 .article .article-meta .article-tag-list-item:before {
