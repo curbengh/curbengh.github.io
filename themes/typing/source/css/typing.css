@@ -2,13 +2,13 @@
 /* Require postcss-normalize */
 @import "sanitize";
 @import "sanitize/forms";
-@import "sanitize/typography";
 
 html {
   line-height: 1.15;
 }
 
 body {
+  font-family: sans-serif;
   font-size: 1.2em;
   line-height: 1.5;
 }
@@ -36,6 +36,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: serif;
   font-weight: bold;
   line-height: 1.35;
   margin-top: 1em;
