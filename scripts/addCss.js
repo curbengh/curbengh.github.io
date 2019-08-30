@@ -21,9 +21,9 @@ hexo.extend.helper.register('addCss', (...args) => {
     } else {
       // New syntax
       let tmpResult = '<link rel="stylesheet"'
-      for (const attribute in item) {
+      Object.keys(item).forEach(attribute => {
         tmpResult += ` ${attribute}="${item[attribute]}"`
-      }
+      })
       tmpResult += '>\n'
       result += tmpResult
     }

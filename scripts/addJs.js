@@ -21,10 +21,10 @@ hexo.extend.helper.register('addJs', (...args) => {
     } else {
       // New syntax
       let tmpResult = '<script'
-      for (const attribute in item) {
+      Object.keys(item).forEach(attribute => {
         if (item[attribute] === true) tmpResult += ' ' + attribute
         else tmpResult += ` ${attribute}="${item[attribute]}"`
-      }
+      })
       tmpResult += '></script>\n'
       result += tmpResult
     }
