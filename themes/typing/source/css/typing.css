@@ -224,6 +224,19 @@ h6 {
   margin-bottom: 0.5em;
 }
 
+/*
+ * Restrict sizing to the page width in all browsers (opinionated).
+ * sanitize.css/page.css
+ */
+iframe,
+img,
+input,
+select,
+textarea {
+  height: auto;
+  max-width: 100%;
+}
+
 a,
 a:hover {
   text-decoration: none;
