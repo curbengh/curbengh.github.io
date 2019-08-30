@@ -14,9 +14,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
   const alt = args[1] || ''
   let modern = ''
   let legacy = ''
-  const cloudinary = 'https://cdn.statically.io/img/res.cloudinary.com/' + user +
-    '/image/upload/q_auto'
-  const original = 'https://cdn.statically.io/img/res.cloudinary.com/' + user + '/' + fileName
+  const link = 'https://cdn.statically.io/img/res.cloudinary.com/' + user
 
   if (fileName.endsWith('.png')) {
     modern = fileName.replace(/\.png$/, '.webp')
@@ -28,26 +26,30 @@ hexo.extend.tag.register('cloudinary', (args) => {
     legacy = fileName
   }
 
+  fileName += '?auto_format=false'
+  modern += '?auto_format=false'
+  legacy += '?auto_format=false'
+
   const img = `<img
-            srcset="${cloudinary}/c_limit,w_320/${legacy} 320w,
-                  ${cloudinary}/c_limit,w_468/${legacy} 468w,
-                  ${cloudinary}/c_limit,w_768/${legacy} 768w,
-                  ${cloudinary}/${legacy} 800w"
+            srcset="${link}/${legacy}&w=320 320w,
+                  ${link}/${legacy}&w=468 468w,
+                  ${link}/${legacy}&w=768 768w,
+                  ${link}/${legacy} 800w"
             sizes="(max-width: 320px) 320px,
                   (max-width: 468px) 468px,
                   (max-width: 768px) 768px,
                   800px"
-            src="${cloudinary}w_768/${legacy}"
+            src="${link}/${legacy}"
             alt="${alt}" loading="lazy">`
 
   if (fileName.endsWith('.png') || fileName.endsWith('.webp')) {
-    return `<a href="${original}">
+    return `<a href="${link}/${fileName}">
       <picture><noscript>
       <source type="image/webp"
-        srcset="${cloudinary}/c_limit,w_320/${modern} 320w,
-              ${cloudinary}/c_limit,w_468/${modern} 468w,
-              ${cloudinary}/c_limit,w_768/${modern} 768w,
-              ${cloudinary}/${modern} 800w"
+        srcset="${link}/${modern}&w=320 320w,
+              ${link}/${modern}&w=468 468w,
+              ${link}/${modern}&w=768 768w,
+              ${link}/${modern} 800w"
         sizes="(max-width: 320px) 320px,
               (max-width: 468px) 468px,
               (max-width: 768px) 768px,
@@ -55,6 +57,6 @@ hexo.extend.tag.register('cloudinary', (args) => {
       ${img}
       </noscript></picture></a>`
   } else {
-    return `<a href="${original}"><noscript>${img}</noscript></a>`
+    return `<a href="${link}/${fileName}"><noscript>${img}</noscript></a>`
   }
 })
