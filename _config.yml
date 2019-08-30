@@ -7,7 +7,7 @@ title: Curben
 subtitle:
 description:
 author: curben
-language:
+language: en
 timezone:
 
 # URL
@@ -93,9 +93,6 @@ feed:
 
 # theme config
 theme_config:
-  # Lang
-  language: en
-
   # Dark Mode
   dark: true
 
