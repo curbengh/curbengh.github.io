@@ -169,8 +169,9 @@ figure {
 .home hr,
 .post-footer hr,
 .tag-container hr {
-  height: 1px;
   border: 0;
+  height: 1px;
+  margin-top: 0;
   background-image: -webkit-linear-gradient(
     0deg,
     transparent,
