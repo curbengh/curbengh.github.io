@@ -103,6 +103,7 @@ theme_config:
   menu:
     Home: /blog/
     About: /about/
+    RSS: /atom.xml
     GitLab: https://gitlab.com/curben/blog
 
   # Your Feed Location
@@ -122,5 +123,5 @@ theme_config:
   # Use the forkawesome icon names (https://forkaweso.me/Fork-Awesome/icons/) without the fa- prefix
   links:
     Home: /blog/
+    RSS: /atom.xml
     GitLab: https://gitlab.com/curben/blog
-
