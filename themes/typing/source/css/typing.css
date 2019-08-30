@@ -825,6 +825,7 @@ pre .keyword {
   float: right;
   height: 1.8em;
   position: relative;
+  margin: auto;
 }
 
 /* inline-block to position them in same line */
