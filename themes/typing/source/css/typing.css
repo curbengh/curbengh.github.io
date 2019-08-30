@@ -16,6 +16,19 @@ html {
   line-height: 1.15;
 }
 
+/*
+ * Restrict sizing to the page width in all browsers (opinionated).
+ * sanitize/page
+ */
+iframe,
+img,
+input,
+select,
+textarea {
+  height: auto;
+  max-width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -50,6 +63,11 @@ a {
 a:active,
 a:hover {
   outline-width: 0;
+}
+
+a,
+a:hover {
+  text-decoration: none;
 }
 
 button,
@@ -190,24 +208,6 @@ samp {
   padding-bottom: 5px;
   display: inline-block;
   border: 0;
-}
-
-/*
- * Restrict sizing to the page width in all browsers (opinionated).
- * sanitize/page
- */
-iframe,
-img,
-input,
-select,
-textarea {
-  height: auto;
-  max-width: 100%;
-}
-
-a,
-a:hover {
-  text-decoration: none;
 }
 
 em {
