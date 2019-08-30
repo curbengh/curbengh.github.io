@@ -203,9 +203,9 @@ samp {
 }
 
 .main-nav-link {
-  margin-right: 10px;
+  margin-right: 0.5em;
   color: #cacdd0;
-  padding-bottom: 5px;
+  padding-bottom: 0.5em;
   display: inline-block;
   border: 0;
 }
@@ -233,7 +233,7 @@ blockquote {
 }
 
 .home-footer {
-  padding: 50px 0;
+  padding: 3em 0;
 }
 
 .archive-footer a,
@@ -321,7 +321,6 @@ blockquote {
 
 .home .content {
   width: 60%;
-  max-width: 500px;
   position: relative;
   margin: 0 auto;
 }
@@ -540,7 +539,7 @@ blockquote {
 .article .article-entry .video-container {
   position: relative;
   padding-top: 56.25%;
-  margin-bottom: 30px;
+  margin-bottom: 1em;
   height: 0;
   overflow: hidden;
 }
@@ -561,7 +560,7 @@ blockquote {
 .article .article-nav-link-wrap {
   display: inline-block;
   color: #cacdd0;
-  padding: 0 10px;
+  padding: 0 1em;
   width: 49%;
   box-sizing: border-box;
   vertical-align: top;
@@ -602,7 +601,7 @@ blockquote {
 }
 
 .article .article-meta .label {
-  margin-right: 10px;
+  margin-right: 0.5em;
 }
 
 .article .article-meta .article-category,
@@ -722,10 +721,6 @@ blockquote {
   float: right;
 }
 
-.article-entry .highlight .line {
-  height: 25px;
-}
-
 .article-entry .highlight .line.marked {
   background: #e6e6e6;
 }
@@ -811,7 +806,7 @@ pre .keyword {
   border-radius: 5px;
   right: 0;
   margin-left: 5px;
-  padding: 10px;
+  padding: 0.5em;
   position: absolute;
 }
 
