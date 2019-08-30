@@ -8,17 +8,8 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
-}
-
-body,
-button,
-input,
-select,
-textarea {
-  font: normal 1em/1.8 sans-serif;
 }
 
 pre {
@@ -191,18 +182,6 @@ html {
   height: 100%;
   position: absolute;
   box-sizing: border-box;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transition: 0.25s;
 }
 
 body {
@@ -496,7 +475,6 @@ blockquote {
 .article .caption {
   color: #cacdd0;
   display: block;
-  font-size: 14px;
   text-align: center;
 }
 
