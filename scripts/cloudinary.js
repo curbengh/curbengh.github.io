@@ -10,7 +10,7 @@
 
 hexo.extend.tag.register('cloudinary', (args) => {
   const user = 'curben'
-  const fileName = args[0]
+  let fileName = args[0]
   const alt = args[1] || ''
   let modern = ''
   let legacy = ''
