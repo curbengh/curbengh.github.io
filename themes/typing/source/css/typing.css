@@ -4,18 +4,60 @@
 @import "sanitize/forms";
 @import "sanitize/typography";
 
+html {
+  line-height: 1.15;
+}
+
+body {
+  font-size: 1.2em;
+}
+
+html {
+  line-height: 1.15;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  line-height: 1.35;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 0.5em 0;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+h3 {
+  font-size: 1.1em;
+}
+
+a {
+  color: #222;
+  transition: color 0.25s linear;
+  cursor: pointer;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
 button,
 input,
 select,
 textarea {
   font-size: 100%;
   line-height: 1.15;
-}
-
-pre {
-  background: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: 1em 1.5em;
 }
 
 hr {
@@ -97,32 +139,10 @@ legend {
   font-weight: inherit;
 }
 
-html {
-  line-height: 1.15;
-}
-
-a {
-  color: #222;
-  transition: color 0.25s linear;
-  cursor: pointer;
-}
-
-a:active,
-a:hover {
-  outline-width: 0;
-}
-
-h1 {
-  font-size: 1.5em;
-  margin: 0.5em 0;
-}
-
-h2 {
-  font-size: 1.3em;
-}
-
-h3 {
-  font-size: 1.1em;
+pre {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 1em 1.5em;
 }
 
 code,
@@ -174,30 +194,6 @@ figure {
   padding-bottom: 5px;
   display: inline-block;
   border: 0;
-}
-
-body,
-html {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  box-sizing: border-box;
-}
-
-body {
-  font-size: 1.2em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: bold;
-  line-height: 1.35;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
 }
 
 /*
