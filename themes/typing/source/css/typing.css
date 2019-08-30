@@ -3,7 +3,6 @@
 @import "sanitize";
 @import "sanitize/forms";
 @import "sanitize/typography";
-@import "sanitize/page";
 
 button,
 input,
