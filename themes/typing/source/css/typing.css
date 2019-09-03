@@ -136,7 +136,6 @@ td,
 th {
   border: 1px solid #ddd;
   padding: 0.5em 1em;
-  color: #666;
 }
 
 table th,
@@ -679,7 +678,6 @@ blockquote {
 .article-entry pre {
   padding: 1em;
   background: #f3f5f6;
-  color: #4d4d4c;
   font-size: 0.9em;
   overflow: auto;
   line-height: 1.8;
