@@ -370,6 +370,7 @@ blockquote {
 .tag-container a,
 .tag-container a:hover {
   border: 0;
+  color: inherit;
 }
 
 .archive-container .header,
