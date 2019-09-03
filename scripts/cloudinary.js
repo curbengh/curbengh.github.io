@@ -10,8 +10,8 @@
 
 hexo.extend.tag.register('cloudinary', (args) => {
   const user = 'curben'
-  const fileName = args[0]
-  const alt = args[1] || ''
+  let [fileName, alt] = args
+  if (!alt) alt = ''
   let modern = ''
   let legacy = ''
   const link = 'https://cdn.statically.io/img/res.cloudinary.com/' + user
