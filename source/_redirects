@@ -1,5 +1,5 @@
-# Temporarily set the homepage to /blog
-/ /blog/ 302
+# Move about page to homepage
+/about/ / 302
 # Redirect post to /blog/
 /:year/:month/:date/:slug /blog/:year/:month/:date/:slug/ 301
 

@@ -13,7 +13,7 @@
 
   {# home page #}
   <url>
-      <loc>{{ config.url + '/' + config.archive_dir + '/' | uriencode }}</loc>
+      <loc>{{ config.url + '/' | uriencode }}</loc>
       <lastmod>{{ sNow }}</lastmod>
       <changefreq>daily</changefreq>
       <priority>1.0</priority>
