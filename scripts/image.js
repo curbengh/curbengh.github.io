@@ -2,10 +2,10 @@
 /* global hexo */
 
 /*
-*  Put {% cloudinary 'folder/filename.jpg' 'description' %} in your post.
+*  Put {% image 'folder/filename.jpg' 'description' %} in your post.
 */
 
-hexo.extend.tag.register('cloudinary', (args) => {
+hexo.extend.tag.register('image', (args) => {
   let [fileName, alt] = args
   if (!alt) alt = ''
   let modern = fileName

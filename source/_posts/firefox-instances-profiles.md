@@ -16,7 +16,7 @@ For example, you are looking for item A and B at a shopping website using the pr
 
 A useful feature of Firefox is that it allows more than one profile, which otherwise would requires multiple operating system accounts. The feature even allows you to run multiple profiles at the same time by having multiple instances.
 
-{% cloudinary '20190407/firefox-error.png' "'Firefox is currently running' error" %}
+{% image '20190407/firefox-error.png' "'Firefox is currently running' error" %}
 
 There are two ways of creating profiles: (1) **Fresh** profile and (2) **Clone** existing profile.
 
@@ -30,19 +30,19 @@ firefox --no-remote -P 'new profile name'
 
 2. Click "Create Profile...".
 
-{% cloudinary '20190407/profile-manager.png' 'Firefox Profile Manager' %}
+{% image '20190407/profile-manager.png' 'Firefox Profile Manager' %}
 
 3. Click "Next".
 
-{% cloudinary '20190407/profile-wizard.png' 'Wizard to set up new Firefox profile' %}
+{% image '20190407/profile-wizard.png' 'Wizard to set up new Firefox profile' %}
 
 4. Name the new profile and click "Finish".
 
-{% cloudinary '20190407/new-profile-name.png' 'Name the new Firefox profile' %}
+{% image '20190407/new-profile-name.png' 'Name the new Firefox profile' %}
 
 5. Once you are back to the profile manager, select "default", make sure "Use the selected profile..." and "Start Firefox".
 
-{% cloudinary '20190407/profile-manager-new.png' 'Firefox Profile Manager with a recently added profile' %}
+{% image '20190407/profile-manager-new.png' 'Firefox Profile Manager with a recently added profile' %}
 
 6. Launch Firefox with the newly created profile using the same command as above:
 
@@ -52,7 +52,7 @@ firefox --no-remote -P 'new profile name'
 
 ***Protip***: Create a launcher or keyboard shortcut to run the command.
 
-{% cloudinary '20190407/launcher.png' 'Create a new launcher for the Firefox profile' %}
+{% image '20190407/launcher.png' 'Create a new launcher for the Firefox profile' %}
 
 7. Just launch Firefox as usual for your current profile.
 
@@ -62,7 +62,7 @@ firefox --no-remote -P 'new profile name'
 2. Browse to the **~/.mozilla/firefox** folder
 3. To clone the default profile, simply select the xxxx.default and duplicate it by **Edit: -> Duplicate**, or copy to another folder, rename and move it back. Rename the cloned folder to desired name. In this example, I named it as *profile z*.
 
-{% cloudinary '20190407/profile-folder.png' 'List of folders in ~/.mozilla/firefox' %}
+{% image '20190407/profile-folder.png' 'List of folders in ~/.mozilla/firefox' %}
 
 4. Append the following line to **profiles.ini**, if there is no existing profile (other than the default), use `[Profile1]` instead.
 
@@ -73,7 +73,7 @@ IsRelative=1
 Path=profile z
 ```
 
-{% cloudinary '20190407/profiles-ini.png' 'profile.ini in a text editor' %}
+{% image '20190407/profiles-ini.png' 'profile.ini in a text editor' %}
 
 5. Launch Firefox with the newly created profile using the same command as above (note the case-sensitive):
 

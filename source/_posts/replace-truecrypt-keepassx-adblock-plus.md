@@ -11,13 +11,13 @@ TrueCrypt and KeePassX have been discontinued while Adblock Plus has been [comme
 
 ## VeraCrypt
 
-{% cloudinary '20190115/veracrypt.png' 'Screenshot of VeraCrypt' %}
+{% image '20190115/veracrypt.png' 'Screenshot of VeraCrypt' %}
 
 VeraCrypt is a fork of the discontinued [TrueCrypt](https://en.wikipedia.org/wiki/TrueCrypt). It includes security improvements and fixes over the original—for example using much higher iterations (327,661-655,331 vs 1,000-2,000) to generate the header key—to make brute force more costly. This improvement along with supporting more ciphers and their combinations, means its storage format is incompatible to the original's. User still has the option to open TrueCrypt volume and (optionally, but recommended) convert it to VeraCrypt format.
 
 ## KeePassXC
 
-{% cloudinary '20190115/keepassxc.png' 'Screenshot of KeePassXC' %}
+{% image '20190115/keepassxc.png' 'Screenshot of KeePassXC' %}
 
 KeePassXC is a fork of the discontinued [KeePassX](https://www.keepassx.org/). KeePassX started out as a Linux port of (previously Windows-only) KeePass. While both eventually become cross-platform, I stick with KeePassX (even on Windows) for being lighter and quicker to launch. The [Mono](https://www.mono-project.com/)-developed KeePass—like Java—makes it not quite as native as Qt-developed KeePass, thus feels slower on Linux. It last [released](https://www.keepassx.org/news/2016/10/609) in October 2016 with no further update since then.
 
@@ -25,7 +25,7 @@ Notable [improvements](https://keepassxc.org/project/) of KeePassXC including KD
 
 ## uBlock Origin
 
-{% cloudinary '20190115/ubo.png' 'Screenshot of uBlock Origin' %}
+{% image '20190115/ubo.png' 'Screenshot of uBlock Origin' %}
 
 uBlock Origin (uBO) is a popular ad blocker well-known for its low memory and CPU usage (compared to other ad blockers). The [dynamic filtering](https://github.com/gorhill/uBlock/wiki/Dynamic-filtering:-quick-guide) allows granular control over filtering rules. It supports HOSTS syntax for blocking malicious websites. I created a [blocklist](https://gitlab.com/curben/urlhaus-filter) based on the Abuse.sh [URLhaus](https://urlhaus.abuse.ch/). 
 

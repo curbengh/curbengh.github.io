@@ -20,6 +20,6 @@ https://gitlab.com/curben/blog/-/ci/lint
 
 This is what it looks like,
 
-{% cloudinary '20181025/lint.png' 'Verify .gitlab-ci.yml online' %}
+{% image '20181025/lint.png' 'Verify .gitlab-ci.yml online' %}
 
 Simply paste the content of your `.gitlab-ci.yml` and 'Validate'.

@@ -11,11 +11,11 @@ tags:
 
 Many criticise Firefox for using Cloudflare by default in DNS-over-HTTPS. In reality, it's **not enabled** by default and you can **easily switch** to other providers.
 
-{% cloudinary '20190525/firefox-doh.png' "'DNS over HTTPS' setting in Firefox" %}
+{% image '20190525/firefox-doh.png' "'DNS over HTTPS' setting in Firefox" %}
 
 That's right, as of version 66, it's *still* **not** enabled by default. You want to use DNS-over-HTTPS but not to use Cloudflare? Just click on 'Custom' and enter the provider's address. There are a few to choose from. Refer to the lists provided by [AdGuard](https://kb.adguard.com/en/general/dns-providers) and [cURL](https://github.com/curl/curl/wiki/DNS-over-HTTPS).
 
-{% cloudinary '20190525/firefox-doh-animated.webp' "How to enable 'DNS over HTTPS' in Firefox" %}
+{% image '20190525/firefox-doh-animated.webp' "How to enable 'DNS over HTTPS' in Firefox" %}
 
 I'm writing this in response to the recent [Opera article](https://arstechnica.com/information-technology/2019/05/review-opera-once-led-web-browser-innovation-it-has-new-ideas-again-with-reborn-3/2/) by Ars Technica,
 

@@ -9,7 +9,7 @@ tags:
 
 When using [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/) (DR) add-on with "Filter" or "Filter+" mode in Firefox (FF 67 as of writing), you may encounter this issue where only the lower half of an image is shown.
 
-{% cloudinary '20190628/dark-reader-before.png' 'Image is only shown half' %}
+{% image '20190628/dark-reader-before.png' 'Image is only shown half' %}
 
 To resolve it, add the following CSS rule to the DR's setting via **Dev tools**. Prepend before the site-specific rules.
 
@@ -21,13 +21,13 @@ To resolve it, add the following CSS rule to the DR's setting via **Dev tools**.
 }
 ```
 
-{% cloudinary '20190628/dark-reader-dev-tools.png' 'Dev tools of Dark Reader' %}
+{% image '20190628/dark-reader-dev-tools.png' 'Dev tools of Dark Reader' %}
 
-{% cloudinary '20190628/dev-tools-demo.webp' 'A video of Dev Tools' %}
+{% image '20190628/dev-tools-demo.webp' 'A video of Dev Tools' %}
 
 After adding the CSS, you should be able to see the whole image. But the fix is not perfect, the image sticks to the top rather than centred.
 
-{% cloudinary '20190628/dark-reader-after.png' 'Full image is shown' %}
+{% image '20190628/dark-reader-after.png' 'Full image is shown' %}
 
 The above CSS is to override the default CSS used by FF to display an image. The default CSS is located at `resource://content-accessible/TopLevelImageDocument.css`, accessible via Style Editor (Shift + F7, don't enable Caret Browsing when prompted). It's used to centre the image. Here is a snippet of "TopLevelImageDocument.css",
 

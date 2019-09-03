@@ -10,7 +10,7 @@ Caja is a file manager originally forked from Nautilus. It's used in MATE deskto
 
 The side pane of Caja shows many media folders by default. You might not have all the media types or not important enough to bookmark it.
 
-{% cloudinary '20181002/caja-side-pane.png' 'Side pane view of Caja file manager' %}
+{% image '20181002/caja-side-pane.png' 'Side pane view of Caja file manager' %}
 *from github [issue](https://github.com/mate-desktop/caja/issues/480).*
 
 You can hide some folder through `~/.config/user-dirs.dirs` or `/home/your-username/.config/user-dirs.dirs` (you need to show hidden file/folder if you're going to browse through Caja).

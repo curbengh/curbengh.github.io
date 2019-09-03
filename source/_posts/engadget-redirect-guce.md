@@ -11,7 +11,7 @@ tags:
 
 Whenever I try to open an Engadget article, it will automatically redirect me to `guce.advertising.com/...` which is (thankfully) blocked by uBO.
 
-{% cloudinary '20190609/guce-engadget.png' 'uBO blocks Engadget redirect' %}
+{% image '20190609/guce-engadget.png' 'uBO blocks Engadget redirect' %}
 
 Initially, I was able to workaround by opening the article in a private window, but it was not reliable. I didn't know why private window worked in the first place (and only found the reason later on). I figured it must be redirected by third-party javascript, so I checked the page source, looked for suspicious domains and block them using uBO. That didn't work, not even disabling javascript.
 
@@ -29,15 +29,15 @@ Firefox can block cookie by website. To block Engadget from setting a cookie, in
 2. Navigate to **Privacy & Security** tab on the left.
 3. Scroll down to **Cookies & Site Data** section and open **Manage Permissions**.
 
-  {% cloudinary '20190609/privacy-settings.png' 'Privacy settings in Firefox' %}
+  {% image '20190609/privacy-settings.png' 'Privacy settings in Firefox' %}
 
 4. Put `https://www.engadget.com` as the address and click **Block** and save it.
 
-  {% cloudinary '20190609/engadget-block-cookie.png' 'Block Engadget cookies' %}
+  {% image '20190609/engadget-block-cookie.png' 'Block Engadget cookies' %}
 
 5. If you have **Clear history when Firefox enabled** enabled, make sure **Site Preferences** is unchecked.
 
-  {% cloudinary '20190609/uncheck-site.png' 'Settings for clearing history' %}
+  {% image '20190609/uncheck-site.png' 'Settings for clearing history' %}
 
 
 That's it. If you want to know what is the purpose of `guce.advertising.com`, read on.
