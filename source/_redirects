@@ -3,3 +3,4 @@
 
 # Reverse proxy to cdn
 /libs/* https://cdn.statically.io/libs/:splat 200
+/img/* https://cdn.statically.io/img/res.cloudinary.com/:splat 200
