@@ -14,7 +14,7 @@ hexo.extend.tag.register('cloudinary', (args) => {
   if (!alt) alt = ''
   let modern = ''
   let legacy = ''
-  const link = 'https://cdn.statically.io/img/res.cloudinary.com/' + user
+  const link = '/img/' + user
 
   if (fileName.endsWith('.png')) {
     modern = fileName.replace(/\.png$/, '.webp')
