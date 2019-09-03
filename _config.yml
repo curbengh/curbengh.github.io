@@ -89,7 +89,7 @@ deploy:
 meta_generator: false
 
 feed:
-  icon: 'svg/rss.svg'
+  icon: '/svg/favicon.svg'
 
 # theme config
 theme_config:
