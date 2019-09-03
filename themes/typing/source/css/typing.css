@@ -14,6 +14,11 @@ body {
   line-height: 1.5;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 /*
  * Restrict sizing to the page width in all browsers (opinionated).
  * sanitize/page
@@ -319,11 +324,6 @@ blockquote {
   width: 60%;
   position: relative;
   margin: 0 auto;
-}
-
-.home h1,
-.home strong {
-  color: #222;
 }
 
 .home hr {
