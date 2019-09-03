@@ -53,7 +53,7 @@ h3 {
 }
 
 a {
-  color: #222;
+  color: inherit;
   transition: color 0.25s linear;
   cursor: pointer;
 }
@@ -370,7 +370,6 @@ blockquote {
 .tag-container a,
 .tag-container a:hover {
   border: 0;
-  color: inherit;
 }
 
 .archive-container .header,
