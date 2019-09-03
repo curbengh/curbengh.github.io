@@ -2,4 +2,4 @@
 / /blog/ 302
 
 # Reverse proxy to cdn
-/extjs/* https://cdnjs.cloudflare.com/ajax/libs/:splat 200
+/libs/* https://cdn.statically.io/libs/:splat 200
