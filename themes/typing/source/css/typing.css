@@ -4,6 +4,7 @@
 @import "sanitize/forms";
 
 html {
+  cursor: unset;
   line-height: 1.15;
 }
 
