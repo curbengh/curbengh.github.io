@@ -43,7 +43,7 @@ We also can open a new container tab by long-pressing the plus (+) button, next 
 
 {% cloudinary '20190812/containers-tabs.png' "New Container Tab" %}
 
-{% cloudinary '20190812/containers-webp.webp' "Container Tab in action" %}
+{% cloudinary '20190812/containers-tabs.webp' "Container Tab in action" %}
 
 ## Facebook Container
 

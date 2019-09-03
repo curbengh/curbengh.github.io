@@ -23,7 +23,7 @@ To resolve it, add the following CSS rule to the DR's setting via **Dev tools**.
 
 {% cloudinary '20190628/dark-reader-dev-tools.png' 'Dev tools of Dark Reader' %}
 
-{% cloudinary '20190628/dev-tools-video.webp' 'A video of Dev Tools' %}
+{% cloudinary '20190628/dev-tools-demo.webp' 'A video of Dev Tools' %}
 
 After adding the CSS, you should be able to see the whole image. But the fix is not perfect, the image sticks to the top rather than centred.
 

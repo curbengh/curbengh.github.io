@@ -23,8 +23,6 @@ When you try to login to AliExpress, the login box is just blank.
 In the new design, the loading wheel just keeps spinning.
 
 {% cloudinary '20190228/invalid-login.png' 'Aliexpress login pop-up keeps loading' %}
-<br />
-{% cloudinary '20190228/invalid-login-ani.webp' 'Screenrecord of aliexpress troubled login' %}
 
 Upon inspection on the blank element (right click on the blank login and select `Inspect Element`), the login box is an iframe of `https://passport.aliexpress.com`. From the Web Console (`Ctrl + Shift + K`), the following error message suggested it's caused by [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
 
@@ -43,8 +41,6 @@ From the Network inspection (`Ctrl + Shift + E`), `https://passport.aliexpress.c
 To use the old login page, mouse-over on the **Account** link at the top right corner and click on **My Orders**. It should redirects to `https://login.aliexpress.com/...`
 
 {% cloudinary '20190228/my-orders.png' "Aliexpress 'My Orders' link" %}
-<br />
-{% cloudinary '20190228/my-orders-ani.webp' "Screenrecord of Aliexpress 'My Orders' link" %}
 
 ## Reset XOriginPolicy
 

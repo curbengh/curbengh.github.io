@@ -3,34 +3,27 @@
 
 /*
 *  Put {% cloudinary 'folder/filename.jpg' 'description' %} in your post.
-*  Change the username in 'user' variable
-*  More info:
-*  https://cloudinary.com/blog/responsive_images_with_srcset_sizes_and_cloudinary
 */
 
 hexo.extend.tag.register('cloudinary', (args) => {
-  const user = 'curben'
   let [fileName, alt] = args
   if (!alt) alt = ''
-  let modern = ''
-  let legacy = ''
-  const link = '/img/' + user
+  let modern = fileName
+  let legacy = fileName
+  const link = '/img/'
 
-  if (fileName.endsWith('.png')) {
-    modern = fileName.replace(/\.png$/, '.webp')
-    legacy = fileName
+  if (fileName.endsWith('.png') || fileName.endsWith('.jpg')) {
+    modern = fileName.concat('?format=webp')
   } else if (fileName.endsWith('.webp')) {
-    // Statically doesn't support animated webp
+    // Statically has yet to support animated webp
     // https://github.com/marsble/statically/issues/36
-    // modern = fileName
+    // modern = fileName.concat('?auto_format=false')
     modern = fileName.replace(/\.webp$/, '.gif')
     legacy = fileName.replace(/\.webp$/, '.gif')
-  } else {
-    legacy = fileName
   }
 
-  const modernLink = link + '/' + modern + '?auto_format=false'
-  const legacyLink = link + '/' + legacy + '?auto_format=false'
+  const modernLink = link + modern
+  const legacyLink = link + legacy
 
   const img = `<img
             srcset="${legacyLink}&w=320 320w,
