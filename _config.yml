@@ -98,8 +98,8 @@ theme_config:
 
   # Header
   menu:
-    Home: /
-    Blog: /blog/
+    Home: /blog/
+    About: /about/
     Feed: /atom.xml
     GitLab: https://gitlab.com/curben/blog
 
@@ -119,7 +119,6 @@ theme_config:
   # If "icons: true" link names will interpreted as fontawesome icon names
   # Use the forkawesome icon names (https://forkaweso.me/Fork-Awesome/icons/) without the fa- prefix
   links:
-    Home: /
-    Blog: /blog/
+    Home: /blog/
     Feed: /atom.xml
     GitLab: https://gitlab.com/curben/blog
