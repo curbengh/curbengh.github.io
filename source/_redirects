@@ -1,7 +1,5 @@
 # Temporarily set the homepage to /blog
 / /blog/ 302
-# Redirect post to /blog/
-/:year/:month/:date/:slug /blog/:year/:month/:date/:slug/ 301
 
 # Reverse proxy to cdn
 /extjs/* https://cdnjs.cloudflare.com/ajax/libs/:splat 200
