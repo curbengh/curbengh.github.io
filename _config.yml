@@ -86,8 +86,6 @@ neat_svg:
 deploy:
   type:
 
-meta_generator: false
-
 feed:
   icon: '/svg/favicon.svg'
 
