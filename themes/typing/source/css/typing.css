@@ -159,18 +159,12 @@ legend {
   font-weight: inherit;
 }
 
-pre {
-  background: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: 1em 1.5em;
-}
-
 code,
 kbd,
 pre,
 samp {
   font-size: 0.9em;
-  background-color: #f3f5f6;
+  background-color: #d8d8d8;
 }
 
 .article .article-entry blockquote footer cite a:hover,
