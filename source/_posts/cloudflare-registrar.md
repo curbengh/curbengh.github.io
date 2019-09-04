@@ -5,7 +5,7 @@ date: 2019-09-05
 tags:
 ---
 
-[Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) service was introduced back in [September 2018](https://blog.cloudflare.com/cloudflare-registrar/). It is well-known for its no markup fees, meaning no additional cost on top of what Cloudflare pay to wholesale registry and ICAAN. So, you essentially get the wholesale price. While you may find registrars that offer cheaper than wholesale's (you can compare prices on [TLD-List.com](https://tld-list.com/)), it is likely that there are hidden costs somewhere.
+[Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) service was introduced back in [September 2018](https://blog.cloudflare.com/cloudflare-registrar/). It differs from other registrars by having no markup fees, meaning no additional cost on top of what it pays to the wholesale registry and [ICANN](https://en.wikipedia.org/wiki/ICANN). So, you essentially get the wholesale price. While you may find registrars that offer cheaper than the wholesale's (you can compare prices on [TLD-List.com](https://tld-list.com/)), it is likely that there are hidden costs somewhere.
 
 While the service has been offered for a while, the only way to jump into it is by transferring existing domains (that you already own). This means you cannot register new domain(s) through Cloudflare, at least not yet as of writing. So, how do you get onboard if you want to get a new domain, but haven't purchase one?
 
