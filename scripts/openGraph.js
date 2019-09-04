@@ -118,7 +118,8 @@ function openGraphHelper (options = {}) {
   })
 
   if (published) {
-    if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf())) {
+    if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf()) &&
+      this.is_post()) {
       // Skip timezone conversion
       result += og('article:published_time', moment(published).format('YYYY-MM-DD[T00:00:00.000Z]'))
     }
@@ -126,8 +127,11 @@ function openGraphHelper (options = {}) {
 
   if (updated) {
     if ((moment.isMoment(updated) || moment.isDate(updated)) && !isNaN(updated.valueOf())) {
-      result += og('article:modified_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
       result += og('og:updated_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
+
+      if (this.is_post()) {
+        result += og('article:modified_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
+      }
     }
   }
 
