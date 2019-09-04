@@ -3,17 +3,9 @@
 <%- partial('_partial/head') %>
   <%/* set /about page to use "home" page layout */%>
   <% if (is_current('about/index.html')) { %>
-    <% if (theme.dark) { %>
-    <body class="home-body dark">
-    <% } else { %>
     <body class="home-body">
-    <% } %>
   <% } else {%>
-    <% if (theme.dark) { %>
-      <body class="dark">
-    <% } else { %>
       <body>
-    <% } %>
   <% } %>
   <div id="container" class="container">
     <%- body %>

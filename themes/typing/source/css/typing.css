@@ -9,6 +9,8 @@ html {
 }
 
 body {
+  color: #e6e6e6;
+  background: black;
   font-family: sans-serif;
   font-size: 1.2em;
   line-height: 1.5;
@@ -67,6 +69,7 @@ a {
 a:active,
 a:hover {
   outline-width: 0;
+  color: white;
 }
 
 a,
@@ -164,12 +167,11 @@ kbd,
 pre,
 samp {
   font-size: 0.9em;
-  background: #d8d8d8;
+  background: #333;
 }
 
 .article .article-entry blockquote footer cite a:hover,
 .article .article-nav-link-wrap:hover {
-  color: #22c5e5;
   border-bottom: 1px solid;
   transition: color 0.1s linear;
 }
@@ -270,7 +272,7 @@ blockquote {
 .copyright a:hover,
 .footer-content a:hover,
 .footer-links a:hover {
-  color: #fff;
+  color: white;
 }
 
 .archive-footer,
@@ -305,13 +307,16 @@ blockquote {
 .home {
   font-weight: lighter;
   line-height: 1.4;
-  color: #505050;
   text-align: center;
   position: relative;
 }
 
 .home a {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.home a:hover {
+  border-bottom: 1px solid white;
 }
 
 .home .content {
@@ -618,45 +623,13 @@ blockquote {
   display: none;
 }
 
-.dark,
-.dark .container,
-.dark .footer {
-  color: #e6e6e6;
-  background: black;
-}
-
-.dark a:hover {
-  color: white;
-}
-
-.dark .home a {
-  border-bottom: 1px solid #e6e6e6;
-}
-
-.dark .home a:hover {
-  border-bottom: 1px solid white;
-}
-
-.dark code,
-.dark kbd,
-.dark pre,
-.dark samp {
-  background: #333;
-}
-
-.dark table caption,
-.dark table td,
-.dark td {
+table caption,
+table td,
+td {
   border: 1px solid #ddd;
 }
 
-.dark .article-entry .highlight table caption,
-.dark .article-entry .highlight table td,
-.dark .article-entry .highlight td {
-  border: 0;
-}
-
-.dark .article-entry .highlight .line.marked {
+.article-entry .highlight .line.marked {
   background: #444;
 }
 
@@ -695,21 +668,14 @@ blockquote {
   padding: 0;
 }
 
+pre .comment,
+pre .title,
 .article-entry .highlight figcaption {
   color: #8e908c;
 }
 
 .article-entry .highlight figcaption a {
   float: right;
-}
-
-.article-entry .highlight .line.marked {
-  background: #e6e6e6;
-}
-
-pre .comment,
-pre .title {
-  color: #8e908c;
 }
 
 pre .attribute,
@@ -783,7 +749,7 @@ pre .keyword {
 
 /* overlap other elements */
 .mobile-nav-link {
-  background: #000;
+  background: black;
   border: 2px solid #999;
   border-radius: 5px;
   right: 0;

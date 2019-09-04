@@ -91,9 +91,6 @@ feed:
 
 # theme config
 theme_config:
-  # Dark Mode
-  dark: true
-
   # Header
   menu:
     Home: /blog/
