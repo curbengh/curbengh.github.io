@@ -622,11 +622,11 @@ blockquote {
 .dark .container,
 .dark .footer {
   color: #e6e6e6;
-  background: #000;
+  background: black;
 }
 
 .dark a:hover {
-  color: #fff;
+  color: white;
 }
 
 .dark .home a {
@@ -634,7 +634,7 @@ blockquote {
 }
 
 .dark .home a:hover {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid white;
 }
 
 .dark code,
@@ -867,6 +867,11 @@ svg#link {
 /* don't underline link icon */
 .article .article-entry a.headerlink {
   border-bottom: none;
+}
+
+/* underline link icon when hover */
+.article .article-entry a.headerlink:hover {
+  border-bottom: 1px solid #1abc9c;
 }
 
 @media (max-width: 768px) {
