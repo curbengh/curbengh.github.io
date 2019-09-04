@@ -27,7 +27,6 @@ In the new design, the loading wheel just keeps spinning.
 Upon inspection on the blank element (right click on the blank login and select `Inspect Element`), the login box is an iframe of `https://passport.aliexpress.com`. From the Web Console (`Ctrl + Shift + K`), the following error message suggested it's caused by [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
 
 {% image '20190228/iframe.png' 'Aliexpress login page under an iframe' %}
-<br />
 {% image '20190228/x-frame.png' 'Console error of Aliexpress login' %}
 
 From the Network inspection (`Ctrl + Shift + E`), `https://passport.aliexpress.com` has HTTP header `x-frame-options: SAMEORIGIN` (which I believe stems from the `XOriginPolicy` setting). This restricts the iframe to the same domain. This caused the iframe unable to load because it's different from the login page `https://login.aliexpress.com`.
@@ -38,15 +37,23 @@ From the Network inspection (`Ctrl + Shift + E`), `https://passport.aliexpress.c
 
 ## My Orders
 
+**Edit:** This step alone doesn't work anymore, requires resetting referer policy. See [next section](#Reset-referer-policy).
+
 To use the old login page, mouse-over on the **Account** link at the top right corner and click on **My Orders**. It should redirects to `https://login.aliexpress.com/...`
 
 {% image '20190228/my-orders.png' "Aliexpress 'My Orders' link" %}
 
-## Reset XOriginPolicy
+## Reset referer policy
 
 1. Go to [about:config](about:config).
-2. Search for `network.http.referer.XOriginPolicy`.
-3. Right click and select `Reset`.
+2. Search for "referer", then adjust the following option,
+
+  ```
+  network.http.referer.defaultPolicy;1 (must be '1' or above)
+  network.http.referer.sendRefererHeader;2
+  ```
+
+3. Mouse-over on the **Account** link at the top right corner and click on **My Orders**. It should redirects to `https://login.aliexpress.com/...`
 
 ## "Ignore X-Frame-Options" extension
 
