@@ -4,9 +4,9 @@
 /*
 * Modified from the hexo version,
 * https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js
-* for compatibility with cloudinary.js
-* the <meta name="og:image"> now use
-* <a> where href value links to an image
+* to include https://github.com/hexojs/hexo/pull/3674
+* and use WHATWG URL API
+* https://nodejs.org/api/url.html#url_the_whatwg_url_api
 */
 
 'use strict'
@@ -67,16 +67,12 @@ function openGraphHelper (options = {}) {
   }
 
   if (!images.length && content && content.includes('<img')) {
-    images = images.slice()
+    images = images.slice();
 
-    // https://github.com/hexojs/hexo/pull/3680
     let img
-    const imgPattern = /<a [^>]*href=['"]([^'"]+)([^>]*>)/gi
+    const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
     while ((img = imgPattern.exec(content)) !== null) {
-      const imgExt = ['*.jpg', '*.png', '*.webp']
-      if (micromatch.isMatch(img[1], imgExt, { basename: true })) {
-        images.push(img[1])
-      }
+      images.push(img[1])
     }
   }
 
@@ -107,10 +103,11 @@ function openGraphHelper (options = {}) {
   }
 
   images = images.map(path => {
-    if (!new URL(path).host) {
-      // resolve `path`'s absolute path relative to current page's url
-      // `path` can be both absolute (starts with `/`) or relative.
-      return new URL(path, url || config.url)
+    // parse relative url to full url
+    try {
+      new URL(path)
+    } catch {
+      return new URL(path, config.url).href
     }
 
     return path
