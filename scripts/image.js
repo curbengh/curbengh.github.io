@@ -2,7 +2,11 @@
 /* global hexo */
 
 /*
-*  Put {% image 'folder/filename.jpg' 'description' %} in your post.
+*  Embed an image with responsive images in a post
+*  https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+*  Image is resized on-the-fly using Statically Imgpx
+*  https://statically.io/imgpx
+*  Usage: {% image 'folder/filename.jpg' 'description' %}
 */
 
 hexo.extend.tag.register('image', (args) => {
@@ -10,6 +14,8 @@ hexo.extend.tag.register('image', (args) => {
   if (!alt) alt = ''
   let modern = fileName
   let legacy = fileName
+  // /img/ is a reverse proxy of Statically CDN
+  // See source/_redirects
   const link = '/img/'
 
   if (fileName.endsWith('.png') || fileName.endsWith('.jpg')) {
