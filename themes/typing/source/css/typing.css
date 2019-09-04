@@ -641,7 +641,6 @@ blockquote {
 .dark kbd,
 .dark pre,
 .dark samp {
-  font-size: 0.9em;
   background: #333;
 }
 
@@ -649,11 +648,6 @@ blockquote {
 .dark table td,
 .dark td {
   border: 1px solid #ddd;
-}
-
-.dark .article-entry .highlight,
-.dark .article-entry pre {
-  background: #333;
 }
 
 .dark .article-entry .highlight table caption,
@@ -669,7 +663,6 @@ blockquote {
 .article-entry .highlight,
 .article-entry pre {
   padding: 1em;
-  background: #f3f5f6;
   font-size: 0.9em;
   overflow: auto;
   line-height: 1.8;
