@@ -3,18 +3,14 @@
 
 /*
 * Add "Copy" button to code snippet
-* cheerio is provided by hexo package
 */
 
-const cheerio = require('cheerio')
-
-hexo.extend.filter.register('after_render:html', (str) => {
-  const $ = cheerio.load(str)
-
+hexo.extend.filter.register('after_render:html', (data) => {
   // Avoid duplicate button
-  if ($('button').parent().hasClass('code')) return
+  if (data.includes('</button></td>')) return;
 
-  $('.code').append('<button class="copy-button">Copy</button>')
+  const copyBtn = '<button class="copy-button">Copy</button>'
 
-  return $.html()
+  // Regex is based on https://github.com/hexojs/hexo/pull/3697
+  return data.replace(/<td class="code">(?!<\/td>).+?<\/td>/, (str) => str.replace('</td>', copyBtn + '</td>'))
 })

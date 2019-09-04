@@ -31,13 +31,12 @@ The following are the major changes I made compared to the upstream.
 ### Plugins
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
 - Installed [hexo-yam](https://github.com/curbengh/hexo-yam) to pre-compress static assets (html, css, js and svg).
-- [cloudinary.js](/scripts/cloudinary.js) - A [tag](https://hexo.io/api/tag) plugin to easily embed [Cloudinary](https://cloudinary.com/) in a post.
 - [copy-button.js](/scripts/copy-button.js) - A [filter](https://hexo.io/api/filter) plugin to add a copy button to each code block.
 - [feed](/scripts/feed) - A generator plugin to generate [an RSS feed](https://en.wikipedia.org/wiki/Web_feed). Modified from [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) to use `post.lastUpdated` instead of `post.updated`.
 - [heading-link.js](/scripts/heading-link.js) - A filter plugin to add a link button next to each heading.
+- [image.js](/scripts/image.js) - A [tag](https://hexo.io/api/tag) plugin to easily embed images in a post with responsive image support.
 - [link.js](/scripts/link.js) - A [helper](https://hexo.io/api/helper) plugin to add a link. Modified from [link_to.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_to.js) to remove title attribute and 'external' option.
-- [listTags](/scripts/listTags.js) - A helper plugin to display tags. Modified from [link_tags.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_tags.js) to add [rel="tag"](http://microformats.org/wiki/rel-tag) and [itemprop="keywords"](https://schema.org/keywords) attributes.
-- [openGraph](/scripts/openGraph.js) - A helper plugin to add [Open Graph](https://ogp.me/) tags. Modified from [open_graph.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js) to be compatible with "cloudinary.js".
+- [openGraph](/scripts/openGraph.js) - A helper plugin to add [Open Graph](https://ogp.me/) tags. Modified from [open_graph.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/open_graph.js) to use additional [Open Graph](https://www.ogp.me/) tags and [WHATWG URL API](https://nodejs.org/api/url.html#url_the_whatwg_url_api).
 - [sitemap](/scripts/sitemap) - A [generator](https://hexo.io/api/generator) plugin to generate [a sitemap](https://en.wikipedia.org/wiki/Sitemaps). Modified from [hexo-generator-sitemap](https://github.com/hexojs/hexo-generator-sitemap) with this [patch](https://github.com/hexojs/hexo-generator-sitemap/pull/26) to include tags/categories and [remove](https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889) [index.html](https://github.com/hexojs/hexo-generator-sitemap/pull/59) from the URL.
 
 ## License
