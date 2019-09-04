@@ -13,7 +13,6 @@
 
 const moment = require('moment')
 const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
-const micromatch = require('micromatch')
 
 function meta (name, content, escape) {
   if (escape !== false && typeof content === 'string') {
@@ -67,7 +66,7 @@ function openGraphHelper (options = {}) {
   }
 
   if (!images.length && content && content.includes('<img')) {
-    images = images.slice();
+    images = images.slice()
 
     let img
     const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
@@ -103,14 +102,17 @@ function openGraphHelper (options = {}) {
   }
 
   images = images.map(path => {
-    // parse relative url to full url
+    let url
+    // resolve `path`'s absolute path relative to current page's url
+    // `path` can be both absolute (starts with `/`) or relative.
     try {
-      new URL(path)
-    } catch {
-      return new URL(path, config.url).href
+      url = new URL(path).href
+    } catch (e) {
+      url = new URL(path, config.url).href
+      return url
     }
 
-    return path
+    return url
   })
 
   images.forEach(path => {
