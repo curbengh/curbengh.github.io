@@ -26,7 +26,7 @@ To see this in action, check out this [job log](https://gitlab.com/curben/blog/-
 ### hexo-yam
 Despite the convenience of hexo-all-minifier, I don't use it due to potential vulnerability. I don't need its image compression since the image hosting I'm currently using, [Cloudinary](https://cloudinary.com/), offers [auto compression](https://cloudinary.com/documentation/responsive_images#responsive_images_with_automatic_quality_selection).
 
-So, I switch to a leaner plugin, [hexo-yam](https://github.com/weyusi/hexo-yam). To use it, simply run the following command in your hexo folder:
+So, I switch to a leaner plugin, [hexo-yam](https://github.com/curbengh/hexo-yam). To use it, simply run the following command in your hexo folder:
 ``` bash
 $ npm install hexo-yam --save
 ```

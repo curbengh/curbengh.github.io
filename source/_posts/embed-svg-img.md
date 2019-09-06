@@ -42,7 +42,7 @@ svgo --disable=cleanupIDs test.svg -o test.min.svg
 
 <br/>
 
-For [hexo-yam](https://github.com/weyusi/hexo-yam),
+For [hexo-yam](https://github.com/curbengh/hexo-yam),
 ```json
 neat_svg:
   plugins: [{ cleanupIDs: false }]
