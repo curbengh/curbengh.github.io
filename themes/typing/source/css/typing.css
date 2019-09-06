@@ -60,8 +60,6 @@ h3 {
 
 a {
   color: inherit;
-  transition: color 0.25s linear;
-  cursor: pointer;
 }
 
 a:active,
@@ -441,7 +439,6 @@ blockquote {
 .article .article-entry blockquote footer cite a {
   color: #cacdd0;
   border-bottom: 1px solid #eee;
-  transition: color 0.25s linear;
 }
 
 .article .article-entry blockquote footer cite:before {
@@ -850,7 +847,6 @@ svg#link {
 .copy-button {
   border: 1px solid #999;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 0.8em;
   line-height: 1em;
   padding: 5px;
