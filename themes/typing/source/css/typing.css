@@ -263,18 +263,6 @@ blockquote {
   display: inline-block;
 }
 
-.copyright a,
-.footer-content a,
-.footer-links a {
-  color: #cacdd0;
-}
-
-.copyright a:hover,
-.footer-content a:hover,
-.footer-links a:hover {
-  color: white;
-}
-
 .archive-footer,
 .post-footer {
   color: #cacdd0;
@@ -540,10 +528,6 @@ blockquote {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.article .article-meta a {
-  color: #cacdd0;
 }
 
 .article .article-meta .label {
