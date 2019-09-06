@@ -191,12 +191,6 @@ samp {
   background: #333;
 }
 
-.article .article-entry blockquote footer cite a:hover,
-.article .article-nav-link-wrap:hover {
-  border-bottom: 1px solid;
-  transition: color 0.1s linear;
-}
-
 /* Hide post's excerpt in article */
 .p-summary {
   display: none;
@@ -518,7 +512,6 @@ blockquote {
 
 .article .article-nav-link-wrap {
   display: inline-block;
-  color: #cacdd0;
   padding: 0 1em;
   width: 49%;
   box-sizing: border-box;
