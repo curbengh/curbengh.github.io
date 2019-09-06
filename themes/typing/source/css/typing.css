@@ -399,20 +399,6 @@ blockquote {
   color: #cacdd0;
 }
 
-.archive-container .page-nav,
-.category-container .page-nav,
-.tag-container .page-nav {
-  text-align: center;
-  margin-top: 2em;
-  color: #cacdd0;;
-}
-
-.archive-container .page-nav a,
-.category-container .page-nav a,
-.tag-container .page-nav a {
-  color: #cacdd0;
-}
-
 .archive-container .extend,
 .archive-container .page-number,
 .category-container .extend,
