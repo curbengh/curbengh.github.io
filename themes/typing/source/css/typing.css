@@ -60,6 +60,7 @@ h3 {
 
 a {
   color: inherit;
+  cursor: pointer;
 }
 
 a:active,
@@ -847,6 +848,7 @@ svg#link {
 .copy-button {
   border: 1px solid #999;
   border-radius: 5px;
+  cursor: pointer;
   font-size: 0.8em;
   line-height: 1em;
   padding: 5px;
