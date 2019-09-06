@@ -5,6 +5,7 @@
 
 html {
   cursor: unset;
+  height: 100%;
   line-height: 1.15;
 }
 
@@ -13,12 +14,9 @@ body {
   background: black;
   font-family: sans-serif;
   font-size: 1.2em;
+  /* https://stackoverflow.com/a/6654996 */
+  min-height: 100%;
   line-height: 1.5;
-}
-
-html,
-body {
-  height: 100%;
 }
 
 /*
@@ -162,6 +160,7 @@ legend {
   font-weight: inherit;
 }
 
+.highlight,
 code,
 kbd,
 pre,
@@ -629,19 +628,18 @@ td {
   border: 1px solid #ddd;
 }
 
-.article-entry .highlight .line.marked {
+.highlight .line.marked {
   background: #444;
 }
 
-.article-entry .highlight,
-.article-entry pre {
+.highlight {
   padding: 1em;
   font-size: 0.9em;
   overflow: auto;
   line-height: 1.8;
 }
 
-.article-entry .highlight .gutter pre {
+.highlight .gutter pre {
   color: #cacdd0;
   font-size: 0.9em;
 }
@@ -652,29 +650,29 @@ td {
   padding: 0;
 }
 
-.article-entry .highlight pre {
+.highlight pre {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-.article-entry .highlight table {
+.highlight table {
   margin: 0;
   width: 100%;
 }
 
-.article-entry .highlight td {
+.highlight td {
   border: 0;
   padding: 0;
 }
 
 pre .comment,
 pre .title,
-.article-entry .highlight figcaption {
+.highlight figcaption {
   color: #8e908c;
 }
 
-.article-entry .highlight figcaption a {
+highlight figcaption a {
   float: right;
 }
 
@@ -937,6 +935,7 @@ svg#link {
     color: white;
   }
 
+  .highlight,
   code,
   kbd,
   pre,
@@ -960,6 +959,7 @@ svg#link {
     color: black;
   }
 
+  .highlight,
   code,
   kbd,
   pre,
