@@ -86,7 +86,6 @@ textarea {
 hr {
   background-image: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
   border: none;
-  border-bottom: 1px solid #cfcfcf;
   box-sizing: content-box;
   height: 1px;
   margin-bottom: 1em;
