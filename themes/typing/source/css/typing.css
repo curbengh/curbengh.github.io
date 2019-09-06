@@ -228,6 +228,11 @@ blockquote {
   margin: 1em 3em 1em -1em;
 }
 
+.page-nav {
+  margin-top: 2em;
+  text-align: center;
+}
+
 .footer {
   box-sizing: border-box;
 }
