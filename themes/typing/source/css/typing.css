@@ -191,12 +191,6 @@ samp {
   border: 0;
   height: 1px;
   margin-top: 0;
-  background-image: -webkit-linear-gradient(
-    0deg,
-    transparent,
-    #d5d5d5,
-    transparent
-  );
 }
 
 .main-nav-link {
@@ -396,12 +390,6 @@ blockquote {
 .tag-container hr {
   width: 100%;
   margin-left: 0;
-  background-image: -webkit-linear-gradient(
-    0deg,
-    #d5d5d5,
-    #d5d5d5,
-    transparent
-  );
 }
 
 .archive-container .archive-article-date,
@@ -448,12 +436,6 @@ blockquote {
 .article hr {
   width: 100%;
   margin-left: 0;
-  background-image: -webkit-linear-gradient(
-    0deg,
-    #d5d5d5,
-    #d5d5d5,
-    transparent
-  );
 }
 
 .article .caption {
