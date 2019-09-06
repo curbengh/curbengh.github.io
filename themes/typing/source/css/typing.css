@@ -84,7 +84,7 @@ textarea {
 }
 
 hr {
-  background: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
+  background-image: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
   border: none;
   border-bottom: 1px solid #cfcfcf;
   box-sizing: content-box;
@@ -104,7 +104,6 @@ hr {
 }
 
 .home hr {
-  width: 80%;
   margin: 1em auto;
 }
 
@@ -114,7 +113,7 @@ hr {
 }
 
 .header-hr {
-  background: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
+  background-image: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
 }
 
 figcaption,
@@ -905,11 +904,11 @@ svg#link {
   }
 
   hr {
-    background: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
+    background-image: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
   }
 
   .header-hr {
-    background: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
+    background-image: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
   }
 
   .copy-button:hover {
@@ -937,11 +936,11 @@ svg#link {
   }
 
   hr {
-    background: -webkit-linear-gradient(0deg,transparent,#333,transparent);
+    background-image: -webkit-linear-gradient(0deg,transparent,#333,transparent);
   }
 
   .header-hr {
-    background: -webkit-linear-gradient(0deg,#333,#333,transparent);
+    background-image: -webkit-linear-gradient(0deg,#333,#333,transparent);
   }
 
   .copy-button:hover {
