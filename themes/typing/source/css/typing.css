@@ -84,14 +84,37 @@ textarea {
 }
 
 hr {
+  background: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
   border: none;
   border-bottom: 1px solid #cfcfcf;
-  margin-bottom: 1em;
   box-sizing: content-box;
-  height: 0;
+  height: 1px;
+  margin-bottom: 1em;
+  margin-left: 25%;
   overflow: visible;
   width: 50%;
-  margin-left: 25%;
+}
+
+.archive-container hr,
+.category-container hr,
+.tag-container hr,
+.article hr {
+  width: 100%;
+  margin-left: 0;
+}
+
+.home hr {
+  width: 80%;
+  margin: 1em auto;
+}
+
+.article .article-footer,
+.article .article-footer hr {
+  margin-top: 1em;
+}
+
+.header-hr {
+  background: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
 }
 
 figcaption,
@@ -178,19 +201,6 @@ samp {
 /* Hide post's excerpt in article */
 .p-summary {
   display: none;
-}
-
-.archive-container hr,
-.archive-footer hr,
-.article .article-footer hr,
-.article hr,
-.category-container hr,
-.home hr,
-.post-footer hr,
-.tag-container hr {
-  border: 0;
-  height: 1px;
-  margin-top: 0;
 }
 
 .main-nav-link {
@@ -318,11 +328,6 @@ blockquote {
   margin: 0 auto;
 }
 
-.home hr {
-  width: 80%;
-  margin: 1em auto;
-}
-
 .home li {
   list-style: none;
 }
@@ -385,13 +390,6 @@ blockquote {
   margin: 0;
 }
 
-.archive-container hr,
-.category-container hr,
-.tag-container hr {
-  width: 100%;
-  margin-left: 0;
-}
-
 .archive-container .archive-article-date,
 .category-container .archive-article-date,
 .tag-container .archive-article-date {
@@ -417,11 +415,6 @@ blockquote {
 
 .article .main-nav-link:hover {
   border: 0;
-}
-
-.article hr {
-  width: 100%;
-  margin-left: 0;
 }
 
 .article .caption {
@@ -543,11 +536,6 @@ blockquote {
 
 .article .article-nav-link-wrap.older {
   text-align: left;
-}
-
-.article .article-footer,
-.article .article-footer hr {
-  margin-top: 1em;
 }
 
 .article .article-meta {
@@ -911,6 +899,14 @@ svg#link {
     background: #333;
   }
 
+  hr {
+    background: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
+  }
+
+  .header-hr {
+    background: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
+  }
+
   .copy-button:hover {
     background: #e6e6e6;
     color: black;
@@ -933,6 +929,14 @@ svg#link {
   pre,
   samp {
     background: #d8d8d8;
+  }
+
+  hr {
+    background: -webkit-linear-gradient(0deg,transparent,#333,transparent);
+  }
+
+  .header-hr {
+    background: -webkit-linear-gradient(0deg,#333,#333,transparent);
   }
 
   .copy-button:hover {
