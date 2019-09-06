@@ -104,6 +104,7 @@ hr {
 
 .home hr {
   margin: 1em auto;
+  width: 65%;
 }
 
 .article .article-footer,
