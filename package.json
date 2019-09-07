@@ -14,6 +14,7 @@
     "autoprefixer": "^9.6.1",
     "hexo": "hexojs/hexo",
     "hexo-generator-archive": "hexojs/hexo-generator-archive",
+    "hexo-generator-index": "hexojs/hexo-generator-index",
     "hexo-generator-tag": "hexojs/hexo-generator-tag",
     "hexo-nofollow": "curbengh/hexo-nofollow",
     "hexo-renderer-ejs": "hexojs/hexo-renderer-ejs",
