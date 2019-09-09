@@ -16,11 +16,13 @@
   Cache-Control: max-age=86400, public
 /*.js
   Cache-Control: max-age=604800, public
+/*.gif
+  Cache-Control: max-age=604800, public
 /*.ico
+  Cache-Control: max-age=604800, public
+/*.jpg
   Cache-Control: max-age=604800, public
 /*.png
   Cache-Control: max-age=604800, public
 /*.webp
-  Cache-Control: max-age=604800, public
-/*.jpg
   Cache-Control: max-age=604800, public
