@@ -8,7 +8,6 @@
   Strict-Transport-Security: max-age=31536000
   Feature-Policy: accelerometer 'none'; autoplay 'none'; camera 'none'; document.domain 'none'; display-capture 'none'; encrypted-media 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; sync-xhr 'none'; usb 'none'
   Expires: 0
-  Server: 0
 
 /*.html
   Cache-Control: max-age=86400, public
