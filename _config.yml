@@ -77,9 +77,9 @@ nofollow:
 
 # hexo-yam
 ## https://github.com/weyusi/hexo-yam
-neat_enable: true
-neat_svg:
-  plugins: [{cleanupIDs: false}]
+minify:
+  svg:
+    plugins: [{cleanupIDs: false}]
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
