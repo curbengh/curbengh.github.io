@@ -71,12 +71,12 @@ pagination_dir: page
 theme: chameleon
 
 # hexo-nofollow
-## https://github.com/weyusi/hexo-nofollow
+## https://github.com/curbengh/hexo-nofollow
 nofollow:
   enable: true
 
 # hexo-yam
-## https://github.com/weyusi/hexo-yam
+## https://github.com/curbengh/hexo-yam
 minify:
   svg:
     plugins: [{cleanupIDs: false}]
