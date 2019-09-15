@@ -34,7 +34,7 @@ The following are the major changes I made compared to the upstream.
 - Add `lastUpdated` to the front-matter to manually set updated time of a post, instead of using `post.updated`.
 
 ### [Chameleon theme](/themes/chameleon)
-Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) theme, rewrite from scratch with the following changes/features:
+Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) theme, rewrote from scratch with the following changes/features:
 
 - [sanitize.css](https://github.com/csstools/sanitize.css/) and [autoprefixer](https://github.com/csstools/sanitize.css/) for consistent cross-browser styling.
 - Utilise [relative length](https://www.w3schools.com/CSSref/css_units.asp) instead of absolute length in the css.
