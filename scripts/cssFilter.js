@@ -13,19 +13,11 @@ const autoprefixer = require('autoprefixer')
 const normalize = require('postcss-normalize')
 const postcss = require('postcss')
 
-hexo.extend.renderer.register('css', 'css', (data, options) => {
+hexo.extend.renderer.register('css', 'css', async (data) => {
   if (data.path) {
     if (data.path.endsWith('.min.css')) return data.text
   }
 
-  return new Promise((resolve, reject) => {
-    postcss([normalize, autoprefixer])
-      .process(data.text, { from: data.path })
-      .then(result => {
-        resolve(result.css)
-      },
-      error => {
-        reject(error)
-      })
-  })
+  const result = await postcss([normalize, autoprefixer]).process(data.text, { from: data.path })
+  return result.css
 })
