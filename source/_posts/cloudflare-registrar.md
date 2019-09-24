@@ -31,4 +31,4 @@ However, the process above may not go as smoothly and the initial transfer might
 
 {% image '20190905/cloudflare-registrar-section.png' 'Domain Registration Section on Cloudflare' %}
 
-Disclosure: I do **not** receive any commission from any of the products mentioned above. None of the links are affiliate link.
+Disclaimer: I do **not** receive any commission from any of the products mentioned above. None of the links are affiliate link.
