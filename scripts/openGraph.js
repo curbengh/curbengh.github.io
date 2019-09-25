@@ -12,24 +12,16 @@
 'use strict'
 
 const moment = require('moment')
-const { escapeHTML, htmlTag, stripHTML } = require('hexo-util')
+const { encodeURL, htmlTag, stripHTML } = require('hexo-util')
 
-function meta (name, content, escape) {
-  if (escape !== false && typeof content === 'string') {
-    content = escapeHTML(content)
-  }
-
+function meta (name, content) {
   return `${htmlTag('meta', {
     name,
     content
   })}\n`
 }
 
-function og (name, content, escape) {
-  if (escape !== false && typeof content === 'string') {
-    content = escapeHTML(content)
-  }
-
+function og (name, content) {
   return `${htmlTag('meta', {
     property: name,
     content
@@ -44,7 +36,7 @@ function openGraphHelper (options = {}) {
   const keywords = page.keywords || (page.tags && page.tags.length ? page.tags : undefined) || config.keywords
   const title = page.title || theme.nickname
   const type = (this.is_post() ? 'article' : 'website')
-  const url = this.url.replace(/index.html$/, '')
+  const url = encodeURL(this.url)
   const siteName = theme.nickname
   const twitterCard = options.twitter_card || 'summary'
   const published = page.date || false
@@ -76,7 +68,7 @@ function openGraphHelper (options = {}) {
   }
 
   if (description) {
-    result += meta('description', description, false)
+    result += meta('description', description)
   }
 
   if (keywords) {
@@ -91,14 +83,14 @@ function openGraphHelper (options = {}) {
 
   result += og('og:type', type)
   result += og('og:title', title)
-  result += og('og:url', url, false)
+  result += og('og:url', url)
   result += og('og:site_name', siteName)
   if (description) {
-    result += og('og:description', description, false)
+    result += og('og:description', description)
   }
 
   if (language) {
-    result += og('og:locale', language, false)
+    result += og('og:locale', language)
   }
 
   images = images.map(path => {
@@ -116,7 +108,7 @@ function openGraphHelper (options = {}) {
   })
 
   images.forEach(path => {
-    result += og('og:image', path, false)
+    result += og('og:image', path)
   })
 
   if (published) {
@@ -140,7 +132,7 @@ function openGraphHelper (options = {}) {
   result += meta('twitter:card', twitterCard)
 
   if (images.length) {
-    result += meta('twitter:image', images[0], false)
+    result += meta('twitter:image', images[0])
   }
 
   return result.trim()
