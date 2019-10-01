@@ -3,6 +3,8 @@ title: About
 layout: page
 ---
 
+[![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)
+
 ## Personal projects
 
 ### hexo-yam
