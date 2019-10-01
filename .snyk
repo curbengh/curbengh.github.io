@@ -5,8 +5,12 @@ ignore:
   'npm:mem:20180117':
     - renovate > npm > libnpx > yargs > os-locale > mem:
         reason: Update/patch unavailable
-        expires: '2019-12-31T00:00:00.000Z'
+        expires: '2019-10-31T00:00:00.000Z'
     - npm > libnpx > yargs > os-locale > mem:
         reason: Update/patch unavailable
-        expires: '2019-12-31T00:00:00.000Z'
+        expires: '2019-10-31T00:00:00.000Z'
+  'SNYK-JS-HANDLEBARS-469063':
+    - renovate > handlebars:
+        reason: Pending update from renovate
+        expires: '2019-10-31T00:00:00.000Z'
 patch: {}
