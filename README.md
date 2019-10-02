@@ -5,13 +5,6 @@
 [![Build Status](https://gitlab.com/curben/curben.gitlab.io/badges/master/pipeline.svg)](https://gitlab.com/curben/blog/-/jobs)
 [![Hexo version](https://img.shields.io/badge/hexo-hexojs/hexo-brightgreen.svg)](https://github.com/hexojs/hexo)
 
-Forked from GitLab's [Hexo](https://gitlab.com/pages/hexo) example with [Typing](https://github.com/geekplux/hexo-theme-typing) theme.
-
-## Installation
-
-Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
-
-
 ### Plugins
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
 - Installed [hexo-yam](https://github.com/curbengh/hexo-yam) to pre-compress static assets (html, css, js and svg).
@@ -42,6 +35,10 @@ Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) t
 - Add a [Copy](https://clipboardjs.com/) button to each code block.
 - Removed jQuery, fancyBox, web analytics, comment plugins, donation links and [typo.css](https://github.com/sofish/typo.css).
 - Homepage shows index of posts (same as /archives).
+
+## Installation
+
+Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
 
 ## License
 The content of this blog is licensed under the [CC-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md), unless indicated otherwise.
