@@ -1,11 +1,0 @@
---2019-10-01 03:42:19--  https://img.shields.io/static/v1?label=GitHub
-Resolving img.shields.io (img.shields.io)... 104.28.21.21, 104.28.20.21, 2606:4700:30::681c:1515, ...
-Connecting to img.shields.io (img.shields.io)|104.28.21.21|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: unspecified [image/svg+xml]
-Saving to: 'v1?label=GitHub’
-
-v1?label=GitHub        [<=>           ]       0  --.-KB/s               v1?label=GitHub        [ <=>          ]    1014  --.-KB/s    in 0s      
-
-2019-10-01 03:42:23 (10.1 MB/s) - 'v1?label=GitHub’ saved [1014]
-
