@@ -61,46 +61,20 @@ deploy:
 ## Installation
 1. Having Hexo means you can debug locally, rather than waiting for [Travis](https://travis-ci.com/). You can even run a local server to preview your blog (see step 6 below).
 2. Clone your repo to your workstation.
-3. Install Node.js 10 (current [active LTS](https://github.com/nodejs/Release)). Other distro, see this [guide](https://nodejs.org/en/download/package-manager/) or [here](https://github.com/nodesource/distributions).
-
-```bash
-# Installing npm will also install nodejs as dependency.
-# Ubuntu 16.04 or newer
-$ sudo snap install node --classic --channel=10
-# Debian
-$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-$ sudo apt-get install -y nodejs
-# Fedora 29 or newer
-$ sudo dnf install npm
-# Fedora 28 or older
-$ curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
-$ sudo yum -y install nodejs
-# Arch Linux
-$ sudo pacman -S npm
-```
-
-4. Install Hexo and its dependencies (defined in `package.json`). Re-launch the terminal program before continue. After installation, append `node_modules/.bin` to $PATH (skip the `echo` step if you've already {% post_link running-locally-installed-node-packages 'done so' %}).
-
-```bash
-$ git clone https://github.com/username/repo <project>
-$ cd <project>
-$ npm install --only=prod
-$ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
-```
-
-5. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
+3. Install Node.js and Hexo using the [official guide](https://hexo.io/docs/).
+4. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 
 ```bash
 $ hexo generate
 ```
 
-6. (Optional) Start Hexo server on `http://localhost:4000` to preview the blog. ([more info](https://hexo.io/docs/server))
+5. (Optional) Start Hexo server on `http://localhost:4000` to preview the blog. ([more info](https://hexo.io/docs/server))
 
 ```bash
 $ hexo server
 ```
 
-7. Git add, commit and push the file to your GitHub repo.
+6. Git add, commit and push the file to your GitHub repo.
 
 ``` bash
 $ git add 'source/_posts/your-post.md'
@@ -108,8 +82,8 @@ $ git commit -a -m 'Commit Message'
 $ git push -u
 ```
 
-8. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to a limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
-9.  If there is no error, the generated website can be accessed on <b>*username*.github.io</b>
+7. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to a limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
+8.  If there is no error, the generated website can be accessed on <b>*username*.github.io</b>
 
 ## Writing
 1. Create a new post (using Hexo)

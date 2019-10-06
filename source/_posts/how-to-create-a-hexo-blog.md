@@ -36,46 +36,21 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 ## Installation
 1. Having Hexo means you can debug locally, rather than waiting for [CI](https://docs.gitlab.com/ee/ci/). You can even run a local server to preview your blog (see step 6 below).
 2. Clone your repo to your workstation.
-3. Install Node.js 10 (current [active LTS](https://github.com/nodejs/Release)). Other distro, see this [guide](https://nodejs.org/en/download/package-manager/) or [here](https://github.com/nodesource/distributions).
-
-```bash
-# Ubuntu 16.04 or newer
-$ sudo snap install node --classic --channel=10
-# Debian
-$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-$ sudo apt-get install -y nodejs
-# Fedora 29 or newer
-$ sudo dnf install npm
-# Fedora 28 or older
-$ curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
-$ sudo yum -y install nodejs
-# Arch Linux
-$ sudo pacman -S npm
-```
-
-4. Install Hexo and its dependencies (defined in `package.json`). Re-launch the terminal program before continue. After installation, append `node_modules/.bin` to $PATH (skip the `echo` step if you've already {% post_link running-locally-installed-node-packages 'done so' %}).
-
-```bash
-$ git clone https://github.com/username/repo <project>
-$ cd <folder>
-$ npm install --only=prod
-$ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
-```
-
-5. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
+3. Install Node.js and Hexo using the [official guide](https://hexo.io/docs/).
+4. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 
 ```bash
 $ hexo generate
 ```
 
-6. (Optional) Start Hexo server on `http://localhost:4000` to preview the blog.
+5. (Optional) Start Hexo server on `http://localhost:4000` to preview the blog.
 
 ```bash
 $ hexo server
 ```
 More info: [Server](https://hexo.io/docs/server)
 
-7. Git add, commit and push the file to your GitHub repo.
+6. Git add, commit and push the file to your GitHub repo.
 
 ``` bash
 $ git add 'source/_posts/your-post.md'
@@ -83,14 +58,14 @@ $ git commit -a -m 'Commit Message'
 $ git push -u
 ```
 
-8. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/blog/blob/master/.gitignore), as CI will generate them during build.
+7. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/blog/blob/master/.gitignore), as CI will generate them during build.
   1. I have migrated to [Netlify](https://www.netlify.com/) and removed my GitLab page.
   2. Since I don't have a gitlab page any more, I removed the deploy command in the `.gitlab-ci.yml`.
   3. The config now has two parts. To use in gitlab page, simply uncomment the second part and comment out the first part.
   4. Make sure you {% post_link validity-gitlab-ci-config 'double-check' %} the CI config before you push.
 
-9. Check the build status by going to your project `CI /CD -> Pipelines`. Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
-10.  If there is no error, the generated website can be accessed on `<your-username>.gitlab.io/` or the link shown on your project `Settings -> Pages`.
+8. Check the build status by going to your project `CI /CD -> Pipelines`. Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
+9.  If there is no error, the generated website can be accessed on `<your-username>.gitlab.io/` or the link shown on your project `Settings -> Pages`.
 
 ## Writing
 1. Create a new post (using Hexo)
