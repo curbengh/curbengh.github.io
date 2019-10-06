@@ -39,9 +39,9 @@ and deploy.
 
 1. Linux distro has built-in gzip. Install brotli through apt/dnf/yum/pacman.
 2. To compress, simply run the following commands after you generate static files (`$ hexo generate`), only `public` folder is affected,
-	```bash
-	$ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \;
-	$ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir brotli -f --keep {} \;
-	```
+  ```bash
+  $ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir gzip -f --keep {} \;
+  $ find public -type f -iregex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -execdir brotli -f --keep {} \;
+  ```
 3. If you use CI like `.gitlab-ci.yml` or `.travis.yml`, simply add the above command under `script:`, after `hexo generate`.
 4. Deploy.

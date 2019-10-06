@@ -25,15 +25,15 @@ filename=$(basename "$1")
 dir=$(dirname "$1")
 
 gs \
-	-sOutputFile="$dir/${filename%.*}.compressed.pdf" \
-	-sDEVICE=pdfwrite \
-	-dPDFSETTINGS=/ebook \
-	-sColorConversionStrategy=Gray \
-	-sColorConversionStrategyForImages=/Gray \
-	-dProcessColorModel=/DeviceGray \
-	-dCompatibilityLevel=1.4 \
-	-dNOPAUSE -dBATCH -dQUIET \
-	"$1"
+  -sOutputFile="$dir/${filename%.*}.compressed.pdf" \
+  -sDEVICE=pdfwrite \
+  -dPDFSETTINGS=/ebook \
+  -sColorConversionStrategy=Gray \
+  -sColorConversionStrategyForImages=/Gray \
+  -dProcessColorModel=/DeviceGray \
+  -dCompatibilityLevel=1.4 \
+  -dNOPAUSE -dBATCH -dQUIET \
+  "$1"
 ```
 
 
@@ -41,11 +41,11 @@ Options ([more info](https://ghostscript.com/doc/current/Ps2pdf.htm#Options)):
 
 - Remove **ColorConversionStrategy**, **ColorConversionStrategyForImages** and **ProcessColorModel** lines to retain colour.
 - **PDFSETTINGS**:
-	- */default* selects output intended to be useful across a wide variety of uses. 72 DPI.
-	- */screen* selects low-resolution output similar to the Acrobat Distiller "Screen Optimized" setting. 72 DPI.
-	- */ebook* selects medium-resolution output similar to the Acrobat Distiller "eBook" setting. 150 DPI.
-	- */printer* selects output similar to the Acrobat Distiller "Print Optimized" setting. 300 DPI.
-	- */prepress* selects output similar to Acrobat Distiller "Prepress Optimized" setting. 300 DPI.
+  - */default* selects output intended to be useful across a wide variety of uses. 72 DPI.
+  - */screen* selects low-resolution output similar to the Acrobat Distiller "Screen Optimized" setting. 72 DPI.
+  - */ebook* selects medium-resolution output similar to the Acrobat Distiller "eBook" setting. 150 DPI.
+  - */printer* selects output similar to the Acrobat Distiller "Print Optimized" setting. 300 DPI.
+  - */prepress* selects output similar to Acrobat Distiller "Prepress Optimized" setting. 300 DPI.
 
 ## PDFs in a folder
 
@@ -61,22 +61,22 @@ cd "$1"
 for i in *.pdf; do
     [ -f "$i" ] || break
 
-	# Skip compressed PDFs
-	echo "$i" | grep --quiet ".compressed.pdf"
+  # Skip compressed PDFs
+  echo "$i" | grep --quiet ".compressed.pdf"
 
-	if [ $? = 1 ]
-	then
-		gs \
-			-sOutputFile="${i%.*}.compressed.pdf" \
-			-sDEVICE=pdfwrite \
-			-dPDFSETTINGS=/ebook \
-			-sColorConversionStrategy=Gray \
-			-sColorConversionStrategyForImages=/Gray \
-			-dProcessColorModel=/DeviceGray \
-			-dCompatibilityLevel=1.4 \
-			-dNOPAUSE -dBATCH -dQUIET \
-			"$i"
-	fi
+  if [ $? = 1 ]
+  then
+    gs \
+      -sOutputFile="${i%.*}.compressed.pdf" \
+      -sDEVICE=pdfwrite \
+      -dPDFSETTINGS=/ebook \
+      -sColorConversionStrategy=Gray \
+      -sColorConversionStrategyForImages=/Gray \
+      -dProcessColorModel=/DeviceGray \
+      -dCompatibilityLevel=1.4 \
+      -dNOPAUSE -dBATCH -dQUIET \
+      "$i"
+  fi
 done
 ```
 

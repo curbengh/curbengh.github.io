@@ -42,20 +42,20 @@ deploy:
 ```
 
 10. You can start writing a new post straightaway without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
-	1. To create a new post (through [GitHub.com](https://help.github.com/en/articles/creating-new-files)), create a new `<post-title>.md` file in `source/_posts` folder.
-	2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
+  1. To create a new post (through [GitHub.com](https://help.github.com/en/articles/creating-new-files)), create a new `<post-title>.md` file in `source/_posts` folder.
+  2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
-	```
-	---
-	title: Test page
-	date: yyyy-mm-dd hh:mm:ss
-	tags:
-	categories:
-	---
-	```
+  ```
+  ---
+  title: Test page
+  date: yyyy-mm-dd hh:mm:ss
+  tags:
+  categories:
+  ---
+  ```
 
-	3. Write your post after the second `---` using [Markdown](https://guides.github.com/features/mastering-markdown/) [style](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
-	4. Save the file by clicking on "Commit changes".
+  3. Write your post after the second `---` using [Markdown](https://guides.github.com/features/mastering-markdown/) [style](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
+  4. Save the file by clicking on "Commit changes".
 11. After you create a new post, the website can be accessed on <b>*username*.github.io</b>. Check your repo settings, under the GitHub Pages, make sure the Source is `gh-pages` branch. Read on if you prefer to manage the blog from your workstation.
 
 ## Installation

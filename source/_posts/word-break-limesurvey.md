@@ -17,31 +17,31 @@ Here's how to prevent word break.
 
 1. Go to the main admin page and then Themes.
 
-	{% image '20181031/theme-button' 'LimeSurvey theme button in admin panel' %}
+  {% image '20181031/theme-button' 'LimeSurvey theme button in admin panel' %}
 
 2. 'Extend' the theme of your choice. Choose a name of the new *extended* theme.
 
-	{% image '20181031/theme-list' 'LimeSurvey theme list' %}
+  {% image '20181031/theme-list' 'LimeSurvey theme list' %}
 
 3. It will redirect you to 'Theme editor' page.
 4. Go to 'custom.css'.
 
-	{% image '20181031/custom-css' 'Customise LimeSurvey theme through custom.css' %}
+  {% image '20181031/custom-css' 'Customise LimeSurvey theme through custom.css' %}
 
 5. Paste the following css,
 
-	```css
-	table.ls-answers {
-	    table-layout: auto;
-	}
-	
-	#outerframeContainer {
-	    word-wrap: normal;
-	    hyphens: none;
-	    -moz-hyphens: none;
-	    -webkit-hyphens: none;
-	}
-	```
+  ```css
+  table.ls-answers {
+      table-layout: auto;
+  }
+  
+  #outerframeContainer {
+      word-wrap: normal;
+      hyphens: none;
+      -moz-hyphens: none;
+      -webkit-hyphens: none;
+  }
+  ```
 
 5. Save it and change to the new theme in your survey.
 
