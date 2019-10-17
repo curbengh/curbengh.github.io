@@ -138,6 +138,10 @@ ul {
   list-style: disc;
 }
 
+ul.index-list {
+  margin-left: unset;
+}
+
 ol {
   list-style: decimal;
   margin-left: 1.9em;
@@ -284,6 +288,15 @@ blockquote {
 
 .footer-links li {
   margin-right: 1em;
+}
+
+/* Wrap count in brackets */
+span.index-list-count:before {
+  content: ' (';
+}
+
+span.index-list-count:after {
+  content: ')';
 }
 
 .home-body {
