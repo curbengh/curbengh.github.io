@@ -172,12 +172,7 @@ th {
 
 table th,
 th {
-  background: #fbfbfb;
-}
-
-table thead th,
-thead th {
-  background: #f1f1f1;
+  background: #333;
 }
 
 em,
@@ -842,7 +837,9 @@ svg#link {
   code,
   kbd,
   pre,
-  samp {
+  samp,
+  table th,
+  th {
     background: #333;
   }
 
@@ -874,7 +871,9 @@ svg#link {
   code,
   kbd,
   pre,
-  samp {
+  samp,
+  table th,
+  th {
     background: #d8d8d8;
   }
 
@@ -889,5 +888,10 @@ svg#link {
   .copy-button:hover {
     background: #333;
     color: #f1f1f1;
+  }
+
+  table th,
+  th {
+    color: #333;
   }
 }
