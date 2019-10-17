@@ -311,6 +311,11 @@ span.index-list-count:after {
   justify-content: center;
 }
 
+/* align badge to the left */
+.about-body .article .article-entry img {
+  margin: auto 0 .5em;
+}
+
 .home {
   font-weight: lighter;
   line-height: 1.4;
