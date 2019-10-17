@@ -101,11 +101,6 @@ hr {
   margin-left: 0;
 }
 
-.home hr {
-  margin: 1em auto;
-  width: 65%;
-}
-
 .article .article-footer,
 .article .article-footer hr {
   margin-top: 1em;
@@ -239,10 +234,6 @@ blockquote {
   box-sizing: border-box;
 }
 
-.home-footer {
-  padding: 3em 0;
-}
-
 .archive-footer a,
 .archive-footer b,
 .archive-footer strong,
@@ -305,48 +296,9 @@ span.index-list-count:after {
   content: ')';
 }
 
-.home-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 /* align badge to the left */
 .about-body .article .article-entry img {
   margin: auto 0 .5em;
-}
-
-.home {
-  font-weight: lighter;
-  line-height: 1.4;
-  text-align: center;
-  position: relative;
-}
-
-.home a {
-  border-bottom: 1px solid #e6e6e6;
-}
-
-.home a:hover {
-  border-bottom: 1px solid white;
-}
-
-.home .content {
-  width: 60%;
-  position: relative;
-  margin: 0 auto;
-}
-
-.home li {
-  list-style: none;
-}
-
-.home .profile {
-  width: 100%;
-}
-
-.home .profile h1 {
-  font-weight: 300;
 }
 
 /* https://jrl.ninja/etc/1/ */
@@ -828,14 +780,6 @@ svg#link {
 @media (max-width: 468px) {
   body {
     font-size: 1em;
-  }
-
-  .home {
-    color: #e6e6e6;
-  }
-
-  .home a {
-    color: #e6e6e6;
   }
 
   .archive-container .archive-footer,
