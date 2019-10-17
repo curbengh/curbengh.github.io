@@ -105,12 +105,3 @@ theme_config:
 
   # Load forkawesome icons? See the links option below.
   icons: false
-
-  # Footer area links
-  # If you set "icons: false" link names will be clear text
-  # If "icons: true" link names will interpreted as fontawesome icon names
-  # Use the forkawesome icon names (https://forkaweso.me/Fork-Awesome/icons/) without the fa- prefix
-  links:
-    Home: /blog/
-    Feed: /atom.xml
-    GitLab: https://gitlab.com/curben/blog
