@@ -3,14 +3,15 @@ version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:mem:20180117':
-    - npm > libnpx > yargs > os-locale > mem:
-        reason: Update/patch unavailable
-        expires: '2019-12-31T00:00:00.000Z'
-    - renovate > npm > libnpx > yargs > os-locale > mem:
+    - '*':
         reason: Update/patch unavailable
         expires: '2019-12-31T00:00:00.000Z'
   SNYK-JS-MARKDOWNIT-459438:
-    - renovate > markdown-it:
+    - '*':
+        reason: Update/patch unavailable
+        expires: '2019-12-31T00:00:00.000Z'
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - '*':
         reason: Update/patch unavailable
         expires: '2019-12-31T00:00:00.000Z'
 # patches apply the minimum changes required to fix a vulnerability
