@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% for post in posts %}
   <url>
-    <loc>{{ post.permalink | uriencode }}</loc>
+    <loc>{{ post.permalink }}</loc>
     {% if post.lastUpdated() %}
     <lastmod>{{ post.lastUpdated() }}</lastmod>
     {% elif post.date %}
@@ -13,30 +13,21 @@
 
   {# home page #}
   <url>
-      <loc>{{ config.url + '/' + config.archive_dir + '/' | uriencode }}</loc>
+      <loc>{{ config.url + config.root }}</loc>
       <lastmod>{{ sNow }}</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>1.0</priority>
+   </url>
+
+  {# archive page #}
+  <url>
+      <loc>{{ config.url + '/' + archive_dir + '/' }}</loc>
+      <lastmod>{{ sNow }}</lastmod>
    </url>
 
   {# tag pages #}
   {% for tag in tags %}
     <url>
-      <loc>{{ tag.permalink | uriencode }}</loc>
+      <loc>{{ tag.permalink }}</loc>
       <lastmod>{{ sNow }}</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.6</priority>
     </url>
   {% endfor %}
-
-  {# categories pages #}
-  {% for cat in categories %}
-    <url>
-      <loc>{{ cat.permalink | uriencode }}</loc>
-      <lastmod>{{ sNow }}</lastmod>
-      <changefreq>daily</changefreq>
-      <priority>0.6</priority>
-    </url>
-  {% endfor %}
-
 </urlset>

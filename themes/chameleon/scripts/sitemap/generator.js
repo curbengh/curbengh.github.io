@@ -4,6 +4,14 @@ const micromatch = require('micromatch')
 const template = require('./template')
 const moment = require('moment')
 
+const isMatch = (path, patterns) => {
+  if (patterns && patterns.length) {
+    if (micromatch.isMatch(path, patterns, { matchBase: true })) return true
+  }
+
+  return false
+}
+
 module.exports = function (locals) {
   const config = this.config
   let skipRenderList = ['*.js', '*.css']
@@ -24,7 +32,6 @@ module.exports = function (locals) {
     // https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889
     .map((post) => ({
       ...post,
-      permalink: post.permalink.replace('index.html', ''),
       date: moment(post.date).format('YYYY-MM-DD[T00:00:00.000Z]'),
       lastUpdated: () => {
         if (post.lastUpdated) return moment(post.lastUpdated).format('YYYY-MM-DD[T00:00:00.000Z]')
@@ -54,12 +61,4 @@ module.exports = function (locals) {
     path: config.sitemap.path,
     data: xml
   }
-}
-
-function isMatch (path, patterns) {
-  if (patterns && patterns.length) {
-    if (micromatch.isMatch(path, patterns, { matchBase: true })) return true
-  }
-
-  return false
 }
