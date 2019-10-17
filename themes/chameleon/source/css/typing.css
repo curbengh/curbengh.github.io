@@ -140,6 +140,7 @@ ul {
 
 ul.index-list {
   margin-left: unset;
+  list-style: disc;
 }
 
 ol {
