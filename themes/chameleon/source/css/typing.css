@@ -148,6 +148,11 @@ ol {
   margin-left: 1.9em;
 }
 
+ol.toc,
+ol.toc-child {
+  margin-left: unset;
+}
+
 li ol,
 li ul,
 ol,
