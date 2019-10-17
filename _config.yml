@@ -90,7 +90,8 @@ pretty_urls:
 theme_config:
   # Header
   menu:
-    Home: /blog/
+    Home: /
+    Blog: /blog/
     About: /about/
     Feed: /atom.xml
     GitLab: https://gitlab.com/curben/blog
