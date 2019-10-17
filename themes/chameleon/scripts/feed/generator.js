@@ -2,8 +2,8 @@
 
 const nunjucks = require('nunjucks')
 const env = new nunjucks.Environment()
-const pathFn = require('path')
-const fs = require('fs')
+const { join } = require('path')
+const { readFileSync } = require('fs')
 const moment = require('moment')
 
 env.addFilter('uriencode', str => {
@@ -18,8 +18,8 @@ env.addFilter('date', str => {
   return moment(str).format('YYYY-MM-DD[T00:00:00.000Z]')
 })
 
-const atomTmplSrc = pathFn.join(__dirname, './.atom.xml')
-const atomTmpl = nunjucks.compile(fs.readFileSync(atomTmplSrc, 'utf8'), env)
+const atomTmplSrc = join(__dirname, './.atom.xml')
+const atomTmpl = nunjucks.compile(readFileSync(atomTmplSrc, 'utf8'), env)
 
 module.exports = function (locals) {
   const config = this.config
