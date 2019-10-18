@@ -68,11 +68,6 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: chameleon
 
-# hexo-nofollow
-## https://github.com/curbengh/hexo-nofollow
-nofollow:
-  enable: true
-
 # hexo-yam
 ## https://github.com/curbengh/hexo-yam
 minify:
