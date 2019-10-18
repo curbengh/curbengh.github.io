@@ -185,8 +185,13 @@ code,
 kbd,
 pre,
 samp {
-  font-size: 0.9em;
   background: #333;
+  font-size: 0.9em;
+}
+
+/* set codeblock width to minimum */
+pre {
+  max-width: min-content;
 }
 
 /* Hide post's excerpt in article */
