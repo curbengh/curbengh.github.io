@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="<%= config.language %>">
-<%- partial('_partial/head', {}, { cache: true }) %>
+<%- partial('_partial/head', {}) %>
   <%/* set /about page to use "home" page layout */%>
   <% if (is_current('about/index.html')) { %>
     <body class="about-body">
