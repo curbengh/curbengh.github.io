@@ -44,8 +44,6 @@ function openGraphHelper () {
   const language = 'en_GB'
   let result = ''
 
-  if (!Array.isArray(images)) images = [images]
-
   if (description) {
     description = stripHTML(description).substring(0, 200)
       .trim() // Remove prefixing/trailing spaces
@@ -55,16 +53,6 @@ function openGraphHelper () {
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&apos;')
       .replace(/\n/g, ' ') // Replace new lines by spaces
-  }
-
-  if (!images.length && content && content.includes('<img')) {
-    images = images.slice()
-
-    let img
-    const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
-    while ((img = imgPattern.exec(content)) !== null) {
-      images.push(img[1])
-    }
   }
 
   if (description) {
@@ -92,6 +80,18 @@ function openGraphHelper () {
   }
 
   result += og('og:locale', language)
+
+  if (!images.length && content && content.includes('<img')) {
+    images = images.slice()
+
+    let img
+    const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
+    while ((img = imgPattern.exec(content)) !== null) {
+      images.push(img[1])
+    }
+  }
+
+  if (!Array.isArray(images)) images = [images]
 
   images = images.map(path => {
     let url
