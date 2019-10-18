@@ -33,7 +33,7 @@ function openGraphHelper (options = {}) {
   const { content } = page
   let images = page.photos || []
   let description = page.excerpt || theme.description
-  const keywords = page.keywords || (page.tags && page.tags.length ? page.tags : undefined) || config.keywords
+  const keywords = page.tags || false
   const title = page.title || theme.nickname
   const type = (this.is_post() ? 'article' : 'website')
   const url = encodeURL(this.url)
@@ -72,13 +72,9 @@ function openGraphHelper (options = {}) {
   }
 
   if (keywords) {
-    if (typeof keywords === 'string') {
-      result += meta('keywords', keywords)
-    } else if (keywords.length) {
-      result += meta('keywords', keywords.map(tag => {
-        return tag.name ? tag.name : tag
-      }).filter(keyword => !!keyword).join())
-    }
+    keywords.forEach(tag => {
+      result += og('article:tag', tag.name)
+    })
   }
 
   result += og('og:type', type)
@@ -112,8 +108,7 @@ function openGraphHelper (options = {}) {
   })
 
   if (published) {
-    if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf()) &&
-      this.is_post()) {
+    if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf())) {
       // Skip timezone conversion
       result += og('article:published_time', moment(published).format('YYYY-MM-DD[T00:00:00.000Z]'))
     }
@@ -121,11 +116,7 @@ function openGraphHelper (options = {}) {
 
   if (updated) {
     if ((moment.isMoment(updated) || moment.isDate(updated)) && !isNaN(updated.valueOf())) {
-      result += og('og:updated_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
-
-      if (this.is_post()) {
-        result += og('article:modified_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
-      }
+      result += og('article:modified_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
     }
   }
 
