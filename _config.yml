@@ -47,6 +47,7 @@ highlight:
   line_number: false
   auto_detect: false
   tab_replace:
+  hljs: true
 
 # Tag
 tag_map:

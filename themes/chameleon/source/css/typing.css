@@ -534,108 +534,88 @@ td {
   border: 1px solid #ddd;
 }
 
-.highlight .line.marked {
-  background: #444;
-}
-
-.highlight {
-  padding: 1em;
-  font-size: 0.9em;
-  overflow: auto;
-  line-height: 1.8;
-}
-
-.highlight .gutter pre {
-  color: #cacdd0;
+code.hljs {
   font-size: 0.9em;
 }
 
-.article-entry pre code {
-  background: 0 0;
-  text-shadow: none;
-  padding: 0;
+/* Dracula Theme v1.2.5
+ *
+ * https://github.com/dracula/highlightjs
+ *
+ * Copyright 2016-present, All rights reserved
+ *
+ * Code licensed under the MIT license
+ *
+ * @author Denis Ciccale <dciccale@gmail.com>
+ * @author Zeno Rocha <hi@zenorocha.com>
+ */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  /* background: #282a36; */
 }
 
-.highlight pre {
-  border: 0;
-  margin: 0;
-  padding: 0;
+.hljs-built_in,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-link {
+  color: #8be9fd;
 }
 
-.highlight table {
-  margin: 0;
-  width: 100%;
+.hljs-keyword {
+  color: #ff79c6;
 }
 
-.highlight td {
-  border: 0;
-  padding: 0;
+/* .hljs,
+.hljs-subst {
+  color: #f8f8f2;
+} */
+
+.hljs-title {
+  color: #50fa7b;
 }
 
-pre .comment,
-pre .title,
-.highlight figcaption {
-  color: #8e908c;
+.hljs-string,
+.hljs-meta,
+.hljs-name,
+.hljs-type,
+.hljs-attr,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #f1fa8c;
 }
 
-highlight figcaption a {
-  float: right;
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion {
+  color: #6272a4;
 }
 
-pre .attribute,
-pre .css .class,
-pre .css .id,
-pre .css .pseudo,
-pre .html .doctype,
-pre .regexp,
-pre .ruby .constant,
-pre .tag,
-pre .variable,
-pre .xml .doctype,
-pre .xml .pi,
-pre .xml .tag .title {
-  color: #c82829;
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-title,
+.hljs-section,
+.hljs-doctag,
+.hljs-type,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
 }
 
-pre .built_in,
-pre .constant,
-pre .literal,
-pre .number,
-pre .params,
-pre .preprocessor {
-  color: #f5871f;
+.hljs-literal,
+.hljs-number {
+  color: #bd93f9;
 }
 
-pre .class,
-pre .css .rules .attribute,
-pre .header,
-pre .inheritance,
-pre .ruby .class .title,
-pre .ruby .symbol,
-pre .string,
-pre .value,
-pre .xml .cdata {
-  color: #718c00;
-}
-
-pre .css .hexcolor {
-  color: #3e999f;
-}
-
-pre .coffeescript .title,
-pre .function,
-pre .javascript .title,
-pre .perl .sub,
-pre .python .decorator,
-pre .python .title,
-pre .ruby .function .title,
-pre .ruby .title .keyword {
-  color: #4271ae;
-}
-
-pre .javascript .function,
-pre .keyword {
-  color: #8959a8;
+.hljs-emphasis {
+  font-style: italic;
 }
 
 /* hide mobile nav menu and its checkbox */
