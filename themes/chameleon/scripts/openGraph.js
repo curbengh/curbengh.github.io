@@ -12,7 +12,7 @@
 'use strict'
 
 const moment = require('moment')
-const { encodeURL, htmlTag, stripHTML } = require('hexo-util')
+const { encodeURL, escapeHTML, htmlTag, stripHTML } = require('hexo-util')
 
 function meta (name, content) {
   return `${htmlTag('meta', {
@@ -32,7 +32,7 @@ function openGraphHelper () {
   const { config, page, theme } = this
   const { content } = page
   let images = page.photos || []
-  const description = page.excerpt || theme.description || false
+  let description = page.excerpt || theme.description || false
   const author = config.author
   const keywords = page.tags || false
   const title = page.title || theme.nickname
@@ -46,17 +46,11 @@ function openGraphHelper () {
   let result = ''
 
   if (description) {
-    description = stripHTML(description).substring(0, 200)
-      .trim() // Remove prefixing/trailing spaces
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;')
-      .replace(/\n/g, ' ') // Replace new lines by spaces
-  }
+    description = escapeHTML(stripHTML(description)
+      .trim()
+      .replace(/\n/g, ' ')
+      .substring(0, 200))
 
-  if (description) {
     result += meta('description', description)
   }
 
