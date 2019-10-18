@@ -37,7 +37,8 @@ function openGraphHelper () {
   const keywords = page.tags || false
   const title = page.title || theme.nickname
   const type = (this.is_post() ? 'article' : 'website')
-  const url = encodeURL(this.url)
+  const url = config.pretty_urls.trailing_index ? encodeURL(this.url)
+    : encodeURL(this.url).replace(/index\.html$/, '')
   const siteName = config.subtitle || theme.nickname || false
   const published = page.date || false
   const updated = page.lastUpdated || false
