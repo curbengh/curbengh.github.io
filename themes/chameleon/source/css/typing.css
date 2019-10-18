@@ -181,7 +181,6 @@ legend {
   font-weight: inherit;
 }
 
-.highlight,
 code,
 kbd,
 pre,
@@ -534,10 +533,6 @@ td {
   border: 1px solid #ddd;
 }
 
-code.hljs {
-  font-size: 0.9em;
-}
-
 /* Dracula Theme v1.2.5
  *
  * https://github.com/dracula/highlightjs
@@ -813,7 +808,6 @@ svg#link {
     color: white;
   }
 
-  .highlight,
   code,
   kbd,
   pre,
@@ -847,7 +841,6 @@ svg#link {
     color: black;
   }
 
-  .highlight,
   code,
   kbd,
   pre,
