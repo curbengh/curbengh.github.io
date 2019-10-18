@@ -32,7 +32,8 @@ function openGraphHelper () {
   const { config, page, theme } = this
   const { content } = page
   let images = page.photos || []
-  let description = page.excerpt || theme.description || false
+  const description = page.excerpt || theme.description || false
+  const author = config.author
   const keywords = page.tags || false
   const title = page.title || theme.nickname
   const type = (this.is_post() ? 'article' : 'website')
@@ -69,6 +70,8 @@ function openGraphHelper () {
   if (description) {
     result += meta('description', description)
   }
+
+  result += og('article:author', author)
 
   if (keywords) {
     keywords.forEach(tag => {
