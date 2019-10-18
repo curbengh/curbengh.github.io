@@ -28,20 +28,19 @@ function og (name, content) {
   })}\n`
 }
 
-function openGraphHelper (options = {}) {
+function openGraphHelper () {
   const { config, page, theme } = this
   const { content } = page
   let images = page.photos || []
-  let description = page.excerpt || theme.description
+  let description = page.excerpt || theme.description || false
   const keywords = page.tags || false
   const title = page.title || theme.nickname
   const type = (this.is_post() ? 'article' : 'website')
   const url = encodeURL(this.url)
-  const siteName = theme.nickname
-  const twitterCard = options.twitter_card || 'summary'
+  const siteName = config.subtitle || theme.nickname || false
   const published = page.date || false
   const updated = page.lastUpdated || false
-  const language = options.language || page.lang || page.language || config.language
+  const language = 'en_GB'
   let result = ''
 
   if (!Array.isArray(images)) images = [images]
@@ -80,14 +79,16 @@ function openGraphHelper (options = {}) {
   result += og('og:type', type)
   result += og('og:title', title)
   result += og('og:url', url)
-  result += og('og:site_name', siteName)
+
+  if (siteName) {
+    result += og('og:site_name', siteName)
+  }
+
   if (description) {
     result += og('og:description', description)
   }
 
-  if (language) {
-    result += og('og:locale', language)
-  }
+  result += og('og:locale', language)
 
   images = images.map(path => {
     let url
@@ -118,12 +119,6 @@ function openGraphHelper (options = {}) {
     if ((moment.isMoment(updated) || moment.isDate(updated)) && !isNaN(updated.valueOf())) {
       result += og('article:modified_time', moment(updated).format('YYYY-MM-DD[T00:00:00.000Z]'))
     }
-  }
-
-  result += meta('twitter:card', twitterCard)
-
-  if (images.length) {
-    result += meta('twitter:image', images[0])
   }
 
   return result.trim()
