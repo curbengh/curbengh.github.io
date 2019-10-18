@@ -1,6 +1,8 @@
 ---
 title: About
 layout: page
+date: 2019-09-20
+lastUpdated: 2019-10-01
 ---
 
 [![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)
