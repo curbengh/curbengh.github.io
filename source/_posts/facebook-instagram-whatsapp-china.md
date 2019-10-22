@@ -2,9 +2,9 @@
 title: Access Facebook/Instagram/Whatsapp/Google in China
 excerpt: Data roaming, commercial VPN provider to rolling your own VPN.
 date: 2018-12-31
-lastUpdated: 2019-01-13
+lastUpdated: 2019-10-23
 tags:
-- security
+- censorship
 ---
 
 Facebook/Instagram/Whatsapp/Google are blocked in China. You can either use data roaming or VPN to access them. Roll your own VPN if you don't trust commercial VPN provider.
@@ -42,7 +42,7 @@ Do note the SIM package cover must be one of four examples provided above, other
 
 If you haven't noticed, the SIMs I mentioned here (including Starhub and China Unicom) are **data-only** (some can call/text, read below). So you can't make/send/receive calls and SMS.
 
-**Edit**: I found China Unicom SIMs that can call (not sure about text) between Mainland and Hong Kong; [3-day](https://res.cloudinary.com/curben/image/upload/20181231/unicom-3-day.jpg) and [5-day](https://res.cloudinary.com/curben/image/upload/20181231/unicom-5-day.jpg) SIMs. They are Hong Kong SIMs, so they should work. They include data but the SIMs are one-time use only.
+**Edit**: I stumbled upon China Unicom SIMs that can call (not sure about text) between Mainland and Hong Kong; [3-day](https://res.cloudinary.com/curben/image/upload/20181231/unicom-3-day.jpg) and [5-day](https://res.cloudinary.com/curben/image/upload/20181231/unicom-5-day.jpg) SIMs. They are Hong Kong SIMs, so they should work. They include data but the SIMs are one-time use only.
 
 For regular SIMs that include call and text, I found this [Hong Kong SIM](https://res.cloudinary.com/curben/image/upload/20181231/unicom-cross-border.jpg). The seller usually also sells prepaid voucher, so you can keep it active like StarHub's.
 
@@ -79,6 +79,8 @@ Mullvad is a cheaper alternative. It offers OpenVPN and Wireguard. They are the 
 
 You can roll your own VPN if you don't trust commercial provider. [Algo](https://github.com/trailofbits/algo) is a bunch of scripts put together to make it much easier for you to do that. With Algo, you can either set up a home server which is least likely to get blocked, or you can use cloud providers if you don't want to mess around with port forwarding. Several cloud providers offer a free trial, usually with some limitations like traffic limit. The limit is not too bad, for example, Amazon EC2 offers 15GB/month. Obviously, this limit doesn't apply in a home server.
 
-In my experience, despite Algo's effort, I still think it's much harder than using a commercial VPN provider. This is not Algo's fault actually. Setting up an EC2 account is too complicated than it should, and the complex Amazon cloud ecosystem is not helping.
+In my experience, despite Algo's effort, I still think it's much harder than using a commercial VPN provider. This is not Algo's fault per se. Setting up an EC2 account is too complicated than it should, and the complex Amazon cloud ecosystem is not helping.
 
 Anyhow, for best results with Algo, I recommend using multiple cloud providers in multiple locations, in case one of them is blocked.
+
+Edit: An alternative to Algo is [Streisand](https://github.com/StreisandEffect/streisand), which may (or may not, I haven't try) be easier to use.
