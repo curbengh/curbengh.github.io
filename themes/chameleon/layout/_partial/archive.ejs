@@ -17,12 +17,13 @@
 <% if (page.total > 1) { %>
   <nav id="page-nav" class="page-nav">
     <% 
-    let prev_text = '&laquo; ' + __('prev')
-    let next_text = __('next') + ' &raquo;'
+    const prev_text = '&laquo; ' + __('prev')
+    const next_text = __('next') + ' &raquo;'
     %>
     <%- paginator({
       prev_text: prev_text,
-      next_text: next_text
+      next_text: next_text,
+      escape: false
     }) %>
   </nav>
 <% } %>
