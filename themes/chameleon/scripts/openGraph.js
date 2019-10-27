@@ -42,7 +42,7 @@ function openGraphHelper () {
   const siteName = config.subtitle || theme.nickname || false
   const published = page.date || false
   const updated = page.lastUpdated || false
-  const language = 'en_GB'
+  const language = config.language.replace('-', '_')
   let result = ''
 
   if (description) {
