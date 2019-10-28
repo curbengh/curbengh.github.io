@@ -145,6 +145,7 @@ ol {
 
 ol.toc,
 ol.toc-child {
+  list-style: disc;
   margin-left: unset;
 }
 
