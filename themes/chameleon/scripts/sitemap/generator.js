@@ -17,7 +17,7 @@ module.exports = function (locals) {
   let skipRenderList = ['*.js', '*.css']
 
   if (Array.isArray(config.skip_render)) {
-    skipRenderList = skipRenderList.concat(config.skip_render)
+    skipRenderList.push(...config.skip_render)
   } else if (config.skip_render != null) {
     skipRenderList.push(config.skip_render)
   }
