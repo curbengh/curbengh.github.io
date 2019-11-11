@@ -2,10 +2,11 @@
 title: About
 layout: page
 date: 2019-09-20
-lastUpdated: 2019-10-01
+lastUpdated: 2019-11-11
 ---
 
 [![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)
+[![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben)
 
 ## Personal projects
 
