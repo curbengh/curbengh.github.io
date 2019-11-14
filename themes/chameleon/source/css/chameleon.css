@@ -219,10 +219,11 @@ strong {
 }
 
 blockquote {
-  color: #666;
+  background: #333;
   border-left: 2px solid #666;
   padding-left: 1em;
-  margin: 1em 3em 1em -1em;
+  margin: 1em 3em 1em 0em;
+  max-width: max-content;
 }
 
 .page-nav {
@@ -814,6 +815,7 @@ svg#link {
     color: white;
   }
 
+  blockquote,
   code,
   kbd,
   pre,
@@ -847,6 +849,7 @@ svg#link {
     color: black;
   }
 
+  blockquote,
   code,
   kbd,
   pre,
