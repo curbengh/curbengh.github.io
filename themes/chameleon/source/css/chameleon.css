@@ -107,7 +107,7 @@ hr {
 }
 
 .header-hr {
-  background-image: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
+  background-image: -webkit-linear-gradient(90deg,#e6e6e6,#e6e6e6,transparent);
 }
 
 figcaption,
@@ -830,7 +830,7 @@ svg#link {
   }
 
   .header-hr {
-    background-image: -webkit-linear-gradient(0deg,#e6e6e6,#e6e6e6,transparent);
+    background-image: -webkit-linear-gradient(90deg,#e6e6e6,#e6e6e6,transparent);
   }
 
   .copy-button:hover {
@@ -864,7 +864,7 @@ svg#link {
   }
 
   .header-hr {
-    background-image: -webkit-linear-gradient(0deg,#333,#333,transparent);
+    background-image: -webkit-linear-gradient(90deg,#333,#333,transparent);
   }
 
   .copy-button:hover {
