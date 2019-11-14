@@ -192,7 +192,7 @@ samp {
 
 /* set codeblock width to minimum */
 pre {
-  max-width: min-content;
+  max-width: max-content;
 }
 
 /* Hide post's excerpt in article */
