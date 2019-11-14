@@ -1,6 +1,6 @@
 <% if (is_post()) { %>
-<%- addJs({ src: '/libs/clipboard.js/2.0.4/clipboard.min.js', 'data-sri-fallback': '/js/clipboard.min.js', integrity: 'sha384-8CYhPwYlLELodlcQV713V9ZikA3DlCVaXFDpjHfP8Z36gpddf/Vrt47XmKDsCttu', crossorigin: 'anonymous', defer: true}) %>
+<%- js({ src: '/libs/clipboard.js/2.0.4/clipboard.min.js', 'data-sri-fallback': '/js/clipboard.min.js', integrity: 'sha384-8CYhPwYlLELodlcQV713V9ZikA3DlCVaXFDpjHfP8Z36gpddf/Vrt47XmKDsCttu', crossorigin: 'anonymous', defer: true}) %>
 <% } %>
 
-<%/* javascript of Typing theme */%>
-<%- addJs('/js/chameleon.js') %>
+<%/* javascript of Chameleon theme */%>
+<%- js('/js/chameleon.js') %>
