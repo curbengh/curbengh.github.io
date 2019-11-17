@@ -93,4 +93,6 @@ privacy.userContext.ui.enabled;true
 privacy.userContext.longPressBehavior;2
 ```
 
-The feature was initially available as an add-on and it is still available (as of August 2019) and may offer [better user experience](https://support.mozilla.org/en-US/kb/containers). Install it from [[addons.mozilla.org]](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/).
+The feature is also available through [an add-on](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/). The add-on offers the ability to assign a site to a specific container, so that a website will always open in a specified container.
+
+{% image '20190407/open-site-container.png' 'Assign a site to a container' %}
