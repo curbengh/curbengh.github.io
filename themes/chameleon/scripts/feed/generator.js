@@ -5,9 +5,10 @@ const env = new nunjucks.Environment()
 const { join } = require('path')
 const { readFileSync } = require('fs')
 const moment = require('moment')
+const { encodeURL } = require('hexo-util')
 
 env.addFilter('uriencode', str => {
-  return encodeURI(str)
+  return encodeURL(str)
 })
 
 env.addFilter('noControlChars', str => {
