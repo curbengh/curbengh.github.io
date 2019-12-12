@@ -14,7 +14,7 @@ const isMatch = (path, patterns) => {
 
 module.exports = function (locals) {
   const config = this.config
-  let skipRenderList = ['*.js', '*.css']
+  const skipRenderList = ['*.js', '*.css']
 
   if (Array.isArray(config.skip_render)) {
     skipRenderList.push(...config.skip_render)
