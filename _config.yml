@@ -16,6 +16,9 @@ url: https://curben.netlify.com
 root: /
 permalink: blog/:year/:month/:day/:title/
 permalink_defaults:
+pretty_urls:
+  trailing_index: false
+  trailing_html: false
 
 # Directory
 source_dir: source
@@ -77,10 +80,6 @@ minify:
 
 feed:
   icon: '/svg/favicon.svg'
-
-## https://github.com/hexojs/hexo/pull/3691
-pretty_urls:
-  trailing_index: false
 
 # theme config
 theme_config:
