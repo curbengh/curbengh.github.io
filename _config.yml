@@ -51,6 +51,7 @@ highlight:
   auto_detect: false
   tab_replace:
   hljs: true
+  wrap: false
 
 # Tag
 tag_map:
