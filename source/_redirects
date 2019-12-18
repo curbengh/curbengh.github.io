@@ -1,3 +1,4 @@
 # Reverse proxy to cdn
 /libs/* https://cdn.statically.io/libs/:splat 200
 /img/* https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site/:splat 200
+/screenshot/* https://cdn.statically.io/screenshot/curben.netlify.com/:splat?mobile=true 200

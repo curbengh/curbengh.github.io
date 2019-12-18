@@ -9,10 +9,9 @@
 * https://nodejs.org/api/url.html#url_the_whatwg_url_api
 */
 
-'use strict'
-
 const moment = require('moment')
-const { encodeURL, escapeHTML, htmlTag, stripHTML } = require('hexo-util')
+const { escapeHTML, htmlTag, prettyUrls, stripHTML } = require('hexo-util')
+const fullUrlFor = require('hexo-util').full_url_for
 
 function meta (name, content) {
   return `${htmlTag('meta', {
@@ -30,15 +29,13 @@ function og (name, content) {
 
 function openGraphHelper () {
   const { config, page, theme } = this
-  const { content } = page
-  let images = page.photos || []
   let description = page.excerpt || theme.description || false
   const author = config.author
   const keywords = page.tags || false
   const title = page.title || theme.nickname
   const type = (this.is_post() ? 'article' : 'website')
-  const url = config.pretty_urls.trailing_index ? encodeURL(this.url)
-    : encodeURL(this.url).replace(/index\.html$/, '')
+  const url = prettyUrls(this.url, config.pretty_urls)
+  const screenshot = '/screenshot/' + prettyUrls(this.path, config.pretty_urls)
   const siteName = config.subtitle || theme.nickname || false
   const published = page.date || false
   const updated = page.lastUpdated || false
@@ -76,35 +73,7 @@ function openGraphHelper () {
 
   result += og('og:locale', language)
 
-  if (!images.length && content && content.includes('<img')) {
-    images = images.slice()
-
-    let img
-    const imgPattern = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
-    while ((img = imgPattern.exec(content)) !== null) {
-      images.push(img[1])
-    }
-  }
-
-  if (!Array.isArray(images)) images = [images]
-
-  images = images.map(path => {
-    let url
-    // resolve `path`'s absolute path relative to current page's url
-    // `path` can be both absolute (starts with `/`) or relative.
-    try {
-      url = new URL(path).href
-    } catch (e) {
-      url = new URL(path, config.url).href
-      return url
-    }
-
-    return url
-  })
-
-  images.forEach(path => {
-    result += og('og:image', path)
-  })
+  result += og('og:image', fullUrlFor.call(this, screenshot))
 
   if (published) {
     if ((moment.isMoment(published) || moment.isDate(published)) && !isNaN(published.valueOf())) {
