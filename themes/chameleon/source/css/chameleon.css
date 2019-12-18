@@ -202,7 +202,6 @@ pre {
 
 .main-nav-link {
   margin-right: 0.5em;
-  color: #cacdd0;
   padding-bottom: 0.5em;
   display: inline-block;
   border: 0;
@@ -235,15 +234,6 @@ blockquote {
   box-sizing: border-box;
 }
 
-.archive-footer a,
-.archive-footer b,
-.archive-footer strong,
-.post-footer a,
-.post-footer b,
-.post-footer strong {
-  color: #cacdd0;;
-}
-
 .container {
   width: 100%;
 }
@@ -253,7 +243,6 @@ blockquote {
 .footer-links {
   text-align: center;
   font-size: 0.95em;
-  color: #cacdd0;
   max-width: 80ch;
   padding: 0 2ch;
   margin: auto;
@@ -263,11 +252,6 @@ blockquote {
 .footer-content li,
 .footer-links li {
   display: inline-block;
-}
-
-.archive-footer,
-.post-footer {
-  color: #cacdd0;
 }
 
 .footer-content {
@@ -356,7 +340,6 @@ span.index-list-count:after {
 .category-container .archive-article-date,
 .tag-container .archive-article-date {
   font-size: 0.8em;
-  color: #cacdd0;
 }
 
 .archive-container .extend,
@@ -380,7 +363,6 @@ span.index-list-count:after {
 }
 
 .article .caption {
-  color: #cacdd0;
   display: block;
   text-align: center;
 }
@@ -407,7 +389,6 @@ span.index-list-count:after {
 .article .article-entry blockquote footer {
   text-align: center;
   font-size: 80%;
-  color: #cacdd0;
 }
 
 .article .article-entry blockquote footer cite {
@@ -415,7 +396,6 @@ span.index-list-count:after {
 }
 
 .article .article-entry blockquote footer cite a {
-  color: #cacdd0;
   border-bottom: 1px solid #eee;
 }
 
@@ -425,7 +405,6 @@ span.index-list-count:after {
 }
 
 .article .article-entry blockquote footer strong {
-  color: #cacdd0;
   font-weight: 400;
 }
 
@@ -482,10 +461,6 @@ span.index-list-count:after {
   border: 0;
 }
 
-.article .article-nav-link-wrap strong {
-  color: #cacdd0;
-}
-
 .article .article-nav-link-wrap:hover {
   border-bottom: 0;
 }
@@ -499,7 +474,6 @@ span.index-list-count:after {
 }
 
 .article .article-meta {
-  color: #cacdd0;
   font-size: 0.9em;
   list-style: none;
   margin: 0;
@@ -635,7 +609,6 @@ td {
 
 /* overlap other elements */
 .mobile-nav-link {
-  background: black;
   border: 2px solid #999;
   border-radius: 5px;
   right: 0;
@@ -652,7 +625,6 @@ td {
 .searchContainer {
   border-radius: 5px;
   width: 10em;
-  color:#e6e6e6;
   background:#333;
   outline: 0;
   float: right;
@@ -665,8 +637,6 @@ td {
 .searchBox,
 .searchBtn{
   display:inline-block;
-  color: inherit;
-  background: inherit;
 }
 
 /* hide the border and fill the height to parent's */
@@ -820,6 +790,7 @@ svg#link {
   kbd,
   pre,
   samp,
+  .searchContainer,
   table th,
   th {
     background: #333;
@@ -854,6 +825,7 @@ svg#link {
   kbd,
   pre,
   samp,
+  .searchContainer,
   table th,
   th {
     background: #d8d8d8;
