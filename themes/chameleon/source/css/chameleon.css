@@ -3,6 +3,14 @@
 @import "sanitize";
 @import "sanitize/forms";
 
+:root {
+  --main-bg-color: black;
+  --main-font-color: #e6e6e6;
+  --a-hover: white;
+  --alt-bg-color: #333;
+  --font-size: 1.2em;
+}
+
 html {
   cursor: unset;
   height: 100%;
@@ -10,10 +18,10 @@ html {
 }
 
 body {
-  color: #e6e6e6;
-  background: black;
+  color: var(--main-font-color);
+  background: var(--main-bg-color);
   font-family: sans-serif;
-  font-size: 1.2em;
+  font-size: var(--font-size);
   /* https://stackoverflow.com/a/6654996 */
   min-height: 100%;
   line-height: 1.5;
@@ -66,7 +74,7 @@ a {
 a:active,
 a:hover {
   outline-width: 0;
-  color: white;
+  color: var(--a-hover);
 }
 
 a,
@@ -83,7 +91,7 @@ textarea {
 }
 
 hr {
-  background-image: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
+  background-image: -webkit-linear-gradient(0deg,transparent,var(--main-font-color),transparent);
   border: none;
   box-sizing: content-box;
   height: 1px;
@@ -107,7 +115,7 @@ hr {
 }
 
 .header-hr {
-  background-image: -webkit-linear-gradient(90deg,#e6e6e6,#e6e6e6,transparent);
+  background-image: -webkit-linear-gradient(90deg,var(--main-font-color),var(--main-font-color),transparent);
 }
 
 figcaption,
@@ -173,7 +181,7 @@ th {
 
 table th,
 th {
-  background: #333;
+  background: var(--alt-bg-color);
 }
 
 em,
@@ -186,7 +194,7 @@ code,
 kbd,
 pre,
 samp {
-  background: #333;
+  background: var(--alt-bg-color);
   font-size: 0.9em;
 }
 
@@ -218,7 +226,7 @@ strong {
 }
 
 blockquote {
-  background: #333;
+  background: var(--alt-bg-color);
   border-left: 2px solid #666;
   padding-left: 1em;
   margin: 1em 3em 1em 0em;
@@ -609,7 +617,8 @@ td {
 
 /* overlap other elements */
 .mobile-nav-link {
-  background: black;
+  background: var(--main-bg-color);
+  color: var(--main-font-color);
   border: 2px solid #999;
   border-radius: 5px;
   right: 0;
@@ -626,7 +635,7 @@ td {
 .searchContainer {
   border-radius: 5px;
   width: 10em;
-  background:#333;
+  background: var(--alt-bg-color);
   outline: 0;
   float: right;
   height: 1.8em;
@@ -726,8 +735,8 @@ svg#link {
 }
 
 @media (max-width: 468px) {
-  body {
-    font-size: 1em;
+  :root {
+    --font-size: 1em;
   }
 
   .archive-container .archive-footer,
@@ -742,8 +751,8 @@ svg#link {
 }
 
 @media (max-width: 320px) {
-  body {
-    font-size: 0.9em;
+  :root {
+    --font-size: 0.9em;
   }
 
   .article {
@@ -772,83 +781,24 @@ svg#link {
 }
 
 .copy-button:hover {
-  background: #e6e6e6;
-  color: black;
+  background: var(--alt-font-color);
+  color: var(--alt-bg-color);
 }
 
 @media (prefers-color-scheme: dark) {
-  body,
-  .mobile-nav-link {
-    background: black;
-    color: #e6e6e6;
-  }
-
-  a:hover {
-    color: white;
-  }
-
-  blockquote,
-  code,
-  kbd,
-  pre,
-  samp,
-  .searchContainer,
-  table th,
-  th {
-    background: #333;
-  }
-
-  hr {
-    background-image: -webkit-linear-gradient(0deg,transparent,#e6e6e6,transparent);
-  }
-
-  .header-hr {
-    background-image: -webkit-linear-gradient(90deg,#e6e6e6,#e6e6e6,transparent);
-  }
-
-  .copy-button:hover {
-    background: #e6e6e6;
-    color: black;
+  :root {
+    --main-bg-color: black;
+    --main-font-color: #e6e6e6;
+    --a-hover: white;
+    --alt-bg-color: #333;
   }
 }
 
 @media (prefers-color-scheme: light) {
-  body,
-  .mobile-nav-link {
-    background: #f1f1f1;
-    color: #333;
-  }
-
-  a:hover {
-    color: black;
-  }
-
-  blockquote,
-  code,
-  kbd,
-  pre,
-  samp,
-  .searchContainer,
-  table th,
-  th {
-    background: #d8d8d8;
-  }
-
-  hr {
-    background-image: -webkit-linear-gradient(0deg,transparent,#333,transparent);
-  }
-
-  .header-hr {
-    background-image: -webkit-linear-gradient(90deg,#333,#333,transparent);
-  }
-
-  .copy-button:hover {
-    background: #333;
-    color: #f1f1f1;
-  }
-
-  table th,
-  th {
-    color: #333;
+  :root {
+    --main-bg-color: #f1f1f1;
+    --main-font-color: #333;
+    --a-hover: black;
+    --alt-bg-color: #d8d8d8;
   }
 }
