@@ -14,23 +14,29 @@ test:
     - npm install --only=prod snyk && npm run snyk # Refer to "scripts" in package.json
     - npm run hexo
 
-  only:
-    - master # only trigger when 'master' branch is pushed
-
-# Don't run this job when renovate job runs
-  except:
-    - schedules
-    - web
+  rules:
+    # Skip in renovate job
+    - if: '$RENOVATE == "true"'
+      when: never
+    # Only trigger through push event in master branch
+    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "push"'
+      when: always
+    # Only trigger through "Run pipeline" in master branch
+    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "web"'
+      when: always
 
 renovate: # Check dependency update
   script:
     - npm install --only=prod renovate
     - npm run renovate
 
-  only:
-    - schedules # trigger build by schedules
-    - web # trigger through "Run pipeline" button in GitLab.com
-
+  rules:
+    # Only trigger when environment variable matches and through schedule in master branch
+    - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+    # Only trigger when environment variable matches and through "Run pipeline" in master branch
+    - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "web"'
+      when: always
 
 # # Uncomment below (and comment/remove above) lines for gitlab pages
 # image: node:latest # Use latest version of Node.js
