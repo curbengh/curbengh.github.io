@@ -3,31 +3,30 @@
 
 /*
 * Add Link button next to a heading
-* cheerio is provided by hexo package
 */
 
-const cheerio = require('cheerio')
+const { slugize, stripHTML } = require('hexo-util')
+const svg = '<svg height="0.75em" viewBox="15 15 1635 1635"><use href="/svg/link.svg#link"></use></svg>'
 
-hexo.extend.filter.register('after_render:html', (str) => {
-  const $ = cheerio.load(str)
-  const svg = `<svg height="0.75em" viewBox="15 15 1635 1635">
-               <use href="/svg/link.svg#link"/>
-               </svg>`
+const anchorId = (str, transformOption) => {
+  return slugize(str.trim(), { transform: transformOption })
+}
 
-  const headings = ['h2', 'h3']
+hexo.extend.filter.register('marked:renderer', function (renderer) {
+  const { config } = this
+  renderer.heading = function (text, level) {
+    const transformOption = config.marked.modifyAnchors
+    let id = anchorId(stripHTML(text), transformOption)
+    const headingId = this._headingId
 
-  headings.forEach(heading => {
-    $(heading).each((index, element) => {
-      if ($(element).children('a').children('svg').length === 0) {
-        const text = $(element).text().trim()
+    // Add a number after id if repeated
+    if (headingId[id]) {
+      id += `-${headingId[id]++}`
+    } else {
+      headingId[id] = 1
+    }
 
-        $(element).append($(element).children('a').append(svg))
-
-        const cache = $(element).children()
-        $(element).text(text + ' ').append(cache)
-      }
-    })
-  })
-
-  return $.html()
+    // add headerlink
+    return `<h${level} id="${id}">${text} <a href="#${id}" class="headerlink" title="${stripHTML(text)}">${svg}</a></h${level}>`
+  }
 })
