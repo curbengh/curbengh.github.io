@@ -18,20 +18,20 @@ Firefox can restrict the referrer to the same origin only ([docs](https://wiki.m
 
 When you try to login to AliExpress, the login box is just blank.
 
-{% image '20190228/no-login.png' 'Blank aliexpress login box' %}
+![Blank aliexpress login box](20190228/no-login.png)
 
 In the new design, the loading wheel just keeps spinning.
 
-{% image '20190228/invalid-login.png' 'Aliexpress login pop-up keeps loading' %}
+![Aliexpress login pop-up keeps loading](20190228/invalid-login.png)
 
 Upon inspection on the blank element (right click on the blank login and select `Inspect Element`), the login box is an iframe of `https://passport.aliexpress.com`. From the Web Console (`Ctrl + Shift + K`), the following error message suggested it's caused by [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
 
-{% image '20190228/iframe.png' 'Aliexpress login page under an iframe' %}
-{% image '20190228/x-frame.png' 'Console error of Aliexpress login' %}
+![Aliexpress login page under an iframe](20190228/iframe.png)
+![Console error of Aliexpress login](20190228/x-frame.png)
 
 From the Network inspection (`Ctrl + Shift + E`), `https://passport.aliexpress.com` has HTTP header `x-frame-options: SAMEORIGIN` (which I believe stems from the `XOriginPolicy` setting). This restricts the iframe to the same domain. This caused the iframe unable to load because it's different from the login page `https://login.aliexpress.com`.
 
-{% image '20190228/sameorigin.png' 'Aliexpress x-frame-options is sameorigin' %}
+![Aliexpress x-frame-options is sameorigin](20190228/sameorigin.png)
 
 **Edit:** After pinpoint the issue to `XOriginPolicy`, I suspect AliExpress sends the referrer from `login` to `passport` for tracking purpose, and somehow `passport` could not be loaded if it does not receive any referrer. There are a few options to resolve this.
 
@@ -41,7 +41,7 @@ From the Network inspection (`Ctrl + Shift + E`), `https://passport.aliexpress.c
 
 To use the old login page, mouse-over on the **Account** link at the top right corner and click on **My Orders**. It should redirects to `https://login.aliexpress.com/...`
 
-{% image '20190228/my-orders.png' "Aliexpress 'My Orders' link" %}
+![Aliexpress 'My Orders' link](20190228/my-orders.png)
 
 ## Reset referer policy
 
@@ -63,11 +63,11 @@ To use the old login page, mouse-over on the **Account** link at the top right c
 https://passport.aliexpress.com/*
 ```
 
-{% image '20190228/whitelist.png' "Add a whitelist to 'Ignore X-Frame-Options'" %}
+![Add a whitelist to 'Ignore X-Frame-Options'](20190228/whitelist.png)
 
 That's how the whitelist works on the extension; you add the domain of the iframe not the page's domain. After you add it to the list, refresh the page and you should see the login.
 
-{% image '20190228/login.png' 'Regular Aliexpress login page' %}
+![Regular Aliexpress login page](20190228/login.png)
 
 ## Direct link
 

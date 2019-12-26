@@ -10,19 +10,19 @@ Note: The previews are displayed in dark theme, but hi-res downloads are in ligh
 
 ## Parametric and non-parametric tests
 
-{% image '20190209/parametric-non-parametric-preview.png' 'Common parametric and non-parametric tests' %}
+![Common parametric and non-parametric tests](20190209/parametric-non-parametric-preview.png)
 
 **Download:** [PDF](https://mega.nz/#!3F81WarB!9aBojWuS6S4_8azMSFdy5ug3UDqCt3UHCKFr77Wpkg0) | [DOCX](https://mega.nz/#!nB9zgCiA!hHHtI-MELou9xVq1dMpkJeE2edXogkP1kEnxE1gr-84)
 
 ## Flowchart
 
-{% image '20190209/statistical-test-flowchart-preview.png' 'Choose a statistical test using a flowchart' %}
+![Choose a statistical test using a flowchart](20190209/statistical-test-flowchart-preview.png)
 
 **Download:** [PDF](https://mega.nz/#!CV8DAYaD!r9NaOEZ4VfeF-peNQm7jbEP6MqO4mRIBsRiHBd2DgsU) | [PNG](https://mega.nz/#!fc9H2KbS!LDp8FmX2W46d58zjIgItZiYDEkmnwkza6EbBxtDSl2g) | [VSDX](https://mega.nz/#!GM0jyKRQ!CEaKcoNBlYmT3bTmEgdatWAkshteinDeby5_FVYcHu8)
 
 ## Table
 
-{% image '20190209/statistical-tests-table-preview.png' 'Statistical tests in a table view' %}
+![Statistical tests in a table view](20190209/statistical-tests-table-preview.png)
 
 **Download:** [PDF](https://mega.nz/#!KN0jjaoS!cqr4sXCabLuD7jIs1GDGUuNrZP0okYRck24-V5QpS8U) | [DOCX](https://mega.nz/#!vV1TXaBb!Rq6x3--CRizMLCJFJ4wgADQmo-NPRMNERSIHeWSwW1o)
 
@@ -30,6 +30,6 @@ Credit: James D. Leeper, Ph.D. (University of Alabama) [(Source)](https://statra
 
 ## Statistics mathematical symbols
 
-{% image '20190209/statistics-mathematical-symbols-preview.png' 'Common mathematical symbols used in statistics' %}
+![Common mathematical symbols used in statistics](20190209/statistics-mathematical-symbols-preview.png)
 
 **Download:** [PDF](https://mega.nz/#!Sc8hUISZ!B-j-ULD7CKDltjBYBRiX7_EPRe0P_YiUDmMzFBLlaEY) | [ODT](https://mega.nz/#!LA0XlAwa!FvU91TB43vgj7fLmNLTq_uMHlSGFHjB1EwVYuv8zlBQ)

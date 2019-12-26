@@ -20,6 +20,6 @@ https://gitlab.com/curben/blog/-/ci/lint
 
 This is what it looks like,
 
-{% image '20181025/lint.png' 'Verify .gitlab-ci.yml online' %}
+![Verify .gitlab-ci.yml online](20181025/lint.png)
 
 Simply paste the content of your `.gitlab-ci.yml` and 'Validate'.

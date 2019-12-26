@@ -38,7 +38,7 @@ Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-min
 1. [Sign up](https://app.snyk.io/signup) for a new Snyk account.
 2. Snyk only supports [SSO](https://en.wikipedia.org/wiki/Single_sign-on), no e-mail sign up. You need to have GitHub, Bitbucket, or Google account. It can be a separate account from your current GitHub account. Linking your current GitHub repo to Snyk is *optional*. 
 3. Once you signed up, go to your account setting, grab the API token and save it in your password manager (or somewhere safe).
-{% image '20181001/snyk-api.png' 'Snyk API token' %}
+![Snyk API token](20181001/snyk-api.png)
 4. Install Snyk, 
 ```bash
 $ npm install snyk
@@ -64,7 +64,7 @@ $ echo 'PATH="$PATH:./node_modules/.bin"' >> ~/.profile
 
 Alternatively, you could integrate directly to your remote repo (github/gitlab). This integration allows Snyk to automatically create pull/merge request. Enable this by going to your Snyk account and Integrations tab.
 
-{% image '20181001/snyk-integration.png' 'Available integrations offered by Snyk' %}
+![Available integrations offered by Snyk](20181001/snyk-integration.png)
 
 More info: [NodeJS](https://snyk.io/docs/snyk-for-nodejs), [GitHub](https://snyk.io/docs/github), [GitLab](https://snyk.io/docs/gitlab)
 

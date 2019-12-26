@@ -16,7 +16,7 @@ For example, you are looking for item A and B at a shopping website using the pr
 
 A useful feature of Firefox is that it allows more than one profile, which otherwise would requires multiple operating system accounts. The feature even allows you to run multiple profiles at the same time by having multiple instances.
 
-{% image '20190407/firefox-error.png' "'Firefox is currently running' error" %}
+!['Firefox is currently running' error](20190407/firefox-error.png)
 
 There are two ways of creating profiles: (1) **Fresh** profile and (2) **Clone** existing profile.
 
@@ -30,19 +30,19 @@ firefox --no-remote -P 'new profile name'
 
 2. Click "Create Profile...".
 
-{% image '20190407/profile-manager.png' 'Firefox Profile Manager' %}
+![Firefox Profile Manager](20190407/profile-manager.png)
 
 3. Click "Next".
 
-{% image '20190407/profile-wizard.png' 'Wizard to set up new Firefox profile' %}
+![Wizard to set up new Firefox profile](20190407/profile-wizard.png)
 
 4. Name the new profile and click "Finish".
 
-{% image '20190407/new-profile-name.png' 'Name the new Firefox profile' %}
+![Name the new Firefox profile](20190407/new-profile-name.png)
 
 5. Once you are back to the profile manager, select "default", make sure "Use the selected profile..." and "Start Firefox".
 
-{% image '20190407/profile-manager-new.png' 'Firefox Profile Manager with a recently added profile' %}
+![Firefox Profile Manager with a recently added profile](20190407/profile-manager-new.png)
 
 6. Launch Firefox with the newly created profile using the same command as above:
 
@@ -52,7 +52,7 @@ firefox --no-remote -P 'new profile name'
 
 ***Protip***: Create a launcher or keyboard shortcut to run the command.
 
-{% image '20190407/launcher.png' 'Create a new launcher for the Firefox profile' %}
+![Create a new launcher for the Firefox profile](20190407/launcher.png)
 
 7. Just launch Firefox as usual for your current profile.
 
@@ -62,7 +62,7 @@ firefox --no-remote -P 'new profile name'
 2. Browse to the **~/.mozilla/firefox** folder
 3. To clone the default profile, simply select the xxxx.default and duplicate it by **Edit: -> Duplicate**, or copy to another folder, rename and move it back. Rename the cloned folder to desired name. In this example, I named it as *profile z*.
 
-{% image '20190407/profile-folder.png' 'List of folders in ~/.mozilla/firefox' %}
+![List of folders in ~/.mozilla/firefox](20190407/profile-folder.png)
 
 4. Append the following line to **profiles.ini**, if there is no existing profile (other than the default), use `[Profile1]` instead.
 
@@ -73,7 +73,7 @@ IsRelative=1
 Path=profile z
 ```
 
-{% image '20190407/profiles-ini.png' 'profile.ini in a text editor' %}
+![profile.ini in a text editor](20190407/profiles-ini.png)
 
 5. Launch Firefox with the newly created profile using the same command as above (note the case-sensitive):
 
@@ -95,4 +95,4 @@ privacy.userContext.longPressBehavior;2
 
 The feature is also available through [an add-on](https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/). The add-on offers the ability to assign a site to a specific container, so that a website will always open in a specified container.
 
-{% image '20190407/open-site-container.png' 'Assign a site to a container' %}
+![Assign a site to a container](20190407/open-site-container.png)

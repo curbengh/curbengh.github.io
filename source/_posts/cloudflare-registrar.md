@@ -13,22 +13,22 @@ Before you rush off to purchase your funky new domain, do note that (as per ICAA
 
 For optimal privacy, register a NameSilo account *before* you make your purchase. After you register an account, go to "Account Settings", scroll to the bottom and adjust the following settings.
 
-{% image '20190905/namesilo-user.png' 'Recommended NameSilo User Settings' %}
+![Recommended NameSilo User Settings](20190905/namesilo-user.png)
 
 Now proceed to purchase your domain (remember to enable WHOIS Privacy in the cart, it's free) and wait for 60 days. While you are waiting, register a Cloudflare account and change the [name server](https://support.cloudflare.com/hc/en-us/articles/201720164-Creating-a-Cloudflare-account-and-adding-a-website) to Cloudflare's on NameSilo Domain Console page. This step is required before you can transfer to Cloudflare.
 
 Once the transfer lock period has passed, go to your domain **Overview** on Cloudflare, on the right bottom is the "Domain Registration" section to kickstart the transfer. Mine looks different because I already transferred.
 
-{% image '20190905/cloudflare-registrar-section.png' 'Domain Registration Section on Cloudflare' %}
+![Domain Registration Section on Cloudflare](20190905/cloudflare-registrar-section.png)
 
 Simply follow [the process](https://developers.cloudflare.com/registrar/domain-transfers/transfer-flow/) and you should be able to transfer across in less than three days. To expedite the process, after you make the payment, you should receive the following email from NameSilo in less than a day.
 
-{% image '20190905/transfer-notification.png' 'NameSilo transfer notification' %}
+![NameSilo transfer notification](20190905/transfer-notification.png)
 
 Once you receive that, go to "Transfer Manager" and click Approve. After you approve, the domain should be transferred across in 15 minutes.
 
 However, the process above may not go as smoothly and the initial transfer might fail. If you receive an email from Cloudflare saying the transfer was rejected, fret not, most probably it is rejected by the registry (for whatever reason) instead of NameSilo. Simply restart the transfer  through the Domain Registration section. The authorization code is the same (as what you receive from NameSilo's email), so you don't need to request again.
 
-{% image '20190905/cloudflare-registrar-section.png' 'Domain Registration Section on Cloudflare' %}
+![Domain Registration Section on Cloudflare](20190905/cloudflare-registrar-section.png)
 
 Disclaimer: I do **not** receive any commission from any of the products mentioned above. None of the links are affiliate link.

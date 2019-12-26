@@ -27,23 +27,23 @@ privacy.userContext.longPressBehavior;2
 
 Once you enabled it, you should be able to access its setting from `about:preferences#containers`. Here's what the default settings look like:
 
-{% image '20190812/container-in-preferences.png' "Containers settings in Firefox Preferences" %}
+![Containers settings in Firefox Preferences](20190812/container-in-preferences.png)
 
-{% image '20190812/container-settings.png' "Containers' default setting" %}
+![Containers' default setting](20190812/container-settings.png)
 
 The name, icon and colour are customisable.
 
-{% image '20190812/container-personalisation.png' "Personalise Containers" %}
+![Personalise Containers](20190812/container-personalisation.png)
 
 There are two ways of using the Containers. We can open a link on a webpage in a specific container, by right-click → Open Link in New Container Tab.
 
-{% image '20190812/container-context-menu.png' "Containers right-click menu" %}
+![Containers right-click menu](20190812/container-context-menu.png)
 
 We also can open a new container tab by long-pressing the plus (+) button, next to a tab.
 
-{% image '20190812/containers-tabs.png' "New Container Tab" %}
+![New Container Tab](20190812/containers-tabs.png)
 
-{% image '20190812/containers-tabs.webp' "Container Tab in action" %}
+![Container Tab in action](20190812/containers-tabs.webp)
 
 ## Facebook Container
 

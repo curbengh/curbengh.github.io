@@ -14,7 +14,7 @@ ISP still knows what **IP address** you are connecting to. Even with HTTPS and D
 
 But even with all that, I repeat, ISP still *knows* what IP address you are connecting to. A simple reverse DNS lookup or even just by visiting the IP address can reveal what website it belongs to. While reverse DNS lookup is not as easy as ten years ago due to the current proliferation of content delivery network (CDN) like Cloudflare, yet it is still possible. For example, A `dig startpage @9.9.9.9` returned `216.218.239.2`. When you go to the IP through a web browser, it redirects to startpage.com. Going to gitlab.com's IP resulted in SSL warning with gitlab.com shown as the valid hostname.
 
-{% image '20190404/gitlab-ip.png' 'Reverse domain lookup through browser' %}
+![Reverse domain lookup through browser](20190404/gitlab-ip.png)
 
 Websites that are behind CDN can be harder to lookup. For example, `dig is.gd @9.9.9.9` returned `104.25.23.21`, but going to that IP resulted in an error page. Even then, with sufficient dataset, it is still [possible](https://blog.apnic.net/2019/08/23/what-can-you-learn-from-an-ip-address/) to infer a website from an IP.
 
