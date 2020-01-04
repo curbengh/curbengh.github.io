@@ -6,9 +6,10 @@
 :root {
   --main-bg-color: black;
   --main-font-color: #e6e6e6;
-  --a-hover: white;
+  --link-hover: white;
   --alt-bg-color: #333;
   --font-size: 1.2em;
+  --link-underline: #1abc9c;
 }
 
 html {
@@ -74,7 +75,7 @@ a {
 a:active,
 a:hover {
   outline-width: 0;
-  color: var(--a-hover);
+  color: var(--link-hover);
 }
 
 a,
@@ -194,12 +195,13 @@ code,
 kbd,
 pre,
 samp {
-  background: var(--alt-bg-color);
   font-size: 0.9em;
 }
 
 /* set codeblock width to minimum */
 pre {
+  border-left: 0.1em solid var(--link-underline);
+  padding-left: 1em;
   max-width: max-content;
 }
 
@@ -227,7 +229,7 @@ strong {
 
 blockquote {
   background: var(--alt-bg-color);
-  border-left: 2px solid #666;
+  border-left: 0.1em solid #666;
   padding-left: 1em;
   margin: 1em 3em 1em 0em;
   max-width: max-content;
@@ -380,7 +382,7 @@ span.index-list-count:after {
 }
 
 .article .article-entry a {
-  border-bottom: 1px solid #1abc9c;
+  border-bottom: 1px solid var(--link-underline);
 }
 
 .article .article-entry a:hover {
@@ -670,7 +672,7 @@ input {
 
 /* highlight the text box when focused */
 .searchBox:focus {
-  border: 1px solid #1abc9c;
+  border: 1px solid var(--link-underline);
 }
 
 /* align the button to center */
@@ -693,7 +695,7 @@ svg {
 
 /* fill the link icon with link's color */
 svg#link {
-  fill: #1abc9c;
+  fill: var(--link-underline);
 }
 
 /* don't underline link icon */
@@ -703,7 +705,7 @@ svg#link {
 
 /* underline link icon when hover */
 .article .article-entry a.headerlink:hover {
-  border-bottom: 1px solid #1abc9c;
+  border-bottom: 1px solid var(--link-underline);
 }
 
 @media (max-width: 768px) {
@@ -781,15 +783,15 @@ svg#link {
 }
 
 .copy-button:hover {
-  background: var(--alt-font-color);
-  color: var(--alt-bg-color);
+  background: var(--main-font-color);
+  color: var(--main-bg-color);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --main-bg-color: black;
     --main-font-color: #e6e6e6;
-    --a-hover: white;
+    --link-hover: white;
     --alt-bg-color: #333;
   }
 }
@@ -798,7 +800,7 @@ svg#link {
   :root {
     --main-bg-color: #f1f1f1;
     --main-font-color: #333;
-    --a-hover: black;
+    --link-hover: black;
     --alt-bg-color: #d8d8d8;
   }
 }
