@@ -6,7 +6,7 @@
     <% } %>
 
     <div class="searchContainer">
-      <form id="searchForm" method="post" action="https://duckduckgo.com/lite" target="_blank" rel="noopener external nofollow noreferrer">
+      <form id="searchForm" method="post" action="https://duckduckgo.com/" target="_blank" rel="noopener external nofollow noreferrer">
       <input type="text" name="q" class="searchBox" id="searchTxt" placeholder="Search..." title="Powered by DuckDuckGo">
       <input type="hidden" name="sites" value="<%- config.url.replace(/^http(s)?:\/\//, '') %>">
       <input type="hidden" name="kd" value="-1">
@@ -30,7 +30,7 @@
     <input id="mobile-menu-toggle" type="checkbox"/>
     <ul class="mobile-nav-link">
       <div class="searchContainer">
-        <form id="searchFormMob" method="post" action="https://duckduckgo.com/lite" target="_blank" rel="noopener external nofollow noreferrer">
+        <form id="searchFormMob" method="post" action="https://duckduckgo.com/" target="_blank" rel="noopener external nofollow noreferrer">
         <input type="text" name="q" class="searchBox" id="searchTxtMob" placeholder="Search..." title="Powered by DuckDuckGo">
         <input type="hidden" name="sites" value="<%- config.url.replace(/^http(s)?:\/\//, '') %>">
         <input type="hidden" name="kd" value="-1">
