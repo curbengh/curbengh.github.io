@@ -53,10 +53,14 @@ Use the following script to compress all PDFs in a folder.
 
 Usage: `sh pdfcompress.sh 'target folder'`
 
+*If `'target folder'` is not specified, defaults to current directory.*
+
 ```bash
 #!/bin/sh
 
-cd "$1"
+if [ -n "$1" ]; then
+  cd "$1"
+fi
 
 for i in *.pdf; do
     [ -f "$i" ] || break
@@ -64,8 +68,7 @@ for i in *.pdf; do
   # Skip compressed PDFs
   echo "$i" | grep --quiet ".compressed.pdf"
 
-  if [ $? = 1 ]
-  then
+  if [ $? = 1 ]; then
     gs \
       -sOutputFile="${i%.*}.compressed.pdf" \
       -sDEVICE=pdfwrite \
@@ -77,6 +80,37 @@ for i in *.pdf; do
       -dNOPAUSE -dBATCH -dQUIET \
       "$i"
   fi
+done
+```
+
+If you prefer to use the original filename as the compressed version and rename the original uncompressed's to "*.original.pdf",
+
+*Following script doesn't skip previously compressed PDFs*
+
+```bash
+#!/bin/sh
+
+if [ -n "$1" ]; then
+  cd "$1"
+fi
+
+for i in *.pdf; do
+  [ -f "$i" ] || break
+
+  # Rename original file to *.original.pdf
+  original="${i%.*}.original.pdf"
+  mv "$i" "$original"
+
+  gs \
+    -sOutputFile="$i" \
+    -sDEVICE=pdfwrite \
+    -dPDFSETTINGS=/ebook \
+    -sColorConversionStrategy=Gray \
+    -sColorConversionStrategyForImages=/Gray \
+    -dProcessColorModel=/DeviceGray \
+    -dCompatibilityLevel=1.4 \
+    -dNOPAUSE -dBATCH -dQUIET \
+    "$original"
 done
 ```
 
