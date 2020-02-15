@@ -11,6 +11,8 @@
 
 hexo.extend.filter.register('marked:renderer', (renderer) => {
   renderer.image = (href, title, alt) => {
+    if (href.endsWith('.svg')) return `<img src="${href}" alt="${alt}">`
+
     if (!alt) alt = ''
     if (!title) title = alt
     let modern = href
