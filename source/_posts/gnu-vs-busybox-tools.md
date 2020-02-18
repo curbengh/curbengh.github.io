@@ -14,7 +14,7 @@ tags:
 
 Alpine Linux is known for its minimal size. The '[mini root filesystem](https://www.alpinelinux.org/downloads/)' flavour is only 2MB. This size makes it suitable as a Docker image, so CI job can start running script sooner instead of downloading larger image like Ubuntu.
 
-I use it in my [urlhaus-filter](https://gitlab.com/curben/urlhaus-filter) repo to run the [scripts](https://gitlab.com/curben/urlhaus-filter/tree/master/utils) (that update the filter twice a day). When I first started using it on gitlab ci (I only knew about it a week ago), my first impression was that it somehow ships with [more Unix tools](https://curben.netlify.com/2018/10/10/binaries-alpine-docker/) than Ubuntu (not technically correct which I explain later), despite its minimal size. during the setup of the repo, there were many job failure due to incorrect command options or syntax.
+I use it in my [urlhaus-filter](https://gitlab.com/curben/urlhaus-filter) repo to run the [scripts](https://gitlab.com/curben/urlhaus-filter/tree/master/utils) (that update the filter twice a day). When I first started using it on gitlab ci (I only knew about it a week ago), my first impression was that it somehow ships with [more Unix tools](https://mdleom.com/2018/10/10/binaries-alpine-docker/) than Ubuntu (not technically correct which I explain later), despite its minimal size. during the setup of the repo, there were many job failure due to incorrect command options or syntax.
 
 ## Exit with code 1
 

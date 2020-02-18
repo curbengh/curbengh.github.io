@@ -1,4 +1,4 @@
-[curben.netlify.com](https://curben.netlify.com/)
+[mdleom.com](https://mdleom.com/)
 ===
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/aaf73659-db84-4c41-a700-de3926022674/deploy-status)](https://app.netlify.com/sites/curben/deploys)
@@ -38,7 +38,7 @@ Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) t
 
 ## Installation
 
-Refer to [this post](https://curben.netlify.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
+Refer to [this post](https://mdleom.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
 
 ## License
 The content of this blog is licensed under the [CC-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md), unless indicated otherwise.
