@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://curben.netlify.com/sitemap.xml
+Sitemap: https://mdleom.com/sitemap.xml
