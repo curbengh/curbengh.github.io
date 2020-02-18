@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Curben
+title: MDLeom.com
 subtitle:
 description:
-author: curben
+author: "MD Leom"
 language: en-GB
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://curben.netlify.com
+url: https://mdleom.com
 root: /
 permalink: blog/:year/:month/:day/:title/
 permalink_defaults:
@@ -97,7 +97,7 @@ theme_config:
   rss: /atom.xml
 
   # Profile
-  nickname: Curben's blog
+  nickname: MDLeom's blog
   description: Troubleshooting, tips & tricks, etc.
 
   # Load forkawesome icons? See the links option below.
