@@ -168,7 +168,7 @@ ul {
 
 li ul,
 ul {
-  list-style: circle;
+  list-style: disc;
 }
 
 table caption,
@@ -291,8 +291,11 @@ span.index-list-count:after {
   content: ')';
 }
 
-/* align badge to the left */
-.about-body .article .article-entry img {
+/* align badge in /about/ */
+.about-body .article .article-entry img.svg {
+  /* display same line */
+  display: inline;
+  /* align to the left */
   margin: auto 0 .5em;
 }
 
