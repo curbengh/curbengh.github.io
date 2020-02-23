@@ -1,5 +1,5 @@
 ---
-title: Using Caddy as a reverse proxy on NixOS (Part 1)
+title: "Using Caddy as a reverse proxy on NixOS (Part 1: Installation)"
 excerpt: "Part 1: Installing NixOS"
 date: 2020-02-23
 tags:
@@ -34,7 +34,7 @@ As for web server, I went with Caddy, which has the most secured defaults. It is
 
 NixOS has a detailed installation [guide](https://nixos.org/nixos/manual/index.html#sec-installation), anyhow this is how I installed it.
 
-1. The LiveCD automatically login as "nixos". Simply switch to root shell by,
+1. The LiveCD automatically login as "nixos". Simply switch to the root shell. You could setup SSH before installation. Personally I can accept the KVM console latency and I didn't want to open another port, so I never bother.
 
 ``` sh
 sudo -s
@@ -90,21 +90,29 @@ nixos-generate-config --root /mnt
 nix-env -f '<nixpkgs>' -iA magic-wormhole p7zip
 
 cd /tmp
-wormhole receive configurations.7z
-7z x configurations.7z
+wormhole receive configuration.7z
+7z x configuration.7z
 
 cp configuration.nix /mnt/etc/nixos/
 ```
 
-7. Install it without setting root password (so that it remains disabled)
+7. Install it without setting root password (so that root remains disabled)
 
 ```
 nixos-install --no-root-passwd
 ```
 
-8. In my setup, the installation downloaded around 1 GB of packages. Once installed, shutdown now, unmount the live cd and boot.
+8. In my setup, the installation downloaded around 1 GB of packages.
 
-Following is my "configuration.nix". I show you how to secure NixOS using hashed password, firewall, DNS-over-TLS and USBGuard in my next post. After that, I show you how to setup Caddy and Tor (they are disabled for now).
+9. Once the installation is done, before shutting down, secure delete the downloaded files.
+
+``` sh
+shred -uz configuration.7z configuration.nix
+```
+
+10. Shutdown, unmount the live cd, boot.
+
+Following is my "configuration.nix". I'll show you how to secure NixOS using hashed password, firewall, DNS-over-TLS and USBGuard in my next post. After that, I'll show you how to setup Caddy and Tor (they are disabled for now).
 
 ```
 { config, pkgs, ... }:
