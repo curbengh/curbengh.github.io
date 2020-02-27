@@ -134,7 +134,7 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
   networking.interfaces.ens3.useDHCP = true;
 
   environment.systemPackages = with pkgs; [
-    dnsutils usbguard magic-wormhole p7zip
+    dnsutils usbguard magic-wormhole p7zip google-authenticator
   ];
 
   time.timeZone = "UTC";
