@@ -244,19 +244,15 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
   services.tor = {
     enable = false;
     enableGeoIP = false;
-    hiddenServices = {
-      proxy = {
-        name = "proxy";
-        version = 3;
-        map = [
-          {
-            port = "80";
-            toHost = "[::1]";
-            toPort = "8080";
-          }
-        ];
-      };
-    };
+    hiddenServices = [{
+      name = "proxy";
+      version = 3;
+      map = [{
+        port = "80";
+        toHost = "[::1]";
+        toPort = "8080";
+      }];
+    }];
     extraConfig = 
       ''
         ClientUseIPv4 0
