@@ -229,6 +229,18 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
     };
   };
 
+  ## Requires OTP to login & sudo
+  security.pam.services = [
+    {
+      name = "login";
+      googleAuthenticator.enable = false;
+    }
+    {
+      name = "sudo";
+      googleAuthenticator.enable = false;
+    }
+  ];
+
   ## Caddy web server
 #  require = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix ];
 #  services.caddyProxy = {
