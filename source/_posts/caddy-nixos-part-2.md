@@ -45,6 +45,8 @@ Use `openssl passwd -6` to generate the SHA512-hashed password. Alternatively, i
 
 Note that the hash is still world-readable. A more secure option is to use `users.<name>.passwordFile`. Save the hash into a file (e.g. "/etc/nixos/nixos.password") and restricts the file to be readable by root only (`chown root:root` and `chmod 600`).
 
+You might be wondering why not just `passwordFile` during installation. The issue is that, in the live CD environment, the "/etc/" folder refers to the live CD's not the actual one which is located in "/mnt/etc/". I mean, you _could_ try "/mnt/etc/nixos/nixos.password", but you gotta remember to update the option after reboot otherwise you would get locked out. "./nixos.password" value doesn't work because `passwordFile` option doesn't support relative path, it must be a full path. Hence, I have use `hashedPassword` during the initial setup and then switch to `passwordFile`. Remember to remove the `hashedPassword` option once you have set up `passwordFile`.
+
 ``` js
   passwordFile = "/etc/nixos/nixos.password";
   isNormalUser = true;
@@ -52,6 +54,14 @@ Note that the hash is still world-readable. A more secure option is to use `user
 ```
 
 I enable `isNormalUser` which includes sane defaults (disable "isSystemUser", create a home folder in "/home/nixos/" and enable shell). Since root account is disabled, you definitely need to add the user to `wheel` group so that it can use `sudo`.
+
+Once you run `# nixos-rebuild switch`, verify the password has been set, by checking the `/etc/shadow`.
+
+```
+# cat /etc/shadow | grep 'nixos'
+```
+
+The hash in the output should be the same as the "/etc/nixos/nixos.password" file. Only quit root shell **after** verify.
 
 ## Run each service as different user
 
