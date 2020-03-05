@@ -4,7 +4,6 @@ excerpt: Use this workaround to view the whole image.
 date: 2019-06-28
 tags:
 - firefox
-- firefox-ext
 ---
 
 When using [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader/) (DR) add-on with "Filter" or "Filter+" mode in Firefox (FF 67 as of writing), you may encounter this issue where only the lower half of an image is shown.

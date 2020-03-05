@@ -4,6 +4,7 @@ excerpt: How to run binaries of locally installed node packages.
 date: 2018-10-24
 tags:
 - node
+- javascript
 ---
 
 Installing a package with `--global` introduce more trouble than convenience. Here's how to run binaries of locally installed node packages.

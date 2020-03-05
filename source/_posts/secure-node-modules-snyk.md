@@ -7,6 +7,7 @@ tags:
 - node
 - snyk
 - security
+- javascript
 ---
 
 ## Intro

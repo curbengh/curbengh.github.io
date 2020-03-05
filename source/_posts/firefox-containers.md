@@ -6,7 +6,6 @@ lastUpdated: 2019-08-27
 tags:
 - firefox
 - privacy
-- firefox-ext
 ---
 
 There are situations where you may want to use more than one account on a website. Meaning you want to use more than one cookie for a specific website. This can be achieved by using a Private Window or creating/cloning a new Firefox profile. I previously wrote about Firefox profile in a {% post_link firefox-instances-profiles 'separate article' %}. While you can use more than two cookies through Firefox profile, this also means managing multiple profiles (especially if you want to use more than *four* cookies).
