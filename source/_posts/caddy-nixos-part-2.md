@@ -35,16 +35,18 @@ users.root.hashedPassword = "*";
 
 ## Hash user's password
 
-User's password can be configured by `users.<name>.password`, obviously this means the password is stored in plain text. Even if you lock down `configuration.nix` with `chmod 600` (which I did), "it is (still) world-readable in the Nix store". The safer way is to store in the hashed form,
+User's password can be configured by `users.<name>.password`, obviously this means the password is stored in plain text. Even if you lock down `configuration.nix` with `chmod 600` (which I did), "it is (still) world-readable in the Nix store". The safer way is to store in a hashed form,
 
 ``` js
 users.<name>.hashedPassword = "xxxx";
 ```
 
-Use `mkpasswd -m sha-512` to generate the hash. If you are using Ubuntu, it can (only?) be installed through the `whois` package. Other distros may simply install `mkpasswd` directly.
+Use `openssl passwd -6` to generate the SHA512-hashed password. Alternatively, if your distro bundles it (Ubuntu doesn't), you could also use `mkpasswd -m sha-512`, but do enter the password with care because it only prompts once (unlike openssl which prompts twice).
+
+Note that the hash is still world-readable. A more secure option is to use `users.<name>.passwordFile`. Save the hash into a file (e.g. "/etc/nixos/nixos.password") and restricts the file to be readable by root only (`chown root:root` and `chmod 600`).
 
 ``` js
-  hashedPassword = "xxxx";
+  passwordFile = "/etc/nixos/nixos.password";
   isNormalUser = true;
   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
 ```
