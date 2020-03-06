@@ -181,7 +181,9 @@ th {
 }
 
 table th,
-th {
+th,
+table tr:nth-child(even),
+tr:nth-child(even) {
   background: var(--alt-bg-color);
 }
 
