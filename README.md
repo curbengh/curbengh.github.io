@@ -41,7 +41,13 @@ Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) t
 Refer to [this post](https://mdleom.com/2018/09/21/how-to-create-a-hexo-blog/) for more detailed instruction.
 
 ## License
+
 The content of this blog is licensed under the [CC-BY-SA license](https://creativecommons.org/licenses/by-sa/4.0/), and the underlying source code used to format and display that content is licensed under the [MIT license](LICENSE.md), unless indicated otherwise.
+
+## Mirrors
+
+- https://curben.netlify.com/
+- http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/
 
 ---
 Useful links:
