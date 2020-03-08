@@ -7,9 +7,20 @@ tags:
 - linux
 ---
 
-This post shows how I securely configure my NixOS installation.
+This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
 
-Prerequisites:
+- {% post_link caddy-nixos-part-2 'Part 1: Install NixOS' %}
+- Part 2: Configure NixOS
+- {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
+- Part 4: Configure Tor (coming soon)
+
+In this post, I show you how I securely configure my NixOS, the server OS behind this website. Following diagram shows the architecture behind this website.
+
+![Architecture behind mdleom.com](20200223/caddy-nixos.png)
+
+## Prerequisites
+
+Before proceeding to the rest of this guide, there are some system packages that you need to install. Add the packages to `environment.systemPackages` option in "configuration.nix" and run `# nixos-rebuild switch` to install them.
 
 ```
   environment.systemPackages = with pkgs; [
@@ -19,7 +30,7 @@ Prerequisites:
 
 ## Disable mutableUsers
 
-In NixOS, instead of using `useradd` and `passwd` to manage users, you could also manage them from the `configuration.nix`. I prefer this approach because it fits the OS' declarative nature and you could say it is the NixOS-_way_.
+In NixOS, instead of using `useradd` and `passwd` to manage users, you could also manage them from the "configuration.nix". I prefer this approach because it fits the OS' declarative nature and you could say it is the NixOS-_way_.
 
 First, I disabled `useradd` and `passwd`.
 
