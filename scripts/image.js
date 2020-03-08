@@ -21,6 +21,9 @@ hexo.extend.filter.register('marked:renderer', (renderer) => {
     // See source/_redirects
     const link = '/img/'
 
+    // embed external image
+    if (!href.startsWith('20')) return `<img src="${href}" alt="${alt}" title="${title}">`
+
     if (href.endsWith('.png') || href.endsWith('.jpg')) {
       modern = href.concat('?format=webp')
     } else if (href.endsWith('.webp')) {
