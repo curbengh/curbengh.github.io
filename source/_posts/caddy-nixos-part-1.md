@@ -7,6 +7,13 @@ tags:
 - linux
 ---
 
+This post is Part 1 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
+
+- Part 1: Install NixOS
+- {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
+- {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
+- Part 4: Configure Tor (coming soon)
+
 ## Background
 
 > Skip to [Installation](#Installation) part.
@@ -30,6 +37,12 @@ Right off the bat I can already see the need of setting up a private server due 
 
 As for web server, I went with Caddy, which has the most secured defaults. It is installed in NixOS, which is attractive for its centralised configuration. I initially planned to use Ubuntu, and then I noticed [NixOS](https://nixos.org/); unlike most other Linux servers which has configs scattered around, NixOS is configured through a single "configuration.nix" file. It is [declarative](https://en.wikipedia.org/wiki/Declarative_programming), meaning you simply supply the desired configuration and NixOS would figure how to achieve that. For example, to open port 80, you just need `networking.firewall.allowedTCPPorts = [ 80 ]`, instead of mucking around with iptables. This significantly helps reproducibility, making server migration much easier; simply supply the "configuration.nix" used in the previous server and the new server would have the same state. Having Caddy in the repo is the tipping point that finally made me dive into NixOS.
 
+![Architecture behind mdleom.com](20200223/caddy-nixos.png)
+
+Above diagram shows the architecture behind this website (mdleom.com). When a visitor browse mdleom.com, it will first go through Cloudflare CDN, the CDN then pass the request to my virtual private server (VPS). Before it reaches my VPS, there is a cloud firewall provided by the VPS host which I configure to allow inbound port 443. Once my VPS receive the request, the iptables port forward from 443 to 4430. The web server (Caddy) binds to (or listens on) port 4430 and it acts as a reverse proxy to the actual backend, curben.netlify.com.
+
+The flow is slightly different when browsing via [.onion](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion). Tor hidden service is able to NAT-punching, only rely on outbound connection, so it can work behind a firewall that block inbound ports. The Tor daemon acts as a reverse proxy and forward the request to Caddy, which in turn is also a reverse proxy which finally forward the request to curben.netlify.com.
+
 ## Installation
 
 NixOS has a detailed installation [guide](https://nixos.org/nixos/manual/index.html#sec-installation), anyhow this is how I installed it.
@@ -46,7 +59,7 @@ sudo -s
 # Most KVM-powered VPS use "/dev/vda" naming scheme (instead of "/dev/sda")
 # Check the output of `ls /dev/` to make sure
 parted /dev/vda -- mklabel msdos
- 
+
 # Create a new partition that fill the disk but
 # leaves 1 GB space for the swap
 parted /dev/vda -- mkpart primary 1MiB -1GiB
@@ -265,7 +278,7 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
         toPort = "8080";
       }];
     }];
-    extraConfig = 
+    extraConfig =
       ''
         ClientUseIPv4 0
         ClientUseIPv6 1
