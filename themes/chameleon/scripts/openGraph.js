@@ -28,17 +28,17 @@ function og (name, content) {
 }
 
 function openGraphHelper () {
-  const { config, page, theme } = this
-  let description = page.excerpt || theme.description || false
+  const { config, page } = this
+  let description = page.excerpt || ''
   const author = config.author
-  const keywords = page.tags || false
-  const title = page.title || theme.nickname
+  const keywords = page.tags || ''
+  const title = page.title || config.title || ''
   const type = (this.is_post() ? 'article' : 'website')
   const url = prettyUrls(this.url, config.pretty_urls)
   const screenshot = '/screenshot/' + prettyUrls(this.path, config.pretty_urls)
-  const siteName = config.subtitle || theme.nickname || false
-  const published = page.date || false
-  const updated = page.lastUpdated || false
+  const siteName = config.title || ''
+  const published = page.date || ''
+  const updated = page.lastUpdated || ''
   const language = config.language.replace('-', '_')
   let result = ''
 

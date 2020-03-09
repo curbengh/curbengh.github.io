@@ -101,9 +101,5 @@ theme_config:
   # https://github.com/hexojs/hexo-generator-feed
   rss: /atom.xml
 
-  # Profile
-  nickname: MDLeom's blog
-  description: Troubleshooting, tips & tricks, etc.
-
   # Load forkawesome icons? See the links option below.
   icons: false
