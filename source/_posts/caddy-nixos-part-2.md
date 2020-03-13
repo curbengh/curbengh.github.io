@@ -5,6 +5,8 @@ date: 2020-03-04
 tags:
 - web
 - linux
+- caddy
+- nixos
 ---
 
 This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
