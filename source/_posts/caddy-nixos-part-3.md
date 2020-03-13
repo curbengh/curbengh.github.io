@@ -163,7 +163,7 @@ Move the files to home folder of "caddyProxy" user, which is "/var/lib/caddyProx
 # chmod 600 /var/lib/caddyProxy/*
 ```
 
-If you followed my {% post_link caddy-nixos-part-2 'Part 2' %} guide, you should have `caddyProxy` user and group before executing chown and chmod. If you haven't, check out [this section](/blog/caddy-nixos-part-2#Run-each-service-as-different-user) of Part 2.
+If you followed my {% post_link caddy-nixos-part-2 'Part 2' %} guide, you should have `caddyProxy` user and group before executing chown and chmod. If you haven't, check out [this section](/blog/2020/03/04/caddy-nixos-part-2/#Run-each-service-as-different-user) of Part 2.
 
 ### Initial setup
 
