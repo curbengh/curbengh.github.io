@@ -7,7 +7,7 @@ lastUpdated: 2020-02-19
 
 ## Projects
 
-[![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben) [![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben)
+[![GitHub handle](/svg/github.svg)](https://github.com/curbengh)&ensp;[![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)&ensp;[![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben)
 
 - Core member of [Hexojs](http://github.com/hexojs) organisation and maintainer of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
 
@@ -15,7 +15,7 @@ lastUpdated: 2020-02-19
 
 - [**hexo-nofollow**](https://github.com/curbengh/hexo-nofollow) is a Hexo plugin that adds [`rel="external nofollow noopener noreferrer"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) to all external links in your blog posts for security, privacy and SEO.
 
-- [**urlhaus-filter**](https://gitlab.com/curben/urlhaus-filter) is a [uBlock Origin](https://github.com/gorhill/uBlock/)-compatible blocklist to block malicious websites that are being used for malware distribution. The blocklist is derived from Abuse.ch [URLhaus](https://urlhaus.abuse.ch/).
+- [**urlhaus-filter**](https://gitlab.com/curben/urlhaus-filter) is a set of URL- and host-based blocklists to block malicious websites that are being used for malware distribution. The URL-based blocklist is typically as a [uBlock Origin](https://github.com/gorhill/uBlock/) filter. The dataset is derived from Abuse.ch [URLhaus](https://urlhaus.abuse.ch/).
 
 ## Publications
 
