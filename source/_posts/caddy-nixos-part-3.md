@@ -1,7 +1,7 @@
 ---
 title: "Using Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
-date: 2020-03-09
+date: 2020-03-14
 tags:
 - web
 - linux
@@ -485,7 +485,7 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
 ## configuration.nix
 
-One last thing to do is to import "[caddyProxy.nix](#caddyProxy.nix)" and enable`services.caddyProxy`.
+One last thing to do is to import "[caddyProxy.nix](#caddyProxy.nix)" and enable `services.caddyProxy`.
 
 ``` js /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyProxy.nix ];
