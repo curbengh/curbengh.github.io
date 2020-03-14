@@ -2,7 +2,7 @@
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  'SNYK-JS-DOTPROP-543489':
+  'SNYK-JS-MINIMIST-559764':
     - '*':
         reason: Update/patch unavailable
         expires: '2020-06-30T00:00:00.000Z'
