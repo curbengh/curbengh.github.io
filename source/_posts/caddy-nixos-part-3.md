@@ -18,7 +18,7 @@ This post is Part 2 of a series of articles that show you how I set up Caddy and
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
-In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.com using Caddy on NixOS(see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
+In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.com using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
 
 ## Background
 
@@ -146,7 +146,7 @@ I'm using "Full (strict)" mode which requires either origin cert or a valid cert
 
 Generate and download the cert from Cloudflare Dash -> SSL/TLS -> Origin Server -> Create Certificate. You can choose the validity from 1 week to 15 years. I choose 1 year so I need to repeat this process every year. Make sure you have both certificate (.pem) and private key (.key).
 
-![Cloudflare Origin Certificate](/cloudflare-origin-cert.png)
+![Cloudflare Origin Certificate](20200314/cloudflare-origin-cert.png)
 
 I also use Authenticated Origin Pull which utilize TLS client authentication. A client must present a client certificate that is signed by a private key; in this case, it is signed by Cloudflare itself. The client certificate can be verified using Cloudflare's public key available [here](https://origin-pull.cloudflare.com/).
 
