@@ -14,7 +14,7 @@ This post is Part 2 of a series of articles that show you how I set up Caddy and
 - {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
 - Part 2: Configure NixOS
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
-- {% post_link caddy-nixos-part-4 'Part 3: Configure Tor' %}
+- {% post_link tor-hidden-onion-nixos 'Part 4: Configure Tor' %}
 
 In this post, I show you how I securely configure my NixOS, the server OS behind this website. Following diagram shows the architecture behind this website.
 
