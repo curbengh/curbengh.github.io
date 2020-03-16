@@ -225,10 +225,6 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
         home = "/var/lib/caddyTor";
         createHome = true;
       };
-      tor = {
-        home = "/var/lib/tor";
-        createHome = true;
-      };
     };
 
     groups = {
@@ -237,9 +233,6 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
       };
       caddyTor = {
         members = [ "caddyTor" ];
-      };
-      tor = {
-        members = [ "tor" ];
       };
     };
   };
@@ -255,38 +248,6 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
       googleAuthenticator.enable = false;
     }
   ];
-
-  ## Caddy web server
-#  require = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix ];
-#  services.caddyProxy = {
-#    enable = true;
-#    config = "/etc/caddy/caddyProxy.conf";
-#  };
-#  services.caddyTor = {
-#    enable = true;
-#    config = "/etc/caddy/caddyTor.conf";
-#  };
-
-  ## Tor onion
-  services.tor = {
-    enable = false;
-    enableGeoIP = false;
-    hiddenServices = [{
-      name = "proxy";
-      version = 3;
-      map = [{
-        port = "80";
-        toHost = "[::1]";
-        toPort = "8080";
-      }];
-    }];
-    extraConfig =
-      ''
-        ClientUseIPv4 0
-        ClientUseIPv6 1
-        ClientPreferIPv6ORPort 1
-      '';
-  };
 }
 
 ```
