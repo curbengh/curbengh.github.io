@@ -1,5 +1,5 @@
 ---
-title: "Using Caddy as a reverse proxy on NixOS (Part 1: Installation)"
+title: "Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)"
 excerpt: "Part 1: Installing NixOS"
 date: 2020-02-23
 tags:
@@ -14,7 +14,7 @@ This post is Part 1 of a series of articles that show you how I set up Caddy and
 - Part 1: Install NixOS
 - {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
-- Part 4: Configure Tor (coming soon)
+- {% post_link caddy-nixos-part-4 'Part 3: Configure Tor' %}
 
 ## Background
 

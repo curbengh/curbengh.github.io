@@ -1,5 +1,5 @@
 ---
-title: "Using Caddy as a reverse proxy on NixOS (Part 4: Tor)"
+title: "Setup Caddy as a reverse proxy on NixOS (Part 4: Tor)"
 excerpt: "How to set up Tor hidden service on NixOS"
 date: 2020-03-16
 tags:

@@ -1,5 +1,5 @@
 ---
-title: "Using Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
+title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
 tags:
@@ -11,10 +11,10 @@ tags:
 
 This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
 
-- {% post_link caddy-nixos-part-2 'Part 1: Install NixOS' %}
+- {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
 - {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
 - Part 3: Configure Caddy
-- Part 4: Configure Tor (coming soon)
+- {% post_link caddy-nixos-part-4 'Part 3: Configure Tor' %}
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
