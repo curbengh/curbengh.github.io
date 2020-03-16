@@ -68,7 +68,7 @@ in {
     enable = mkEnableOption "Caddy web server";
 
     config = mkOption {
-      default = "/etc/caddy/Caddyfile";
+      default = "/etc/caddy/caddyProxy.conf";
       type = types.str;
       description = "Path to Caddyfile";
     };
