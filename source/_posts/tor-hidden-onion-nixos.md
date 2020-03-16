@@ -62,7 +62,7 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
   * If you set it to "1234", visitor needs to specify the port number to browse your site, e.g. http://foobar.onion:1234
   * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80. Tor has NAT traversal capability and can function without opening any inbound port.
 5. `toHost` is location of your web server. In my case, it is the IPv6 loopback **[::1]**. If your server supports IPv4 (mine doesn't), you can set it to "127.0.0.1" or "localhost". If it's an IPv6 address, you need to wrap the address with square brackets **[]**.
-6. `toPort` is the port number of your web server listens to. The [next section](#caddyTor.nix) shows how to set up the web server yet.
+6. `toPort` is the port number that your web server listens to. The [next section](#caddyTor.nix) shows how to set up the web server.
 7. `extraConfig` is optional. The options I use here are only applicable if the server is IPv6 only.
 
 Run `# nixos-rebuild switch` and three important files will be generated in the "/var/lib/tor/onion/**myOnion**" folder.
