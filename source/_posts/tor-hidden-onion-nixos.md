@@ -26,7 +26,7 @@ Note that this only applies to the traffic between visitor and the (Caddy) web s
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
-## configuration.nix
+## Launch Tor
 
 The first step is to bring up a Tor hidden service to get an onion address. Add the following options to **configuration.nix**:
 
@@ -62,7 +62,8 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
   * If you set it to "1234", visitor needs to specify the port number to browse your site, e.g. http://foobar.onion:1234
   * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80. Tor has NAT traversal capability and can function without opening any inbound port.
 5. `toHost` is location of your web server. In my case, it is the IPv6 loopback **[::1]**. If your server supports IPv4 (mine doesn't), you can set it to "127.0.0.1" or "localhost". If it's an IPv6 address, you need to wrap the address with square brackets **[]**.
-6. `toPort` is the port number that your web server listens to. The [next section](#caddyTor.nix) shows how to set up the web server.
+  * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. Tor recommends to have a separate web server that is dedicated for Tor hidden service only. The [next section](#caddyTor.nix) shows how to set up the web server.
+6. `toPort` is the port number that your web server listens to.
 7. `extraConfig` is optional. The options I use here are only applicable if the server is IPv6 only.
 
 Run `# nixos-rebuild switch` and three important files will be generated in the "/var/lib/tor/onion/**myOnion**" folder.
@@ -273,7 +274,7 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 }
 ```
 
-## configuration.nix
+## Launch Caddy
 
 Start the Caddy service.
 
@@ -284,3 +285,5 @@ Start the Caddy service.
     config = "/etc/caddy/caddyTor.conf";
   };
 ```
+
+Tor hidden service needs some time to announce to the Tor network, wait for a few hours before trying your newfangled onion address.
