@@ -648,7 +648,7 @@ td {
 }
 
 /* search bar */
-.searchContainer {
+.search-container {
   border-radius: 5px;
   width: 10em;
   background: var(--alt-bg-color);
@@ -660,13 +660,13 @@ td {
 }
 
 /* inline-block to position them in same line */
-.searchBox,
-.searchBtn{
+.search-box,
+.search-button{
   display:inline-block;
 }
 
 /* hide the border and fill the height to parent's */
-.searchBox {
+.search-box {
   border: 0;
   border-radius: 5px;
   height:1.8em;
@@ -678,19 +678,19 @@ td {
 /*
  * Override sanitize/forms
  * to prevent conflict with
- * .searchBox padding-left
+ * .search-box padding-left
  */
 input {
   padding: 0;
 }
 
 /* highlight the text box when focused */
-.searchBox:focus {
+.search-box:focus {
   border: 1px solid var(--link-underline);
 }
 
 /* align the button to center */
-.searchBtn {
+.search-button {
   width: 10%;
   position: absolute;
   top: 45%;

@@ -1,9 +1,9 @@
 // Search button function
-document.getElementById('searchClick').addEventListener('click', () => {
+document.getElementById('search-click').addEventListener('click', () => {
   searchForm.submit()
 }, false)
 
-document.getElementById('searchClickMob').addEventListener('click', () => {
+document.getElementById('search-click-mobile').addEventListener('click', () => {
   searchFormMob.submit()
 }, false)
 
