@@ -1,5 +1,5 @@
 ---
-title: "How to make your website available over Tor hidden service in NixOS"
+title: "How to make your website available over Tor hidden service on NixOS"
 excerpt: "A guide on Tor hidden service in NixOS"
 date: 2020-03-16
 tags:
