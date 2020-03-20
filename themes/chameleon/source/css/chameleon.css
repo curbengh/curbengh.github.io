@@ -59,6 +59,11 @@ h1 {
   margin: 0.5em 0;
 }
 
+/* Disable line break for site title */
+h1.site-title {
+  white-space: nowrap;
+}
+
 h2 {
   font-size: 1.3em;
 }
@@ -638,6 +643,10 @@ td {
   text-align: center;
 }
 
+.menu-button {
+  font-size: 2em;
+}
+
 /* search bar */
 .searchContainer {
   border-radius: 5px;
@@ -732,6 +741,8 @@ svg#link {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* reduce height of mobile header */
+    height: 1.5em;
   }
 
   /* display links when menu button is clicked */
