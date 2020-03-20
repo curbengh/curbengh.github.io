@@ -707,7 +707,8 @@ svg {
   border-bottom: none;
 }
 
-/* fill the permalink and share icons with link's color */
+/* fill the search, permalink and share icons with link's color */
+svg#search,
 svg#link,
 svg#share {
   fill: var(--link-underline);
