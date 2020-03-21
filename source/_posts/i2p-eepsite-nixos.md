@@ -11,6 +11,8 @@ tags:
 - censorship
 ---
 
+In this segment, I show you how I set up I2P Eepsite service that reverse proxy to curben.netlify.com. This website can be accessed using this [B32 address](http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p) or [mdleom.i2p](http://mdleom.i2p/)
+
 This post is Part 5 of a series of articles that show you how I set up Caddy, Tor hidden service and I2P Eepsite on NixOS:
 
 - {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
@@ -18,8 +20,6 @@ This post is Part 5 of a series of articles that show you how I set up Caddy, To
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
 - {% post_link tor-hidden-onion-nixos 'Part 4: Configure Tor' %}
 - Part 5: Configure I2P
-
-In this segment, I show you how I set up I2P Eepsite service that reverse proxy to curben.netlify.com. This website can be accessed using this [B32 address](http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p) or [mdleom.i2p](http://mdleom.i2p/)
 
 The reason I set up an Eepsite is similar to why I have a Tor hidden service, is to let people visit my website (mdleom.com) anonymously. I2P is touted as superior to Tor with its garlic routing which is claimed to be an improvement to onion routing. In practice though, I don't see much difference. From a client's (as in client-server) perspective,  the browsing experience is still as slow since the traffic has to jump through a few hops, just like in Tor. For a server, the setup is similar as both involve creating public/private key pair.
 
@@ -165,12 +165,12 @@ in {
         ReadWriteDirectories = cfg.dataDir;
       };
     };
-    
+
     users.users.caddyI2p = {
       home = cfg.dataDir;
       createHome = true;
     };
-    
+
     users.groups.caddyI2p = {
       members = [ "caddyI2p" ];
     };

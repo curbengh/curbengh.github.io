@@ -11,14 +11,15 @@ tags:
 - censorship
 ---
 
-This post is Part 4 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
+In this segment, I show you how I set up Tor hidden (.onion) service that reverse proxy to curben.netlify.com. This website can be accessed through the following [.onion address](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion).
+
+This post is Part 4 of a series of articles that show you how I set up Caddy, Tor hidden service and I2P Eepsite on NixOS:
 
 - {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
 - {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
 - Part 4: Configure Tor
-
-In this segment, I show you how I set up Tor hidden (.onion) service that reverse proxy to curben.netlify.com. This website can be accessed through the following [.onion address](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion).
+- {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
 
 The main reason for me to have a Tor hidden service is so that visitor can visit my website (mdleom.com) anonymously. Visitor indeed can browse this website _somewhat_ anonymously via VPN, but it's not hidden from the VPN provider. Even with Tor, the traffic still needs to get out from the Tor network to the Internet via exit relays, and exit relays can [do whatever](https://doi.org/10.1007/978-3-319-08506-7_16) they want to the traffic. Tor hidden service ensures the traffic is end-to-end encrypted and stays inside the Tor network--without involving any exit relay.
 

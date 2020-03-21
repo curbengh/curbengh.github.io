@@ -9,14 +9,17 @@ tags:
 - nixos
 ---
 
+In this post, I show you how I securely configure the NixOS, the server OS behind this website.
+
 This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
 
 - {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
 - Part 2: Configure NixOS
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
 - {% post_link tor-hidden-onion-nixos 'Part 4: Configure Tor' %}
+- {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
 
-In this post, I show you how I securely configure my NixOS, the server OS behind this website. Following diagram shows the architecture behind this website.
+Following diagram shows the architecture behind this website.
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 

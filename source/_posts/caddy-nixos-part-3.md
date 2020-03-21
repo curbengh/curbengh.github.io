@@ -9,16 +9,17 @@ tags:
 - nixos
 ---
 
+In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.com using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
+
 This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
 
 - {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
 - {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
 - Part 3: Configure Caddy
 - {% post_link tor-hidden-onion-nixos 'Part 4: Configure Tor' %}
+- {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
-
-In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.com using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
 
 ## Background
 

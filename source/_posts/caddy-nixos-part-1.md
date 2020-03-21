@@ -9,12 +9,15 @@ tags:
 - nixos
 ---
 
-This post is Part 1 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
+In this segment, I show you how I install NixOS.
+
+This post is Part 1 of a series of articles that show you how I set up Caddy, Tor hidden service and I2P Eepsite on NixOS:
 
 - Part 1: Install NixOS
 - {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
 - {% post_link tor-hidden-onion-nixos 'Part 4: Setup Tor hidden service' %}
+- {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
 
 ## Background
 
