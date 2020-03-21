@@ -48,6 +48,8 @@ The content of this blog is licensed under the [CC-BY-SA license](https://creati
 
 - https://curben.netlify.com/
 - http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/
+- http://mdleom.i2p/
+- http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p/
 
 ---
 Useful links:
