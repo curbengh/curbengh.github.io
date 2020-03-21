@@ -1,6 +1,6 @@
 ---
 title: "How to make your website available over Tor hidden service on NixOS"
-excerpt: "A guide on Tor hidden service in NixOS"
+excerpt: "A guide on Tor hidden service on NixOS"
 date: 2020-03-16
 tags:
 - web
@@ -256,6 +256,8 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 ### Alternate Caddyfile
 
 There is another approach which has a much simpler Caddyfile, but it _doubles_ the latency. I could simply reverse proxy to mdleom.com but that itself is {% post_link caddy-nixos-part-3 'also' %} a reverse proxy, so it would add one more roundtrip. But hey, if the latency doesn't faze you, why not.
+
+This is also suitable if you have a website that you can't root access.
 
 ```
 # Do not use this approach unless you are absolutely sure
