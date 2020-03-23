@@ -268,6 +268,8 @@ Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecurity
 
   ## Network hardening and performance
   boot.kernel.sysctl = {
+    # Disable magic SysRq key
+    "kernel.sysrq" = 0;
     # Ignore ICMP broadcasts to avoid participating in Smurf attacks
     "net.ipv4.icmp_echo_ignore_broadcasts" = 1;
     # Ignore bad ICMP errors
