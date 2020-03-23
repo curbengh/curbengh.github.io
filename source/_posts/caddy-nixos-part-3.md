@@ -135,7 +135,7 @@ in {
 
 ## Caddyfile
 
-Caddy web server is configured using a Caddyfile. The Caddyfile format I'm using is only compatible with Caddy v1. I will update to the v2 syntax once the format and its companion Caddy v2 are deemed stable. Note that v1 is incompatible with v2 and vice versa.
+Caddy web server is configured using a Caddyfile. The Caddyfile format I'm using is only compatible with Caddy v1. I will update to v2 once the stable version is released on NixOS. Note that v1 and v2 are incompatible with each other.
 
 ### Cloudflare origin cert
 
