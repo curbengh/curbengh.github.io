@@ -293,7 +293,7 @@ Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecurity
     "net.ipv6.conf.all.accept_source_route" = 0;
     # Protect against tcp time-wait assassination hazards
     "net.ipv4.tcp_rfc1337" = 1;
-    # Latency reduction
+    # TCP Fast Open (TFO)
     "net.ipv4.tcp_fastopen" = 3;
     ## Bufferbloat mitigations
     # Requires >= 4.9 & kernel module
@@ -302,3 +302,5 @@ Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecurity
     "net.core.default_qdisc" = "cake";
   };
 ```
+
+TCP Fast Open ([TFO](https://en.wikipedia.org/wiki/Tcp_fast_open)) is enabled by default (`tcp_fastopen = 1`) for outgoing connection since 3.13. As of writing, TFO has limited server support; Caddy, Tor and I2Pd don't support it yet, so enabling it for incoming and outgoing connections (`3`) has no effect.
