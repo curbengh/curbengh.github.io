@@ -714,6 +714,13 @@ svg#share {
   fill: var(--link-underline);
 }
 
+/* use font color when hover */
+svg#search:hover,
+svg#link:hover,
+svg#share:hover {
+  fill: currentColor;
+}
+
 .article .article-entry a.headerlink svg,
 .article-title a.share-button svg {
   height: 0.75em;
