@@ -6,5 +6,13 @@ ignore:
     - '*':
         reason: Update/patch unavailable
         expires: '2020-06-30T00:00:00.000Z'
+  'SNYK-JS-DOTPROP-543489':
+    - '*':
+        reason: Update/patch unavailable
+        expires: '2020-06-30T00:00:00.000Z'
+  'SNYK-JS-YARGSPARSER-560381':
+    - '*':
+        reason: Update/patch unavailable
+        expires: '2020-06-30T00:00:00.000Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch: {}
