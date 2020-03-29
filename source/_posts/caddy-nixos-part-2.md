@@ -304,3 +304,11 @@ Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecurity
 ```
 
 TCP Fast Open ([TFO](https://en.wikipedia.org/wiki/Tcp_fast_open)) is enabled by default (`tcp_fastopen = 1`) for outgoing connection since 3.13. As of writing, TFO has limited server support; Caddy, Tor and I2Pd don't support it yet, so enabling it for incoming and outgoing connections (`3`) has no effect.
+
+## Hardened kernel
+
+Kernel compiled with additional security-oriented patch set. [More details](https://wiki.archlinux.org/index.php/Security#Kernel_hardening).
+
+```
+  boot.kernelPackages = pkgs.linuxPackages_hardened;
+```
