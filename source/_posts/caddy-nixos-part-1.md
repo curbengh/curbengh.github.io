@@ -157,56 +157,6 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
 
   time.timeZone = "UTC";
 
-  ## Unattended upgrade
-  system.autoUpgrade = {
-    enable = false;
-    allowReboot = true;
-    dates = "00:00";
-  };
-
-  ## USBGuard
-  services.usbguard = {
-    enable = false;
-    ruleFile = "/var/lib/usbguard/rules.conf";
-  };
-
-  ## DNS-over-TLS
-  services.stubby = {
-    enable = true;
-    listenAddresses = [ "0::1" "127.0.0.1" ];
-    roundRobinUpstreams = false;
-    upstreamServers =
-      ''
-        ## Cloudflare DNS
-        - address_data: 2606:4700:4700::1111
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 2606:4700:4700::1001
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.1.1.1
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.0.0.1
-          tls_auth_name: "cloudflare-dns.com"
-      '';
-  };
-
-  networking.nameservers = [ "::1" "127.0.0.1" ];
-  services.resolved = {
-    enable = true;
-    fallbackDns = [ "2606:4700:4700::1111" "2606:4700:4700::1001" "1.1.1.1" "1.0.0.1" ];
-  };
-
-  ## Port forwarding
-  networking.firewall = {
-    enable = true;
-    interfaces.ens3 = {
-      allowedTCPPorts = [ 443 4430 ];
-    };
-    extraCommands =
-      ''
-        ip6tables -t nat -I PREROUTING -i ens3 -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 4430
-      '';
-  };
-
   ## Create service users
   users = {
     mutableUsers = false; # Disable useradd & passwd
@@ -239,18 +189,6 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
       };
     };
   };
-
-  ## Requires OTP to login & sudo
-  security.pam.services = [
-    {
-      name = "login";
-      googleAuthenticator.enable = false;
-    }
-    {
-      name = "sudo";
-      googleAuthenticator.enable = false;
-    }
-  ];
 }
 
 ```
