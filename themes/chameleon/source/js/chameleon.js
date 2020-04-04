@@ -7,6 +7,22 @@ document.getElementById('search-click-mobile').addEventListener('click', () => {
   searchFormMob.submit()
 }, false)
 
+// Hide mobile menu when click outside of the menu
+document.addEventListener('click', (evt) => {
+  const mainNavDisplay = window.getComputedStyle(document.getElementsByClassName('main-nav')[0]).getPropertyValue('display')
+  const mobileNav = document.getElementById('mobile-nav-link')
+  const mobileToggle = document.getElementById('mobile-menu-toggle')
+  const isClickedOutside = !mobileNav.contains(evt.target)
+
+  // Exit if not in mobile view or menu button is clicked
+  // Menu button click triggers `menu-button` and `mobile-menu-toggle`
+  if (mainNavDisplay !== 'none' || evt.target.id === 'menu-button' || evt.target.id === 'mobile-menu-toggle') return
+
+  if (isClickedOutside) {
+    mobileToggle.checked = false
+  }
+}, false)
+
 // Web Share API
 // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share
 // Only available on supporting browsers and HTTPS
@@ -15,11 +31,11 @@ if (navigator.share && document.location.protocol === 'https:') {
     const query = (selector) => {
       return document.querySelector(selector)
     }
-  
+
     const title = query('meta[property="og:title"]') ? query('meta[property="og:title"]').content : ''
     const text = query('meta[property="og:description"]') ? query('meta[property="og:description"]').content : ''
     const url = query('link[rel="canonical"]') ? query('link[rel="canonical"]').href : document.location.href
-  
+
     await navigator.share({ title, text, url })
   }, false)
 }

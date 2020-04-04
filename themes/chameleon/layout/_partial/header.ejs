@@ -1,6 +1,6 @@
 <header id="header" class="header">
   <%/* Nav menu for desktop */%>
-  <nav id="main-nav" class="main-nav">
+  <nav class="main-nav">
     <% for (const i in theme.menu) { %>
       <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
     <% } %>
@@ -26,9 +26,9 @@
   <nav class="mobile-nav">
     <h1 class="site-title"><a href="<%- url_for(theme.menu['Home']) %>"><%= config.title %></a></h1>
     <ul class="mobile-nav-menu">
-    <label for="mobile-menu-toggle"><a class="menu-button no-underline">&#9776;</a></label>
+    <label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label>
     <input id="mobile-menu-toggle" type="checkbox"/>
-    <ul class="mobile-nav-link">
+    <ul id="mobile-nav-link">
       <div class="search-container">
         <form id="searchFormMob" method="post" action="https://duckduckgo.com/" target="_blank" rel="noopener external nofollow noreferrer">
         <input type="text" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo">

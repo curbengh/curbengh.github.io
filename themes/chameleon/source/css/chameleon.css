@@ -618,7 +618,7 @@ td {
 /* when it's not mobile */
 .mobile-nav,
 #mobile-menu-toggle,
-.mobile-nav-link {
+#mobile-nav-link {
   display: none;
 }
 
@@ -628,7 +628,7 @@ td {
 }
 
 /* overlap other elements */
-.mobile-nav-link {
+#mobile-nav-link {
   background: var(--main-bg-color);
   color: var(--main-font-color);
   border: 2px solid #999;
@@ -643,7 +643,7 @@ td {
   text-align: center;
 }
 
-.menu-button {
+#menu-button {
   font-size: 2em;
 }
 
@@ -764,7 +764,7 @@ svg#share:hover {
 
   /* display links when menu button is clicked */
   /* use grid to display each link in new line */
-  #mobile-menu-toggle:checked + .mobile-nav-link {
+  #mobile-menu-toggle:checked + #mobile-nav-link {
     display: grid;
   }
 }
