@@ -1,18 +1,11 @@
-<% let last %>
 <% page.posts.each((post, i) => { %>
-  <% const year = post.date.year() %>
-  <% if (last !== year) { %>
-    <% if (last !== null) { %>
-      </div></section>
-    <% } %>
-    <% last = year %>
-    <section class="archives-wrap">
-      <div class="archives">
-  <% } %>
-  <%- partial('archive-post', {post: post}) %>
+  <section class="archives-wrap">
+    <div class="archives">
+  <%- partial('archive-post', { post }) %>
 <% }) %>
 <% if (page.posts.length) { %>
-  </div></section>
+    </div>
+  </section>
 <% } %>
 <% if (page.total > 1) { %>
   <nav id="page-nav" class="page-nav">
