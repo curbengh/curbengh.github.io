@@ -224,12 +224,6 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
     Cache-Control "public, max-age=31536000, immutable"
   }
 
-  proxy /libs https://cdn.statically.io/libs {
-    without /libs
-    import removeHeaders
-    import staticallyCfg
-  }
-
   proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
     without /img
     import removeHeaders

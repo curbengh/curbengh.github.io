@@ -249,12 +249,6 @@ ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:808
     Cache-Control "public, max-age=31536000, immutable"
   }
 
-  proxy /libs https://cdn.statically.io/libs {
-    without /libs
-    import removeHeaders
-    import staticallyCfg
-  }
-
   proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
     without /img
     import removeHeaders

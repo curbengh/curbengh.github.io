@@ -2,6 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
+lastUpdated: 2020-04-08
 tags:
 - web
 - linux
@@ -217,7 +218,6 @@ If you prefer to redirect apex to www,
 Aside from reverse proxy to curben.netlify.com, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current [config](https://gitlab.com/curben/blog) is:
 
 ``` plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
-/libs/* https://cdn.statically.io/libs/:splat 200
 /img/* https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site/:splat 200
 /screenshot/* https://cdn.statically.io/screenshot/mdleom.com/:splat?mobile=true 200
 ```
@@ -225,10 +225,6 @@ Aside from reverse proxy to curben.netlify.com, I also configured my Netlify web
 In Caddyfile, the config can be expressed as:
 
 ``` plain
-  proxy /libs https://cdn.statically.io/libs {
-    without /libs
-  }
-
   proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
     without /img
   }
@@ -254,11 +250,6 @@ For `/screenshot`, since the `proxy` doesn't support variable like the Netlify `
 To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_upstream` option,
 
 ``` plain
-  proxy /libs https://cdn.statically.io/libs {
-    without /libs
-    header_upstream Host cdn.statically.io
-  }
-
   proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
     without /img
     header_upstream Host cdn.statically.io
@@ -287,10 +278,6 @@ There are a few repetitions for rewriting the header for Statically. I can group
 }
 
 mdleom.com {
-  proxy /libs ... {
-    import staticallyCfg
-  }
-
   proxy /img ... {
     import staticallyCfg
   }
@@ -322,10 +309,6 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
 }
 
 mdleom.com {
-  proxy /libs ... {
-    import removeHeaders
-  }
-
   proxy /img ... {
     import removeHeaders
   }
@@ -359,28 +342,7 @@ I also add the `Cache-Control` and `Referrer-Policy` to the response header. Use
 
 ### header and header_downstream
 
-`/lib` location is used to grab javascript libraries from Statically CDN. Since the library is usually requested by a specific version, we can safely assume that the response would remain the same. This means I can set long expiration and `immutable` on the response. [`immutable`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Revalidation_and_reloading) is to tell the browser that revalidation is not needed.
-
-```
-  proxy /libs ... {
-    header_downstream Cache-Control "public, max-age=31536000, immutable"
-  }
-```
-
-However, one issue I noticed is that `header` directive takes precedent over `header_downstream` option in `proxy` directive.
-
-```
-  header / {
-    Cache-Control "max-age=604800, public"
-  }
-  
-  proxy /libs ... {
-    # Doesn't work
-    header_downstream Cache-Control "public, max-age=31536000, immutable"
-  }
-```
-
-To solve that, I specify another `header` directive,
+`/libs` folder contains third-party libraries. Since the library is usually requested by a specific version, we can safely assume that the response would remain the same. This means I can set long expiration and `immutable` on the response. [`immutable`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Revalidation_and_reloading) is to tell the browser that revalidation is not needed.
 
 ```
   header / {
@@ -389,10 +351,6 @@ To solve that, I specify another `header` directive,
 
   header /libs {
     Cache-Control "public, max-age=31536000, immutable"
-  }
-  
-  proxy /libs ... {
-    # header_downstream no longer needed here
   }
 ```
 
@@ -452,12 +410,6 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
   header /libs {
     Cache-Control "public, max-age=31536000, immutable"
-  }
-
-  proxy /libs https://cdn.statically.io/libs {
-    without /libs
-    import removeHeaders
-    import staticallyCfg
   }
 
   proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
