@@ -14,9 +14,11 @@ document.addEventListener('click', (evt) => {
   const mobileToggle = document.getElementById('mobile-menu-toggle')
   const isClickedOutside = !mobileNav.contains(evt.target)
 
-  // Exit if not in mobile view or menu button is clicked
+  // Exit if not in mobile view or menu button is clicked or menu is currently hidden
   // Menu button click triggers `menu-button` and `mobile-menu-toggle`
-  if (mainNavDisplay !== 'none' || evt.target.id === 'menu-button' || evt.target.id === 'mobile-menu-toggle') return
+  if (mainNavDisplay !== 'none' ||
+    evt.target.id === 'menu-button' || evt.target.id === 'mobile-menu-toggle' ||
+    mobileToggle.checked === false) return
 
   if (isClickedOutside) {
     mobileToggle.checked = false
