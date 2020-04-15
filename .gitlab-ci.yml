@@ -5,14 +5,32 @@ cache: # add cache to 'node_modules' for speeding up builds
     - node_modules/ # Node modules and dependencies
 
 before_script:
-  - apk update && apk add git
   - npm install --only=prod -g npm
   - npm install --only=prod
 
 test:
+  before_script:
+    - 'which ssh-agent || (apk update && apk add openssh-client git)'
+
   script:
     - npm install --only=prod snyk && npm run snyk # Refer to "scripts" in package.json
     - npm run hexo
+
+  # Update github mirror
+  after_script:
+    # Import SSH key
+    - eval $(ssh-agent -s)
+    - echo "$GH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+    # (workaround) force exit code 0
+    - ssh -T git@github.com || ":"
+    - git remote add mirror git@github.com:curbengh/blog.git
+    - git push mirror master
+    - git push mirror site
 
   rules:
     # Skip in renovate job
