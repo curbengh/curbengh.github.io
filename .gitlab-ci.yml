@@ -29,6 +29,8 @@ test:
     # (workaround) force exit code 0
     - ssh -T git@github.com || ":"
     - git remote add mirror git@github.com:curbengh/blog.git
+    # Discard changes before checking out branch
+    - git reset HEAD --hard
     - git checkout master && git push mirror master
     - git checkout site && git push mirror site
 
