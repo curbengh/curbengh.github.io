@@ -29,8 +29,8 @@ test:
     # (workaround) force exit code 0
     - ssh -T git@github.com || ":"
     - git remote add mirror git@github.com:curbengh/blog.git
-    - git push mirror master
-    - git push mirror site
+    - git checkout master && git push mirror master
+    - git checkout site && git push mirror site
 
   rules:
     # Skip in renovate job
