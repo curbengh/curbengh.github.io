@@ -2,6 +2,7 @@
 title: Using Git and Git+SSH in GitLab CI
 excerpt: Guides and potential pitfalls
 date: 2019-10-03
+lastUpdated: 2020-04-18
 tags:
 - dev
 - gitlab
@@ -55,7 +56,9 @@ Hi user! You've successfully authenticated, but GitHub does not provide shell ac
 
 and _non-zero_ code, meaning the CI will stop after ssh and not run the subsequent git operations. SSH authenticate with GL doesn't have this issue. The `":"` command is a workaround to [force exit code 0](https://unix.fandom.com/wiki/Force_exit_code_0), the quote is to escape the semicolon in YML.
 
-Note that if you push any commit to GL (aside from the CI), remember to push it to GH as well; remember, commit history must sync. It's not an issue for because, in the context urlhaus-filter, the blocklist update is already automated, the only manual work is adding/removing false positive or changing the CI process which I rarely need to. Besides, I noticed it is possible for git `origin` to have multiple tracking repositories, so any commit can be automatically pushed to backup/mirror repository.
+Note that if you push any commit to GL (aside from the CI), remember to push it to GH as well; remember, commit history must sync. It's not an issue for because, in the context urlhaus-filter, the blocklist update is already automated, the only manual work is adding/removing false positive or changing the CI process which I rarely need to. Besides, I also noticed it is possible for git `origin` to have [multiple locations](https://stackoverflow.com/a/12795747), so any commit can be automatically pushed to backup/mirror repository, but I haven't found any use of it yet.
+
+_Edit:_ you could also use GitLab [**push** mirroring](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html#pushing-to-a-remote-repository-core) feature.
 
 ## Removed git clone step
 
