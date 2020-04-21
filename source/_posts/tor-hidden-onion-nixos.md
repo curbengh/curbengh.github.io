@@ -11,7 +11,7 @@ tags:
 - censorship
 ---
 
-In this segment, I show you how I set up Tor hidden (.onion) service that reverse proxy to curben.netlify.com. This website can be accessed through the following [.onion address](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion).
+In this segment, I show you how I set up Tor hidden (.onion) service that reverse proxy to curben.netlify.app. This website can be accessed through the following [.onion address](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion).
 
 This post is Part 4 of a series of articles that show you how I set up Caddy, Tor hidden service and I2P Eepsite on NixOS:
 
@@ -23,7 +23,7 @@ This post is Part 4 of a series of articles that show you how I set up Caddy, To
 
 The main reason for me to have a Tor hidden service is so that visitor can visit my website (mdleom.com) anonymously. Visitor indeed can browse this website _somewhat_ anonymously via VPN, but it's not hidden from the VPN provider. Even with Tor, the traffic still needs to get out from the Tor network to the Internet via exit relays, and exit relays can [do whatever](https://doi.org/10.1007/978-3-319-08506-7_16) they want to the traffic. Tor hidden service ensures the traffic is end-to-end encrypted and stays inside the Tor network--without involving any exit relay.
 
-Note that this only applies to the traffic between visitor and the (Caddy) web server, as shown in the following diagram; a request still needs to get passed to the upstream curben.netlify.com, but Netlify only sees the request comes from my web server as if it's just a regular visitor and shouldn't know that its origin from the Tor network.
+Note that this only applies to the traffic between visitor and the (Caddy) web server, as shown in the following diagram; a request still needs to get passed to the upstream curben.netlify.app, but Netlify only sees the request comes from my web server as if it's just a regular visitor and shouldn't know that its origin from the Tor network.
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
@@ -235,15 +235,15 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
     to /screenshot{1}?mobile=true
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.com {
+  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
     without /screenshot
     import removeHeaders
     import staticallyCfg
   }
 
-  proxy / https://curben.netlify.com {
+  proxy / https://curben.netlify.app {
     import removeHeaders
-    header_upstream Host curben.netlify.com
+    header_upstream Host curben.netlify.app
   }
 }
 ```

@@ -10,7 +10,7 @@ tags:
 - nixos
 ---
 
-In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.com using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
+In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
 
 This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
 
@@ -215,7 +215,7 @@ If you prefer to redirect apex to www,
 
 ### Reverse proxy
 
-Aside from reverse proxy to curben.netlify.com, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current [config](https://gitlab.com/curben/blog) is:
+Aside from reverse proxy to curben.netlify.app, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current [config](https://gitlab.com/curben/blog) is:
 
 ``` plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
 /img/* https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site/:splat 200
@@ -234,11 +234,11 @@ In Caddyfile, the config can be expressed as:
     to /screenshot{1}?mobile=true
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.com {
+  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
     without /screenshot
   }
 
-  proxy / https://curben.netlify.com
+  proxy / https://curben.netlify.app
 ```
 
 `without` directive is necessary to remove `libs/` from the path, so that "mdleom.com/libs/foo/bar.js" is linked to "https://cdn.statically.io/libs/foo/bar.js", not "https://cdn.statically.io/libs/libs/foo/bar.js".
@@ -260,12 +260,12 @@ To make sure Caddy sends the correct `Host:` header to the upstream/backend loca
     to /screenshot{1}?mobile=true
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.com {
+  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
     without /screenshot
     header_upstream Host cdn.statically.io
   }
 
-  proxy / https://curben.netlify.com {
+  proxy / https://curben.netlify.app {
     header_upstream Host cdn.statically.io
   }
 ```
@@ -423,15 +423,15 @@ mdleom.com:4430 www.mdleom.com:4430 {
     to /screenshot{1}?mobile=true
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.com {
+  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
     without /screenshot
     import removeHeaders
     import staticallyCfg
   }
 
-  proxy / https://curben.netlify.com {
+  proxy / https://curben.netlify.app {
     import removeHeaders
-    header_upstream Host curben.netlify.com
+    header_upstream Host curben.netlify.app
   }
 }
 ```

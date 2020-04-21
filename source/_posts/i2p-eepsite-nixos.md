@@ -11,7 +11,7 @@ tags:
 - censorship
 ---
 
-In this segment, I show you how I set up I2P Eepsite service that reverse proxy to curben.netlify.com. This website can be accessed using this [B32 address](http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p) or [mdleom.i2p](http://mdleom.i2p/)
+In this segment, I show you how I set up I2P Eepsite service that reverse proxy to curben.netlify.app. This website can be accessed using this [B32 address](http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p) or [mdleom.i2p](http://mdleom.i2p/)
 
 This post is Part 5 of a series of articles that show you how I set up Caddy, Tor hidden service and I2P Eepsite on NixOS:
 
@@ -25,7 +25,7 @@ The reason I set up an Eepsite is similar to why I have a Tor hidden service, is
 
 A thing to note about I2P is that, while inside its network, you can only browse *.i2p websites, not normal websites or what is so-called the _clearnet_. This is unlike Tor where you can browse .onion and clearnet, which is routed through _exit relays_. You could browse the clearnet from I2P network by using a _outproxy_, which works similarly to exit relay of Tor. However, I2P user is discouraged from using a outproxy as that would compromise the user's anonymity.
 
-For this website, I2P network only applies to the traffic between visitor and my (Caddy) web server, as shown in the following diagram; a request still needs to get passed to the upstream curben.netlify.com, but Netlify only sees the request comes from my web server as if it's just a regular visitor and shouldn't know that its origin from the I2P network.
+For this website, I2P network only applies to the traffic between visitor and my (Caddy) web server, as shown in the following diagram; a request still needs to get passed to the upstream curben.netlify.app, but Netlify only sees the request comes from my web server as if it's just a regular visitor and shouldn't know that its origin from the I2P network.
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
@@ -260,15 +260,15 @@ ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:808
     to /screenshot{1}?mobile=true
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.com {
+  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
     without /screenshot
     import removeHeaders
     import staticallyCfg
   }
 
-  proxy / https://curben.netlify.com {
+  proxy / https://curben.netlify.app {
     import removeHeaders
-    header_upstream Host curben.netlify.com
+    header_upstream Host curben.netlify.app
   }
 }
 ```
