@@ -34,7 +34,7 @@ Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) t
 - [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) to apply light/dark theme according to the OS preference.
 - Add a [Copy](https://clipboardjs.com/) button to each code block.
 - Removed jQuery, fancyBox, web analytics, comment plugins, donation links and [typo.css](https://github.com/sofish/typo.css).
-- Homepage shows index of posts (same as /archives).
+- Homepage shows recent posts and tags.
 
 ## Installation
 
