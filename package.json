@@ -20,7 +20,7 @@
     "hexo-renderer-ejs": "hexojs/hexo-renderer-ejs",
     "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
     "hexo-yam": "curbengh/hexo-yam",
-    "postcss-normalize": "^8.0.1",
+    "postcss-normalize": "^9.0.0",
     "sanitize.css": "^11.0.0"
   },
   "devDependencies": {
