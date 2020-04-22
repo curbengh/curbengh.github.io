@@ -213,6 +213,16 @@ The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos
 (removeHeaders) {
   header_upstream -cookie
   header_upstream -referer
+  header_upstream -cf-ipcountry
+  header_upstream -cf-connecting-ip
+  header_upstream -x-forwarded-for
+  header_upstream -x-forwarded-proto
+  header_upstream -cf-ray
+  header_upstream -cf-visitor
+  header_upstream -true-client-ip
+  header_upstream -cdn-loop
+  header_upstream -cf-request-id
+  header_upstream -cf-cache-status
 }
 
 (staticallyCfg) {
@@ -227,6 +237,7 @@ ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:808
 
   header / {
     -server
+    -alt-svc
     -cdn-cache
     -cdn-cachedat
     -cdn-edgestorageid
@@ -234,6 +245,9 @@ ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:808
     -cdn-requestcountrycode
     -cdn-requestid
     -cdn-uid
+    -cf-cache-status
+    -cf-ray
+    -cf-request-id
     -etag
     -set-cookie
     -strict-transport-security

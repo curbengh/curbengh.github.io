@@ -188,6 +188,16 @@ The rest are similar to "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#ca
 (removeHeaders) {
   header_upstream -cookie
   header_upstream -referer
+  header_upstream -cf-ipcountry
+  header_upstream -cf-connecting-ip
+  header_upstream -x-forwarded-for
+  header_upstream -x-forwarded-proto
+  header_upstream -cf-ray
+  header_upstream -cf-visitor
+  header_upstream -true-client-ip
+  header_upstream -cdn-loop
+  header_upstream -cf-request-id
+  header_upstream -cf-cache-status
 }
 
 (staticallyCfg) {
@@ -202,6 +212,7 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
   header / {
     -server
+    -alt-svc
     -cdn-cache
     -cdn-cachedat
     -cdn-edgestorageid
@@ -209,6 +220,9 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
     -cdn-requestcountrycode
     -cdn-requestid
     -cdn-uid
+    -cf-cache-status
+    -cf-ray
+    -cf-request-id
     -etag
     -set-cookie
     -strict-transport-security

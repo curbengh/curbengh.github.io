@@ -306,6 +306,8 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
   header_upstream -cf-visitor
   header_upstream -true-client-ip
   header_upstream -cdn-loop
+  header_upstream -cf-request-id
+  header_upstream -cf-cache-status
 }
 
 mdleom.com {
@@ -315,11 +317,12 @@ mdleom.com {
 }
 ```
 
-The upstream locations insert some information into the response headers that could like my server location. I use `header` directive to filter them out. It applies to all `proxy` directive.
+The upstream locations insert some information into the response headers that are irrelevant to the site visitors. I use `header` directive to filter them out. It applies to all `proxy` directive.
 
 ```
   header / {
     -server
+    -alt-svc
     -cdn-cache
     -cdn-cachedat
     -cdn-edgestorageid
@@ -327,6 +330,9 @@ The upstream locations insert some information into the response headers that co
     -cdn-requestcountrycode
     -cdn-requestid
     -cdn-uid
+    -cf-cache-status
+    -cf-ray
+    -cf-request-id
     -etag
     -set-cookie
     -x-bytes-saved
@@ -370,6 +376,8 @@ I also add the `Cache-Control` and `Referrer-Policy` to the response header. Use
   header_upstream -cf-visitor
   header_upstream -true-client-ip
   header_upstream -cdn-loop
+  header_upstream -cf-request-id
+  header_upstream -cf-cache-status
 }
 
 (staticallyCfg) {
@@ -391,6 +399,7 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
   header / {
     -server
+    -alt-svc
     -cdn-cache
     -cdn-cachedat
     -cdn-edgestorageid
@@ -398,6 +407,9 @@ mdleom.com:4430 www.mdleom.com:4430 {
     -cdn-requestcountrycode
     -cdn-requestid
     -cdn-uid
+    -cf-cache-status
+    -cf-ray
+    -cf-request-id
     -etag
     -set-cookie
     -x-bytes-saved
