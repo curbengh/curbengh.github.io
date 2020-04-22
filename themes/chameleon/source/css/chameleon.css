@@ -721,21 +721,27 @@ svg#share:hover {
   fill: currentColor;
 }
 
+/* hide share button by default
+unhide (via JS) if Web Share API is supported */
+.article-title a#share-button {
+  display: none;
+}
+
 .article .article-entry a.headerlink svg,
-.article-title a.share-button svg {
+.article-title a#share-button svg {
   height: 0.75em;
 }
 
 /* don't underline permalink and share icons */
 .article .article-entry a.headerlink,
-.article-title a.share-button {
+.article-title a#share-button {
   border-bottom: none;
   margin-left: 0.5em;
 }
 
 /* underline permalink and share icons when hover */
 .article .article-entry a.headerlink:hover,
-.article-title a.share-button:hover {
+.article-title a#share-button:hover {
   border-bottom: 1px solid var(--link-underline);
 }
 

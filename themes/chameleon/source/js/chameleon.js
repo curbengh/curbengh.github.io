@@ -29,7 +29,12 @@ document.addEventListener('click', (evt) => {
 // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share
 // Only available on supporting browsers and HTTPS
 if (navigator.share && document.location.protocol === 'https:') {
-  document.getElementById('share-click').addEventListener('click', async () => {
+  const shareBtn = document.getElementById('share-button')
+
+  // Unhide share-button if supported
+  shareBtn.style.display = 'initial'
+
+  shareBtn.addEventListener('click', async () => {
     const query = (selector) => {
       return document.querySelector(selector)
     }
