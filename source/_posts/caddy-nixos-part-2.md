@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"
 excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
-lastUpdated: 2020-03-23
+lastUpdated: 2020-04-22
 tags:
 - web
 - linux
@@ -148,16 +148,10 @@ Once the secret is generated, TOTP can be enabled using the following config. I 
 
 ``` js
   ## Requires OTP to login & sudo
-  security.pam.services = [
-    {
-      name = "login";
-      googleAuthenticator.enable = true;
-    }
-    {
-      name = "sudo";
-      googleAuthenticator.enable = true;
-    }
-  ];
+  security.pam = {
+    services.login.googleAuthenticator.enable = true;
+    services.sudo.googleAuthenticator.enable = true;
+  };
 ```
 
 ## DNS-over-TLS

@@ -2,6 +2,7 @@
 title: "How to make your website available over I2P Eepsite on NixOS"
 excerpt: "A guide on I2P Eepsite on NixOS"
 date: 2020-03-21
+lastUpdated: 2020-04-22
 tags:
 - web
 - linux
@@ -39,8 +40,7 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
     enable = true;
     ifname = "ens3";
     address = "xxxx";
-    inTunnels = [{
-      name = "myEep";
+    inTunnels.myEep = {
       enable = true;
       keys = "myEep-keys.dat";
       inPort = 80;
@@ -49,7 +49,7 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
       port = 8081;
       # inbound.length = 1;
       # outbound.length = 1;
-    }];
+    };
     enableIPv4 = false;
     enableIPv6 = true;
   };

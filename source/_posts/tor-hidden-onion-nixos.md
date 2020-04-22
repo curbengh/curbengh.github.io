@@ -2,6 +2,7 @@
 title: "How to make your website available over Tor hidden service on NixOS"
 excerpt: "A guide on Tor hidden service on NixOS"
 date: 2020-03-16
+lastUpdated: 2020-04-22
 tags:
 - web
 - linux
@@ -36,8 +37,7 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
   services.tor = {
     enable = true;
     enableGeoIP = false;
-    hiddenServices = [{
-      name = "myOnion";
+    hiddenServices.myOnion = {
       version = 3;
       map = [
         {
@@ -46,7 +46,7 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
           toPort = "8080";
         }
       ];
-    }];
+    };
     extraConfig = 
       ''
         ClientUseIPv4 0
