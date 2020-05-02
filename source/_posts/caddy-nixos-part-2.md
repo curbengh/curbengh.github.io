@@ -225,11 +225,14 @@ Unattended upgrade can be enabled through the following config. Once enabled, Ni
 
 In the config, you can also specify the time that the server will reboot. I recommend to only enable it after everything is up and running, especially when setting a web server; you wouldn't want the server to reboot itself in the middle of your tinkering.
 
+(For more advanced usage of `dates`, see [`systemd.time`](https://jlk.fjfi.cvut.cz/arch/manpages/man/systemd.time.7#CALENDAR_EVENTS))
+
 ``` js
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
-    dates = "00:00";
+    # Daily 00:00
+    dates = "daily UTC";
   };
 ```
 
@@ -305,4 +308,17 @@ Kernel compiled with additional security-oriented patch set. [More details](http
 
 ```
   boot.kernelPackages = pkgs.linuxPackages_hardened;
+```
+
+## Remove old, unreferenced packages
+
+Since my web server has limited disk space, it needs to run [garbage collector](https://nixos.org/nixos/manual/index.html#sec-nix-gc) from time to time.
+
+```
+  ## Garbage collector
+  nix.gc = {
+    automatic = true;
+    # Every Monday 00:00
+    dates = "weekly UTC";
+  };
 ```

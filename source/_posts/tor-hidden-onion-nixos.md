@@ -37,15 +37,17 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
   services.tor = {
     enable = true;
     enableGeoIP = false;
-    hiddenServices.myOnion = {
-      version = 3;
-      map = [
-        {
-          port = "80";
-          toHost = "[::1]";
-          toPort = "8080";
-        }
-      ];
+    hiddenServices = {
+      myOnion = {
+        version = 3;
+        map = [
+          {
+            port = "80";
+            toHost = "[::1]";
+            toPort = "8080";
+          }
+        ];
+      };
     };
     extraConfig = 
       ''

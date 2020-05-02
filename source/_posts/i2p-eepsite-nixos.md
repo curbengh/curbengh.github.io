@@ -40,15 +40,17 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
     enable = true;
     ifname = "ens3";
     address = "xxxx";
-    inTunnels.myEep = {
-      enable = true;
-      keys = "myEep-keys.dat";
-      inPort = 80;
-      address = "::1";
-      destination = "::1";
-      port = 8081;
-      # inbound.length = 1;
-      # outbound.length = 1;
+    inTunnels = {
+      myEep = {
+        enable = true;
+        keys = "myEep-keys.dat";
+        inPort = 80;
+        address = "::1";
+        destination = "::1";
+        port = 8081;
+        # inbound.length = 1;
+        # outbound.length = 1;
+      };
     };
     enableIPv4 = false;
     enableIPv6 = true;
