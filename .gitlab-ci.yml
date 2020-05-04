@@ -5,7 +5,6 @@ cache: # add cache to 'node_modules' for speeding up builds
     - node_modules/ # Node modules and dependencies
 
 before_script:
-  - npm install --only=prod -g npm
   - npm install --only=prod
 
 test:
