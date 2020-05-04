@@ -4,7 +4,6 @@ excerpt: Jest = Chai + Mocha + NYC + Sinon
 date: 2019-12-30
 tags:
 - javascript
-- dev
 ---
 
 Recently, I finally implement unit tests for hexo-yam, which it lacked for too long than I would like. I've grown pretty familiar with Chai + Mocha as part of my work in HexoJS. But I'm not particularly fond of them, due to my [previous](https://github.com/hexojs/hexo-generator-sitemap/pull/66) [frustation](https://github.com/hexojs/hexo-generator-sitemap/pull/70). I started to look for alternatives. Initially, I was intrigued by [ava](https://github.com/avajs/ava) used in [hexo-filter-responsive-images](https://github.com/hexojs/hexo-filter-responsive-images) plugin, but the name just stuck as a todo as I work on more pressing issues in HexoJS.

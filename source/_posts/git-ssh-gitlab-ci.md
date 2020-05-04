@@ -4,7 +4,6 @@ excerpt: Guides and potential pitfalls
 date: 2019-10-03
 lastUpdated: 2020-04-18
 tags:
-- dev
 - gitlab
 ---
 
