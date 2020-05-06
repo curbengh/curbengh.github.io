@@ -548,8 +548,8 @@ td {
 .hljs {
   display: block;
   overflow-x: auto;
-  padding: 0.5em;
-  /* background: #282a36; */
+  /* padding: 0.5em;
+  background: #282a36; */
 }
 
 .hljs-built_in,
