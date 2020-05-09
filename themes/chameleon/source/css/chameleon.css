@@ -112,8 +112,6 @@ hr {
 }
 
 .archive-container hr,
-.category-container hr,
-.tag-container hr,
 .article hr {
   width: 100%;
   margin-left: 0;
@@ -306,9 +304,7 @@ span.index-list-count:after {
 }
 
 /* https://jrl.ninja/etc/1/ */
-.archive-container,
-.category-container,
-.tag-container {
+.archive-container {
   position: relative;
   font-size: 1em;
   max-width: 80ch;
@@ -316,57 +312,37 @@ span.index-list-count:after {
   margin: auto;
 }
 
-.archive-container article,
-.category-container article,
-.tag-container article {
+.archive-container article {
   margin-bottom: 1em;
   line-height: 1em;
 }
 
 .archive-container a,
-.archive-container a:hover,
-.category-container a,
-.category-container a:hover,
-.tag-container a,
-.tag-container a:hover {
+.archive-container a:hover {
   border: 0;
 }
 
 .archive-container .header,
-.category-container .header,
-.tag-container .header,
 .article .header {
   font-size: 1.1em;
 }
 
 .archive-container .archive-article-header > a,
-.archive-container .archive-article-header > h1,
-.category-container .archive-article-header > a,
-.category-container .archive-article-header > h1,
-.tag-container .archive-article-header > a,
-.tag-container .archive-article-header > h1 {
+.archive-container .archive-article-header > h1 {
   vertical-align: middle;
 }
 
-.archive-container .archive-article-header h1,
-.category-container .archive-article-header h1,
-.tag-container .archive-article-header h1 {
+.archive-container .archive-article-header h1 {
   font-size: 1.2em;
   margin: 0;
 }
 
-.archive-container .archive-article-date,
-.category-container .archive-article-date,
-.tag-container .archive-article-date {
+.archive-container .archive-article-date {
   font-size: 0.8em;
 }
 
 .archive-container .extend,
-.archive-container .page-number,
-.category-container .extend,
-.category-container .page-number,
-.tag-container .extend,
-.tag-container .page-number {
+.archive-container .page-number {
   margin-right: 1em;
 }
 
