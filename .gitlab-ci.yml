@@ -1,4 +1,4 @@
-image: node:alpine # Use latest version of Node.js on Alpine
+image: node:12
 
 cache: # add cache to 'node_modules' for speeding up builds
   paths:
@@ -11,7 +11,6 @@ test:
 
   script:
     - npm install --only=prod snyk && npm run snyk # Refer to "scripts" in package.json
-    - ls node_modules/.bin
     - npm run hexo
 
   # Update github mirror
