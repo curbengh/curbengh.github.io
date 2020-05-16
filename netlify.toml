@@ -1,3 +1,3 @@
 [context.production]
   publish = "public"
-  command = "npm install --only=prod --no-save snyk && npm run snyk && npm run hexo"
+  command = "npm run hexo"
