@@ -7,7 +7,6 @@ cache: # add cache to 'node_modules' for speeding up builds
 test:
   before_script:
     - 'which ssh-agent || (apk update && apk add openssh-client git)'
-    - npm install --only=prod -g hexo-cli@hexojs/hexo-cli
     - npm install --only=prod
 
   script:
