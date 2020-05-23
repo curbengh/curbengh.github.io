@@ -4,7 +4,7 @@ excerpt: "A guide on I2P Eepsite on NixOS"
 date: 2020-03-21
 lastUpdated: 2020-04-22
 tags:
-- web
+- server
 - linux
 - caddy
 - nixos

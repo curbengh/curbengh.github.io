@@ -4,7 +4,7 @@ excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
 lastUpdated: 2020-04-22
 tags:
-- web
+- server
 - linux
 - caddy
 - nixos
