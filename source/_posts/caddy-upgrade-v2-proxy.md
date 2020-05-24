@@ -130,6 +130,48 @@ http://example.com:8080 {
 }
 ```
 
+## Redirect www subdomain
+
+Remove `www.` subdomain with HTTP 301 Permanent redirect:
+
+``` plain v1
+example.com www.example.com {
+  redir 301 {
+    if {label1} is www
+    / https://example.com{uri}
+  }
+}
+```
+
+``` plain v2
+example.com www.example.com {
+  @www {
+    host www.example.com
+  }
+  redir @www https://example.com{uri} permanent
+}
+```
+
+Add `www.` subdomain:
+
+``` plain v1
+example.com www.example.com {
+  redir 301 {
+    if {label1} is example
+    / https://www.example.com{uri}
+  }
+}
+```
+
+``` plain v2
+example.com www.example.com {
+  @www {
+    host example.com
+  }
+  redir @www https://www.example.com{uri} permanent
+}
+```
+
 ## Disable HTTP -> HTTPS redirects
 
 In v2, Caddy automatically listens on HTTP (port 80) and redirects to HTTPS, whereas in v1, you need add a separate `redir 301`. This is handy is most use cases, but doesn't apply to my {% post_link caddy-nixos-part-3 'use case' %}--listens on HTTPS only.
