@@ -132,6 +132,14 @@ small {
   color: #888;
 }
 
+figcaption {
+  margin-bottom: 0.5em;
+}
+
+pre figcaption a {
+  float: right;
+}
+
 dl,
 form,
 hr,
@@ -792,6 +800,7 @@ unhide (via JS) if Web Share API is supported */
   cursor: pointer;
   font-size: 0.8em;
   line-height: 1em;
+  margin-top: 1em;
   padding: 5px;
   user-select: none;
 }
