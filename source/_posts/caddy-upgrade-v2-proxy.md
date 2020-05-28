@@ -2,6 +2,7 @@
 title: Upgrading Caddy reverse proxy from v1 to v2 syntax
 excerpt: route, strip_prefix, rewrite
 date: 2020-05-23
+lastUpdated: 2020-05-28
 tags:
 - server
 - caddy
@@ -170,6 +171,18 @@ example.com www.example.com {
   }
   redir @www https://www.example.com{uri} permanent
 }
+```
+
+## header and reverse_proxy
+
+`header` directive still keeps similar syntax, but operates a bit different. In v2, when used alongside with `reverse_proxy`, Caddy modifies the header _before_ receiving header response from the backend. This behaviour is apparent when you want to replace existing header(s); instead of replacing, Caddy adds the header and results in duplicate headers. To avoid this issue, you should use `defer`:
+
+``` plain v2
+  header {
+    -server
+    Referrer-Policy "no-referrer"
+    defer
+  }
 ```
 
 ## Disable HTTP -> HTTPS redirects
