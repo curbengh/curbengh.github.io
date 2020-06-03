@@ -6,7 +6,7 @@ tags:
 - tor
 ---
 
-Tor Browser recently introduced "Onion Location" feature to enable a (cleanet) website to advertise its onion service to users of Tor Browser by adding an HTTP header. When visiting a cleanet website that has onion service available and the relevant HTTP header, Tor Browser will display a ".onion available" button on the address bar. When user clicks on it, Tor Browser will redirects to the .onion address of the website. User could also opt-in the "Always Prioritise Onions" option and Tor Browser will automatically redirects to a website's .onion if detected.
+Tor Browser recently introduced "Onion Location" feature in [v9.5](https://blog.torproject.org/new-release-tor-browser-95) to enable a (cleanet) website to advertise its onion service to users of Tor Browser by adding an HTTP header. When visiting a cleanet website that has onion service available and the relevant HTTP header, Tor Browser will display a ".onion available" button on the address bar. When user clicks on it, Tor Browser will redirects to the .onion address of the website. User could also opt-in the "Always Prioritise Onions" option and Tor Browser will automatically redirects to a website's .onion if detected. This feature was initially suggested back in [2017](https://trac.torproject.org/projects/tor/ticket/21952) and finally landed in v9.5.
 
 ![.onion button](20200603/onion-location.png)
 
