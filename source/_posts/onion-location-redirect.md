@@ -38,6 +38,15 @@ example.com {
 }
 ```
 
+## Netlify
+
+Add custom header by using [`_headers`](https://docs.netlify.com/routing/headers/) file saved the root folder of your site:
+
+``` plain _headers
+/*
+  Onion-Location: http://xxx.onion
+```
+
 ## <meta> tag
 
 If you don't have access to the web server to add the header (e.g. GitHub/GitLab Pages), you can add `<meta>` tag instead.
