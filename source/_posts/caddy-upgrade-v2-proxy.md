@@ -2,7 +2,7 @@
 title: Upgrading Caddy reverse proxy from v1 to v2 syntax
 excerpt: route, strip_prefix, rewrite
 date: 2020-05-23
-lastUpdated: 2020-05-28
+lastUpdated: 2020-06-21
 tags:
 - server
 - caddy
@@ -54,9 +54,17 @@ Requests to `https://example.com/api/foo/bar/` is redirected to `https://backend
 
 v2 doesn't have `without` directive, instead you need to use `route` the request and remove the prefix using `uri strip_prefix`:
 
-``` plain v2
+``` plain v2.0
 route /api/* {
 	uri strip_prefix /api
+	reverse_proxy https://backend.com
+}
+```
+
+v2.1 adds `handle_path` directive which integrates prefix stripping:
+
+``` plain v2.1
+handle_path /api/* {
 	reverse_proxy https://backend.com
 }
 ```
@@ -75,12 +83,19 @@ proxy /img https://backend.com/img/blog {
 
 v2 doesn't support custom path, instead you need to use `rewrite` to prepend the path:
 
-``` plain v2
+``` plain v2.0
 route /img/* {
   uri strip_prefix /img
 
   rewrite * /img/blog{path}
 
+  reverse_proxy https://backend.com
+}
+```
+
+``` plain v2.1
+handle_path /img/* {
+  rewrite * /img/blog{path}
   reverse_proxy https://backend.com
 }
 ```
@@ -144,11 +159,20 @@ example.com www.example.com {
 }
 ```
 
-``` plain v2
+``` plain v2.0
 example.com www.example.com {
   @www {
     host www.example.com
   }
+  redir @www https://example.com{uri} permanent
+}
+```
+
+v2.1 supports single-line matcher:
+
+``` plain v2.1
+example.com www.example.com {
+  @www host www.example.com
   redir @www https://example.com{uri} permanent
 }
 ```
@@ -164,11 +188,18 @@ example.com www.example.com {
 }
 ```
 
-``` plain v2
+``` plain v2.0
 example.com www.example.com {
   @www {
     host example.com
   }
+  redir @www https://www.example.com{uri} permanent
+}
+```
+
+``` plain v2.1
+example.com www.example.com {
+  @www host example.com
   redir @www https://www.example.com{uri} permanent
 }
 ```
@@ -189,10 +220,44 @@ example.com www.example.com {
 
 In v2, Caddy automatically listens on HTTP (port 80) and redirects to HTTPS, whereas in v1, you need add a separate `redir 301`. This is handy is most use cases, but doesn't apply to my {% post_link caddy-nixos-part-3 'use case' %}--listens on HTTPS only.
 
-In v2.0, this can only be disabled in [JSON](https://caddyserver.com/docs/json/apps/http/servers/#automatic_https/disable_redirects); it will be configurable using Caddyfile in [v2.1](https://github.com/caddyserver/caddy/issues/3219).
+In v2.0, this can only be disabled in [JSON](https://caddyserver.com/docs/json/apps/http/servers/#automatic_https/disable_redirects).
+
+v2.1 supports configuring Automatic HTTPS in Caddyfile using `auto https` global option:
+
+``` plain Caddyfile
+{
+  auto_https disable_redirects
+}
+```
 
 ## TLS client authentication
 
 Client authentication adds another step to TLS connection process whereby a client needs to present a certificate (that has been signed by a CA certificate) to the server (which has the CA certificate) when it attempts to establish a TLS connection. Once the client is authenticated, the process is reversed and client authenticates the server instead. The padlock icon next to the web address indicates that the website's certificate is valid. Client authentication is only used in private web server to restrict access to authorised clients only. In my case, I restrict my origin server to [Cloudflare CDN](https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls) only; mdleom.com is only accessible via Cloudflare, direct connection to the origin server will be dropped.
 
-In v2.0, this can only be disabled in [JSON](https://caddyserver.com/docs/json/apps/http/servers/tls_connection_policies/#client_authentication); it will be configurable using Caddyfile in [v2.1](https://github.com/caddyserver/caddy/issues/3334).
+In v2.0, this can only be disabled in [JSON](https://caddyserver.com/docs/json/apps/http/servers/tls_connection_policies/#client_authentication).
+
+v2.1 supports configuring client authentication in Caddyfile using `clients` directive in tls option:
+
+``` plain Caddyfile
+example.com {
+  tls cert.pem cert.key {
+    client_auth {
+      mode require_and_verify
+      trusted_ca_cert_file origin-pull-ca.pem
+      # base64 DER-encoded CA cert is also supported
+      # trusted_ca_cert MIIDSzCCAjOgAwIBAg
+    }
+  }
+}
+```
+
+## Administration endpoint
+
+[Admin endpoint](https://caddyserver.com/docs/api) is the highlight feature of v2.0; new config can be loaded without restarting Caddy. It is enabled by default and listens on `http://localhost:2019`.
+
+To disable it:
+
+```
+{
+  admin off
+}
