@@ -2,7 +2,7 @@
 title: Upgrading Caddy reverse proxy from v1 to v2 syntax
 excerpt: route, strip_prefix, rewrite
 date: 2020-05-23
-lastUpdated: 2020-06-21
+updated: 2020-06-21
 tags:
 - server
 - caddy

@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-lastUpdated: 2020-02-19
+updated: 2020-02-19
 ---
 
 ## Projects

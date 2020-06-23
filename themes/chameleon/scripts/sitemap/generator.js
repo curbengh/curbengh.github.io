@@ -33,10 +33,7 @@ module.exports = function (locals) {
     .map((post) => ({
       ...post,
       date: moment(post.date).format('YYYY-MM-DD[T00:00:00.000Z]'),
-      lastUpdated: () => {
-        if (post.lastUpdated) return moment(post.lastUpdated).format('YYYY-MM-DD[T00:00:00.000Z]')
-        else return false
-      }
+      updated: post.updated ? moment(post.updated).format('YYYY-MM-DD[T00:00:00.000Z]') : false
     }))
 
   // configuration dictionary

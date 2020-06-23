@@ -3,8 +3,8 @@
   {% for post in posts %}
   <url>
     <loc>{{ post.permalink }}</loc>
-    {% if post.lastUpdated() %}
-    <lastmod>{{ post.lastUpdated() }}</lastmod>
+    {% if post.updated %}
+    <lastmod>{{ post.updated }}</lastmod>
     {% elif post.date %}
     <lastmod>{{ post.date }}</lastmod>
     {% endif %}

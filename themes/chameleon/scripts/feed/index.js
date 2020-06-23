@@ -4,7 +4,7 @@
 /*
 * Modified from the hexo version,
 * https://github.com/hexojs/hexo-generator-feed
-* to use post.lastUpdated and remove timezone
+* to remove timezone
 */
 
 const { extname } = require('path')

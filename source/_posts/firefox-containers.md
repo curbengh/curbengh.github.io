@@ -2,7 +2,7 @@
 title: Firefox Multi-Account Containers
 excerpt: Separate website cookies in a single session
 date: 2019-08-12
-lastUpdated: 2019-08-27
+updated: 2019-08-27
 tags:
 - firefox
 - privacy

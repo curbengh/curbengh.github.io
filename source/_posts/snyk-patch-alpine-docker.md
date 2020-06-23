@@ -2,7 +2,7 @@
 title: Snyk failed to patch in Alpine docker
 excerpt: Synk depends on GNU version of patch utility.
 date: 2018-10-31
-lastUpdated: 2019-03-09
+updated: 2019-03-09
 tags:
 - snyk
 - linux

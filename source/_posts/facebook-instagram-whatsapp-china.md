@@ -2,7 +2,7 @@
 title: Access Facebook/Instagram/Whatsapp/Google in China
 excerpt: Data roaming, commercial VPN provider to rolling your own VPN.
 date: 2018-12-31
-lastUpdated: 2019-10-23
+updated: 2019-10-23
 tags:
 - censorship
 ---

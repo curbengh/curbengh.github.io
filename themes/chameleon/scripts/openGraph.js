@@ -38,7 +38,7 @@ function openGraphHelper () {
   const screenshot = '/screenshot/' + prettyUrls(this.path, config.pretty_urls)
   const siteName = config.title || ''
   const published = page.date || ''
-  const updated = page.lastUpdated || ''
+  const updated = page.updated || ''
   const language = config.language.replace('-', '_')
   let result = ''
 

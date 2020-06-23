@@ -2,7 +2,7 @@
 title: Recommended open-source Android apps
 excerpt: Apps I'm currently using and recommend to everyone.
 date: 2019-01-07
-lastUpdated: 2020-04-15
+updated: 2020-04-15
 tags:
 - android
 ---

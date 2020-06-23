@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"
 excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
-lastUpdated: 2020-04-22
+updated: 2020-04-22
 tags:
 - server
 - linux

@@ -2,7 +2,7 @@
 title: Edit multiple questions on LimeSurvey
 excerpt: List Questions view allows you to edit multiple questions at the same time.
 date: 2018-10-18
-lastUpdated: 2018-10-26
+updated: 2018-10-26
 tags:
 - stats
 - limesurvey

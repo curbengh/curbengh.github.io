@@ -2,7 +2,7 @@
 title: "How to make your website available over I2P Eepsite on NixOS"
 excerpt: "A guide on I2P Eepsite on NixOS"
 date: 2020-03-21
-lastUpdated: 2020-04-22
+updated: 2020-04-22
 tags:
 - server
 - linux

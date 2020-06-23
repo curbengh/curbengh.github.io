@@ -2,7 +2,7 @@
 title: How to create a Hexo blog on GitLab Pages
 excerpt: Create a website/blog using Hexo on GitLab Pages for free using this detailed guide.
 date: 2018-09-21
-lastUpdated: 2018-11-10
+updated: 2018-11-10
 tags:
 - hexo
 - gitlab

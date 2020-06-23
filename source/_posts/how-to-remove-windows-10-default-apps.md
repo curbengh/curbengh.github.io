@@ -2,7 +2,7 @@
 title: How to remove Windows 10 default apps
 excerpt: How to get rid of these bloatware.
 date: 2018-09-26
-lastUpdated: 2019-03-01
+updated: 2019-03-01
 tags:
 - windows
 ---
