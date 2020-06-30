@@ -32,6 +32,7 @@ skip_render:
   - 'google5149b8b3449442e3.html'
   - 'yandex_210230bd98a5c664.html'
   - 'yandex_e54834b81be38a26.html'
+  - 'yandex_6cc1f27a50282e72.html'
 include:
   - '_headers' # Netlify header rule
   - '_redirects' # Netlify redirects rule
