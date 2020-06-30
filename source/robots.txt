@@ -1,4 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /404
+Disallow: /404.html
 
 Sitemap: https://mdleom.com/sitemap.xml
