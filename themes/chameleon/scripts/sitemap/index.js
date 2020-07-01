@@ -9,8 +9,7 @@
 const pathFn = require('path')
 
 const config = hexo.config.sitemap = Object.assign({
-  path: 'sitemap.xml',
-  tags: true
+  path: 'sitemap.xml'
 }, hexo.config.sitemap)
 
 if (!pathFn.extname(config.path)) {

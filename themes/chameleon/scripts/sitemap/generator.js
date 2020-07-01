@@ -13,13 +13,15 @@ const isMatch = (path, patterns) => {
 }
 
 module.exports = function (locals) {
-  const config = this.config
+  const { config } = this
+  const { sitemap, skip_render } = config
+  const { path } = sitemap
   const skipRenderList = ['*.js', '*.css']
 
-  if (Array.isArray(config.skip_render)) {
-    skipRenderList.push(...config.skip_render)
-  } else if (config.skip_render != null) {
-    skipRenderList.push(config.skip_render)
+  if (Array.isArray(skip_render)) {
+    skipRenderList.push(...skip_render)
+  } else if (skip_render != null) {
+    skipRenderList.push(skip_render)
   }
 
   const posts = [].concat(locals.posts.toArray(), locals.pages.toArray())
@@ -38,22 +40,15 @@ module.exports = function (locals) {
 
   // configuration dictionary
   const xmlConfig = {
-    config: config,
-    posts: posts
+    config,
+    posts,
+    tags: locals.tags.toArray()
   }
 
-  if (config.sitemap.tags !== false) {
-    xmlConfig.tags = locals.tags.toArray()
-  }
-
-  if (config.sitemap.categories !== false) {
-    xmlConfig.categories = locals.categories.toArray()
-  }
-
-  const xml = template(config).render(xmlConfig)
+  const data = template(config).render(xmlConfig)
 
   return {
-    path: config.sitemap.path,
-    data: xml
+    path,
+    data
   }
 }
