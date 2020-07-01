@@ -15,7 +15,6 @@ module.exports = function (config) {
   })
 
   env.addFilter('formatDate', str => {
-    if (typeof str === 'string') return str.substring(0, 10)
     return moment(str).format('YYYY-MM-DD[T00:00:00.000Z]').substring(0, 10)
   })
 

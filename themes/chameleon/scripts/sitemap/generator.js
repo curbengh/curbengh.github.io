@@ -2,7 +2,6 @@
 
 const micromatch = require('micromatch')
 const template = require('./template')
-const moment = require('moment')
 
 const isMatch = (path, patterns) => {
   if (patterns && patterns.length) {
@@ -31,12 +30,6 @@ module.exports = function (locals) {
     .sort((a, b) => {
       return b.date - a.date
     })
-    // https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889
-    .map((post) => ({
-      ...post,
-      date: moment(post.date).format('YYYY-MM-DD[T00:00:00.000Z]'),
-      updated: post.updated ? moment(post.updated).format('YYYY-MM-DD[T00:00:00.000Z]') : false
-    }))
 
   // configuration dictionary
   const xmlConfig = {
