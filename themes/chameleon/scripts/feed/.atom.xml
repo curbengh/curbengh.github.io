@@ -6,7 +6,7 @@
   <link href="{{ feed_url | uriencode }}" rel="self"/>
   {% if config.feed.hub %}<link href="{{ config.feed.hub | uriencode }}" rel="hub"/>{% endif %}
   <link href="{{ url | uriencode }}"/>
-  <updated>{% if posts.first().updated %}{{ posts.first().updated | date }}{% else %}{{ posts.first().date | date }}{% endif %}</updated>
+  <updated>{% if posts.first().updated %}{{ posts.first().updated | formatDate }}{% else %}{{ posts.first().date | formatDate }}{% endif %}</updated>
   <id>{{ url | uriencode }}</id>
   {% if config.author %}
   <author>
@@ -20,8 +20,8 @@
     <title>{{ post.title }}</title>
     <link href="{{ post.permalink }}"/>
     <id>{{ post.permalink }}</id>
-    <published>{{ post.date.toISOString() }}</published>
-    <updated>{% if post.updated %}{{ post.updated | date }}{% else %}{{ post.date | date }}{% endif %}</updated>
+    <published>{{ post.date | formatDate }}</published>
+    <updated>{% if post.updated %}{{ post.updated | formatDate }}{% else %}{{ post.date | formatDate }}{% endif %}</updated>
     {% if config.feed.content and post.content %}
     <content type="html"><![CDATA[{{ post.content | noControlChars | safe }}]]></content>
     {% endif %}
