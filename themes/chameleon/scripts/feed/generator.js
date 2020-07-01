@@ -6,6 +6,7 @@ const { join } = require('path')
 const { readFileSync } = require('fs')
 const moment = require('moment')
 const { encodeURL } = require('hexo-util')
+const { format } = require('url')
 
 env.addFilter('uriencode', str => {
   return encodeURL(str)
@@ -23,33 +24,30 @@ const atomTmplSrc = join(__dirname, './.atom.xml')
 const atomTmpl = nunjucks.compile(readFileSync(atomTmplSrc, 'utf8'), env)
 
 module.exports = function (locals) {
-  const config = this.config
-  const feedConfig = config.feed
+  const { config } = this
+  const { feed, root, url } = config
+  const { icon: iconCfg, limit, order_by, path } = feed
   const template = atomTmpl
 
-  let posts = locals.posts.sort(feedConfig.order_by || '-date')
+  let posts = locals.posts.sort(order_by || '-date')
   posts = posts.filter(post => {
     return post.draft !== true
   })
 
-  if (feedConfig.limit) posts = posts.limit(feedConfig.limit)
+  if (limit) posts = posts.limit(limit)
 
-  let url = config.url
-  if (url[url.length - 1] !== '/') url += '/'
+  const icon = iconCfg ? format(new URL(iconCfg, url), { unicode: true }) : ''
 
-  let icon = ''
-  if (feedConfig.icon) icon = url + encodeURI(feedConfig.icon)
-
-  const xml = template.render({
-    config: config,
-    url: url,
-    icon: icon,
-    posts: posts,
-    feed_url: config.root + feedConfig.path
+  const data = template.render({
+    config,
+    url,
+    icon,
+    posts,
+    feed_url: root + path
   })
 
   return {
-    path: feedConfig.path,
-    data: xml
+    path,
+    data
   }
 }
