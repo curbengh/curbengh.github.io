@@ -5,7 +5,7 @@ const env = new nunjucks.Environment()
 const { join } = require('path')
 const { readFileSync } = require('fs')
 const moment = require('moment')
-const { encodeURL } = require('hexo-util')
+const { encodeURL, full_url_for } = require('hexo-util')
 const { format } = require('url')
 
 env.addFilter('uriencode', str => {
@@ -36,7 +36,7 @@ module.exports = function (locals) {
 
   if (limit) posts = posts.limit(limit)
 
-  const icon = iconCfg ? format(new URL(iconCfg, url), { unicode: true }) : ''
+  const icon = iconCfg ? full_url_for.call(this, iconCfg) : ''
 
   const data = template.render({
     config,
