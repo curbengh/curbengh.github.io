@@ -39,9 +39,7 @@ module.exports = function (locals) {
   // configuration dictionary
   const xmlConfig = {
     config: config,
-    posts: posts,
-    // add current time to <lastmod> of homepage and tags
-    sNow: moment().format('YYYY-MM-DD[T00:00:00.000Z]')
+    posts: posts
   }
 
   if (config.sitemap.tags !== false) {

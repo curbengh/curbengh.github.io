@@ -4,30 +4,29 @@
   <url>
     <loc>{{ post.permalink }}</loc>
     {% if post.updated %}
-    <lastmod>{{ post.updated }}</lastmod>
+    <lastmod>{{ post.updated | formatDate }}</lastmod>
     {% elif post.date %}
-    <lastmod>{{ post.date }}</lastmod>
+    <lastmod>{{ post.date | formatDate }}</lastmod>
     {% endif %}
   </url>
   {% endfor %}
 
   {# home page #}
   <url>
-      <loc>{{ config.url + config.root }}</loc>
-      <lastmod>{{ sNow }}</lastmod>
-   </url>
+    <loc>{{ config.url + config.root }}</loc>
+    <lastmod>{% if posts[0].updated %}{{ posts[0].updated | formatDate }}{% else %}{{ posts[0].date | formatDate }}{% endif %}</lastmod>
+  </url>
 
   {# archive page #}
   <url>
-      <loc>{{ config.url + '/' + archive_dir + '/' }}</loc>
-      <lastmod>{{ sNow }}</lastmod>
+    <loc>{{ config.url + '/' + config.archive_dir + '/' }}</loc>
+    <lastmod>{% if posts[0].updated %}{{ posts[0].updated | formatDate }}{% else %}{{ posts[0].date | formatDate }}{% endif %}</lastmod>
    </url>
-
-  {# tag pages #}
+  
   {% for tag in tags %}
-    <url>
-      <loc>{{ tag.permalink }}</loc>
-      <lastmod>{{ sNow }}</lastmod>
-    </url>
+  <url>
+    <loc>{{ tag.permalink }}</loc>
+    <lastmod>{% if tag.posts.first().updated %}{{ tag.posts.first().updated | formatDate }}{% else %}{{ tag.posts.first().date | formatDate }}{% endif %}</lastmod>
+  </url>
   {% endfor %}
 </urlset>
