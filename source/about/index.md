@@ -11,9 +11,9 @@ updated: 2020-02-19
 
 - Core member of [Hexojs](http://github.com/hexojs) organisation and maintainer of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
 
-- [**hexo-yam**](https://github.com/curbengh/hexo-yam) is a Yet Another Minifier plugin for Hexo. Minify and compress HTML, JS, CSS and SVG. XML, JSON, etc. Support gzip and brotli compressions.
+- [**hexo-yam**](https://github.com/curbengh/hexo-yam): Yet Another Minifier plugin for Hexo. Minify and compress HTML, JS, CSS and SVG. XML, JSON, etc. Support gzip and brotli compressions.
 
-- [**hexo-nofollow**](https://github.com/curbengh/hexo-nofollow) is a Hexo plugin that adds [`rel="external nofollow noopener noreferrer"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) to all external links in your blog posts for security, privacy and SEO.
+- [**hexo-nofollow**](https://github.com/curbengh/hexo-nofollow): A Hexo plugin that adds [`rel="external nofollow noopener noreferrer"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) to all external links in your blog posts for security, privacy and SEO.
 
 - [**urlhaus-filter**](https://gitlab.com/curben/urlhaus-filter): A set of blocklists to restrict >130K of websites used
 for malware distribution. Part of [uBlock Origin](https://github.com/gorhill/uBlock)'s default filter and [NextDNS](https://nextdns.io/)' threat intelligence. Based on Abuse.ch [URLhaus](https://urlhaus.abuse.ch/).
