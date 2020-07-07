@@ -15,7 +15,10 @@ updated: 2020-02-19
 
 - [**hexo-nofollow**](https://github.com/curbengh/hexo-nofollow) is a Hexo plugin that adds [`rel="external nofollow noopener noreferrer"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) to all external links in your blog posts for security, privacy and SEO.
 
-- [**urlhaus-filter**](https://gitlab.com/curben/urlhaus-filter) is a set of URL- and host-based blocklists to block >120K malicious websites that are being used for malware distribution. The URL-based blocklist is typically as a [uBlock Origin](https://github.com/gorhill/uBlock/) filter. The dataset is derived from Abuse.ch [URLhaus](https://urlhaus.abuse.ch/).
+- [**urlhaus-filter**](https://gitlab.com/curben/urlhaus-filter): A set of blocklists to restrict >130K of websites used
+for malware distribution. Part of [uBlock Origin](https://github.com/gorhill/uBlock)'s default filter and [NextDNS](https://nextdns.io/)' threat intelligence. Based on Abuse.ch [URLhaus](https://urlhaus.abuse.ch/).
+
+- [**phishing-filter**](https://gitlab.com/curben/phishing-filter): A set of blocklists to restrict >14K phishing websites. Based on OpenDNS [PhishTank](https://www.phishtank.com/).
 
 ## Publications
 
