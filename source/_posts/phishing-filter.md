@@ -2,6 +2,7 @@
 title: Block phishing websites with phishing-filter
 excerpt: Many formats available
 date: 2020-07-07
+updated: 2020-07-08
 tags:
 - security
 ---
@@ -12,7 +13,7 @@ Recently I switched Firefox's Android app from Preview Nightly to Nightly after 
 
 I was intrigued by the DShield list as I created a blocklist ([urlhaus-filter](https://gitlab.com/curben/urlhaus-filter)) that is also based on URLhaus. I then checked out its another source, the PhishTank list. PhishTank operates similarly to URLhaus, the links are user-submitted. User can vote on submitted links (of other users') are indeed phishing websites. The database is available in [various formats](https://www.phishtank.com/developer_info.php) including CSV. This seemed ideal to be processed into a blocklist, just like what I did in urlhaus-filter. To avoid duplicate effort, I did a search on FilterLists and there is a domain-based blocklist ("[Phishing Bad Sites](https://filterlists.com/lists/phishing-bad-sites)") that is based on PhishTank.
 
-Domain-based blocklist is created by stripping out the path of the original links, leaving the domain only (e.g. `www.example.com`~~`/foo-page`~~). This blocks the whole website, instead of specific webpages; it also significantly reduces the file size, not just from the path stripping, but also de-duplication of domains. However, one thing I learned from urlhaus-filter is that many malicious links are also hosted on popular domains, like Google Docs and Dropbox; such is the fate of file-hosting service, it will inadvertently be abused to host malicious content. To avoid blocking those popular services, I utilise [Umbrella Popularity List](https://s3-us-west-1.amazonaws.com/umbrella-static/index.html) and [Tranco List](https://tranco-list.eu/) to remove popular domains from urlhaus-filter. Since uBlock Origin (uBO) supports blocking webpages via static filter (e.g. `||example.com/foo-page$all`), malicious webpages (of popular domains) are still blocked in the [uBO-specific filter](https://gitlab.com/curben/urlhaus-filter#url-based).
+Domain-based blocklist is created by stripping out the path of the original links, leaving the domain only (e.g. `www.example.com`~~`/foo-page`~~). This blocks the whole website, instead of specific webpages; it also significantly reduces the file size, not just from the path stripping, but also de-duplication of domains. However, one thing I learned from urlhaus-filter is that many malicious links are also hosted on popular domains, like Google Docs and Dropbox; such is the fate of file-hosting service, it will inadvertently be abused to host malicious content. To avoid blocking those popular services, I utilise [Umbrella Popularity List](https://s3-us-west-1.amazonaws.com/umbrella-static/index.html) and [Tranco List](https://tranco-list.eu/) to remove popular domains from urlhaus-filter and minimise false positive. Since uBlock Origin (uBO) supports blocking webpages via static filter (e.g. `||example.com/foo-page$all`), malicious webpages (of popular domains) are still blocked in the [uBO-specific filter](https://gitlab.com/curben/urlhaus-filter#url-based).
 
 I ran a quick check on "Phishing Bad Sites" filter:
 
@@ -20,7 +21,7 @@ I ran a quick check on "Phishing Bad Sites" filter:
 $ grep -F 'google' 2020-07-07-phishing.bad.sites.conf
 ```
 
-The search result included Google Drive and Google Play.
+The search result included Google Drive and Google Play. Hence, I find it necessary to create a new PhishTank-based filter, with minimal false positives and available in various formats (other than uBO). Another reason is that despite PhishTank being operated by OpenDNS, it [does not](https://www.phishtank.com/faq.php#whyisasitemarkedbyph) block all of the verified phishing websites.
 
 ## phishing-filter
 
@@ -52,3 +53,27 @@ http://example-phishing.com/lorem
 ```
 
 I then remove the quotes with `sed 's/"//g'`. It will be more convenient if _all_ URLs are quoted--just like URLhaus.csv--I can simply use `cut -f 2 -d '"'`. I know I'm not supposed to use `cut` to process csv, but there is no csv-processing command line tools available in Alpine Linux official packages.
+
+Before I stumbled upon csvquote, I also considered [xsv](https://github.com/BurntSushi/xsv) and [csvtools](https://github.com/DavyLandman/csvtools). xsv is written in Rust and can be installed via Cargo package manager, which is available in Alpine Linux. I couldn't compile csvtools under Alpine because it's not compatible with musl. Ultimately, I chose csvquote due to simplicity, minimal size and being compatible with both glibc and musl. Speaking of glibc and musl, the binaries are incompatible with each other; I couldn't run glibc-compiled csvquote on Alpine (musl-based), neither did musl-compiled binary on Ubuntu. I utilise a musl detection script that can adjust the binary choice automatically.
+
+``` sh script.sh https://stackoverflow.com/a/60471114 Source
+#!/bin/sh
+
+LIBC="$(ldd /bin/ls | grep 'musl' || [ $? = 1 ])"
+if [ -z "$LIBC" ]; then
+  rm -f "/tmp/musl.log"
+  # Not Musl
+  CSVQUOTE="../utils/csvquote-bin-glibc"
+else
+  # Musl
+  CSVQUOTE="../utils/csvquote-bin-musl"
+fi
+
+cat "phishtank.csv" | \
+"./$CSVQUOTE" | \
+cut -f 2 -d "," | \
+"./$CSVQUOTE" -u | \
+...
+```
+
+_OpenDNS and PhishTank are either trademarks or registered trademarks of OpenDNS, LLC._
