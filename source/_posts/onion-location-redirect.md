@@ -2,6 +2,7 @@
 title: "Onion-Location: redirect your cleanet website to .onion"
 excerpt: Supported in Tor Browser >=9.5
 date: 2020-06-03
+updated: 2020-07-09
 tags:
 - tor
 ---
@@ -60,3 +61,7 @@ The tag should be added in `<head>`:
   </head>
 </html>
 ```
+
+## Apache and Nginx
+
+Refer to this [configuration guide](https://community.torproject.org/onion-services/advanced/onion-location/) on Tor Project website.
