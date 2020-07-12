@@ -40,7 +40,7 @@ DNS Provider | Canadian Shield<br>149.112.121.20 | Cloudflare<br>1.1.1.2 | DNSFi
 --- | --- | --- | --- | --- | ---
 % blocked | 84.04% | 49.11% | 15.43% | 89.54% | 17.73% | 81.03%
 
-[Script](https://gitlab.com/curben/blog/-/raw/site/20200711/malware.sh), [CSV](https://gitlab.com/curben/blog/-/raw/site/20200711/malware.csv.zip) and [Spreadsheet](https://gitlab.com/curben/blog/-/raw/site/20200711/malware.ods).
+[Script](https://gitlab.com/curben/blog/raw/site/20200711/malware.sh), [CSV](https://gitlab.com/curben/blog/raw/site/20200711/malware.csv.zip) and [Spreadsheet](https://gitlab.com/curben/blog/raw/site/20200711/malware.ods).
 
 (Warning: Do not visit any of the links in the CSV and spreadsheet)
 
@@ -52,7 +52,7 @@ DNS Provider | Canadian Shield<br>149.112.121.20 | Cloudflare<br>1.1.1.2 | DNSFi
 --- | --- | --- | --- | --- | ---
 % blocked | 72.01% | 36.98% | 73.36% | 89.10% | 50.19% | 49.26%
 
-[Script](https://gitlab.com/curben/blog/-/raw/site/20200711/phishing.sh), [CSV](https://gitlab.com/curben/blog/-/raw/site/20200711/phishing.csv.zip) and [Spreadsheet](https://gitlab.com/curben/blog/-/raw/site/20200711/phishing.ods).
+[Script](https://gitlab.com/curben/blog/raw/site/20200711/phishing.sh), [CSV](https://gitlab.com/curben/blog/raw/site/20200711/phishing.csv.zip) and [Spreadsheet](https://gitlab.com/curben/blog/raw/site/20200711/phishing.ods).
 
 (Warning: Do not visit any of the links in the CSV and spreadsheet)
 
