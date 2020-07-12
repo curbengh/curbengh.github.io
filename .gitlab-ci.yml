@@ -9,31 +9,12 @@ variables:
 
 test:
   before_script:
-    - 'which ssh-agent || (apk update && apk add openssh-client git)'
     - npm install -g pnpm
     - pnpm install
 
   script:
     - pnpm install snyk && pnpm run snyk # Refer to "scripts" in package.json
     - pnpm run hexo
-
-  # Update github mirror
-  after_script:
-    # Import SSH key
-    - eval $(ssh-agent -s)
-    - echo "$GH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-
-    # (workaround) force exit code 0
-    - ssh -T git@github.com || ":"
-    - git remote add mirror git@github.com:curbengh/blog.git
-    # Discard changes before checking out branch
-    - git reset HEAD --hard
-    - git checkout master && git push mirror master
-    - git checkout site && git push mirror site
 
   rules:
     # Skip in renovate job
@@ -48,8 +29,7 @@ test:
 
 renovate: # Check dependency update
   before_script:
-    - apk update
-    - apk add git
+    - apk update && apk add git
     - npm install
 
   script:
