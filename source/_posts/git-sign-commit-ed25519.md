@@ -20,9 +20,9 @@ Please select which elliptic curve you want:
   (1) Curve 25519
 Your selection? 1
 
-# Key will expire in 1 year
+# Key shouldn't expire (in commit signing)
 Please specify how long the key should be valid.
-Key is valid for? (0) 1y
+Key is valid for? (0) 0
 
 Key expires at Sun 18 Jul 2021 00:00:00 UTC
 Is this correct? (y/N) y
