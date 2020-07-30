@@ -222,6 +222,10 @@ pre {
   max-width: max-content;
 }
 
+mark {
+  background: var(--alt-bg-color);
+}
+
 /* Hide post's excerpt in article */
 .p-summary {
   display: none;
@@ -517,84 +521,121 @@ td {
   border: 1px solid #ddd;
 }
 
-/* Dracula Theme v1.2.5
- *
- * https://github.com/dracula/highlightjs
- *
- * Copyright 2016-present, All rights reserved
- *
- * Code licensed under the MIT license
- *
- * @author Denis Ciccale <dciccale@gmail.com>
- * @author Zeno Rocha <hi@zenorocha.com>
+/*
+ * Visual Studio 2015 dark style
+ * Author: Nicolas LLOBERA <nllobera@gmail.com>
+ * https://github.com/highlightjs/highlight.js/blob/master/src/styles/vs2015.css
  */
 
-.hljs {
+ .hljs {
   display: block;
   overflow-x: auto;
   /* padding: 0.5em;
-  background: #282a36; */
-}
-
-.hljs-built_in,
-.hljs-selector-tag,
-.hljs-section,
-.hljs-link {
-  color: #8be9fd;
-}
-
-.hljs-keyword {
-  color: #ff79c6;
-}
-
-/* .hljs,
-.hljs-subst {
-  color: #f8f8f2;
-} */
-
-.hljs-title {
-  color: #50fa7b;
-}
-
-.hljs-string,
-.hljs-meta,
-.hljs-name,
-.hljs-type,
-.hljs-attr,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition,
-.hljs-variable,
-.hljs-template-tag,
-.hljs-template-variable {
-  color: #f1fa8c;
-}
-
-.hljs-comment,
-.hljs-quote,
-.hljs-deletion {
-  color: #6272a4;
+  background: #1E1E1E;
+  color: #DCDCDC; */
 }
 
 .hljs-keyword,
-.hljs-selector-tag,
 .hljs-literal,
-.hljs-title,
-.hljs-section,
-.hljs-doctag,
-.hljs-type,
-.hljs-name,
-.hljs-strong {
-  font-weight: bold;
+.hljs-symbol,
+.hljs-name {
+  color: #569CD6;
+}
+.hljs-link {
+  color: #569CD6;
+  text-decoration: underline;
 }
 
-.hljs-literal,
-.hljs-number {
-  color: #bd93f9;
+.hljs-built_in,
+.hljs-type {
+  color: #4EC9B0;
+}
+
+.hljs-number,
+.hljs-class {
+  color: #B8D7A3;
+}
+
+.hljs-string,
+.hljs-meta-string {
+  color: #D69D85;
+}
+
+.hljs-regexp,
+.hljs-template-tag {
+  color: #9A5334;
+}
+
+.hljs-subst,
+.hljs-function,
+.hljs-title,
+.hljs-params,
+.hljs-formula {
+  color: #DCDCDC;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #57A64A;
+  font-style: italic;
+}
+
+.hljs-doctag {
+  color: #608B4E;
+}
+
+.hljs-meta,
+.hljs-meta-keyword,
+.hljs-tag {
+  color: #9B9B9B;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #BD63C5;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-builtin-name {
+  color: #9CDCFE;
+}
+
+.hljs-section {
+  color: gold;
 }
 
 .hljs-emphasis {
   font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+/*.hljs-code {
+  font-family:'Monospace';
+}*/
+
+.hljs-bullet,
+.hljs-selector-tag,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #D7BA7D;
+}
+
+.hljs-addition {
+  background-color: #144212;
+  display: inline-block;
+  width: 100%;
+}
+
+.hljs-deletion {
+  background-color: #600;
+  display: inline-block;
+  width: 100%;
 }
 
 /* hide mobile nav menu and its checkbox */
@@ -825,5 +866,75 @@ unhide (via JS) if Web Share API is supported */
     --main-font-color: #333;
     --link-hover: black;
     --alt-bg-color: #d8d8d8;
+  }
+
+  /*
+  * Visual Studio-like style based on original C# coloring
+  * Author:  Jason Diamond <jason@diamond.name>
+  * https://github.com/highlightjs/highlight.js/blob/master/src/styles/vs.css
+  */
+
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    /* padding: 0.5em;
+    background: white;
+    color: black; */
+  }
+
+  .hljs-comment,
+  .hljs-quote,
+  .hljs-variable {
+    color: #008000;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in,
+  .hljs-name,
+  .hljs-tag {
+    color: #00f;
+  }
+
+  .hljs-string,
+  .hljs-title,
+  .hljs-section,
+  .hljs-attribute,
+  .hljs-literal,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-addition {
+    color: #a31515;
+  }
+
+  .hljs-deletion,
+  .hljs-selector-attr,
+  .hljs-selector-pseudo,
+  .hljs-meta {
+    color: #2b91af;
+  }
+
+  .hljs-doctag {
+    color: #808080;
+  }
+
+  .hljs-attr {
+    color: #f00;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-link {
+    color: #00b0e8;
+  }
+
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: bold;
   }
 }
