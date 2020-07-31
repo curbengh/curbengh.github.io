@@ -10,16 +10,16 @@ Let's say you have an array of objects with duplicate entries:
 
 ``` js
 const input = [
-	{ name: 'lorem', item: 'ipsum' },
-	{ name: 'per', item: 'doming' },
-	{ name: 'dolor', item: 'lorem' },
-	{ name: 'usu', item: 'pericula' },
-	{ name: 'per', item: 'doming' },
-	{ item: 'doming', name: 'per' },
-	{ name: 'dolor', item: 'lorem' },
-	{ name: 'quem', item: 'graece' },
-	{ item: 'graece', name: 'quem' },
-	{ name: 'sonet', item: 'labitur' }
+  { name: 'lorem', item: 'ipsum' },
+  { name: 'per', item: 'doming' },
+  { name: 'dolor', item: 'lorem' },
+  { name: 'usu', item: 'pericula' },
+  { name: 'per', item: 'doming' },
+  { item: 'doming', name: 'per' },
+  { name: 'dolor', item: 'lorem' },
+  { name: 'quem', item: 'graece' },
+  { item: 'graece', name: 'quem' },
+  { name: 'sonet', item: 'labitur' }
 ];
 ```
 
@@ -32,7 +32,7 @@ const input = [
   { name: 'dolor', item: 'lorem' },
   { name: 'usu', item: 'pericula' },
   { name: 'per', item: 'doming' },
-	{ item: 'doming', name: 'per' },
+  { item: 'doming', name: 'per' },
   { name: 'dolor', item: 'lorem' },
   { name: 'quem', item: 'graece' },
   { item: 'graece', name: 'quem' },
