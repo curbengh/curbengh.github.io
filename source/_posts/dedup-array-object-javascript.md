@@ -40,7 +40,7 @@ const input = [
 ]
 {% endcodeblock %}
 
-In this case, we can use `Object.fromEntries()` and `Object.entries()` to deal with duplicates. This involves two processes:
+In this case, we can use `Object.fromEntries()` and `Object.entries()` to deal with duplicates; I discovered these functions while working on [hexojs/hexo-migrator-wordpress#89](https://github.com/hexojs/hexo-migrator-wordpress/pull/89). This involves two processes:
 
 1. Convert an array of objects to an object.
 2. Convert the object back to an array of objects.
