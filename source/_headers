@@ -11,6 +11,8 @@
 
 /*.html
   Cache-Control: max-age=86400, public
+/*.xml
+  Cache-Control: max-age=86400, public
 /*.css
   Cache-Control: max-age=604800, public
 /*.js
