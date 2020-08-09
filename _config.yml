@@ -104,9 +104,5 @@ theme_config:
     Eepsite: http://mdleom.i2p
     'Eepsite (B32)': http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p
 
-  # Your Feed Location
-  # https://github.com/hexojs/hexo-generator-feed
-  rss: /atom.xml
-
   # Load forkawesome icons? See the links option below.
   icons: false
