@@ -32,21 +32,21 @@
     <%- feed_tag(theme.rss) %>
   <% } %>
   <%/* Favicon */%>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=yyQLrgrMjG">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=yyQLrgrMjG">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=yyQLrgrMjG">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=yyQLrgrMjG">
-  <link rel="icon" type="image/svg+xml" href="/svg/favicon.svg?v=yyQLrgrMjG">
-  <link rel="manifest" href="/site.webmanifest?v=yyQLrgrMjG">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg?v=yyQLrgrMjG" color="#3f72af">
-  <link rel="shortcut icon" href="/favicon.ico?v=yyQLrgrMjG">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%- url_for('/apple-touch-icon.png?v=yyQLrgrMjG') %>">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%- url_for('/favicon-32x32.png?v=yyQLrgrMjG') %>">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%- url_for('/favicon-16x16.png?v=yyQLrgrMjG') %>">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%- url_for('/favicon-16x16.png?v=yyQLrgrMjG') %>">
+  <link rel="icon" type="image/svg+xml" href="<%- url_for('/svg/favicon.svg?v=yyQLrgrMjG') %>">
+  <link rel="manifest" href="<%- url_for('/site.webmanifest?v=yyQLrgrMjG') %>">
+  <link rel="mask-icon" href="<%- url_for('/safari-pinned-tab.svg?v=yyQLrgrMjG') %>" color="#3f72af">
+  <link rel="shortcut icon" href="<%- url_for('/favicon.ico?v=yyQLrgrMjG') %>">
   <meta name="apple-mobile-web-app-title" content="<%= config.title %>">
   <meta name="application-name" content="<%= config.title %>">
   <meta name="msapplication-TileColor" content="#3f72af">
-  <meta name="msapplication-config" content="/browserconfig.xml">
+  <meta name="msapplication-config" content="<%- url_for('/browserconfig.xml') %>">
   <meta name="theme-color" content="#3f72af">
 
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="<%- url_for('/sitemap.xml') %>">
 
   <%/* CSS of Chameleon theme */%>
   <%- css('/css/chameleon.css') %>
