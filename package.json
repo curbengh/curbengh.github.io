@@ -21,8 +21,7 @@
     "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
     "hexo-yam": "curbengh/hexo-yam",
     "postcss-normalize": "^9.0.0",
-    "sanitize.css": "^11.0.0",
-    "hexo-util": "hexojs/hexo-util"
+    "sanitize.css": "^11.0.0"
   },
   "devDependencies": {
     "hexo-server": "hexojs/hexo-server"
