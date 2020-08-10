@@ -9,6 +9,15 @@
 * incompatible with hexo-yam
 */
 
+const deps = ['autoprefixer', 'postcss', 'postcss-normalize']
+deps.forEach(dep => {
+  try {
+    require.resolve(dep)
+  } catch (err) {
+    throw new Error(`Missing "${dep}" dependency. Please install it by running "npm install ${dep}".`)
+  }
+})
+
 const autoprefixer = require('autoprefixer')
 const normalize = require('postcss-normalize')
 const postcss = require('postcss')
