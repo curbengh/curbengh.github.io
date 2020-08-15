@@ -30,6 +30,22 @@ theme_config:
   icons: false
 ```
 
+## Codeblock highlight
+
+Following configurations need to be updated.
+
+``` yml
+# _config.yml
+highlight:
+  enable: true
+  line_number: false
+  hljs: true
+  wrap: false
+
+prismjs:
+  enable: false
+```
+
 ## Build
 
 Build "source/css/_source.css" into "source/css/chameleon.css"

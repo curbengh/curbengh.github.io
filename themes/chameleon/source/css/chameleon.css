@@ -571,16 +571,20 @@ hr {
 }
 
 figcaption,
-small {
+small,
+pre div {
   font-size: 0.9em;
   color: #888;
 }
 
-figcaption {
+/* code caption */
+figcaption,
+pre div {
   margin-bottom: 0.5em;
 }
 
-pre figcaption a {
+pre figcaption a,
+pre div a {
   float: right;
 }
 
