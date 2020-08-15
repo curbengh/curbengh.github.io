@@ -29,3 +29,12 @@ theme_config:
   # Load forkawesome icons?
   icons: false
 ```
+
+## Build
+
+Build "source/css/_source.css" into "source/css/chameleon.css"
+
+```
+$ npm install
+$ npm run build
+```

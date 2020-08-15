@@ -1,0 +1,16 @@
+{
+  "name": "hexo-theme-chameleon",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "node build/script.js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.6.1",
+    "postcss-normalize": "^9.0.0",
+    "sanitize.css": "^11.0.0"
+  },
+  "engines": {
+    "node": ">= 10.17.0"
+  }
+}
