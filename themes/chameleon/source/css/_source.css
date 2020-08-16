@@ -757,6 +757,7 @@ unhide (via JS) if Web Share API is supported */
 .article .article-entry a.headerlink svg,
 .article-title a#share-button svg {
   height: 0.75em;
+  margin-bottom: 0.25em;
 }
 
 /* don't underline permalink and share icons */
