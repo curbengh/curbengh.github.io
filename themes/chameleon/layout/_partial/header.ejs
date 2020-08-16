@@ -1,9 +1,11 @@
 <header id="header" class="header">
   <%/* Nav menu for desktop */%>
   <nav class="main-nav">
+    <% if (!theme.menu) { %><a class="main-nav-link" href="<%- config.root %>">Home</a>
+    <% } else { %>
     <% for (const i in theme.menu) { %>
       <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
-    <% } %>
+    <% }} %>
 
     <div class="search-container">
       <form id="searchForm" method="post" action="https://duckduckgo.com/" target="_blank" rel="noopener external nofollow noreferrer">
