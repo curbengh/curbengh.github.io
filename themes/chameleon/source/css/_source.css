@@ -127,19 +127,19 @@ hr {
 
 figcaption,
 small,
-pre div {
+pre div.caption {
   font-size: 0.9em;
   color: #888;
 }
 
 /* code caption */
 figcaption,
-pre div {
+pre div.caption {
   margin-bottom: 0.5em;
 }
 
 pre figcaption a,
-pre div a {
+pre div.caption a {
   float: right;
 }
 
