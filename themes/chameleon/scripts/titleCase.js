@@ -7,7 +7,7 @@
 */
 
 hexo.extend.helper.register('titleCase', (str) => {
-  return str.replace(/[\w]+[^\s-]*/g, (match) => {
-    return match.charAt(0).toUpperCase() + match.substr(1)
+  return str.replace(/[\w]+[^\s]*/g, (match) => {
+    return match[0].toUpperCase() + match.substring(1).toLowerCase()
   })
 })
