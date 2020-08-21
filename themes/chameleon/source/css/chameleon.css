@@ -821,11 +821,6 @@ span.index-list-count:after {
   border: 0;
 }
 
-.article .caption {
-  display: block;
-  text-align: center;
-}
-
 .article .article-entry {
   word-break: break-word;
 }
