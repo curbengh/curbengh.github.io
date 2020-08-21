@@ -6,7 +6,6 @@ const { join } = require('path')
 const { readFileSync } = require('fs')
 const moment = require('moment')
 const { encodeURL, full_url_for } = require('hexo-util')
-const { format } = require('url')
 
 env.addFilter('uriencode', str => {
   return encodeURL(str)
@@ -25,9 +24,13 @@ const atomTmpl = nunjucks.compile(readFileSync(atomTmplSrc, 'utf8'), env)
 
 module.exports = function (locals) {
   const { config } = this
-  const { feed, root, url } = config
+  const { feed, url } = config
   const { icon: iconCfg, limit, order_by, path } = feed
   const template = atomTmpl
+
+  env.addFilter('fullUrlFor', str => {
+    return full_url_for.call(this, str)
+  })
 
   let posts = locals.posts.sort(order_by || '-date')
   posts = posts.filter(post => {
@@ -38,12 +41,14 @@ module.exports = function (locals) {
 
   const icon = iconCfg ? full_url_for.call(this, iconCfg) : ''
 
+  const feed_url = full_url_for.call(this, path);
+
   const data = template.render({
     config,
     url,
     icon,
     posts,
-    feed_url: root + path
+    feed_url
   })
 
   return {

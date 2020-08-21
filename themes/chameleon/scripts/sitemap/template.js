@@ -3,6 +3,7 @@
 const { join } = require('path')
 const { readFileSync } = require('fs')
 const moment = require('moment')
+const { full_url_for } = require('hexo-util')
 let sitemapTmpl = ''
 
 module.exports = function (config) {
@@ -16,6 +17,10 @@ module.exports = function (config) {
 
   env.addFilter('formatDate', str => {
     return moment(str).format('YYYY-MM-DD[T00:00:00.000Z]').substring(0, 10)
+  })
+
+  env.addFilter('fullUrlFor', str => {
+    return full_url_for.call({ config }, str)
   })
 
   const sitemapSrc = config.sitemap.template || join(__dirname, '.sitemap.xml')

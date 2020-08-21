@@ -13,13 +13,13 @@
 
   {# home page #}
   <url>
-    <loc>{{ config.url + config.root }}</loc>
+    <loc>{{ config.root | fullUrlFor }}</loc>
     <lastmod>{% if posts[0].updated %}{{ posts[0].updated | formatDate }}{% else %}{{ posts[0].date | formatDate }}{% endif %}</lastmod>
   </url>
 
   {# archive page #}
   <url>
-    <loc>{{ config.url + '/' + config.archive_dir + '/' }}</loc>
+    <loc>{{ config.archive_dir | fullUrlFor + '/' }}</loc>
     <lastmod>{% if posts[0].updated %}{{ posts[0].updated | formatDate }}{% else %}{{ posts[0].date | formatDate }}{% endif %}</lastmod>
    </url>
   
