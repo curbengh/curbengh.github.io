@@ -17,7 +17,7 @@
     "hexo-generator-index": "hexojs/hexo-generator-index",
     "hexo-generator-tag": "hexojs/hexo-generator-tag",
     "hexo-renderer-ejs": "hexojs/hexo-renderer-ejs",
-    "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
+    "hexo-renderer-marked": "curbengh/hexo-renderer-marked#quotes",
     "hexo-yam": "curbengh/hexo-yam"
   },
   "devDependencies": {
