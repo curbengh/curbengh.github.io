@@ -1,7 +1,8 @@
 ---
-title: Embed SVG without using img tag
+title: Embed SVG without using <img> tag
 excerpt: Using img tag prevents the use of CSS to change property of SVG. There is a workaround.
 date: 2019-06-01
+updated: 2020-08-29
 tags:
 - svg
 - web
@@ -11,7 +12,7 @@ Website usually embed SVG using `<img>` tag or directly use the `<svg>` tag. Usi
 
 ## Embed SVG file
 
-Utilise `<use>` tag to embed an SVG file in `svg`. For example in this blog, I have a search button on the top right corner. This is how I embed the [search.svg](/svg/search.svg):
+Utilise `<use>` tag to embed an SVG file in `svg`. For example in this blog, I have a search button on the top right corner. This is how I embed [search.svg](/svg/search.svg):
 
 ```html
 <svg viewBox="0 0 512 512">
@@ -21,31 +22,32 @@ Utilise `<use>` tag to embed an SVG file in `svg`. For example in this blog, I h
 </svg>
 ```
 
-<br/>
-
 The `<title>` is for tooltip and `<desc>` stands for description and functions similarly to the `alt` attribute in `<img>`. These two tags are optional but recommended for [SEO purpose](https://support.google.com/webmasters/answer/114016?hl=en).
 
 The `viewBox` value is based on the layout you want to use. I simply use the value from the SVG file.
 
 Notice `#search` value in the href attribute. It refers to the `id` attribute in the SVG file, which you need to manually add it. Following is an excerpt from the search.svg.
 
-```
-<svg id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="..."/></svg>
+``` html
+<svg id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path d="..."/>
+</svg>
 ```
 
 That attribute is **mandatory**; using link alone like `<use href="/svg/search.svg"/>` would *not* work. Another thing to watch out is SVG minifier like [svgo](https://github.com/svg/svgo) (the only SVG minifier?). **svgo** removes the id attribute by default, via [cleanupIDs](https://github.com/svg/svgo/blob/master/plugins/cleanupIDs.js) plugin.
 
 To disable that plugin in CLI,
+
 ```
-svgo --disable=cleanupIDs test.svg -o test.min.svg
+$ svgo --disable=cleanupIDs test.svg -o test.min.svg
 ```
 
-<br/>
+If you're using my minifier plugin in Hexo, [hexo-yam](https://github.com/curbengh/hexo-yam):
 
-For [hexo-yam](https://github.com/curbengh/hexo-yam),
-```json
-neat_svg:
-  plugins: [{ cleanupIDs: false }]
+```yml
+minify:
+  svg:
+    plugins: [{ cleanupIDs: false }]
 ```
 
 ## img tag
@@ -58,7 +60,7 @@ svg {
 }
 ```
 
-to set the SVG to use the same colour as the font's. The `fill` attribute is not supported in `<img>` tag. Since `<image>` property in SVG is [defined as a synonym](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image) for `<img>`, it also shares similar limitation. So, the following method *would not* work,
+to set the SVG to use the same colour as the font's. The `fill` attribute is not supported in `<img>` tag. Since `<image>` property in SVG is [defined as a synonym](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image) for `<img>`, it also shares similar limitation. So, the following method *does not* work,
 
 ```html
 <svg viewBox="0 0 512 512">
