@@ -2,6 +2,7 @@
 title: Running Caddy 2 in NixOS 20.03
 excerpt: Use stable v2 instead of beta release
 date: 2020-05-24
+updated: 2020-08-30
 tags:
 - server
 - caddy
@@ -83,6 +84,11 @@ in {
           ${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}
         '' else ''
           ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
+        '';
+        ExecReload = if isCaddy2 then ''
+          ${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}
+        '' else ''
+          "${pkgs.coreutils}/bin/kill -HUP $MAINPID"
         '';
         ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
         Type = "simple";
