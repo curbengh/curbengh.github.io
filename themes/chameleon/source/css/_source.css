@@ -218,6 +218,11 @@ samp {
   font-size: 0.9em;
 }
 
+/* set bg colour of single backtick wrap */
+p code {
+  background: var(--alt-bg-color);
+}
+
 /* set codeblock width to minimum */
 pre {
   border-left: 0.1em solid var(--link-underline);
