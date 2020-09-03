@@ -2,7 +2,7 @@
 title: Comparing malware-blocking DNS providers using URLhaus and PhishTank
 excerpt: Canadian Shield, Cloudflare, DNS Filter, NextDNS, OpenDNS, Quad9
 date: 2020-07-11
-updated: 2020-07-14
+updated: 2020-09-03
 tags:
 - security
 ---
@@ -70,3 +70,60 @@ PhishTank is a notable example of this kind of discrepancy. Despite being operat
 Using URLhaus and PhishTank alone cannot possibly determine the effectiveness of malicious-blocking DNS providers accurately. I believe there are many malicious links out there that are not covered in those datasets. While I do think they are high quality and every DNS provider should consider utilising them, they are not _representative_ samples. So, take DNS-filtering testing which has limited sample with a grain of salt.
 
 (Edit 14/07/2020) I was curious if the result is due to the samples being too _fresh_ (7 hours); DNS providers may not update their sources in real-time and perhaps only update once or twice a day. I ran the tests again on 13 July 2020 using the same samples (which I downloaded in 10 July 2020), a 3-day delay. The results show no significant change though.
+
+## Google Safe Browsing
+
+(Edit: 3 Sep 2020) Recently, I was curious how well Safe Browsing blocks the domains/IP listed in urlhaus-filter and phishing-filter. I used the datasets generated on **3 Sep 2020 00:06:23 UTC** and ran the test (see below) at (roughly) 05:00 UTC. I used "[safe-browse-url-lookup](https://github.com/muety/safe-browse-url-lookup)" library to simplify the test, the library queries all [types of threats](https://developers.google.com/safe-browsing/v4/lists) by default.
+
+Category | Domains marked as unsafe | Percentage
+--- | --- | ---
+Malware | 102 / 3259 | 3.13 %
+Phishing | 2533 / 6832 | 37.08 %
+
+While the result doesn't look encouraging, I believe the Safe Browsing API is more suitable for looking up a [full URL](https://developers.google.com/safe-browsing/v4/urls-hashing), as opposed to domains and IP address as listed in the blocklists. My approach to creating those blocklists is based on the assumption that, if a URL is hosting malware, probably due to compromised web server, then there may be other malicious links on that domain. While Google's approach can minimise false positive, I believe my paranoid approach in creating those blocklists can possibly reduce false negative.
+
+``` js
+const { readFile, writeFile } = require('fs').promises
+const { checkMulti: lookup } = require('safe-browse-url-lookup')({ apiKey: '<your-api-key>' })
+const { delay } = require('bluebird')
+
+const fn = async () => {
+  try {
+    const input = await readFile('urlhaus.txt')
+    const threats = input.toString('utf-8')
+      // remove comment
+      .replace(/^#.+/gm, '')
+      .trim()
+      .split('\n')
+      // 'https://' will yield the same result
+      .map(str => `http://${str}`)
+
+    // Max 500 URLs per query
+    // https://developers.google.com/safe-browsing/v4/usage-limits#UsageRestrictions
+    const multiple = Math.ceil(threats.length / 500)
+    let result = {}
+    for (let i = 0; i < multiple; i++) {
+      console.log('Run: ' + String(i + 1))
+      await delay(5000)
+      const min = i === 0 ? 0 : i * 500
+      const max = i === 0 ? 500 : (i + 1) * 500
+      const urlMap = await lookup(threats.slice(min, max))
+      result = { ...result, ...urlMap }
+    }
+
+    await writeFile('result-phishing.json', JSON.stringify(result, null, 2))
+
+    const positive = []
+    const negative = []
+    for (const ele in result) {
+      if (result[ele] === true) positive.push(ele)
+      else negative.push(ele)
+    }
+    console.log(positive.length)
+  } catch (err) {
+    throw new Error(err)
+  }
+}
+
+fn()
+```
