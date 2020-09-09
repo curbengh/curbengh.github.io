@@ -2,7 +2,7 @@
 title: "How to make your website available over Tor hidden service on NixOS"
 excerpt: "A guide on Tor hidden service on NixOS"
 date: 2020-03-16
-updated: 2020-04-22
+updated: 2020-09-09
 tags:
 - server
 - linux
@@ -123,6 +123,8 @@ in {
       wantedBy = [ "multi-user.target" ];
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
         { CADDYPATH = cfg.dataDir; };
+      startLimitIntervalSec = 86400;
+      startLimitBurst = 5;
       serviceConfig = {
         ExecStart = ''
           ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
@@ -132,8 +134,6 @@ in {
         User = "caddyTor";
         Group = "caddyTor";
         Restart = "on-failure";
-        StartLimitInterval = 86400;
-        StartLimitBurst = 5;
         NoNewPrivileges = true;
         LimitNPROC = 64;
         LimitNOFILE = 1048576;

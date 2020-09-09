@@ -2,7 +2,7 @@
 title: Running Caddy 2 in NixOS 20.03
 excerpt: Use stable v2 instead of beta release
 date: 2020-05-24
-updated: 2020-08-30
+updated: 2020-09-09
 tags:
 - server
 - caddy
@@ -79,6 +79,8 @@ in {
       wantedBy = [ "multi-user.target" ];
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09" && !isCaddy2)
         { CADDYPATH = cfg.dataDir; };
+      startLimitIntervalSec = 86400;
+      startLimitBurst = 5;
       serviceConfig = {
         ExecStart = if isCaddy2 then ''
           ${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}
@@ -95,8 +97,6 @@ in {
         User = "caddy";
         Group = "caddy";
         Restart = "on-failure";
-        StartLimitInterval = 86400;
-        StartLimitBurst = 5;
         NoNewPrivileges = true;
         LimitNPROC = 64;
         LimitNOFILE = 1048576;
