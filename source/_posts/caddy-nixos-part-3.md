@@ -101,7 +101,8 @@ in {
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
         { CADDYPATH = cfg.dataDir; };
       startLimitIntervalSec = 86400;
-      startLimitBurst = 5;
+      # 20.09+
+      # startLimitBurst = 5;
       serviceConfig = {
         ExecStart = ''
           ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
@@ -111,6 +112,8 @@ in {
         User = "caddyProxy";
         Group = "caddyProxy";
         Restart = "on-failure";
+        # <= 20.03
+        StartLimitBurst = 5;
         NoNewPrivileges = true;
         LimitNPROC = 64;
         LimitNOFILE = 1048576;

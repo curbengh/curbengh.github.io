@@ -80,23 +80,19 @@ in {
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09" && !isCaddy2)
         { CADDYPATH = cfg.dataDir; };
       startLimitIntervalSec = 86400;
-      startLimitBurst = 5;
+      # 20.09+
+      # startLimitBurst = 5;
       serviceConfig = {
-        ExecStart = if isCaddy2 then ''
-          ${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}
-        '' else ''
+        ExecStart = ''
           ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
-        '';
-        ExecReload = if isCaddy2 then ''
-          ${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}
-        '' else ''
-          "${pkgs.coreutils}/bin/kill -HUP $MAINPID"
         '';
         ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
         Type = "simple";
-        User = "caddy";
-        Group = "caddy";
+        User = "caddyProxy";
+        Group = "caddyProxy";
         Restart = "on-failure";
+        # <= 20.03
+        StartLimitBurst = 5;
         NoNewPrivileges = true;
         LimitNPROC = 64;
         LimitNOFILE = 1048576;
