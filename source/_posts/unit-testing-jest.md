@@ -2,6 +2,7 @@
 title: Javascript Unit Testing with Jest
 excerpt: Jest = Chai + Mocha + NYC + Sinon
 date: 2019-12-30
+updated: 2020-09-28
 tags:
 - javascript
 ---
@@ -36,7 +37,9 @@ Since it's only three lines and I prefer to minimise the files, I moved the conf
 
 Now, hexo-yam has many defaults to maximise the compressions. I prefer not to repeat the same config in the unit test, so I declared them as objects and module-export.
 
-``` js
+Edit (28 Sep 2020): I now find using module-export simply for the purpose of unit testing to be a bit _unhygienic_, so I no longer use this approach, now default config is declared in each test instead.
+
+``` js index.js
 // the actual object has many properties, this is just a preview
 const htmlDefault = {
   minifyJS: true,
@@ -52,7 +55,7 @@ module.exports = {
 
 Then in the test, I simply import `htmlDefault` object,
 
-``` js
+``` js test/html.test.js
 describe('html', () => {
   const { htmlDefault } = require('../index')
 
@@ -134,7 +137,7 @@ expect(result).toEqual(expect.not.arrayContaining(expected))
 
 When `verbose:` option is enabled, the plugin would output `${feature}: {path} [${percentage}% saved]` to stdout using `hexo.log.log()`. The percentage is the size difference between the original and minified file.
 
-For example:
+Example output:
 
 ```
 html: foo/bar/baz.html [10.10% saved]
@@ -159,7 +162,7 @@ Initially I tested it by using [`.toHaveBeenCalledWith(arg)`](https://jestjs.io/
 expect(hexo.log.log).toHaveBeenCalledWith(`html: foo/bar/baz.html [10.10% saved]`);
 ```
 
-Then I realized the percentage could change as upstream minifiers get enhanced or even regressed. However, since the test input is just a line of code, it's practically impossible that the percentage will change. Yet, not taking chances to be safe. So, I refactored it into,
+Then I realized the percentage could change as upstream minifiers get enhanced or even regressed. However, since the test input is just a line of code, it's practically impossible that the percentage will change. Yet, to be safe, I skip checking the percentage,
 
 ``` js
 expect(hexo.log.log.mock.calls[0][0]).toContain('html: foo/bar/baz.html')
