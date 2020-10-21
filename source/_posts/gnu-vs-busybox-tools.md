@@ -6,6 +6,7 @@ updated: 2018-10-31
 tags:
 - linux
 - alpine
+- busybox
 ---
 
 ## Intro
@@ -18,7 +19,7 @@ I use it in my [urlhaus-filter](https://gitlab.com/curben/urlhaus-filter) repo t
 
 ## Exit with code 1
 
-I was dismayed by those [error messages](https://gitlab.com/curben/urlhaus-filter/-/jobs), I tested the scripts on my workstation! Looking through error message, I noticed the Alpine's Unx tools behave differently than mine. I investigated further by running an Alpine live cd.
+I was dismayed by those [error messages](https://gitlab.com/curben/urlhaus-filter/-/jobs), I tested the scripts on my workstation! Looking through error message, I noticed the Alpine's Unix tools behave differently than mine. I investigated further by running an Alpine live cd.
 
 I `--version` those tools (only those I use in the [scripts](https://gitlab.com/curben/urlhaus-filter/tree/master/utils)) and the output is totally different! The Alpine tools output `BusyBox vXX`, which shows they are part of BusyBox. I briefly read up the [wiki](https://en.wikipedia.org/wiki/BusyBox#Features) and noticed the following line,
 
