@@ -161,6 +161,24 @@ $ aws ec2 describe-instances --profile ec2 \
 $ ssh server1
 ```
 
+### Encrypt private key
+
+AWS generates a private key without any encryption by default, to secure it with a password:
+
+```
+$ ssh-keygen -p -f /home/example/.ssh/private_key.pem
+Enter new passphrase (empty for no passphrase): ****
+Enter same passphrase again: ****
+Your identification has been saved with the new passphrase.
+```
+
+SSH will prompt for password after this:
+
+```
+$ ssh server1
+Enter passphrase for key '/home/example/.ssh/private_key.pem': ****
+```
+
 ## kitty compatibility
 
 If you use [kitty](https://sw.kovidgoyal.net/kitty/index.html) terminal to ssh into your Linux instance, you may find the backspace doesn't work. That is because kitty uses different terminfo.
