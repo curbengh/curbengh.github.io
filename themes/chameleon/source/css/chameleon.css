@@ -701,6 +701,7 @@ pre {
 
 mark {
   background: var(--alt-bg-color);
+  color: unset;
 }
 
 /* Hide post's excerpt in article */
