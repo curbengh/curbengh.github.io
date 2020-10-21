@@ -623,24 +623,20 @@ blockquote {
 }
 
 ul {
-  margin-left: 1.3em;
   list-style: disc;
 }
 
 ul.index-list {
-  margin-left: unset;
   list-style: disc;
 }
 
 ol {
   list-style: decimal;
-  margin-left: 1.9em;
 }
 
 ol.toc,
 ol.toc-child {
   list-style: disc;
-  margin-left: unset;
 }
 
 li ol,
@@ -648,7 +644,6 @@ li ul,
 ol,
 ul {
   margin-bottom: 0.8em;
-  margin-left: 2em;
 }
 
 li ul,
