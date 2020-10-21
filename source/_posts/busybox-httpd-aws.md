@@ -36,7 +36,7 @@ $ sudo lsof -i -P -n | grep busybox
 busybox   85600        www-data    3u  IPv4 527284      0t0  TCP *:80 (LISTEN)
 ```
 
-But we still can't escape the fact that `httpd` is still started using root:
+But we still can't escape the fact that `httpd` was started using root:
 
 ```
 $ ps aux | grep httpd
