@@ -840,15 +840,13 @@ span.index-list-count:after {
   position: relative;
 }
 
-.article .main-nav-link:hover {
-  border: 0;
-}
-
 .article .article-entry {
   word-break: break-word;
 }
 
-.article .article-entry a {
+.article .article-entry a,
+.article a.main-nav-link:hover,
+.copyright a:hover {
   border-bottom: 1px solid var(--link-underline);
 }
 
