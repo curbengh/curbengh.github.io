@@ -124,7 +124,7 @@ in {
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
         { CADDYPATH = cfg.dataDir; };
       startLimitIntervalSec = 86400;
-      # 20.09+
+      # https://github.com/NixOS/nixpkgs/pull/97512
       # startLimitBurst = 5;
       serviceConfig = {
         ExecStart = ''
