@@ -39,6 +39,10 @@
             <%- partial('post/tag') %>
           </li>
         <% } %>
+        <li>
+          <span class="label"><%= __('source') %>:</span>
+          <%- link('https://gitlab.com/curben/blog/-/blob/master/source/' + post.source, post.source.replace('_posts/', '')) %>
+        </li>
         <hr/>
       </ul>
     </footer>
