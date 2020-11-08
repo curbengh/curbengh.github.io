@@ -101,6 +101,7 @@ in {
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
         { CADDYPATH = cfg.dataDir; };
       startLimitIntervalSec = 86400;
+      # 21.03+
       # https://github.com/NixOS/nixpkgs/pull/97512
       # startLimitBurst = 5;
       serviceConfig = {
@@ -112,7 +113,7 @@ in {
         User = "caddyProxy";
         Group = "caddyProxy";
         Restart = "on-failure";
-        # <= 20.03
+        # <= 20.09
         StartLimitBurst = 5;
         NoNewPrivileges = true;
         LimitNPROC = 64;
