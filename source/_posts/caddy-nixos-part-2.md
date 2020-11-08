@@ -26,12 +26,10 @@ Following diagram shows the architecture behind this website.
 
 ## Prerequisites
 
-Before proceeding to the rest of this guide, there are some system packages that you need to install. Add the packages to `environment.systemPackages` option in "configuration.nix" and run `# nixos-rebuild switch` to install them.
+Before proceeding to the rest of this guide, there are some system packages that you need to install.
 
 ```
-  environment.systemPackages = with pkgs; [
-    dnsutils usbguard magic-wormhole p7zip google-authenticator
-  ];
+$ nix-env -f '<nixpkgs>' -iA google-authenticator p7zip usbguard wormhole-william
 ```
 
 ## Disable mutableUsers

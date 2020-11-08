@@ -102,18 +102,18 @@ nixos-generate-config --root /mnt
   2. Replace "eth0" to "ens3" in firewall config (check output of `ifconfig`)
   3. Encrypt the file using 7zip before upload.
 
-``` sh
-# This is much less memory-intensive than `nix-env -i package`
-# ffsend (unofficial CLI client of Firefox Send) is a good alternative to magic-wormhole,
-# but it has a long URL so it's only usable in ssh where you can copy-paste.
-nix-env -f '<nixpkgs>' -iA magic-wormhole p7zip
+  ``` sh
+  # This is much less memory-intensive than `nix-env -i package`
+  # wormhole-william is Go-implementation of magic-wormhole
+  # Available in 20.09+
+  nix-env -f '<nixpkgs>' -iA google-authenticator p7zip usbguard wormhole-william
 
-cd /tmp
-wormhole receive configuration.7z
-7z x configuration.7z
+  cd /tmp
+  wormhole-william receive configuration.7z
+  7z x configuration.7z
 
-cp configuration.nix /mnt/etc/nixos/
-```
+  cp configuration.nix /mnt/etc/nixos/
+  ```
 
 7. Install it without setting root password (so that root remains disabled)
 
@@ -153,8 +153,13 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
   networking.interfaces.ens3.useDHCP = true;
 
   environment.systemPackages = with pkgs; [
-    dnsutils usbguard magic-wormhole p7zip google-authenticator
+    dnsutils p7zip wormhole-william
   ];
+
+  # Save some typing
+  environment.shellAliases = {
+    wormhole = "wormhole-william";
+  };
 
   time.timeZone = "UTC";
 
