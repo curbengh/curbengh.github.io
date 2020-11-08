@@ -306,8 +306,16 @@ TCP Fast Open ([TFO](https://en.wikipedia.org/wiki/Tcp_fast_open)) is enabled by
 
 Kernel compiled with additional security-oriented patch set. [More details](https://wiki.archlinux.org/index.php/Security#Kernel_hardening).
 
+_NixOS [defaults](https://nixos.wiki/wiki/Linux_kernel) to the latest LTS kernel_
+
 ```
+  # Latest LTS kernel
   boot.kernelPackages = pkgs.linuxPackages_hardened;
+```
+
+```
+  # Latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest_hardened;
 ```
 
 ## Remove old, unreferenced packages
