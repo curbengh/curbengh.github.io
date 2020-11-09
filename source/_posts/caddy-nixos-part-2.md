@@ -257,7 +257,7 @@ Once enabled, any device not whitelisted in the policy will not be accessible.
 
 Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecuritySettings) and [ArchWiki](https://wiki.archlinux.org/index.php/sysctl).
 
-```
+``` nix
   ## Enable BBR module
   boot.kernelModules = [ "tcp_bbr" ];
 
@@ -328,5 +328,267 @@ Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay ga
     automatic = true;
     # Every Monday 01:00 (UTC)
     dates = "Monday 01:00 UTC";
+    options = "--delete-older-than 7d";
   };
+
+  # Run garbage collection whenever there is less than 500MB free space left
+  nix.extraOptions = ''
+    min-free = ${toString (500 * 1024 * 1024)}
+  '';
+```
+
+## Complete configuration.nix
+
+``` nix /etc/nixos/configuration.nix
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  networking.useDHCP = false;
+  networking.interfaces.ens3.useDHCP = true;
+
+  environment.systemPackages = with pkgs; [
+    dnsutils wormhole-william p7zip
+  ];
+
+  environment.shellAliases = {
+    ls = "ls -l";
+    la = "ls -a";
+    wormhole = "wormhole-william";
+  };
+
+  time.timeZone = "UTC";
+
+  ## Unattended upgrade
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    dates = "weekly UTC";
+  };
+
+  ## Garbage collection
+  # https://nixos.wiki/wiki/Storage_optimization#Automation
+  nix.gc = {
+    automatic = true;
+    dates = "Monday 01:00 UTC";
+    options = "--delete-older-than 7d";
+  };
+
+  # Run garbage collection whenever there is less than 500MB free space left
+  nix.extraOptions = ''
+    min-free = ${toString (500 * 1024 * 1024)}
+  '';
+
+  ## Optional: Clear >1 month-old logs
+  systemd = {
+    services.clear-log = {
+      description = "Clear >1 month-old logs every week";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.systemd}/bin/journalctl --vacuum-time=30d";
+      };
+    };
+    timers.clear-log = {
+      wantedBy = [ "timers.target" ];
+      partOf = [ "clear-log.service" ];
+      timerConfig.OnCalendar = "weekly UTC";
+    };
+  };
+
+  ## Hardened kernel
+  boot.kernelPackages = pkgs.linuxPackages_hardened;
+
+  ## Enable BBR
+  boot.kernelModules = [ "tcp_bbr" ];
+
+  ## Network hardening and performance
+  boot.kernel.sysctl = {
+    # Disable magic SysRq key
+    "kernel.sysrq" = 0;
+    # Ignore ICMP broadcasts to avoid participating in Smurf attacks
+    "net.ipv4.icmp_echo_ignore_broadcasts" = 1;
+    # Ignore bad ICMP errors
+    "net.ipv4.icmp_ignore_bogus_error_responses" = 1;
+    # Reverse-path filter for spoof protection
+    "net.ipv4.conf.default.rp_filter" = 1;
+    "net.ipv4.conf.all.rp_filter" = 1;
+    # SYN flood protection
+    "net.ipv4.tcp_syncookies" = 1;
+    # Do not accept ICMP redirects (prevent MITM attacks)
+    "net.ipv4.conf.all.accept_redirects" = 0;
+    "net.ipv4.conf.default.accept_redirects" = 0;
+    "net.ipv4.conf.all.secure_redirects" = 0;
+    "net.ipv4.conf.default.secure_redirects" = 0;
+    "net.ipv6.conf.all.accept_redirects" = 0;
+    "net.ipv6.conf.default.accept_redirects" = 0;
+    # Do not send ICMP redirects (we are not a router)
+    "net.ipv4.conf.all.send_redirects" = 0;
+    # Do not accept IP source route packets (we are not a router)
+    "net.ipv4.conf.all.accept_source_route" = 0;
+    "net.ipv6.conf.all.accept_source_route" = 0;
+    # Protect against tcp time-wait assassination hazards
+    "net.ipv4.tcp_rfc1337" = 1;
+    # Latency reduction
+    "net.ipv4.tcp_fastopen" = 3;
+    ## Bufferfloat mitigations
+    # Requires >= 4.9 & kernel module
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    # Requires >= 4.19
+    "net.core.default_qdisc" = "cake";
+  };
+
+  ## USBGuard
+  # Load "/var/lib/usbguard/rules.conf" by default
+  services.usbguard.enable = true;
+
+  ## DNS-over-TLS
+  services.stubby = {
+    enable = true;
+    # ::1 cause error, use 0::1 instead
+    listenAddresses = [ "0::1" "127.0.0.1" ];
+    roundRobinUpstreams = false;
+    upstreamServers =
+      ''
+        ## Cloudflare DNS
+        - address_data: 2606:4700:4700::1111
+          tls_auth_name: "cloudflare-dns.com"
+        - address_data: 2606:4700:4700::1001
+          tls_auth_name: "cloudflare-dns.com"
+        - address_data: 1.1.1.1
+          tls_auth_name: "cloudflare-dns.com"
+        - address_data: 1.0.0.1
+          tls_auth_name: "cloudflare-dns.com"
+      '';
+  };
+
+  networking.nameservers = [ "::1" "127.0.0.1" ];
+  services.resolved = {
+    enable = true;
+    fallbackDns = [ "2606:4700:4700::1111" "2606:4700:4700::1001" "1.1.1.1" "1.0.0.1" ];
+  };
+
+  ## Port forwarding
+  networking.firewall = {
+    enable = true;
+    interfaces.ens3 = {
+      allowedTCPPorts = [ 443 4430 ];
+    };
+    extraCommands =
+      ''
+        ip6tables -t nat -I PREROUTING -i ens3 -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 4430
+      '';
+  };
+
+  ## Create service users
+  users = {
+    mutableUsers = false; # Disable passwd
+
+    users = {
+      root = {
+        hashedPassword = "*"; # Disable root password
+      };
+      nixos = {
+        passwordFile = "/etc/nixos/nixos.password";
+        isNormalUser = true;
+        extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      };
+      caddyProxy = {
+        home = "/var/lib/caddyProxy";
+        createHome = true;
+      };
+      caddyTor = {
+        home = "/var/lib/caddyTor";
+        createHome = true;
+      };
+      caddyI2p = {
+        home = "/var/lib/caddyI2p";
+        createHome = true;
+      };
+    };
+
+    groups = {
+      caddyProxy = {
+        members = [ "caddyProxy" ];
+      };
+      caddyTor = {
+        members = [ "caddyTor" ];
+      };
+      caddyI2p = {
+        members = [ "caddyI2p" ];
+      };
+    };
+  };
+
+  ## Requires OTP to login & sudo
+  security.pam = {
+    services.login.googleAuthenticator.enable = true;
+    services.sudo.googleAuthenticator.enable = true;
+  };
+
+  ### The rest will be explained in the next articles
+  ## Caddy web server
+  require = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix /etc/caddy/caddyI2p.nix ];
+  services.caddyProxy = {
+    enable = false;
+    config = "/etc/caddy/caddyProxy.conf";
+  };
+  services.caddyTor = {
+    enable = false;
+    config = "/etc/caddy/caddyTor.conf";
+  };
+  services.caddyI2p = {
+    enable = false;
+    config = "/etc/caddy/caddyI2p.conf";
+  };
+
+  ## Tor onion
+  services.tor = {
+    enable = true;
+    enableGeoIP = false;
+    hiddenServices = {
+      proxy = {
+        version = 3;
+        map = [
+          {
+            port = "80";
+            toHost = "[::1]";
+            toPort = "8080";
+          }
+        ];
+      };
+    };
+    extraConfig =
+      ''
+        ClientUseIPv4 0
+        ClientUseIPv6 1
+        ClientPreferIPv6ORPort 1
+      '';
+  };
+
+  ## I2P Eepsite
+  services.i2pd = {
+    enable = true;
+    enableIPv4 = false;
+    enableIPv6 = true;
+    ifname = "ens3";
+    address = "xxxx";
+    inTunnels = {
+      proxy = {
+        enable = true;
+        keys = "proxy-keys.dat";
+        inPort = 80;
+        address = "::1";
+        destination = "::1";
+        port = 8081;
+      };
+    };
+  };
+}
 ```
