@@ -2,13 +2,15 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"
 excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
-updated: 2020-04-22
+updated: 2020-11-09
 tags:
 - server
 - linux
 - caddy
 - nixos
 ---
+
+> 9 Nov 2020: Updated to NixOS 20.09 syntax.
 
 In this post, I show you how I securely configure the NixOS, the server OS behind this website.
 
@@ -38,13 +40,13 @@ In NixOS, instead of using `useradd` and `passwd` to manage users, you could als
 
 First, I disabled `useradd` and `passwd`.
 
-``` js
+``` nix
 users.mutableUsers = false;
 ```
 
 ## Disable root
 
-``` js
+``` nix
 users.root.hashedPassword = "*";
 ```
 
@@ -52,7 +54,7 @@ users.root.hashedPassword = "*";
 
 User's password can be configured by `users.<name>.password`, obviously this means the password is stored in plain text. Even if you lock down `configuration.nix` with `chmod 600` (which I did), "it is (still) world-readable in the Nix store". The safer way is to store in a hashed form,
 
-``` js
+``` nix
 users.<name>.hashedPassword = "xxxx";
 ```
 
@@ -62,7 +64,7 @@ Note that the hash is still world-readable. A more secure option is to use `user
 
 You might be wondering why not just `passwordFile` during installation. The issue is that, in the live CD environment, the "/etc/" folder refers to the live CD's not the actual one which is located in "/mnt/etc/". I mean, you _could_ try "/mnt/etc/nixos/nixos.password", but you gotta remember to update the option after reboot otherwise you would get locked out. "./nixos.password" value doesn't work because `passwordFile` option doesn't support relative path, it must be a full path. Hence, I have use `hashedPassword` during the initial setup and then switch to `passwordFile`. Remember to remove the `hashedPassword` option once you have set up `passwordFile`.
 
-``` js
+``` nix
   passwordFile = "/etc/nixos/nixos.password";
   isNormalUser = true;
   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -84,7 +86,7 @@ For separation of privilege, each service is launched with different user under 
 
 Combining with the previous user configs, I ended up with:
 
-``` js
+``` nix
   users = {
     mutableUsers = false;
 
@@ -144,7 +146,7 @@ $ google-authenticator
 
 Once the secret is generated, TOTP can be enabled using the following config. I configured it to require OTP when login and sudo, in addition to password.
 
-``` js
+``` nix
   ## Requires OTP to login & sudo
   security.pam = {
     services.login.googleAuthenticator.enable = true;
@@ -158,7 +160,7 @@ Since DNS is not encrypted in transit, it risks being tampered. To resolve that,
 
 I use Cloudflare DNS simply because I'm already using its CDN, using other alternatives wouldn't have the privacy benefit since Cloudflare already knows that a visitor is browsing this website though its CDN.  Refer to stubby.yml for a full list of supported servers.
 
-``` js
+``` nix
   ## DNS-over-TLS
   services.stubby = {
     enable = true;
@@ -181,7 +183,7 @@ I use Cloudflare DNS simply because I'm already using its CDN, using other alter
 
 Then I point systemd's resolved to stubby. I do configure it to fallback to unencrypted DNS if stubby is not responsive (which does happen). Whether you need an unsecured fallback depends on your cost-benefit. For me, the cost of the site being inaccessible (due to unresponsive stubby) outweighs the benefit of having enforced encryption (my setup is opportunistic).
 
-```
+``` nix
   networking.nameservers = [ "::1" "127.0.0.1" ];
   services.resolved = {
     enable = true;
@@ -201,7 +203,7 @@ By default, Linux program cannot bind to port <=1024 for security reason. If a p
 
 In my case, I configure iptables to port forward 443 to 4430, so any traffic that hits 443 will be redirected to 4430. Both ports need to be opened, but I do configure my dedicated firewall (separate from the web server) to allow port 443 only.
 
-``` js
+``` nix
   ## Port forwarding
   networking.firewall = {
     enable = true;
@@ -225,7 +227,7 @@ In the config, you can also specify the time that the server will reboot. I reco
 
 (For more advanced usage of `dates`, see [`systemd.time`](https://jlk.fjfi.cvut.cz/arch/manpages/man/systemd.time.7#CALENDAR_EVENTS))
 
-``` js
+``` nix
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
@@ -239,16 +241,14 @@ In the config, you can also specify the time that the server will reboot. I reco
 I use USBGuard utility to allow or deny USB devices. In a virtual server environment, I only need to use the virtualised USB keyboard. Configuration is easy and straightforward. First, I generate a policy (with root privilege) to allow all currently connected devices:
 
 ```
-# usbguard generate-policy > /var/lib/usbguard/rules.conf
+$ sudo usbguard generate-policy > /var/lib/usbguard/rules.conf
 ```
 
 Then, I just simply enable the service:
 
-``` js
-  services.usbguard = {
-    enable = true;
-    ruleFile = "/var/lib/usbguard/rules.conf";
-  };
+``` nix
+  # Load "/var/lib/usbguard/rules.conf" by default
+  services.usbguard.enable = true;
 ```
 
 Once enabled, any device not whitelisted in the policy will not be accessible.
@@ -306,12 +306,12 @@ Kernel compiled with additional security-oriented patch set. [More details](http
 
 _NixOS [defaults](https://nixos.wiki/wiki/Linux_kernel) to the latest LTS kernel_
 
-```
+``` nix
   # Latest LTS kernel
   boot.kernelPackages = pkgs.linuxPackages_hardened;
 ```
 
-```
+``` nix
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest_hardened;
 ```
@@ -320,11 +320,13 @@ _NixOS [defaults](https://nixos.wiki/wiki/Linux_kernel) to the latest LTS kernel
 
 Since my web server has limited disk space, it needs to run [garbage collector](https://nixos.org/nixos/manual/index.html#sec-nix-gc) from time to time.
 
-```
+Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay garbage collection to 01:00 to avoid time conflict. The order doesn't matter, but there should be at least 15 minutes buffer.
+
+``` nix
   ## Garbage collector
   nix.gc = {
     automatic = true;
-    # Every Monday 00:00
-    dates = "weekly UTC";
+    # Every Monday 01:00 (UTC)
+    dates = "Monday 01:00 UTC";
   };
 ```

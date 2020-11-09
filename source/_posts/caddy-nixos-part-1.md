@@ -133,7 +133,7 @@ shred -uz configuration.7z configuration.nix
 
 Following is my "configuration.nix". I'll show you how to secure NixOS using hashed password, firewall, DNS-over-TLS and USBGuard in my next post. After that, I'll show you how to setup Caddy and Tor (they are disabled for now).
 
-```
+``` nix /etc/nixos/configuration.nix
 { config, pkgs, ... }:
 
 {

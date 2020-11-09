@@ -2,7 +2,7 @@
 title: "How to make your website available over I2P Eepsite on NixOS"
 excerpt: "A guide on I2P Eepsite on NixOS"
 date: 2020-03-21
-updated: 2020-09-09
+updated: 2020-11-09
 tags:
 - server
 - linux
@@ -11,6 +11,8 @@ tags:
 - i2p
 - censorship
 ---
+
+> 9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to {% post_link caddy-upgrade-v2-proxy 'this article' %} for upgrade guide.
 
 In this segment, I show you how I set up I2P Eepsite service that reverse proxy to curben.netlify.app. This website can be accessed using this [B32 address](http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p) or [mdleom.i2p](http://mdleom.i2p/)
 
@@ -123,6 +125,16 @@ in {
       description = "Path to Caddyfile";
     };
 
+    adapter = mkOption {
+      default = "caddyfile";
+      example = "nginx";
+      type = types.str;
+      description = ''
+        Name of the config adapter to use.
+        See https://caddyserver.com/docs/config-adapters for the full list.
+      '';
+    };
+
     dataDir = mkOption {
       default = "/var/lib/caddyI2p";
       type = types.path;
@@ -145,40 +157,40 @@ in {
     systemd.services.caddyI2p = {
       description = "Caddy web server";
       after = [ "network-online.target" ];
+      wants = [ "network-online.target" ]; # systemd-networkd-wait-online.service
       wantedBy = [ "multi-user.target" ];
-      environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
-        { CADDYPATH = cfg.dataDir; };
-      startLimitIntervalSec = 86400;
       # 21.03+
       # https://github.com/NixOS/nixpkgs/pull/97512
-      # startLimitBurst = 5;
+      # startLimitIntervalSec = 14400;
+      # startLimitBurst = 10;
       serviceConfig = {
-        ExecStart = ''
-          ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
-        '';
-        ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+        ExecStart = "${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}";
+        ExecReload = "${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}";
         Type = "simple";
-        User = "caddyProxy";
-        Group = "caddyProxy";
-        Restart = "on-failure";
-        # <= 20.09
-        StartLimitBurst = 5;
+        User = "caddyI2p";
+        Group = "caddyI2p";
+        Restart = "on-abnormal";
+        StartLimitIntervalSec = 14400;
+        StartLimitBurst = 10;
         NoNewPrivileges = true;
-        LimitNPROC = 64;
+        LimitNPROC = 512;
         LimitNOFILE = 1048576;
         PrivateTmp = true;
         PrivateDevices = true;
         ProtectHome = true;
         ProtectSystem = "full";
         ReadWriteDirectories = cfg.dataDir;
+        KillMode = "mixed";
+        KillSignal = "SIGQUIT";
+        TimeoutStopSec = "5s";
       };
     };
-
+    
     users.users.caddyI2p = {
       home = cfg.dataDir;
       createHome = true;
     };
-
+    
     users.groups.caddyI2p = {
       members = [ "caddyI2p" ];
     };
@@ -188,11 +200,13 @@ in {
 
 ### File ownership and permissions
 
-After you save the file to **/etc/caddy/caddyI2p.nix**, remember to restrict it to root.
+After you save the file to **/etc/caddy/caddyI2p.nix**, remember to restrict it to `caddyI2p` user.
 
 ```
-# chown root:root /etc/caddy/caddyI2p.nix
-# chown 600 /etc/caddy/caddyI2p.nix
+$ chown caddyI2p:caddyI2p /etc/caddy/caddyI2p.nix
+$ chown 600 /etc/caddy/caddyI2p.nix
+# "common.conf" must be readable by other users
+$ chmod o+r /etc/caddy/common.conf
 ```
 
 ## caddyFile
@@ -200,97 +214,36 @@ After you save the file to **/etc/caddy/caddyI2p.nix**, remember to restrict it 
 Create a new caddyFile in `/etc/caddy/caddyI2p.conf` and starts with the following config:
 
 ```
-ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:8081 {
+http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://mdleom.i2p:8081 {
   bind ::1
 
-  tls off
-
-  header / {
+  header {
     -strict-transport-security
+    defer
   }
 }
 ```
 
-Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service like [stats.i2p](http://stats.i2p/) and it acts as a shortcut to my B32 address. `tls` (HTTPS) is disabled here because it's not necessary as Tor hidden service already encrypts the traffic. Let's Encrypt doesn't support validating a .i2p address. Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to loopback so it only listens to localhost.
+Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service like [stats.i2p](http://stats.i2p/) and it acts as a shortcut to my B32 address. HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Eepsite already encrypts the traffic. Let's Encrypt doesn't support validating a .i2p address. Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
 
-The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos/#caddyTor.conf)" and "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#caddyFile)".
+The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos/#caddyTor.conf)" and "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
 
 ``` plain /etc/caddy/caddyI2p.conf
-(removeHeaders) {
-  header_upstream -cookie
-  header_upstream -referer
-  header_upstream -cf-ipcountry
-  header_upstream -cf-connecting-ip
-  header_upstream -x-forwarded-for
-  header_upstream -x-forwarded-proto
-  header_upstream -cf-ray
-  header_upstream -cf-visitor
-  header_upstream -true-client-ip
-  header_upstream -cdn-loop
-  header_upstream -cf-request-id
-  header_upstream -cf-cache-status
-}
-
-(staticallyCfg) {
-  header_upstream Host cdn.statically.io
-}
+import common.conf
 
 # I2P Eepsite
-ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:8081 {
+http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://mdleom.i2p:8081 {
   bind ::1
 
-  tls off
-
-  header / {
-    -server
-    -alt-svc
-    -cdn-cache
-    -cdn-cachedat
-    -cdn-edgestorageid
-    -cdn-pullzone
-    -cdn-requestcountrycode
-    -cdn-requestid
-    -cdn-uid
-    -cf-cache-status
-    -cf-ray
-    -cf-request-id
-    -etag
-    -set-cookie
-    -strict-transport-security
-    -x-bytes-saved
-    -x-cache
-    -x-nf-request-id
-    -x-served-by
-    Cache-Control "max-age=604800, public"
-    Referrer-Policy "no-referrer"
+  header {
+    import setHeaders
+    -strict-transport-origin
+    defer
   }
 
-  header /libs {
-    Cache-Control "public, max-age=31536000, immutable"
-  }
-
-  proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
-    without /img
-    import removeHeaders
-    import staticallyCfg
-  }
-
-  rewrite /screenshot {
-    r (.*)
-    to /screenshot{1}?mobile=true
-  }
-
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
-    without /screenshot
-    import removeHeaders
-    import staticallyCfg
-  }
-
-  proxy / https://curben.netlify.app {
-    import removeHeaders
-    header_upstream Host curben.netlify.app
-  }
+  import pathProxy
 }
+
 ```
 
 ### Alternate Caddyfile
@@ -299,17 +252,16 @@ There is another approach which is suitable if you have a website that you don't
 
 ```
 # Do not use this approach unless you are absolutely sure
-ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:8081 {
+http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://mdleom.i2p:8081 {
   bind ::1
 
-  tls off
-
-  header / {
+  header {
     -strict-transport-security
+    defer
   }
 
-  proxy / https://mdleom.com {
-    header_upstream Host mdleom.com
+  reverse_proxy https://mdleom.com {
+    header_up Host mdleom.com
   }
 }
 ```
@@ -318,7 +270,7 @@ ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 mdleom.i2p:808
 
 Start the Caddy service.
 
-``` js /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix /etc/caddy/caddyI2p.nix ];
   services.caddyI2p = {
     enable = true;

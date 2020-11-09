@@ -2,7 +2,7 @@
 title: "How to make your website available over Tor hidden service on NixOS"
 excerpt: "A guide on Tor hidden service on NixOS"
 date: 2020-03-16
-updated: 2020-09-09
+updated: 2020-11-09
 tags:
 - server
 - linux
@@ -11,6 +11,8 @@ tags:
 - tor
 - censorship
 ---
+
+> 9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to {% post_link caddy-upgrade-v2-proxy 'this article' %} for upgrade guide.
 
 In this segment, I show you how I set up Tor hidden (.onion) service that reverse proxy to curben.netlify.app. This website can be accessed through the following [.onion address](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion).
 
@@ -32,7 +34,7 @@ Note that this only applies to the traffic between visitor and the (Caddy) web s
 
 The first step is to bring up a Tor hidden service to get an onion address. Add the following options to **configuration.nix**:
 
-``` plain /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   ## Tor onion
   services.tor = {
     enable = true;
@@ -87,19 +89,29 @@ I set up another Caddy-powered reverse proxy which is separate from the {% post_
 with lib;
 
 let
-  cfg = config.services.caddyTor;
+  cfg = config.services.caddyProxy;
 in {
-  options.services.caddyTor = {
+  options.services.caddyProxy = {
     enable = mkEnableOption "Caddy web server";
 
     config = mkOption {
-      default = "/etc/caddy/caddyTor.conf";
+      default = "/etc/caddy/caddyProxy.conf";
       type = types.str;
       description = "Path to Caddyfile";
     };
 
+    adapter = mkOption {
+      default = "caddyfile";
+      example = "nginx";
+      type = types.str;
+      description = ''
+        Name of the config adapter to use.
+        See https://caddyserver.com/docs/config-adapters for the full list.
+      '';
+    };
+
     dataDir = mkOption {
-      default = "/var/lib/caddyTor";
+      default = "/var/lib/caddyProxy";
       type = types.path;
       description = ''
         The data directory, for storing certificates. Before 17.09, this
@@ -117,45 +129,45 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.caddyTor = {
+    systemd.services.caddyProxy = {
       description = "Caddy web server";
       after = [ "network-online.target" ];
+      wants = [ "network-online.target" ]; # systemd-networkd-wait-online.service
       wantedBy = [ "multi-user.target" ];
-      environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
-        { CADDYPATH = cfg.dataDir; };
-      startLimitIntervalSec = 86400;
       # 21.03+
       # https://github.com/NixOS/nixpkgs/pull/97512
-      # startLimitBurst = 5;
+      # startLimitIntervalSec = 14400;
+      # startLimitBurst = 10;
       serviceConfig = {
-        ExecStart = ''
-          ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
-        '';
-        ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+        ExecStart = "${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}";
+        ExecReload = "${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}";
         Type = "simple";
         User = "caddyProxy";
         Group = "caddyProxy";
-        Restart = "on-failure";
-        # <= 20.09
-        StartLimitBurst = 5;
+        Restart = "on-abnormal";
+        StartLimitIntervalSec = 14400;
+        StartLimitBurst = 10;
         NoNewPrivileges = true;
-        LimitNPROC = 64;
+        LimitNPROC = 512;
         LimitNOFILE = 1048576;
         PrivateTmp = true;
         PrivateDevices = true;
         ProtectHome = true;
         ProtectSystem = "full";
         ReadWriteDirectories = cfg.dataDir;
+        KillMode = "mixed";
+        KillSignal = "SIGQUIT";
+        TimeoutStopSec = "5s";
       };
     };
-    
-    users.users.caddyTor = {
+
+    users.users.caddyProxy = {
       home = cfg.dataDir;
       createHome = true;
     };
     
-    users.groups.caddyTor = {
-      members = [ "caddyTor" ];
+    users.groups.caddyProxy = {
+      members = [ "caddyProxy" ];
     };
   };
 }
@@ -175,96 +187,40 @@ After you save the file to **/etc/caddy/CaddyTor.nix**, remember to restrict it 
 Create a new caddyFile in `/etc/caddy/caddyTor.conf` and starts with the following config:
 
 ```
-xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
+import common.conf
+
+# Tor onion
+http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
   bind ::1
 
-  tls off
-
-  header / {
-    -strict-transport-security
+  header {
+    import setHeaders
+    -strict-transport-origin
+    defer
   }
+
+  import pathProxy
 }
 ```
 
-Update the onion address to the value shown in "[/var/lib/tor/onion/myOnion/hostname](#configuration.nix)". `tls` (HTTPS) is disabled here because it's not necessary as Tor hidden service already encrypts the traffic. Let's Encrypt doesn't support validating a .onion address. The only way is to purchase the cert from [Digicert](https://www.digicert.com/blog/ordering-a-onion-certificate-from-digicert/). Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to loopback so it only listens to localhost.
+Update the onion address to the value shown in "[/var/lib/tor/onion/myOnion/hostname](#configuration.nix)". HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Tor hidden service already encrypts the traffic. Let's Encrypt doesn't support validating a .onion address. The only way is to purchase the cert from [Digicert](https://www.digicert.com/blog/ordering-a-onion-certificate-from-digicert/). Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
 
-The rest are similar to "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#caddyFile)".
+The rest are similar to "[caddyProxy.conf](blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
 
 ``` plain /etc/caddy/caddyTor.conf
-(removeHeaders) {
-  header_upstream -cookie
-  header_upstream -referer
-  header_upstream -cf-ipcountry
-  header_upstream -cf-connecting-ip
-  header_upstream -x-forwarded-for
-  header_upstream -x-forwarded-proto
-  header_upstream -cf-ray
-  header_upstream -cf-visitor
-  header_upstream -true-client-ip
-  header_upstream -cdn-loop
-  header_upstream -cf-request-id
-  header_upstream -cf-cache-status
-}
-
-(staticallyCfg) {
-  header_upstream Host cdn.statically.io
-}
+import common.conf
 
 # Tor onion
-xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
+http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
   bind ::1
 
-  tls off
-
-  header / {
-    -server
-    -alt-svc
-    -cdn-cache
-    -cdn-cachedat
-    -cdn-edgestorageid
-    -cdn-pullzone
-    -cdn-requestcountrycode
-    -cdn-requestid
-    -cdn-uid
-    -cf-cache-status
-    -cf-ray
-    -cf-request-id
-    -etag
-    -set-cookie
-    -strict-transport-security
-    -x-bytes-saved
-    -x-cache
-    -x-nf-request-id
-    -x-served-by
-    Cache-Control "max-age=604800, public"
-    Referrer-Policy "no-referrer"
+  header {
+    import setHeaders
+    -strict-transport-origin
+    defer
   }
 
-  header /libs {
-    Cache-Control "public, max-age=31536000, immutable"
-  }
-
-  proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
-    without /img
-    import removeHeaders
-    import staticallyCfg
-  }
-
-  rewrite /screenshot {
-    r (.*)
-    to /screenshot{1}?mobile=true
-  }
-
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
-    without /screenshot
-    import removeHeaders
-    import staticallyCfg
-  }
-
-  proxy / https://curben.netlify.app {
-    import removeHeaders
-    header_upstream Host curben.netlify.app
-  }
+  import pathProxy
 }
 ```
 
@@ -276,17 +232,16 @@ This is also suitable if you have a website that you can't root access.
 
 ```
 # Do not use this approach unless you are absolutely sure
-xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
+http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
   bind ::1
 
-  tls off
-
-  header / {
+  header {
     -strict-transport-security
+    defer
   }
 
-  proxy / https://mdleom.com {
-    header_upstream Host mdleom.com
+  reverse_proxy https://mdleom.com {
+    header_up Host mdleom.com
   }
 }
 ```

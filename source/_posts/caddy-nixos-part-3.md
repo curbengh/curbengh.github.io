@@ -2,13 +2,15 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
-updated: 2020-09-09
+updated: 2020-11-09
 tags:
 - server
 - linux
 - caddy
 - nixos
 ---
+
+> 9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to {% post_link caddy-upgrade-v2-proxy 'this article' %} for upgrade guide.
 
 In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
 
@@ -26,11 +28,10 @@ This post is Part 2 of a series of articles that show you how I set up Caddy and
 
 In NixOS, Caddy can be easily configured through "configuration.nix", without even touching a Caddyfile, if you have a rather simple setup. For example, to serve static files from "/var/www/" folder,
 
-``` plain configuration.nix
+``` nix configuration.nix
 services.caddy = {
   enable = true;
   email = example@example.com;
-  agree = true;
   config =
     ''
       example.com {
@@ -58,7 +59,7 @@ caddy.nix grants `CAP_NET_BIND_SERVICE` capability which is not needed in my use
 
 I created another nix file which is similar to "caddy.nix", but without `CAP_NET_BIND_SERVICE` capability. I also removed Let's Encrypt-related options since I'm using Cloudflare origin certificate. I renamed the `options.services.caddy` to `options.services.caddyProxy` to avoid clash with "caddy.nix". Save the file to "/etc/caddy/caddyProxy.nix" with root as owner. We'll revisit this file in "[configuration.nix](#configuration.nix)" section later in this guide.
 
-``` plain /etc/caddy/caddyProxy.nix
+``` nix /etc/caddy/caddyProxy.nix
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -73,6 +74,16 @@ in {
       default = "/etc/caddy/caddyProxy.conf";
       type = types.str;
       description = "Path to Caddyfile";
+    };
+
+    adapter = mkOption {
+      default = "caddyfile";
+      example = "nginx";
+      type = types.str;
+      description = ''
+        Name of the config adapter to use.
+        See https://caddyserver.com/docs/config-adapters for the full list.
+      '';
     };
 
     dataDir = mkOption {
@@ -97,32 +108,32 @@ in {
     systemd.services.caddyProxy = {
       description = "Caddy web server";
       after = [ "network-online.target" ];
+      wants = [ "network-online.target" ]; # systemd-networkd-wait-online.service
       wantedBy = [ "multi-user.target" ];
-      environment = mkIf (versionAtLeast config.system.stateVersion "17.09")
-        { CADDYPATH = cfg.dataDir; };
-      startLimitIntervalSec = 86400;
       # 21.03+
       # https://github.com/NixOS/nixpkgs/pull/97512
-      # startLimitBurst = 5;
+      # startLimitIntervalSec = 14400;
+      # startLimitBurst = 10;
       serviceConfig = {
-        ExecStart = ''
-          ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
-        '';
-        ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+        ExecStart = "${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}";
+        ExecReload = "${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}";
         Type = "simple";
         User = "caddyProxy";
         Group = "caddyProxy";
-        Restart = "on-failure";
-        # <= 20.09
-        StartLimitBurst = 5;
+        Restart = "on-abnormal";
+        StartLimitIntervalSec = 14400;
+        StartLimitBurst = 10;
         NoNewPrivileges = true;
-        LimitNPROC = 64;
+        LimitNPROC = 512;
         LimitNOFILE = 1048576;
         PrivateTmp = true;
         PrivateDevices = true;
         ProtectHome = true;
         ProtectSystem = "full";
         ReadWriteDirectories = cfg.dataDir;
+        KillMode = "mixed";
+        KillSignal = "SIGQUIT";
+        TimeoutStopSec = "5s";
       };
     };
 
@@ -130,7 +141,7 @@ in {
       home = cfg.dataDir;
       createHome = true;
     };
-
+    
     users.groups.caddyProxy = {
       members = [ "caddyProxy" ];
     };
@@ -188,7 +199,11 @@ Subsequent configurations (directives) shall be inside the curly braces. Let's s
 ```
 mdleom.com:4430 www.mdleom.com:4430 {
   tls /var/lib/caddyProxy/mdleom.com.pem /var/lib/caddyProxy/mdleom.com.key {
-    clients /var/lib/caddyProxy/origin-pull-ca.pem
+    protocols tls1.3
+    client_auth {
+      mode require_and_verify
+      trusted_ca_cert_file /var/lib/caddyProxy/origin-pull-ca.pem
+    }
   }
 }
 ```
@@ -198,10 +213,8 @@ mdleom.com:4430 www.mdleom.com:4430 {
 Connection to www.mdleom.com is redirected to mdleom.com with HTTP 301 status.
 
 ```
-  redir 301 {
-    if {label1} is www
-    / https://mdleom.com{uri}
-  }
+  @www host www.mdleom.com
+  redir @www https://mdleom.com{uri} permanent
 ```
 
 `{label1}` placeholder refers to the first part of the request hostname, e.g. if hostname is `foo.bar.com`, `{label1}` is foo, `{label2}` is bar and so on.
@@ -211,10 +224,8 @@ Connection to www.mdleom.com is redirected to mdleom.com with HTTP 301 status.
 If you prefer to redirect apex to www,
 
 ```
-  redir 301 {
-    if {label1} is mdleom
-    / https://www.mdleom.com{uri}
-  }
+  @www host mdleom.com
+  redir @www https://www.mdleom.com{uri} permanent
 ```
 
 ### Reverse proxy
@@ -229,103 +240,104 @@ Aside from reverse proxy to curben.netlify.app, I also configured my Netlify web
 In Caddyfile, the config can be expressed as:
 
 ``` plain
-  proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
-    without /img
+  handle_path /img/* {
+    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
+    reverse_proxy https://cdn.statically.io 
   }
 
-  rewrite /screenshot {
-    r (.*)
-    to /screenshot{1}?mobile=true
+  handle_path /screenshot/* {
+    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+
+    reverse_proxy https://cdn.statically.io
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
-    without /screenshot
-  }
-
-  proxy / https://curben.netlify.app
+  reverse_proxy https://curben.netlify.app
 ```
 
-`without` directive is necessary to remove `libs/` from the path, so that "mdleom.com/libs/foo/bar.js" is linked to "https://cdn.statically.io/libs/foo/bar.js", not "https://cdn.statically.io/libs/libs/foo/bar.js".
-
-For `/screenshot`, since the `proxy` doesn't support variable like the Netlify `:splat`, to prepend "?mobile=true" to the link in the background (without using 301 redirection), I use `rewrite` directive which has a regex match function. I use the regex to capture the path after `screenshot` and call it using `{1}`.
+`rewrite` directive is necessary to remove `img/` and `screenshot/*` from the path, so that "mdleom.com/img/foo.jpg" is linked to "https://cdn.statically.io/img/foo.jpg", not "https://cdn.statically.io/img/img/foo.jpg".
 
 ### Host header
 
 To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_upstream` option,
 
-``` plain
-  proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
-    without /img
-    header_upstream Host cdn.statically.io
+{% codeblock mark:5,13,18 %}
+  handle_path /img/* {
+    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
+
+    reverse_proxy https://cdn.statically.io {
+      header_up Host cdn.statically.io
+    }
   }
 
-  rewrite /screenshot {
-    r (.*)
-    to /screenshot{1}?mobile=true
+  handle_path /screenshot/* {
+    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+
+    reverse_proxy https://cdn.statically.io {
+      header_up Host cdn.statically.io
+    }
   }
 
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
-    without /screenshot
-    header_upstream Host cdn.statically.io
+  reverse_proxy https://curben.netlify.app {
+    header_up Host curben.netlify.app
   }
-
-  proxy / https://curben.netlify.app {
-    header_upstream Host cdn.statically.io
-  }
-```
-
-There are a few repetitions for rewriting the header for Statically. I can group that option as a global variable and call it using `import`.
-
-```
-(staticallyCfg) {
-  header_upstream Host cdn.statically.io
-}
-
-mdleom.com {
-  proxy /img ... {
-    import staticallyCfg
-  }
-
-  proxy /screenshot ... {
-    import staticallyCfg
-  }
-}
-```
+{% endcodeblock %}
 
 ### Add or remove headers
 
-To prevent any unnecessary request headers from being sent to the upstreams, I use `header_upstream`. I use it to remove cookie, referer and [other headers](https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-) added by Cloudflare. Since there are many headers to remove, I group them as a global variable. I apply it to all `proxy` directive.
+To prevent any unnecessary request headers from being sent to the upstreams, I use `header_up`. I use it to remove cookie, referer and [other headers](https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-) added by Cloudflare. Since there are many headers to remove, I group them as a global variable. I apply it to all `reverse_proxy` directives.
 
-```
+{% codeblock mark:25,34,40 %}
 (removeHeaders) {
-  header_upstream -cookie
-  header_upstream -referer
-  # Remove Cloudflare headers
-  # https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-
-  header_upstream -cf-ipcountry
-  header_upstream -cf-connecting-ip
-  header_upstream -x-forwarded-for
-  header_upstream -x-forwarded-proto
-  header_upstream -cf-ray
-  header_upstream -cf-visitor
-  header_upstream -true-client-ip
-  header_upstream -cdn-loop
-  header_upstream -cf-request-id
-  header_upstream -cf-cache-status
+  header_up -cdn-loop
+  header_up -cf-cache-status
+  header_up -cf-connecting-ip
+  header_up -cf-ipcountry
+  header_up -cf-ray
+  header_up -cf-request-id
+  header_up -cf-visitor
+  header_up -cookie
+  header_up -referer
+  header_up -sec-ch-ua
+  header_up -sec-ch-ua-mobile
+  header_up -true-client-ip
+  header_up -via
+  header_up -x-forwarded-for
+  header_up -x-forwarded-proto
+  header_up User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 }
 
 mdleom.com {
-  proxy /img ... {
+  handle_path /img/* {
+    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
+
+    reverse_proxy https://cdn.statically.io {
+      import removeHeaders
+      header_up Host cdn.statically.io
+    }
+  }
+
+  handle_path /screenshot/* {
+    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+
+    reverse_proxy https://cdn.statically.io {
+      import removeHeaders
+      header_up Host cdn.statically.io
+    }
+  }
+
+  reverse_proxy https://curben.netlify.app {
     import removeHeaders
+    header_up Host curben.netlify.app
   }
 }
-```
+{% endcodeblock %}
 
-The upstream locations insert some information into the response headers that are irrelevant to the site visitors. I use `header` directive to filter them out. It applies to all `proxy` directive.
+The upstream locations insert some information into the response headers that are irrelevant to the site visitors. I use `header` directive to filter them out. It also applies to all `reverse_proxy` directives.
 
 ```
-  header / {
-    -server
+  header {
+    -access-control-allow-origin
+    -access-control-expose-headers
     -alt-svc
     -cdn-cache
     -cdn-cachedat
@@ -334,121 +346,209 @@ The upstream locations insert some information into the response headers that ar
     -cdn-requestcountrycode
     -cdn-requestid
     -cdn-uid
+    -cf-bgj
     -cf-cache-status
+    -cf-polished
     -cf-ray
     -cf-request-id
+    -content-disposition
     -etag
+    -expect-ct
+    -server
     -set-cookie
+    -timing-allow-origin
+    -via
     -x-bytes-saved
     -x-cache
+    -x-cache-hits
     -x-nf-request-id
     -x-served-by
-    Cache-Control "max-age=604800, public"
+    -x-timer
+    Clear-Site-Data `"cookies", "storage"`
+    Content-Language "en-GB"
+    Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://3g2upl4pq6kufc4m.onion; frame-ancestors 'none'; block-all-mixed-content"
+    Expires "0"
+    Feature-Policy "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; display-capture 'none'; document-domain 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'none'; sync-xhr 'none'; usb 'none'; vibrate 'none'; vr 'none'; wake-lock 'none'; webauthn 'none'; xr-spatial-tracking 'none'"
     Referrer-Policy "no-referrer"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "DENY"
+    X-XSS-Protection "1; mode=block"
+    defer
   }
 ```
 
 I also add the `Cache-Control` and `Referrer-Policy` to the response header. Use minus (-) sign before each option to remove particular header. Without minus sign, the specified header is either added or replacing an existing one.
 
-### header and header_downstream
+### Cache-Control
 
 `/libs` folder contains third-party libraries. Since the library is usually requested by a specific version, we can safely assume that the response would remain the same. This means I can set long expiration and `immutable` on the response. [`immutable`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Revalidation_and_reloading) is to tell the browser that revalidation is not needed.
 
 ```
-  header / {
-    Cache-Control "max-age=604800, public"
+  header {
+    Cache-Control "max-age=86400, public"
   }
 
-  header /libs {
+  header /libs/* {
     Cache-Control "public, max-age=31536000, immutable"
   }
 ```
 
 ### Complete Caddyfile
 
-``` plain Caddyfile
-(removeHeaders) {
-  header_upstream -cookie
-  header_upstream -referer
-  # Remove Cloudflare headers
-  # https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-
-  header_upstream -cf-ipcountry
-  header_upstream -cf-connecting-ip
-  header_upstream -x-forwarded-for
-  header_upstream -x-forwarded-proto
-  header_upstream -cf-ray
-  header_upstream -cf-visitor
-  header_upstream -true-client-ip
-  header_upstream -cdn-loop
-  header_upstream -cf-request-id
-  header_upstream -cf-cache-status
+Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor Onion' %} and {% post_link i2p-eepsite-nixos 'I2P Eepsite' %}, I refactor most of the configuration into "common.conf" and import it into "caddyProxy.conf".
+
+``` plain common.conf
+## Optional: disable admin endpoint and http->https redirect
+#{
+#  admin off
+#  auto_https disable_redirects
+#}
+
+(setHeaders) {
+  -access-control-allow-origin
+  -access-control-expose-headers
+  -alt-svc
+  -cdn-cache
+  -cdn-cachedat
+  -cdn-edgestorageid
+  -cdn-pullzone
+  -cdn-requestcountrycode
+  -cdn-requestid
+  -cdn-uid
+  -cf-bgj
+  -cf-cache-status
+  -cf-polished
+  -cf-ray
+  -cf-request-id
+  -content-disposition
+  -etag
+  -expect-ct
+  -server
+  -set-cookie
+  -timing-allow-origin
+  -via
+  -x-bytes-saved
+  -x-cache
+  -x-cache-hits
+  -x-nf-request-id
+  -x-served-by
+  -x-timer
+  Cache-Control "max-age=86400, public"
+  Clear-Site-Data `"cookies", "storage"`
+  Content-Language "en-GB"
+  Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://3g2upl4pq6kufc4m.onion; frame-ancestors 'none'; block-all-mixed-content"
+  Expires "0"
+  Feature-Policy "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; display-capture 'none'; document-domain 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'none'; sync-xhr 'none'; usb 'none'; vibrate 'none'; vr 'none'; wake-lock 'none'; webauthn 'none'; xr-spatial-tracking 'none'"
+  Referrer-Policy "no-referrer"
+  X-Content-Type-Options "nosniff"
+  X-Frame-Options "DENY"
+  X-XSS-Protection "1; mode=block"
 }
 
-(staticallyCfg) {
-  header_downstream Strict-Transport-Security "max-age=31536000"
-  header_upstream Host cdn.statically.io
+(removeHeaders) {
+  header_up -cdn-loop
+  header_up -cf-cache-status
+  header_up -cf-connecting-ip
+  header_up -cf-ipcountry
+  header_up -cf-ray
+  header_up -cf-request-id
+  header_up -cf-visitor
+  header_up -cookie
+  header_up -referer
+  header_up -sec-ch-ua
+  header_up -sec-ch-ua-mobile
+  header_up -true-client-ip
+  header_up -via
+  header_up -x-forwarded-for
+  header_up -x-forwarded-proto
+  header_up User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 }
+
+(oneWeekCache) {
+  Cache-Control "max-age=604800, public"
+}
+
+(pathProxy) {
+  header /js/* {
+    import oneWeekCache
+    defer
+  }
+
+  header /css/* {
+    import oneWeekCache
+    defer
+  }
+
+  header /svg/* {
+    import oneWeekCache
+    defer
+  }
+
+  header /libs/* {
+    Cache-Control "max-age=31536000, public, immutable"
+    defer
+  }
+
+  handle_path /img/* {
+    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
+
+    reverse_proxy https://cdn.statically.io {
+      import removeHeaders
+      header_up Host cdn.statically.io
+    }
+  }
+
+  header /img/* {
+    import oneWeekCache
+    defer
+  }
+
+  handle_path /screenshot/* {
+    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+
+    reverse_proxy https://cdn.statically.io {
+      import removeHeaders
+      header_up Host cdn.statically.io
+    }
+  }
+
+  header /screenshot/* {
+    import oneWeekCache
+    defer
+  }
+
+  reverse_proxy https://curben.netlify.app {
+    import removeHeaders
+    header_up Host curben.netlify.app
+  }
+}
+```
+
+``` plain caddyProxy.conf
+import common.conf
 
 ## mdleom.com
 mdleom.com:4430 www.mdleom.com:4430 {
   tls /var/lib/caddyProxy/mdleom.com.pem /var/lib/caddyProxy/mdleom.com.key {
-    clients /var/lib/caddyProxy/origin-pull-ca.pem
+    protocols tls1.3
+    client_auth {
+      mode require_and_verify
+      trusted_ca_cert_file /var/lib/caddyProxy/origin-pull-ca.pem
+    }
   }
 
   # www -> apex
-  redir 301 {
-    if {label1} is www
-    / https://mdleom.com{uri}
+  @www host www.mdleom.com
+  redir @www https://mdleom.com{uri} permanent
+
+  header {
+    import setHeaders
+    Onion-Location "http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion"
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    defer
   }
 
-  header / {
-    -server
-    -alt-svc
-    -cdn-cache
-    -cdn-cachedat
-    -cdn-edgestorageid
-    -cdn-pullzone
-    -cdn-requestcountrycode
-    -cdn-requestid
-    -cdn-uid
-    -cf-cache-status
-    -cf-ray
-    -cf-request-id
-    -etag
-    -set-cookie
-    -x-bytes-saved
-    -x-cache
-    -x-nf-request-id
-    -x-served-by
-    Cache-Control "max-age=604800, public"
-    Referrer-Policy "no-referrer"
-  }
-
-  header /libs {
-    Cache-Control "public, max-age=31536000, immutable"
-  }
-
-  proxy /img https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site {
-    without /img
-    import removeHeaders
-    import staticallyCfg
-  }
-
-  rewrite /screenshot {
-    r (.*)
-    to /screenshot{1}?mobile=true
-  }
-
-  proxy /screenshot https://cdn.statically.io/screenshot/curben.netlify.app {
-    without /screenshot
-    import removeHeaders
-    import staticallyCfg
-  }
-
-  proxy / https://curben.netlify.app {
-    import removeHeaders
-    header_upstream Host curben.netlify.app
-  }
+  import pathProxy
 }
 ```
 
@@ -456,7 +556,7 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
 One last thing to do is to import "[caddyProxy.nix](#caddyProxy.nix)" and enable `services.caddyProxy`.
 
-``` js /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyProxy.nix ];
   services.caddyProxy = {
     enable = true;
