@@ -2,14 +2,14 @@
 title: Running Caddy 2 in NixOS 20.03
 excerpt: Use stable v2 instead of beta release
 date: 2020-05-24
-updated: 2020-09-09
+updated: 2020-11-10
 tags:
 - server
 - caddy
 - nixos
 ---
 
-> caddy package in NixOS is undergoing a [major change](https://github.com/NixOS/nixpkgs/pull/86686), do not use this guide in production.
+> Applies to 20.03 or older only
 
 In NixOS 20.03, `caddy` package is still version 1.0.4 and `caddy2` package uses version 2.0 beta 10. The package maintainer [plans](https://github.com/NixOS/nixpkgs/pull/86686) to upgrade the `caddy` package to v2 in 20.09, while retaining v1 as `caddy1`. In the meantime, I show you how to run v2 stable release by using the `caddy2` package from the `unstable` channel; note that this only affects `caddy2` package, all other packages still use the stable `nixos` channel.
 
@@ -24,7 +24,7 @@ $ nix-channel --update unstable
 
 Add `caddyTwo.nix` file (this example stores the file in "/etc/caddy"):
 
-``` plain /etc/caddy/caddyTwo.nix
+``` nix /etc/caddy/caddyTwo.nix
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -79,29 +79,34 @@ in {
       wantedBy = [ "multi-user.target" ];
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09" && !isCaddy2)
         { CADDYPATH = cfg.dataDir; };
-      startLimitIntervalSec = 86400;
-      # 21.03+
-      # https://github.com/NixOS/nixpkgs/pull/97512
-      # startLimitBurst = 5;
       serviceConfig = {
-        ExecStart = ''
+        ExecStart = if isCaddy2 then ''
+          ${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}
+        '' else ''
           ${cfg.package}/bin/caddy -root=/var/tmp -conf=${cfg.config}
         '';
-        ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+        ExecReload =
+          if isCaddy2 then
+            "${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}"
+          else
+            "${pkgs.coreutils}/bin/kill -USR1 $MAINPID";
         Type = "simple";
-        User = "caddyProxy";
-        Group = "caddyProxy";
-        Restart = "on-failure";
-        # <= 20.09
-        StartLimitBurst = 5;
+        User = "caddy";
+        Group = "caddy";
+        Restart = "on-abnormal";
+        StartLimitIntervalSec = 14400;
+        StartLimitBurst = 10;
         NoNewPrivileges = true;
-        LimitNPROC = 64;
+        LimitNPROC = 512;
         LimitNOFILE = 1048576;
         PrivateTmp = true;
         PrivateDevices = true;
         ProtectHome = true;
         ProtectSystem = "full";
         ReadWriteDirectories = cfg.dataDir;
+        KillMode = "mixed";
+        KillSignal = "SIGQUIT";
+        TimeoutStopSec = "5s";
         # Remove two options below if caddy doesn't listen on port <1024
         AmbientCapabilities = "cap_net_bind_service";
         CapabilityBoundingSet = "cap_net_bind_service";
@@ -122,7 +127,7 @@ in {
 
 Enable caddy service in "configuration.nix":
 
-``` plain /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyTwo.nix ];
   services.caddyTwo = {
     enable = true;
@@ -134,7 +139,7 @@ Enable caddy service in "configuration.nix":
 
 If you use other [config formats](https://caddyserver.com/docs/config-adapters#known-config-adapters), modify the following options:
 
-``` plain /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   services.caddyTwo = {
     config = "/path/to/yaml";
     adapter = "yaml";
@@ -143,7 +148,7 @@ If you use other [config formats](https://caddyserver.com/docs/config-adapters#k
 
 Package maintainer is updating the `caddy` package to v2 in [#86686](https://github.com/NixOS/nixpkgs/pull/86686), once that pull request is merged, update the following option:
 
-``` plain /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   services.caddyTwo = {
     package = unstable.caddy;
   };
@@ -151,7 +156,7 @@ Package maintainer is updating the `caddy` package to v2 in [#86686](https://git
 
 Import `unstable` channel:
 
-``` plain /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
 { config, pkgs, ... }:
 
 let
@@ -163,7 +168,7 @@ in
   require = [ /etc/caddy/caddyTwo.nix ];
   services.caddyTwo = {
     enable = true;
-    package = unstable.caddy2
+    package = unstable.caddy2;
     config = "/path/to/caddyFile";
     adapter = "caddyfile";
   };
@@ -179,7 +184,7 @@ $ systemctl status caddy
 
 To revert to v1, remove `package` and `adapter` options:
 
-``` plain /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   services.caddyTwo = {
     enable = true;
     config = "/path/to/caddyFile";
