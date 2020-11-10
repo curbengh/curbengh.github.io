@@ -237,7 +237,7 @@ http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://
 
   header {
     import setHeaders
-    -strict-transport-origin
+    -strict-transport-security
     defer
   }
 

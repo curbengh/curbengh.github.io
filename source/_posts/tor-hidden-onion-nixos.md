@@ -195,7 +195,7 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
   header {
     import setHeaders
-    -strict-transport-origin
+    -strict-transport-security
     defer
   }
 
@@ -216,7 +216,7 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
   header {
     import setHeaders
-    -strict-transport-origin
+    -strict-transport-security
     defer
   }
 
