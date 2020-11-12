@@ -473,7 +473,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
 
 (pathProxy) {
   @staticFiles {
-    path *.css *.gif *.ico *.jpg *.js *.png *.svg *.webp *.xml
+    path *.css *.gif *.ico *.jpg *.js *.png *.svg *.webp
   }
   header @staticFiles {
     Cache-Control "max-age=604800, public"
