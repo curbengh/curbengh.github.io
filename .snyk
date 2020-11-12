@@ -6,6 +6,10 @@ ignore:
     - '*':
         reason: Update unreliable
         expires: '2020-12-30T00:00:00.000Z'
+  SNYK-JS-TRIM-1017038:
+    - '*':
+        reason: Patch unavailable
+        expires: '2020-12-30T00:00:00.000Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   SNYK-JS-LODASH-567746:
