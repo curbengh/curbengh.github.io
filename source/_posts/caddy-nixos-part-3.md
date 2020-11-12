@@ -141,7 +141,7 @@ in {
       home = cfg.dataDir;
       createHome = true;
     };
-    
+
     users.groups.caddyProxy = {
       members = [ "caddyProxy" ];
     };
@@ -242,7 +242,7 @@ In Caddyfile, the config can be expressed as:
 ``` plain
   handle_path /img/* {
     rewrite * /img/gitlab.com/curben/blog/raw/site{path}
-    reverse_proxy https://cdn.statically.io 
+    reverse_proxy https://cdn.statically.io
   }
 
   handle_path /screenshot/* {
@@ -464,23 +464,19 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   header_up User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 }
 
-(oneWeekCache) {
-  Cache-Control "max-age=604800, public"
+(reverseProxy) {
+  reverse_proxy https://{args.0} {
+    import removeHeaders
+    header_up Host "{args.0}"
+  }
 }
 
 (pathProxy) {
-  header /js/* {
-    import oneWeekCache
-    defer
+  @staticFiles {
+    path *.css *.gif *.ico *.jpg *.js *.png *.svg *.webp *.xml
   }
-
-  header /css/* {
-    import oneWeekCache
-    defer
-  }
-
-  header /svg/* {
-    import oneWeekCache
+  header @staticFiles {
+    Cache-Control "max-age=604800, public"
     defer
   }
 
@@ -492,35 +488,16 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   handle_path /img/* {
     rewrite * /img/gitlab.com/curben/blog/raw/site{path}
 
-    reverse_proxy https://cdn.statically.io {
-      import removeHeaders
-      header_up Host cdn.statically.io
-    }
-  }
-
-  header /img/* {
-    import oneWeekCache
-    defer
+    import reverseProxy cdn.statically.io
   }
 
   handle_path /screenshot/* {
     rewrite * /screenshot/curben.netlify.app{path}?mobile=true
 
-    reverse_proxy https://cdn.statically.io {
-      import removeHeaders
-      header_up Host cdn.statically.io
-    }
+    import reverseProxy cdn.statically.io
   }
 
-  header /screenshot/* {
-    import oneWeekCache
-    defer
-  }
-
-  reverse_proxy https://curben.netlify.app {
-    import removeHeaders
-    header_up Host curben.netlify.app
-  }
+  import reverseProxy curben.netlify.app
 }
 ```
 
