@@ -109,7 +109,7 @@ header @svg Content-Type image/svg+xml
 root * /home/user/www
 ```
 
-I prepared a set of dummy files with most common file extensions ([download](https://gitlab.com/curben/blog/-/raw/site/20201112/dummy.zip)). This enables you to test whether Caddy serves the correct file. `.gz` and `.br` files are _not_ compressed files, they are text files so that you can easily identify the file being served.
+I prepared a set of dummy files with most common file extensions ([download](https://gitlab.com/curben/blog/-/raw/site/20201112/dummy.zip)). This enables you to test whether Caddy serves the correct file. `.gz` and `.br` files are _not_ compressed files, they are text files so that you can easily identify the file being served. This also means you cannot test it on browsers since the files are not are not actually compressed (you'll get encoding error); also note that web browsers only send `Accept-Encoding: br` request header to HTTPS website.
 
 Unzip the dummy.zip and specify the folder in the `root` directive. Following are some sample tests after you start Caddy:
 
