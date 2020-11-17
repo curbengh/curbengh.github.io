@@ -6,6 +6,7 @@ updated: 2020-11-17
 tags:
 - hexo
 - gitlab
+- netlify
 ---
 
 > Refer to the [this guide](https://hexo.io/docs/gitlab-pages) (co-authored by me) if you prefer to use GitLab Pages instead of Netlify
