@@ -9,7 +9,7 @@ tags:
 
 > I recommend the [official guide](https://hexo.io/docs/github-pages) (which I co-authored) for more updated content.
 
-In {% post_link how-to-create-a-hexo-blog 'previous post' %}, I showed you how to create a blog using [Hexo](https://hexo.io) and host it on [GitLab Pages](https://about.gitlab.com/features/pages/). Here's how to host it on [GitHub Pages](https://pages.github.com/):
+In {% post_link how-to-create-a-hexo-blog 'previous post' %}, I showed you how to create a blog using [Hexo](https://hexo.io) and host it on a GitLab repo then deploy using Netlify. Here's how to host it on [GitHub Pages](https://pages.github.com/):
 
 ## GitHub repository
 1. Register a free [GitHub](https://github.com/join) account or use your current one.

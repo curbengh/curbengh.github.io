@@ -9,7 +9,7 @@ tags:
 - netlify
 ---
 
-> Refer to the [this guide](https://hexo.io/docs/gitlab-pages) (co-authored by me) if you prefer to use GitLab Pages instead of Netlify
+> Refer to the [this guide](https://hexo.io/docs/gitlab-pages) (co-authored by me) if you prefer to use GitLab Pages instead of Netlify.
 
 Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/features/pages/) for free using the following guide. Refer to my {% post_link hexo-blog-github 'another guide' %} for [GitHub Pages](https://pages.github.com/).
 
