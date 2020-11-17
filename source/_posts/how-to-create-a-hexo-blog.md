@@ -1,12 +1,14 @@
 ---
-title: How to create a Hexo blog on GitLab Pages
-excerpt: Create a website/blog using Hexo on GitLab Pages for free using this detailed guide.
+title: How to create a Hexo blog using GitLab and Netlify
+excerpt: Deploy a Hexo website/blog using Netlify from a GitLab repo.
 date: 2018-09-21
-updated: 2018-11-10
+updated: 2020-11-17
 tags:
 - hexo
 - gitlab
 ---
+
+> Refer to the [this guide](https://hexo.io/docs/gitlab-pages) (co-authored by me) if you prefer to use GitLab Pages instead of Netlify
 
 Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/features/pages/) for free using the following guide. Refer to my {% post_link hexo-blog-github 'another guide' %} for [GitHub Pages](https://pages.github.com/).
 
@@ -20,7 +22,7 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
   1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
   2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
-  ```
+  ``` yml _posts/test-page.md
   ---
   title: Test page
   date: yyyy-mm-dd hh:mm:ss
@@ -39,20 +41,20 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 3. Install Node.js and Hexo using the [official guide](https://hexo.io/docs/).
 4. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 
-```bash
+```
 $ hexo generate
 ```
 
 5. (Optional) Start Hexo server on `http://localhost:4000` to preview the blog.
 
-```bash
+```
 $ hexo server
 ```
 More info: [Server](https://hexo.io/docs/server)
 
 6. Git add, commit and push the file to your GitHub repo.
 
-``` bash
+```
 $ git add 'source/_posts/your-post.md'
 $ git commit -a -m 'Commit Message'
 $ git push -u
@@ -70,13 +72,13 @@ $ git push -u
 ## Writing
 1. Create a new post (using Hexo)
 
-``` bash
+```
 $ hexo new "My New Post"
 ```
 
 2. `My-New-Post.md` is created to the `source/_posts` folder, with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
-```
+``` yml _posts/my-new-post.md
 ---
 title: My New Post
 date: yyyy-mm-dd hh:mm:ss
@@ -91,19 +93,18 @@ More info: [Writing](https://hexo.io/docs/writing.html)
 
 ## Configuration
 ### Naming
-Change the website's author and name
-`_config.yml`:
+Change the website's author and name:
 
-```yml
+``` yml _config.yml
 title:
 excerpt:
 description:
 author:
 ```
 
-`themes/typing/_config.yml`:
+Change the theme's setting:
 
-```yml
+``` yml themes/typing/_config.yml
 menu:
   GitLab: <your-gitlab-project-link>
 # Customize /about page
@@ -134,10 +135,10 @@ If you don't have any plan to send merge requests to the upstream, you can remov
 ## Useful links:
 Configuration files for this blog deployment:
 
-- [.gitlab-ci.yml](https://gitlab.com/curben/blog/blob/master/.gitlab-ci.yml)
+- [netlify.toml](https://gitlab.com/curben/blog/blob/master/netlify.toml)
 - [_config.yml](https://gitlab.com/curben/blog/blob/master/_config.yml)
 - [package.json](https://gitlab.com/curben/blog/blob/master/package.json)
-- [netlify.toml](https://gitlab.com/curben/blog/blob/master/netlify.toml) *for Netlify deployment only*
+- [.gitlab-ci.yml](https://gitlab.com/curben/blog/blob/master/.gitlab-ci.yml) _testing only, not for deployment_
 
 Docs:
 
