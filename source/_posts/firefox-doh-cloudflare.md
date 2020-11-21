@@ -7,6 +7,7 @@ tags:
 - privacy
 - security
 - doh
+- cloudflare
 ---
 
 Many criticise Firefox for using Cloudflare by default in DNS-over-HTTPS. In reality, it's **not enabled** by default and you can **easily switch** to other providers.

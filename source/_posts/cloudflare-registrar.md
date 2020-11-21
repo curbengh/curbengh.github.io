@@ -3,6 +3,7 @@ title: Transfer new domains to Cloudflare Registrar
 excerpt: Register new domain on NameSilo, then transfer to Cloudflare
 date: 2019-09-05
 tags:
+- cloudflare
 ---
 
 [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) service was introduced back in [September 2018](https://blog.cloudflare.com/cloudflare-registrar/). It differs from other registrars by having no markup fees, meaning no additional cost on top of what it pays to the wholesale registry and [ICANN](https://en.wikipedia.org/wiki/ICANN). So, you essentially get the wholesale price. While you may find registrars that offer cheaper than the wholesale's (you can compare prices on [TLD-List.com](https://tld-list.com/)), it is likely that there are hidden costs somewhere.
