@@ -10,7 +10,7 @@ In this guide, I'll show you how to enable html caching. Since the inception of 
 
 However, for the past 8 months, the analytics (Analytics -> Performance) showed that only 1% is served from cache.
 
-![1% bandwidth saved](/img/20201121/cf-before.png)
+![1% bandwidth saved](20201121/cf-before.png)
 
 It was only last week that I realised that Cloudflare does not cache everything by default, only certain [file extensions](https://support.cloudflare.com/hc/en-us/articles/200172516#h_a01982d4-d5b6-4744-bb9b-a71da62c160a) are cached and they do not include HTML and XML, despite majority (55%) of content served are HTML and XML.
 
@@ -23,4 +23,4 @@ Html caching can be easily enabled through Page Rules. Since my site's content a
 
 After a week with the new page rule, cached content has now increased to 72%.
 
-![72% bandwidth saved](/img/20201121/cf-after.png)
+![72% bandwidth saved](20201121/cf-after.png)

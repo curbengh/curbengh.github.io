@@ -18,19 +18,19 @@ However, this method is also the most expensive. Unless your telco offers a chea
 1. [StarHub Internet-only SIM](http://www.starhub.com/personal/mobile/mobile-phones-plans/prepaid-cards/internet-sim.html)
 
 Screenshots:
-[5-Day](/img/20181231/starhub-5-day.jpg), [15-Day](/img/20181231/starhub-15-day.jpg)
+[5-Day](20181231/starhub-5-day.jpg), [15-Day](20181231/starhub-15-day.jpg)
 
 2. China Unicom Data-only SIM
 
 Screenshots:
-[3-day](/img/20181231/unicom-3-day.jpg), [5-day](/img/20181231/unicom-5-day.jpg), [7-Day](/img/20181231/unicom-7-day.jpg), [8-Day](/img/20181231/unicom-8-day.jpg), [15-Day](/img/20181231/unicom-15-day.jpg), [30-Day](/img/20181231/unicom-30-day.png)
+[3-day](20181231/unicom-3-day.jpg), [5-day](20181231/unicom-5-day.jpg), [7-Day](20181231/unicom-7-day.jpg), [8-Day](20181231/unicom-8-day.jpg), [15-Day](20181231/unicom-15-day.jpg), [30-Day](20181231/unicom-30-day.png)
 
 StarHub | China Unicom HK
 ---|---
 Pros:<br/>- Support [more countries](http://www.starhub.com/personal/mobile/mobile-phones-plans/prepaid-cards/happy-roam.html#hr_plans)<br/>- Can be kept active | Pros:<br/>- Widely available online<br/>- Does not require ID
 Cons:<br/>- Only available at Singapore Airport | Cons:<br/>- One-time use only\* <br/>- Support only Mainland China.\**
 
-\* Except for [this product](/img/20181231/unicom-cross-border.jpg).
+\* Except for [this product](20181231/unicom-cross-border.jpg).
 \** Some plans include Hong Kong, Macau or Taiwan.
 
 
@@ -38,15 +38,15 @@ StarHub SIM is available at the Singapore Changi Airport, so it's a good option 
 
 China Unicom SIMs shown here are provided by its Hong Kong subsidiary, so they are considered as foreign SIM and use data roaming. They are widely available online, you can easily purchase it through eBay, Amazon or your local online shopping. You don't need an ID to purchase it, and the seller won't request it either. It works all over the Mainland, unlike some China domestic SIMs that only work in the originating city or state. This benefit applies to any roaming SIM.
 
-Do note the SIM package cover must be one of four examples provided above, otherwise the SIM could be China Unicom domestic SIM ([example](/img/20181231/unicom-domestic.jpg)). The SIM is one-time use only. The SIM is activated once you start using it and when you reach the validity period, it can no longer be used.
+Do note the SIM package cover must be one of four examples provided above, otherwise the SIM could be China Unicom domestic SIM ([example](20181231/unicom-domestic.jpg)). The SIM is one-time use only. The SIM is activated once you start using it and when you reach the validity period, it can no longer be used.
 
 If you haven't noticed, the SIMs I mentioned here (including Starhub and China Unicom) are **data-only** (some can call/text, read below). So you can't make/send/receive calls and SMS.
 
-**Edit**: I stumbled upon China Unicom SIMs that can call (not sure about text) between Mainland and Hong Kong; [3-day](/img/20181231/unicom-3-day.jpg) and [5-day](/img/20181231/unicom-5-day.jpg) SIMs. They are Hong Kong SIMs, so they should work. They include data but the SIMs are one-time use only.
+**Edit**: I stumbled upon China Unicom SIMs that can call (not sure about text) between Mainland and Hong Kong; [3-day](20181231/unicom-3-day.jpg) and [5-day](20181231/unicom-5-day.jpg) SIMs. They are Hong Kong SIMs, so they should work. They include data but the SIMs are one-time use only.
 
-For regular SIMs that include call and text, I found this [Hong Kong SIM](/img/20181231/unicom-cross-border.jpg). The seller usually also sells prepaid voucher, so you can keep it active like StarHub's.
+For regular SIMs that include call and text, I found this [Hong Kong SIM](20181231/unicom-cross-border.jpg). The seller usually also sells prepaid voucher, so you can keep it active like StarHub's.
 
-For the purpose of this article, you should *avoid* this [domestic SIM](/img/20181231/unicom-domestic.jpg) (which is subjected to local censorship) and this [Asia SIM](/img/20181231/unicom-asia-8-dau.jpg) that doesn't include Mainland.
+For the purpose of this article, you should *avoid* this [domestic SIM](20181231/unicom-domestic.jpg) (which is subjected to local censorship) and this [Asia SIM](20181231/unicom-asia-8-dau.jpg) that doesn't include Mainland.
 
 ## VPN
 
