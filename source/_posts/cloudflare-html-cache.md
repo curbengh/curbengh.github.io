@@ -6,9 +6,7 @@ tags:
 - cloudflare
 ---
 
-In this guide, I'll show you how to enable html caching. Since the inception of this website, I always make sure [caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) is configured correctly so that most of the content are served from CDN, which is much faster than serving content from my origin server. This is in addition to the fact that this website is a static site, so _all_ content are cacheable. I configured caching in [Netlify](https://gitlab.com/curben/blog/-/blob/master/source/_headers), [Caddy](/blog/2020/03/14/caddy-nixos-part-3/#Cache-Control) and [Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168276-Understanding-Browser-Cache-TTL).
-
-However, for the past 8 months, the analytics (Analytics -> Performance) showed that only 1% is served from cache.
+In this guide, I'll show you how to enable html caching. Since I started using Cloudflare eight months ago, I always make sure [caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) is configured correctly so that most of the content are served from CDN, which is much faster than serving content from my origin server. This is in addition to the fact that this website is a static site, so _all_ content are cacheable. I configured caching in [Netlify](https://gitlab.com/curben/blog/-/blob/master/source/_headers), [Caddy](/blog/2020/03/14/caddy-nixos-part-3/#Cache-Control) and [Cloudflare](https://support.cloudflare.com/hc/en-us/articles/200168276-Understanding-Browser-Cache-TTL). However, every time I check the analytics (Analytics -> Performance), it only showed 1% of content is served from cache.
 
 ![1% bandwidth saved](20201121/cf-before.png)
 
