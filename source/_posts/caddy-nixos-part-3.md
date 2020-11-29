@@ -423,6 +423,8 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   -content-disposition
   -etag
   -expect-ct
+  -gitlab-lb
+  -gitlab-sv
   -server
   -set-cookie
   -timing-allow-origin
@@ -430,9 +432,15 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   -x-bytes-saved
   -x-cache
   -x-cache-hits
+  -x-download-options
+  -x-gitlab-feature-category
   -x-nf-request-id
+  -x-permitted-cross-domain-policies
+  -x-request-id
+  -x-runtime
   -x-served-by
   -x-timer
+  -x-ua-compatible
   Cache-Control "max-age=86400, public"
   Clear-Site-Data `"cookies", "storage"`
   Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://3g2upl4pq6kufc4m.onion; frame-ancestors 'none'; block-all-mixed-content"
@@ -472,7 +480,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
 
 (pathProxy) {
   @staticFiles {
-    path *.css *.gif *.ico *.jpg *.js *.png *.svg *.webp
+    path *.css *.gif *.ico *.jpg *.js *.pdf *.png *.svg *.webp
   }
   header @staticFiles {
     Cache-Control "max-age=604800, public"
@@ -494,6 +502,12 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
     rewrite * /screenshot/curben.netlify.app{path}?mobile=true
 
     import reverseProxy cdn.statically.io
+  }
+
+  handle_path /files/* {
+    rewrite * /curben/blog/-/raw/site{path}
+
+    import reverseProxy gitlab.com
   }
 
   import reverseProxy curben.netlify.app
