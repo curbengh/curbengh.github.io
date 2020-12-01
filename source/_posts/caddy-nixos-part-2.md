@@ -156,9 +156,9 @@ Once the secret is generated, TOTP can be enabled using the following config. I 
 
 ## DNS-over-TLS
 
-Since DNS is not encrypted in transit, it risks being tampered. To resolve that, I use DNS-over-TLS which as the name implies, uses TLS to encrypt the DNS traffic. I use `stubby` which creates a DNS resolver that listens on localhost and forward DNS query to the upstream server(s) using DoT. `stubby` enables DNSSEC by default to verify authenticity of the DNS response for supported domains. (This domain mdleom.com has DNSSEC enabled by having a DS record)
+Since DNS is not encrypted in transit, it risks being tampered. To resolve that, I use DNS-over-TLS which as the name implies, uses TLS to encrypt the DNS traffic. I use `stubby` which creates a DNS resolver that listens on localhost and forward DNS query to the upstream server(s) using DoT. `stubby` enables DNSSEC by default to verify authenticity of the DNS response for supported domains. (This domain mdleom.com has DNSSEC enabled through a DS record)
 
-I use Cloudflare DNS simply because I'm already using its CDN, using other alternatives wouldn't have the privacy benefit since Cloudflare already knows that a visitor is browsing this website though its CDN.  Refer to stubby.yml for a full list of supported servers.
+I use Cloudflare DNS simply because I'm already using its CDN, using other alternatives wouldn't have the privacy benefit since it already knows that a visitor is browsing this website. I add [Quad9](https://quad9.net/) as a backup. Refer to [stubby.yml](https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example) for a full list of supported servers.
 
 ``` nix
   ## DNS-over-TLS
@@ -169,14 +169,30 @@ I use Cloudflare DNS simply because I'm already using its CDN, using other alter
     upstreamServers =
       ''
         ## Cloudflare DNS
-        - address_data: 2606:4700:4700::1111
+        - address_data: 2606:4700:4700::1112
           tls_auth_name: "cloudflare-dns.com"
-        - address_data: 2606:4700:4700::1001
+        - address_data: 2606:4700:4700::1002
           tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.1.1.1
+        - address_data: 1.1.1.2
           tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.0.0.1
+        - address_data: 1.0.0.2
           tls_auth_name: "cloudflare-dns.com"
+        ## Quad9
+        - address_data: 2620:fe::fe
+          tls_auth_name: "dns.quad9.net"
+        - address_data: 2620:fe::9
+          tls_auth_name: "dns.quad9.net"
+        - address_data: 9.9.9.9
+          tls_auth_name: "dns.quad9.net"
+        - address_data: 149.112.112.112
+          tls_auth_name: "dns.quad9.net"
+      '';
+    extraConfig =
+      ''
+        # Set TLS 1.3 as minimum acceptable version
+        tls_min_version: GETDNS_TLS1_3
+        # Require DNSSEC validation
+        dnssec: GETDNS_EXTENSION_TRUE
       '';
   };
 ```
