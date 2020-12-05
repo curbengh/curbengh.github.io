@@ -621,13 +621,8 @@ blockquote {
   margin-bottom: 1em;
 }
 
-ul {
-  list-style: disc;
-}
-
 ul.index-list {
   font-size: 1.1em;
-  list-style: disc;
 }
 
 ol {
