@@ -159,6 +159,7 @@ ul {
 }
 
 ul.index-list {
+  font-size: 1.1em;
   list-style: disc;
 }
 
