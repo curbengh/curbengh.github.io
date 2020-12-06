@@ -5,9 +5,8 @@
 :root {
   --main-bg-color: black;
   --main-font-color: #e6e6e6;
-  --link-hover: white;
   --alt-bg-color: #333;
-  --link-underline: #3d73b0;
+  --link-underline: #3f72af;
 }
 
 html {
@@ -75,19 +74,23 @@ h4 {
 }
 
 a {
-  color: inherit;
+  background: none;
+  color: var(--link-underline);
   cursor: pointer;
-}
-
-a:active,
-a:hover {
-  outline-width: 0;
-  color: var(--link-hover);
-}
-
-a,
-a:hover {
   text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #0b0080;
+}
+
+a:active {
+  color: #faa700;
 }
 
 button,
@@ -365,16 +368,6 @@ span.index-list-count:after {
 
 .article .article-entry {
   word-break: break-word;
-}
-
-.article .article-entry a,
-.article a.main-nav-link:hover,
-.copyright a:hover {
-  border-bottom: 1px solid var(--link-underline);
-}
-
-.article .article-entry a:hover {
-  border-bottom: none;
 }
 
 .article .article-entry img {
@@ -751,7 +744,6 @@ unhide (via JS) if Web Share API is supported */
 /* don't underline permalink and share icons */
 .article .article-entry a.headerlink,
 .article-title a#share-button {
-  border-bottom: none;
   margin-left: 0.5em;
 }
 
@@ -835,7 +827,6 @@ unhide (via JS) if Web Share API is supported */
   :root {
     --main-bg-color: black;
     --main-font-color: #e6e6e6;
-    --link-hover: white;
     --alt-bg-color: #333;
   }
 }
@@ -844,7 +835,6 @@ unhide (via JS) if Web Share API is supported */
   :root {
     --main-bg-color: #f1f1f1;
     --main-font-color: #333;
-    --link-hover: black;
     --alt-bg-color: #d8d8d8;
   }
 
