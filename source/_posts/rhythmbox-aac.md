@@ -3,6 +3,7 @@ title: Play AAC-encoded music in Rhythmbox
 excerpt: Don't bother gstreamer1.0-plugins-bad, use gstreamer1.0-libav instead
 date: 2019-09-26
 tags:
+- linux
 - media
 ---
 
