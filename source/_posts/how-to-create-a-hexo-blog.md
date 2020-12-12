@@ -139,7 +139,7 @@ Configuration files for this blog deployment:
 - [netlify.toml](https://gitlab.com/curben/blog/blob/master/netlify.toml)
 - [_config.yml](https://gitlab.com/curben/blog/blob/master/_config.yml)
 - [package.json](https://gitlab.com/curben/blog/blob/master/package.json)
-- [.gitlab-ci.yml](https://gitlab.com/curben/blog/blob/master/.gitlab-ci.yml) _testing only, not for deployment_
+- [.gitlab-ci.yml](https://gitlab.com/curben/blog/blob/master/.gitlab-ci.yml)
 
 Docs:
 
