@@ -7,14 +7,18 @@ cache: # add cache to 'node_modules' for speeding up builds
 variables:
   NODE_ENV: "production"
 
-test:
+pages:
   before_script:
     - apk update && apk add git
     - npm install
 
   script:
     - npm install snyk && npm run snyk # Refer to "scripts" in package.json
-    - npm run hexo
+    - npm run hexo # Generate site
+
+  artifacts:
+    paths:
+      - public # deploy from the 'public' folder.
 
   rules:
     # Skip in renovate job
@@ -43,25 +47,3 @@ renovate: # Check dependency update
     # Only trigger when environment variable matches and through "Run pipeline" in master branch
     - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "web"'
       when: always
-
-# # Uncomment below (and comment/remove above) lines for gitlab pages
-# image: node:latest # Use latest version of Node.js
-# pages:
-  # cache: # add cache to 'node_modules' for speeding up builds
-    # paths:
-      # - node_modules/ # Node modules and dependencies
-
-  # script:
-    # - npm install -g snyk hexo-cli
-    # - npm install # install node modules
-    # - snyk auth $SNYK_TOKEN
-    # - snyk protect # Apply patches to node modules
-    # - snyk test # Check node modules for vulnerability
-    # - hexo deploy # deploy the site.
-
-  # artifacts:
-    # paths:
-      # - public # deploy to the 'public' folder.
-
-  # only:
-    # - master # this job will affect only the 'master' branch
