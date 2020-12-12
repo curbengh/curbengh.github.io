@@ -474,7 +474,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
 (reverseProxy) {
   reverse_proxy https://{args.0} {
     import removeHeaders
-    header_up Host "{args.0}"
+    header_up Host {http.reverse_proxy.upstream.host}
   }
 }
 
@@ -510,7 +510,11 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
     import reverseProxy gitlab.com
   }
 
-  import reverseProxy curben.netlify.app
+  reverse_proxy https://curben.netlify.app https://curben.gitlab.io {
+    import removeHeaders
+    lb_policy first
+    header_up Host {http.reverse_proxy.upstream.host}
+  }
 }
 ```
 
