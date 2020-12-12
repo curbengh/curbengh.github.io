@@ -7,7 +7,10 @@ cache: # add cache to 'node_modules' for speeding up builds
 variables:
   NODE_ENV: "production"
 
-pages:
+## Rename to 'pages' for gitlab pages
+test:
+  stage: test
+
   before_script:
     - apk update && apk add git
     - npm install
@@ -17,20 +20,24 @@ pages:
     - npm run build # Generate site
 
   rules:
-    # Skip in renovate job
-    - if: '$RENOVATE == "true"'
-      when: never
-    # Only trigger through push event in master branch
-    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "push"'
-      when: always
-    # Only trigger through "Run pipeline" in master branch
-    - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "web"'
+    # Only trigger through push & "Run pipeline" events in master branch; Skip in renovate job
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
 
-  ## Uncomment below to enable GitLab Pages
+  ## Uncomment below to enable gitlab pages
   # artifacts:
   #   paths:
   #     - public # deploy from the 'public' folder.
+
+deploy: # Trigger deploy job on curben/curben.gitlab.io
+  stage: deploy
+  trigger:
+    project: curben/curben.gitlab.io
+    branch: master
+  strategy: depend
+  rules:
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+      when: always
 
 renovate: # Check dependency update
   before_script:
@@ -42,9 +49,5 @@ renovate: # Check dependency update
     - npm run renovate
 
   rules:
-    # Only trigger when environment variable matches and through schedule in master branch
-    - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "schedule"'
-      when: always
-    # Only trigger when environment variable matches and through "Run pipeline" in master branch
-    - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "web"'
+    - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "schedule" || $CI_PIPELINE_SOURCE == "web")'
       when: always
