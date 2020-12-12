@@ -472,7 +472,6 @@ select:not([multiple]):not([size]) {
 :root {
   --main-bg-color: black;
   --main-font-color: #e6e6e6;
-  --link-hover: white;
   --alt-bg-color: #333;
   --link-underline: #3f72af;
 }
@@ -553,12 +552,12 @@ a:focus {
   text-decoration: underline;
 }
 
-a:active {
-  color: #faa700;
+a:visited {
+  color: purple;
 }
 
-a:visited {
-  color: #0b0080;
+a:active {
+  color: #faa700;
 }
 
 button,
@@ -1302,7 +1301,6 @@ unhide (via JS) if Web Share API is supported */
   :root {
     --main-bg-color: black;
     --main-font-color: #e6e6e6;
-    --link-hover: white;
     --alt-bg-color: #333;
   }
 }
@@ -1311,7 +1309,6 @@ unhide (via JS) if Web Share API is supported */
   :root {
     --main-bg-color: #f1f1f1;
     --main-font-color: #333;
-    --link-hover: black;
     --alt-bg-color: #d8d8d8;
   }
 
