@@ -48,7 +48,7 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 ## Mirrors
 
 - https://curben.netlify.app/
-- https://curben.gitlab.io/blog/
+- https://curben.gitlab.io/
 - http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/
 - http://mdleom.i2p/ ([address helper](http://mdleom.i2p/?i2paddresshelper=-NjUAy6H3wkgRfB3rBwGrpS56L2P~RHRDnD8HnRV1mLSKFdbzxHTMsGLo-mdgGq360Kni2Ec0qhRzm-IUc8X4Y0Ug1eYvcEp2ubXwLe5JJg7yZJOdGxqdy5y5VbdHfIuUe2ooG3MNA4v6b4pGk7pUQ7hnTkUi0EObD~79ik4AY-vSsxIFrc8kJxtbRMCQ3NQRhAuvS1A14rSVk0wv50YwKS23y~FUIQWyG8ZpjTVYu50n~oBnJtVKSAHbCMWRcnJx6iGFsbTRh4ZsRtDh0drwfeRkvaQQqQmf6nZOc4-GLxZ0RT5QlS5gdPXL4V7eaIETbNJAIeYr2NzcpwVHs~zp93Ga-p7dlH3TsJX5gJSyqJWCc64vvmkxf7Vseh3uGaa4xqiLjTH5XsOyFQLp5D6myt-yH7ggReZbs70NKqG1Mj5iRLhIC3Q~pJ6LkPnMBJN6QeLNYNWcOPXkMzRfsavvH2l3yxdpkn41BLM2-7bBUdJNXfu4OhGAR22O0gFngjUBQAEAAcAAA==&update=true))
 - http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p/
