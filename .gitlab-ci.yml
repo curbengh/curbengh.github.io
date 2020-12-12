@@ -34,7 +34,7 @@ deploy: # Trigger deploy job on curben/curben.gitlab.io
   trigger:
     project: curben/curben.gitlab.io
     branch: master
-  strategy: depend
+    strategy: depend
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
