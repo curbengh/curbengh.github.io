@@ -2,6 +2,7 @@
 title: Enabling HSTS preload in Cloudflare
 excerpt: Take note if you have www -> apex redirect
 date: 2020-11-22
+updated: 2020-12-17
 tags:
 - cloudflare
 - security
@@ -64,3 +65,13 @@ Covered by "Always use HTTPS":
 - `http://www.example.com` -> `https://www.example.com`
 
 ![Page Rules](20201122/page-rules.png)
+
+## Update (17 Dec 2020)
+
+This website is now included in the Chromium's preload list after I submitted a [request](https://hstspreload.org/) a month ago. The list hasn't been deployed to browsers' (Chrome and Firefox) stable version yet, that may take another month or two.
+
+```
+$ curl -L https://github.com/chromium/chromium/raw/master/net/http/transport_security_state_static.json -o hsts-chromium.json
+$ grep mdleom.com hsts-chromium.json 
+  { "name": "mdleom.com", "policy": "bulk-1-year", "mode": "force-https", "include_subdomains": true },
+```
