@@ -2,19 +2,18 @@
 title: Default binaries in Alpine docker image
 excerpt: Here is the list of binaries shipped with the Docker image of Alpine Linux.
 date: 2018-10-10
+updated: 2020-12-18
 tags:
 - linux
 - alpine
 - busybox
 ---
 
-Here is the list of binaries shipped with the Docker image of Alpine Linux `alpine:3.8`
-
-[Pastebin](https://bin.disroot.org/?f85ebb52e17968ea#uvKnHjd1monx3ENkEL+jN1zKfWBYGI0jfaLbhvb7zoQ=)
+Here is the list of binaries shipped with the Docker image of Alpine Linux `alpine:3.12`
 
 - acpid
-- addgroup
 - add-shell
+- addgroup
 - adduser
 - adjtimex
 - apk
@@ -26,6 +25,7 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - base64
 - basename
 - bbconfig
+- bc
 - beep
 - blkdiscard
 - blkid
@@ -203,12 +203,12 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - partprobe
 - passwd
 - paste
-- patch
 - pgrep
 - pidof
 - ping
 - ping6
 - pipe_progress
+- pivot_root
 - pkill
 - pmap
 - poweroff
@@ -323,6 +323,7 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - whois
 - xargs
 - xxd
+- xz
 - xzcat
 - yes
 - zcat
