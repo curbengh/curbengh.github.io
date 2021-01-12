@@ -234,22 +234,29 @@ If you prefer to redirect apex to www,
 Aside from reverse proxy to curben.netlify.app, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current [config](https://gitlab.com/curben/blog) is:
 
 ``` plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
-/img/* https://cdn.statically.io/img/gitlab.com/curben/blog/raw/site/:splat 200
-/screenshot/* https://cdn.statically.io/screenshot/mdleom.com/:splat?mobile=true 200
+/img/* https://cdn.statically.io/img/:splat 200
+/screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
+/files/* https://gitlab.com/curben/blog/-/raw/site/:splat 200
 ```
 
 In Caddyfile, the config can be expressed as:
 
 ``` plain
-  handle_path /img/* {
-    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
+  handle /img/* {
     reverse_proxy https://cdn.statically.io
   }
 
   handle_path /screenshot/* {
-    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+    # "curben.netlify.app" is updated to "mdleom.com"
+    rewrite * /screenshot/mdleom.com{path}
 
     reverse_proxy https://cdn.statically.io
+  }
+
+  handle_path /files/* {
+    rewrite * /curben/blog/-/raw/site{path}
+
+    reverse_proxy https://gitlab.com
   }
 
   reverse_proxy https://curben.netlify.app
@@ -262,16 +269,14 @@ In Caddyfile, the config can be expressed as:
 To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_upstream` option,
 
 {% codeblock mark:5,13,18 %}
-  handle_path /img/* {
-    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
-
+  handle /img/* {
     reverse_proxy https://cdn.statically.io {
       header_up Host cdn.statically.io
     }
   }
 
   handle_path /screenshot/* {
-    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+    rewrite * /screenshot/mdleom.com{path}
 
     reverse_proxy https://cdn.statically.io {
       header_up Host cdn.statically.io
@@ -308,9 +313,7 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
 }
 
 mdleom.com {
-  handle_path /img/* {
-    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
-
+  handle /img/* {
     reverse_proxy https://cdn.statically.io {
       import removeHeaders
       header_up Host cdn.statically.io
@@ -318,7 +321,7 @@ mdleom.com {
   }
 
   handle_path /screenshot/* {
-    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+    rewrite * /screenshot/mdleom.com{path}
 
     reverse_proxy https://cdn.statically.io {
       import removeHeaders
@@ -492,14 +495,12 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
     defer
   }
 
-  handle_path /img/* {
-    rewrite * /img/gitlab.com/curben/blog/raw/site{path}
-
+  handle /img/* {
     import reverseProxy cdn.statically.io
   }
 
   handle_path /screenshot/* {
-    rewrite * /screenshot/curben.netlify.app{path}?mobile=true
+    rewrite * /screenshot/mdleom.com{path}
 
     import reverseProxy cdn.statically.io
   }
@@ -510,6 +511,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
     import reverseProxy gitlab.com
   }
 
+  # Multiple mirrors
   reverse_proxy https://curben.netlify.app https://curben.gitlab.io {
     import removeHeaders
     lb_policy first

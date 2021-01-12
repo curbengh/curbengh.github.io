@@ -4,66 +4,44 @@
 /*
 *  Embed an image with responsive images in a post
 *  https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
-*  Image is resized on-the-fly using Statically Imgpx
-*  https://statically.io/imgpx
+*  Image is resized on-the-fly using Statically (https://statically.io/)
 *  Usage: ![alt](/path/to/img "title")
 */
 
 hexo.extend.filter.register('marked:renderer', (renderer) => {
   renderer.image = (href, title, alt) => {
-    if (href.endsWith('.svg')) return `<img class="svg" src="${href}" alt="${alt}">`
-
     if (!alt) alt = ''
     if (!title) title = alt
-    let modern = href
-    let legacy = href
-    // /img/ is a reverse proxy to Statically CDN
-    // See source/_redirects
-    const link = '/img/'
+
+    if (href.endsWith('.svg')) return `<img class="svg" src="${href}" alt="${alt} title="${title}">`
 
     // embed external image
     if (!href.startsWith('20')) return `<img src="${href}" alt="${alt}" title="${title}">`
 
-    if (href.endsWith('.png') || href.endsWith('.jpg')) {
-      modern = href.concat('?format=webp')
-    } else if (href.endsWith('.webp')) {
-      // Statically has yet to support animated webp
-      // https://github.com/marsble/statically/issues/36
-      // modern = href.concat('?auto_format=false')
-      modern = href.replace(/\.webp$/, '.gif')
-      legacy = href.replace(/\.webp$/, '.gif')
+    // Statically doesn't support WebP and GIF
+    if (href.endsWith('.webp')) {
+      const gif = href.replace(/\.webp$/, '.gif')
+      return `<a href="/files/${gif}"><picture>` +
+        `<source srcset="/files/${href}" type="image/webp">` +
+        `<img src="/files/${gif}" title="${title}" alt="${alt}" loading="lazy"></picture></a>`
     }
 
-    const modernLink = link + modern
-    const legacyLink = link + legacy
+    const fLink = (str, width) => {
+      if (typeof width === 'number') width = ',w=' + width.toString()
+      else width = ''
 
-    const img = `<img srcset="${legacyLink}&w=320 320w,` +
-      `${legacyLink}&w=468 468w,` +
-      `${legacyLink}&w=768 768w,` +
-      `${legacyLink} 800w"` +
+      return '/img/gitlab.com/f=auto' + width + '/curben/blog/-/raw/site/' + str
+    }
+
+    return `<a href="${fLink(href)}">` +
+      `<img srcset="${fLink(href, 320)} 320w,` +
+      `${fLink(href, 468)} 468w,` +
+      `${fLink(href, 768)} 768w,` +
+      `${fLink(href)} 800w"` +
       ' sizes="(max-width: 320px) 320px,' +
       '(max-width: 468px) 468px,' +
       '(max-width: 768px) 768px,' +
       '800px"' +
-      ` src="${legacyLink}"` +
-      ` title="${title}" alt="${alt}" loading="lazy">`
-
-    if (href.endsWith('.png') || href.endsWith('.webp')) {
-      return `<a href="${legacyLink}">` +
-        '<picture>' +
-        '<source type="image/webp"' +
-        ` srcset="${modernLink}&w=320 320w,` +
-        `${modernLink}&w=468 468w,` +
-        `${modernLink}&w=768 768w,` +
-        `${modernLink} 800w"` +
-        ' sizes="(max-width: 320px) 320px,' +
-                '(max-width: 468px) 468px,' +
-                '(max-width: 768px) 768px,' +
-                '800px">' +
-        `${img}` +
-        '</picture></a>'
-    } else {
-      return `<a href="${legacyLink}">${img}</a>`
-    }
+      ` src="${fLink(href)}" title="${title}" alt="${alt}" loading="lazy"></a>`
   }
 })
