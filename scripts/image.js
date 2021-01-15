@@ -13,7 +13,7 @@ hexo.extend.filter.register('marked:renderer', (renderer) => {
     if (!alt) alt = ''
     if (!title) title = alt
 
-    if (href.endsWith('.svg')) return `<img class="svg" src="${href}" alt="${alt} title="${title}">`
+    if (href.endsWith('.svg')) return `<img class="svg" src="${href}" alt="${alt}" title="${title}">`
 
     // embed external image
     if (!href.startsWith('20')) return `<img src="${href}" alt="${alt}" title="${title}">`
