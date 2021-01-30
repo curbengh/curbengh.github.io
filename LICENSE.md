@@ -1,7 +1,7 @@
 MIT License
 
 Copyright (c) 2016-2018 GeekPlux <geekplux@gmail.com> (Typing theme)
-Copyright (c) 2018-2019 curben
+Copyright (c) 2018-2021 Ming Di Leom
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
