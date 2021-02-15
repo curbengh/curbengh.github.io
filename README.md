@@ -49,6 +49,7 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 
 ## Mirrors
 
+- https://curben.pages.dev/
 - https://curben.netlify.app/
 - https://curben.gitlab.io/
 - http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/
