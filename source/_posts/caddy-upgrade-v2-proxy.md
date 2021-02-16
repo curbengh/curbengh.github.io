@@ -1,14 +1,16 @@
 ---
 title: Upgrading Caddy reverse proxy from v1 to v2 syntax
-excerpt: route, strip_prefix, rewrite
+excerpt: route, strip_prefix, rewrite, reverse_proxy
 date: 2020-05-23
-updated: 2020-06-21
+updated: 2021-02-16
 tags:
 - server
 - caddy
 ---
 
 Caddy v2 brought many major changes, particularly to the Caddyfile syntax. This [site](https://mdleom.com/) is powered by the reverse proxy feature of Caddy, so I need to make sure everything works before I finally upgrade. While v2 has been released for more than 2 weeks by now (after months of beta testing), I only managed get my feet wet last weekend, even though I should've done it during the beta releases. After testing v2 on a local server (plus some forum posts), I would say it is _mostly_ working. While v2.0 has reached feature parity with v1, Caddyfile has not; there are two TLS/HTTPS options that are not yet supported in Caddyfile (see [#3219](https://github.com/caddyserver/caddy/issues/3219), [#3334](https://github.com/caddyserver/caddy/issues/3334); planned to be released in v2.1). So, if you don't need HTTPS--like my {% post_link tor-hidden-onion-nixos 'Tor' %} and {% post_link i2p-eepsite-nixos 'I2P' %} proxies--it should be safe to upgrade.
+
+Edit (16 Feb 2021): v2.1 implemented #3219 and #3334, I've updated this post accordingly.
 
 ## proxy to reverse_proxy
 
@@ -222,7 +224,7 @@ In v2, Caddy automatically listens on HTTP (port 80) and redirects to HTTPS, whe
 
 In v2.0, this can only be disabled in [JSON](https://caddyserver.com/docs/json/apps/http/servers/#automatic_https/disable_redirects).
 
-v2.1 supports configuring Automatic HTTPS in Caddyfile using `auto https` global option:
+v2.1 supports configuring Automatic HTTPS in Caddyfile using [`auto_https`](https://caddyserver.com/docs/caddyfile/options#auto-https) global option:
 
 ``` plain Caddyfile
 {
@@ -236,9 +238,17 @@ Client authentication adds another step to TLS connection process whereby a clie
 
 In v2.0, this can only be disabled in [JSON](https://caddyserver.com/docs/json/apps/http/servers/tls_connection_policies/#client_authentication).
 
-v2.1 supports configuring client authentication in Caddyfile using `clients` directive in tls option:
+v2.1 supports configuring client authentication in Caddyfile using `client_auth` option in [`tls`](https://caddyserver.com/docs/caddyfile/directives/tls) directive:
 
-``` plain Caddyfile
+``` plain v1.0
+example.com {
+  tls cert.pem cert.key {
+    clients origin-pull-ca.pem
+  }
+}
+```
+
+``` plain v2.1
 example.com {
   tls cert.pem cert.key {
     client_auth {
