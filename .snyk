@@ -2,7 +2,10 @@
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-
+  SNYK-JS-GLOBPARENT-1016905:
+    - '*':
+        reason: Patch unavailable
+        expires: '2021-06-30T00:00:00.000Z'
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   SNYK-JS-LODASH-567746:
