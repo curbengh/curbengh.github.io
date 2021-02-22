@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)"
 excerpt: "Part 1: Installing NixOS"
 date: 2020-02-23
-updated: 2020-04-22
+updated: 2021-02-22
 tags:
 - server
 - linux
@@ -38,6 +38,8 @@ This website's JAMstack workflow goes like this:
 3. Any commit to GitLab repository triggers a build on Netlify CI
 4. Markdown files are processed into HTML pages using Nodejs-powered Hexo.
 5. Generated pages are hosted on curben.netlify.app
+
+_(Edit 22 Feb 2021: static site is now hosted primarily on Cloudflare Pages curben.pages.dev, with Netlify as a standby)_
 
 Right off the bat I can already see the need of setting up a private server due to the second requirement (ability to remove HTTP header). I had an option to drop Netlify by building the pages on my workstation and deploy to the web server (using a Hexo deployer plugin). So far I do find Netlify service to be reliable and it offers features like adding headers and reverse proxy which are easy to setup. Speaking of Netlify's features, I then had an idea of setting up a web server which reverse proxy to Netlify. This approach meets all the four requirements; a side-benefit is that if I screw up the web server, at least my website is still up on curben.netlify.app and I can easily migrate this domain to Netlify.
 
