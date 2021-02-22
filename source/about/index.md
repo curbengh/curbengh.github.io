@@ -19,6 +19,18 @@ updated: 2021-01-21
 
 - [**phishing-filter**](https://gitlab.com/curben/phishing-filter): A set of blocklists to restrict ~9,000 phishing websites. Based on [PhishTank](https://www.phishtank.com/) and [OpenPhish](https://openphish.com/).
 
+## Architecture
+
+mdleom.com is hosted on a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server) with Cloudflare CDN. The OS is [NixOS](https://nixos.org/) and the web server is [Caddy](https://caddyserver.com/). The web server is a reverse proxy, specifically an active/standby load balancer to multiple backend for redundancy. The backend (where the static site is actually hosted) are Cloudflare Pages, Netlify and GitHub Pages, in order of priority. Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The repo also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site); images are resized on-the-fly using [Statically](https://statically.io/).
+
+More details are available in the following series of posts:
+
+- {% post_link caddy-nixos-part-1 'Part 1: Install NixOS' %}
+- {% post_link caddy-nixos-part-2 'Part 2: Configure NixOS' %}
+- {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
+- {% post_link tor-hidden-onion-nixos 'Part 4: Setup Tor hidden service' %}
+- {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
+
 ## Publications
 
 - Leom, MD, Deegan, G, Martini, B & Boland, J 2021, 'Information disclosure in mobile device: examining the influence of information relevance and recipient', [_HICSS_](https://hicss.hawaii.edu/), pp. 4632-4640. [PDF](/files/publications/Information-disclosure-mobile-device.pdf)
