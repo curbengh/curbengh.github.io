@@ -55,3 +55,15 @@ if (document.location.hostname.endsWith('.onion')) {
     form.setAttribute('action', 'https://3g2upl4pq6kufc4m.onion/')
   })
 }
+
+// Remove navigation link of current page
+const navLink = document.querySelectorAll('a.main-nav-link, a.mobile-nav-link-a')
+navLink.forEach((ele) => {
+  const eleHref = new URL(ele.href)
+  if (eleHref.pathname === document.location.pathname) {
+    const span = document.createElement('span')
+    span.className = ele.className
+    span.textContent = ele.textContent
+    ele.outerHTML = span.outerHTML
+  }
+})
