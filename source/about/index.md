@@ -2,8 +2,12 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2021-01-21
+updated: 2021-02-24
 ---
+
+## About Me
+
+[![LinkedIn handle](/svg/linkedin.svg)](https://www.linkedin.com/in/mdleom/)
 
 ## Projects
 
