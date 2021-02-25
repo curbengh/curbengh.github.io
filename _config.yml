@@ -100,6 +100,7 @@ theme_config:
 
   footer:
     Disclaimer: /disclaimer/
+    Status: https://status.mdleom.com
     Onion: http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion
     Eepsite: http://mdleom.i2p
     'Eepsite (B32)': http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p
