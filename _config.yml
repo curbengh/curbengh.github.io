@@ -35,6 +35,8 @@ skip_render:
   - 'yandex_210230bd98a5c664.html'
   - 'yandex_e54834b81be38a26.html'
   - 'yandex_6cc1f27a50282e72.html'
+  - 'yandex_0aa588b63243f2b9.html'
+  - 'yandex_e026a03a5dd06730.html'
 include:
   - '_headers' # Netlify header rule
   - '_redirects' # Netlify redirects rule
