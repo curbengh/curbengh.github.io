@@ -57,7 +57,12 @@ h1 {
 }
 
 /* Disable line break for site title */
-h1.site-title {
+a.site-title {
+  font-family: serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1.35;
+  margin: 0.5em 0;
   white-space: nowrap;
 }
 
