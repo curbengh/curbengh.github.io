@@ -4,4 +4,3 @@
 # /screenshot/* https://cdn.statically.io/screenshot/device=mobile/curben.netlify.app/:splat 200
 /screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
 /files/* https://gitlab.com/curben/blog/-/raw/site/:splat 200
-/robots.txt /robots-mdleom.com.txt 200

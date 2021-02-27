@@ -1,4 +1,4 @@
 [context.production]
   environment = { NODE_ENV = "production" }
   publish = "public"
-  command = "npm run build"
+  command = "npm run build && mv public/robots-mdleom.com.txt public/robots.txt"
