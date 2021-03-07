@@ -80,7 +80,7 @@ Run `# nixos-rebuild switch` and the keypair will be generated in a file "/var/l
 
 Eepsite has an **52-character Base32** (B32) address which works similarly like an onion address of Tor hidden service. B32 address is Base32-encoded SHA256 hash of an Eepsite's public key or "I2P destination" as the lingo goes. . I2P generates EDDSA (ED25519-SHA512) by default, in future it may switch to RedDSA. The easy way to get your Eepsite's B32 address is look for a file with 52-character filename in **/var/lib/i2pd/destinations** folder. In my case, the file is **ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.dat**, so my B32 address is **ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p**.
 
-You also manually derive it from the public key using common Linux utility tools. The public key is located in the first 391 bytes of **keypair.dat**.
+You could also manually derive it from the public key using common Linux utility tools. The public key is located in the first 391 bytes of **keypair.dat**.
 
 ```
 $ head -c 391 <name>-keys.dat | sha256sum | cut -f1 -d\  | xxd -r -p | base32 | tr '[:upper:]' '[:lower:]' | sed -r 's/=//g'
@@ -224,7 +224,7 @@ http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://
 }
 ```
 
-Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service like [stats.i2p](http://stats.i2p/) and it acts as a shortcut to my B32 address. HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Eepsite already encrypts the traffic. Let's Encrypt doesn't support validating a .i2p address. Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
+Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service like [stats.i2p](http://stats.i2p/) and [reg.i2p](http://reg.i2p) which acts as a shortcut to my B32 address. HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Eepsite already encrypts the traffic. Let's Encrypt doesn't support validating a .i2p address. Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
 
 The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos/#caddyTor.conf)" and "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
 
@@ -290,7 +290,7 @@ Since B32 address is too long to remember, you can register an I2P domain which 
 
 A jump service verifies the ownership of B32 address by checking the digital signature with the public key. The digital signature is created by signing the domain.i2p and public key with your private key.
 
-Submit the authentication string via [this form](http://stats.i2p/i2p/addkey.html). You should see the following page if the submission is successful. As the screenshot implies, your new domain will take at least a week to propagate to most users' addressbook.
+Submit the authentication string to [stats.i2p](http://stats.i2p/i2p/addkey.html) or [reg.i2p](http://reg.i2p/add) (but not both). You should see the following page if the submission is successful. As the screenshot implies, your new domain will take at least a week to propagate to most users' addressbook.
 
 ![Domain registration success](20200321/stats-i2p.png)
 
