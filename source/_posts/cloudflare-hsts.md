@@ -2,7 +2,7 @@
 title: Enabling HSTS preload in Cloudflare
 excerpt: Take note if you have www -> apex redirect
 date: 2020-11-22
-updated: 2020-12-17
+updated: 2021-03-11
 tags:
 - cloudflare
 - security
@@ -75,3 +75,9 @@ $ curl -L https://github.com/chromium/chromium/raw/master/net/http/transport_sec
 $ grep mdleom.com hsts-chromium.json 
   { "name": "mdleom.com", "policy": "bulk-1-year", "mode": "force-https", "include_subdomains": true },
 ```
+
+## Update (11 Mar 2021)
+
+This website is now included in the HSTS list of Chrome 89.
+
+![Chromium 89 HSTS query](20201122/chromium-hsts.png)
