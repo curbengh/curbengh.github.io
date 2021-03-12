@@ -30,8 +30,8 @@ test:
     - npm run build # Generate site
 
   after_script:
-    - rsync -azvh --delete --dry-run public/ host-1:/var/www/
-    #- rsync -azvh --delete --dry-run public/ host-2:/var/www/
+    - rsync -azvh --delete public/ host-1:/var/www/
+    - rsync -azvh --delete public/ host-2:/var/www/
 
   rules:
     # Only trigger through push & "Run pipeline" events in master branch; Skip in renovate job
