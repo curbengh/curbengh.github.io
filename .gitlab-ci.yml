@@ -12,12 +12,26 @@ test:
   stage: test
 
   before_script:
-    - apk update && apk add git
+    - apk update && apk add openssh-client git rsync
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo "$SSH_KEY_1" > ~/.ssh/id_host_1
+    - chmod 600 ~/.ssh/id_host_1
+    - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
+    - chmod 600 ~/.ssh/id_host_2
+    - echo "$SSH_CONFIG" > ~/.ssh/config
+    - chmod 600 ~/.ssh/config
     - npm install
 
   script:
     - npm install snyk && npm run snyk # Refer to "scripts" in package.json
     - npm run build # Generate site
+
+  after_script:
+    - rsync -azvh --delete --dry-run public/ host-1:/var/www/
+    #- rsync -azvh --delete --dry-run public/ host-2:/var/www/
 
   rules:
     # Only trigger through push & "Run pipeline" events in master branch; Skip in renovate job
