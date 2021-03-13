@@ -21,8 +21,6 @@ test:
     - chmod 600 ~/.ssh/id_host_1
     - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
     - chmod 600 ~/.ssh/id_host_2
-    - echo "$SSH_KEY_3" > ~/.ssh/id_host_3
-    - chmod 600 ~/.ssh/id_host_3
     - echo "$SSH_CONFIG" > ~/.ssh/config
     - chmod 600 ~/.ssh/config
     - npm install
@@ -34,7 +32,6 @@ test:
   after_script:
     - rsync -azvh --delete public/ host-1:/var/www/
     - rsync -azvh --delete public/ host-2:/var/www/
-    - rsync -azvh --delete --dry-run public/ host-3:/var/www/
 
   rules:
     # Only trigger through push & "Run pipeline" events in master branch; Skip in renovate job
