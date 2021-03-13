@@ -27,7 +27,7 @@ updated: 2021-02-24
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
-mdleom.com is hosted on a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server) with Cloudflare CDN. The OS is [NixOS](https://nixos.org/) and the web server is [Caddy](https://caddyserver.com/). The web server is a reverse proxy, specifically an active/standby load balancer to multiple backend for redundancy. The backend (where the static site is actually hosted) are Cloudflare Pages, Netlify and GitHub Pages, in order of priority. Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The repo also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site); images are resized on-the-fly using [Statically](https://statically.io/).
+mdleom.com is hosted on a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server) with Cloudflare CDN. The OS is [NixOS](https://nixos.org/) and the web server is [Caddy](https://caddyserver.com/). The web server functions as a file server with ability to failover to mirrors (Cloudflare Pages, Netlify and GitHub Pages). Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The repo also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site); images are resized on-the-fly using [Statically](https://statically.io/).
 
 More details are available in the following series of posts:
 
