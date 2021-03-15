@@ -23,6 +23,8 @@ For cloud image, NixOS only officially supports AWS EC2, so I expected the insta
 
 Undeterred by this initial setback, I searched for "nixos oracle cloud" and found this [gist](https://gist.github.com/misuzu/89fb064a2cc09c6a75dc9833bb3995bf). It offered two approaches, the first one is installing Nix package manager on an Ubuntu VM (provisioned using an official image) and _partially_ replace the OS by overwriting the bootloader so it boots NixOS instead. But that didn't work too, so I tried the second one instead, which _worked_. So, let's get started.
 
+Edit (15 Mar 2021): I stumbled upon [NixOS-Infect](https://github.com/elitak/nixos-infect), an installation script similar to the first approach of that gist. The script seems popular and may work better, although no one has tried it on Oracle Cloud yet.
+
 ## Build a kexec tarball
 
 The working approach involved building a [kexec](https://en.wikipedia.org/wiki/Kexec) image using Nix/NixOS. If you're not using NixOS, the NixOS' [VirtualBox image](https://nixos.org/download.html#nixos-virtualbox) works too. If you're building inside a VM (of your local workstation, not Oracle Cloud), I recommend provisioning at least two CPUs as the operation is quite intensive.
