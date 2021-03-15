@@ -58,10 +58,18 @@ deploy:
     - rsync -azvh --delete public/ host-1:/var/www/
     - rsync -azvh --delete public/ host-2:/var/www/
 
+  rules:
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+      when: always
+
+deploy_pages:
+  stage: deploy
+
   trigger:
     project: curben/curben.gitlab.io
     branch: master
     strategy: depend
+
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
