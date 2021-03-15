@@ -8,31 +8,16 @@ variables:
   NODE_ENV: "production"
 
 ## Rename to 'pages' for gitlab pages
-test:
-  stage: test
+build:
+  stage: build
 
   before_script:
-    - apk update && apk add openssh-client git rsync
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - echo "$SSH_KEY_1" > ~/.ssh/id_host_1
-    - chmod 600 ~/.ssh/id_host_1
-    - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
-    - chmod 600 ~/.ssh/id_host_2
-    - echo "$SSH_CONFIG" > ~/.ssh/config
-    - chmod 600 ~/.ssh/config
+    - apk update && apk add git
     - npm install
 
   script:
     - npm install snyk && npm run snyk # Refer to "scripts" in package.json
     - npm run build # Generate site
-    - sh check-homepage.sh # Homepage should exists and non-empty
-
-  after_script:
-    - rsync -azvh --delete public/ host-1:/var/www/
-    - rsync -azvh --delete public/ host-2:/var/www/
 
   rules:
     # Only trigger through push & "Run pipeline" events in master branch; Skip in renovate job
@@ -44,8 +29,36 @@ test:
   #   paths:
   #     - public # deploy from the 'public' folder.
 
-deploy: # Trigger deploy job on curben/curben.gitlab.io
+test:
+  stage: test
+
+  script:
+    - sh check-homepage.sh # Homepage should exists and non-empty
+
+  rules:
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+      when: always
+
+deploy:
   stage: deploy
+
+  before_script:
+    - apk update && apk add openssh-client rsync
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo "$SSH_KEY_1" > ~/.ssh/id_host_1
+    - chmod 600 ~/.ssh/id_host_1
+    - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
+    - chmod 600 ~/.ssh/id_host_2
+    - echo "$SSH_CONFIG" > ~/.ssh/config
+    - chmod 600 ~/.ssh/config
+
+  script:
+    - rsync -azvh --delete public/ host-1:/var/www/
+    - rsync -azvh --delete public/ host-2:/var/www/
+
   trigger:
     project: curben/curben.gitlab.io
     branch: master

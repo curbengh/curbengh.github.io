@@ -125,6 +125,18 @@ ssh-keyscan -p 1234 x.x.x.x
 ```
 
 ``` yml .gitlab-ci.yml
+build:
+  stage: build
+
+  before_script:
+    - npm install
+
+  script:
+    - npm run build
+
+deploy:
+  stage: deploy
+
   before_script:
     - apk update && apk add openssh-client rsync
     - mkdir -p ~/.ssh
@@ -136,12 +148,8 @@ ssh-keyscan -p 1234 x.x.x.x
     - chmod 600 ~/.ssh/id_remote_rsync
     - echo "$SSH_CONFIG" > ~/.ssh/config
     - chmod 600 ~/.ssh/config
-    - npm install
 
   script:
-    - hexo generate # Or `npm run build`
-
-  after_script:
     ## Dry run
     - rsync -azvh --delete --dry-run public/ rsync-remote:/var/www/
     ## Remove above & uncomment below if no issue
