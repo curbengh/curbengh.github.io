@@ -23,10 +23,10 @@ build:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
 
-  ## Uncomment below to enable gitlab pages
-  # artifacts:
-  #   paths:
-  #     - public # deploy from the 'public' folder.
+  artifacts:
+    paths:
+      - public/
+    expire_in: 30 days
 
 test:
   stage: test
@@ -37,6 +37,11 @@ test:
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
+
+  artifacts:
+    paths:
+      - public/
+    expire_in: 30 days
 
 deploy:
   stage: deploy
@@ -83,6 +88,9 @@ renovate: # Check dependency update
     - npm install renovate
     - npm run renovate
     - npm install snyk && npm run snyk
+
+  # No artifact
+  dependencies: []
 
   rules:
     - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "schedule" || $CI_PIPELINE_SOURCE == "web")'
