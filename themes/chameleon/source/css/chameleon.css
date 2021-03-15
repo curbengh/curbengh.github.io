@@ -862,10 +862,6 @@ span.index-list-count:after {
   font-style: italic;
 }
 
-.article .article-entry blockquote footer cite a {
-  border-bottom: 1px solid #eee;
-}
-
 .article .article-entry blockquote footer cite:before {
   content: "—";
   padding: 0 0.5em;
