@@ -29,7 +29,7 @@ Generate a new SSH key. If you're planning to use rsync on CI/CD pipeline, leave
 ssh-keygen -t ed25519 -C "www-data@nixos-server"
 ```
 
-Create a separate user with home folder set to where web server will be deployed. I use the convention of `www-data` user with `/var/www` home folder. Create 
+Create a separate user with home folder set to where web server will be deployed. I use the convention of `www-data` user with `/var/www` home folder. Create
 
 ``` nix /etc/nixos/configuration.nix
   users = {
@@ -133,6 +133,10 @@ build:
 
   script:
     - npm run build
+
+  artifacts:
+    paths:
+      - public/
 
 deploy:
   stage: deploy
