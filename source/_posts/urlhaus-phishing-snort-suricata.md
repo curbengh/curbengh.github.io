@@ -2,9 +2,12 @@
 title: urlhaus-filter and phishing-filter available as Snort and Suricata rules
 excerpt: Tested on Snort 2, Snort 3 and Suricata 6
 date: 2021-03-20
+updated: 2021-04-05
 tags:
 - security
 ---
+
+> Update (5 April 2021): The blocklists are also available in [Response Policy Zone](https://dnsrpz.info/) format.
 
 [urlhaus-filter](https://gitlab.com/curben/urlhaus-filter) and [phishing-filter](https://gitlab.com/curben/phishing-filter) are blocklists that target malware and phishing websites respectively. The blocklists are available in many formats:
 
