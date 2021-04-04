@@ -35,7 +35,7 @@ Stop included games like Candy Crush and Minecraft to reappear after you remove 
 ## Uninstall all preinstalled apps
 This is the easiest method to remove all preinstalled apps. Note: this will remove **ALL** apps listed at the next [section](#Uninstall-specific-preinstalled-app).
 1. Launch PowerShell as administrator (right click `Run as administrator`).
-  1.1. Windows 10 Home user might not have it, install [here](https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6). 
+    1.1. Windows 10 Home user might not have it, install [here](https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6). 
 2. Run the following command:
   ```
   Get-AppxPackage -AllUsers | Remove-AppxPackage
@@ -55,8 +55,9 @@ For example to remove 3D Builder,
   Get-AppxPackage *3dbuilder* | Remove-AppxPackage
   ```
 
+
 App name | Package name
----|---
+--- | ---
 3D Builder | 3dbuilder
 3D Viewer | 3dviewer
 Alarms and Clock¹ | windowsalarms
@@ -85,6 +86,7 @@ Wallet | wallet
 Weather | bingweather
 Xbox | xboxapp
 Your Phone | yourphone
+
 ¹ These are *not* the time and date view you get at the bottom right. Safe to remove.
 ² This is a full-screen/[UWP](https://en.wikipedia.org/wiki/Universal_Windows_Platform_apps) image viewer. Safe to remove.
 ³ You might need it. Safe to remove if you don't.

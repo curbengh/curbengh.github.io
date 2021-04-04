@@ -100,22 +100,22 @@ nixos-generate-config --root /mnt
 
 6. I replaced the generated "configuration.nix" with my own "configuration.nix". Before uploading the config to the server, I did the following change,
 
-  1. Replace "/dev/sda" with "/dev/vda" in `boot.loader.grub.device`
-  2. Replace "eth0" to "ens3" in firewall config (check output of `ifconfig`)
-  3. Encrypt the file using 7zip before upload.
+    1. Replace "/dev/sda" with "/dev/vda" in `boot.loader.grub.device`
+    2. Replace "eth0" to "ens3" in firewall config (check output of `ifconfig`)
+    3. Encrypt the file using 7zip before upload.
 
-  ``` sh
-  # This is much less memory-intensive than `nix-env -i package`
-  # wormhole-william is Go-implementation of magic-wormhole
-  # Available in 20.09+
-  nix-env -f '<nixpkgs>' -iA google-authenticator p7zip usbguard wormhole-william
+    ``` sh
+    # This is much less memory-intensive than `nix-env -i package`
+    # wormhole-william is Go-implementation of magic-wormhole
+    # Available in 20.09+
+    nix-env -f '<nixpkgs>' -iA google-authenticator p7zip usbguard wormhole-william
 
-  cd /tmp
-  wormhole-william receive configuration.7z
-  7z x configuration.7z
+    cd /tmp
+    wormhole-william receive configuration.7z
+    7z x configuration.7z
 
-  cp configuration.nix /mnt/etc/nixos/
-  ```
+    cp configuration.nix /mnt/etc/nixos/
+    ```
 
 7. Install it without setting root password (so that root remains disabled)
 

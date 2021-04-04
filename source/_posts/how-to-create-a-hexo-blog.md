@@ -20,20 +20,20 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 4. Change project website to a user website. This is so that the website's home page is <b>*username*.gitlab.io</b>, instead of username.gitlab.io/hexo.
     Go to `Settings -> General -> Advanced -> Change path`. Change the value to <b>*username*.gitlab.io</b>, where username is your username on GitLab.
 5. You can start writing a new post straight away without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#Naming)).
-  1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
-  2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
+    1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
+    2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
-  ``` yml _posts/test-page.md
-  ---
-  title: Test page
-  date: yyyy-mm-dd hh:mm:ss
-  tags:
-  categories:
-  ---
-  ```
+    ``` yml _posts/test-page.md
+    ---
+    title: Test page
+    date: yyyy-mm-dd hh:mm:ss
+    tags:
+    categories:
+    ---
+    ```
 
-  3. Write your post after the second `---` using [Markdown](https://about.gitlab.com/handbook/product/technical-writing/markdown-guide/) [style](https://docs.gitlab.com/ee/user/markdown.html).
-  4. Save the file by clicking on "Commit changes".
+    3. Write your post after the second `---` using [Markdown](https://about.gitlab.com/handbook/product/technical-writing/markdown-guide/) [style](https://docs.gitlab.com/ee/user/markdown.html).
+    4. Save the file by clicking on "Commit changes".
 6. After you create a new post, the website can be accessed on <b>*username*.gitlab.io</b> or the link shown on your project `Settings -> Pages`. Read on if you prefer to manage the blog from your workstation.
 
 ## Installation
@@ -62,10 +62,10 @@ $ git push -u
 ```
 
 7. The generated `public` and `node_modules` are [ignored](https://gitlab.com/curben/blog/blob/master/.gitignore), as CI will generate them during build.
-  1. I have migrated to [Netlify](https://www.netlify.com/) and removed my GitLab page.
-  2. Since I don't have a gitlab page any more, I removed the deploy command in the `.gitlab-ci.yml`.
-  3. The config now has two parts. To use in gitlab page, simply uncomment the second part and comment out the first part.
-  4. Make sure you {% post_link validity-gitlab-ci-config 'double-check' %} the CI config before you push.
+    1. I have migrated to [Netlify](https://www.netlify.com/) and removed my GitLab page.
+    2. Since I don't have a gitlab page any more, I removed the deploy command in the `.gitlab-ci.yml`.
+    3. The config now has two parts. To use in gitlab page, simply uncomment the second part and comment out the first part.
+    4. Make sure you {% post_link validity-gitlab-ci-config 'double-check' %} the CI config before you push.
 
 8. Check the build status by going to your project `CI /CD -> Pipelines`. Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
 9.  If there is no error, the generated website can be accessed on `<your-username>.gitlab.io/` or the link shown on your project `Settings -> Pages`.
