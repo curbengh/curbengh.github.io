@@ -2,6 +2,7 @@
 title: Install NixOS on Oracle Cloud
 excerpt: Two always free bare minimum VM with 20TB bandwidth
 date: 2021-03-09
+update: 2021-04-05
 tags:
 - linux
 - nixos
@@ -303,8 +304,9 @@ Since Oracle offers two VMs, might as well take it. The second instance can be i
 
 Launching a second redundant instance is easy:
 
-1. Create a boot volume backup of the first instance (you should do it anyway)
+1. Create a boot volume backup of the first instance
 2. Create a new boot volume from the backup
+    * (Update 5 April 2021): Boot volume created from backup somehow is not free, it charges [*performance units*](https://www.oracle.com/cloud/price-list.html#storage); you may be able to avoid this cost by cloning the boot volume instead. Alternatively, you can always create the volume from scratch.
 3. Launch a new instance using the second boot volume
 4. Attach reserved IP to the instance
 
