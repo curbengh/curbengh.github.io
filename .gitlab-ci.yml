@@ -86,8 +86,7 @@ renovate: # Check dependency update
 
   script:
     - npm install snyk && npm run snyk
-    - npm install renovate
-    - npm run renovate
+    - npm install renovate && npm run renovate
 
   # No artifact
   dependencies: []
