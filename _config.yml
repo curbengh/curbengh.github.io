@@ -87,6 +87,10 @@ minify:
   svg:
     plugins: [{cleanupIDs: false}]
 
+marked:
+  # https://github.com/hexojs/hexo-renderer-marked/pull/179
+  descriptionLists: false
+
 feed:
   icon: '/svg/favicon.svg'
 
