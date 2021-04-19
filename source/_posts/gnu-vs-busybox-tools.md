@@ -2,7 +2,7 @@
 title: GNU vs BusyBox Unix tools
 excerpt: Alpine uses BusyBox while Ubuntu uses GNU tools, and they behave differently.
 date: 2018-10-13
-updated: 2018-10-31
+updated: 2021-04-19
 tags:
 - linux
 - alpine
@@ -19,9 +19,9 @@ I use it in my [urlhaus-filter](https://gitlab.com/curben/urlhaus-filter) repo t
 
 ## Exit with code 1
 
-I was dismayed by those [error messages](https://gitlab.com/curben/urlhaus-filter/-/jobs), I tested the scripts on my workstation! Looking through error message, I noticed the Alpine's Unix tools behave differently than mine. I investigated further by running an Alpine live cd.
+While setting up GitLab CI for urlhaus-filter, I encountered many issues despite tested fine on my workstation. Sifting through the error messages, I noticed the Alpine's Unix tools behave differently than mine. I investigated further by testing the script on an Alpine VM.
 
-I `--version` those tools (only those I use in the [scripts](https://gitlab.com/curben/urlhaus-filter/tree/master/utils)) and the output is totally different! The Alpine tools output `BusyBox vXX`, which shows they are part of BusyBox. I briefly read up the [wiki](https://en.wikipedia.org/wiki/BusyBox#Features) and noticed the following line,
+I compared the `--version` of those tools in Ubuntu and Alpine, and noticed the outputs are totally different. The Alpine tools output `BusyBox vXX`, which shows they are part of BusyBox. I briefly read up the [wiki](https://en.wikipedia.org/wiki/BusyBox#Features) and noticed the following line,
 
 {% blockquote %}
 ...compared GNU, BusyBox, asmutils and Perl implementations of the standard Unix commands...
@@ -41,14 +41,14 @@ Programs included in BusyBox can be run simply by adding their name as an argume
 after /bin/ls is linked to /bin/busybox
 {% endblockquote %}
 
-So, Alpine uses BusyBox and Ubuntu uses GNU. While Ubuntu also bundles with BusyBox, but it uses GNU by default.
+So, Alpine uses BusyBox and Ubuntu uses GNU. Ubuntu does include BusyBox by default, but it mostly uses GNU.
 
 ## List
 
 I tested the tools on Alpine and Ubuntu, and noted their behaviour. BusyBox = BB.
 
-- **gzip/gunzip/zcat**: BB only support gzip/bzip2/xz format, not the ubiquitous zip. To extract, use **unzip**. GNU supports zip, but its zcat can only extract the first file. Use bsdtar to extract all files.
-- **unzip**: GNU doesn't support stdin as input. Use funzip to decompress stdin, but only extract the first file like zcat. BB support stdin and extract all files, through `unzip -`.
+- **gzip/gunzip/zcat**: BB only support gzip/bzip2/xz format, not the ubiquitous zip. GNU can only extract the first file. Use unzip or bsdtar to extract all files.
+- **unzip**: GNU doesn't support stdin as input. funzip can decompress from stdin, but only the first file (like zcat). BB support stdin and extract all files, through `unzip -`.
 - **sed**: BB doesn't support -z argument which is used to find/replace \n new line character. A [workaround](https://stackoverflow.com/a/1252191) is `sed ':a;N;$!ba;s/\n/<new character>/g' file` or `sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/<new character>/g' file`. GNU `sed -z 's/\n/<new character>/g' ` works.
-- **bsdtar**: Since GNU's zcat and funzip can only extract the first file, in addition to BB's unzip, another alternative is bsdtar. bsdtar can be installed through `libarchive-tools` package. To extract zip from stdin, use `$ bsdtar -xf -`.
+- **bsdtar**: Since GNU can only extract the first file, in addition to BB's unzip, another alternative is bsdtar. bsdtar is available through `libarchive-tools` package. To extract zip from stdin, use `$ bsdtar -xf -`.
 - **patch**: BB doesn't support `--backup` option. BSD doesn't support `--verbose` option.
