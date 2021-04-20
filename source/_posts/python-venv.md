@@ -6,7 +6,9 @@ tags:
 - linux
 ---
 
-I have several Python scripts for data processing purpose. I put them in "~/.local/bin/" folder so that I can directly run them by `$ script_a` ("~/.local/bin/" is preconfigured to be part of "$PATH"). A minor annoyance I found is that whenever I want to dispose a script along with its dependencies, I need to figure out which ones are core libraries or which ones are still required by other scripts (e.g. is [`logging`](https://pypi.org/project/logging/) a [core](https://docs.python.org/3/library/logging.html) library?). Recently, I learned about [venv](https://docs.python.org/3/library/venv.html) from awscli which it uses to install dependencies in a dedicated folder.
+I have several Python scripts for data processing purpose. I put them in "~/.local/bin/" folder so that I can directly run them by `$ script_a` ("~/.local/bin/" is preconfigured to be part of "$PATH"). A minor annoyance I found is that whenever I want to dispose a script along with its dependencies, I need to figure out which ones are core libraries or which ones are still required by other scripts (e.g. is [`logging`](https://pypi.org/project/logging/) a [core](https://docs.python.org/3/library/logging.html) library?).
+
+Recently, I learned about [venv](https://docs.python.org/3/library/venv.html) from awscli which it uses to install dependencies in a dedicated folder. Despite a plenty of tutorials on virtual environment, I found most of them use virtualenv since it's more powerful and supports Python2; I prefer venv because it is a core Python3 library and sufficient for my need.
 
 Let's say I have `script_a.py` and it requires `dep_x` and `dep_y` libraries. I install the libraries to "~/.local/lib/script_a/" folder, so if I don't need the script anymore, I just "rm -rf" the script and "~/.local/lib/script_a/" folder where its dependencies are located.
 
