@@ -47,7 +47,7 @@ So, Alpine uses BusyBox and Ubuntu uses GNU. Ubuntu does include BusyBox by defa
 
 I tested the tools on Alpine and Ubuntu, and noted their behaviour. BusyBox = BB.
 
-- **gzip/gunzip/zcat**: BB only support gzip/bzip2/xz format, not the ubiquitous zip. GNU can only extract the first file. Use unzip or bsdtar to extract all files.
+- **gzip/gunzip/zcat**: BB only support gzip/bzip2/xz format, use BB's unzip for zip file. GNU can only extract the first file in a zip.
 - **unzip**: GNU doesn't support stdin as input. funzip can decompress from stdin, but only the first file (like zcat). BB support stdin and extract all files, through `unzip -`.
 - **sed**: BB doesn't support -z argument which is used to find/replace \n new line character. A [workaround](https://stackoverflow.com/a/1252191) is `sed ':a;N;$!ba;s/\n/<new character>/g' file` or `sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/<new character>/g' file`. GNU `sed -z 's/\n/<new character>/g' ` works.
 - **bsdtar**: Since GNU can only extract the first file, in addition to BB's unzip, another alternative is bsdtar. bsdtar is available through `libarchive-tools` package. To extract zip from stdin, use `$ bsdtar -xf -`.
