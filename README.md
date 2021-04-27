@@ -58,7 +58,7 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 
 ## Uptime Status
 
-- https://status.mdleom.com/
+- https://stats.uptimerobot.com/1394zup2LQ
 
 ---
 Useful links:
