@@ -23,6 +23,8 @@ updated: 2021-03-13
 
 - [**phishing-filter**](https://gitlab.com/curben/phishing-filter): A set of blocklists to restrict ~9,000 phishing websites. Based on [PhishTank](https://www.phishtank.com/) and [OpenPhish](https://openphish.com/).
 
+- [**pup-filter**](https://gitlab.com/curben/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
+
 ## Architecture
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
