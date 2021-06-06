@@ -74,10 +74,10 @@ input.map(({ name, item }) => [name, item])
 input.map((element) => [element.name, element.item])
 ```
 
-Then we pass `stepOne` to `Object.entries`:
+Then we pass `stepOne` to `Object.fromEntries`:
 
 ``` js
-const stepTwo = Object.entries(stepOne)
+const stepTwo = Object.fromEntries(stepOne)
 console.log(stepTwo)
 
 {
@@ -90,7 +90,7 @@ console.log(stepTwo)
 }
 ```
 
-Now we have a de-duplicated object. Then, we use `Object.entries()` to convert it to an array:
+Now we have a de-duplicated object. Then, we use `Object.entries()` to convert it back to an array:
 
 ``` js
 const stepThree = Object.entries(stepTwo)
@@ -106,7 +106,7 @@ console.log(stepThree)
 ]
 ```
 
-Finally, we loop through each element to convert it back to object:
+Finally, we loop through each element to convert it back to an array of objects:
 
 ``` js
 const stepFour = stepThree.map(([name, item]) => {
