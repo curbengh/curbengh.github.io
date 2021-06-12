@@ -102,10 +102,12 @@ Combining with the previous user configs, I ended up with:
       caddyProxy = {
         home = "/var/lib/caddyProxy";
         createHome = true;
+        isNormalUser = true;
       };
       caddyTor = {
         home = "/var/lib/caddyTor";
         createHome = true;
+        isNormalUser = true;
       };
       tor = {
         home = "/var/lib/tor";
