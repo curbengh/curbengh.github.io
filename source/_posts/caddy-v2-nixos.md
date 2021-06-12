@@ -79,6 +79,8 @@ in {
       wantedBy = [ "multi-user.target" ];
       environment = mkIf (versionAtLeast config.system.stateVersion "17.09" && !isCaddy2)
         { CADDYPATH = cfg.dataDir; };
+      startLimitIntervalSec = 14400;
+      startLimitBurst = 10;
       serviceConfig = {
         ExecStart = if isCaddy2 then ''
           ${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}
@@ -94,8 +96,6 @@ in {
         User = "caddy";
         Group = "caddy";
         Restart = "on-abnormal";
-        StartLimitIntervalSec = 14400;
-        StartLimitBurst = 10;
         NoNewPrivileges = true;
         LimitNPROC = 512;
         LimitNOFILE = 1048576;

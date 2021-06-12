@@ -110,6 +110,8 @@ Combining with the previous user configs, I ended up with:
       tor = {
         home = "/var/lib/tor";
         createHome = true;
+        group = "tor";
+        uid = config.ids.uids.tor;
       };
     };
 
@@ -121,7 +123,7 @@ Combining with the previous user configs, I ended up with:
         members = [ "caddyTor" ];
       };
       tor = {
-        members = [ "tor" ];
+        gid = config.ids.gids.tor;
       };
     };
   };
@@ -568,24 +570,23 @@ Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay ga
   services.tor = {
     enable = true;
     enableGeoIP = false;
-    hiddenServices = {
+    relay.onionServices = {
       proxy = {
         version = 3;
-        map = [
-          {
-            port = "80";
-            toHost = "[::1]";
-            toPort = "8080";
-          }
-        ];
+        map = [{
+          port = 80;
+          target = {
+            addr = "[::1]";
+            port = 8080;
+          };
+        }];
       };
     };
-    extraConfig =
-      ''
-        ClientUseIPv4 0
-        ClientUseIPv6 1
-        ClientPreferIPv6ORPort 1
-      '';
+    settings = {
+      ClientUseIPv4 = false;
+      ClientUseIPv6 = true;
+      ClientPreferIPv6ORPort = true;
+    };
   };
 
   ## I2P Eepsite

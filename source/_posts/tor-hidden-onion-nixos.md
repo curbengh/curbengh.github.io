@@ -39,24 +39,23 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
   services.tor = {
     enable = true;
     enableGeoIP = false;
-    hiddenServices = {
+    relay.onionServices = {
       myOnion = {
         version = 3;
-        map = [
-          {
-            port = "80";
-            toHost = "[::1]";
-            toPort = "8080";
-          }
-        ];
+        map = [{
+          port = 80;
+          target = {
+            addr = "[::1]";
+            port = 8080;
+          };
+        }];
       };
     };
-    extraConfig = 
-      ''
-        ClientUseIPv4 0
-        ClientUseIPv6 1
-        ClientPreferIPv6ORPort 1
-      '';
+    settings = {
+      ClientUseIPv4 = false;
+      ClientUseIPv6 = true;
+      ClientPreferIPv6ORPort = true;
+    };
   };
 ```
 
@@ -134,10 +133,8 @@ in {
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ]; # systemd-networkd-wait-online.service
       wantedBy = [ "multi-user.target" ];
-      # 21.03+
-      # https://github.com/NixOS/nixpkgs/pull/97512
-      # startLimitIntervalSec = 14400;
-      # startLimitBurst = 10;
+      startLimitIntervalSec = 14400;
+      startLimitBurst = 10;
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}";
         ExecReload = "${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}";
@@ -145,8 +142,10 @@ in {
         User = "caddyProxy";
         Group = "caddyProxy";
         Restart = "on-abnormal";
-        StartLimitIntervalSec = 14400;
-        StartLimitBurst = 10;
+        # < 20.09
+        # https://github.com/NixOS/nixpkgs/pull/97512
+        # StartLimitIntervalSec = 14400;
+        # StartLimitBurst = 10;
         NoNewPrivileges = true;
         LimitNPROC = 512;
         LimitNOFILE = 1048576;

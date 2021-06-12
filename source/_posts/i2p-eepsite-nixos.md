@@ -159,10 +159,8 @@ in {
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ]; # systemd-networkd-wait-online.service
       wantedBy = [ "multi-user.target" ];
-      # 21.03+
-      # https://github.com/NixOS/nixpkgs/pull/97512
-      # startLimitIntervalSec = 14400;
-      # startLimitBurst = 10;
+      startLimitIntervalSec = 14400;
+      startLimitBurst = 10;
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/caddy run --config ${cfg.config} --adapter ${cfg.adapter}";
         ExecReload = "${cfg.package}/bin/caddy reload --config ${cfg.config} --adapter ${cfg.adapter}";
@@ -170,8 +168,6 @@ in {
         User = "caddyI2p";
         Group = "caddyI2p";
         Restart = "on-abnormal";
-        StartLimitIntervalSec = 14400;
-        StartLimitBurst = 10;
         NoNewPrivileges = true;
         LimitNPROC = 512;
         LimitNOFILE = 1048576;
