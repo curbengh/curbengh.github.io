@@ -102,16 +102,17 @@ Combining with the previous user configs, I ended up with:
       caddyProxy = {
         home = "/var/lib/caddyProxy";
         createHome = true;
-        isNormalUser = true;
+        isSystemUser = true;
       };
       caddyTor = {
         home = "/var/lib/caddyTor";
         createHome = true;
-        isNormalUser = true;
+        isSystemUser = true;
       };
       tor = {
         home = "/var/lib/tor";
         createHome = true;
+        isSystemUser = true;
         group = "tor";
         uid = config.ids.uids.tor;
       };
@@ -522,14 +523,17 @@ Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay ga
       caddyProxy = {
         home = "/var/lib/caddyProxy";
         createHome = true;
+        isSystemUser = true;
       };
       caddyTor = {
         home = "/var/lib/caddyTor";
         createHome = true;
+        isSystemUser = true;
       };
       caddyI2p = {
         home = "/var/lib/caddyI2p";
         createHome = true;
+        isSystemUser = true;
       };
     };
 

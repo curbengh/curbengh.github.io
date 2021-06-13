@@ -37,24 +37,22 @@ Create a separate user with home folder set to where web server will be deployed
       www-data = {
         openssh.authorizedKeys.keys = [ "ssh-ed25519 ..." ];
         home = "/var/www";
-        # Remove this line after "/var/www" is created
-        createHome = true;
         # Required for rsync
-        useDefaultShell = true;
+        isNormalUser = true;
       };
     };
   };
+
+  ## Make /var/www world-readable
+  system.activationScripts = {
+     www-data.text =
+     ''
+       chmod +xr "/var/www"
+     '';
+  };
 ```
 
-`useDefaultShell` is required to execute rsync on the remote server. This has a security implication and requires a minor tweak to the web server; more on this in the next section. Execute `nixos-rebuild switch` as root to create `www-data` user and its home folder.
-
-Home folder is not world-readable by default, so if you start a web server using different user, it can't access the `/var/www`. To fix this,
-
-```
-chmod +xr /var/www
-```
-
-Make sure `users.users.www-data.createHome` setting is removed/disabled, otherwise `/var/www` will become non-world-readable after an upgrade.
+`isNormalUser` (which also enables `useDefaultShell`) is required to execute rsync on the remote server. This has a security implication and requires a minor tweak to the web server; more on this in the next section. Execute `nixos-rebuild switch` as root to create `www-data` user and its home folder.
 
 ### Hide dotfiles in web server
 
