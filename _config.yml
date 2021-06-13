@@ -109,9 +109,8 @@ theme_config:
   footer:
     Disclaimer: /disclaimer/
     Status: https://stats.uptimerobot.com/1394zup2LQ
-    Onion: http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion
-    Eepsite: http://mdleom.i2p
-    'Eepsite (B32)': http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p
+    Onion: https://gitlab.com/curben/blog#mirrors
+    Eepsite: https://gitlab.com/curben/blog#mirrors
 
   # Load forkawesome icons?
   icons: false
