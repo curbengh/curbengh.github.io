@@ -37,8 +37,9 @@ Create a separate user with home folder set to where web server will be deployed
       www-data = {
         openssh.authorizedKeys.keys = [ "ssh-ed25519 ..." ];
         home = "/var/www";
+        # Remove this line after "/var/www" is created
         createHome = true;
-        ## Required for rsync
+        # Required for rsync
         useDefaultShell = true;
       };
     };
@@ -52,6 +53,8 @@ Home folder is not world-readable by default, so if you start a web server using
 ```
 chmod +xr /var/www
 ```
+
+Make sure `users.users.www-data.createHome` setting is removed/disabled, otherwise `/var/www` will become non-world-readable after an upgrade.
 
 ### Hide dotfiles in web server
 
