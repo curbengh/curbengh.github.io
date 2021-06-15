@@ -182,11 +182,13 @@ Following is my "configuration.nix". I'll show you how to secure NixOS using has
         home = "/var/lib/caddyProxy";
         createHome = true;
         isSystemUser = true;
+        group = "caddyProxy";
       };
       caddyTor = {
         home = "/var/lib/caddyTor";
         createHome = true;
         isSystemUser = true;
+        group = "caddyTor";
       };
     };
 
