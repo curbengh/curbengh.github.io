@@ -164,6 +164,8 @@ Restart/reload Caddy for the changed config to take effect.
   # cloudflared is not distributed via a free software license
   nixpkgs.config.allowUnfree = true;
   services.argoWeb.enable = true;
+  # if the config is in another location
+  # services.argoWeb.config = "/etc/caddy/argoWeb.yml";
 ```
 
 ## Create a CNAME record
