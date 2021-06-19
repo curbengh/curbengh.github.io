@@ -2,7 +2,7 @@
 title: microG, a replacement for the proprietary Google Play Services
 excerpt: The core of the Android OS is open source, but much of the core apps, libraries and APIs are proprietary.
 date: 2019-01-12
-updated: 2019-04-30
+updated: 2021-06-19
 tags:
 - android
 ---
@@ -25,16 +25,17 @@ microG is not an 100% replacement of the Google Play Services, possibly will nev
 
 **App**: Play Store
 **Issue**: No app or in-app purchase ([NanoDroid](http://nanolx.org/nanolx/nanodroid) claimed to support).
-**Alternative**: F-Droid + Yalp Store
+**Alternative**: [F-Droid](https://f-droid.org)/[Aurora Droid](https://f-droid.org/en/packages/com.aurora.adroid/) + [Aurora Store](https://f-droid.org/en/packages/com.aurora.store/)
 **Info**: F-Droid is an app store for open source apps. Many of the apps I'm going to recommend can be installed through it. With [privileged extension](https://f-droid.org/en/packages/org.fdroid.fdroid.privileged.ota/) (usually installed alongside with microG), it can auto update installed apps.
-For proprietary apps, use Yalp Store. You can use built-in credential to install free apps or use your credential to install purchased apps. Purchase apps through Play Store's [website](https://play.google.com/store). I recommend installing it as a system app (flash the [OTA.zip](https://github.com/yeriomin/YalpStore/releases) in recovery) to automatically install once an APK is downloaded. Root is required for auto-download updates. Go to the Yalp setting, set "*Only the chosen apps will be checked for updates*" and whitelist any apps you installed via F-Droid.
+I use Aurora Droid, an alternative app to access F-Droid repository. I find it easier to use and pairs well with Aurora Store.
+For proprietary apps, use Aurora Store. You can use built-in credential to install free apps or use your credential to install purchased apps. Purchase apps through Play Store's [website](https://play.google.com/store). I recommend installing [Aurora Services](https://gitlab.com/AuroraOSS/AuroraServices) to enable auto-installation of downloaded apps in Aurora Droid/Store, essentially making them a privileged app.
 
 ---
 
 **App**: Google Maps
 **Issue**: ~~No location, possibly due to absence of [incomplete/outdated](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) [Maps API](https://arstechnica.com/gadgets/2018/07/googles-iron-grip-on-android-controlling-open-source-by-any-means-necessary/4/).~~ Edit: Google Maps v10.6.2 works again on microG v0.2.6.13280
-**Alternative**: [OsmAnd](https://f-droid.org/en/packages/net.osmand.plus/), [*Maps*](https://f-droid.org/en/packages/com.github.axet.maps/)/MAPS.ME, Waze, HERE WeGo
-**Info**: HERE WeGo supports public transit and offline maps, while Waze doesn't. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. **OsmAnd** and **MAPS.ME** are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/). They do not have public transport info though. Use [**Transportr**](https://f-droid.org/en/packages/de.grobox.liberario/) for that. **Maps** is a fork of MAPS.ME without the proprietary bits and it's available on F-Droid.
+**Alternative**: [Organic Maps](https://f-droid.org/en/packages/app.organicmaps/), [OsmAnd](https://f-droid.org/en/packages/net.osmand.plus/), Waze, HERE WeGo
+**Info**: HERE WeGo supports public transit and offline maps, while Waze doesn't. Despite [being funded](https://web.archive.org/web/20150816051912/http://company.nokia.com/en/news/press-releases/2015/08/03/nokia-completes-next-stage-of-transformation-with-agreement-to-sell-here-to-automotive-industry-consortium-at-an-enterprise-value-of-eur-28-billion#) by the Germany big 3 autos, the app looks dated and not as smooth as Google and iOS Maps. **OsmAnd** and **MAPS.ME** are open source and utilise [OpenStreetMap](https://www.openstreetmap.org/). They do not have public transport info though. Use [**Transportr**](https://f-droid.org/en/packages/de.grobox.liberario/) for that. **Organic Maps** is a fork of MAPS.ME without the proprietary bits and it's available on F-Droid.
 
 ---
 
@@ -54,7 +55,7 @@ For proprietary apps, use Yalp Store. You can use built-in credential to install
 
 **App**. Google Pay
 **Issue**: Failed SafetyNet
-**Alternative**: [Loyalty Card Keychain](https://f-droid.org/packages/protect.card_locker/) (for loyalty cards only)
+**Alternative**: [Catima](https://f-droid.org/en/packages/me.hackerchick.catima/), [Loyalty Card Keychain](https://f-droid.org/packages/protect.card_locker/)
 **Info**: SafetyNet can be bypassed through 1) DroidGuard Helper (available from microG's F-Droid [repo](https://microg.org/download.html), install as a system app) or 2) [Magisk Module](https://magiskroot.net/bypass-safetynet-issue-cts/).
 
 ---
