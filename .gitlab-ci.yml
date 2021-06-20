@@ -94,3 +94,6 @@ renovate: # Check dependency update
   rules:
     - if: '$RENOVATE == "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "schedule" || $CI_PIPELINE_SOURCE == "web")'
       when: always
+
+include:
+  - template: Security/Secret-Detection.gitlab-ci.yml
