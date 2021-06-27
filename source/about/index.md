@@ -13,7 +13,7 @@ updated: 2021-03-13
 
 [![GitHub handle](/svg/github.svg)](https://github.com/curbengh)&ensp;[![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)&ensp;[![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben)
 
-- Core member of [Hexojs](http://github.com/hexojs) organisation and maintainer of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
+- (Inactive) Core member of [Hexojs](http://github.com/hexojs) organisation and maintainer of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
 
 - [**hexo-yam**](https://github.com/curbengh/hexo-yam): Yet Another Minifier plugin for Hexo. Minify and compress HTML, JS, CSS and SVG. XML, JSON, etc. Support gzip and brotli compressions.
 
