@@ -49,8 +49,6 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 
 ## Mirrors
 
-- https://mirror.mdleom.com/
-- https://mirror2.mdleom.com/ (to be decommissioned)
 - https://curben.pages.dev/
 - https://curben.netlify.app/
 - https://curben.gitlab.io/
