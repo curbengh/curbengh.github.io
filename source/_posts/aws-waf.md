@@ -40,7 +40,8 @@ The underlying format of a web ACL is JSON. In this use case, I'm only concern w
       "Action": {
         "Allow": {}
       }
-    }]
+    }
+  ]
 }
 ```
 
