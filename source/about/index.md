@@ -31,7 +31,7 @@ updated: 2021-03-13
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
 
-mdleom.com is hosted on a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server) with Cloudflare CDN. The OS is [NixOS](https://nixos.org/) and the web server is [Caddy](https://caddyserver.com/). The web server functions as a file server with ability to failover to mirrors (Cloudflare Pages, Netlify and GitHub Pages). Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The repo also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site); images are resized on-the-fly using [Statically](https://statically.io/).
+mdleom.com is hosted on a [VPS](https://en.wikipedia.org/wiki/Virtual_private_server) with Cloudflare CDN. The OS is [NixOS](https://nixos.org/) and the web server is [Caddy](https://caddyserver.com/). The web server functions as a file server with ability to failover to mirrors (Cloudflare Pages, Netlify and GitHub Pages). It serves content via cloudflared that connects to the CDN network using an outbound tunnel. Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The repo also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site); images are resized on-the-fly using [Statically](https://statically.io/).
 
 More details are available in the following series of posts:
 
@@ -40,6 +40,7 @@ More details are available in the following series of posts:
 - {% post_link caddy-nixos-part-3 'Part 3: Configure Caddy' %}
 - {% post_link tor-hidden-onion-nixos 'Part 4: Setup Tor hidden service' %}
 - {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
+- {% post_link cloudflare-argo-nixos 'Setup Cloudflare Argo Tunnel in NixOS' %}
 
 ## Services
 
