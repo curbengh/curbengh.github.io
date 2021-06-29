@@ -109,7 +109,7 @@ theme_config:
   footer:
     Disclaimer: /disclaimer/
     Status: https://stats.uptimerobot.com/1394zup2LQ
-    Onion: https://gitlab.com/curben/blog#mirrors
+    Onion: https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/
     Eepsite: https://gitlab.com/curben/blog#mirrors
 
   # Load forkawesome icons?
