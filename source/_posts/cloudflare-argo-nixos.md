@@ -104,6 +104,13 @@ in {
         The data directory, for storing credentials.
       '';
     };
+
+    package = mkOption {
+      default = pkgs.cloudflared;
+      defaultText = "pkgs.cloudflared";
+      type = types.package;
+      description = "cloudflared package to use.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -113,7 +120,7 @@ in {
       wants = [ "network-online.target" ]; # systemd-networkd-wait-online.service
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.cloudflared}/bin/cloudflared --config ${cfg.config} --no-autoupdate tunnel run";
+        ExecStart = "${cfg.package}/bin/cloudflared --config ${cfg.config} --no-autoupdate tunnel run";
         Type = "simple";
         User = "argoWeb";
         Group = "argoWeb";
@@ -163,9 +170,12 @@ Restart/reload Caddy for the changed config to take effect.
   ];
   # cloudflared is not distributed via a free software license
   nixpkgs.config.allowUnfree = true;
-  services.argoWeb.enable = true;
-  # if the config is in another location
-  # services.argoWeb.config = "/etc/caddy/argoWeb.yml";
+  services.argoWeb = {
+    enable = true;
+    config = "/etc/caddy/argoWeb.yml";
+    # custom package
+    # package = pkgs.callPackage (import /etc/caddy/cloudflared-custom.nix) { };
+  };
 ```
 
 ## Create a CNAME record
