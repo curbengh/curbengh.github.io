@@ -73,8 +73,8 @@ xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8079 {
 
   header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
-  @harica path /.well-known/pki-validation/Eu10T57406i0uijBkGR
-  respond @harica "2021062911343ffd0a9189a80cf18cb6f9e86dd9a4d4fcc577dd627dd3bd5daae70955c7048b"
+  @harica path /.well-known/pki-validation/xxx
+  respond @harica "yyy"
 }
 ```
 
