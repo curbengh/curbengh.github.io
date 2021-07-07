@@ -368,7 +368,7 @@ The upstream locations insert some information into the response headers that ar
     -x-nf-request-id
     -x-served-by
     -x-timer
-    Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://3g2upl4pq6kufc4m.onion; frame-ancestors 'none'; block-all-mixed-content"
+    Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion; frame-ancestors 'none'; block-all-mixed-content"
     Expires "0"
     Permissions-Policy "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; display-capture 'none'; document-domain 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'none'; sync-xhr 'none'; usb 'none'; vibrate 'none'; vr 'none'; wake-lock 'none'; webauthn 'none'; xr-spatial-tracking 'none'; interest-cohort=()"
     Referrer-Policy "no-referrer"
@@ -444,7 +444,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   -x-timer
   -x-ua-compatible
   Cache-Control "max-age=86400, public"
-  Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://3g2upl4pq6kufc4m.onion; frame-ancestors 'none'; block-all-mixed-content"
+  Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'none'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion; frame-ancestors 'none'; block-all-mixed-content"
   Expires "0"
   Permissions-Policy "accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; camera 'none'; display-capture 'none'; document-domain 'none'; encrypted-media 'none'; fullscreen 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; payment 'none'; picture-in-picture 'none'; speaker 'none'; sync-xhr 'none'; usb 'none'; vibrate 'none'; vr 'none'; wake-lock 'none'; webauthn 'none'; xr-spatial-tracking 'none'; interest-cohort=()"
   Referrer-Policy "no-referrer"

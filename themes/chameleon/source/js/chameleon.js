@@ -52,7 +52,7 @@ if (document.location.hostname.endsWith('.onion')) {
   const searchForms = document.querySelectorAll('form#searchForm, form#searchFormMob')
 
   searchForms.forEach((form) => {
-    form.setAttribute('action', 'https://3g2upl4pq6kufc4m.onion/')
+    form.setAttribute('action', 'https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/')
   })
 }
 
