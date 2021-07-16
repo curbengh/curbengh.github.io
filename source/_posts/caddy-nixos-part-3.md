@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
-updated: 2020-11-09
+updated: 2021-07-16
 tags:
 - server
 - linux
@@ -292,7 +292,7 @@ To make sure Caddy sends the correct `Host:` header to the upstream/backend loca
 
 To prevent any unnecessary request headers from being sent to the upstreams, I use `header_up`. I use it to remove cookie, referer and [other headers](https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-) added by Cloudflare. Since there are many headers to remove, I group them as a global variable. I apply it to all `reverse_proxy` directives.
 
-{% codeblock mark:25,34,40 %}
+``` Caddyfile
 (removeHeaders) {
   header_up -cdn-loop
   header_up -cf-cache-status
@@ -301,10 +301,18 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
   header_up -cf-ray
   header_up -cf-request-id
   header_up -cf-visitor
+  header_up -cf-worker
   header_up -cookie
   header_up -referer
-  header_up -sec-ch-ua
-  header_up -sec-ch-ua-mobile
+  # https://user-agent-client-hints.glitch.me/
+  header_up -sec-ch-ua-arch
+  header_up -sec-ch-ua-bitness
+  header_up -sec-ch-ua-full-version
+  header_up -sec-ch-ua-ua
+  header_up -sec-ch-ua-ua-mobile
+  header_up -sec-ch-ua-ua-model
+  header_up -sec-ch-ua-ua-platform
+  header_up -sec-ch-ua-ua-platform-version
   header_up -true-client-ip
   header_up -via
   header_up -x-forwarded-for
@@ -334,7 +342,7 @@ mdleom.com {
     header_up Host curben.netlify.app
   }
 }
-{% endcodeblock %}
+```
 
 The upstream locations insert some information into the response headers that are irrelevant to the site visitors. I use `header` directive to filter them out. It also applies to all `reverse_proxy` directives.
 
@@ -401,10 +409,47 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
 
 ``` plain common.conf
 ## Optional: disable admin endpoint and http->https redirect
-#{
-#  admin off
-#  auto_https disable_redirects
-#}
+{
+  ## disable admin endpoint
+  # admin off
+  ## http->https redirect
+  # auto_https disable_redirects
+  ## Remove PII from error log
+  log {
+    level ERROR
+    format filter {
+      wrap json {
+        time_format iso8601
+      }
+      fields {
+        request>remote_addr delete
+        request>headers>CDN-Loop delete
+        request>headers>CF-Cache-Status delete
+        request>headers>CF-Connecting-IP delete
+        request>headers>CF-IPCountry delete
+        request>headers>CF-RAY delete
+        request>headers>CF-Request-ID delete
+        request>headers>CF-Visitor delete
+        request>headers>CF-Worker delete
+        request>headers>Cookie delete
+        request>headers>Referer delete
+        request>headers>Sec-CH-UA-Arch delete
+        request>headers>Sec-CH-UA-Bitness delete
+        request>headers>Sec-CH-UA-Full-Version delete
+        request>headers>Sec-CH-UA-UA delete
+        request>headers>Sec-CH-UA-UA-Mobile delete
+        request>headers>Sec-CH-UA-UA-Model delete
+        request>headers>Sec-CH-UA-UA-Platform delete
+        request>headers>Sec-CH-UA-UA-Platform-Version delete
+        request>headers>True-Client-IP delete
+        request>headers>User-Agent delete
+        request>headers>Via delete
+        request>headers>X-Forwarded-For delete
+        request>headers>X-Forwarded-Proto delete
+      }
+    }
+  }
+}
 
 (setHeaders) {
   -access-control-allow-origin
@@ -461,10 +506,18 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   header_up -cf-ray
   header_up -cf-request-id
   header_up -cf-visitor
+  header_up -cf-worker
   header_up -cookie
   header_up -referer
-  header_up -sec-ch-ua
-  header_up -sec-ch-ua-mobile
+  # https://user-agent-client-hints.glitch.me/
+  header_up -sec-ch-ua-arch
+  header_up -sec-ch-ua-bitness
+  header_up -sec-ch-ua-full-version
+  header_up -sec-ch-ua-ua
+  header_up -sec-ch-ua-ua-mobile
+  header_up -sec-ch-ua-ua-model
+  header_up -sec-ch-ua-ua-platform
+  header_up -sec-ch-ua-ua-platform-version
   header_up -true-client-ip
   header_up -via
   header_up -x-forwarded-for
