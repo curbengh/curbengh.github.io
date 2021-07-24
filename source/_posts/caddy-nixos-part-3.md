@@ -266,7 +266,7 @@ In Caddyfile, the config can be expressed as:
 
 ### Host header
 
-To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_upstream` option,
+To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_up` option,
 
 {% codeblock mark:5,13,18 %}
   handle /img/* {
@@ -288,6 +288,14 @@ To make sure Caddy sends the correct `Host:` header to the upstream/backend loca
   }
 {% endcodeblock %}
 
+If there are multiple backends for the reverse_proxy, it's better to use a placeholder instead of hardcording the `Host` header.
+
+{% codeblock mark:2 %}
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app {
+    header_up Host {http.reverse_proxy.upstream.host}
+  }
+{% endcodeblock %}
+
 ### Add or remove headers
 
 To prevent any unnecessary request headers from being sent to the upstreams, I use `header_up`. I use it to remove cookie, referer and [other headers](https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-) added by Cloudflare. Since there are many headers to remove, I group them as a global variable. I apply it to all `reverse_proxy` directives.
@@ -302,7 +310,9 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
   header_up -cf-request-id
   header_up -cf-visitor
   header_up -cf-worker
+  header_up -client-ip
   header_up -cookie
+  header_up -forwarded
   header_up -referer
   # https://user-agent-client-hints.glitch.me/
   header_up -sec-ch-ua-arch
@@ -317,6 +327,8 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
   header_up -via
   header_up -x-forwarded-for
   header_up -x-forwarded-proto
+  header_up -x-proxyuser-ip
+  header_up Host {http.reverse_proxy.upstream.host}
   header_up User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 }
 
@@ -324,7 +336,6 @@ mdleom.com {
   handle /img/* {
     reverse_proxy https://cdn.statically.io {
       import removeHeaders
-      header_up Host cdn.statically.io
     }
   }
 
@@ -333,13 +344,11 @@ mdleom.com {
 
     reverse_proxy https://cdn.statically.io {
       import removeHeaders
-      header_up Host cdn.statically.io
     }
   }
 
-  reverse_proxy https://curben.netlify.app {
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app {
     import removeHeaders
-    header_up Host curben.netlify.app
   }
 }
 ```
@@ -408,7 +417,6 @@ I also add the `Cache-Control` and `Referrer-Policy` to the response header. Use
 Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor Onion' %} and {% post_link i2p-eepsite-nixos 'I2P Eepsite' %}, I refactor most of the configuration into "common.conf" and import it into "caddyProxy.conf".
 
 ``` plain common.conf
-## Optional: disable admin endpoint and http->https redirect
 {
   ## disable admin endpoint
   # admin off
@@ -573,7 +581,6 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   reverse_proxy https://curben.pages.dev https://curben.netlify.app https://curben.gitlab.io {
     import removeHeaders
     lb_policy first
-    header_up Host {http.reverse_proxy.upstream.host}
   }
 }
 ```
