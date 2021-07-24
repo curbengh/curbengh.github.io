@@ -431,7 +431,9 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
         request>headers>CF-Request-ID delete
         request>headers>CF-Visitor delete
         request>headers>CF-Worker delete
+        request>headers>Client-IP delete
         request>headers>Cookie delete
+        request>headers>Forwarded delete
         request>headers>Referer delete
         request>headers>Sec-CH-UA-Arch delete
         request>headers>Sec-CH-UA-Bitness delete
@@ -446,6 +448,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
         request>headers>Via delete
         request>headers>X-Forwarded-For delete
         request>headers>X-Forwarded-Proto delete
+        request>headers>X-ProxyUser-Ip delete
       }
     }
   }
@@ -507,7 +510,9 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   header_up -cf-request-id
   header_up -cf-visitor
   header_up -cf-worker
+  header_up -client-ip
   header_up -cookie
+  header_up -forwarded
   header_up -referer
   # https://user-agent-client-hints.glitch.me/
   header_up -sec-ch-ua-arch
@@ -522,6 +527,8 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   header_up -via
   header_up -x-forwarded-for
   header_up -x-forwarded-proto
+  header_up -x-proxyuser-ip
+  header_up Host {http.reverse_proxy.upstream.host}
   header_up User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 }
 
