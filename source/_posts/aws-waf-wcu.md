@@ -10,7 +10,7 @@ As part of my {% post_link aws-waf 'routine review' %} of my company's [AWS WAF]
 
 While individual and total WCU are shown during ACL creation/modification on the management console, a read-only role could only check the total WCU. It may be possible to use `CheckCapacity` [CLI](https://docs.aws.amazon.com/cli/latest/reference/wafv2/check-capacity.html) or [API](https://docs.aws.amazon.com/waf/latest/APIReference/API_CheckCapacity.html) by separating each rule as an ACL, but that'll involve excessive (online) API calls.
 
-I further improved my script [waf-acl.py](/files/20210627/waf-acl.py) by implementing _offline_ WCU calculation. While the [AWS docs](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statements-list.html) has a complete list of WCU of each match statement, I find the text transformation part is not clear enough.
+I further improved my script [waf-acl.py](https://gitlab.com/curben/aws-scripts/-/blob/main/waf-acl.py) by implementing _offline_ WCU calculation. While the [AWS docs](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statements-list.html) has a complete list of WCU of each match statement, I find the text transformation part is not clear enough.
 
 >  For each Text transformation that you apply, add 10 WCUs.
 

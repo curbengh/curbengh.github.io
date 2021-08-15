@@ -10,7 +10,7 @@ tags:
 
 I regularly need to audit my company's access control lists (ACLs) implemented in [AWS WAF](https://aws.amazon.com/waf/), as part of my job. Each ACL can be more than a thousand lines which is practically impossible to read. I wrote a script that downloads and summarises the ACLs into human-readable format; each one-thousand-line behemoth is transformed into a fifty-line summary that I can _actually_ audit.
 
-The script is [available here](/files/20210627/waf-acl.py). It currently only supports Cloudfront ACL, feel free to extend it to support regional ACL.
+The script is [available here](https://gitlab.com/curben/aws-scripts/-/blob/main/waf-acl.py). It currently only supports Cloudfront ACL, feel free to extend it to support regional ACL.
 
 ```
 ./waf-acl.py --profile {profile-name} --directory {output-dir} --original --wcu --total-wcu
