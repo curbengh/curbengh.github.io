@@ -12,14 +12,6 @@ I regularly need to audit my company's access control lists (ACLs) implemented i
 
 The script is [available here](https://gitlab.com/curben/aws-scripts/-/blob/main/waf-acl.py). It currently only supports Cloudfront ACL, feel free to extend it to support regional ACL.
 
-```
-./waf-acl.py --profile {profile-name} --directory {output-dir} --original --wcu --total-wcu
-```
-
-**profile-name**: The profile name as listed in "~/.aws/credentials".
-**directory**: Output directory. It will be created if not exist. Defaults to current folder.
-**original**: Preserve the original ACL after conversion and save it with "-original" suffix.
-
 ## ACL schema
 
 The underlying format of a web ACL is JSON. In this use case, I'm only concern with two keys:
