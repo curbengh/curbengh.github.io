@@ -69,7 +69,7 @@ PhishTank is a notable example of this kind of discrepancy. Despite being operat
 
 Using URLhaus and PhishTank alone cannot possibly determine the effectiveness of malicious-blocking DNS providers accurately. I believe there are many malicious links out there that are not covered in those datasets. While I do think they are high quality and every DNS provider should consider utilising them, they are not _representative_ samples. So, take DNS-filtering testing which has limited sample with a grain of salt.
 
-(Edit 14/07/2020) I was curious if the result is due to the samples being too _fresh_ (7 hours); DNS providers may not update their sources in real-time and perhaps only update once or twice a day. I ran the tests again on 13 July 2020 using the same samples (which I downloaded in 10 July 2020), a 3-day delay. The results show no significant change though.
+(Edit: 14 Jul 2020) I was curious if the result is due to the samples being too _fresh_ (7 hours); DNS providers may not update their sources in real-time and perhaps only update once or twice a day. I ran the tests again on 13 July 2020 using the same samples (which I downloaded in 10 July 2020), a 3-day delay. The results show no significant change though.
 
 ## Google Safe Browsing
 
