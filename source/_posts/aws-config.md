@@ -1,7 +1,7 @@
 ---
-title: Using AWS Config to query security compliance of resources on organisation-level
+title: Using AWS Config for security compliance and inventory
 excerpt: Query across all accounts and regions of an organisation
-date: 2021-08-15
+date: 2021-09-17
 tags:
 - aws
 - security
