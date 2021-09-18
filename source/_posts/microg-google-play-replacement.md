@@ -2,7 +2,7 @@
 title: microG, a replacement for the proprietary Google Play Services
 excerpt: The core of the Android OS is open source, but much of the core apps, libraries and APIs are proprietary.
 date: 2019-01-12
-updated: 2021-06-19
+updated: 2021-09-18
 tags:
 - android
 ---
@@ -15,11 +15,12 @@ Despite the minimal size of microG, it's actually usable if you can shift away f
 
 microG requires Signature Spoofing to function on behalf of Google Play Services APK (com.google.android.gms). As summarised by lee.wp14 in this [XDA thread](https://forum.xda-developers.com/showpost.php?p=71042083), there are 3 options to install microG:
 
-1. FakeGApps Xposed Module ([Xposed Repo](https://repo.xposed.info/module/com.thermatk.android.xf.fakegapps), [GitHub](https://github.com/thermatk/FakeGApps))
-2. /system Patch ([NanoDroid](https://gitlab.com/Nanolx/NanoDroid), [Haystack](https://github.com/Lanchon/haystack), [Tingle](https://github.com/ale5000-git/tingle))
-3. Custom ROMs. See the [thread](https://forum.xda-developers.com/showpost.php?p=71042083) for a list of supported ROMs and more info on the above options.
+1. Custom ROMs. See the [thread](https://forum.xda-developers.com/showpost.php?p=71042083) for a list of supported ROMs and more info on the above options.
+2. microG installer via [Magisk module](https://github.com/Magisk-Modules-Repo/microG_installer).
 
 Personally I use [microG-bundled LineageOS](https://lineage.microg.org/) as I'm already using LineageOS. It basically mirrors all the [upstream ROMs](https://download.lineageos.org/), so you can get similar updates as upstream's.
+
+(Edit: 18 Sep 2021) I'm currently using [LineageOS GSI](https://forum.xda-developers.com/t/gsi-11-lineageos-18-x-gsi-all-archs.4205461/) in my new phone, which is not yet officially supported by LineageOS. I use a [Magisk module](https://github.com/Magisk-Modules-Repo/microG_installer) (installable via Magisk repo) to install microG, which works better than flashing an OTA zip. ROM-flashing will wipe microG's data, so I need to apply [this workaround](https://teddit.net/r/MicroG/comments/kuhgse/device_registration_and_push_notifications/girx53t) to get cloud messaging to work every time I update the ROM. With a Magisk module, microG's data is stored in user partition instead of system partition.
 
 microG is not an 100% replacement of the Google Play Services, possibly will never be—it [hasn't implement](https://github.com/microg/android_packages_apps_GmsCore/wiki/Implementation-Status) all the APIs. Following are the problematic apps and their alternatives. (**Edit**: I wrote a {% post_link recommended-android-apps 'list of alternative apps' %} which includes the apps below plus some others which are not necessarily incompatible with microG.)
 
