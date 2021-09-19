@@ -13,12 +13,14 @@ Adding to this issue is having all the APIs packaged into a single monolithic Pl
 
 Despite the minimal size of microG, it's actually usable if you can shift away from the Google Apps (which is the goal of microG anyway). Most of us have grown to rely on services offered by Google and moving away from them is not easy. The good news is, there are plenty of great alternatives out there.
 
-microG requires Signature Spoofing to function on behalf of Google Play Services APK (com.google.android.gms). As summarised by lee.wp14 in this [XDA thread](https://forum.xda-developers.com/showpost.php?p=71042083), there are 3 options to install microG:
+microG requires Signature Spoofing to function on behalf of Google Play Services APK (com.google.android.gms). The best way to get signature spoofing is to use ROMs ([list](https://forum.xda-developers.com/showpost.php?p=71042083)) that have built-in support, though you could also [manually patch](https://forum.xda-developers.com/showpost.php?p=71042083) a ROM.
 
-1. Custom ROMs. See the [thread](https://forum.xda-developers.com/showpost.php?p=71042083) for a list of supported ROMs and more info on the above options.
-2. microG installer via [Magisk module](https://github.com/Magisk-Modules-Repo/microG_installer).
+Once you have signature spoofing enabled, there are 2 options of installing microG:
 
-Personally I use [microG-bundled LineageOS](https://lineage.microg.org/) as I'm already using LineageOS. It basically mirrors all the [upstream ROMs](https://download.lineageos.org/), so you can get similar updates as upstream's.
+1. Flash OTA zip ([instruction](https://forum.xda-developers.com/t/index-how-to-get-signature-spoofing-support.3557047/post-79171994)).
+2. [Magisk module](https://github.com/Magisk-Modules-Repo/microG_installer).
+
+Personally I use [microG-bundled LineageOS](https://lineage.microg.org/) as I'm already using LineageOS. It basically mirrors all the [upstream ROMs](https://download.lineageos.org/), so you can get similar updates as upstream's. There's also a [GSI ROM](https://forum.xda-developers.com/t/aosp-11-0_r40-all-in-one-microg-ufofficial-cve-august-2021-arm32-64-vndklite.4281231/) with built-in microG.
 
 (Edit: 18 Sep 2021) I'm currently using [LineageOS GSI](https://forum.xda-developers.com/t/gsi-11-lineageos-18-x-gsi-all-archs.4205461/) in my new phone, which is not yet officially supported by LineageOS. I use a [Magisk module](https://github.com/Magisk-Modules-Repo/microG_installer) (installable via Magisk repo) to install microG, which works better for me than flashing an OTA zip. Even with vndklite (which makes system partition writeable), OTA zip installation may fails sometimes because I can't reliably switch the A/B partition (TWRP is not supported in my phone). microG's data will be wiped (due to missing app) if an installation fails; when that happens, I'll need to re-apply [this workaround](https://teddit.net/r/MicroG/comments/kuhgse/device_registration_and_push_notifications/girx53t) to get cloud messaging to work every time I update the ROM. With a Magisk module, both microG's app and data are stored in the user partition instead of system partition.
 
