@@ -24,14 +24,14 @@ const smartypants = (str) => {
 
 hexo.extend.filter.register('marked:tokenizer', function(tokenizer) {
   const { smartypants: isSmarty } = this.config.marked;
-  tokenizer.inlineText = function(src, inRawBlock) {
+  tokenizer.inlineText = function(src) {
     const { rules } = this;
 
     // https://github.com/markedjs/marked/blob/b6773fca412c339e0cedd56b63f9fa1583cfd372/src/Tokenizer.js#L643-L658
     const cap = rules.inline.text.exec(src);
     if (cap) {
       let text;
-      if (inRawBlock) {
+      if (this.lexer.state.inRawBlock) {
         text = cap[0];
       } else {
         text = escape(isSmarty ? smartypants(cap[0]) : cap[0]);
