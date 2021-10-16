@@ -86,8 +86,7 @@ theme: chameleon
 minify:
   svg:
     plugins: 
-      - name: 'cleanupIDs'
-        active: false
+      cleanupIDs: false
 
 marked:
   # https://github.com/hexojs/hexo-renderer-marked/pull/179
