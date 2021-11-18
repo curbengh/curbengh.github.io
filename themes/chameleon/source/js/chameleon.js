@@ -32,7 +32,7 @@ if (navigator.share && document.location.protocol === 'https:') {
   const shareBtn = document.getElementById('btnshare')
 
   // Unhide share-button if supported
-  shareBtn.style.display = 'initial'
+  shareBtn.style.display = 'inline-block'
 
   shareBtn.addEventListener('click', async () => {
     const query = (selector) => {

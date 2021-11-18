@@ -1066,9 +1066,12 @@ unhide (via JS) if Web Share API is supported */
 .article .article-entry a.headerlink,
 .article-title a#btnshare {
   margin-left: 0.5em;
-  display: inline-block;
   height: 1em;
   width: 1em;
+}
+
+.article .article-entry a.headerlink {
+  display: inline-block;
 }
 
 @media (max-width: 768px) {
