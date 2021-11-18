@@ -6,7 +6,7 @@
 */
 
 const { slugize, stripHTML } = require('hexo-util')
-const svg = '<svg viewBox="15 15 1635 1635"><use href="/svg/link.svg#link"></use></svg>'
+const svg = '<img src="/svg/link.svg">'
 
 const anchorId = (str, transformOption) => {
   return slugize(str.trim(), { transform: transformOption })
