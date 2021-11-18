@@ -733,7 +733,7 @@ svg#share:hover {
 /* hide share button by default
 unhide (via JS) if Web Share API is supported */
 .article-title a#btnshare {
-  display: initial;
+  display: none;
 }
 
 .article-title a#btnshare img {
