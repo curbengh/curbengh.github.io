@@ -6,7 +6,6 @@
 */
 
 const { slugize, stripHTML } = require('hexo-util')
-const svg = '<img src="/svg/link.svg">'
 
 const anchorId = (str, transformOption) => {
   return slugize(str.trim(), { transform: transformOption })
@@ -27,6 +26,6 @@ hexo.extend.filter.register('marked:renderer', function (renderer) {
     }
 
     // add headerlink
-    return `<h${level} id="${id}">${text} <a href="#${id}" class="headerlink" title="${stripHTML(text)}">${svg}</a></h${level}>`
+    return `<h${level} id="${id}">${text} <a href="#${id}" class="headerlink" title="${stripHTML(text)}">§</a></h${level}>`
   }
 })
