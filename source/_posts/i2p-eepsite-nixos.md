@@ -78,9 +78,9 @@ Run `# nixos-rebuild switch` and the keypair will be generated in a file "/var/l
 
 ### B32 address
 
-Eepsite has an **52-character Base32** (B32) address which works similarly like an onion address of Tor hidden service. B32 address is Base32-encoded SHA256 hash of an Eepsite's public key or "I2P destination" as the lingo goes. . I2P generates EDDSA (ED25519-SHA512) by default, in future it may switch to RedDSA. The easy way to get your Eepsite's B32 address is look for a file with 52-character filename in **/var/lib/i2pd/destinations** folder. In my case, the file is **ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.dat**, so my B32 address is **ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p**.
+Eepsite has an **52-character Base32** (B32) address which works similarly like an onion address of Tor hidden service. B32 address is Base32-encoded SHA256 hash of an Eepsite's public key or "I2P destination" as the lingo goes. I2P generates EDDSA (ED25519-SHA512) by default, in future it may switch to RedDSA. The easy way to get your Eepsite's B32 address is look for a file with 52-character filename in **/var/lib/i2pd/destinations** folder. In my case, the file is **ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.dat**, so my B32 address is **ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p**.
 
-You could also manually derive it from the public key using common Linux utility tools. The public key is located in the first 391 bytes of **keypair.dat**.
+Above method is only applicable if you only have one eepsite, otherwise you wouldn't know which file in "destinations" corresponds to which ".dat". Common Linux utility tools can be used to derive the B32 address of a ".dat". The public key is located in the first 391 bytes.
 
 ```
 $ head -c 391 <name>-keys.dat | sha256sum | cut -f1 -d\  | xxd -r -p | base32 | tr '[:upper:]' '[:lower:]' | sed -r 's/=//g'
@@ -181,12 +181,12 @@ in {
         TimeoutStopSec = "5s";
       };
     };
-    
+
     users.users.caddyI2p = {
       home = cfg.dataDir;
       createHome = true;
     };
-    
+
     users.groups.caddyI2p = {
       members = [ "caddyI2p" ];
     };
