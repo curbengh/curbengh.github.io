@@ -44,9 +44,24 @@ More details are available in the following series of posts:
 
 ## Services
 
-- [Nitter](https://github.com/zedeus/nitter): A free and open source lightweight alternative Twitter front-end focused on privacy. [Onion](http://26oq3gioiwcmfojub37nz5gzbkdiqp7fue5kvye7d4txv4ny6fb4wwid.onion)&ensp;[Eepsite](http://u6ikd6zndl3c4dsdq4mmujpntgeevdk5qzkfb57r4tnfeccrn2qa.b32.i2p)
-- [Bibliogram](https://sr.ht/~cadence/bibliogram/): An alternative front-end for Instagram. It works without client-side JavaScript, has no ads or tracking, and doesn't urge you to sign up. [Onion](http://g5kdmgu6dybc2wvfcyy67pax2b57sm2edtwjgikrzz4rps4qmny2y3id.onion)&ensp;[Eepsite](http://uc3imttrmypvgmmayqd4eaqcinwvy5yrriiirwgu3k6q2tum6khq.b32.i2p)
-- [Teddit](https://codeberg.org/teddit/teddit): A free and open source alternative Reddit front-end focused on privacy. [Onion](http://ibarajztopxnuhabfu7fg6gbudynxofbnmvis3ltj6lfx47b6fhrd5qd.onion)&ensp;[Eepsite](http://xugoqcf2pftm76vbznx4xuhrzyb5b6zwpizpnw2hysexjdn5l2tq.b32.i2p)
+- [Nitter](https://github.com/zedeus/nitter): A free and open source lightweight alternative Twitter front-end focused on privacy.
+  * [Onion](http://26oq3gioiwcmfojub37nz5gzbkdiqp7fue5kvye7d4txv4ny6fb4wwid.onion)
+  * [Eepsite](http://u6ikd6zndl3c4dsdq4mmujpntgeevdk5qzkfb57r4tnfeccrn2qa.b32.i2p)
+- [Bibliogram](https://sr.ht/~cadence/bibliogram/): An alternative front-end for Instagram. It works without client-side JavaScript, has no ads or tracking, and doesn't urge you to sign up.
+  * [Onion](http://g5kdmgu6dybc2wvfcyy67pax2b57sm2edtwjgikrzz4rps4qmny2y3id.onion)
+  * [Eepsite](http://uc3imttrmypvgmmayqd4eaqcinwvy5yrriiirwgu3k6q2tum6khq.b32.i2p)
+- [Teddit](https://codeberg.org/teddit/teddit): A free and open source alternative Reddit front-end focused on privacy.
+  * [Onion](http://ibarajztopxnuhabfu7fg6gbudynxofbnmvis3ltj6lfx47b6fhrd5qd.onion)
+  * [Eepsite](http://xugoqcf2pftm76vbznx4xuhrzyb5b6zwpizpnw2hysexjdn5l2tq.b32.i2p)
+- [Libreddit](https://github.com/spikecodes/libreddit): A private front-end for Reddit. No JavaScript, no ads, no tracking, no bloat.
+  * [Onion](http://twjxj64xqcxkz2gif4irnvnd5svvmwnlpv4zqxknwksqhx4yucxeg6ad.onion)
+  * [Eepsite](http://gv47huyjz6esmu4q7ps6twvsn6pe7punuuzxa5cgwor2ubbt5jea.b32.i2p)
+- [SimplyTranslate](https://simple-web.org/projects/simplytranslate.html): Provide fast and private translations to the user without wasting much overhead for extensive styling or JavaScript. Supports Google Translate engine.
+  * [Onion](http://fmgp3rg56ng6mtb5gvu5hgzwwdyzgkmnanettwnmbnueues7ndw2fkyd.onion)
+  * [Eepsite](http://mmiyv57bfhgc7p4pipk7jjqv5meuz5rjijoviquplvhxl3v7aoba.b32.i2p)
+- [Lingva](https://github.com/TheDavidDelta/lingva-translate): An alternative front-end for Google Translate. Retrieves the translation without using any Google-related service.
+  * [Onion](http://beko4bipbbqvwjizoswa3gcjrj3fdgb6nqthv7mt2gcswd2nln45ooid.onion)
+  * [Eepsite](http://ek34dpqqketa3o75jucgiimy6uk5uxyrkr2iv6bt3jnbckshb5la.b32.i2p)
 
 ## Publications
 
