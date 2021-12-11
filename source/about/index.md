@@ -25,7 +25,7 @@ updated: 2021-12-09
 
 - [**pup-filter**](https://gitlab.com/curben/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
 
-- [**tracking-filter**](https://gitlab.com/curben/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar).
+- [**tracking-filter**](https://gitlab.com/curben/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). _[Blokada version](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt) is recommended to block more tracking links ([more details](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469))._
 
 ## Architecture
 
