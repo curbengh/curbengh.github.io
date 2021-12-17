@@ -108,9 +108,10 @@ sudo -e /etc/hosts
 
 The last step before we start the service is to configure the firewall to allow inbound DNS traffic. I recommend not to allow all IP (0.0.0.0, ::0), otherwise you'll get unwanted traffic. In EC2, that means the attached security group.
 
-After we configure the firewall, we can proceed to start Unbound.
+After we configure the firewall, we can proceed to unmask and start the DNS server.
 
 ```
+systemctl unmask unbound
 systemctl enable --now unbound
 ```
 
