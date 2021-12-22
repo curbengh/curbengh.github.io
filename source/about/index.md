@@ -65,6 +65,9 @@ More details are available in the following series of posts:
 - [Wikiless](https://codeberg.org/orenom/wikiless): A free open source alternative Wikipedia front-end focused on privacy.
   * [Onion](http://c2pesewpalbi6lbfc5hf53q4g3ovnxe4s7tfa6k2aqkf7jd7a7dlz5ad.onion)
   * [Eepsite](http://hflqp2ejxygpj6cdwo3ogfieqmxw3b56w7dblt7bor2ltwk6kcfa.b32.i2p)
+- [Scribe](https://sr.ht/~edwardloveall/scribe/): Alternative front-end to Medium.com
+  * [Onion](http://3xejtix5tkneqclwbcuqi2mysi3bqp6qv2b3jwp466itjzjjptiwhdqd.onion)
+  * [Eepsite](http://4dpb7ukgzbmmccrdpeyxkghptrh5ulvxlnfeyxay2ftzgkwf75ca.b32.i2p)
 
 ## Publications
 
