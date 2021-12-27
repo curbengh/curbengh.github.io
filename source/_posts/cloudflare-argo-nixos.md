@@ -162,6 +162,10 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
 Restart/reload Caddy for the changed config to take effect.
 
+## Custom package (optional)
+
+If your NixOS instance is IPv6-only, you may want to use a {% post_link custom-package-nixos-module 'custom package' %}. [`pkgs.cloudflared`](https://search.nixos.org/packages?channel=21.11&from=0&size=50&sort=relevance&type=packages&query=cloudflared) is installed by compiling the source from the [GitHub repo](https://github.com/cloudflare/cloudflared), instead of using a cached binary from Nix repo. cloudflared's license restricts the distribution of binary, hence the need of source compilation. However, GitHub doesn't support IPv6 yet, so we need to clone its repo to other Git repo that supports IPv6 and then download it from there.
+
 ## Start cloudflared
 
 ``` nix
