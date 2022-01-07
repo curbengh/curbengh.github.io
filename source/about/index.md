@@ -21,9 +21,9 @@ updated: 2021-12-19
 
 - [**urlhaus-filter**](https://gitlab.com/curben/urlhaus-filter): A set of blocklists to restrict ~3,000 malware websites. Part of [uBlock Origin](https://github.com/gorhill/uBlock)'s default filter. Based on [URLhaus](https://urlhaus.abuse.ch/).
 
-- [**phishing-filter**](https://gitlab.com/curben/phishing-filter): A set of blocklists to restrict ~9,000 phishing websites. Based on [PhishTank](https://www.phishtank.com/) and [OpenPhish](https://openphish.com/).
+- [**phishing-filter**](https://gitlab.com/curben/phishing-filter): A set of blocklists to restrict ~9,000 phishing websites. Part of uBlock Origin's default filter. Based on [PhishTank](https://www.phishtank.com/) and [OpenPhish](https://openphish.com/).
 
-- [**pup-filter**](https://gitlab.com/curben/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
+- [**pup-filter**](https://gitlab.com/curben/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Part of uBlock Origin's default filter. Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
 
 - [**tracking-filter**](https://gitlab.com/curben/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). [Blokada version](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469) blocks more tracking links but the trade-off is more false positive; available at [blokada.org](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt).
 
