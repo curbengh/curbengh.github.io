@@ -332,4 +332,4 @@ do
     find -L "$i" -maxdepth 1 -executable -type f -exec basename {} \; 2> /dev/null || :
   fi
 done
-{% codeblock %}
+{% endcodeblock %}
