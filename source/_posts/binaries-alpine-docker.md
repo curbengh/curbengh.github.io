@@ -2,14 +2,14 @@
 title: Default binaries in Alpine docker image
 excerpt: Here is the list of binaries shipped with the Docker image of Alpine Linux.
 date: 2018-10-10
-updated: 2020-12-18
+updated: 2021-01-08
 tags:
 - linux
 - alpine
 - busybox
 ---
 
-Here is the list of binaries shipped with the Docker image of Alpine Linux `alpine:3.12`
+Here is the list of binaries shipped with the Docker image of Alpine Linux `alpine:3.15`.
 
 - acpid
 - add-shell
@@ -47,7 +47,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - clear
 - cmp
 - comm
-- conspy
 - cp
 - cpio
 - crond
@@ -69,7 +68,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - dos2unix
 - du
 - dumpkmap
-- dumpleases
 - echo
 - ed
 - egrep
@@ -85,7 +83,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - fbset
 - fbsplash
 - fdflush
-- fdformat
 - fdisk
 - fgrep
 - find
@@ -107,7 +104,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - gzip
 - halt
 - hd
-- hdparm
 - head
 - hexdump
 - hostid
@@ -156,7 +152,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - ls
 - lsmod
 - lsof
-- lspci
 - lsusb
 - lzcat
 - lzma
@@ -212,7 +207,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - pkill
 - pmap
 - poweroff
-- powertop
 - printenv
 - printf
 - ps
@@ -225,7 +219,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - rdev
 - readahead
 - readlink
-- readprofile
 - realpath
 - reboot
 - reformime
@@ -261,7 +254,6 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - shuf
 - slattach
 - sleep
-- smemcap
 - sort
 - split
 - ssl_client
@@ -323,7 +315,21 @@ Here is the list of binaries shipped with the Docker image of Alpine Linux `alpi
 - whois
 - xargs
 - xxd
-- xz
 - xzcat
 - yes
 - zcat
+
+Above list is built using the following command:
+
+{% codeblock script.sh lang:sh https://unix.stackexchange.com/a/120790 source %}
+#!/bin/sh
+
+IFS=":"
+for i in $PATH
+do
+  if [ -d "$i" ]; then
+    # -L follows symlinks
+    find -L "$i" -maxdepth 1 -executable -type f -exec basename {} \; 2> /dev/null || :
+  fi
+done
+{% codeblock %}
