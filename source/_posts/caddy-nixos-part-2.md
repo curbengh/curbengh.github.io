@@ -242,7 +242,7 @@ In my case, I configure iptables to port forward 443 to 4430, so any traffic tha
 
 Most probably you would need `ip46tables` to open ports in both IPv4 and IPv6. If the server doesn't support IPv6 (!), just use `iptables`.
 
-Edit (20 Jun 2021): {% post_link cloudflare-argo-nixos 'cloudflared' %} replaced my port forwarding setup, my web server now binds to localhost and no longer needs open inbound port.
+(Edit: 20 Jun 2021) {% post_link cloudflare-argo-nixos 'cloudflared' %} replaced my port forwarding setup, my web server now binds to localhost and no longer needs open inbound port.
 
 ## Unattended upgrade
 

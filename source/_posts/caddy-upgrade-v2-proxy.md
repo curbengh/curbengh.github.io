@@ -10,7 +10,7 @@ tags:
 
 Caddy v2 brought many major changes, particularly to the Caddyfile syntax. This [site](https://mdleom.com/) is powered by the reverse proxy feature of Caddy, so I need to make sure everything works before I finally upgrade. While v2 has been released for more than 2 weeks by now (after months of beta testing), I only managed get my feet wet last weekend, even though I should've done it during the beta releases. After testing v2 on a local server (plus some forum posts), I would say it is _mostly_ working. While v2.0 has reached feature parity with v1, Caddyfile has not; there are two TLS/HTTPS options that are not yet supported in Caddyfile (see [#3219](https://github.com/caddyserver/caddy/issues/3219), [#3334](https://github.com/caddyserver/caddy/issues/3334); planned to be released in v2.1). So, if you don't need HTTPS--like my {% post_link tor-hidden-onion-nixos 'Tor' %} and {% post_link i2p-eepsite-nixos 'I2P' %} proxies--it should be safe to upgrade.
 
-Edit (16 Feb 2021): v2.1 implemented #3219 and #3334, I've updated this post accordingly.
+(Edit: 16 Feb 2021) v2.1 implemented #3219 and #3334, I've updated this post accordingly.
 
 ## proxy to reverse_proxy
 
