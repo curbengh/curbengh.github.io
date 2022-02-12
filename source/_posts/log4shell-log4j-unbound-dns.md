@@ -2,10 +2,13 @@
 title: Check Log4Shell vulnerability using Unbound DNS server
 excerpt: Check vulnerability without relying on third-party services
 date: 2021-12-17
+updated: 2022-02-12
 tags:
 - security
 - aws
 ---
+
+> (Edit: 12 Feb 2022) AWS CDK stack is available at [curben/aws-scripts](https://gitlab.com/curben/aws-scripts/-/tree/main/log4shell-stack)
 
 Most of the publications discussing the Log4Shell/[Log4j](https://blogs.apache.org/foundation/entry/apache-log4j-cves) vulnerability ([[1]](https://www.huntress.com/blog/rapid-response-critical-rce-vulnerability-is-affecting-java), [[2]](https://www.lunasec.io/docs/blog/log4j-zero-day/), [[3]](https://blog.cloudflare.com/inside-the-log4j2-vulnerability-cve-2021-44228/), [[4]](https://arstechnica.com/information-technology/2021/12/minecraft-and-other-apps-face-serious-threat-from-new-code-execution-bug/)) focus on the ability to instruct the JNDI component to load remote code or download payload using [LDAP](https://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol). A less known fact is that Log4j also supports DNS protocol by default, at least in versions prior to 2.15.0.
 
@@ -24,6 +27,8 @@ When installing a server (web, DNS, app, etc), Ubuntu usually starts the service
 ```
 systemctl mask unbound
 ```
+
+Above command may fail in a script, in that case, use `ln -s /dev/null /etc/systemd/system/unbound.service` instead.
 
 Then, we can proceed to install and configure it.
 
