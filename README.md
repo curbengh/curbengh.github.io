@@ -1,15 +1,16 @@
 [mdleom.com](https://mdleom.com/)
 ===
 
+[![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fmdleom.com)](https://stats.uptimerobot.com/1394zup2LQ)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/aaf73659-db84-4c41-a700-de3926022674/deploy-status)](https://app.netlify.com/sites/curben/deploys)
 [![Build Status](https://gitlab.com/curben/blog/badges/master/pipeline.svg)](https://gitlab.com/curben/blog/-/jobs)
 [![Hexo version](https://img.shields.io/badge/hexo-hexojs/hexo-brightgreen.svg)](https://github.com/hexojs/hexo)
 
 ### Plugins
+- Installed [hexo-yam](https://github.com/curbengh/hexo-yam) (author) to pre-compress static assets (html, css, js and svg).
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
-- Installed [hexo-yam](https://github.com/curbengh/hexo-yam) to pre-compress static assets (html, css, js and svg).
 - [copy-button.js](/themes/chameleon/scripts/copy-button.js) - A [filter](https://hexo.io/api/filter) plugin to add a copy button to each code block.
-- [feed](/themes/chameleon/scripts/feed) - A generator plugin to generate [an RSS feed](https://en.wikipedia.org/wiki/Web_feed). Modified from [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) to use `post.updated` instead of `post.updated`.
+- [feed](/themes/chameleon/scripts/feed) - A generator plugin to generate [an RSS feed](https://en.wikipedia.org/wiki/Web_feed). Adapted from [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) for simpler use case.
 - [heading-link.js](/themes/chameleon/scripts/heading-link.js) - A filter plugin to add a link button next to each heading.
 - [image.js](/scripts/image.js) - A [tag](https://hexo.io/api/tag) plugin to easily embed images in a post with responsive image support.
 - [link.js](/themes/chameleon/scripts/link.js) - A [helper](https://hexo.io/api/helper) plugin to add a link. Modified from [link_to.js](https://github.com/hexojs/hexo/blob/master/lib/plugins/helper/link_to.js) to remove title attribute and 'external' option.
