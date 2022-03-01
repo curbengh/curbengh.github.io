@@ -216,6 +216,13 @@ samp {
   font-size: 0.9em;
 }
 
+kbd {
+  border: 1px solid var(--alt-bg-color);
+  border-radius: 3px;
+  /* https://github.com/alvaromontoro/almond.css */
+  padding: 0.125rem 0.25rem;
+}
+
 /* set bg colour of single backtick wrap */
 p code {
   background: var(--alt-bg-color);

@@ -93,7 +93,7 @@ forward-zone:
   forward-addr: 149.112.112.112
 ```
 
-_`Ctrl + X` to quit, press `Y` to save, `Enter` to confirm._
+<kbd>Ctrl</kbd> + <kbd>X</kbd> to quit, <kbd>Y</kbd> to save, <kbd>Enter</kbd> to confirm.
 
 > With the above config, Unbound will respond to _all_ IP, including _public_ IP if exposed to internet.
 
