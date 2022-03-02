@@ -1,4 +1,4 @@
-const { escape } = require('marked/src/helpers');
+const { escapeHTML: escape } = require('hexo-util')
 
 // https://github.com/markedjs/marked/blob/b6773fca412c339e0cedd56b63f9fa1583cfd372/src/Lexer.js#L8-L24
 // Replace dashes only
@@ -19,22 +19,22 @@ const smartypants = (str) => {
     // ellipses
     .replace(/\.{3}/g, '\u2026')
     // right arrow
-    .replace(/->/g, '\u2192');
-};
+    .replace(/->/g, '\u2192')
+}
 
-hexo.extend.filter.register('marked:tokenizer', function(tokenizer) {
-  const { smartypants: isSmarty } = this.config.marked;
-  tokenizer.inlineText = function(src) {
-    const { rules } = this;
+hexo.extend.filter.register('marked:tokenizer', function (tokenizer) {
+  const { smartypants: isSmarty } = this.config.marked
+  tokenizer.inlineText = function (src) {
+    const { rules } = this
 
     // https://github.com/markedjs/marked/blob/b6773fca412c339e0cedd56b63f9fa1583cfd372/src/Tokenizer.js#L643-L658
-    const cap = rules.inline.text.exec(src);
+    const cap = rules.inline.text.exec(src)
     if (cap) {
-      let text;
+      let text
       if (this.lexer.state.inRawBlock) {
-        text = cap[0];
+        text = cap[0]
       } else {
-        text = escape(isSmarty ? smartypants(cap[0]) : cap[0]);
+        text = escape(isSmarty ? smartypants(cap[0]) : cap[0])
       }
       return {
         // `type` value is a corresponding renderer method
@@ -42,7 +42,7 @@ hexo.extend.filter.register('marked:tokenizer', function(tokenizer) {
         type: 'text',
         raw: cap[0],
         text
-      };
+      }
     }
   }
-});
+})
