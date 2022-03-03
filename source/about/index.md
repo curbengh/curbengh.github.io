@@ -11,7 +11,7 @@ updated: 2021-12-19
 
 ## Projects
 
-[![GitHub handle](/svg/github.svg)](https://github.com/curbengh)&ensp;[![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)&ensp;[![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben)
+[![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben) [![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben)
 
 - (Inactive) Core member of [Hexojs](http://github.com/hexojs) organisation and maintainer of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
 
