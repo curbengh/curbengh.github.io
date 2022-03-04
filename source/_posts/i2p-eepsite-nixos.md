@@ -220,7 +220,7 @@ http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://
 }
 ```
 
-Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service like [stats.i2p](http://stats.i2p/) and [reg.i2p](http://reg.i2p) which acts as a shortcut to my B32 address. HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Eepsite already encrypts the traffic. Let's Encrypt doesn't support validating a .i2p address. Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
+Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service as a shortcut to my B32 address (see [next section](#Register-domain-i2p) for guide). HTTPS is disabled by specifying `http://` prefix, HTTPS is not applicable since Eepsite already encrypts the traffic. No CA is going to validate your .i2p anyway. `strict-transport-security` (HSTS) needs to be removed to prevent the browser from attempting to connect to HTTPS. It binds to IPv6 loopback so it only listens to localhost, use `bind 127.0.0.1 ::1` if you need IPv4.
 
 The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos/#caddyTor.conf)" and "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
 
