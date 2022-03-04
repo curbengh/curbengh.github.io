@@ -1,0 +1,19 @@
+image: alpine:latest
+
+pages:
+  before_script:
+    - apk update && apk add cpio
+
+  script:
+    - mkdir -p .public
+    - find . \( -path ./node_modules -o -path ./themes -o -path '*/.*' -o -path ./README.md \) -prune -o -print | cpio -pdm .public/
+    - mv .public public
+
+  rules:
+    # Only "site" branch; Skip in renovate job
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "site"'
+      when: always
+
+  artifacts:
+    paths:
+      - public/
