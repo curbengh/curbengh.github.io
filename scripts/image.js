@@ -8,6 +8,8 @@
 *  Usage: ![alt](/path/to/img "title")
 */
 
+const { join } = require('path').posix
+
 hexo.extend.filter.register('marked:renderer', (renderer) => {
   renderer.image = (href, title, alt) => {
     if (!alt) alt = ''
@@ -16,24 +18,17 @@ hexo.extend.filter.register('marked:renderer', (renderer) => {
     if (href.endsWith('.svg')) return `<img class="svg" src="${href}" alt="${alt}" title="${title}">`
 
     // embed external image
-    if (!href.startsWith('20')) return `<img src="${href}" alt="${alt}" title="${title}">`
+    if (!href.startsWith('20') && !href.startsWith('/20')) return `<img src="${href}" alt="${alt}" title="${title}">`
 
-    // Statically doesn't support WebP and GIF
-    if (href.endsWith('.webp')) {
-      const gif = href.replace(/\.webp$/, '.gif')
-      return `<a href="/files/${gif}"><picture>` +
-        `<source srcset="/files/${href}" type="image/webp">` +
-        `<img src="/files/${gif}" title="${title}" alt="${alt}" loading="lazy"></picture></a>`
+    const fLink = (path, width) => {
+      const query = new URLSearchParams('f=auto')
+      if (typeof width === 'number') query.set('width', width)
+      const url = new URL('http://example.com/' + join('img', path) + '?' + query)
+
+      return url.pathname + url.search
     }
 
-    const fLink = (str, width) => {
-      if (typeof width === 'number') width = ',w=' + width.toString()
-      else width = ''
-
-      return '/img/gitlab.com/f=auto' + width + '/curben/blog/-/raw/site/' + str
-    }
-
-    return `<a href="${fLink(href)}">` +
+    return `<a href="${join('http://curben.gitlab.io/blog', href)}">` +
       `<img srcset="${fLink(href, 320)} 320w,` +
       `${fLink(href, 468)} 468w,` +
       `${fLink(href, 768)} 768w,` +
