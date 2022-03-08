@@ -27,6 +27,8 @@ updated: 2021-12-19
 
 - [**tracking-filter**](https://gitlab.com/curben/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). [Blokada version](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469) blocks more tracking links but the trade-off is more false positive; available at [blokada.org](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt).
 
+- [**aws-scripts**](https://gitlab.com/curben/aws-scripts): Security-related python scripts for AWS.
+
 ## Architecture
 
 ![Architecture behind mdleom.com](20200223/caddy-nixos.png)
