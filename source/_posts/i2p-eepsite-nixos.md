@@ -42,6 +42,10 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
     enable = true;
     ifname = "ens3";
     address = "xxxx";
+    # TCP & UDP
+    port = 9898;
+    # TCP
+    ntcp2.port = 9899;
     inTunnels = {
       myEep = {
         enable = true;
@@ -54,22 +58,24 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
         # outbound.length = 1;
       };
     };
-    enableIPv4 = false;
+    enableIPv4 = true;
     enableIPv6 = true;
   };
 ```
 
 1. `ifname` is the interface name that has Internet connection.
 2. `address` is the IP address of that Internet-connected interface. Usually i2pd can figure it out by itself, but in an IPv6 environment, an interface could have multiple IPv6 addresses due to IPv6 privacy extensions. In that case, the _true_ IPv6 address needs to be specified.
-3. I `name` the service as "myOnion", so the key pair will be stored in "/var/lib/i2pd/**myEep**-keys.dat". I set `keys` to make sure it really save to that file, despite being the default.
+3. `port` (TCP & UDP) port to listen for incoming connection. Even though i2pd supports NAT traversal, it's not reliable in my experience. This port needs to be open or port-forwarded. Choose any random port between 1024-65535.
+4. `ntcp2.port` (TCP) port to listen for incoming [NTCP2](https://geti2p.net/spec/ntcp2) connection. Choose any random port between 1024-65535. This port also needs to be open.
+3. I name the service as "myEep", so the key pair will be stored in "/var/lib/i2pd/**myEep**-keys.dat". I set `keys` to make sure it really save to that file, despite being the default.
 4. `inPort` is to set the port number that the service binds to. Recommend to set it to port **80**.
   * If you set it to "1234", visitor needs to specify the port number to browse your site, e.g. http://foobar.i2p:1234
-  * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80. I2P has NAT traversal capability and can function without opening any inbound port.
+  * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80.
 5. `address` is location of your server where the Eepsite is hosted. For most use cases, set it to the loopback **127.0.0.1** (default). In my case, it is the IPv6 loopback "::1".
 6. `destination` is the location of your website where Eeepsite will forward the request to. It can be a loopback (if website and Eepsite are hosted within the same server), an IP address, a domain or even another eepsite.
   * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. For separation of privilege, it is recommended to have a web server that is dedicated for Eepsite only. The [next section](#caddyI2p.nix) shows how to set up the web server.
 7. `port` is the port number that your web server listens to.
-8. `enableIPv4` and `enableIPv6` are optional. I set them because my server is IPv6 only.
+8. `enableIPv4` and `enableIPv6` are optional. I enable both.
 9. (Optional) If your website is not behind a CDN, meaning the server's IP address is publicly known (in DNS A/AAAA record), I recommend setting both `inbound.length` and `outbound.length` to 1 (from the default 3). This can significantly decrease the latency of your Eepsite by reducing the hops. This [diagram](https://geti2p.net/en/faq#slow) illustrates the effect of hops.
 
 Run `# nixos-rebuild switch` and the keypair will be generated in a file "/var/lib/i2pd/**myEep**-keys.dat". There are no separate files for public and private keys, both are embedded in the same file.
