@@ -2,7 +2,7 @@
 ===
 
 [![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fmdleom.com)](https://stats.uptimerobot.com/1394zup2LQ)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/aaf73659-db84-4c41-a700-de3926022674/deploy-status)](https://app.netlify.com/sites/curben/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3f4b970a-c258-454c-97d6-3a8164f63262/deploy-status)](https://app.netlify.com/sites/curben/deploys)
 [![Build Status](https://gitlab.com/curben/blog/badges/master/pipeline.svg)](https://gitlab.com/curben/blog/-/jobs)
 [![Hexo version](https://img.shields.io/badge/hexo-hexojs/hexo-brightgreen.svg)](https://github.com/hexojs/hexo)
 
