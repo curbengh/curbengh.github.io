@@ -8,6 +8,7 @@ tags:
 - linux
 - caddy
 - nixos
+series: true
 ---
 
 > 9 Nov 2020: Updated to NixOS 20.09 syntax.

@@ -46,5 +46,21 @@ if (is_archive()) {
   <% if (theme.icons) { %>
     <%- css('/libs/forkawesome/css/forkawesome-1.1.7.min.css') %>
   <% } %>
+<% if (is_post() && page.series) { %>
+  <%
+  if (page.series !== 'first' && page.next?.path?.startsWith(`${config.archive_dir}/`)) {
+    const pageTitle = page.next.title
+  %>
+  <%/* page.next is not a typo */%>
+  <link rel="prev" href="<%- url_for(page.next.path) %>" title="<%= pageTitle %>">
+  <% } %>
+  <%
+  if (page.series !== 'last' && page.prev?.path?.startsWith(`${config.archive_dir}/`)) {
+    const pageTitle = page.prev.title
+  %>
+  <link rel="next" href="<%- url_for(page.prev.path) %>" title="<%= pageTitle %>">
+  <% } %>
+<% } %>
+
   <meta name="yandex-verification" content="e026a03a5dd06730" />
 </head>

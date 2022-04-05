@@ -8,6 +8,7 @@ tags:
 - linux
 - caddy
 - nixos
+series: first
 ---
 
 In this segment, I show you how I install NixOS.

@@ -9,6 +9,7 @@ tags:
 - caddy
 - nixos
 - cloudflare
+series: true
 ---
 
 > 9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to {% post_link caddy-upgrade-v2-proxy 'this article' %} for upgrade guide.
