@@ -8,8 +8,8 @@
     <% }} %>
 
     <div class="search-container">
-      <form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer">
-      <input type="text" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo">
+      <form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search">
+      <input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search">
       <input type="hidden" name="sites" value="<%- config.url.replace(/^http(s)?:\/\//, '') %>">
       <input type="hidden" name="kd" value="-1">
       <input type="hidden" name="kg" value="p">
@@ -28,8 +28,8 @@
     <input id="mobile-menu-toggle" type="checkbox"/>
     <ul id="mobile-nav-link">
       <div class="search-container">
-        <form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer">
-        <input type="text" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo">
+        <form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search">
+        <input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search">
         <input type="hidden" name="sites" value="<%- config.url.replace(/^http(s)?:\/\//, '') %>">
         <input type="hidden" name="kd" value="-1">
         <input type="hidden" name="kg" value="p">
