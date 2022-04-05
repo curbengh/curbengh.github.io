@@ -4,13 +4,7 @@
     <% if (post.prev) { %>
     <strong><%= __('newer') %></strong>
     <a href="<%- url_for(post.prev.path) %>">
-      <div class="article-nav-title">
-      <% if (post.prev.title) { %>
-        <%= post.prev.title %>
-      <% } else { %>
-        (no title)
-      <% } %>
-      </div>
+      <div class="article-nav-title"><%= post.prev.title %></div>
     </a>
     <% } %>
   </span>
