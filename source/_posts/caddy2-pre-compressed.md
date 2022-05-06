@@ -2,9 +2,12 @@
 title: Serving pre-compressed files in Caddy 2
 excerpt: gzip and brotli files
 date: 2020-11-12
+updated: 2022-05-06
 tags:
 - caddy
 ---
+
+> Caddy [v2.4.0](https://github.com/caddyserver/caddy/releases/tag/v2.4.0-beta.2) added a new option [`precompressed`](https://caddyserver.com/docs/caddyfile/directives/file_server) to support serving pre-compressed assets.
 
 Caddy v0.9.4+ and v1.0.0+ support pre-compressed gzip and brotli files automatically. However, this feature is [not yet](https://github.com/caddyserver/caddy/issues/2665) implemented in v2 and requires manual configuration. Examples available at the Caddy forum are incomplete, it's either gzip or brotli. The config provided in this guide supports _both_, prioritising brotli if supported by the requesting web browser (and there are .br files), otherwise fallback to gzip.
 
