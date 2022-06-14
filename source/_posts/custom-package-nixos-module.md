@@ -43,7 +43,7 @@ buildGoModule rec {
 }
 {% endcodeblock %}
 
-In my {% post_link clouflared-argo-nixos 'cloudflared module' %}, I updated the following lines:
+In my {% post_link cloudflare-argo-nixos 'cloudflared module' %}, I updated the following lines:
 
 ``` diff
   options.services.argoWeb = {
