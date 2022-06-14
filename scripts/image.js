@@ -28,7 +28,7 @@ hexo.extend.filter.register('marked:renderer', (renderer) => {
       return url.pathname + url.search
     }
 
-    return `<a href="${join('https://curben.gitlab.io/blog', href)}">` +
+    return `<a href="${join('/img', href)}">` +
       `<img srcset="${fLink(href, 320)} 320w,` +
       `${fLink(href, 468)} 468w,` +
       `${fLink(href, 768)} 768w,` +
