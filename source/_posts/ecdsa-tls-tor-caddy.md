@@ -43,14 +43,11 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
 8. Restart Caddy and check the path has correct response. `curl http://localhost:8080/.well-known/pki-validation/xxx -H "Host: your-onion.onion"
 9. After HARICA verified my onion, I received an email notification that it's ready for purchase and download.
-10. Download the P7B format with the full chain **PKCS#7 (chain)** and convert it to PEM:
-
-```
-openssl pkcs7 -inform pem -in myonion.p7b -print_certs -out myonion.pem -outform pem
-```
-
-_PEM bundle offered by HARICA somehow doesn't include root CA in the cert chain_
-
+10. Download the PEM bundle.
+    - HARICA is [transitioning](https://news.harica.gr/article/2021_harica_tls_roots/) to new root certs. For compatibility with older browsers that have not include the latest root certs yet, the PEM bundle needs to include a cross-cert.
+    - To download the cross-cert, heads to [HARICA repo](https://repo.harica.gr/rep_dyn.php), select **HARICA TLS RSA Root CA 2021 Cross Certificate from HARICA ECC Root CA 2015, 2021** and download PEM.
+    - Append the cross-cert to the PEM bundle, `$ cat pem-bundle.pem cross-cert.pem > fixed-pem-bundle.pem`
+    - [More details](https://chris.partridge.tech/2022/untrusted-harica-onion-certificates/)
 11. Upload ".pem" and ".key" to the server. `chown` it to the Caddy system user and `chmod 600`.
 
 12. Install the cert in Caddy. Site address has to be separated to HTTP and HTTPS blocks due to the use of custom port. When custom port is not used, Caddy listens on port 80 and 443 by default.
