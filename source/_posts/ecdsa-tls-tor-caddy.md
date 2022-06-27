@@ -43,11 +43,13 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
 8. Restart Caddy and check the path has correct response. `curl http://localhost:8080/.well-known/pki-validation/xxx -H "Host: your-onion.onion"
 9. After HARICA verified my onion, I received an email notification that it's ready for purchase and download.
-10. Download the P7B format with the full chain and convert it to PEM:
+10. Download the P7B format with the full chain **PKCS#7 (chain)** and convert it to PEM:
 
 ```
 openssl pkcs7 -inform pem -in myonion.p7b -print_certs -out myonion.pem -outform pem
 ```
+
+_PEM bundle offered by HARICA somehow doesn't include root CA in the cert chain_
 
 11. Upload ".pem" and ".key" to the server. `chown` it to the Caddy system user and `chmod 600`.
 
