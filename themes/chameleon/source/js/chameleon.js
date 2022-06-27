@@ -60,7 +60,8 @@ if (document.location.hostname.endsWith('.onion')) {
 const navLink = document.querySelectorAll('a.main-nav-link, a.mobile-nav-link-a')
 navLink.forEach((ele) => {
   const eleHref = new URL(ele.href)
-  if (eleHref.pathname === document.location.pathname) {
+  const docPath = document.location.pathname
+  if (eleHref.pathname !== '/' && eleHref.pathname === docPath) {
     const span = document.createElement('span')
     span.className = ele.className
     span.textContent = ele.textContent
