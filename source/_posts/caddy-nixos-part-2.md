@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"
 excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
-updated: 2020-11-09
+updated: 2022-07-06
 tags:
 - server
 - linux
@@ -11,7 +11,7 @@ tags:
 series: true
 ---
 
-> 9 Nov 2020: Updated to NixOS 20.09 syntax.
+> 6 Jul 2022: Updated to NixOS 22.05 syntax.
 
 In this post, I show you how I securely configure the NixOS, the server OS behind this website.
 
@@ -96,23 +96,27 @@ Combining with the previous user configs, I ended up with:
         hashedPassword = "*";
       };
       nixos = {
+        group = "nixos";
         hashedPassword = "xxxx";
         isNormalUser = true;
         extraGroups = [ "wheel" ];
       };
       caddyProxy = {
+        group = "caddyProxy";
         home = "/var/lib/caddyProxy";
         createHome = true;
         isSystemUser = true;
         group = "caddyProxy";
       };
       caddyTor = {
+        group = "caddyTor";
         home = "/var/lib/caddyTor";
         createHome = true;
         isSystemUser = true;
         group = "caddyTor";
       };
       tor = {
+        group = "tor";
         home = "/var/lib/tor";
         createHome = true;
         isSystemUser = true;
@@ -122,15 +126,10 @@ Combining with the previous user configs, I ended up with:
     };
 
     groups = {
-      caddyProxy = {
-        members = [ "caddyProxy" ];
-      };
-      caddyTor = {
-        members = [ "caddyTor" ];
-      };
-      tor = {
-        gid = config.ids.gids.tor;
-      };
+      nixos = {};
+      caddyProxy = {};
+      caddyTor = {};
+      tor = {};
     };
   };
 ```
@@ -166,42 +165,74 @@ Once the secret is generated, TOTP can be enabled using the following config. I 
 
 Since DNS is not encrypted in transit, it risks being tampered. To resolve that, I use DNS-over-TLS which as the name implies, uses TLS to encrypt the DNS traffic. I use `stubby` which creates a DNS resolver that listens on localhost and forward DNS query to the upstream server(s) using DoT. `stubby` enables DNSSEC by default to verify authenticity of the DNS response for supported domains. (This domain mdleom.com has DNSSEC enabled through a DS record)
 
-I use Cloudflare DNS simply because I'm already using its CDN, using other alternatives wouldn't have the privacy benefit since it already knows that a visitor is browsing this website. I add [Quad9](https://quad9.net/) as a backup. Refer to [stubby.yml](https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example) for a full list of supported servers.
+I use Cloudflare DNS (simply because I'm already using its CDN) and [Quad9](https://quad9.net/) as backup. Refer to [stubby.yml](https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example) for a full list of supported servers. For Cloudflare DNS, I opt for the malware-blocking flavour, refer to the following IPs if you prefer the default flavour.
+
+```
+Source: https://developers.cloudflare.com/1.1.1.1/setup/
+# No malware blocking
+1.1.1.1
+1.0.0.1
+2606:4700:4700::1111
+2606:4700:4700::1001
+
+# Malware blocking
+1.1.1.2
+1.0.0.2
+2606:4700:4700::1112
+2606:4700:4700::1002
+```
 
 ``` nix
   ## DNS-over-TLS
   services.stubby = {
     enable = true;
-    listenAddresses = [ "0::1" "127.0.0.1" ];
-    roundRobinUpstreams = false;
-    upstreamServers =
-      ''
-        ## Cloudflare DNS
-        - address_data: 2606:4700:4700::1112
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 2606:4700:4700::1002
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.1.1.2
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.0.0.2
-          tls_auth_name: "cloudflare-dns.com"
-        ## Quad9
-        - address_data: 2620:fe::fe
-          tls_auth_name: "dns.quad9.net"
-        - address_data: 2620:fe::9
-          tls_auth_name: "dns.quad9.net"
-        - address_data: 9.9.9.9
-          tls_auth_name: "dns.quad9.net"
-        - address_data: 149.112.112.112
-          tls_auth_name: "dns.quad9.net"
-      '';
-    extraConfig =
-      ''
-        # Set TLS 1.3 as minimum acceptable version
-        tls_min_version: GETDNS_TLS1_3
-        # Require DNSSEC validation
-        dnssec: GETDNS_EXTENSION_TRUE
-      '';
+    settings = {
+      # ::1 cause error, use 0::1 instead
+      listen_addresses = [ "127.0.0.1" "0::1" ];
+      # https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example
+      resolution_type = "GETDNS_RESOLUTION_STUB";
+      dns_transport_list = [ "GETDNS_TRANSPORT_TLS" ];
+      tls_authentication = "GETDNS_AUTHENTICATION_REQUIRED";
+      tls_query_padding_blocksize = 128;
+      idle_timeout = 10000;
+      round_robin_upstreams = 1;
+      tls_min_version = "GETDNS_TLS1_3";
+      dnssec = "GETDNS_EXTENSION_TRUE";
+      upstream_recursive_servers = [
+        {
+          address_data = "1.1.1.2";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "1.0.0.2";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "2606:4700:4700::1112";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "2606:4700:4700::1002";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "9.9.9.9";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "149.112.112.112";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "2620:fe::fe";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "2620:fe::9";
+          tls_auth_name = "dns.quad9.net";
+        }
+      ];
+    };
   };
 ```
 
@@ -477,21 +508,52 @@ Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay ga
   ## DNS-over-TLS
   services.stubby = {
     enable = true;
-    # ::1 cause error, use 0::1 instead
-    listenAddresses = [ "0::1" "127.0.0.1" ];
-    roundRobinUpstreams = false;
-    upstreamServers =
-      ''
-        ## Cloudflare DNS
-        - address_data: 2606:4700:4700::1111
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 2606:4700:4700::1001
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.1.1.1
-          tls_auth_name: "cloudflare-dns.com"
-        - address_data: 1.0.0.1
-          tls_auth_name: "cloudflare-dns.com"
-      '';
+    settings = {
+      listen_addresses = [ "127.0.0.1" "0::1" ];
+      # https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example
+      resolution_type = "GETDNS_RESOLUTION_STUB";
+      dns_transport_list = [ "GETDNS_TRANSPORT_TLS" ];
+      tls_authentication = "GETDNS_AUTHENTICATION_REQUIRED";
+      tls_query_padding_blocksize = 128;
+      idle_timeout = 10000;
+      round_robin_upstreams = 1;
+      tls_min_version = "GETDNS_TLS1_3";
+      dnssec = "GETDNS_EXTENSION_TRUE";
+      upstream_recursive_servers = [
+        {
+          address_data = "1.1.1.2";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "1.0.0.2";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "2606:4700:4700::1112";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "2606:4700:4700::1002";
+          tls_auth_name = "cloudflare-dns.com";
+        }
+        {
+          address_data = "9.9.9.9";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "149.112.112.112";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "2620:fe::fe";
+          tls_auth_name = "dns.quad9.net";
+        }
+        {
+          address_data = "2620:fe::9";
+          tls_auth_name = "dns.quad9.net";
+        }
+      ];
+    };
   };
 
   networking.nameservers = [ "::1" "127.0.0.1" ];
@@ -566,7 +628,11 @@ Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay ga
 
   ### The rest will be explained in the next articles
   ## Caddy web server
-  require = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix /etc/caddy/caddyI2p.nix ];
+  require = [
+    /etc/caddy/caddyProxy.nix
+    /etc/caddy/caddyTor.nix
+    /etc/caddy/caddyI2p.nix
+  ];
   services.caddyProxy = {
     enable = false;
     config = "/etc/caddy/caddyProxy.conf";
