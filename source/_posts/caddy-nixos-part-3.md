@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
-updated: 2021-07-16
+updated: 2022-07-08
 tags:
 - server
 - linux
@@ -12,7 +12,7 @@ tags:
 series: true
 ---
 
-> 9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to {% post_link caddy-upgrade-v2-proxy 'this article' %} for upgrade guide.
+> 8 Jul 2022: Updated to Caddy 2.5 syntax.
 
 In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
 
@@ -431,7 +431,8 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
         time_format iso8601
       }
       fields {
-        request>remote_addr delete
+        request>remote_ip delete
+        request>remote_port delete
         request>headers>CDN-Loop delete
         request>headers>CF-Cache-Status delete
         request>headers>CF-Connecting-IP delete
