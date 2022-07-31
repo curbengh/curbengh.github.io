@@ -83,7 +83,7 @@ Run `# nixos-rebuild switch` and three important files will be generated in the 
 
 I set up another Caddy-powered reverse proxy which is separate from the {% post_link caddy-nixos-part-3 "mdleom.com's" %}. It's similar to [caddyProxy.nix](/blog/2020/03/14/caddy-nix-part-3/#caddyProxy.nix), except I replace "caddyProxy" with "caddyTor". This Nix file exposes `services.caddyTor` so that I can enable the Tor-related Caddy service from "configuration.nix".
 
-``` plain /etc/caddy/CaddyTor.nix
+``` nix /etc/caddy/CaddyTor.nix
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -186,7 +186,7 @@ After you save the file to **/etc/caddy/CaddyTor.nix**, remember to restrict it 
 
 Create a new caddyFile in `/etc/caddy/caddyTor.conf` and starts with the following config:
 
-```
+``` Caddyfile
 import common.conf
 
 # Tor onion
@@ -207,7 +207,7 @@ Update the onion address to the value shown in "[/var/lib/tor/onion/myOnion/host
 
 The rest are similar to "[caddyProxy.conf](blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
 
-``` plain /etc/caddy/caddyTor.conf
+``` Caddyfile /etc/caddy/caddyTor.conf
 import common.conf
 
 # Tor onion
@@ -230,7 +230,7 @@ There is another approach which has a much simpler Caddyfile, but it _doubles_ t
 
 This is also suitable if you have a website that you can't root access.
 
-```
+``` Caddyfile
 # Do not use this approach unless you are absolutely sure
 http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
   bind ::1
@@ -250,7 +250,7 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
 Start the Caddy service.
 
-``` js /etc/nixos/configuration.nix
+``` nix /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix ];
   services.caddyTor = {
     enable = true;
@@ -259,3 +259,16 @@ Start the Caddy service.
 ```
 
 Tor hidden service needs some time to announce to the Tor network, wait for a few hours before trying your newfangled onion address.
+
+## Snowflake proxy (optional)
+
+[Snowflake](https://snowflake.torproject.org/) is an alternative method to connect to the Tor network, useful when connections to [entry nodes](https://metrics.torproject.org/rs.html#search/flag:Guard%20running:true) and [bridge](https://support.torproject.org/censorship/censorship-7/) have been restricted. Volunteers can run Snowflake proxy to enable people who are censored to use it to access the Tor network. Snowflake proxy is available in NixOS 22.05+.
+
+``` nix /etc/nixos/configuration.nix
+  services.snowflake-proxy = {
+    enable = true;
+    capacity = 100;
+  };
+```
+
+`capacity` sets the maximum concurrent clients and there is no limit by default. I set `100` as a precaution. In my experience, on average there are 10-20 clients every hour, with a total 2 GB daily traffic for each direction (2 GB ingress & 2 GB egress). Assuming your VPS provider set a quota based on whichever direction is higher (like Vultr), expect less than 100 GB of monthly traffic.
