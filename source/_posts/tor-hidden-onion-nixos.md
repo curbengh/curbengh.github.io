@@ -63,9 +63,10 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
 1. `enableGeoIP` is disabled as I don't need by-country statistics.
 2. I `name` the service as "myOnion", so the keys will be stored in "/var/lib/tor/onion/**myOnion**" folder.
 3. Set the `version` to 3, which is a [more secure](https://trac.torproject.org/projects/tor/wiki/doc/NextGenOnions#Howtoconnecttothetesthubfornextgenonionservices) version. The most noticable difference is that the generated onion address will be 56-character long, which is much longer than v2's 16-character. Tor already defaults to v3 since 0.3.5, but I set it just to make sure.
-4. `port` is to set the port number that the hidden service binds to. Recommend to set it to port **80**.
+4. `port` sets the port number that the hidden service binds to. Recommend to set it to port **80**.
   * If you set it to "1234", visitor needs to specify the port number to browse your site, e.g. http://foobar.onion:1234
   * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80. Tor has NAT traversal capability and can function without opening any inbound port.
+  * Add port 443 if your onion service is also available in HTTPS; I wrote {% post_link ecdsa-tls-tor-caddy 'a guide' %} on purchasing a .onion SSL certificate and the subsequent configuration.
 5. `toHost` is location of your web server. In my case, it is the IPv6 loopback **[::1]**. If your server supports IPv4 (mine doesn't), you can set it to "127.0.0.1" or "localhost". If it's an IPv6 address, you need to wrap the address with square brackets **[]**.
   * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. Tor recommends to have a separate web server that is dedicated for Tor hidden service only. The [next section](#caddyTor.nix) shows how to set up the web server.
 6. `toPort` is the port number that your web server listens to.
@@ -226,9 +227,9 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 
 ### Alternate Caddyfile
 
-There is another approach which has a much simpler Caddyfile, but it _doubles_ the latency. I could simply reverse proxy to mdleom.com but that itself is {% post_link caddy-nixos-part-3 'also' %} a reverse proxy, so it would add one more roundtrip. But hey, if the latency doesn't faze you, why not.
+There is another approach which has a much simpler Caddyfile, but it _doubles_ the latency. I could simply reverse proxy to mdleom.com but that itself is {% post_link caddy-nixos-part-3 'also' %} a reverse proxy, so it would add one more roundtrip.
 
-This is also suitable if you have a website that you can't root access.
+This is also suitable if you have a website that you don't have root access (e.g. GitHub Pages).
 
 ``` Caddyfile
 # Do not use this approach unless you are absolutely sure
