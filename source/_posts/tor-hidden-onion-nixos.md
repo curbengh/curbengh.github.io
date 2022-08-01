@@ -2,7 +2,7 @@
 title: "How to make your website available over Tor hidden service on NixOS"
 excerpt: "A guide on Tor hidden service on NixOS"
 date: 2020-03-16
-updated: 2020-11-09
+updated: 2022-08-01
 tags:
 - server
 - linux
