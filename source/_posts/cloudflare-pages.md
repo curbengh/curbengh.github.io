@@ -24,8 +24,9 @@ Every push to the git repo will trigger a new build and subsequently a new snaps
 
 ![Cloudflare Pages build progress](20210215/cf-pages-deploy.png)
 
-Speaking of Netlify, I haven't replace it with Clouflare Pages and currently not planning to. Instead, I deploy my blog (including [.onion](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion) and [Eepsite](http://mdleom.i2p)) with a active/standby load balancer that points to the following backend:
+Speaking of Netlify, I haven't replace it with Clouflare Pages and currently not planning to. Instead, I deploy my blog (including [.onion](http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion) and [Eepsite](http://mdleom.i2p)) to two identical web servers that can failover to the following mirrors:
 
-1. curben.pages.dev (active)
-2. curben.netlify.app (standby)
-3. curben.gitlab.io (standby)
+1. [curben.pages.dev](https://curben.pages.dev)
+2. [curben.netlify.app](https://curben.netlify.app)
+3. [curben.gitlab.io](https://curben.gitlab.io)
+4. [curbengh.github.io](https://curbengh.github.io)

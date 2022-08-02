@@ -580,7 +580,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   }
 
   # Multiple mirrors
-  reverse_proxy https://curben.pages.dev https://curben.netlify.app https://curben.gitlab.io {
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app https://curben.gitlab.io https://curbengh.github.io {
     import removeHeaders
     lb_policy first
   }
