@@ -1,0 +1,6 @@
+# Reverse proxy to cdn
+/img/* https://curben.gitlab.io/blog/:splat 200
+/files/* https://curben.gitlab.io/blog/:splat 200
+# https://statically.discourse.group/t/mobile-version-not-working-on-screenshot/225
+# /screenshot/* https://cdn.statically.io/screenshot/device=mobile/curben.netlify.app/:splat 200
+/screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
