@@ -10,7 +10,9 @@ On 8 Aug 2022, GitLab [announced](https://docs.gitlab.com/ee/user/usage_quotas.h
 
 ## Expire new job artifacts
 
-In all my projects that were using more than 5 GB, 99% of the usage came from job artifacts. I believe most of the cases are like this. The first thing I did is to set *new* job artifacts to expire in a week, the default is [30 days](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlab-cicd). Existing job artifact is not affected by this setting.
+In all my projects that were using more than 5 GB, 99% of the usage came from job artifacts. I believe most of the cases are like this. The first thing I did was to set *new* job artifacts to expire in a week, the default is [30 days](https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlab-cicd). Existing job artifacts are not affected by this setting.
+
+If your job artifacts created in a month are much less than 5 GB in total yet still exceed the quota, it is likely caused by very old artifacts which have no expiry. In that case, reducing the default expiry may not be relevant, those old artifacts should be removed instead.
 
 ``` diff .gitlab-ci.yml
 build:
@@ -23,6 +25,8 @@ build:
 ## Remove old job artifacts
 
 As for cleaning up existing job artifacts, I found the following bash script on the GitLab forum. I fixed some variable typo and modified the starting page to "2", all job artifacts will be removed except for the first page, retaining 100 most recent job artifacts. The only dependencies are **curl** and **jq**.
+
+This script is especially useful for removing job artifacts were created before 22 Jun 2020, artifacts created before that date do not expire.
 
 {% codeblock cleanup-gitlab.sh lang:bash https://forum.gitlab.com/t/remove-all-artifact-no-expire-options/9274/12 source %}
 #!/bin/bash
