@@ -28,7 +28,7 @@ As for cleaning up existing job artifacts, I found the following bash script on 
 
 This script is especially useful for removing job artifacts were created before 22 Jun 2020, artifacts created before that date do not expire.
 
-{% codeblock cleanup-gitlab.sh lang:bash https://forum.gitlab.com/t/remove-all-artifact-no-expire-options/9274/12 source %}
+``` bash cleanup-gitlab.sh https://forum.gitlab.com/t/remove-all-artifact-no-expire-options/9274/12 source
 #!/bin/bash
 # https://forum.gitlab.com/t/remove-all-artifact-no-expire-options/9274/12
 # Copyright 2021 "Holloway" Chew, Kean Ho <kean.ho.chew@zoralab.com>
@@ -92,39 +92,39 @@ delete() {
   1>&2 printf "Calling API to get lob list: ${url}\n"
 
   list=$(curl --globoff --header "PRIVATE-TOKEN:${token}" "$url" \
-          | jq -r ".[].id")
+    | jq -r ".[].id")
   if [ ${#list[@]} -eq 0 ]; then
-          1>&2 printf "list is empty\n"
-          return 0
+    1>&2 printf "list is empty\n"
+    return 0
   fi
 
   # remove all jobs from page
   for jobID in ${list[@]}; do
-          url="${baseURL}/${projectID}/jobs/${jobID}/erase"
-          1>&2 printf "Calling API to erase job: ${url}\n"
+    url="${baseURL}/${projectID}/jobs/${jobID}/erase"
+    1>&2 printf "Calling API to erase job: ${url}\n"
 
-          curl --request POST --header "PRIVATE-TOKEN:${token}" "$url"
-          1>&2 printf "\n\n"
+    curl --request POST --header "PRIVATE-TOKEN:${token}" "$url"
+    1>&2 printf "\n\n"
   done
 }
 
 main() {
   # check dependencies
   if [ -z $(type -p jq) ]; then
-          1>&2 printf "[ ERROR ] need 'jq' dependency to parse json."
-          exit 1
+    1>&2 printf "[ ERROR ] need 'jq' dependency to parse json."
+    exit 1
   fi
 
   # loop through each pages from given start_page to end_page inclusive
   for ((i=start_page; i<=end_page; i++)); do
-          delete $i
+    delete $i
   done
 
   # return
   exit 0
 }
 main $@
-{% endcodeblock %}
+```
 
 ## Before & after
 
