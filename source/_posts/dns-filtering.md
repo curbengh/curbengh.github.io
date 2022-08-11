@@ -36,7 +36,7 @@ I use Google DNS (8.8.8.8) to determine _liveness_ of domains, domains that did 
 ## Malware-blocking test result
 
 DNS Provider | Canadian Shield<br>149.112.121.20 | Cloudflare<br>1.1.1.2 | DNSFilter<br>103.247.36.36 | NextDNS<br>45.90.28.38 | OpenDNS<br>208.67.222.222 | Quad9<br>9.9.9.9
---- | --- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 % blocked<br>10 July 2020 | 84.04% | 49.11% | 15.43% | 89.54% | 17.73% | 81.03%
 % blocked<br>13 July 2020 | 83.30% | 49.19% | 15.26% | 86.89% | 16.52% | 78.46%
 
@@ -50,7 +50,7 @@ DNS Provider | Canadian Shield<br>149.112.121.20 | Cloudflare<br>1.1.1.2 | DNSFi
 ## Phishing-blocking test result
 
 DNS Provider | Canadian Shield<br>149.112.121.20 | Cloudflare<br>1.1.1.2 | DNSFilter<br>103.247.36.36 | NextDNS<br>45.90.28.38 | OpenDNS<br>208.67.222.222 | Quad9<br>9.9.9.9
---- | --- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 % blocked<br>10 July 2020 | 72.01% | 36.98% | 73.36% | 89.10% | 50.19% | 49.26%
 % blocked<br>13 July 2020 | 71.53% | 37.38% | 73.71% | 84.40% | 47.33% | 47.00%
 
