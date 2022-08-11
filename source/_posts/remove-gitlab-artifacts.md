@@ -1,5 +1,5 @@
 ---
-title: Remove old GitLab CI job artifacts
+title: Bulk remove old GitLab CI job artifacts
 excerpt: Use this script to unlock a repository that has exceeded the 5 GB usage quota
 date: 2022-08-09
 tags:
