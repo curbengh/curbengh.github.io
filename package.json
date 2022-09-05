@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "hexo generate",
-    "snyk": "snyk auth \"$SNYK_TOKEN\" && snyk protect && snyk test && snyk monitor",
+    "snyk": "snyk auth \"$SNYK_TOKEN\" && snyk-protect && snyk test && snyk monitor",
     "renovate": "renovate --token \"$BOT_TOKEN\" --platform 'gitlab' --onboarding false --update-lock-files false --labels 'renovate' --recreate-closed true --require-config false curben/blog"
   },
   "dependencies": {
