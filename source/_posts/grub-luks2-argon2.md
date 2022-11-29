@@ -11,7 +11,7 @@ tags:
 
 I recently refreshed my Manjaro installation using the official ISO. My last installation used Manjaro Architect, which is my preferred method. Unfortunately, it was removed from all official ISOs due to lack of maintainer. I tried installing it in Live USB but it couldn't install some base packages due to keyring issue, same issue with the [nightly ISO](https://github.com/manjaro-architect/download/releases). As such, I had to use the GUI installer instead.
 
-I ticked "Encrypt system" and Manjaro created two partitions in my NVMe drive.
+I ticked "Encrypt system" and Manjaro created two partitions in my NVMe drive _without_ LVM. [Btrfs subvolume](https://wiki.archlinux.org/title/btrfs#Subvolumes) can provide LVM-like functionality.
 
 | Partition      | Filesystem | Mount       | Encrypted |
 | -------------- | ---------- | ----------- | --------- |
