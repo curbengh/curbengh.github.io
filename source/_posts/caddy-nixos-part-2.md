@@ -2,12 +2,12 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"
 excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
-updated: 2022-07-06
+updated: 2022-12-03
 tags:
-- server
-- linux
-- caddy
-- nixos
+  - server
+  - linux
+  - caddy
+  - nixos
 series: true
 ---
 
@@ -41,31 +41,51 @@ In NixOS, instead of using `useradd` and `passwd` to manage users, you could als
 
 First, I disabled `useradd` and `passwd`.
 
-``` nix
+```nix
 users.mutableUsers = false;
 ```
 
 ## Disable root
 
-``` nix
+```nix
 users.root.hashedPassword = "*";
 ```
 
-## Hash user's password
+## Hash password
 
 User's password can be configured by `users.<name>.password`, obviously this means the password is stored in plain text. Even if you lock down `configuration.nix` with `chmod 600` (which I did), "it is (still) world-readable in the Nix store". The safer way is to store in a hashed form,
 
-``` nix
+```nix
 users.<name>.hashedPassword = "xxxx";
 ```
 
-Use `openssl passwd -6` to generate the SHA512-hashed password. Alternatively, if your distro bundles it (Ubuntu doesn't), you could also use `mkpasswd -m sha-512`, but do enter the password with care because it only prompts once (unlike openssl which prompts twice).
+Use `openssl passwd -6` to generate the SHA512-hashed password. Alternatively, you could also use `mkpasswd -m sha-512` (bundled with `whois` package). To ensure password is entered correctly in `mkpasswd` (it only prompts once), copy the salt value which is the second section where each section is separated by `$` ($6$**salt**$hashedpassword).
+
+```
+mkpasswd -m sha-512 --salt 'saltvalue'
+```
+
+Both outputs of `mkpasswd` should be the same.
+
+### yescript
+
+NixOS 22.11 onwards support yescrypt, a more secure password hashing algorithm than SHA512. It can generated using `mkpasswd -m yescrypt`, openssl passwd doesn't support it yet. mkpasswd generates it with "5" compute cost by default, you can change it using `--round` option with a value from 1 to 11. Increasing the value will make it more resistant to brute-force, but password verification will also be slower.
+
+To verify the output, `--salt` option cannot be used for yescrypt due to [a bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1003151). As a workaround, copy the output from the first `$` until the forth.
+
+```
+printf "Password: " && read -s var && mkpasswd "$var" '$y$parameter$salt$' && var=""
+```
+
+Replace the single-quoted value `''` with the copied value.
+
+### passwordFile
 
 Note that the hash is still world-readable. A more secure option is to use `users.<name>.passwordFile`. Save the hash into a file (e.g. "/etc/nixos/nixos.password") and restricts the file to be readable by root only (`chown root:root` and `chmod 600`).
 
-You might be wondering why not just `passwordFile` during installation. The issue is that, in the live CD environment, the "/etc/" folder refers to the live CD's not the actual one which is located in "/mnt/etc/". I mean, you _could_ try "/mnt/etc/nixos/nixos.password", but you gotta remember to update the option after reboot otherwise you would get locked out. "./nixos.password" value doesn't work because `passwordFile` option doesn't support relative path, it must be a full path. Hence, I have use `hashedPassword` during the initial setup and then switch to `passwordFile`. Remember to remove the `hashedPassword` option once you have set up `passwordFile`.
+You might be wondering why not just `passwordFile` during installation. The issue is that, in the live CD environment, the "/etc/" folder refers to the live CD's not the actual one which is located in "/mnt/etc/". I mean, you _could_ try "/mnt/etc/nixos/nixos.password", but remember to update the option after reboot otherwise you would get locked out. "./nixos.password" value doesn't work because `passwordFile` option doesn't support relative path, it must be a full path. Hence, I have to use `hashedPassword` during the initial setup and then switch to `passwordFile`. Remember to remove the `hashedPassword` option once you have set up `passwordFile`.
 
-``` nix
+```nix
   passwordFile = "/etc/nixos/nixos.password";
   isNormalUser = true;
   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -79,7 +99,7 @@ Once you run `# nixos-rebuild switch`, verify the password has been set, by chec
 # cat /etc/shadow | grep 'nixos'
 ```
 
-The hash in the output should be the same as the "/etc/nixos/nixos.password" file. Only quit root shell **after** verify.
+The hash in the output should be the same as the content of "/etc/nixos/nixos.password" or `hashedPassword` value. Only quit root shell **after** verify.
 
 ## Run each service as different user
 
@@ -87,7 +107,7 @@ For separation of privilege, each service is launched with different user under 
 
 Combining with the previous user configs, I ended up with:
 
-``` nix
+```nix
   users = {
     mutableUsers = false;
 
@@ -136,7 +156,7 @@ Combining with the previous user configs, I ended up with:
 
 ## Enables 2FA (OTP) for login
 
-For extra security, I enabled 2FA for the user account via TOTP method. It can be configured using `google-authenticator` (available in NixOS repo). The resulting secret is stored in "~/.google_authenticator". This is also why `isNormalUser` is needed. `google-authenticator` should be run as a normal user, _not_ root nor sudo.
+For extra security, I enabled 2FA for the user account via TOTP method. It can be configured using `google-authenticator` (available in NixOS repo). The resulting secret is stored in "~/.google*authenticator". This is also why `isNormalUser` is needed. `google-authenticator` should be run as a normal user, \_not* root nor sudo.
 
 ```
 $ google-authenticator
@@ -153,7 +173,7 @@ $ google-authenticator
 
 Once the secret is generated, TOTP can be enabled using the following config. I configured it to require OTP when login and sudo, in addition to password.
 
-``` nix
+```nix
   ## Requires OTP to login & sudo
   security.pam = {
     services.login.googleAuthenticator.enable = true;
@@ -182,7 +202,7 @@ Source: https://developers.cloudflare.com/1.1.1.1/setup/
 2606:4700:4700::1002
 ```
 
-``` nix
+```nix
   ## DNS-over-TLS
   services.stubby = {
     enable = true;
@@ -238,7 +258,7 @@ Source: https://developers.cloudflare.com/1.1.1.1/setup/
 
 Then I point systemd's resolved to stubby. I do configure it to fallback to unencrypted DNS if stubby is not responsive (which does happen). Whether you need an unsecured fallback depends on your cost-benefit. For me, the cost of the site being inaccessible (due to unresponsive stubby) outweighs the benefit of having enforced encryption (my setup is opportunistic).
 
-``` nix
+```nix
   networking.nameservers = [ "::1" "127.0.0.1" ];
   services.resolved = {
     enable = true;
@@ -258,7 +278,7 @@ By default, Linux program cannot bind to port <=1024 for security reason. If a p
 
 In my case, I configure iptables to port forward 443 to 4430, so any traffic that hits 443 will be redirected to 4430. Both ports need to be opened, but I do configure my dedicated firewall (separate from the web server) to allow port 443 only.
 
-``` nix
+```nix
   ## Port forwarding
   networking.firewall = {
     enable = true;
@@ -284,7 +304,7 @@ In the config, you can also specify the time that the server will reboot. I reco
 
 (For more advanced usage of `dates`, see [`systemd.time`](https://jlk.fjfi.cvut.cz/arch/manpages/man/systemd.time.7#CALENDAR_EVENTS))
 
-``` nix
+```nix
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
@@ -303,7 +323,7 @@ $ sudo usbguard generate-policy > /var/lib/usbguard/rules.conf
 
 Then, I just simply enable the service:
 
-``` nix
+```nix
   # Load "/var/lib/usbguard/rules.conf" by default
   services.usbguard.enable = true;
 ```
@@ -314,7 +334,7 @@ Once enabled, any device not whitelisted in the policy will not be accessible.
 
 Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecuritySettings) and [ArchWiki](https://wiki.archlinux.org/index.php/sysctl).
 
-``` nix
+```nix
   ## Enable BBR module
   boot.kernelModules = [ "tcp_bbr" ];
 
@@ -363,12 +383,12 @@ Kernel compiled with additional security-oriented patch set. [More details](http
 
 _NixOS [defaults](https://nixos.wiki/wiki/Linux_kernel) to the latest LTS kernel_
 
-``` nix
+```nix
   # Latest LTS kernel
   boot.kernelPackages = pkgs.linuxPackages_hardened;
 ```
 
-``` nix
+```nix
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest_hardened;
 ```
@@ -379,7 +399,7 @@ Since my web server has limited disk space, it needs to run [garbage collector](
 
 Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay garbage collection to 01:00 to avoid time conflict. The order doesn't matter, but there should be at least 15 minutes buffer.
 
-``` nix
+```nix
   ## Garbage collector
   nix.gc = {
     automatic = true;
@@ -396,7 +416,7 @@ Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay ga
 
 ## Complete configuration.nix
 
-``` nix /etc/nixos/configuration.nix
+```nix /etc/nixos/configuration.nix
 { config, pkgs, ... }:
 
 {
