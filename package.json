@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "hexo generate",
-    "snyk": "snyk auth && snyk-protect && snyk test && snyk monitor",
+    "snyk": "snyk auth $SNYK_TOKEN && snyk-protect && snyk test && snyk monitor",
     "renovate": "renovate --platform 'gitlab' --onboarding false --update-lock-files false --labels 'renovate' --recreate-closed true --require-config 'ignored' \"$CI_PROJECT_PATH\""
   },
   "dependencies": {
