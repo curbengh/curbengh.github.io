@@ -13,23 +13,31 @@ updated: 2022-08-01
 
 [![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben) [![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben) [![Codeberg handle](/svg/codeberg.svg)](https://codeberg.org/curben/)
 
+- [**malware-filter**](https://gitlab.com/malware-filter): A collection of blocklists:
+
+  - [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict ~3,000 malware websites. Part of [uBlock Origin](https://github.com/gorhill/uBlock)'s default filter. Based on [URLhaus](https://urlhaus.abuse.ch/).
+
+  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict ~35,000 phishing websites. Part of uBlock Origin's default filter. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
+
+  - [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Part of uBlock Origin's default filter. Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
+
+  - [**tracking-filter**](https://gitlab.com/malware-filter/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). [Blokada version](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469) blocks more tracking links but the trade-off is more false positive; available at [blokada.org](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt).
+
+  - [**vn-badsite-filter**](https://gitlab.com/malware-filter/vn-badsite-filter): A set of blocklists to restrict 6,000+ malicious websites targeting Vietnamese users; also suitable for global users. Based on [Hieu Minh Ngo](https://chongluadao.vn)'s list.
+
+  - [**botnet-filter**](https://gitlab.com/malware-filter/botnet-filter): A set of blocklists to restrict botnet IPs used as command and control (C2) servers. Based on [Feodo Tracker](https://feodotracker.abuse.ch/). Recommend to use the [upstream blocklist](https://feodotracker.abuse.ch/blocklist/) whenever possible, it has much more frequent update (every 5 minutes).
+
+  - [**splunk-malware-filter**](https://gitlab.com/malware-filter/splunk-malware-filter): A Splunk add-on for update malware-filter lookups.
+
+- [**splunk-scripts**](https://gitlab.com/curben/splunk-scripts): Miscellaneous python scripts for Splunk.
+
+- [**aws-scripts**](https://gitlab.com/curben/aws-scripts): Security-related python scripts for AWS.
+
 - (Inactive) Core contributor of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
 
 - [**hexo-yam**](https://github.com/curbengh/hexo-yam): Yet Another Minifier plugin for Hexo. Minify and compress HTML, JS, CSS and SVG. XML, JSON, etc. Support gzip and brotli compressions.
 
 - [**hexo-nofollow**](https://github.com/curbengh/hexo-nofollow): A Hexo plugin that adds [`rel="external nofollow noopener noreferrer"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) to all external links in your blog posts for security, privacy and SEO.
-
-- [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict ~3,000 malware websites. Part of [uBlock Origin](https://github.com/gorhill/uBlock)'s default filter. Based on [URLhaus](https://urlhaus.abuse.ch/).
-
-- [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict ~35,000 phishing websites. Part of uBlock Origin's default filter. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
-
-- [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Part of uBlock Origin's default filter. Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
-
-- [**tracking-filter**](https://gitlab.com/malware-filter/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). [Blokada version](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469) blocks more tracking links but the trade-off is more false positive; available at [blokada.org](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt).
-
-- [**vn-badsite-filter**](https://gitlab.com/malware-filter/vn-badsite-filter): A set of blocklists to restrict 6,000+ malicious websites targeting Vietnamese users; also suitable for global users. Based on [Hieu Minh Ngo](https://chongluadao.vn)'s list.
-
-- [**aws-scripts**](https://gitlab.com/curben/aws-scripts): Security-related python scripts for AWS.
 
 ## Architecture
 
