@@ -2,6 +2,7 @@
 title: SSH authentication using short-lived certificate through Cloudflare Tunnel
 excerpt: A quick quide to SSH certificate without using an identity provider.
 date: 2023-02-13
+updated: 2023-02-14
 tags:
   - cloudflare
 ---
@@ -167,3 +168,9 @@ Back to the terminal, wait for at least 5 seconds and you should see the usual S
 ## Browser-based shell
 
 As a bonus, head to test.yourdomain.com (see [Add an application](#Add-an-application) step) which will redirect you to a login page just the previous step. After login with a 6-digit PIN, you shall see a browser-based shell.
+
+## Usage monitoring
+
+Head to **Settings** -> **Account** to monitor how many users you have, each email address you configured to receive one-time PIN is counted as one user.
+
+To delete user(s), head to **Users**, tick the relevant users, **Update status** and then **Remove**. The seat usage column should show _Inactive_.
