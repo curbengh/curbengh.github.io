@@ -2,7 +2,7 @@
 title: SSH authentication using short-lived certificate through Cloudflare Tunnel
 excerpt: A quick quide to SSH certificate without using an identity provider.
 date: 2023-02-13
-updated: 2023-02-14
+updated: 2023-02-16
 tags:
   - cloudflare
 ---
