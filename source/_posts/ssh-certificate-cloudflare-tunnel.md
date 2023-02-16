@@ -106,7 +106,7 @@ Install `openssh-server`.
 
 `sudo -e /etc/ssh/sshd_config.d/cf.conf`
 
-```
+```plain /etc/ssh/sshd_config.d/cf.conf
 TrustedUserCAKeys /etc/ssh/ca.pub
 ListenAddress 127.0.0.1
 ListenAddress ::1
@@ -125,6 +125,24 @@ The easiest setup is one where a Unix username matches the email that you config
 
 Set a random password and leave everything else blank.
 
+### Matching email to different username
+
+To match **loremipsum**@youremail.com to **lipsum** user:
+
+```plain /etc/ssh/sshd_config.d/cf.conf
+Match user lipsum
+  AuthorizedPrincipalsCommand /bin/echo 'loremipsum'
+  AuthorizedPrincipalsCommandUser nobody
+```
+
+**loremipsum+somealias**@youremail.com also works.
+
+```plain /etc/ssh/sshd_config.d/cf.conf
+Match user lipsum
+  AuthorizedPrincipalsCommand /bin/echo 'loremipsum+somealias'
+  AuthorizedPrincipalsCommandUser nobody
+```
+
 ## Initiate SSH connection
 
 Install `cloudflared` on the host that you're going to SSH from.
@@ -133,7 +151,7 @@ Install `cloudflared` on the host that you're going to SSH from.
 
 Example output:
 
-```
+```plain ~/.ssh/config
 Match host test.example.com exec "/usr/local/bin/cloudflared access ssh-gen --hostname %h"
     ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
     IdentityFile ~/.cloudflared/%h-cf_key
@@ -142,7 +160,7 @@ Match host test.example.com exec "/usr/local/bin/cloudflared access ssh-gen --ho
 
 or
 
-```
+```plain ~/.ssh/config
 Host test.example.com
     ProxyCommand bash -c '/usr/local/bin/cloudflared access ssh-gen --hostname %h; ssh -tt %r@cfpipe-test.example.com >&2 <&1'
 
@@ -150,7 +168,7 @@ Host cfpipe-test.example.com
     HostName test.example.com
     ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
     IdentityFile ~/.cloudflared/test.example.com-cf_key
-    CertificateFile ~/.cloudflared/test.example.com-cf_key-cert.pup
+    CertificateFile ~/.cloudflared/test.example.com-cf_key-cert.pub
 ```
 
 Save the output to `$HOME/.ssh/config`.
@@ -174,3 +192,7 @@ As a bonus, head to test.yourdomain.com (see [Add an application](#Add-an-applic
 Head to **Settings** -> **Account** to monitor how many users you have, each email address you configured to receive one-time PIN is counted as one user.
 
 To delete user(s), head to **Users**, tick the relevant users, **Update status** and then **Remove**. The seat usage column should show _Inactive_.
+
+## Inspect user certificate
+
+`ssh-keygen -L -f ~/.cloudflared/test.example.com-cf_key-cert.pub`
