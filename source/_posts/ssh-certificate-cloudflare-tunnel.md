@@ -1,8 +1,8 @@
 ---
-title: SSH authentication using short-lived certificate through Cloudflare Tunnel
+title: SSH certificate using Cloudflare Tunnel
 excerpt: A quick quide to SSH certificate without using an identity provider.
 date: 2023-02-13
-updated: 2023-02-16
+updated: 2023-02-18
 tags:
   - cloudflare
 ---
@@ -92,7 +92,7 @@ Navigate to **Access** -> **Tunnels**
 
 **Route tunnel** tab,
 
-- Public hostname: test.example.com
+- Public hostname: test.yourdomain.com
   - This is the application domain in the [Add an application](#Add-an-application) step.
 - Service
   - SSH type: URL = localhost:22
@@ -152,7 +152,7 @@ Install `cloudflared` on the host that you're going to SSH from.
 Example output:
 
 ```plain ~/.ssh/config
-Match host test.example.com exec "/usr/local/bin/cloudflared access ssh-gen --hostname %h"
+Match host test.yourdomain.com exec "/usr/local/bin/cloudflared access ssh-gen --hostname %h"
     ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
     IdentityFile ~/.cloudflared/%h-cf_key
     CertificateFile ~/.cloudflared/%h-cf_key-cert.pub
@@ -161,21 +161,21 @@ Match host test.example.com exec "/usr/local/bin/cloudflared access ssh-gen --ho
 or
 
 ```plain ~/.ssh/config
-Host test.example.com
-    ProxyCommand bash -c '/usr/local/bin/cloudflared access ssh-gen --hostname %h; ssh -tt %r@cfpipe-test.example.com >&2 <&1'
+Host test.yourdomain.com
+    ProxyCommand bash -c '/usr/local/bin/cloudflared access ssh-gen --hostname %h; ssh -tt %r@cfpipe-test.yourdomain.com >&2 <&1'
 
-Host cfpipe-test.example.com
-    HostName test.example.com
+Host cfpipe-test.yourdomain.com
+    HostName test.yourdomain.com
     ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
-    IdentityFile ~/.cloudflared/test.example.com-cf_key
-    CertificateFile ~/.cloudflared/test.example.com-cf_key-cert.pub
+    IdentityFile ~/.cloudflared/test.yourdomain.com-cf_key
+    CertificateFile ~/.cloudflared/test.yourdomain.com-cf_key-cert.pub
 ```
 
 Save the output to `$HOME/.ssh/config`.
 
 Now, the moment of truth.
 
-`ssh loremipsum@test.example.com` (replace the username with the one you created in [Create a test user](#Create-a-test-user) step.)
+`ssh loremipsum@test.yourdomain.com` (replace the username with the one you created in [Create a test user](#Create-a-test-user) step.)
 
 The terminal should launch a website to _team-name_.cloudflareaccess.com. Enter the email you configured in [Add an application](#Add-an-application) step and then enter the received 6-digit PIN.
 
@@ -195,4 +195,4 @@ To delete user(s), head to **Users**, tick the relevant users, **Update status**
 
 ## Inspect user certificate
 
-`ssh-keygen -L -f ~/.cloudflared/test.example.com-cf_key-cert.pub`
+`ssh-keygen -L -f ~/.cloudflared/test.yourdomain.com-cf_key-cert.pub`
