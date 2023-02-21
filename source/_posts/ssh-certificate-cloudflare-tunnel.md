@@ -2,7 +2,7 @@
 title: SSH certificate using Cloudflare Tunnel
 excerpt: A quick quide to SSH certificate without using an identity provider.
 date: 2023-02-13
-updated: 2023-02-18
+updated: 2023-02-21
 tags:
   - cloudflare
 ---
@@ -143,6 +143,33 @@ Match user lipsum
   AuthorizedPrincipalsCommandUser nobody
 ```
 
+### AuthorizedPrincipalsFile
+
+For NixOS user, `AuthorizedPrincipalsCommand` will not work because the command will run within "/nix/store" but it is read-only. Instead, you should use `AuthorizedPrincipalsFile`. This config also enables you to match multiple emails to a username, just separate each email user by newline. This applies to all OpenSSH instances, not just NixOS.
+
+`echo 'loremipsum' | sudo tee /etc/ssh/authorized_principals`
+
+````nix /etc/nixos/configuration.nix
+  services.openssh = {
+    enable = true;
+    permitRootLogin = "no";
+    passwordAuthentication = false;
+    # ports = [ 1234 ];
+    extraConfig =
+      ''
+        TrustedUserCAKeys /etc/ssh/ca.pub
+        Match User lipsum
+          AuthorizedPrincipalsFile /etc/ssh/authorized_principals
+          # if there is no existing AuthenticationMethods
+          AuthenticationMethods publickey
+      '';
+  };
+```
+
+### Other use cases
+
+https://developers.cloudflare.com/cloudflare-one/identity/users/short-lived-certificates/#2-ensure-unix-usernames-match-user-sso-identities
+
 ## Initiate SSH connection
 
 Install `cloudflared` on the host that you're going to SSH from.
@@ -156,7 +183,7 @@ Match host test.yourdomain.com exec "/usr/local/bin/cloudflared access ssh-gen -
     ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
     IdentityFile ~/.cloudflared/%h-cf_key
     CertificateFile ~/.cloudflared/%h-cf_key-cert.pub
-```
+````
 
 or
 
