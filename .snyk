@@ -2,22 +2,9 @@
 version: v1.13.5
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-JS-GLOBPARENT-1016905:
-    - '*':
+  SNYK-JS-HTMLMINIFIER-3091181:
+    - "*":
         reason: Patch unavailable
-        expires: '2021-06-30T00:00:00.000Z'
-  SNYK-JS-HOSTEDGITINFO-1088355:
-    - '*':
-        reason: Patch unavailable
-        expires: '2021-06-30T00:00:00.000Z'
+        expires: "2023-06-30T00:00:00.000Z"
 # patches apply the minimum changes required to fix a vulnerability
 patch:
-  SNYK-JS-LODASH-567746:
-    - hexo > lodash:
-        patched: '2020-05-04T00:00:00.000Z'
-      renovate > lodash:
-        patched: '2020-05-04T00:00:00.000Z'
-      renovate > @snyk/ruby-semver > lodash:
-        patched: '2020-05-15T00:00:00.000Z'
-      lodash:
-        patched: '2020-06-22T00:00:00.000Z'
