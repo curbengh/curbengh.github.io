@@ -2,10 +2,13 @@
 title: Installing Caddy plugins in NixOS
 excerpt: By using custom package
 date: 2021-12-27
+updated: 2023-02-23
 tags:
 - caddy
 - nixos
 ---
+
+> [Previous method](#Custom-package) no longer works on 22.11. Refer to [xcaddy](#xcaddy) section instead.
 
 Caddy, like any other web servers, is extensible through plugins. Plugin is usually installed using [xcaddy](https://github.com/caddyserver/xcaddy); using it is as easy as `$ xcaddy build --with github.com/caddyserver/ntlm-transport` to build the latest caddy binary with [ntlm-transport](https://github.com/caddyserver/ntlm-transport) plugin.
 
@@ -88,7 +91,7 @@ in buildGoModule rec {
 }
 {% endcodeblock %}
 
-## Install custom package
+### Install custom package
 
 Specify the desired plugins in `services.caddy.package.plugins`:
 
@@ -106,3 +109,66 @@ Specify the desired plugins in `services.caddy.package.plugins`:
 ```
 
 The above example will install ntlm-transport and [forwardproxy](https://github.com/caddyserver/forwardproxy) plugins. The first run of `nixos-rebuild` will fail due to mismatched `vendorSha256`, simply replace the "000..." with the expected value and the second run should be ok.
+
+## xcaddy
+
+### Nix sandbox
+
+Since the Nix-way of building custom caddy plugins no longer works in 22.11, I resort to the *caddy*-way instead, by using [xcaddy](https://github.com/caddyserver/xcaddy). The implication of using xcaddy is that Nix sandbox can no longer be enabled because the sandbox does not even allow network access. Nix sandbox is enabled by default in NixOS, to disable:
+
+```nix /etc/nixox/configuration.nix
+  nix.settings.sandbox = false;
+```
+
+Then run `sudo nixos-rebuild switch` to apply the config. Verify the generated config in `/etc/nix/nix.conf`. Refer to [this article](https://nixos.wiki/wiki/Nix_package_manager#Sandboxing) for details on Nix sandbox.
+
+### Build custom plugins with xcaddy
+
+The following package will always use the [`latest`](https://github.com/caddyserver/caddy/releases/latest) caddy release.
+
+{% codeblock /etc/caddy/custom-package.nix lang:nix https://discourse.nixos.org/t/build-caddy-with-modules-in-devenv-shell/25125/4 source mark:7,21 %}
+{ pkgs, config, plugins, ... }:
+
+with pkgs;
+
+stdenv.mkDerivation rec {
+  pname = "caddy";
+  # https://github.com/NixOS/nixpkgs/issues/113520
+  version = "latest";
+  dontUnpack = true;
+
+  nativeBuildInputs = [ git go xcaddy ];
+
+  configurePhase = ''
+    export GOCACHE=$TMPDIR/go-cache
+    export GOPATH="$TMPDIR/go"
+  '';
+
+  buildPhase = let
+    pluginArgs = lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins;
+  in ''
+    runHook preBuild
+    ${xcaddy}/bin/xcaddy build latest ${pluginArgs}
+    runHook postBuild
+  '';
+
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/bin
+    mv caddy $out/bin
+    runHook postInstall
+  '';
+}
+{% endcodeblock %}
+
+If you prefer to specify a version, modify the following lines:
+
+```nix
+  # line 7
+  version = "2.6.4";
+  # line 12
+  ${xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
+```
+
+To install the above package, use the same config shown in the [Install custom package](#Install-custom-package) but remove the `vendorSha256` line. Remember to `nixos-rebuild` again.
