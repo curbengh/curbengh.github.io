@@ -18,7 +18,7 @@ hexo.extend.filter.register('marked:renderer', (renderer) => {
     if (href.endsWith('.svg')) return `<img class="svg" src="${href}" alt="${alt}" title="${title}">`
 
     // embed external image
-    if (!href.startsWith('20') && !href.startsWith('/20')) return `<img src="${href}" alt="${alt}" title="${title}">`
+    if (href.startsWith('http')) return `<img src="${href}" alt="${alt}" title="${title}">`
 
     const fLink = (path, width) => {
       const query = new URLSearchParams('f=auto')
