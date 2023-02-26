@@ -2,7 +2,7 @@
 title: Installing Caddy plugins in NixOS
 excerpt: By using custom package
 date: 2021-12-27
-updated: 2023-02-23
+updated: 2023-02-26
 tags:
 - caddy
 - nixos
@@ -16,7 +16,7 @@ NixOS has its [own way](https://nixos.org/manual/nixpkgs/stable/#sec-language-go
 
 In NixOS, the Caddy module has long included [`services.caddy.package`](https://search.nixos.org/options?channel=21.11&show=services.caddy.package&from=0&size=50&sort=relevance&type=packages&query=caddy) option to specify custom package. It was primarily used as a way to install Caddy 2 from the unstable channel (`unstable.caddy`) because the package in stable channel (`pkgs.caddy`) of NixOS 20.03 is still Caddy 1. I talked about that option in a {% post_link caddy-v2-nixos 'previous post' %}.
 
-Aside from installing Caddy from different channel, that option can also be used to specify a custom package by using [`pkgs.callPackage`](https://nixos.org/guides/nix-pills/callpackage-design-pattern.html). I {% post_link custom-package-nixos-module 'previously used' %} `callPackage` as a workaround to install cloudflared in a IPv6-only instance from a repository other than GitHub because GitHub doesn't support IPv6 yet.
+Aside from installing Caddy from different channel, that option can also be used to specify a custom package by using [`pkgs.callPackage`](https://nixos.org/guides/nix-pills/callpackage-design-pattern.html). I {% post_link custom-package-nixos-module 'previously used' %} `callPackage` as a workaround to install cloudflared in an IPv6-only instance from a repository other than GitHub because GitHub doesn't support IPv6 yet.
 
 If a custom package is defined in "/etc/caddy/custom-package.nix", then the configuration will be:
 
@@ -120,7 +120,9 @@ Since the Nix-way of building custom caddy plugins no longer works in 22.11, I r
   nix.settings.sandbox = false;
 ```
 
-Then run `sudo nixos-rebuild switch` to apply the config. Verify the generated config in `/etc/nix/nix.conf`. Refer to [this article](https://nixos.wiki/wiki/Nix_package_manager#Sandboxing) for details on Nix sandbox.
+Then run `sudo nixos-rebuild switch` to apply the config. Verify the generated config in `/etc/nix/nix.conf`.
+
+[Nix sandbox](https://nixos.wiki/wiki/Nix_package_manager#Sandboxing) is not a security feature, rather it is used to provide reproducibility, its fundamental feature. When enabled, each build will run in an isolated environment not affected by the system configuration. This feature is essential when contributing to [Nixpkgs](https://github.com/NixOS/nixpkgs) to ensure that a successful build does not depend on the contributor's system configuration. For example, all dependencies should be declared even when the contributor's system already installed all or some beforehand; a build will fail if there is any undeclared dependency.
 
 ### Build custom plugins with xcaddy
 
