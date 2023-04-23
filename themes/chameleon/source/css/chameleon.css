@@ -486,9 +486,13 @@ ol {
   list-style: decimal;
 }
 
-ol.toc,
-ol.toc-child {
+ol.toc {
   list-style: disc;
+}
+
+ol.toc-child {
+  list-style: circle;
+  margin-bottom: unset;
 }
 
 li ol,
