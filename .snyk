@@ -6,5 +6,9 @@ ignore:
     - "*":
         reason: Patch unavailable
         expires: "2023-06-30T00:00:00.000Z"
+  SNYK-JS-WORDWRAP-3149973:
+    - "*":
+        reason: Patch unavailable
+        expires: "2023-06-30T00:00:00.000Z"
 # patches apply the minimum changes required to fix a vulnerability
 patch:
