@@ -1,5 +1,4 @@
-[mdleom.com](https://mdleom.com/)
-===
+# [mdleom.com](https://mdleom.com/)
 
 [![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fmdleom.com)](https://stats.uptimerobot.com/1394zup2LQ)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3f4b970a-c258-454c-97d6-3a8164f63262/deploy-status)](https://app.netlify.com/sites/curben/deploys)
@@ -7,6 +6,7 @@
 [![Hexo version](https://img.shields.io/badge/hexo-hexojs/hexo-brightgreen.svg)](https://github.com/hexojs/hexo)
 
 ### Plugins
+
 - Installed [hexo-yam](https://github.com/curbengh/hexo-yam) (author) to pre-compress static assets (html, css, js and svg).
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
 - [copy-button.js](/themes/chameleon/scripts/copy-button.js) - A [filter](https://hexo.io/api/filter) plugin to add a copy button to each code block.
@@ -18,17 +18,20 @@
 - [sitemap](/scripts/sitemap) - A [generator](https://hexo.io/api/generator) plugin to generate [a sitemap](https://en.wikipedia.org/wiki/Sitemaps). Modified from [hexo-generator-sitemap](https://github.com/hexojs/hexo-generator-sitemap) with this [patch](https://github.com/hexojs/hexo-generator-sitemap/pull/26) to include tags/categories and [remove](https://github.com/pyyzcwg2833/hexo-generator-sitemap/commit/a92dbbb83cc39ff60d43faa5cd688a56574a3889) [index.html](https://github.com/hexojs/hexo-generator-sitemap/pull/59) from the URL.
 
 ## Changes
+
 The following are the major changes I made compared to the upstream.
 
 ### [Hexo](https://gitlab.com/pages/hexo) site
+
 - Updated [.gitlab-ci.yml](.gitlab-ci.yml) to use the latest version of [Node.js](https://hub.docker.com/_/node/) in Alpine docker image.
 - [All packages](package.json) are installed from their respective master branch, instead of npm published version.
 - Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
 - Replaced the bundled Landscape theme with Typing theme.
 - Add `lastUpdated` to the front-matter to manually set updated time of a post, instead of using `post.updated`.
-  * This is no longer necessary, thanks to [`updated_option`](https://github.com/hexojs/hexo/pull/4278) feature.
+  - This is no longer necessary, thanks to [`updated_option`](https://github.com/hexojs/hexo/pull/4278) feature.
 
 ### [Chameleon theme](/themes/chameleon)
+
 Chameleon is a fork of [Typing](https://github.com/geekplux/hexo-theme-typing) theme, rewrote from scratch with the following changes/features:
 
 - [sanitize.css](https://github.com/csstools/sanitize.css/) and [autoprefixer](https://github.com/csstools/sanitize.css/) for consistent cross-browser styling.
@@ -48,7 +51,7 @@ Copyright (c) 2018-2022 Ming Di Leom
 
 The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license, and the underlying source code used to format and display that content is licensed under an [MIT license](LICENSE.md), unless indicated otherwise.
 
-## Mirrors
+## Website Mirrors
 
 - https://curben.pages.dev/
 - https://curben.netlify.app/
@@ -58,13 +61,23 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 - http://mdleom.i2p/ ([address helper](http://mdleom.i2p/?i2paddresshelper=-NjUAy6H3wkgRfB3rBwGrpS56L2P~RHRDnD8HnRV1mLSKFdbzxHTMsGLo-mdgGq360Kni2Ec0qhRzm-IUc8X4Y0Ug1eYvcEp2ubXwLe5JJg7yZJOdGxqdy5y5VbdHfIuUe2ooG3MNA4v6b4pGk7pUQ7hnTkUi0EObD~79ik4AY-vSsxIFrc8kJxtbRMCQ3NQRhAuvS1A14rSVk0wv50YwKS23y~FUIQWyG8ZpjTVYu50n~oBnJtVKSAHbCMWRcnJx6iGFsbTRh4ZsRtDh0drwfeRkvaQQqQmf6nZOc4-GLxZ0RT5QlS5gdPXL4V7eaIETbNJAIeYr2NzcpwVHs~zp93Ga-p7dlH3TsJX5gJSyqJWCc64vvmkxf7Vseh3uGaa4xqiLjTH5XsOyFQLp5D6myt-yH7ggReZbs70NKqG1Mj5iRLhIC3Q~pJ6LkPnMBJN6QeLNYNWcOPXkMzRfsavvH2l3yxdpkn41BLM2-7bBUdJNXfu4OhGAR22O0gFngjUBQAEAAcAAA==&update=true))
 - http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p/
 
+## Repository Mirrors
+
+- https://github.com/curbengh
+- https://pagure.io/projects/curben/%2A
+- https://codeberg.org/curben
+- https://git.disroot.org/curben
+- https://git.nixnet.services/curben
+- https://gitea.com/curben
+- nhttps://framagit.org/curben
+
 ## Uptime Status
 
 - https://stats.uptimerobot.com/1394zup2LQ
 
 ---
+
 Useful links:
 
 - [Hexo Docs](https://hexo.io/docs/)
 - [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/index.html)
-
