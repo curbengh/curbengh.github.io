@@ -4,6 +4,8 @@ excerpt: Also fix Ctrl+Backspace in PowerShell
 date: 2023-07-17
 tags:
   - linux
+  - zsh
+  - powershell
 ---
 
 A few months ago, there was [an article](https://www.masteringemacs.org/article/keyboard-shortcuts-every-command-line-hacker-should-know-about-gnu-readline) which encouraged Linux users to use more readline keyboard shortcuts. readline keyboard shortcuts are based on Emacs keybindings, while also support switching to vi keybindings. At that time, I was only familiar with `Ctrl+a` (line start) and `Ctrl+e` (line end). Interested to learn more tricks, I went on search for a cheatsheet and [found this](https://clementc.github.io/blog/2018/01/25/moving_cli/). I then added two missing shortcuts (`Ctrl+h` & `Ctrl+d`), printed it out and stick it to my desk.
