@@ -2,6 +2,7 @@
 title: Configure Splunk Universal Forwarder to ingest JSON files
 excerpt: Parse single-line JSON into separate events
 date: 2023-06-17
+updated: 2023-08-13
 tags:
   - splunk
 ---
@@ -100,3 +101,5 @@ AUTO_KV_JSON = 0
 SHOULD_LINEMERGE = 0
 # MAX_DAYS_AGO = 3560
 ```
+
+For Splunk Cloud deployment, the above configuration can only be added through Splunk Web: **Settings > [Source types](https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Managesourcetypes)**.
