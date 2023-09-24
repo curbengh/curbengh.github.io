@@ -69,7 +69,7 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 - https://git.disroot.org/curben
 - https://git.nixnet.services/curben
 - https://gitea.com/curben
-- nhttps://framagit.org/curben
+- https://framagit.org/curben
 
 ## Uptime Status
 
