@@ -5,10 +5,10 @@ ignore:
   SNYK-JS-HTMLMINIFIER-3091181:
     - "*":
         reason: Patch unavailable
-        expires: "2023-06-30T00:00:00.000Z"
-  SNYK-JS-WORDWRAP-3149973:
+        expires: "2023-12-31T00:00:00.000Z"
+  SNYK-JS-HEXO-5889980:
     - "*":
-        reason: Patch unavailable
-        expires: "2023-06-30T00:00:00.000Z"
+        reason: "https://github.com/hexojs/hexo/pull/5251"
+        expires: "2023-12-31T00:00:00.000Z"
 # patches apply the minimum changes required to fix a vulnerability
 patch:
