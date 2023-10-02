@@ -6,7 +6,7 @@
 title: Ming Di Leom's Blog
 subtitle:
 description:
-author: 'Ming Di Leom'
+author: "Ming Di Leom"
 language: en-GB
 timezone:
 
@@ -28,18 +28,18 @@ tag_generator:
   enable_index_page: true
 archive_dir: blog
 category_dir: categories
-code_dir: ''
+code_dir: ""
 i18n_dir: :lang
 skip_render:
-  - 'google5149b8b3449442e3.html'
-  - 'yandex_210230bd98a5c664.html'
-  - 'yandex_e54834b81be38a26.html'
-  - 'yandex_6cc1f27a50282e72.html'
-  - 'yandex_0aa588b63243f2b9.html'
-  - 'yandex_e026a03a5dd06730.html'
+  - "google5149b8b3449442e3.html"
+  - "yandex_210230bd98a5c664.html"
+  - "yandex_e54834b81be38a26.html"
+  - "yandex_6cc1f27a50282e72.html"
+  - "yandex_0aa588b63243f2b9.html"
+  - "yandex_e026a03a5dd06730.html"
 include:
-  - '_headers' # Netlify header rule
-  - '_redirects' # Netlify redirects rule
+  - "_headers" # Netlify header rule
+  - "_redirects" # Netlify redirects rule
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -56,7 +56,7 @@ highlight:
   enable: true
   line_number: false
   auto_detect: false
-  tab_replace: '  '
+  tab_replace: "  "
   hljs: true
   wrap: false
 
@@ -85,15 +85,15 @@ theme: chameleon
 ## https://github.com/curbengh/hexo-yam
 minify:
   svg:
-    plugins: 
-      cleanupIDs: false
+    plugins:
+      cleanupIds: false
 
 marked:
   # https://github.com/hexojs/hexo-renderer-marked/pull/179
   descriptionLists: false
 
 feed:
-  icon: '/svg/favicon.svg'
+  icon: "/svg/favicon.svg"
 
 # theme config
 theme_config:
