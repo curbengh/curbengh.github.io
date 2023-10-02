@@ -1,4 +1,4 @@
-image: node:alpine # Use latest version of Node.js on Alpine
+image: oven/bun:alpine
 
 cache:
   paths:
@@ -13,11 +13,11 @@ build:
 
   before_script:
     - apk update && apk add git
-    - npm install
+    - bun install
 
   script:
     # Generate site
-    - npm run build
+    - bun run build
 
   rules:
     # Only trigger through push & "Run pipeline" events not in "site" branch; Skip in renovate job
@@ -85,11 +85,11 @@ deploy_pages:
 renovate:
   before_script:
     - apk update && apk add git
-    - npm install
+    - bun install
 
   script:
-    - npm install snyk @snyk/protect && npm run snyk
-    - npm install renovate && npm run renovate
+    - bun install snyk @snyk/protect && bun run snyk
+    - bun install renovate && bun run renovate
 
   # No artifact
   dependencies: []
