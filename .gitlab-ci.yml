@@ -19,8 +19,8 @@ build:
     - npm run build # Generate site
 
   rules:
-    # Only trigger through push & "Run pipeline" events in master branch; Skip in renovate job
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+    # Only trigger through push & "Run pipeline" events not in "site" branch; Skip in renovate job
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME != "site" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
 
   artifacts:
