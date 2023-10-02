@@ -2,7 +2,7 @@
 title: Configure Splunk Universal Forwarder to ingest JSON files
 excerpt: Parse single-line JSON into separate events
 date: 2023-06-17
-updated: 2023-08-13
+updated: 2023-10-02
 tags:
   - splunk
 ---
@@ -27,7 +27,7 @@ The format can be achieved by exporting live event in JSON and append to a log f
 
 I will detail the required configurations in this post, so that Splunk is able to parse it correctly even though "example.json" is a valid JSON file.
 
-## App-specific inputs.conf
+## UF inputs.conf
 
 ```conf $SPLUNK_HOME/etc/deployment-apps/foo/local/inputs.conf
 [monitor:///var/log/app_a]
@@ -58,7 +58,7 @@ A path can be a file or a folder. When (\*) wildcard matching is used to match m
 
 Specify an appropriate value in **sourcetype** config, the value will be the value of `sourcetype` field in the ingested events under the "monitor" directive. Take note of the value you have configured, it will be used in the rest of configurations.
 
-## App-specific props.conf
+## UF props.conf
 
 ```conf $SPLUNK_HOME/etc/deployment-apps/foo/local/props.conf
 [app_a_event]
@@ -90,7 +90,7 @@ The directive name should be the **sourcetype** value specified in the [inputs.c
 - MAX_DAYS_AGO (optional): Specify the value if there are events older than 2,000 days.
 - TIME_FORMAT: Optional if Unix time is used. When Unix time is used, it is not necessary to specify `%s%3N` when there is [subsecond](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Commontimeformatvariables).
 
-## System props.conf
+## Indexer props.conf
 
 ```conf $SPLUNK_HOME/etc/system/local/props.conf
 [app_a_event]
@@ -102,4 +102,6 @@ SHOULD_LINEMERGE = 0
 # MAX_DAYS_AGO = 3560
 ```
 
-For Splunk Cloud deployment, the above configuration can only be added through Splunk Web: **Settings > [Source types](https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Managesourcetypes)**.
+In Splunk Enterprise, the above file can be saved in a custom app, e.g. "$SPLUNK_HOME/etc/app/custom-app/default/props.conf"
+
+For Splunk Cloud deployment, the above configuration can be added through a custom app or Splunk Web: **Settings > [Source types](https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Managesourcetypes)**.
