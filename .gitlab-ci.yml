@@ -1,13 +1,13 @@
 image: node:alpine # Use latest version of Node.js on Alpine
 
-cache: # add cache to 'node_modules' for speeding up builds
+cache:
   paths:
-    - node_modules/ # Node modules and dependencies
+    - node_modules/
 
 variables:
   NODE_ENV: "production"
 
-## Rename to 'pages' for gitlab pages
+# Rename to 'pages' for gitlab pages
 build:
   stage: build
 
@@ -16,7 +16,8 @@ build:
     - npm install
 
   script:
-    - npm run build # Generate site
+    # Generate site
+    - npm run build
 
   rules:
     # Only trigger through push & "Run pipeline" events not in "site" branch; Skip in renovate job
@@ -32,7 +33,8 @@ test:
   stage: test
 
   script:
-    - sh check-homepage.sh # Homepage should exists and non-empty
+    # Homepage should exist and non-empty
+    - sh check-homepage.sh
 
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
@@ -79,7 +81,8 @@ deploy_pages:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
 
-renovate: # Check dependency update
+# Check dependency update
+renovate:
   before_script:
     - apk update && apk add git
     - npm install
