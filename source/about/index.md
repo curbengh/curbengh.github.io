@@ -15,15 +15,15 @@ updated: 2022-08-01
 
 - [**malware-filter**](https://gitlab.com/malware-filter): A collection of blocklists:
 
-  - [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict ~3,000 malware websites. Part of [uBlock Origin](https://github.com/gorhill/uBlock)'s default filter. Based on [URLhaus](https://urlhaus.abuse.ch/).
+  - [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict malware-hosting websites. Based on [URLhaus](https://urlhaus.abuse.ch/).
 
-  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict ~35,000 phishing websites. Part of uBlock Origin's default filter. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
+  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict phishing websites. Part of uBlock Origin's default filter. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
 
-  - [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict ~500 websites that host potentially unwanted programs (PUP). Part of uBlock Origin's default filter. Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
+  - (Inactive) [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
 
   - [**tracking-filter**](https://gitlab.com/malware-filter/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). [Blokada version](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469) blocks more tracking links but the trade-off is more false positive; available at [blokada.org](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt).
 
-  - [**vn-badsite-filter**](https://gitlab.com/malware-filter/vn-badsite-filter): A set of blocklists to restrict 6,000+ malicious websites targeting Vietnamese users; also suitable for global users. Based on [Hieu Minh Ngo](https://chongluadao.vn)'s list.
+  - [**vn-badsite-filter**](https://gitlab.com/malware-filter/vn-badsite-filter): A set of blocklists to restrict malicious websites targeting Vietnamese users; also suitable for global users. Based on [Hieu Minh Ngo](https://chongluadao.vn)'s list.
 
   - [**botnet-filter**](https://gitlab.com/malware-filter/botnet-filter): A set of blocklists to restrict botnet IPs used as command and control (C2) servers. Based on [Feodo Tracker](https://feodotracker.abuse.ch/). Recommend to use the [upstream blocklist](https://feodotracker.abuse.ch/blocklist/) whenever possible, it has much more frequent update (every 5 minutes).
 
