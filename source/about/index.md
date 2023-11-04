@@ -15,9 +15,9 @@ updated: 2022-08-01
 
 - [**malware-filter**](https://gitlab.com/malware-filter): A collection of blocklists:
 
-  - [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict malware-hosting websites. Based on [URLhaus](https://urlhaus.abuse.ch/).
+  - [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict malware-hosting websites. Enabled by default in uBlock Origin. Based on [URLhaus](https://urlhaus.abuse.ch/).
 
-  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict phishing websites. Part of uBlock Origin's default filter. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
+  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict phishing websites. Bundled with uBlock Origin, requires manual enablement. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
 
   - (Inactive) [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
 
