@@ -2,7 +2,7 @@
 title: Configure Splunk Universal Forwarder to ingest JSON files
 excerpt: Parse single-line JSON into separate events
 date: 2023-06-17
-updated: 2023-10-02
+updated: 2023-12-05
 tags:
   - splunk
 ---
@@ -25,7 +25,7 @@ The format can be achieved by exporting live event in JSON and append to a log f
 [{"datetime": 1672531212123456, "event_id": 1, "key1": "value1", "key2": "value2", "key3": "value3"}, {"datetime": 1672531213789012, "event_id": 2, "key1": "value1", "key2": "value2", "key3": "value3"}, {"datetime": 1672531214345678, "event_id": 3, "key1": "value1", "key2": "value2", "key3": "value3"}]
 ```
 
-I will detail the required configurations in this post, so that Splunk is able to parse it correctly even though "example.json" is a valid JSON file.
+I will detail the required configurations in this post, so that Splunk is able to parse it correctly even though "example.json" is not a valid JSON file.
 
 ## UF inputs.conf
 
@@ -58,16 +58,15 @@ A path can be a file or a folder. When (\*) wildcard matching is used to match m
 
 Specify an appropriate value in **sourcetype** config, the value will be the value of `sourcetype` field in the ingested events under the "monitor" directive. Take note of the value you have configured, it will be used in the rest of configurations.
 
-## UF props.conf
+## Forwarder props.conf
 
-```conf $SPLUNK_HOME/etc/deployment-apps/foo/local/props.conf
+```conf props.conf
 [app_a_event]
 description = App A logs
-disabled = 0
 INDEXED_EXTRACTIONS = JSON
 # remove bracket at the start and end of each line
-SEDCMD-a = s/^\[//g
-SEDCMD-b = s/\]$//g
+SEDCMD-remove_prefix = s/^\[//g
+SEDCMD-remove-suffix = s/\]$//g
 # separate each object into a line
 LINE_BREAKER = }(,){\"datetime\"
 # a line represents an event
@@ -90,12 +89,18 @@ The directive name should be the **sourcetype** value specified in the [inputs.c
 - MAX_DAYS_AGO (optional): Specify the value if there are events older than 2,000 days.
 - TIME_FORMAT: Optional if Unix time is used. When Unix time is used, it is not necessary to specify `%s%3N` when there is [subsecond](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Commontimeformatvariables).
 
-## Indexer props.conf
+The location of "props.conf" depends on whether the universal forwarder is centrally managed by a deployment server.
 
-```conf $SPLUNK_HOME/etc/system/local/props.conf
+Path A: $SPLUNK_HOME/etc/deployment-apps/foo/local/props.conf
+Path B: $SPLUNK_HOME/etc/apps/foo/local/props.conf
+
+If there is a deployment server, then the config file should be in path A, in which the server will automatically deploy it to path B in the UF. If the UF is not centrally managed, it should head straight to path B.
+
+## Search head props.conf
+
+```conf props.conf
 [app_a_event]
 description = App A logs
-disabled = 0
 KV_MODE = none
 AUTO_KV_JSON = 0
 SHOULD_LINEMERGE = 0
@@ -105,3 +110,37 @@ SHOULD_LINEMERGE = 0
 In Splunk Enterprise, the above file can be saved in a custom app, e.g. "$SPLUNK_HOME/etc/app/custom-app/default/props.conf"
 
 For Splunk Cloud deployment, the above configuration can be added through a custom app or Splunk Web: **Settings > [Source types](https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/Managesourcetypes)**.
+
+## Ingesting API response
+
+It is important to note `SEDCMD` [runs after](https://community.splunk.com/t5/Getting-Data-In/SEDCMD-not-actually-replacing-data-during-indexing/m-p/387812/highlight/true#M69511) `INDEXED_EXTRACTIONS`. I noticed this behaviour when I tried to ingest API response of [LibreNMS](https://gitlab.com/curben/splunk-scripts/-/tree/main/TA-librenms-data-poller?ref_type=heads).
+
+```json
+{"status": "ok", "devices": [{"device_id": 1, "key1": "value1", "key2": "value2"}, {"device_id": 2, "key1": "value1", "key2": "value2"}, {"device_id": 3, "key1": "value1", "key2": "value2"}], "count": 3}
+```
+
+In this scenario, I only wanted to ingest "devices" array where each item is an event. The previous approach not only did not split the array, but "status" and "count" fields still existed in each event despite the use of `SEDCMD` to remove them.
+
+The solution is not to use `INDEXED_EXTRACTIONS` (index-time field extraction), but use `KV_MODE` (search-time field extraction) instead.
+
+```conf props.conf
+# forwarder
+[api_a_response]
+description = API A response
+# remove bracket at the start and end of each line
+SEDCMD-remove_prefix = s/^\{"status": "ok", "devices": \[//g
+SEDCMD-remove_suffix = s/\], "count": [0-9]+\}$//g
+# separate each object into a line
+LINE_BREAKER = }(, ){\"device_id\"
+# a line represents an event
+SHOULD_LINEMERGE = 0
+```
+
+```conf props.conf
+# search head
+[api_a_response]
+description = API A response
+KV_MODE = json
+AUTO_KV_JSON = 1
+SHOULD_LINEMERGE = 0
+```
