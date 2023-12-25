@@ -323,6 +323,8 @@
   --main-font-color: #e6e6e6;
   --alt-bg-color: #333;
   --link-underline: #3f72af;
+  --code-add-bg-color: #144212;
+  --code-del-bg-color: #600;
 }
 
 html {
@@ -943,12 +945,12 @@ td {
 }
 
 .hljs-addition {
-  background-color: #144212;
+  background-color: var(--code-add-bg-color);
   display: inline-block;
 }
 
 .hljs-deletion {
-  background-color: #600;
+  background-color: var(--code-del-bg-color);
   display: inline-block;
 }
 
@@ -1157,6 +1159,8 @@ unhide (via JS) if Web Share API is supported */
     --main-bg-color: black;
     --main-font-color: #e6e6e6;
     --alt-bg-color: #333;
+    --code-add-bg-color: #144212;
+    --code-del-bg-color: #600;
   }
 }
 
@@ -1165,6 +1169,8 @@ unhide (via JS) if Web Share API is supported */
     --main-bg-color: #f1f1f1;
     --main-font-color: #333;
     --alt-bg-color: #d8d8d8;
+    --code-add-bg-color: #e6ffec;
+    --code-del-bg-color: #ffebe9;
   }
 
   /*
@@ -1202,12 +1208,10 @@ unhide (via JS) if Web Share API is supported */
   .hljs-literal,
   .hljs-template-tag,
   .hljs-template-variable,
-  .hljs-type,
-  .hljs-addition {
+  .hljs-type {
     color: #a31515;
   }
 
-  .hljs-deletion,
   .hljs-selector-attr,
   .hljs-selector-pseudo,
   .hljs-meta {
