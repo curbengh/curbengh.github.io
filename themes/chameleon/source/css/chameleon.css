@@ -945,13 +945,11 @@ td {
 .hljs-addition {
   background-color: #144212;
   display: inline-block;
-  width: 100%;
 }
 
 .hljs-deletion {
   background-color: #600;
   display: inline-block;
-  width: 100%;
 }
 
 /* hide mobile nav menu and its checkbox */
