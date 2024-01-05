@@ -2,7 +2,7 @@
 title: Configure Splunk Universal Forwarder to ingest JSON files
 excerpt: Parse single-line JSON into separate events
 date: 2023-06-17
-updated: 2023-12-05
+updated: 2024-01-05
 tags:
   - splunk
 ---
@@ -64,30 +64,24 @@ Specify an appropriate value in **sourcetype** config, the value will be the val
 [app_a_event]
 description = App A logs
 INDEXED_EXTRACTIONS = JSON
-# remove bracket at the start and end of each line
-SEDCMD-remove_prefix = s/^\[//g
-SEDCMD-remove-suffix = s/\]$//g
 # separate each object into a line
 LINE_BREAKER = }(,){\"datetime\"
 # a line represents an event
 SHOULD_LINEMERGE = 0
 TIMESTAMP_FIELDS = datetime
+TIME_FORMAT = %s
 ## default is 2000
 # MAX_DAYS_AGO = 3560
-# TIME_FORMAT = %s
 ```
 
-The directive name should be the **sourcetype** value specified in the [inputs.conf](#App-specific-inputs-conf).
+The directive name should be the **sourcetype** value specified in the [inputs.conf](#App-specific-inputs-conf). The following configs apply to the universal forwarder is because [`INDEXED_EXTRACTIONS`](https://docs.splunk.com/Documentation/Splunk/latest/Data/Extractfieldsfromfileswithstructureddata#Field_extraction_settings_for_forwarded_structured_data_must_be_configured_on_the_forwarder) is used.
 
-- SEDCMD: [sed](https://tldr.inbrowser.app/pages/common/sed) script, `SEDCMD-<name>` can be specified multiple times to run different scripts, each with different name.
-  - `s/^\[//g` removes "[" at the start of each line.
-  - `s/\]$//g` removes "]" at the end of each line.
 - LINE_BREAKER: Search for string that matches the regex and replace only the capturing group with newline (\n). This is to separate each event into separate line.
   - `}(,){\"datetime\"` searches for `},{"datetime"` and replaces "," with "\n".
 - SHOULD_LINEMERGE: only used for event that spans multiple lines. In this case, it's the reverse, the log file has all events in one line.
 - TIMESTAMP_FIELDS: Refers to `datetime` key in the `example.json`.
 - MAX_DAYS_AGO (optional): Specify the value if there are events older than 2,000 days.
-- TIME_FORMAT: Optional if Unix time is used. When Unix time is used, it is not necessary to specify `%s%3N` when there is [subsecond](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Commontimeformatvariables).
+- TIME_FORMAT: Optional if Unix time is used, but recommended to specify whenever possible. When Unix time is used, it is not necessary to specify `%s%3N` when there is [subsecond](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference/Commontimeformatvariables).
 
 The location of "props.conf" depends on whether the universal forwarder is centrally managed by a deployment server.
 
@@ -104,8 +98,9 @@ description = App A logs
 KV_MODE = none
 AUTO_KV_JSON = 0
 SHOULD_LINEMERGE = 0
-# MAX_DAYS_AGO = 3560
 ```
+
+Since index-time field extraction is already enabled using `INDEXED_EXTRACTIONS`, search-time field extraction is no longer necessary. If `KV_MODE` and `AUTO_KV_JSON` are not disabled, there will be duplicate fields in the search result.
 
 In Splunk Enterprise, the above file can be saved in a custom app, e.g. "$SPLUNK_HOME/etc/app/custom-app/default/props.conf"
 
@@ -113,18 +108,18 @@ For Splunk Cloud deployment, the above configuration can be added through a cust
 
 ## Ingesting API response
 
-It is important to note `SEDCMD` [runs after](https://community.splunk.com/t5/Getting-Data-In/SEDCMD-not-actually-replacing-data-during-indexing/m-p/387812/highlight/true#M69511) `INDEXED_EXTRACTIONS`. I noticed this behaviour when I tried to ingest API response of [LibreNMS](https://gitlab.com/curben/splunk-scripts/-/tree/main/TA-librenms-data-poller?ref_type=heads).
+It is important to note `SEDCMD` [runs](https://www.aplura.com/assets/pdf/props_conf_order.pdf) [after](https://wiki.splunk.com/Community:HowIndexingWorks) `INDEXED_EXTRACTIONS`. I noticed [this behaviour](https://community.splunk.com/t5/Getting-Data-In/SEDCMD-not-actually-replacing-data-during-indexing/m-p/387812/highlight/true#M69511) when I tried to ingest API response of [LibreNMS](https://gitlab.com/curben/splunk-scripts/-/tree/main/TA-librenms-data-poller?ref_type=heads).
 
 ```json
 {"status": "ok", "devices": [{"device_id": 1, "key1": "value1", "key2": "value2"}, {"device_id": 2, "key1": "value1", "key2": "value2"}, {"device_id": 3, "key1": "value1", "key2": "value2"}], "count": 3}
 ```
 
-In this scenario, I only wanted to ingest "devices" array where each item is an event. The previous approach not only did not split the array, but "status" and "count" fields still existed in each event despite the use of `SEDCMD` to remove them.
+In this scenario, I only wanted to ingest "devices" array where each item is an event. The previous approach not only did not split the array, but "status" and "count" fields still existed in each event despite the use of SEDCMD to remove them.
 
-The solution is not to use `INDEXED_EXTRACTIONS` (index-time field extraction), but use `KV_MODE` (search-time field extraction) instead.
+The solution is not to use INDEXED_EXTRACTIONS (index-time field extraction), but use KV_MODE (search-time field extraction) instead. INDEXED_EXTRACTIONS is not enabled so that SEDCMD works more reliably.  If it's enabled, the JSON parser can unpredictably split part of the prefix (in this case `{"status": "ok", "devices": [`) or suffix into separate events and SEDCMD does not work across events. SEDCMD does work with INDEXED_EXTRACTIONS, but you have to make sure the replacement is within an event
 
 ```conf props.conf
-# forwarder
+# heavy forwarder or indexer
 [api_a_response]
 description = API A response
 # remove bracket at the start and end of each line
@@ -132,8 +127,11 @@ SEDCMD-remove_prefix = s/^\{"status": "ok", "devices": \[//g
 SEDCMD-remove_suffix = s/\], "count": [0-9]+\}$//g
 # separate each object into a line
 LINE_BREAKER = }(, ){\"device_id\"
+# if each line/event is very long
+# TRUNCATE = 0
 # a line represents an event
 SHOULD_LINEMERGE = 0
+
 ```
 
 ```conf props.conf
@@ -142,5 +140,4 @@ SHOULD_LINEMERGE = 0
 description = API A response
 KV_MODE = json
 AUTO_KV_JSON = 1
-SHOULD_LINEMERGE = 0
 ```
