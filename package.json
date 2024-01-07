@@ -11,7 +11,7 @@
     "renovate": "renovate --platform 'gitlab' --onboarding false --update-lock-files false --labels 'renovate' --recreate-closed true --require-config 'ignored' \"$CI_PROJECT_PATH\""
   },
   "dependencies": {
-    "hexo": "^7.0.0",
+    "hexo": "hexojs/hexo",
     "hexo-filter-nofollow": "hexojs/hexo-filter-nofollow",
     "hexo-generator-archive": "hexojs/hexo-generator-archive",
     "hexo-generator-index": "hexojs/hexo-generator-index",
