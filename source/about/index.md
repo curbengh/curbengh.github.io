@@ -85,6 +85,15 @@ More details are available in the following series of posts:
 - [Rimgo](https://codeberg.org/video-prize-ranch/rimgo): An alternative frontend for Imgur. Images and albums can be viewed without wasting resources from downloading and running tracking scripts.
   - [Onion](http://be7udfhmnzqyt7cxysg6c4pbawarvaofjjywp35nhd5qamewdfxl6sid.onion)
   - [Eepsite](http://xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p)
+- [Quetre](https://github.com/zyachel/quetre): A libre front-end for Quora.
+  - [Onion](http://4sg56knxo4vklsb7uj6iwtnuuwqyrel5im75ovlml6zywdnpeed55xqd.onion)
+  - [Eepsite](http://yk5xtcyxoyj4hwj3g5yzdest6ixqri332prqvpwcufmufzdelcuq.b32.i2p)
+- [libremdb](https://github.com/zyachel/libremdb): A free & open source IMDb front-end.
+  - [Onion](http://ijridx42bzzelztznz7lzeoule4ug45qmtmvhffotdetj6xxaxi54ryd.onion)
+  - [Eepsite](http://jjr6zhcpe763emklpklre3vorzluczwd67uxhb5pxslawn4dedwa.b32.i2p)
+- [AnonymousOverflow](https://github.com/httpjamesm/AnonymousOverflow): View StackOverflow in privacy and without the clutter.
+  - [Onion](http://7gpurrl7besakeh6ml5xkxriamnmt2awbt3u7o5td6lkeocmqujikzad.onion)
+  - [Eepsite](http://kb2qqt2ycigflptnyqvamamqnexwnqnzghnwswtty773mn24jkfa.b32.i2p)
 
 ## Publications
 
