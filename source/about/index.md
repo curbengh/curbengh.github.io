@@ -94,6 +94,9 @@ More details are available in the following series of posts:
 - [AnonymousOverflow](https://github.com/httpjamesm/AnonymousOverflow): View StackOverflow in privacy and without the clutter.
   - [Onion](http://7gpurrl7besakeh6ml5xkxriamnmt2awbt3u7o5td6lkeocmqujikzad.onion)
   - [Eepsite](http://kb2qqt2ycigflptnyqvamamqnexwnqnzghnwswtty773mn24jkfa.b32.i2p)
+- [LibreTranslate](https://github.com/LibreTranslate/LibreTranslate): Free and Open Source Machine Translation API.
+  - [Onion](http://ryp7domnuvrha3sm5fohl75vrj3opolykbfv6rh35hg5i4uo3rrpslid.onion)
+  - [Eepsite](http://b5nins66p4rpvspyr3j43x26lapr7e5jm4nnvv53gbtljfcbgihq.b32.i2p)
 
 ## Publications
 
