@@ -59,13 +59,13 @@ More details are available in the following series of posts:
 ## Services
 
 - [Nitter](https://github.com/zedeus/nitter): A free and open source lightweight alternative Twitter front-end focused on privacy.
-  - [Onion](http://26oq3gioiwcmfojub37nz5gzbkdiqp7fue5kvye7d4txv4ny6fb4wwid.onion)
+  - [Onion](http://su7dlbyavmg5sailmmgkxdcazkqznnc7mr7ibcnr32ctduiqfb7pvkad.onion)
   - [Eepsite](http://u6ikd6zndl3c4dsdq4mmujpntgeevdk5qzkfb57r4tnfeccrn2qa.b32.i2p)
 - [Teddit](https://codeberg.org/teddit/teddit): A free and open source alternative Reddit front-end focused on privacy.
-  - [Onion](http://ibarajztopxnuhabfu7fg6gbudynxofbnmvis3ltj6lfx47b6fhrd5qd.onion)
+  - [Onion](http://clnxvdfthhcmvwhauaadincmitimhawq7nee4dmqkk4nfkpfi3orsgad.onion)
   - [Eepsite](http://xugoqcf2pftm76vbznx4xuhrzyb5b6zwpizpnw2hysexjdn5l2tq.b32.i2p)
 - [Libreddit](https://github.com/spikecodes/libreddit): A private front-end for Reddit. No JavaScript, no ads, no tracking, no bloat.
-  - [Onion](http://twjxj64xqcxkz2gif4irnvnd5svvmwnlpv4zqxknwksqhx4yucxeg6ad.onion)
+  - [Onion](http://f4x7ntxrmn4yc7immgqpdu6dt7kakz4i4bxrve7sdipg62lukrga5uad.onion)
   - [Eepsite](http://gv47huyjz6esmu4q7ps6twvsn6pe7punuuzxa5cgwor2ubbt5jea.b32.i2p)
 - [SimplyTranslate](https://simple-web.org/projects/simplytranslate.html): Provide fast and private translations to the user without wasting much overhead for extensive styling or JavaScript. Supports Google Translate engine.
   - [Onion](http://fmgp3rg56ng6mtb5gvu5hgzwwdyzgkmnanettwnmbnueues7ndw2fkyd.onion)
@@ -74,7 +74,7 @@ More details are available in the following series of posts:
   - [Onion](http://beko4bipbbqvwjizoswa3gcjrj3fdgb6nqthv7mt2gcswd2nln45ooid.onion)
   - [Eepsite](http://ek34dpqqketa3o75jucgiimy6uk5uxyrkr2iv6bt3jnbckshb5la.b32.i2p)
 - [Wikiless](https://codeberg.org/orenom/wikiless): A free open source alternative Wikipedia front-end focused on privacy.
-  - [Onion](http://c2pesewpalbi6lbfc5hf53q4g3ovnxe4s7tfa6k2aqkf7jd7a7dlz5ad.onion)
+  - [Onion](http://g6gr4dahewooeelw3h44qhqzr3x2jy475xm6rpve4m6hrsqe467lwxad.onion)
   - [Eepsite](http://hflqp2ejxygpj6cdwo3ogfieqmxw3b56w7dblt7bor2ltwk6kcfa.b32.i2p)
 - [Scribe](https://sr.ht/~edwardloveall/scribe/): Alternative front-end to Medium.com
   - [Onion](http://3xejtix5tkneqclwbcuqi2mysi3bqp6qv2b3jwp466itjzjjptiwhdqd.onion)
@@ -83,7 +83,7 @@ More details are available in the following series of posts:
   - [Onion](http://atfykf7jyn4uxuwdqmonyz4xohrw5mrnrldkwtulxkpictxrm3xxfsyd.onion)
   - [Eepsite](http://c4vqxvn27l7z5neffrasc22xxoglf23eudmp7mtwmk3yqgrbefsa.b32.i2p)
 - [Rimgo](https://codeberg.org/video-prize-ranch/rimgo): An alternative frontend for Imgur. Images and albums can be viewed without wasting resources from downloading and running tracking scripts.
-  - [Onion](http://be7udfhmnzqyt7cxysg6c4pbawarvaofjjywp35nhd5qamewdfxl6sid.onion)
+  - [Onion](http://eertpnpliglunzserhwbr2unvyfa4dj7j3iq43sktlytvhcmgj4io6id.onion)
   - [Eepsite](http://xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p)
 - [Quetre](https://github.com/zyachel/quetre): A libre front-end for Quora.
   - [Onion](http://4sg56knxo4vklsb7uj6iwtnuuwqyrel5im75ovlml6zywdnpeed55xqd.onion)
