@@ -38,7 +38,7 @@ None of the above configs will grant roleB read access to lookupB.csv. For the r
 - If any layer does not permit read access, the object will not be accessible.
 ```
 
-> For brevity, this article will only discuss about read access which has slightly different interaction of ACLs. Don't worry, once you understood read access, it's much easier to understand write access.
+> For brevity, this article will only discuss about read access which has slightly different interaction of ACLs compared to write access. Don't worry, once you understood read access, it's much easier to understand write access.
 
 Notice a role must at least have read access to the app. The simplest way to grant roleB read access is,
 
