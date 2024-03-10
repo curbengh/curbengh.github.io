@@ -82,3 +82,18 @@ access = read : [ roleA, roleB ], write : [ ]
 ```
 
 In this approach, every new objects created in appA will not be accessible to roleB because it does not have app access.
+
+## Non-removable lookup file
+
+I noticed lookup files that have object-level ACL, e.g.
+
+```conf
+[lookups/lookupC.csv]
+access = read : [ roleA ], write : [ ]
+```
+
+makes it non-removable, even with admin/sc-admin role.
+
+My theory is that the object is non-removable to prevent the ACL from being orphaned. But this theory does not hold, at least for a lookup file that is shipped with an app; deleting a lookup file merely resets its content back to the app's version. Deleting a lookup file is necessary during an app update that also have updated content of a bundled lookup file. Even when a lookup was never modified, Splunk will keep the content during an app update. Updating an app does not automatically update the bundled lookup, the lookup will only be updated after a delete operation.
+
+Similar limitation (i.e. app update does not update the app's object) also applies to dashboards. However, there is no way to delete a dashboard xml in Splunk Cloud, so updating a dashboard through app update always require app uninstallation beforehand.
