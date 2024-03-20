@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>How to make your website available over Tor hidden service on NixOS | Ming Di Leom&#39;s Blog</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://mdleom.com/blog/2020/03/16/tor-hidden-onion-nixos/"><meta name="description" content="A guide on Tor hidden service on NixOS"><meta property="article:author" content="Ming Di Leom"><meta property="article:tag" content="linux"><meta property="article:tag" content="server"><meta property="article:tag" content="caddy"><meta property="article:tag" content="nixos"><meta property="article:tag" content="tor"><meta property="article:tag" content="censorship"><meta property="og:type" content="article"><meta property="og:title" content="How to make your website available over Tor hidden service on NixOS"><meta property="og:url" content="https://mdleom.com/blog/2020/03/16/tor-hidden-onion-nixos/"><meta property="og:site_name" content="Ming Di Leom&#39;s Blog"><meta property="og:description" content="A guide on Tor hidden service on NixOS"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mdleom.com/screenshot/blog/2020/03/16/tor-hidden-onion-nixos/"><meta property="article:published_time" content="2020-03-16T00:00:00.000Z"><meta property="article:modified_time" content="2022-08-01T00:00:00.000Z"><link rel="alternate" href="/atom.xml" title="Ming Di Leom's Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"><link rel="manifest" href="/site.webmanifest"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><link rel="stylesheet" href="/css/chameleon.css"><link rel="prev" href="/blog/2020/03/14/caddy-nixos-part-3/" title="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"><link rel="next" href="/blog/2020/03/21/i2p-eepsite-nixos/" title="How to make your website available over I2P Eepsite on NixOS"><meta name="yandex-verification" content="e026a03a5dd06730"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="container" class="container"><article id="post-tor-hidden-onion-nixos" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><header id="header" class="header"><nav class="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/blog/">Blog</a> <a class="main-nav-link" href="/about/">About</a> <a class="main-nav-link" href="/atom.xml">Feed</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a><div class="search-container"><form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click"><img src="/svg/search.svg"></a></form></div></nav><nav class="mobile-nav"><a class="site-title" href="/">mdleom.com</a><ul class="mobile-nav-menu"><label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label> <input id="mobile-menu-toggle" type="checkbox"><ul id="mobile-nav-link"><div class="search-container"><form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click-mobile"><img src="/svg/search.svg"></a></form></div><i>Powered by DuckDuckGo</i> <a class="mobile-nav-link-a" href="/">Home</a> <a class="mobile-nav-link-a" href="/blog/">Blog</a> <a class="mobile-nav-link-a" href="/about/">About</a> <a class="mobile-nav-link-a" href="/atom.xml">Feed</a> <a class="mobile-nav-link-a" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a></ul></ul></nav></header><hr class="header-hr"><div class="article-inner"><header class="article-header"><h1 class="p-name entry-title article-title" itemprop="headline name">How to make your website available over Tor hidden service on NixOS <a id="btnshare"><img src="/svg/share.svg"></a></h1></header><p class="p-summary">A guide on Tor hidden service on NixOS</p><div class="e-content article-entry" itemprop="articleBody"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Launch-Tor"><span class="toc-text">Launch Tor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#caddyTor-nix"><span class="toc-text">caddyTor.nix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File-ownership-and-permissions"><span class="toc-text">File ownership and permissions</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#caddyFile"><span class="toc-text">caddyFile</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Alternate-Caddyfile"><span class="toc-text">Alternate Caddyfile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Launch-Caddy"><span class="toc-text">Launch Caddy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snowflake-proxy-optional"><span class="toc-text">Snowflake proxy (optional)</span></a></li></ol><blockquote><p>9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to <a href="/blog/2020/05/23/caddy-upgrade-v2-proxy/" title="Upgrading Caddy reverse proxy from v1 to v2 syntax">this article</a> for upgrade guide.</p></blockquote><p>In this segment, I show you how I set up Tor hidden (.onion) service that reverse proxy to curben.netlify.app. This website can be accessed through the following <a href="http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">.onion address</a>.</p><p>This post is Part 4 of a series of articles that show you how I set up Caddy, Tor hidden service and I2P Eepsite on NixOS:</p><ul><li><a href="/blog/2020/02/23/caddy-nixos-part-1/" title="Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)">Part 1: Install NixOS</a></li><li><a href="/blog/2020/03/04/caddy-nixos-part-2/" title="Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)">Part 2: Configure NixOS</a></li><li><a href="/blog/2020/03/14/caddy-nixos-part-3/" title="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)">Part 3: Configure Caddy</a></li><li>Part 4: Configure Tor</li><li><a href="/blog/2020/03/21/i2p-eepsite-nixos/" title="How to make your website available over I2P Eepsite on NixOS">Part 5: Configure I2P</a></li></ul><p>The main reason for me to have a Tor hidden service is so that visitor can visit my website (mdleom.com) anonymously. Visitor indeed can browse this website <em>somewhat</em> anonymously via VPN, but it’s not hidden from the VPN provider. Even with Tor, the traffic still needs to get out from the Tor network to the Internet via exit relays, and exit relays can <a href="https://doi.org/10.1007/978-3-319-08506-7_16" rel="noopener external nofollow noreferrer">do whatever</a> they want to the traffic. Tor hidden service ensures the traffic is end-to-end encrypted and stays inside the Tor network–without involving any exit relay.</p><p>Note that this only applies to the traffic between visitor and the (Caddy) web server, as shown in the following diagram; a request still needs to get passed to the upstream curben.netlify.app, but Netlify only sees the request comes from my web server as if it’s just a regular visitor and shouldn’t know that its origin from the Tor network.</p><p><a href="/img/20200223/caddy-nixos.png"><img srcset="/img/20200223/caddy-nixos.png?f=auto&width=320 320w,/img/20200223/caddy-nixos.png?f=auto&width=468 468w,/img/20200223/caddy-nixos.png?f=auto&width=768 768w,/img/20200223/caddy-nixos.png?f=auto 800w" sizes="(max-width: 320px) 320px,(max-width: 468px) 468px,(max-width: 768px) 768px,800px" src="/img/20200223/caddy-nixos.png?f=auto" title="Architecture behind mdleom.com" alt="Architecture behind mdleom.com" loading="lazy"></a></p><h2 id="Launch-Tor">Launch Tor <a href="#Launch-Tor" class="headerlink" title="Launch Tor">§</a></h2><p>The first step is to bring up a Tor hidden service to get an onion address. Add the following options to <strong>configuration.nix</strong>:</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix"><span class="hljs-comment">## Tor onion</span>
+services.<span class="hljs-attr">tor</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">enableGeoIP</span> = <span class="hljs-literal">false</span>;
+  relay.<span class="hljs-attr">onionServices</span> = &#123;
+    <span class="hljs-attr">myOnion</span> = &#123;
+      <span class="hljs-attr">version</span> = <span class="hljs-number">3</span>;
+      <span class="hljs-attr">map</span> = [&#123;
+        <span class="hljs-attr">port</span> = <span class="hljs-number">80</span>;
+        <span class="hljs-attr">target</span> = &#123;
+          <span class="hljs-attr">addr</span> = <span class="hljs-string">&quot;[::1]&quot;</span>;
+          <span class="hljs-attr">port</span> = <span class="hljs-number">8080</span>;
+        &#125;;
+      &#125;];
+    &#125;;
+  &#125;;
+  <span class="hljs-attr">settings</span> = &#123;
+    <span class="hljs-attr">ClientUseIPv4</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-attr">ClientUseIPv6</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">ClientPreferIPv6ORPort</span> = <span class="hljs-literal">true</span>;
+  &#125;;
+&#125;;</code><button class="copy-button">Copy</button></pre><ol><li><code>enableGeoIP</code> is disabled as I don’t need by-country statistics.</li><li>I <code>name</code> the service as “myOnion”, so the keys will be stored in “&#x2F;var&#x2F;lib&#x2F;tor&#x2F;onion&#x2F;<strong>myOnion</strong>“ folder.</li><li>Set the <code>version</code> to 3, which is a <a href="https://trac.torproject.org/projects/tor/wiki/doc/NextGenOnions#Howtoconnecttothetesthubfornextgenonionservices" rel="noopener external nofollow noreferrer">more secure</a> version. The most noticable difference is that the generated onion address will be 56-character long, which is much longer than v2’s 16-character. Tor already defaults to v3 since 0.3.5, but I set it just to make sure.</li><li><code>port</code> sets the port number that the hidden service binds to. Recommend to set it to port <strong>80</strong>.</li></ol><ul><li>If you set it to “1234”, visitor needs to specify the port number to browse your site, e.g. <a href="http://foobar.onion:1234/" rel="noopener external nofollow noreferrer">http://foobar.onion:1234</a></li><li>There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80. Tor has NAT traversal capability and can function without opening any inbound port.</li><li>Add port 443 if your onion service is also available in HTTPS; I wrote <a href="/blog/2021/07/04/ecdsa-tls-tor-caddy/" title="Get a ECDSA TLS certificate for your onion service">a guide</a> on purchasing a .onion SSL certificate and the subsequent configuration.</li></ul><ol start="5"><li><code>toHost</code> is location of your web server. In my case, it is the IPv6 loopback <strong>[::1]</strong>. If your server supports IPv4 (mine doesn’t), you can set it to “127.0.0.1” or “localhost”. If it’s an IPv6 address, you need to wrap the address with square brackets <strong>[]</strong>.</li></ol><ul><li>You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. Tor recommends to have a separate web server that is dedicated for Tor hidden service only. The <a href="#caddyTor.nix">next section</a> shows how to set up the web server.</li></ul><ol start="6"><li><code>toPort</code> is the port number that your web server listens to.</li><li><code>extraConfig</code> is optional. The options I use here are only applicable if the server is IPv6 only.</li></ol><p>Run <code># nixos-rebuild switch</code> and three important files will be generated in the “&#x2F;var&#x2F;lib&#x2F;tor&#x2F;onion&#x2F;<strong>myOnion</strong>“ folder.</p><ol><li><code>hostname</code> your unique onion address, note this down. The address is derived from the private key.</li><li><code>hs_ed25519_public_key</code> ED25519 elliptic-curve public key. Backup this key.</li><li><code>hs_ed25519_private_key</code> Absolutely backup this key and protect it with your own life. Losing this file means losing the onion address.</li></ol><p><strong>Backup the keys</strong>. If you migrate to another server, you just need to move the keys, Tor will generate the same <code>hostname</code> from the private key.</p><h2 id="caddyTor-nix">caddyTor.nix <a href="#caddyTor-nix" class="headerlink" title="caddyTor.nix">§</a></h2><p>I set up another Caddy-powered reverse proxy which is separate from the <a href="/blog/2020/03/14/caddy-nixos-part-3/" title="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)">mdleom.com&#39;s</a>. It’s similar to <a href="/blog/2020/03/14/caddy-nix-part-3/#caddyProxy.nix">caddyProxy.nix</a>, except I replace “caddyProxy” with “caddyTor”. This Nix file exposes <code>services.caddyTor</code> so that I can enable the Tor-related Caddy service from “configuration.nix”.</p><pre><div class="caption"><span>/etc/caddy/CaddyTor.nix</span></div><code class="hljs nix">&#123; config, lib, pkgs, ... &#125;:
+
+<span class="hljs-keyword">with</span> lib;
+
+<span class="hljs-keyword">let</span>
+  <span class="hljs-attr">cfg</span> = config.services.caddyProxy;
+<span class="hljs-keyword">in</span> &#123;
+  options.services.<span class="hljs-attr">caddyProxy</span> = &#123;
+    <span class="hljs-attr">enable</span> = mkEnableOption <span class="hljs-string">&quot;Caddy web server&quot;</span>;
+
+    <span class="hljs-attr">config</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;/etc/caddy/caddyProxy.conf&quot;</span>;
+      <span class="hljs-attr">type</span> = types.str;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Path to Caddyfile&quot;</span>;
+    &#125;;
+
+    <span class="hljs-attr">adapter</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;caddyfile&quot;</span>;
+      <span class="hljs-attr">example</span> = <span class="hljs-string">&quot;nginx&quot;</span>;
+      <span class="hljs-attr">type</span> = types.str;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        Name of the config adapter to use.</span>
+<span class="hljs-string">        See https://caddyserver.com/docs/config-adapters for the full list.</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+    &#125;;
+
+    <span class="hljs-attr">dataDir</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;/var/lib/caddyProxy&quot;</span>;
+      <span class="hljs-attr">type</span> = types.path;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        The data directory, for storing certificates. Before 17.09, this</span>
+<span class="hljs-string">        would create a .caddy directory. With 17.09 the contents of the</span>
+<span class="hljs-string">        .caddy directory are in the specified data directory instead.</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+    &#125;;
+
+    <span class="hljs-attr">package</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = pkgs.caddy;
+      <span class="hljs-attr">defaultText</span> = <span class="hljs-string">&quot;pkgs.caddy&quot;</span>;
+      <span class="hljs-attr">type</span> = types.package;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Caddy package to use.&quot;</span>;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-attr">config</span> = mkIf cfg.enable &#123;
+    systemd.services.<span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Caddy web server&quot;</span>;
+      <span class="hljs-attr">after</span> = [ <span class="hljs-string">&quot;network-online.target&quot;</span> ];
+      <span class="hljs-attr">wants</span> = [ <span class="hljs-string">&quot;network-online.target&quot;</span> ]; <span class="hljs-comment"># systemd-networkd-wait-online.service</span>
+      <span class="hljs-attr">wantedBy</span> = [ <span class="hljs-string">&quot;multi-user.target&quot;</span> ];
+      <span class="hljs-attr">startLimitIntervalSec</span> = <span class="hljs-number">14400</span>;
+      <span class="hljs-attr">startLimitBurst</span> = <span class="hljs-number">10</span>;
+      <span class="hljs-attr">serviceConfig</span> = &#123;
+        <span class="hljs-attr">ExecStart</span> = <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy run --config <span class="hljs-subst">$&#123;cfg.config&#125;</span> --adapter <span class="hljs-subst">$&#123;cfg.adapter&#125;</span>&quot;</span>;
+        <span class="hljs-attr">ExecReload</span> = <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy reload --config <span class="hljs-subst">$&#123;cfg.config&#125;</span> --adapter <span class="hljs-subst">$&#123;cfg.adapter&#125;</span>&quot;</span>;
+        <span class="hljs-attr">Type</span> = <span class="hljs-string">&quot;simple&quot;</span>;
+        <span class="hljs-attr">User</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+        <span class="hljs-attr">Group</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+        <span class="hljs-attr">Restart</span> = <span class="hljs-string">&quot;on-abnormal&quot;</span>;
+        <span class="hljs-comment"># &lt; 20.09</span>
+        <span class="hljs-comment"># https://github.com/NixOS/nixpkgs/pull/97512</span>
+        <span class="hljs-comment"># StartLimitIntervalSec = 14400;</span>
+        <span class="hljs-comment"># StartLimitBurst = 10;</span>
+        <span class="hljs-attr">NoNewPrivileges</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">LimitNPROC</span> = <span class="hljs-number">512</span>;
+        <span class="hljs-attr">LimitNOFILE</span> = <span class="hljs-number">1048576</span>;
+        <span class="hljs-attr">PrivateTmp</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">PrivateDevices</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">ProtectHome</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">ProtectSystem</span> = <span class="hljs-string">&quot;full&quot;</span>;
+        <span class="hljs-attr">ReadWriteDirectories</span> = cfg.dataDir;
+        <span class="hljs-attr">KillMode</span> = <span class="hljs-string">&quot;mixed&quot;</span>;
+        <span class="hljs-attr">KillSignal</span> = <span class="hljs-string">&quot;SIGQUIT&quot;</span>;
+        <span class="hljs-attr">TimeoutStopSec</span> = <span class="hljs-string">&quot;5s&quot;</span>;
+      &#125;;
+    &#125;;
+
+    users.users.<span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">home</span> = cfg.dataDir;
+      <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+    &#125;;
+
+    users.groups.<span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">members</span> = [ <span class="hljs-string">&quot;caddyProxy&quot;</span> ];
+    &#125;;
+  &#125;;
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="File-ownership-and-permissions">File ownership and permissions <a href="#File-ownership-and-permissions" class="headerlink" title="File ownership and permissions">§</a></h3><p>After you save the file to <strong>&#x2F;etc&#x2F;caddy&#x2F;CaddyTor.nix</strong>, remember to restrict it to root.</p><pre><code class="hljs plaintext"># chown root:root /etc/caddy/caddyTor.nix
+# chown 600 /etc/caddy/caddyTor.nix</code><button class="copy-button">Copy</button></pre><h2 id="caddyFile">caddyFile <a href="#caddyFile" class="headerlink" title="caddyFile">§</a></h2><p>Create a new caddyFile in <code>/etc/caddy/caddyTor.conf</code> and starts with the following config:</p><pre><code class="hljs Caddyfile">import common.conf
+
+# Tor onion
+http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 &#123;
+  bind ::1
+
+  header &#123;
+    import setHeaders
+    -strict-transport-security
+    defer
+  &#125;
+
+  import pathProxy
+&#125;</code><button class="copy-button">Copy</button></pre><p>Update the onion address to the value shown in “<a href="#configuration.nix">&#x2F;var&#x2F;lib&#x2F;tor&#x2F;onion&#x2F;myOnion&#x2F;hostname</a>“. HTTPS is disabled by specifying <code>http://</code> prefix, HTTPS is not necessary as Tor hidden service already encrypts the traffic. Let’s Encrypt doesn’t support validating a .onion address. The only way is to purchase the cert from <a href="https://www.digicert.com/blog/ordering-a-onion-certificate-from-digicert/" rel="noopener external nofollow noreferrer">Digicert</a>. Since HTTPS is not enabled, <code>strict-transport-security</code> (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to <code>https://</code>. It binds to IPv6 loopback so it only listens to localhost, specify <code>bind 127.0.0.1 ::1</code> if you need IPv4.</p><p>The rest are similar to “<a href="blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile">caddyProxy.conf</a>“. Content of “common.conf” is available at <a href="/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile">this section</a>.</p><pre><div class="caption"><span>/etc/caddy/caddyTor.conf</span></div><code class="hljs Caddyfile">import common.conf
+
+# Tor onion
+http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 &#123;
+  bind ::1
+
+  header &#123;
+    import setHeaders
+    -strict-transport-security
+    defer
+  &#125;
+
+  import pathProxy
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="Alternate-Caddyfile">Alternate Caddyfile <a href="#Alternate-Caddyfile" class="headerlink" title="Alternate Caddyfile">§</a></h3><p>There is another approach which has a much simpler Caddyfile, but it <em>doubles</em> the latency. I could simply reverse proxy to mdleom.com but that itself is <a href="/blog/2020/03/14/caddy-nixos-part-3/" title="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)">also</a> a reverse proxy, so it would add one more roundtrip.</p><p>This is also suitable if you have a website that you don’t have root access (e.g. GitHub Pages).</p><pre><code class="hljs Caddyfile"># Do not use this approach unless you are absolutely sure
+http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 &#123;
+  bind ::1
+
+  header &#123;
+    -strict-transport-security
+    defer
+  &#125;
+
+  reverse_proxy https://mdleom.com &#123;
+    header_up Host mdleom.com
+  &#125;
+&#125;</code><button class="copy-button">Copy</button></pre><h2 id="Launch-Caddy">Launch Caddy <a href="#Launch-Caddy" class="headerlink" title="Launch Caddy">§</a></h2><p>Start the Caddy service.</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix"><span class="hljs-attr">require</span> = [ /etc/caddy/caddyProxy.nix /etc/caddy/caddyTor.nix ];
+services.<span class="hljs-attr">caddyTor</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/etc/caddy/caddyTor.conf&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>Tor hidden service needs some time to announce to the Tor network, wait for a few hours before trying your newfangled onion address.</p><h2 id="Snowflake-proxy-optional">Snowflake proxy (optional) <a href="#Snowflake-proxy-optional" class="headerlink" title="Snowflake proxy (optional)">§</a></h2><p><a href="https://snowflake.torproject.org/" rel="noopener external nofollow noreferrer">Snowflake</a> is an alternative method to connect to the Tor network, useful when connections to <a href="https://metrics.torproject.org/rs.html#search/flag:Guard%20running:true" rel="noopener external nofollow noreferrer">entry nodes</a> and <a href="https://support.torproject.org/censorship/censorship-7/" rel="noopener external nofollow noreferrer">bridge</a> have been restricted. Volunteers can run Snowflake proxy to enable people who are censored to use it to access the Tor network. Snowflake proxy is available in NixOS 22.05+.</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix">services.<span class="hljs-attr">snowflake-proxy</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">capacity</span> = <span class="hljs-number">100</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><p><code>capacity</code> sets the maximum concurrent clients and there is no limit by default. I set <code>100</code> as a precaution. In my experience, on average there are 10-20 clients every hour, with a total 2 GB daily traffic for each direction (2 GB ingress &amp; 2 GB egress). Assuming your VPS provider set a quota based on whichever direction is higher (like Vultr), expect less than 100 GB of monthly traffic.</p></div><footer class="article-footer"><ul class="article-meta"><li><span class="label">Last Updated:</span> <time class="dt-updated" datetime="2022-08-01T00:00:00.000Z" itemprop="dateModified">1 Aug 2022</time></li><li><span class="label">Published Date:</span> <time class="dt-published" datetime="2020-03-16T00:00:00.000Z" itemprop="datePublished">16 <a href="/blog/2020/03/" title="See March 2020's posts">Mar</a> <a href="/blog/2020/" title="See 2020's posts">2020</a></time></li><li><span class="label">Tag:</span><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/caddy/" rel="tag">Caddy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/censorship/" rel="tag">Censorship</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nixos/" rel="tag">Nixos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/" rel="tag">Server</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tor/" rel="tag">Tor</a></li></ul></li><li><span class="label">Source:</span> <a href="https://gitlab.com/curben/blog/-/blob/master/source/_posts/tor-hidden-onion-nixos.md" rel="noopener external nofollow noreferrer">tor-hidden-onion-nixos.md</a></li><hr></ul></footer></div><nav id="article-nav" class="article-nav"><span class="article-nav-link-wrap newer"><strong>Newer</strong> <a href="/blog/2020/03/21/i2p-eepsite-nixos/"><div class="article-nav-title">How to make your website available over I2P Eepsite on NixOS</div></a></span><span class="article-nav-link-wrap older"><strong>Older</strong> <a href="/blog/2020/03/14/caddy-nixos-part-3/"><div class="article-nav-title">Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)</div></a></span></nav></article></div><footer id="footer" class="post-footer footer"><hr><div id="copyright" class="copyright">&copy; 2018-2024 Ming Di Leom. <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">Powered by </a><a href="https://hexo.io/" rel="noopener external nofollow noreferrer">Hexo</a> with <a href="https://gitlab.com/curben/blog/tree/master/themes/chameleon" rel="noopener external nofollow noreferrer">Chameleon</a> theme.<br>Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external nofollow noreferrer license" itemprop="license">CC-BY-SA 4.0</a>, unless indicated otherwise.<br><a class="main-nav-link" href="/disclaimer/">Disclaimer</a> <a class="main-nav-link" href="https://stats.uptimerobot.com/1394zup2LQ" rel="noopener external nofollow noreferrer">Status</a> <a class="main-nav-link" href="https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">Onion</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog#mirrors" rel="noopener external nofollow noreferrer">Eepsite</a></div></footer><script src="/libs/clipboard-2.0.6.min.js" defer></script><script src="/js/copy-button.js"></script><script src="/js/chameleon.js"></script></body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>Running Caddy 2 in NixOS 20.03 | Ming Di Leom&#39;s Blog</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://mdleom.com/blog/2020/05/24/caddy-v2-nixos/"><meta name="description" content="Use stable v2 instead of beta release"><meta property="article:author" content="Ming Di Leom"><meta property="article:tag" content="server"><meta property="article:tag" content="caddy"><meta property="article:tag" content="nixos"><meta property="og:type" content="article"><meta property="og:title" content="Running Caddy 2 in NixOS 20.03"><meta property="og:url" content="https://mdleom.com/blog/2020/05/24/caddy-v2-nixos/"><meta property="og:site_name" content="Ming Di Leom&#39;s Blog"><meta property="og:description" content="Use stable v2 instead of beta release"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mdleom.com/screenshot/blog/2020/05/24/caddy-v2-nixos/"><meta property="article:published_time" content="2020-05-24T00:00:00.000Z"><meta property="article:modified_time" content="2020-11-10T00:00:00.000Z"><link rel="alternate" href="/atom.xml" title="Ming Di Leom's Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"><link rel="manifest" href="/site.webmanifest"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><link rel="stylesheet" href="/css/chameleon.css"><meta name="yandex-verification" content="e026a03a5dd06730"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="container" class="container"><article id="post-caddy-v2-nixos" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><header id="header" class="header"><nav class="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/blog/">Blog</a> <a class="main-nav-link" href="/about/">About</a> <a class="main-nav-link" href="/atom.xml">Feed</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a><div class="search-container"><form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click"><img src="/svg/search.svg"></a></form></div></nav><nav class="mobile-nav"><a class="site-title" href="/">mdleom.com</a><ul class="mobile-nav-menu"><label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label> <input id="mobile-menu-toggle" type="checkbox"><ul id="mobile-nav-link"><div class="search-container"><form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click-mobile"><img src="/svg/search.svg"></a></form></div><i>Powered by DuckDuckGo</i> <a class="mobile-nav-link-a" href="/">Home</a> <a class="mobile-nav-link-a" href="/blog/">Blog</a> <a class="mobile-nav-link-a" href="/about/">About</a> <a class="mobile-nav-link-a" href="/atom.xml">Feed</a> <a class="mobile-nav-link-a" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a></ul></ul></nav></header><hr class="header-hr"><div class="article-inner"><header class="article-header"><h1 class="p-name entry-title article-title" itemprop="headline name">Running Caddy 2 in NixOS 20.03 <a id="btnshare"><img src="/svg/share.svg"></a></h1></header><p class="p-summary">Use stable v2 instead of beta release</p><div class="e-content article-entry" itemprop="articleBody"><blockquote><p>Applies to 20.03 or older only</p></blockquote><p>In NixOS 20.03, <code>caddy</code> package is still version 1.0.4 and <code>caddy2</code> package uses version 2.0 beta 10. The package maintainer <a href="https://github.com/NixOS/nixpkgs/pull/86686" rel="noopener external nofollow noreferrer">plans</a> to upgrade the <code>caddy</code> package to v2 in 20.09, while retaining v1 as <code>caddy1</code>. In the meantime, I show you how to run v2 stable release by using the <code>caddy2</code> package from the <code>unstable</code> channel; note that this only affects <code>caddy2</code> package, all other packages still use the stable <code>nixos</code> channel.</p><p>(Execute commands with “sudo” privilege)</p><p>Add the <code>unstable</code> channel:</p><pre><code class="hljs plaintext">$ nix-channel --add https://nixos.org/channels/nixos-unstable unstable
+$ nix-channel --update unstable</code><button class="copy-button">Copy</button></pre><p>Add <code>caddyTwo.nix</code> file (this example stores the file in “&#x2F;etc&#x2F;caddy”):</p><pre><div class="caption"><span>/etc/caddy/caddyTwo.nix</span></div><code class="hljs nix">&#123; config, lib, pkgs, ... &#125;:
+
+<span class="hljs-keyword">with</span> lib;
+
+<span class="hljs-keyword">let</span>
+  <span class="hljs-attr">cfg</span> = config.services.caddyTwo;
+
+  <span class="hljs-comment"># v2-specific options</span>
+  <span class="hljs-attr">isCaddy2</span> = versionAtLeast cfg.package.version <span class="hljs-string">&quot;2.0&quot;</span>;
+<span class="hljs-keyword">in</span> &#123;
+  options.services.<span class="hljs-attr">caddyTwo</span> = &#123;
+    <span class="hljs-attr">enable</span> = mkEnableOption <span class="hljs-string">&quot;Caddy web server&quot;</span>;
+
+    <span class="hljs-attr">config</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;/etc/caddy/Caddyfile&quot;</span>;
+      <span class="hljs-attr">type</span> = types.str;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Path to Caddyfile&quot;</span>;
+    &#125;;
+
+    <span class="hljs-attr">dataDir</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;/var/lib/caddy&quot;</span>;
+      <span class="hljs-attr">type</span> = types.path;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        The data directory, for storing certificates. Before 17.09, this</span>
+<span class="hljs-string">        would create a .caddy directory. With 17.09 the contents of the</span>
+<span class="hljs-string">        .caddy directory are in the specified data directory instead.</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+    &#125;;
+
+    <span class="hljs-attr">package</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = pkgs.caddy;
+      <span class="hljs-attr">defaultText</span> = <span class="hljs-string">&quot;pkgs.caddy&quot;</span>;
+      <span class="hljs-attr">type</span> = types.package;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Caddy package to use.&quot;</span>;
+    &#125;;
+
+    <span class="hljs-attr">adapter</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;caddyfile&quot;</span>;
+      <span class="hljs-attr">example</span> = <span class="hljs-string">&quot;nginx&quot;</span>;
+      <span class="hljs-attr">type</span> = types.str;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        Name of the config adapter to use. Not applicable to Caddy v1.</span>
+<span class="hljs-string">        See https://caddyserver.com/docs/config-adapters for the full list.</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-attr">config</span> = mkIf cfg.enable &#123;
+    systemd.services.<span class="hljs-attr">caddy</span> = &#123;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Caddy web server&quot;</span>;
+      <span class="hljs-attr">after</span> = [ <span class="hljs-string">&quot;network-online.target&quot;</span> ];
+      <span class="hljs-attr">wantedBy</span> = [ <span class="hljs-string">&quot;multi-user.target&quot;</span> ];
+      <span class="hljs-attr">environment</span> = mkIf (versionAtLeast config.system.stateVersion <span class="hljs-string">&quot;17.09&quot;</span> &amp;&amp; !isCaddy2)
+        &#123; <span class="hljs-attr">CADDYPATH</span> = cfg.dataDir; &#125;;
+      <span class="hljs-attr">startLimitIntervalSec</span> = <span class="hljs-number">14400</span>;
+      <span class="hljs-attr">startLimitBurst</span> = <span class="hljs-number">10</span>;
+      <span class="hljs-attr">serviceConfig</span> = &#123;
+        <span class="hljs-attr">ExecStart</span> = <span class="hljs-keyword">if</span> isCaddy2 <span class="hljs-keyword">then</span> <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">          <span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy run --config <span class="hljs-subst">$&#123;cfg.config&#125;</span> --adapter <span class="hljs-subst">$&#123;cfg.adapter&#125;</span></span>
+<span class="hljs-string">        &#x27;&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">          <span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy -root=/var/tmp -conf=<span class="hljs-subst">$&#123;cfg.config&#125;</span></span>
+<span class="hljs-string">        &#x27;&#x27;</span>;
+        <span class="hljs-attr">ExecReload</span> =
+          <span class="hljs-keyword">if</span> isCaddy2 <span class="hljs-keyword">then</span>
+            <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy reload --config <span class="hljs-subst">$&#123;cfg.config&#125;</span> --adapter <span class="hljs-subst">$&#123;cfg.adapter&#125;</span>&quot;</span>
+          <span class="hljs-keyword">else</span>
+            <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;pkgs.coreutils&#125;</span>/bin/kill -USR1 $MAINPID&quot;</span>;
+        <span class="hljs-attr">Type</span> = <span class="hljs-string">&quot;simple&quot;</span>;
+        <span class="hljs-attr">User</span> = <span class="hljs-string">&quot;caddy&quot;</span>;
+        <span class="hljs-attr">Group</span> = <span class="hljs-string">&quot;caddy&quot;</span>;
+        <span class="hljs-attr">Restart</span> = <span class="hljs-string">&quot;on-abnormal&quot;</span>;
+        <span class="hljs-attr">NoNewPrivileges</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">LimitNPROC</span> = <span class="hljs-number">512</span>;
+        <span class="hljs-attr">LimitNOFILE</span> = <span class="hljs-number">1048576</span>;
+        <span class="hljs-attr">PrivateTmp</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">PrivateDevices</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">ProtectHome</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">ProtectSystem</span> = <span class="hljs-string">&quot;full&quot;</span>;
+        <span class="hljs-attr">ReadWriteDirectories</span> = cfg.dataDir;
+        <span class="hljs-attr">KillMode</span> = <span class="hljs-string">&quot;mixed&quot;</span>;
+        <span class="hljs-attr">KillSignal</span> = <span class="hljs-string">&quot;SIGQUIT&quot;</span>;
+        <span class="hljs-attr">TimeoutStopSec</span> = <span class="hljs-string">&quot;5s&quot;</span>;
+        <span class="hljs-comment"># Remove two options below if caddy doesn&#x27;t listen on port &lt;1024</span>
+        <span class="hljs-attr">AmbientCapabilities</span> = <span class="hljs-string">&quot;cap_net_bind_service&quot;</span>;
+        <span class="hljs-attr">CapabilityBoundingSet</span> = <span class="hljs-string">&quot;cap_net_bind_service&quot;</span>;
+      &#125;;
+    &#125;;
+
+    users.users.<span class="hljs-attr">caddy</span> = &#123;
+      <span class="hljs-attr">home</span> = cfg.dataDir;
+      <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+    &#125;;
+
+    users.groups.<span class="hljs-attr">caddy</span> = &#123;
+      <span class="hljs-attr">members</span> = [ <span class="hljs-string">&quot;caddy&quot;</span> ];
+    &#125;;
+  &#125;;
+&#125;</code><button class="copy-button">Copy</button></pre><p>Enable caddy service in “configuration.nix”:</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix"><span class="hljs-attr">require</span> = [ /etc/caddy/caddyTwo.nix ];
+services.<span class="hljs-attr">caddyTwo</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">package</span> = unstable.caddy2
+  <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/path/to/caddyFile&quot;</span>;
+  <span class="hljs-attr">adapter</span> = <span class="hljs-string">&quot;caddyfile&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>If you use other <a href="https://caddyserver.com/docs/config-adapters#known-config-adapters" rel="noopener external nofollow noreferrer">config formats</a>, modify the following options:</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix">services.<span class="hljs-attr">caddyTwo</span> = &#123;
+  <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/path/to/yaml&quot;</span>;
+  <span class="hljs-attr">adapter</span> = <span class="hljs-string">&quot;yaml&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>Package maintainer is updating the <code>caddy</code> package to v2 in <a href="https://github.com/NixOS/nixpkgs/pull/86686" rel="noopener external nofollow noreferrer">#86686</a>, once that pull request is merged, update the following option:</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix">services.<span class="hljs-attr">caddyTwo</span> = &#123;
+  <span class="hljs-attr">package</span> = unstable.caddy;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>Import <code>unstable</code> channel:</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix">&#123; config, pkgs, ... &#125;:
+
+<span class="hljs-keyword">let</span>
+  <span class="hljs-attr">unstable</span> = <span class="hljs-built_in">import</span> &lt;unstable&gt; &#123;&#125;;
+<span class="hljs-keyword">in</span>
+&#123;
+  <span class="hljs-comment"># existing options</span>
+
+  <span class="hljs-attr">require</span> = [ /etc/caddy/caddyTwo.nix ];
+  services.<span class="hljs-attr">caddyTwo</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">package</span> = unstable.caddy2;
+    <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/path/to/caddyFile&quot;</span>;
+    <span class="hljs-attr">adapter</span> = <span class="hljs-string">&quot;caddyfile&quot;</span>;
+  &#125;;
+&#125;</code><button class="copy-button">Copy</button></pre><p>Runs a rebuild and check the status:</p><pre><code class="hljs plaintext">$ nixos-rebuild switch
+$ systemctl status caddy</code><button class="copy-button">Copy</button></pre><p>To revert to v1, remove <code>package</code> and <code>adapter</code> options:</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix">services.<span class="hljs-attr">caddyTwo</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/path/to/caddyFile&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre></div><footer class="article-footer"><ul class="article-meta"><li><span class="label">Last Updated:</span> <time class="dt-updated" datetime="2020-11-10T00:00:00.000Z" itemprop="dateModified">10 Nov 2020</time></li><li><span class="label">Published Date:</span> <time class="dt-published" datetime="2020-05-24T00:00:00.000Z" itemprop="datePublished">24 <a href="/blog/2020/05/" title="See May 2020's posts">May</a> <a href="/blog/2020/" title="See 2020's posts">2020</a></time></li><li><span class="label">Tag:</span><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/caddy/" rel="tag">Caddy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nixos/" rel="tag">Nixos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/" rel="tag">Server</a></li></ul></li><li><span class="label">Source:</span> <a href="https://gitlab.com/curben/blog/-/blob/master/source/_posts/caddy-v2-nixos.md" rel="noopener external nofollow noreferrer">caddy-v2-nixos.md</a></li><hr></ul></footer></div><nav id="article-nav" class="article-nav"><span class="article-nav-link-wrap newer"><strong>Newer</strong> <a href="/blog/2020/06/03/onion-location-redirect/"><div class="article-nav-title">Onion-Location: redirect your clearnet website to .onion</div></a></span><span class="article-nav-link-wrap older"><strong>Older</strong> <a href="/blog/2020/05/23/caddy-upgrade-v2-proxy/"><div class="article-nav-title">Upgrading Caddy reverse proxy from v1 to v2 syntax</div></a></span></nav></article></div><footer id="footer" class="post-footer footer"><hr><div id="copyright" class="copyright">&copy; 2018-2024 Ming Di Leom. <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">Powered by </a><a href="https://hexo.io/" rel="noopener external nofollow noreferrer">Hexo</a> with <a href="https://gitlab.com/curben/blog/tree/master/themes/chameleon" rel="noopener external nofollow noreferrer">Chameleon</a> theme.<br>Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external nofollow noreferrer license" itemprop="license">CC-BY-SA 4.0</a>, unless indicated otherwise.<br><a class="main-nav-link" href="/disclaimer/">Disclaimer</a> <a class="main-nav-link" href="https://stats.uptimerobot.com/1394zup2LQ" rel="noopener external nofollow noreferrer">Status</a> <a class="main-nav-link" href="https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">Onion</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog#mirrors" rel="noopener external nofollow noreferrer">Eepsite</a></div></footer><script src="/libs/clipboard-2.0.6.min.js" defer></script><script src="/js/copy-button.js"></script><script src="/js/chameleon.js"></script></body></html>
