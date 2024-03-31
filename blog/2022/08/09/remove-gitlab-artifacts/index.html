@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>Bulk remove old GitLab CI job artifacts | Ming Di Leom&#39;s Blog</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://mdleom.com/blog/2022/08/09/remove-gitlab-artifacts/"><meta name="description" content="Use this script to unlock a repository that has exceeded the 5 GB usage quota"><meta property="article:author" content="Ming Di Leom"><meta property="article:tag" content="gitlab"><meta property="og:type" content="article"><meta property="og:title" content="Bulk remove old GitLab CI job artifacts"><meta property="og:url" content="https://mdleom.com/blog/2022/08/09/remove-gitlab-artifacts/"><meta property="og:site_name" content="Ming Di Leom&#39;s Blog"><meta property="og:description" content="Use this script to unlock a repository that has exceeded the 5 GB usage quota"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mdleom.com/screenshot/blog/2022/08/09/remove-gitlab-artifacts/"><meta property="article:published_time" content="2022-08-09T00:00:00.000Z"><link rel="alternate" href="/atom.xml" title="Ming Di Leom's Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"><link rel="manifest" href="/site.webmanifest"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><link rel="stylesheet" href="/css/chameleon.css"><meta name="yandex-verification" content="e026a03a5dd06730"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="container" class="container"><article id="post-remove-gitlab-artifacts" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><header id="header" class="header"><nav class="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/blog/">Blog</a> <a class="main-nav-link" href="/about/">About</a> <a class="main-nav-link" href="/atom.xml">Feed</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a><div class="search-container"><form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click"><img src="/svg/search.svg"></a></form></div></nav><nav class="mobile-nav"><a class="site-title" href="/">mdleom.com</a><ul class="mobile-nav-menu"><label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label> <input id="mobile-menu-toggle" type="checkbox"><ul id="mobile-nav-link"><div class="search-container"><form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click-mobile"><img src="/svg/search.svg"></a></form></div><i>Powered by DuckDuckGo</i> <a class="mobile-nav-link-a" href="/">Home</a> <a class="mobile-nav-link-a" href="/blog/">Blog</a> <a class="mobile-nav-link-a" href="/about/">About</a> <a class="mobile-nav-link-a" href="/atom.xml">Feed</a> <a class="mobile-nav-link-a" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a></ul></ul></nav></header><hr class="header-hr"><div class="article-inner"><header class="article-header"><h1 class="p-name entry-title article-title" itemprop="headline name">Bulk remove old GitLab CI job artifacts <a id="btnshare"><img src="/svg/share.svg"></a></h1></header><p class="p-summary">Use this script to unlock a repository that has exceeded the 5 GB usage quota</p><div class="e-content article-entry" itemprop="articleBody"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Expire-new-job-artifacts"><span class="toc-text">Expire new job artifacts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove-old-job-artifacts"><span class="toc-text">Remove old job artifacts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Before-amp-after"><span class="toc-text">Before &amp; after</span></a></li></ol><p>On 8 Aug 2022, GitLab <a href="https://docs.gitlab.com/ee/user/usage_quotas.html#namespace-storage-limit-enforcement-schedule" rel="noopener external nofollow noreferrer">announced</a> they will enforce 5 GB storage quota on free account from 9 November 2022. My <a href="https://gitlab.com/malware-filter" rel="noopener external nofollow noreferrer">malware-filter</a> group was using 25.3 GB prior to a cleanup where some projects were more than 5 GB. I did apply malware-filter for GitLab for <a href="https://about.gitlab.com/solutions/open-source/join/" rel="noopener external nofollow noreferrer">Open Source Program</a>, so I get Ultimate tier with 250 GB storage limit (per project). While I’m still far off from the storage limit, I still went ahead to clean them up in case they reduce storage quota for Open Source Program.</p><h2 id="Expire-new-job-artifacts">Expire new job artifacts <a href="#Expire-new-job-artifacts" class="headerlink" title="Expire new job artifacts">§</a></h2><p>In all my projects that were using more than 5 GB, 99% of the usage came from job artifacts. I believe most of the cases are like this. The first thing I did was to set <em>new</em> job artifacts to expire in a week, the default is <a href="https://docs.gitlab.com/ee/user/gitlab_com/index.html#gitlab-cicd" rel="noopener external nofollow noreferrer">30 days</a>. Existing job artifacts are not affected by this setting.</p><p>If your job artifacts created in a month are much less than 5 GB in total yet still exceed the quota, it is likely caused by very old artifacts which have no expiry. In that case, reducing the default expiry may not be relevant, those old artifacts should be removed instead.</p><pre><div class="caption"><span>.gitlab-ci.yml</span></div><code class="hljs diff">build:
+  artifacts:
+    paths:
+      - public/
+<span class="hljs-addition">+    expire_in: 1 week</span></code><button class="copy-button">Copy</button></pre><h2 id="Remove-old-job-artifacts">Remove old job artifacts <a href="#Remove-old-job-artifacts" class="headerlink" title="Remove old job artifacts">§</a></h2><p>As for cleaning up existing job artifacts, I found the following bash script on the GitLab forum. I fixed some variable typo and modified the starting page to “2”, all job artifacts will be removed except for the first page, retaining 100 most recent job artifacts. The only dependencies are <strong>curl</strong> and <strong>jq</strong>.</p><p>This script is especially useful for removing job artifacts were created before 22 Jun 2020, artifacts created before that date do not expire.</p><pre><div class="caption"><span>cleanup-gitlab.sh</span><a href="https://forum.gitlab.com/t/remove-all-artifact-no-expire-options/9274/12" rel="noopener external nofollow noreferrer">source</a></div><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># https://forum.gitlab.com/t/remove-all-artifact-no-expire-options/9274/12</span>
+<span class="hljs-comment"># Copyright 2021 &quot;Holloway&quot; Chew, Kean Ho &lt;kean.ho.chew@zoralab.com&gt;</span>
+<span class="hljs-comment"># Copyright 2020 Benny Powers (https://forum.gitlab.com/u/bennyp/summary)</span>
+<span class="hljs-comment"># Copyright 2017 Adam Boseley (https://forum.gitlab.com/u/adam.boseley/summary)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="hljs-comment"># you may not use this file except in compliance with the License.</span>
+<span class="hljs-comment"># You may obtain a copy of the License at</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="hljs-comment"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="hljs-comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="hljs-comment"># See the License for the specific language governing permissions and</span>
+<span class="hljs-comment"># limitations under the License.</span>
+
+
+<span class="hljs-comment">##############</span>
+<span class="hljs-comment"># user input #</span>
+<span class="hljs-comment">##############</span>
+<span class="hljs-comment"># project ID (Help: goto &quot;Settings&quot; &gt; &quot;General&quot;)</span>
+projectID=<span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># user API token (Help: &quot;User Settings&quot; &gt; &quot;Access Tokens&quot; &gt; tick &quot;api&quot;)</span>
+token=<span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># gitlab server instance</span>
+server=<span class="hljs-string">&quot;gitlab.com&quot;</span>
+
+<span class="hljs-comment"># CI Jobs pagination (Help: &quot;CI/CD&quot; &gt; &quot;Jobs&quot; &gt; see bottom pagination bar)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> user interface might be bug. If so, you need to manually calculate.</span>
+<span class="hljs-comment"># By default, maximum 10,000 (end_page * per_page) job artifacts will be removed, while retaining 100 most recent artifacts.</span>
+<span class="hljs-comment"># Example:</span>
+<span class="hljs-comment">#   1. For 123 jobs in the past and per_page is &quot;100&quot; (maximum), it has 2 pages (end_page) in total</span>
+<span class="hljs-comment">#      [end_page = ROUND_UP(total_job / per_page)].</span>
+<span class="hljs-comment">#   2. To retain most recent 200 jobs</span>
+<span class="hljs-comment">#      [start_page = num_job_retain / per_page + 1]</span>
+start_page=<span class="hljs-string">&quot;2&quot;</span>
+end_page=<span class="hljs-string">&quot;100&quot;</span>
+per_page=<span class="hljs-string">&quot;100&quot;</span>
+
+<span class="hljs-comment"># GitLab API version</span>
+api=<span class="hljs-string">&quot;v4&quot;</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># internal function #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-function"><span class="hljs-title">delete</span></span>() &#123;
+  <span class="hljs-comment"># page</span>
+  page=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+  1&gt;&amp;2 <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Cleaning page <span class="hljs-variable">$&#123;page&#125;</span>...\n&quot;</span>
+
+  <span class="hljs-comment"># build internal variables</span>
+  baseURL=<span class="hljs-string">&quot;https://<span class="hljs-variable">$&#123;server&#125;</span>/api/<span class="hljs-variable">$&#123;api&#125;</span>/projects&quot;</span>
+
+  <span class="hljs-comment"># get list from servers for the page</span>
+  url=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;baseURL&#125;</span>/<span class="hljs-variable">$&#123;projectID&#125;</span>/jobs/?page=<span class="hljs-variable">$&#123;page&#125;</span>&amp;per_page=<span class="hljs-variable">$&#123;per_page&#125;</span>&quot;</span>
+  1&gt;&amp;2 <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Calling API to get lob list: <span class="hljs-variable">$&#123;url&#125;</span>\n&quot;</span>
+
+  list=$(curl --globoff --header <span class="hljs-string">&quot;PRIVATE-TOKEN:<span class="hljs-variable">$&#123;token&#125;</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$url</span>&quot;</span> \
+    | jq -r <span class="hljs-string">&quot;.[].id&quot;</span>)
+  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">$&#123;#list[@]&#125;</span> -eq 0 ]; <span class="hljs-keyword">then</span>
+    1&gt;&amp;2 <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;list is empty\n&quot;</span>
+    <span class="hljs-built_in">return</span> 0
+  <span class="hljs-keyword">fi</span>
+
+  <span class="hljs-comment"># remove all jobs from page</span>
+  <span class="hljs-keyword">for</span> jobID <span class="hljs-keyword">in</span> <span class="hljs-variable">$&#123;list[@]&#125;</span>; <span class="hljs-keyword">do</span>
+    url=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;baseURL&#125;</span>/<span class="hljs-variable">$&#123;projectID&#125;</span>/jobs/<span class="hljs-variable">$&#123;jobID&#125;</span>/erase&quot;</span>
+    1&gt;&amp;2 <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Calling API to erase job: <span class="hljs-variable">$&#123;url&#125;</span>\n&quot;</span>
+
+    curl --request POST --header <span class="hljs-string">&quot;PRIVATE-TOKEN:<span class="hljs-variable">$&#123;token&#125;</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$url</span>&quot;</span>
+    1&gt;&amp;2 <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\n\n&quot;</span>
+  <span class="hljs-keyword">done</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-title">main</span></span>() &#123;
+  <span class="hljs-comment"># check dependencies</span>
+  <span class="hljs-keyword">if</span> [ -z $(<span class="hljs-built_in">type</span> -p jq) ]; <span class="hljs-keyword">then</span>
+    1&gt;&amp;2 <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;[ ERROR ] need &#x27;jq&#x27; dependency to parse json.&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+  <span class="hljs-keyword">fi</span>
+
+  <span class="hljs-comment"># loop through each pages from given start_page to end_page inclusive</span>
+  <span class="hljs-keyword">for</span> ((i=start_page; i&lt;=end_page; i++)); <span class="hljs-keyword">do</span>
+    delete <span class="hljs-variable">$i</span>
+  <span class="hljs-keyword">done</span>
+
+  <span class="hljs-comment"># return</span>
+  <span class="hljs-built_in">exit</span> 0
+&#125;
+main <span class="hljs-variable">$@</span></code><button class="copy-button">Copy</button></pre><h2 id="Before-amp-after">Before &amp; after <a href="#Before-amp-after" class="headerlink" title="Before &amp; after">§</a></h2><table><thead><tr><th>Project</th><th>Before</th><th>After</th><th>Runtime</th></tr></thead><tbody><tr><td><a href="https://gitlab.com/malware-filter/malware-filter" rel="noopener external nofollow noreferrer">malware-filter</a> (project)</td><td>15.12 GB</td><td>6.3 GB</td><td>46m 15s</td></tr><tr><td><a href="https://gitlab.com/malware-filter/phishing-filter" rel="noopener external nofollow noreferrer">phishing-filter</a></td><td>6.02 GB</td><td>949 MB</td><td>1h 35m 17s</td></tr><tr><td><a href="https://gitlab.com/malware-filter/pup-filter" rel="noopener external nofollow noreferrer">pup-filter</a></td><td>1.16 GB</td><td>480.4 MB</td><td>57m 45s</td></tr><tr><td><a href="https://gitlab.com/malware-filter/tracking-filter" rel="noopener external nofollow noreferrer">tracking-filter</a></td><td>106.68 MB</td><td>105.3 MB</td><td>4m 38s</td></tr><tr><td><a href="https://gitlab.com/malware-filter/urlhaus-filter" rel="noopener external nofollow noreferrer">urlhaus-filter</a></td><td>2.64 GB</td><td>908 MB</td><td>1h 50m 19s</td></tr><tr><td><a href="https://gitlab.com/malware-filter/vn-badsite-filter" rel="noopener external nofollow noreferrer">vn-badsite-filter</a></td><td>283.12 MB</td><td>114.8 MB</td><td>19m 52s</td></tr></tbody></table></div><footer class="article-footer"><ul class="article-meta"><li><span class="label">Published Date:</span> <time class="dt-published" datetime="2022-08-09T00:00:00.000Z" itemprop="datePublished">9 <a href="/blog/2022/08/" title="See August 2022's posts">Aug</a> <a href="/blog/2022/" title="See 2022's posts">2022</a></time></li><li><span class="label">Tag:</span><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/" rel="tag">Gitlab</a></li></ul></li><li><span class="label">Source:</span> <a href="https://gitlab.com/curben/blog/-/blob/master/source/_posts/remove-gitlab-artifacts.md" rel="noopener external nofollow noreferrer">remove-gitlab-artifacts.md</a></li><hr></ul></footer></div><nav id="article-nav" class="article-nav"><span class="article-nav-link-wrap newer"><strong>Newer</strong> <a href="/blog/2022/11/27/grub-luks2-argon2/"><div class="article-nav-title">Enable LUKS2 and Argon2 support for Grub in Manjaro/Arch</div></a></span><span class="article-nav-link-wrap older"><strong>Older</strong> <a href="/blog/2021/12/27/caddy-plugins-nixos/"><div class="article-nav-title">Installing Caddy plugins in NixOS</div></a></span></nav></article></div><footer id="footer" class="post-footer footer"><hr><div id="copyright" class="copyright">&copy; 2018-2024 Ming Di Leom. <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">Powered by </a><a href="https://hexo.io/" rel="noopener external nofollow noreferrer">Hexo</a> with <a href="https://gitlab.com/curben/blog/tree/master/themes/chameleon" rel="noopener external nofollow noreferrer">Chameleon</a> theme.<br>Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external nofollow noreferrer license" itemprop="license">CC-BY-SA 4.0</a>, unless indicated otherwise.<br><a class="main-nav-link" href="/disclaimer/">Disclaimer</a> <a class="main-nav-link" href="https://stats.uptimerobot.com/1394zup2LQ" rel="noopener external nofollow noreferrer">Status</a> <a class="main-nav-link" href="https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">Onion</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog#mirrors" rel="noopener external nofollow noreferrer">Eepsite</a></div></footer><script src="/libs/clipboard-2.0.6.min.js" defer></script><script src="/js/copy-button.js"></script><script src="/js/chameleon.js"></script></body></html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>Serving pre-compressed files in Caddy 2 | Ming Di Leom&#39;s Blog</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://mdleom.com/blog/2020/11/12/caddy2-pre-compressed/"><meta name="description" content="gzip and brotli files"><meta property="article:author" content="Ming Di Leom"><meta property="article:tag" content="caddy"><meta property="og:type" content="article"><meta property="og:title" content="Serving pre-compressed files in Caddy 2"><meta property="og:url" content="https://mdleom.com/blog/2020/11/12/caddy2-pre-compressed/"><meta property="og:site_name" content="Ming Di Leom&#39;s Blog"><meta property="og:description" content="gzip and brotli files"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mdleom.com/screenshot/blog/2020/11/12/caddy2-pre-compressed/"><meta property="article:published_time" content="2020-11-12T00:00:00.000Z"><meta property="article:modified_time" content="2022-05-06T00:00:00.000Z"><link rel="alternate" href="/atom.xml" title="Ming Di Leom's Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"><link rel="manifest" href="/site.webmanifest"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><link rel="stylesheet" href="/css/chameleon.css"><meta name="yandex-verification" content="e026a03a5dd06730"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="container" class="container"><article id="post-caddy2-pre-compressed" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><header id="header" class="header"><nav class="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/blog/">Blog</a> <a class="main-nav-link" href="/about/">About</a> <a class="main-nav-link" href="/atom.xml">Feed</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a><div class="search-container"><form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click"><img src="/svg/search.svg"></a></form></div></nav><nav class="mobile-nav"><a class="site-title" href="/">mdleom.com</a><ul class="mobile-nav-menu"><label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label> <input id="mobile-menu-toggle" type="checkbox"><ul id="mobile-nav-link"><div class="search-container"><form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click-mobile"><img src="/svg/search.svg"></a></form></div><i>Powered by DuckDuckGo</i> <a class="mobile-nav-link-a" href="/">Home</a> <a class="mobile-nav-link-a" href="/blog/">Blog</a> <a class="mobile-nav-link-a" href="/about/">About</a> <a class="mobile-nav-link-a" href="/atom.xml">Feed</a> <a class="mobile-nav-link-a" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a></ul></ul></nav></header><hr class="header-hr"><div class="article-inner"><header class="article-header"><h1 class="p-name entry-title article-title" itemprop="headline name">Serving pre-compressed files in Caddy 2 <a id="btnshare"><img src="/svg/share.svg"></a></h1></header><p class="p-summary">gzip and brotli files</p><div class="e-content article-entry" itemprop="articleBody"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Default-usage"><span class="toc-text">Default usage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Content-Type"><span class="toc-text">Content-Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#URL-normalisation"><span class="toc-text">URL normalisation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dummy-files"><span class="toc-text">Dummy files</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pretty-URLs"><span class="toc-text">Pretty URLs</span></a></li></ol><blockquote><p>Caddy <a href="https://github.com/caddyserver/caddy/releases/tag/v2.4.0-beta.2" rel="noopener external nofollow noreferrer">v2.4.0</a> added a new option <a href="https://caddyserver.com/docs/caddyfile/directives/file_server" rel="noopener external nofollow noreferrer"><code>precompressed</code></a> to support serving pre-compressed assets.</p></blockquote><p>Caddy v0.9.4+ and v1.0.0+ support pre-compressed gzip and brotli files automatically. However, this feature is <a href="https://github.com/caddyserver/caddy/issues/2665" rel="noopener external nofollow noreferrer">not yet</a> implemented in v2 and requires manual configuration. Examples available at the Caddy forum are incomplete, it’s either gzip or brotli. The config provided in this guide supports <em>both</em>, prioritising brotli if supported by the requesting web browser (and there are .br files), otherwise fallback to gzip.</p><h2 id="Default-usage">Default usage <a href="#Default-usage" class="headerlink" title="Default usage">§</a></h2><p>This configuration supports URL normalisation; when a URL has a trailing slash <code>http://localhost:8080/about/</code>, Caddy will serve <code>http://localhost:8080/about/index.html</code> using <em>internal&#x2F;transparent</em> redirect (without 301&#x2F;302 redirect). If you need to internal redirect <code>http://localhost:8080/bio</code> to <code>http://localhost:8080/bio.html</code>, refer to the <a href="#Pretty-URLs">next section</a>.</p><pre><div class="caption"><span>Caddyfile</span></div><code class="hljs plain">http://localhost:8080 &#123;
+  bind 127.0.0.1 ::1
+
+  root * /home/user/www
+  file_server
+
+  @brotli &#123;
+    header Accept-Encoding *br*
+    file &#123;
+      try_files &#123;path&#125;.br &#123;path&#125;/index.html.br
+    &#125;
+  &#125;
+  handle @brotli &#123;
+    header Content-Encoding br
+    rewrite &#123;http.matchers.file.relative&#125;
+  &#125;
+
+  @gzip &#123;
+    header Accept-Encoding *gzip*
+    file &#123;
+      try_files &#123;path&#125;.gz &#123;path&#125;/index.html.gz
+    &#125;
+  &#125;
+  handle @gzip &#123;
+    header Content-Encoding gzip
+    rewrite &#123;http.matchers.file.relative&#125;
+  &#125;
+
+  @html &#123;
+    file
+    path *.html */
+  &#125;
+  header @html Content-Type text/html
+
+  @css &#123;
+    file
+    path *.css
+  &#125;
+  header @css Content-Type text/css
+
+  @js &#123;
+    file
+    path *.js
+  &#125;
+  header @js Content-Type text/javascript
+
+  @svg &#123;
+    file
+    path *.svg
+  &#125;
+  header @svg Content-Type image/svg+xml
+
+  @xml &#123;
+    file
+    path *.xml
+  &#125;
+  header @xml Content-Type application/xmlr
+  &#125;
+
+  @json &#123;
+    file
+    path *.json
+  &#125;
+  header @json Content-Type application/json
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="Content-Type">Content-Type <a href="#Content-Type" class="headerlink" title="Content-Type">§</a></h3><pre><code class="hljs plaintext">@svg &#123;
+  file
+  path *.svg
+&#125;
+header @svg Content-Type image/svg+xml</code><button class="copy-button">Copy</button></pre><p><code>Content-Type</code> response header needs to be specified as a workaround, otherwise Caddy responds with <code>application/gzip</code>.</p><h3 id="URL-normalisation">URL normalisation <a href="#URL-normalisation" class="headerlink" title="URL normalisation">§</a></h3><pre><code class="hljs plaintext">@html &#123;
+  file
+  path *.html */
+&#125;</code><button class="copy-button">Copy</button></pre><p><code>*/</code> is to match path with a trailing slash <code>/path/</code> since that is (transparently) redirects to <code>/path/index.html</code>.</p><h3 id="Dummy-files">Dummy files <a href="#Dummy-files" class="headerlink" title="Dummy files">§</a></h3><pre><code class="hljs plaintext">root * /home/user/www</code><button class="copy-button">Copy</button></pre><p>I prepared a set of dummy files with most common file extensions (<a href="/files/20201112/dummy.zip">download</a>). This enables you to test whether Caddy serves the correct file. <code>.gz</code> and <code>.br</code> files are <em>not</em> compressed files, they are text files so that you can easily identify the file being served. This also means you cannot test it on browsers since the files are not gzip&#x2F;brotli-compressed files (you’ll get encoding error); also note that web browsers only send <code>Accept-Encoding: br</code> request header to HTTPS website.</p><p>Unzip the dummy.zip and specify the folder in the <code>root</code> directive. Following are some sample tests after you start Caddy:</p><pre><code class="hljs plaintext">$ curl -i http://localhost:8080/foo.svg -H &#x27;Accept-Encoding: gzip&#x27;
+
+# /foo.svg.gz should be served
+HTTP/1.1 200 OK
+Content-Encoding: gzip
+Content-Type: image/svg+xml
+
+svg gz</code><button class="copy-button">Copy</button></pre><pre><code class="hljs plaintext">$ curl -i http://localhost:8080/foo.svg -H &#x27;Accept-Encoding: gzip,br&#x27;
+
+# /foo.svg.br should be served
+HTTP/1.1 200 OK
+Content-Encoding: br
+Content-Type: image/svg+xml
+
+svg br</code><button class="copy-button">Copy</button></pre><pre><code class="hljs plaintext">$ curl -i http://localhost:8080/foo.svg
+
+# /foo.svg should be served
+HTTP/1.1 200 OK
+Content-Type: image/svg+xml
+
+svg</code><button class="copy-button">Copy</button></pre><h2 id="Pretty-URLs">Pretty URLs <a href="#Pretty-URLs" class="headerlink" title="Pretty URLs">§</a></h2><p>This configuration supports transparently redirect a URL without trailing slash and file extension, e.g. <code>http://localhost:8080/bio</code> to <code>http://localhost:8080/bio.html</code>. If you request “bio.html”, Caddy still still serve it as usual, without any redirect. This feature is similar to <a href="https://docs.netlify.com/routing/redirects/redirect-options/#trailing-slash" rel="noopener external nofollow noreferrer">Netlify’s</a>.</p><pre><div class="caption"><span>Caddyfile</span></div><code class="hljs plain">http://localhost:8080 &#123;
+  bind 127.0.0.1 ::1
+
+  root * /home/user/www
+  file_server
+  try_files &#123;path&#125;.html
+
+  @brotli &#123;
+    header Accept-Encoding *br*
+    file &#123;
+      try_files &#123;path&#125;.br &#123;path&#125;/index.html.br &#123;path&#125;.html.br
+    &#125;
+  &#125;
+  handle @brotli &#123;
+    header &#123;
+      Content-Encoding br
+      Content-Type text/html
+    &#125;
+    rewrite &#123;http.matchers.file.relative&#125;
+  &#125;
+
+  @gzip &#123;
+    header Accept-Encoding *gzip*
+    file &#123;
+      try_files &#123;path&#125;.gz &#123;path&#125;/index.html.gz &#123;path&#125;.html.gz
+    &#125;
+  &#125;
+  handle @gzip &#123;
+    header &#123;
+      Content-Encoding gzip
+      Content-Type text/html
+    &#125;
+    rewrite &#123;http.matchers.file.relative&#125;
+  &#125;
+
+  @html &#123;
+    file
+    path *.html */
+  &#125;
+  header @html &#123;
+    Content-Type text/html
+    defer
+  &#125;
+
+  @css &#123;
+    file
+    path *.css
+  &#125;
+  header @css &#123;
+    Content-Type text/css
+    defer
+  &#125;
+
+  @js &#123;
+    file
+    path *.js
+  &#125;
+  header @js &#123;
+    Content-Type text/javascript
+    defer
+  &#125;
+
+  @svg &#123;
+    file
+    path *.svg
+  &#125;
+  header @svg &#123;
+    Content-Type image/svg+xml
+    defer
+  &#125;
+
+  @xml &#123;
+    file
+    path *.xml
+  &#125;
+  header @xml &#123;
+    Content-Type application/xml
+    defer
+  &#125;
+
+  @json &#123;
+    file
+    path *.json
+  &#125;
+  header @json &#123;
+    Content-Type application/json
+    defer
+  &#125;
+&#125;</code><button class="copy-button">Copy</button></pre><p>Derived from <a href="https://caddy.community/t/how-to-serve-pre-compressed-files-with-caddy-v2/8760" rel="noopener external nofollow noreferrer">[1]</a>, <a href="https://caddy.community/t/how-to-serve-gzipped-files-automatically-in-caddy-v2/7311" rel="noopener external nofollow noreferrer">[2]</a>, <a href="https://caddy.community/t/why-caddy-2-is-not-able-to-serve-static-brotli-files/7653" rel="noopener external nofollow noreferrer">[3]</a>.</p></div><footer class="article-footer"><ul class="article-meta"><li><span class="label">Last Updated:</span> <time class="dt-updated" datetime="2022-05-06T00:00:00.000Z" itemprop="dateModified">6 May 2022</time></li><li><span class="label">Published Date:</span> <time class="dt-published" datetime="2020-11-12T00:00:00.000Z" itemprop="datePublished">12 <a href="/blog/2020/11/" title="See November 2020's posts">Nov</a> <a href="/blog/2020/" title="See 2020's posts">2020</a></time></li><li><span class="label">Tag:</span><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/caddy/" rel="tag">Caddy</a></li></ul></li><li><span class="label">Source:</span> <a href="https://gitlab.com/curben/blog/-/blob/master/source/_posts/caddy2-pre-compressed.md" rel="noopener external nofollow noreferrer">caddy2-pre-compressed.md</a></li><hr></ul></footer></div><nav id="article-nav" class="article-nav"><span class="article-nav-link-wrap newer"><strong>Newer</strong> <a href="/blog/2020/11/21/cloudflare-html-cache/"><div class="article-nav-title">Cloudflare does not cache html by default</div></a></span><span class="article-nav-link-wrap older"><strong>Older</strong> <a href="/blog/2020/10/21/busybox-httpd-aws/"><div class="article-nav-title">Using BusyBox httpd in AWS EC2 for testing</div></a></span></nav></article></div><footer id="footer" class="post-footer footer"><hr><div id="copyright" class="copyright">&copy; 2018-2024 Ming Di Leom. <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">Powered by </a><a href="https://hexo.io/" rel="noopener external nofollow noreferrer">Hexo</a> with <a href="https://gitlab.com/curben/blog/tree/master/themes/chameleon" rel="noopener external nofollow noreferrer">Chameleon</a> theme.<br>Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external nofollow noreferrer license" itemprop="license">CC-BY-SA 4.0</a>, unless indicated otherwise.<br><a class="main-nav-link" href="/disclaimer/">Disclaimer</a> <a class="main-nav-link" href="https://stats.uptimerobot.com/1394zup2LQ" rel="noopener external nofollow noreferrer">Status</a> <a class="main-nav-link" href="https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">Onion</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog#mirrors" rel="noopener external nofollow noreferrer">Eepsite</a></div></footer><script src="/libs/clipboard-2.0.6.min.js" defer></script><script src="/js/copy-button.js"></script><script src="/js/chameleon.js"></script></body></html>

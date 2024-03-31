@@ -1,0 +1,432 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy) | Ming Di Leom&#39;s Blog</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://mdleom.com/blog/2020/03/14/caddy-nixos-part-3/"><meta name="description" content="Part 3: Configure Caddy"><meta property="article:author" content="Ming Di Leom"><meta property="article:tag" content="linux"><meta property="article:tag" content="server"><meta property="article:tag" content="caddy"><meta property="article:tag" content="nixos"><meta property="article:tag" content="cloudflare"><meta property="og:type" content="article"><meta property="og:title" content="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"><meta property="og:url" content="https://mdleom.com/blog/2020/03/14/caddy-nixos-part-3/"><meta property="og:site_name" content="Ming Di Leom&#39;s Blog"><meta property="og:description" content="Part 3: Configure Caddy"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mdleom.com/screenshot/blog/2020/03/14/caddy-nixos-part-3/"><meta property="article:published_time" content="2020-03-14T00:00:00.000Z"><meta property="article:modified_time" content="2022-07-08T00:00:00.000Z"><link rel="alternate" href="/atom.xml" title="Ming Di Leom's Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"><link rel="manifest" href="/site.webmanifest"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><link rel="stylesheet" href="/css/chameleon.css"><link rel="prev" href="/blog/2020/03/04/caddy-nixos-part-2/" title="Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"><link rel="next" href="/blog/2020/03/16/tor-hidden-onion-nixos/" title="How to make your website available over Tor hidden service on NixOS"><meta name="yandex-verification" content="e026a03a5dd06730"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="container" class="container"><article id="post-caddy-nixos-part-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><header id="header" class="header"><nav class="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/blog/">Blog</a> <a class="main-nav-link" href="/about/">About</a> <a class="main-nav-link" href="/atom.xml">Feed</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a><div class="search-container"><form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click"><img src="/svg/search.svg"></a></form></div></nav><nav class="mobile-nav"><a class="site-title" href="/">mdleom.com</a><ul class="mobile-nav-menu"><label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label> <input id="mobile-menu-toggle" type="checkbox"><ul id="mobile-nav-link"><div class="search-container"><form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click-mobile"><img src="/svg/search.svg"></a></form></div><i>Powered by DuckDuckGo</i> <a class="mobile-nav-link-a" href="/">Home</a> <a class="mobile-nav-link-a" href="/blog/">Blog</a> <a class="mobile-nav-link-a" href="/about/">About</a> <a class="mobile-nav-link-a" href="/atom.xml">Feed</a> <a class="mobile-nav-link-a" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a></ul></ul></nav></header><hr class="header-hr"><div class="article-inner"><header class="article-header"><h1 class="p-name entry-title article-title" itemprop="headline name">Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy) <a id="btnshare"><img src="/svg/share.svg"></a></h1></header><p class="p-summary">Part 3: Configure Caddy</p><div class="e-content article-entry" itemprop="articleBody"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#caddyProxy-nix"><span class="toc-text">caddyProxy.nix</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Caddyfile"><span class="toc-text">Caddyfile</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cloudflare-origin-cert"><span class="toc-text">Cloudflare origin cert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Download-certs"><span class="toc-text">Download certs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Initial-setup"><span class="toc-text">Initial setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Enable-HTTPS"><span class="toc-text">Enable HTTPS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redirect-www-to-apex"><span class="toc-text">Redirect www to apex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse-proxy"><span class="toc-text">Reverse proxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Host-header"><span class="toc-text">Host header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-or-remove-headers"><span class="toc-text">Add or remove headers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache-Control"><span class="toc-text">Cache-Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Complete-Caddyfile"><span class="toc-text">Complete Caddyfile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configuration-nix"><span class="toc-text">configuration.nix</span></a></li></ol><blockquote><p>8 Jul 2022: Updated to Caddy 2.5 syntax.</p></blockquote><p>In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you’re not using NixOS, simply skip to the <a href="#Caddyfile">Caddyfile</a> section.</p><p>This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:</p><ul><li><a href="/blog/2020/02/23/caddy-nixos-part-1/" title="Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)">Part 1: Install NixOS</a></li><li><a href="/blog/2020/03/04/caddy-nixos-part-2/" title="Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)">Part 2: Configure NixOS</a></li><li>Part 3: Configure Caddy</li><li><a href="/blog/2020/03/16/tor-hidden-onion-nixos/" title="How to make your website available over Tor hidden service on NixOS">Part 4: Configure Tor</a></li><li><a href="/blog/2020/03/21/i2p-eepsite-nixos/" title="How to make your website available over I2P Eepsite on NixOS">Part 5: Configure I2P</a></li></ul><p><a href="/img/20200223/caddy-nixos.png"><img srcset="/img/20200223/caddy-nixos.png?f=auto&width=320 320w,/img/20200223/caddy-nixos.png?f=auto&width=468 468w,/img/20200223/caddy-nixos.png?f=auto&width=768 768w,/img/20200223/caddy-nixos.png?f=auto 800w" sizes="(max-width: 320px) 320px,(max-width: 468px) 468px,(max-width: 768px) 768px,800px" src="/img/20200223/caddy-nixos.png?f=auto" title="Architecture behind mdleom.com" alt="Architecture behind mdleom.com" loading="lazy"></a></p><h2 id="Background">Background <a href="#Background" class="headerlink" title="Background">§</a></h2><p>In NixOS, Caddy can be easily configured through “configuration.nix”, without even touching a Caddyfile, if you have a rather simple setup. For example, to serve static files from “&#x2F;var&#x2F;www&#x2F;“ folder,</p><pre><div class="caption"><span>configuration.nix</span></div><code class="hljs nix">services.<span class="hljs-attr">caddy</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">email</span> = example@example.com;
+  <span class="hljs-attr">config</span> =
+    <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">      example.com &#123;</span>
+<span class="hljs-string">        root /var/www/</span>
+<span class="hljs-string">      &#125;</span>
+<span class="hljs-string">    &#x27;&#x27;</span>;
+&#125;</code><button class="copy-button">Copy</button></pre><p>Once rebuild, caddy will run as a systemd service. This config also automatically enable HTTPS on example.com using Let’s Encrypt cert which will be stored in “&#x2F;var&#x2F;lib&#x2F;caddy&#x2F;“ folder by default.</p><p>The magic behind the option is “<a href="https://github.com/NixOS/nixpkgs/blob/release-19.09/nixos/modules/services/web-servers/caddy.nix" rel="noopener external nofollow noreferrer">caddy.nix</a>“ which exposes the <code>services.caddy</code> option. It also take care of creating a systemd unit file and installation the caddy package, so you don’t need to install it beforehand. caddy.nix is bundled with NixOS so you can use <code>services.caddy</code> straightaway.</p><p>This shows the declarative property of NixOS. Nix, the package manager behind NixOS, also enables the system to be atomic. Imagine putting the whole system binaries under Git or file system snapshot. If you botch the system upgrade, you can easily rollback to previous state (usually via Grub menu).</p><p>A package is installed in <code>/nix/store/&lt;hash&gt;/</code> folder and that hash is what makes Nix atomic. I mention this atomic thing because a package’s binary is only symlink to $PATH (“&#x2F;usr&#x2F;bin”) when installed using <code>environment.systemPackages</code> option or <code>nix-env</code>. In this case, “caddy.nix” simply specify the required binary “pkgs.caddy&#x2F;bin&#x2F;caddy” and NixOS will automatically install the required package. Since the caddy binary is not available under $PATH, running <code>$ caddy</code> command will return “command not found” error. If you need to use the caddy binary, you have three options:</p><ol><li>Locate the binary in “&#x2F;nix&#x2F;store” by checking <code>$ systemctl status caddy</code>. This is only available when caddy service is enabled in “configuration.nix”. Disabling the service will remove the package.</li><li>Install it as a system package using <code>environment.systemPackages</code>.</li><li>Install it as a user package using <code>$ nix-env -f &#39;&lt;nixpkgs&gt;&#39; -iA caddy</code>.</li></ol><p>caddy.nix grants <code>CAP_NET_BIND_SERVICE</code> capability which is not needed in my use case because I’m not binding caddy to port &lt; 1024.</p><h2 id="caddyProxy-nix">caddyProxy.nix <a href="#caddyProxy-nix" class="headerlink" title="caddyProxy.nix">§</a></h2><p>I created another nix file which is similar to “caddy.nix”, but without <code>CAP_NET_BIND_SERVICE</code> capability. I also removed Let’s Encrypt-related options since I’m using Cloudflare origin certificate. I renamed the <code>options.services.caddy</code> to <code>options.services.caddyProxy</code> to avoid clash with “caddy.nix”. Save the file to “&#x2F;etc&#x2F;caddy&#x2F;caddyProxy.nix” with root as owner. We’ll revisit this file in “<a href="#configuration.nix">configuration.nix</a>“ section later in this guide.</p><pre><div class="caption"><span>/etc/caddy/caddyProxy.nix</span></div><code class="hljs nix">&#123; config, lib, pkgs, ... &#125;:
+
+<span class="hljs-keyword">with</span> lib;
+
+<span class="hljs-keyword">let</span>
+  <span class="hljs-attr">cfg</span> = config.services.caddyProxy;
+<span class="hljs-keyword">in</span> &#123;
+  options.services.<span class="hljs-attr">caddyProxy</span> = &#123;
+    <span class="hljs-attr">enable</span> = mkEnableOption <span class="hljs-string">&quot;Caddy web server&quot;</span>;
+
+    <span class="hljs-attr">config</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;/etc/caddy/caddyProxy.conf&quot;</span>;
+      <span class="hljs-attr">type</span> = types.str;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Path to Caddyfile&quot;</span>;
+    &#125;;
+
+    <span class="hljs-attr">adapter</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;caddyfile&quot;</span>;
+      <span class="hljs-attr">example</span> = <span class="hljs-string">&quot;nginx&quot;</span>;
+      <span class="hljs-attr">type</span> = types.str;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        Name of the config adapter to use.</span>
+<span class="hljs-string">        See https://caddyserver.com/docs/config-adapters for the full list.</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+    &#125;;
+
+    <span class="hljs-attr">dataDir</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = <span class="hljs-string">&quot;/var/lib/caddyProxy&quot;</span>;
+      <span class="hljs-attr">type</span> = types.path;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        The data directory, for storing certificates. Before 17.09, this</span>
+<span class="hljs-string">        would create a .caddy directory. With 17.09 the contents of the</span>
+<span class="hljs-string">        .caddy directory are in the specified data directory instead.</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+    &#125;;
+
+    <span class="hljs-attr">package</span> = mkOption &#123;
+      <span class="hljs-attr">default</span> = pkgs.caddy;
+      <span class="hljs-attr">defaultText</span> = <span class="hljs-string">&quot;pkgs.caddy&quot;</span>;
+      <span class="hljs-attr">type</span> = types.package;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Caddy package to use.&quot;</span>;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-attr">config</span> = mkIf cfg.enable &#123;
+    systemd.services.<span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Caddy web server&quot;</span>;
+      <span class="hljs-attr">after</span> = [ <span class="hljs-string">&quot;network-online.target&quot;</span> ];
+      <span class="hljs-attr">wants</span> = [ <span class="hljs-string">&quot;network-online.target&quot;</span> ]; <span class="hljs-comment"># systemd-networkd-wait-online.service</span>
+      <span class="hljs-attr">wantedBy</span> = [ <span class="hljs-string">&quot;multi-user.target&quot;</span> ];
+      <span class="hljs-attr">startLimitIntervalSec</span> = <span class="hljs-number">14400</span>;
+      <span class="hljs-attr">startLimitBurst</span> = <span class="hljs-number">10</span>;
+      <span class="hljs-attr">serviceConfig</span> = &#123;
+        <span class="hljs-attr">ExecStart</span> = <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy run --config <span class="hljs-subst">$&#123;cfg.config&#125;</span> --adapter <span class="hljs-subst">$&#123;cfg.adapter&#125;</span>&quot;</span>;
+        <span class="hljs-attr">ExecReload</span> = <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;cfg.package&#125;</span>/bin/caddy reload --config <span class="hljs-subst">$&#123;cfg.config&#125;</span> --adapter <span class="hljs-subst">$&#123;cfg.adapter&#125;</span>&quot;</span>;
+        <span class="hljs-attr">Type</span> = <span class="hljs-string">&quot;simple&quot;</span>;
+        <span class="hljs-attr">User</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+        <span class="hljs-attr">Group</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+        <span class="hljs-attr">Restart</span> = <span class="hljs-string">&quot;on-abnormal&quot;</span>;
+        <span class="hljs-comment"># &lt; 20.09</span>
+        <span class="hljs-comment"># https://github.com/NixOS/nixpkgs/pull/97512</span>
+        <span class="hljs-comment"># StartLimitIntervalSec = 14400;</span>
+        <span class="hljs-comment"># StartLimitBurst = 10;</span>
+        <span class="hljs-attr">NoNewPrivileges</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">LimitNPROC</span> = <span class="hljs-number">512</span>;
+        <span class="hljs-attr">LimitNOFILE</span> = <span class="hljs-number">1048576</span>;
+        <span class="hljs-attr">PrivateTmp</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">PrivateDevices</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">ProtectHome</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">ProtectSystem</span> = <span class="hljs-string">&quot;full&quot;</span>;
+        <span class="hljs-attr">ReadWriteDirectories</span> = cfg.dataDir;
+        <span class="hljs-attr">KillMode</span> = <span class="hljs-string">&quot;mixed&quot;</span>;
+        <span class="hljs-attr">KillSignal</span> = <span class="hljs-string">&quot;SIGQUIT&quot;</span>;
+        <span class="hljs-attr">TimeoutStopSec</span> = <span class="hljs-string">&quot;5s&quot;</span>;
+      &#125;;
+    &#125;;
+
+    users.users.<span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">home</span> = cfg.dataDir;
+      <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+    &#125;;
+
+    users.groups.<span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">members</span> = [ <span class="hljs-string">&quot;caddyProxy&quot;</span> ];
+    &#125;;
+  &#125;;
+&#125;</code><button class="copy-button">Copy</button></pre><h2 id="Caddyfile">Caddyfile <a href="#Caddyfile" class="headerlink" title="Caddyfile">§</a></h2><p>Caddy web server is configured using a Caddyfile. The Caddyfile format I’m using is only compatible with Caddy v1. I will update to v2 once the stable version is released on NixOS. Note that v1 and v2 are incompatible with each other.</p><h3 id="Cloudflare-origin-cert">Cloudflare origin cert <a href="#Cloudflare-origin-cert" class="headerlink" title="Cloudflare origin cert">§</a></h3><p>For TLS setup, I’m using Cloudflare Origin Certificate. This cert is only valid for connection between Cloudflare and the origin server (i.e. my web server) because it’s not signed by a CA. The cert is only signed by Cloudflare and does not have a valid chain of trust. TLS connection between a visitor and Cloudflare is enabled by Cloudflare Universal SSL which has a valid cert.</p><p>I’m using “Full (strict)” mode which requires either origin cert or a valid cert signed by a trusted CA. This mode forbids self-signed cert unlike “Full” mode. Let’s Encrypt cert is compatible with “Full (strict)”. However, putting a web server behind a CDN means that Caddy could only obtain a Let’s Encrypt using <a href="https://letsencrypt.org/docs/challenge-types/" rel="noopener external nofollow noreferrer">DNS challenge</a> not the default HTTP challenge. Setting up the DNS challenge requires installing <code>tls.dns.cloudflare</code> Caddy plugin which is not included in the NixOS package. The plugin also requires access to my Cloudflare’s API key which I’m not really comfortable with. Hence, the use of Origin Certificate.</p><h3 id="Download-certs">Download certs <a href="#Download-certs" class="headerlink" title="Download certs">§</a></h3><p>Generate and download the cert from Cloudflare Dash → SSL&#x2F;TLS → Origin Server → Create Certificate. You can choose the validity from 1 week to 15 years. I choose 1 year so I need to repeat this process every year. Make sure you have both certificate (.pem) and private key (.key).</p><p><a href="/img/20200314/cloudflare-origin-cert.png"><img srcset="/img/20200314/cloudflare-origin-cert.png?f=auto&width=320 320w,/img/20200314/cloudflare-origin-cert.png?f=auto&width=468 468w,/img/20200314/cloudflare-origin-cert.png?f=auto&width=768 768w,/img/20200314/cloudflare-origin-cert.png?f=auto 800w" sizes="(max-width: 320px) 320px,(max-width: 468px) 468px,(max-width: 768px) 768px,800px" src="/img/20200314/cloudflare-origin-cert.png?f=auto" title="Cloudflare Origin Certificate" alt="Cloudflare Origin Certificate" loading="lazy"></a></p><p>I also use Authenticated Origin Pull which utilize TLS client authentication. A client must present a client certificate that is signed by a private key; in this case, it is signed by Cloudflare itself. The client certificate can be verified using Cloudflare’s public key available <a href="https://origin-pull.cloudflare.com/" rel="noopener external nofollow noreferrer">here</a>.</p><p>By now, you should have three files:</p><ol><li><code>&lt;domain&gt;.pem</code></li><li><code>&lt;domain&gt;.key</code></li><li><code>origin-pull-ca.pem</code></li></ol><p>Move the files to home folder of “caddyProxy” user, which is “&#x2F;var&#x2F;lib&#x2F;caddyProxy” in this case. Set the files’ owner and group to <code>caddyProxy</code> and permission to <code>600</code>.</p><pre><code class="hljs plaintext"># chown caddyProxy:caddyProxy /var/lib/caddyProxy/*
+# chmod 600 /var/lib/caddyProxy/*</code><button class="copy-button">Copy</button></pre><p>If you followed my <a href="/blog/2020/03/04/caddy-nixos-part-2/" title="Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)">Part 2</a> guide, you should have <code>caddyProxy</code> user and group before executing chown and chmod. If you haven’t, check out <a href="/blog/2020/03/04/caddy-nixos-part-2/#Run-each-service-as-different-user">this section</a> of Part 2.</p><h3 id="Initial-setup">Initial setup <a href="#Initial-setup" class="headerlink" title="Initial setup">§</a></h3><p>Set up Caddy to listen on apex domain and www.* on port 4430</p><pre><div class="caption"><span>Caddyfile</span></div><code class="hljs plain">mdleom.com:4430 www.mdleom.com:4430 &#123;
+
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="Enable-HTTPS">Enable HTTPS <a href="#Enable-HTTPS" class="headerlink" title="Enable HTTPS">§</a></h3><p>Subsequent configurations (directives) shall be inside the curly braces. Let’s start with <code>tls</code> directive.</p><pre><code class="hljs plaintext">mdleom.com:4430 www.mdleom.com:4430 &#123;
+  tls /var/lib/caddyProxy/mdleom.com.pem /var/lib/caddyProxy/mdleom.com.key &#123;
+    protocols tls1.3
+    client_auth &#123;
+      mode require_and_verify
+      trusted_ca_cert_file /var/lib/caddyProxy/origin-pull-ca.pem
+    &#125;
+  &#125;
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="Redirect-www-to-apex">Redirect www to apex <a href="#Redirect-www-to-apex" class="headerlink" title="Redirect www to apex">§</a></h3><p>Connection to <a href="http://www.mdleom.com/" rel="noopener external nofollow noreferrer">www.mdleom.com</a> is redirected to mdleom.com with HTTP 301 status.</p><pre><code class="hljs plaintext">@www host www.mdleom.com
+redir @www https://mdleom.com&#123;uri&#125; permanent</code><button class="copy-button">Copy</button></pre><p><code>&#123;label1&#125;</code> placeholder refers to the first part of the request hostname, e.g. if hostname is <code>foo.bar.com</code>, <code>&#123;label1&#125;</code> is foo, <code>&#123;label2&#125;</code> is bar and so on.</p><p><code>&#123;uri&#125;</code> is used to retain the path when redirecting. <code>www.mdleom.com/foo/bar</code> is redirected to <code>mdleom.com/foo/bar</code>.</p><p>If you prefer to redirect apex to www,</p><pre><code class="hljs plaintext">@www host mdleom.com
+redir @www https://www.mdleom.com&#123;uri&#125; permanent</code><button class="copy-button">Copy</button></pre><h3 id="Reverse-proxy">Reverse proxy <a href="#Reverse-proxy" class="headerlink" title="Reverse proxy">§</a></h3><p>Aside from reverse proxy to curben.netlify.app, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">config</a> is:</p><pre><div class="caption"><span>source/_redirects</span><a href="https://gitlab.com/curben/blog/-/blob/master/source/_redirects" rel="noopener external nofollow noreferrer">_redirects</a></div><code class="hljs plain">/img/* https://cdn.statically.io/img/:splat 200
+/screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
+/files/* https://gitlab.com/curben/blog/-/raw/site/:splat 200</code><button class="copy-button">Copy</button></pre><p>In Caddyfile, the config can be expressed as:</p><pre><code class="hljs plain">handle /img/* &#123;
+  reverse_proxy https://cdn.statically.io
+&#125;
+
+handle_path /screenshot/* &#123;
+  # &quot;curben.netlify.app&quot; is updated to &quot;mdleom.com&quot;
+  rewrite * /screenshot/mdleom.com&#123;path&#125;
+
+  reverse_proxy https://cdn.statically.io
+&#125;
+
+handle_path /files/* &#123;
+  rewrite * /curben/blog/-/raw/site&#123;path&#125;
+
+  reverse_proxy https://gitlab.com
+&#125;
+
+reverse_proxy https://curben.netlify.app</code><button class="copy-button">Copy</button></pre><p><code>rewrite</code> directive is necessary to remove <code>img/</code> and <code>screenshot/*</code> from the path, so that “mdleom.com&#x2F;img&#x2F;foo.jpg” is linked to “<a href="https://cdn.statically.io/img/foo.jpg" rel="noopener external nofollow noreferrer">https://cdn.statically.io/img/foo.jpg</a>“, not “<a href="https://cdn.statically.io/img/img/foo.jpg" rel="noopener external nofollow noreferrer">https://cdn.statically.io/img/img/foo.jpg</a>“.</p><h3 id="Host-header">Host header <a href="#Host-header" class="headerlink" title="Host header">§</a></h3><p>To make sure Caddy sends the correct <code>Host:</code> header to the upstream&#x2F;backend locations, I use <code>header_up</code> option,</p><pre><code class="hljs plaintext">handle /img/* &#123;
+  reverse_proxy https://cdn.statically.io &#123;
+    header_up Host cdn.statically.io
+  &#125;
+<mark>&#125;</mark>
+
+handle_path /screenshot/* &#123;
+  rewrite * /screenshot/mdleom.com&#123;path&#125;
+
+  reverse_proxy https://cdn.statically.io &#123;
+    header_up Host cdn.statically.io
+  &#125;
+<mark>&#125;</mark>
+
+reverse_proxy https://curben.netlify.app &#123;
+  header_up Host curben.netlify.app
+&#125;</code><button class="copy-button">Copy</button></pre><p>If there are multiple backends for the reverse_proxy, it’s better to use a placeholder instead of hardcording the <code>Host</code> header.</p><pre><code class="hljs plaintext">reverse_proxy https://curben.pages.dev https://curben.netlify.app &#123;
+<mark>  header_up Host &#123;http.reverse_proxy.upstream.host&#125;</mark>
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="Add-or-remove-headers">Add or remove headers <a href="#Add-or-remove-headers" class="headerlink" title="Add or remove headers">§</a></h3><p>To prevent any unnecessary request headers from being sent to the upstreams, I use <code>header_up</code>. I use it to remove cookie, referer and <a href="https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-" rel="noopener external nofollow noreferrer">other headers</a> added by Cloudflare. Since there are many headers to remove, I group them as a global variable. I apply it to all <code>reverse_proxy</code> directives.</p><pre><code class="hljs Caddyfile">(removeHeaders) &#123;
+  header_up -cdn-loop
+  header_up -cf-cache-status
+  header_up -cf-connecting-ip
+  header_up -cf-ipcountry
+  header_up -cf-ray
+  header_up -cf-request-id
+  header_up -cf-visitor
+  header_up -cf-worker
+  header_up -client-ip
+  header_up -cookie
+  header_up -forwarded
+  header_up -referer
+  # https://user-agent-client-hints.glitch.me/
+  header_up -sec-ch-ua-arch
+  header_up -sec-ch-ua-bitness
+  header_up -sec-ch-ua-full-version
+  header_up -sec-ch-ua-ua
+  header_up -sec-ch-ua-ua-mobile
+  header_up -sec-ch-ua-ua-model
+  header_up -sec-ch-ua-ua-platform
+  header_up -sec-ch-ua-ua-platform-version
+  header_up -true-client-ip
+  header_up -via
+  header_up -x-forwarded-for
+  header_up -x-forwarded-proto
+  header_up -x-proxyuser-ip
+  header_up Host &#123;http.reverse_proxy.upstream.host&#125;
+  header_up User-Agent &quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;
+&#125;
+
+mdleom.com &#123;
+  handle /img/* &#123;
+    reverse_proxy https://cdn.statically.io &#123;
+      import removeHeaders
+    &#125;
+  &#125;
+
+  handle_path /screenshot/* &#123;
+    rewrite * /screenshot/mdleom.com&#123;path&#125;
+
+    reverse_proxy https://cdn.statically.io &#123;
+      import removeHeaders
+    &#125;
+  &#125;
+
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app &#123;
+    import removeHeaders
+  &#125;
+&#125;</code><button class="copy-button">Copy</button></pre><p>The upstream locations insert some information into the response headers that are irrelevant to the site visitors. I use <code>header</code> directive to filter them out. It also applies to all <code>reverse_proxy</code> directives.</p><pre><code class="hljs plaintext">header &#123;
+  -access-control-allow-origin
+  -access-control-expose-headers
+  -alt-svc
+  -cdn-cache
+  -cdn-cachedat
+  -cdn-edgestorageid
+  -cdn-pullzone
+  -cdn-requestcountrycode
+  -cdn-requestid
+  -cdn-uid
+  -cf-bgj
+  -cf-cache-status
+  -cf-polished
+  -cf-ray
+  -cf-request-id
+  -content-disposition
+  -etag
+  -expect-ct
+  -server
+  -set-cookie
+  -timing-allow-origin
+  -via
+  -x-bytes-saved
+  -x-cache
+  -x-cache-hits
+  -x-nf-request-id
+  -x-served-by
+  -x-timer
+  Content-Security-Policy &quot;default-src &#x27;self&#x27;; child-src &#x27;none&#x27;; connect-src &#x27;none&#x27;; font-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; img-src &#x27;self&#x27;; manifest-src &#x27;self&#x27;; media-src &#x27;none&#x27;; object-src &#x27;none&#x27;; prefetch-src &#x27;none&#x27;; script-src &#x27;self&#x27;; style-src &#x27;self&#x27;; worker-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action https://duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion; frame-ancestors &#x27;none&#x27;; block-all-mixed-content&quot;
+  Expires &quot;0&quot;
+  Permissions-Policy &quot;accelerometer &#x27;none&#x27;; ambient-light-sensor &#x27;none&#x27;; autoplay &#x27;none&#x27;; camera &#x27;none&#x27;; display-capture &#x27;none&#x27;; document-domain &#x27;none&#x27;; encrypted-media &#x27;none&#x27;; fullscreen &#x27;none&#x27;; geolocation &#x27;none&#x27;; gyroscope &#x27;none&#x27;; magnetometer &#x27;none&#x27;; microphone &#x27;none&#x27;; midi &#x27;none&#x27;; payment &#x27;none&#x27;; picture-in-picture &#x27;none&#x27;; speaker &#x27;none&#x27;; sync-xhr &#x27;none&#x27;; usb &#x27;none&#x27;; vibrate &#x27;none&#x27;; vr &#x27;none&#x27;; wake-lock &#x27;none&#x27;; webauthn &#x27;none&#x27;; xr-spatial-tracking &#x27;none&#x27;; interest-cohort=()&quot;
+  Referrer-Policy &quot;no-referrer&quot;
+  X-Content-Type-Options &quot;nosniff&quot;
+  X-Frame-Options &quot;DENY&quot;
+  X-XSS-Protection &quot;1; mode=block&quot;
+  defer
+&#125;</code><button class="copy-button">Copy</button></pre><p>I also add the <code>Cache-Control</code> and <code>Referrer-Policy</code> to the response header. Use minus (-) sign before each option to remove particular header. Without minus sign, the specified header is either added or replacing an existing one.</p><h3 id="Cache-Control">Cache-Control <a href="#Cache-Control" class="headerlink" title="Cache-Control">§</a></h3><p><code>/libs</code> folder contains third-party libraries. Since the library is usually requested by a specific version, we can safely assume that the response would remain the same. This means I can set long expiration and <code>immutable</code> on the response. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Revalidation_and_reloading" rel="noopener external nofollow noreferrer"><code>immutable</code></a> is to tell the browser that revalidation is not needed.</p><pre><code class="hljs plaintext">header &#123;
+  Cache-Control &quot;max-age=86400, public&quot;
+&#125;
+
+header /libs/* &#123;
+  Cache-Control &quot;public, max-age=31536000, immutable&quot;
+&#125;</code><button class="copy-button">Copy</button></pre><h3 id="Complete-Caddyfile">Complete Caddyfile <a href="#Complete-Caddyfile" class="headerlink" title="Complete Caddyfile">§</a></h3><p>Since I also set up reverse proxy for <a href="/blog/2020/03/16/tor-hidden-onion-nixos/" title="How to make your website available over Tor hidden service on NixOS">Tor Onion</a> and <a href="/blog/2020/03/21/i2p-eepsite-nixos/" title="How to make your website available over I2P Eepsite on NixOS">I2P Eepsite</a>, I refactor most of the configuration into “common.conf” and import it into “caddyProxy.conf”.</p><pre><div class="caption"><span>common.conf</span></div><code class="hljs plain">&#123;
+  ## disable admin endpoint
+  # admin off
+  ## http-&gt;https redirect
+  # auto_https disable_redirects
+  ## Remove PII from error log
+  log &#123;
+    level ERROR
+    format filter &#123;
+      wrap json &#123;
+        time_format iso8601
+      &#125;
+      fields &#123;
+        request&gt;remote_ip delete
+        request&gt;remote_port delete
+        request&gt;headers&gt;CDN-Loop delete
+        request&gt;headers&gt;CF-Cache-Status delete
+        request&gt;headers&gt;CF-Connecting-IP delete
+        request&gt;headers&gt;CF-IPCountry delete
+        request&gt;headers&gt;CF-RAY delete
+        request&gt;headers&gt;CF-Request-ID delete
+        request&gt;headers&gt;CF-Visitor delete
+        request&gt;headers&gt;CF-Worker delete
+        request&gt;headers&gt;Client-IP delete
+        request&gt;headers&gt;Cookie delete
+        request&gt;headers&gt;Forwarded delete
+        request&gt;headers&gt;Referer delete
+        request&gt;headers&gt;Sec-CH-UA-Arch delete
+        request&gt;headers&gt;Sec-CH-UA-Bitness delete
+        request&gt;headers&gt;Sec-CH-UA-Full-Version delete
+        request&gt;headers&gt;Sec-CH-UA-UA delete
+        request&gt;headers&gt;Sec-CH-UA-UA-Mobile delete
+        request&gt;headers&gt;Sec-CH-UA-UA-Model delete
+        request&gt;headers&gt;Sec-CH-UA-UA-Platform delete
+        request&gt;headers&gt;Sec-CH-UA-UA-Platform-Version delete
+        request&gt;headers&gt;True-Client-IP delete
+        request&gt;headers&gt;User-Agent delete
+        request&gt;headers&gt;Via delete
+        request&gt;headers&gt;X-Forwarded-For delete
+        request&gt;headers&gt;X-Forwarded-Proto delete
+        request&gt;headers&gt;X-ProxyUser-Ip delete
+      &#125;
+    &#125;
+  &#125;
+&#125;
+
+(setHeaders) &#123;
+  -access-control-allow-origin
+  -access-control-expose-headers
+  -alt-svc
+  -cdn-cache
+  -cdn-cachedat
+  -cdn-edgestorageid
+  -cdn-pullzone
+  -cdn-requestcountrycode
+  -cdn-requestid
+  -cdn-uid
+  -cf-bgj
+  -cf-cache-status
+  -cf-polished
+  -cf-ray
+  -cf-request-id
+  -content-disposition
+  -etag
+  -expect-ct
+  -gitlab-lb
+  -gitlab-sv
+  -server
+  -set-cookie
+  -timing-allow-origin
+  -via
+  -x-bytes-saved
+  -x-cache
+  -x-cache-hits
+  -x-download-options
+  -x-gitlab-feature-category
+  -x-nf-request-id
+  -x-permitted-cross-domain-policies
+  -x-request-id
+  -x-runtime
+  -x-served-by
+  -x-timer
+  -x-ua-compatible
+  Cache-Control &quot;max-age=86400, public&quot;
+  Content-Security-Policy &quot;default-src &#x27;self&#x27;; child-src &#x27;none&#x27;; connect-src &#x27;none&#x27;; font-src &#x27;none&#x27;; frame-src &#x27;none&#x27;; img-src &#x27;self&#x27;; manifest-src &#x27;self&#x27;; media-src &#x27;none&#x27;; object-src &#x27;none&#x27;; prefetch-src &#x27;none&#x27;; script-src &#x27;self&#x27;; style-src &#x27;self&#x27;; worker-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action https://duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion; frame-ancestors &#x27;none&#x27;; block-all-mixed-content&quot;
+  Expires &quot;0&quot;
+  Permissions-Policy &quot;accelerometer &#x27;none&#x27;; ambient-light-sensor &#x27;none&#x27;; autoplay &#x27;none&#x27;; camera &#x27;none&#x27;; display-capture &#x27;none&#x27;; document-domain &#x27;none&#x27;; encrypted-media &#x27;none&#x27;; fullscreen &#x27;none&#x27;; geolocation &#x27;none&#x27;; gyroscope &#x27;none&#x27;; magnetometer &#x27;none&#x27;; microphone &#x27;none&#x27;; midi &#x27;none&#x27;; payment &#x27;none&#x27;; picture-in-picture &#x27;none&#x27;; speaker &#x27;none&#x27;; sync-xhr &#x27;none&#x27;; usb &#x27;none&#x27;; vibrate &#x27;none&#x27;; vr &#x27;none&#x27;; wake-lock &#x27;none&#x27;; webauthn &#x27;none&#x27;; xr-spatial-tracking &#x27;none&#x27;; interest-cohort=()&quot;
+  Referrer-Policy &quot;no-referrer&quot;
+  X-Content-Type-Options &quot;nosniff&quot;
+  X-Frame-Options &quot;DENY&quot;
+  X-XSS-Protection &quot;1; mode=block&quot;
+&#125;
+
+(removeHeaders) &#123;
+  header_up -cdn-loop
+  header_up -cf-cache-status
+  header_up -cf-connecting-ip
+  header_up -cf-ipcountry
+  header_up -cf-ray
+  header_up -cf-request-id
+  header_up -cf-visitor
+  header_up -cf-worker
+  header_up -client-ip
+  header_up -cookie
+  header_up -forwarded
+  header_up -referer
+  # https://user-agent-client-hints.glitch.me/
+  header_up -sec-ch-ua-arch
+  header_up -sec-ch-ua-bitness
+  header_up -sec-ch-ua-full-version
+  header_up -sec-ch-ua-ua
+  header_up -sec-ch-ua-ua-mobile
+  header_up -sec-ch-ua-ua-model
+  header_up -sec-ch-ua-ua-platform
+  header_up -sec-ch-ua-ua-platform-version
+  header_up -true-client-ip
+  header_up -via
+  header_up -x-forwarded-for
+  header_up -x-forwarded-proto
+  header_up -x-proxyuser-ip
+  header_up Host &#123;http.reverse_proxy.upstream.host&#125;
+  header_up User-Agent &quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;
+&#125;
+
+(reverseProxy) &#123;
+  reverse_proxy https://&#123;args.0&#125; &#123;
+    import removeHeaders
+    header_up Host &#123;http.reverse_proxy.upstream.host&#125;
+  &#125;
+&#125;
+
+(pathProxy) &#123;
+  @staticFiles &#123;
+    path *.css *.gif *.ico *.jpg *.js *.pdf *.png *.svg *.webp
+  &#125;
+  header @staticFiles &#123;
+    Cache-Control &quot;max-age=604800, public&quot;
+    defer
+  &#125;
+
+  header /libs/* &#123;
+    Cache-Control &quot;max-age=31536000, public, immutable&quot;
+    defer
+  &#125;
+
+  handle /img/* &#123;
+    import reverseProxy cdn.statically.io
+  &#125;
+
+  handle_path /screenshot/* &#123;
+    rewrite * /screenshot/mdleom.com&#123;path&#125;
+
+    import reverseProxy cdn.statically.io
+  &#125;
+
+  handle_path /files/* &#123;
+    rewrite * /curben/blog/-/raw/site&#123;path&#125;
+
+    import reverseProxy gitlab.com
+  &#125;
+
+  # Multiple mirrors
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app https://curben.gitlab.io https://curbengh.github.io &#123;
+    import removeHeaders
+    lb_policy first
+  &#125;
+&#125;</code><button class="copy-button">Copy</button></pre><pre><div class="caption"><span>caddyProxy.conf</span></div><code class="hljs plain">import common.conf
+
+## mdleom.com
+mdleom.com:4430 www.mdleom.com:4430 &#123;
+  tls /var/lib/caddyProxy/mdleom.com.pem /var/lib/caddyProxy/mdleom.com.key &#123;
+    protocols tls1.3
+    client_auth &#123;
+      mode require_and_verify
+      trusted_ca_cert_file /var/lib/caddyProxy/origin-pull-ca.pem
+    &#125;
+  &#125;
+
+  # www -&gt; apex
+  @www host www.mdleom.com
+  redir @www https://mdleom.com&#123;uri&#125; permanent
+
+  header &#123;
+    import setHeaders
+    Onion-Location &quot;http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion&quot;
+    Strict-Transport-Security &quot;max-age=31536000; includeSubDomains; preload&quot;
+    defer
+  &#125;
+
+  import pathProxy
+&#125;</code><button class="copy-button">Copy</button></pre><h2 id="configuration-nix">configuration.nix <a href="#configuration-nix" class="headerlink" title="configuration.nix">§</a></h2><p>One last thing to do is to import “<a href="#caddyProxy.nix">caddyProxy.nix</a>“ and enable <code>services.caddyProxy</code>.</p><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix"><span class="hljs-attr">require</span> = [ /etc/caddy/caddyProxy.nix ];
+services.<span class="hljs-attr">caddyProxy</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/etc/caddy/caddyProxy.conf&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre></div><footer class="article-footer"><ul class="article-meta"><li><span class="label">Last Updated:</span> <time class="dt-updated" datetime="2022-07-08T00:00:00.000Z" itemprop="dateModified">8 Jul 2022</time></li><li><span class="label">Published Date:</span> <time class="dt-published" datetime="2020-03-14T00:00:00.000Z" itemprop="datePublished">14 <a href="/blog/2020/03/" title="See March 2020's posts">Mar</a> <a href="/blog/2020/" title="See 2020's posts">2020</a></time></li><li><span class="label">Tag:</span><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/caddy/" rel="tag">Caddy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloudflare/" rel="tag">Cloudflare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nixos/" rel="tag">Nixos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/" rel="tag">Server</a></li></ul></li><li><span class="label">Source:</span> <a href="https://gitlab.com/curben/blog/-/blob/master/source/_posts/caddy-nixos-part-3.md" rel="noopener external nofollow noreferrer">caddy-nixos-part-3.md</a></li><hr></ul></footer></div><nav id="article-nav" class="article-nav"><span class="article-nav-link-wrap newer"><strong>Newer</strong> <a href="/blog/2020/03/16/tor-hidden-onion-nixos/"><div class="article-nav-title">How to make your website available over Tor hidden service on NixOS</div></a></span><span class="article-nav-link-wrap older"><strong>Older</strong> <a href="/blog/2020/03/04/caddy-nixos-part-2/"><div class="article-nav-title">Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)</div></a></span></nav></article></div><footer id="footer" class="post-footer footer"><hr><div id="copyright" class="copyright">&copy; 2018-2024 Ming Di Leom. <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">Powered by </a><a href="https://hexo.io/" rel="noopener external nofollow noreferrer">Hexo</a> with <a href="https://gitlab.com/curben/blog/tree/master/themes/chameleon" rel="noopener external nofollow noreferrer">Chameleon</a> theme.<br>Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external nofollow noreferrer license" itemprop="license">CC-BY-SA 4.0</a>, unless indicated otherwise.<br><a class="main-nav-link" href="/disclaimer/">Disclaimer</a> <a class="main-nav-link" href="https://stats.uptimerobot.com/1394zup2LQ" rel="noopener external nofollow noreferrer">Status</a> <a class="main-nav-link" href="https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">Onion</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog#mirrors" rel="noopener external nofollow noreferrer">Eepsite</a></div></footer><script src="/libs/clipboard-2.0.6.min.js" defer></script><script src="/js/copy-button.js"></script><script src="/js/chameleon.js"></script></body></html>

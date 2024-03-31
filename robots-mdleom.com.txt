@@ -1,0 +1,6 @@
+# This file only applies to mdleom.com via web server's internal rewrite
+User-agent: *
+Disallow: /404
+Disallow: /404.html
+
+Sitemap: https://mdleom.com/sitemap.xml

@@ -1,0 +1,471 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8"><title>Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening) | Ming Di Leom&#39;s Blog</title><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="canonical" href="https://mdleom.com/blog/2020/03/04/caddy-nixos-part-2/"><meta name="description" content="Part 2: Securing NixOS"><meta property="article:author" content="Ming Di Leom"><meta property="article:tag" content="linux"><meta property="article:tag" content="server"><meta property="article:tag" content="caddy"><meta property="article:tag" content="nixos"><meta property="og:type" content="article"><meta property="og:title" content="Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"><meta property="og:url" content="https://mdleom.com/blog/2020/03/04/caddy-nixos-part-2/"><meta property="og:site_name" content="Ming Di Leom&#39;s Blog"><meta property="og:description" content="Part 2: Securing NixOS"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mdleom.com/screenshot/blog/2020/03/04/caddy-nixos-part-2/"><meta property="article:published_time" content="2020-03-04T00:00:00.000Z"><meta property="article:modified_time" content="2022-12-03T00:00:00.000Z"><link rel="alternate" href="/atom.xml" title="Ming Di Leom's Blog" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><link rel="icon" href="/svg/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"><link rel="manifest" href="/site.webmanifest"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"><link rel="stylesheet" href="/css/chameleon.css"><link rel="prev" href="/blog/2020/02/23/caddy-nixos-part-1/" title="Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)"><link rel="next" href="/blog/2020/03/14/caddy-nixos-part-3/" title="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"><meta name="yandex-verification" content="e026a03a5dd06730"><meta name="generator" content="Hexo 7.1.1"></head><body><div id="container" class="container"><article id="post-caddy-nixos-part-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting"><header id="header" class="header"><nav class="main-nav"><a class="main-nav-link" href="/">Home</a> <a class="main-nav-link" href="/blog/">Blog</a> <a class="main-nav-link" href="/about/">About</a> <a class="main-nav-link" href="/atom.xml">Feed</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a><div class="search-container"><form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click"><img src="/svg/search.svg"></a></form></div></nav><nav class="mobile-nav"><a class="site-title" href="/">mdleom.com</a><ul class="mobile-nav-menu"><label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label> <input id="mobile-menu-toggle" type="checkbox"><ul id="mobile-nav-link"><div class="search-container"><form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search"><input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search"> <input type="hidden" name="sites" value="mdleom.com"> <input type="hidden" name="kd" value="-1"> <input type="hidden" name="kg" value="p"> <input type="hidden" name="kae" value="#000"> <a class="search-button" id="search-click-mobile"><img src="/svg/search.svg"></a></form></div><i>Powered by DuckDuckGo</i> <a class="mobile-nav-link-a" href="/">Home</a> <a class="mobile-nav-link-a" href="/blog/">Blog</a> <a class="mobile-nav-link-a" href="/about/">About</a> <a class="mobile-nav-link-a" href="/atom.xml">Feed</a> <a class="mobile-nav-link-a" href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">GitLab</a></ul></ul></nav></header><hr class="header-hr"><div class="article-inner"><header class="article-header"><h1 class="p-name entry-title article-title" itemprop="headline name">Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening) <a id="btnshare"><img src="/svg/share.svg"></a></h1></header><p class="p-summary">Part 2: Securing NixOS</p><div class="e-content article-entry" itemprop="articleBody"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prerequisites"><span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disable-mutableUsers"><span class="toc-text">Disable mutableUsers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disable-root"><span class="toc-text">Disable root</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hash-password"><span class="toc-text">Hash password</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#yescript"><span class="toc-text">yescript</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#passwordFile"><span class="toc-text">passwordFile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run-each-service-as-different-user"><span class="toc-text">Run each service as different user</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enables-2FA-OTP-for-login"><span class="toc-text">Enables 2FA (OTP) for login</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-over-TLS"><span class="toc-text">DNS-over-TLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bind-to-port-gt-1024"><span class="toc-text">Bind to port &gt;1024</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unattended-upgrade"><span class="toc-text">Unattended upgrade</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USBGuard-restricts-new-USB-devices"><span class="toc-text">USBGuard (restricts new USB devices)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Networking-stack-hardening-and-performance"><span class="toc-text">Networking stack hardening and performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hardened-kernel"><span class="toc-text">Hardened kernel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remove-old-unreferenced-packages"><span class="toc-text">Remove old, unreferenced packages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Complete-configuration-nix"><span class="toc-text">Complete configuration.nix</span></a></li></ol><blockquote><p>6 Jul 2022: Updated to NixOS 22.05 syntax.</p></blockquote><p>In this post, I show you how I securely configure the NixOS, the server OS behind this website.</p><p>This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:</p><ul><li><a href="/blog/2020/02/23/caddy-nixos-part-1/" title="Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)">Part 1: Install NixOS</a></li><li>Part 2: Configure NixOS</li><li><a href="/blog/2020/03/14/caddy-nixos-part-3/" title="Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)">Part 3: Configure Caddy</a></li><li><a href="/blog/2020/03/16/tor-hidden-onion-nixos/" title="How to make your website available over Tor hidden service on NixOS">Part 4: Configure Tor</a></li><li><a href="/blog/2020/03/21/i2p-eepsite-nixos/" title="How to make your website available over I2P Eepsite on NixOS">Part 5: Configure I2P</a></li></ul><p>Following diagram shows the architecture behind this website.</p><p><a href="/img/20200223/caddy-nixos.png"><img srcset="/img/20200223/caddy-nixos.png?f=auto&width=320 320w,/img/20200223/caddy-nixos.png?f=auto&width=468 468w,/img/20200223/caddy-nixos.png?f=auto&width=768 768w,/img/20200223/caddy-nixos.png?f=auto 800w" sizes="(max-width: 320px) 320px,(max-width: 468px) 468px,(max-width: 768px) 768px,800px" src="/img/20200223/caddy-nixos.png?f=auto" title="Architecture behind mdleom.com" alt="Architecture behind mdleom.com" loading="lazy"></a></p><h2 id="Prerequisites">Prerequisites <a href="#Prerequisites" class="headerlink" title="Prerequisites">§</a></h2><p>Before proceeding to the rest of this guide, there are some system packages that you need to install.</p><pre><code class="hljs plaintext">$ nix-env -f &#x27;&lt;nixpkgs&gt;&#x27; -iA google-authenticator p7zip usbguard wormhole-william</code><button class="copy-button">Copy</button></pre><h2 id="Disable-mutableUsers">Disable mutableUsers <a href="#Disable-mutableUsers" class="headerlink" title="Disable mutableUsers">§</a></h2><p>In NixOS, instead of using <code>useradd</code> and <code>passwd</code> to manage users, you could also manage them from the “configuration.nix”. I prefer this approach because it fits the OS’ declarative nature and you could say it is the NixOS-<em>way</em>.</p><p>First, I disabled <code>useradd</code> and <code>passwd</code>.</p><pre><code class="hljs nix">users.<span class="hljs-attr">mutableUsers</span> = <span class="hljs-literal">false</span>;</code><button class="copy-button">Copy</button></pre><h2 id="Disable-root">Disable root <a href="#Disable-root" class="headerlink" title="Disable root">§</a></h2><pre><code class="hljs nix">users.root.<span class="hljs-attr">hashedPassword</span> = <span class="hljs-string">&quot;*&quot;</span>;</code><button class="copy-button">Copy</button></pre><h2 id="Hash-password">Hash password <a href="#Hash-password" class="headerlink" title="Hash password">§</a></h2><p>User’s password can be configured by <code>users.&lt;name&gt;.password</code>, obviously this means the password is stored in plain text. Even if you lock down <code>configuration.nix</code> with <code>chmod 600</code> (which I did), “it is (still) world-readable in the Nix store”. The safer way is to store in a hashed form,</p><pre><code class="hljs nix">users.&lt;name&gt;.<span class="hljs-attr">hashedPassword</span> = <span class="hljs-string">&quot;xxxx&quot;</span>;</code><button class="copy-button">Copy</button></pre><p>Use <code>openssl passwd -6</code> to generate the SHA512-hashed password. Alternatively, you could also use <code>mkpasswd -m sha-512</code> (bundled with <code>whois</code> package). To ensure password is entered correctly in <code>mkpasswd</code> (it only prompts once), copy the salt value which is the second section where each section is separated by <code>$</code> ($6$<strong>salt</strong>$hashedpassword).</p><pre><code class="hljs plaintext">mkpasswd -m sha-512 --salt &#x27;saltvalue&#x27;</code><button class="copy-button">Copy</button></pre><p>Both outputs of <code>mkpasswd</code> should be the same.</p><h3 id="yescript">yescript <a href="#yescript" class="headerlink" title="yescript">§</a></h3><p>NixOS 22.11 onwards support yescrypt, a more secure password hashing algorithm than SHA512. It can generated using <code>mkpasswd -m yescrypt</code>, openssl passwd doesn’t support it yet. mkpasswd generates it with “5” compute cost by default, you can change it using <code>--round</code> option with a value from 1 to 11. Increasing the value will make it more resistant to brute-force, but password verification will also be slower.</p><p>To verify the output, <code>--salt</code> option cannot be used for yescrypt due to <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1003151" rel="noopener external nofollow noreferrer">a bug</a>. As a workaround, copy the output from the first <code>$</code> until the forth.</p><pre><code class="hljs plaintext">printf &quot;Password: &quot; &amp;&amp; read -s var &amp;&amp; mkpasswd &quot;$var&quot; &#x27;$y$parameter$salt$&#x27; &amp;&amp; var=&quot;&quot;</code><button class="copy-button">Copy</button></pre><p>Replace the single-quoted value <code>&#39;&#39;</code> with the copied value.</p><h3 id="passwordFile">passwordFile <a href="#passwordFile" class="headerlink" title="passwordFile">§</a></h3><p>Note that the hash is still world-readable. A more secure option is to use <code>users.&lt;name&gt;.passwordFile</code>. Save the hash into a file (e.g. “&#x2F;etc&#x2F;nixos&#x2F;nixos.password”) and restricts the file to be readable by root only (<code>chown root:root</code> and <code>chmod 600</code>).</p><p>You might be wondering why not just <code>passwordFile</code> during installation. The issue is that, in the live CD environment, the “&#x2F;etc&#x2F;“ folder refers to the live CD’s not the actual one which is located in “&#x2F;mnt&#x2F;etc&#x2F;“. I mean, you <em>could</em> try “&#x2F;mnt&#x2F;etc&#x2F;nixos&#x2F;nixos.password”, but remember to update the option after reboot otherwise you would get locked out. “.&#x2F;nixos.password” value doesn’t work because <code>passwordFile</code> option doesn’t support relative path, it must be a full path. Hence, I have to use <code>hashedPassword</code> during the initial setup and then switch to <code>passwordFile</code>. Remember to remove the <code>hashedPassword</code> option once you have set up <code>passwordFile</code>.</p><pre><code class="hljs nix"><span class="hljs-attr">passwordFile</span> = <span class="hljs-string">&quot;/etc/nixos/nixos.password&quot;</span>;
+<span class="hljs-attr">isNormalUser</span> = <span class="hljs-literal">true</span>;
+<span class="hljs-attr">extraGroups</span> = [ <span class="hljs-string">&quot;wheel&quot;</span> ]; <span class="hljs-comment"># Enable ‘sudo’ for the user.</span></code><button class="copy-button">Copy</button></pre><p>I enable <code>isNormalUser</code> which includes sane defaults (disable “isSystemUser”, create a home folder in “&#x2F;home&#x2F;nixos&#x2F;“ and enable shell). Since root account is disabled, you definitely need to add the user to <code>wheel</code> group so that it can use <code>sudo</code>.</p><p>Once you run <code># nixos-rebuild switch</code>, verify the password has been set, by checking the <code>/etc/shadow</code>.</p><pre><code class="hljs plaintext"># cat /etc/shadow | grep &#x27;nixos&#x27;</code><button class="copy-button">Copy</button></pre><p>The hash in the output should be the same as the content of “&#x2F;etc&#x2F;nixos&#x2F;nixos.password” or <code>hashedPassword</code> value. Only quit root shell <strong>after</strong> verify.</p><h2 id="Run-each-service-as-different-user">Run each service as different user <a href="#Run-each-service-as-different-user" class="headerlink" title="Run each service as different user">§</a></h2><p>For separation of privilege, each service is launched with different user under different group. Shell is disabled for those users. In this case, I have “caddyProxy” to run the Caddy reverse proxy for mdleom.com, “caddyTor” for the reverse proxy to be connected to Tor and “tor” for the Tor hidden service. Caddy package does create “caddy” user by default in its <a href="https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/web-servers/caddy.nix" rel="noopener external nofollow noreferrer">“caddy.nix”</a>, but I prefer to use my own “caddy.nix” which has less permissions granted. “tor” user will be created automatically by the Tor package, but I need to import the private key and assign it to the “tor” user before I can enable the service, hence I create the user beforehand.</p><p>Combining with the previous user configs, I ended up with:</p><pre><code class="hljs nix"><span class="hljs-attr">users</span> = &#123;
+  <span class="hljs-attr">mutableUsers</span> = <span class="hljs-literal">false</span>;
+
+  <span class="hljs-attr">users</span> = &#123;
+    <span class="hljs-attr">root</span> = &#123;
+      <span class="hljs-attr">hashedPassword</span> = <span class="hljs-string">&quot;*&quot;</span>;
+    &#125;;
+    <span class="hljs-attr">nixos</span> = &#123;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;nixos&quot;</span>;
+      <span class="hljs-attr">hashedPassword</span> = <span class="hljs-string">&quot;xxxx&quot;</span>;
+      <span class="hljs-attr">isNormalUser</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">extraGroups</span> = [ <span class="hljs-string">&quot;wheel&quot;</span> ];
+    &#125;;
+    <span class="hljs-attr">caddyProxy</span> = &#123;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+      <span class="hljs-attr">home</span> = <span class="hljs-string">&quot;/var/lib/caddyProxy&quot;</span>;
+      <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">isSystemUser</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+    &#125;;
+    <span class="hljs-attr">caddyTor</span> = &#123;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyTor&quot;</span>;
+      <span class="hljs-attr">home</span> = <span class="hljs-string">&quot;/var/lib/caddyTor&quot;</span>;
+      <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">isSystemUser</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyTor&quot;</span>;
+    &#125;;
+    <span class="hljs-attr">tor</span> = &#123;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;tor&quot;</span>;
+      <span class="hljs-attr">home</span> = <span class="hljs-string">&quot;/var/lib/tor&quot;</span>;
+      <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">isSystemUser</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;tor&quot;</span>;
+      <span class="hljs-attr">uid</span> = config.ids.uids.tor;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-attr">groups</span> = &#123;
+    <span class="hljs-attr">nixos</span> = &#123;&#125;;
+    <span class="hljs-attr">caddyProxy</span> = &#123;&#125;;
+    <span class="hljs-attr">caddyTor</span> = &#123;&#125;;
+    <span class="hljs-attr">tor</span> = &#123;&#125;;
+  &#125;;
+&#125;;</code><button class="copy-button">Copy</button></pre><h2 id="Enables-2FA-OTP-for-login">Enables 2FA (OTP) for login <a href="#Enables-2FA-OTP-for-login" class="headerlink" title="Enables 2FA (OTP) for login">§</a></h2><p>For extra security, I enabled 2FA for the user account via TOTP method. It can be configured using <code>google-authenticator</code> (available in NixOS repo). The resulting secret is stored in “~&#x2F;.google<em>authenticator”. This is also why <code>isNormalUser</code> is needed. <code>google-authenticator</code> should be run as a normal user, _not</em> root nor sudo.</p><pre><code class="hljs plaintext">$ google-authenticator</code><button class="copy-button">Copy</button></pre><ol><li>Yes to time-based</li><li>Import the generated QR code or secret key to OTP app (recommends Aegis for Android)</li><li>Enter OTP</li><li>Backup scratch codes</li><li>Yes to saving the key to ~&#x2F;.google_authenticator</li><li>Yes to disallowing multiple usage</li><li>No to increasing window</li><li>Yes to rate-limiting login attempts</li></ol><p>Once the secret is generated, TOTP can be enabled using the following config. I configured it to require OTP when login and sudo, in addition to password.</p><pre><code class="hljs nix"><span class="hljs-comment">## Requires OTP to login &amp; sudo</span>
+security.<span class="hljs-attr">pam</span> = &#123;
+  services.login.googleAuthenticator.<span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  services.sudo.googleAuthenticator.<span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><h2 id="DNS-over-TLS">DNS-over-TLS <a href="#DNS-over-TLS" class="headerlink" title="DNS-over-TLS">§</a></h2><p>Since DNS is not encrypted in transit, it risks being tampered. To resolve that, I use DNS-over-TLS which as the name implies, uses TLS to encrypt the DNS traffic. I use <code>stubby</code> which creates a DNS resolver that listens on localhost and forward DNS query to the upstream server(s) using DoT. <code>stubby</code> enables DNSSEC by default to verify authenticity of the DNS response for supported domains. (This domain mdleom.com has DNSSEC enabled through a DS record)</p><p>I use Cloudflare DNS (simply because I’m already using its CDN) and <a href="https://quad9.net/" rel="noopener external nofollow noreferrer">Quad9</a> as backup. Refer to <a href="https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example" rel="noopener external nofollow noreferrer">stubby.yml</a> for a full list of supported servers. For Cloudflare DNS, I opt for the malware-blocking flavour, refer to the following IPs if you prefer the default flavour.</p><pre><code class="hljs plaintext">Source: https://developers.cloudflare.com/1.1.1.1/setup/
+# No malware blocking
+1.1.1.1
+1.0.0.1
+2606:4700:4700::1111
+2606:4700:4700::1001
+
+# Malware blocking
+1.1.1.2
+1.0.0.2
+2606:4700:4700::1112
+2606:4700:4700::1002</code><button class="copy-button">Copy</button></pre><pre><code class="hljs nix"><span class="hljs-comment">## DNS-over-TLS</span>
+services.<span class="hljs-attr">stubby</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">settings</span> = &#123;
+    <span class="hljs-comment"># ::1 cause error, use 0::1 instead</span>
+    <span class="hljs-attr">listen_addresses</span> = [ <span class="hljs-string">&quot;127.0.0.1&quot;</span> <span class="hljs-string">&quot;0::1&quot;</span> ];
+    <span class="hljs-comment"># https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example</span>
+    <span class="hljs-attr">resolution_type</span> = <span class="hljs-string">&quot;GETDNS_RESOLUTION_STUB&quot;</span>;
+    <span class="hljs-attr">dns_transport_list</span> = [ <span class="hljs-string">&quot;GETDNS_TRANSPORT_TLS&quot;</span> ];
+    <span class="hljs-attr">tls_authentication</span> = <span class="hljs-string">&quot;GETDNS_AUTHENTICATION_REQUIRED&quot;</span>;
+    <span class="hljs-attr">tls_query_padding_blocksize</span> = <span class="hljs-number">128</span>;
+    <span class="hljs-attr">idle_timeout</span> = <span class="hljs-number">10000</span>;
+    <span class="hljs-attr">round_robin_upstreams</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-attr">tls_min_version</span> = <span class="hljs-string">&quot;GETDNS_TLS1_3&quot;</span>;
+    <span class="hljs-attr">dnssec</span> = <span class="hljs-string">&quot;GETDNS_EXTENSION_TRUE&quot;</span>;
+    <span class="hljs-attr">upstream_recursive_servers</span> = [
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;1.1.1.2&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;1.0.0.2&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2606:4700:4700::1112&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2606:4700:4700::1002&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;9.9.9.9&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;149.112.112.112&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2620:fe::fe&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+      &#125;
+      &#123;
+        <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2620:fe::9&quot;</span>;
+        <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+      &#125;
+    ];
+  &#125;;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>Then I point systemd’s resolved to stubby. I do configure it to fallback to unencrypted DNS if stubby is not responsive (which does happen). Whether you need an unsecured fallback depends on your cost-benefit. For me, the cost of the site being inaccessible (due to unresponsive stubby) outweighs the benefit of having enforced encryption (my setup is opportunistic).</p><pre><code class="hljs nix">networking.<span class="hljs-attr">nameservers</span> = [ <span class="hljs-string">&quot;::1&quot;</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span> ];
+services.<span class="hljs-attr">resolved</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">fallbackDns</span> = [ <span class="hljs-string">&quot;2606:4700:4700::1112&quot;</span> <span class="hljs-string">&quot;2606:4700:4700::1002&quot;</span> <span class="hljs-string">&quot;1.1.1.2&quot;</span> <span class="hljs-string">&quot;1.0.0.2&quot;</span> ];
+&#125;;</code><button class="copy-button">Copy</button></pre><p>Execute <code>nixos-rebuild switch</code> and test the DNS resolver by using <code>dig</code> (part of “dnsutils” package):</p><pre><code class="hljs plaintext">$ dig example.com</code><button class="copy-button">Copy</button></pre><h2 id="Bind-to-port-gt-1024">Bind to port &gt;1024 <a href="#Bind-to-port-gt-1024" class="headerlink" title="Bind to port &gt;1024">§</a></h2><p>By default, Linux program cannot bind to port &lt;&#x3D;1024 for security reason. If a program needs it, you need to explicitly grant CAP_NET_BIND_SERVICE capability. An alternative approach is to bind the program to port &gt;1024 and port forward 80&#x2F;443 to that port.</p><p>In my case, I configure iptables to port forward 443 to 4430, so any traffic that hits 443 will be redirected to 4430. Both ports need to be opened, but I do configure my dedicated firewall (separate from the web server) to allow port 443 only.</p><pre><code class="hljs nix"><span class="hljs-comment">## Port forwarding</span>
+networking.<span class="hljs-attr">firewall</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  interfaces.<span class="hljs-attr">ens3</span> = &#123;
+    <span class="hljs-attr">allowedTCPPorts</span> = [ <span class="hljs-number">443</span> <span class="hljs-number">4430</span> ];
+  &#125;;
+  <span class="hljs-attr">extraCommands</span> =
+    <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">      ip6tables -t nat -I PREROUTING -i ens3 -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 4430</span>
+<span class="hljs-string">    &#x27;&#x27;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>Most probably you would need <code>ip46tables</code> to open ports in both IPv4 and IPv6. If the server doesn’t support IPv6 (!), just use <code>iptables</code>.</p><p>(Edit: 20 Jun 2021) <a href="/blog/2021/06/15/cloudflare-argo-nixos/" title="Setup Cloudflare Argo Tunnel in NixOS">cloudflared</a> replaced my port forwarding setup, my web server now binds to localhost and no longer needs open inbound port.</p><h2 id="Unattended-upgrade">Unattended upgrade <a href="#Unattended-upgrade" class="headerlink" title="Unattended upgrade">§</a></h2><p>Unattended upgrade can be enabled through the following config. Once enabled, NixOS will automatically check and install the updates. If you enable <code>allowReboot</code>, it will also reboot if required (especially after kernel upgrade). Unattended upgrade is also a cost-benefit thing. The benefit is timely fix for vulnerability and reduce maintenance effort, the cost is potential incompatibility issue that can arise after update. In my use case, the cost is deemed to be minimal because I find the issue to be rare.</p><p>In the config, you can also specify the time that the server will reboot. I recommend to only enable it after everything is up and running, especially when setting a web server; you wouldn’t want the server to reboot itself in the middle of your tinkering.</p><p>(For more advanced usage of <code>dates</code>, see <a href="https://jlk.fjfi.cvut.cz/arch/manpages/man/systemd.time.7#CALENDAR_EVENTS" rel="noopener external nofollow noreferrer"><code>systemd.time</code></a>)</p><pre><code class="hljs nix">system.<span class="hljs-attr">autoUpgrade</span> = &#123;
+  <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-attr">allowReboot</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-comment"># Daily 00:00</span>
+  <span class="hljs-attr">dates</span> = <span class="hljs-string">&quot;daily UTC&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><h2 id="USBGuard-restricts-new-USB-devices">USBGuard (restricts new USB devices) <a href="#USBGuard-restricts-new-USB-devices" class="headerlink" title="USBGuard (restricts new USB devices)">§</a></h2><p>I use USBGuard utility to allow or deny USB devices. In a virtual server environment, I only need to use the virtualised USB keyboard. Configuration is easy and straightforward. First, I generate a policy (with root privilege) to allow all currently connected devices:</p><pre><code class="hljs plaintext">$ sudo usbguard generate-policy &gt; /var/lib/usbguard/rules.conf</code><button class="copy-button">Copy</button></pre><p>Then, I just simply enable the service:</p><pre><code class="hljs nix"><span class="hljs-comment"># Load &quot;/var/lib/usbguard/rules.conf&quot; by default</span>
+services.usbguard.<span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;</code><button class="copy-button">Copy</button></pre><p>Once enabled, any device not whitelisted in the policy will not be accessible.</p><h2 id="Networking-stack-hardening-and-performance">Networking stack hardening and performance <a href="#Networking-stack-hardening-and-performance" class="headerlink" title="Networking stack hardening and performance">§</a></h2><p>Based on <a href="https://wiki.ubuntu.com/ImprovedNetworking/KernelSecuritySettings" rel="noopener external nofollow noreferrer">Ubuntu Wiki</a> and <a href="https://wiki.archlinux.org/index.php/sysctl" rel="noopener external nofollow noreferrer">ArchWiki</a>.</p><pre><code class="hljs nix"><span class="hljs-comment">## Enable BBR module</span>
+boot.<span class="hljs-attr">kernelModules</span> = [ <span class="hljs-string">&quot;tcp_bbr&quot;</span> ];
+
+<span class="hljs-comment">## Network hardening and performance</span>
+boot.kernel.<span class="hljs-attr">sysctl</span> = &#123;
+  <span class="hljs-comment"># Disable magic SysRq key</span>
+  <span class="hljs-string">&quot;kernel.sysrq&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-comment"># Ignore ICMP broadcasts to avoid participating in Smurf attacks</span>
+  <span class="hljs-string">&quot;net.ipv4.icmp_echo_ignore_broadcasts&quot;</span> = <span class="hljs-number">1</span>;
+  <span class="hljs-comment"># Ignore bad ICMP errors</span>
+  <span class="hljs-string">&quot;net.ipv4.icmp_ignore_bogus_error_responses&quot;</span> = <span class="hljs-number">1</span>;
+  <span class="hljs-comment"># Reverse-path filter for spoof protection</span>
+  <span class="hljs-string">&quot;net.ipv4.conf.default.rp_filter&quot;</span> = <span class="hljs-number">1</span>;
+  <span class="hljs-string">&quot;net.ipv4.conf.all.rp_filter&quot;</span> = <span class="hljs-number">1</span>;
+  <span class="hljs-comment"># SYN flood protection</span>
+  <span class="hljs-string">&quot;net.ipv4.tcp_syncookies&quot;</span> = <span class="hljs-number">1</span>;
+  <span class="hljs-comment"># Do not accept ICMP redirects (prevent MITM attacks)</span>
+  <span class="hljs-string">&quot;net.ipv4.conf.all.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-string">&quot;net.ipv4.conf.default.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-string">&quot;net.ipv4.conf.all.secure_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-string">&quot;net.ipv4.conf.default.secure_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-string">&quot;net.ipv6.conf.all.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-string">&quot;net.ipv6.conf.default.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-comment"># Do not send ICMP redirects (we are not a router)</span>
+  <span class="hljs-string">&quot;net.ipv4.conf.all.send_redirects&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-comment"># Do not accept IP source route packets (we are not a router)</span>
+  <span class="hljs-string">&quot;net.ipv4.conf.all.accept_source_route&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-string">&quot;net.ipv6.conf.all.accept_source_route&quot;</span> = <span class="hljs-number">0</span>;
+  <span class="hljs-comment"># Protect against tcp time-wait assassination hazards</span>
+  <span class="hljs-string">&quot;net.ipv4.tcp_rfc1337&quot;</span> = <span class="hljs-number">1</span>;
+  <span class="hljs-comment"># TCP Fast Open (TFO)</span>
+  <span class="hljs-string">&quot;net.ipv4.tcp_fastopen&quot;</span> = <span class="hljs-number">3</span>;
+  <span class="hljs-comment">## Bufferbloat mitigations</span>
+  <span class="hljs-comment"># Requires &gt;= 4.9 &amp; kernel module</span>
+  <span class="hljs-string">&quot;net.ipv4.tcp_congestion_control&quot;</span> = <span class="hljs-string">&quot;bbr&quot;</span>;
+  <span class="hljs-comment"># Requires &gt;= 4.19</span>
+  <span class="hljs-string">&quot;net.core.default_qdisc&quot;</span> = <span class="hljs-string">&quot;cake&quot;</span>;
+&#125;;</code><button class="copy-button">Copy</button></pre><p>TCP Fast Open (<a href="https://en.wikipedia.org/wiki/Tcp_fast_open" rel="noopener external nofollow noreferrer">TFO</a>) is enabled by default (<code>tcp_fastopen = 1</code>) for outgoing connection since 3.13. As of writing, TFO has limited server support; Caddy, Tor and I2Pd don’t support it yet, so enabling it for incoming and outgoing connections (<code>3</code>) has no effect.</p><h2 id="Hardened-kernel">Hardened kernel <a href="#Hardened-kernel" class="headerlink" title="Hardened kernel">§</a></h2><p>Kernel compiled with additional security-oriented patch set. <a href="https://wiki.archlinux.org/index.php/Security#Kernel_hardening" rel="noopener external nofollow noreferrer">More details</a>.</p><p><em>NixOS <a href="https://nixos.wiki/wiki/Linux_kernel" rel="noopener external nofollow noreferrer">defaults</a> to the latest LTS kernel</em></p><pre><code class="hljs nix"><span class="hljs-comment"># Latest LTS kernel</span>
+boot.<span class="hljs-attr">kernelPackages</span> = pkgs.linuxPackages_hardened;</code><button class="copy-button">Copy</button></pre><pre><code class="hljs nix"><span class="hljs-comment"># Latest kernel</span>
+boot.<span class="hljs-attr">kernelPackages</span> = pkgs.linuxPackages_latest_hardened;</code><button class="copy-button">Copy</button></pre><h2 id="Remove-old-unreferenced-packages">Remove old, unreferenced packages <a href="#Remove-old-unreferenced-packages" class="headerlink" title="Remove old, unreferenced packages">§</a></h2><p>Since my web server has limited disk space, it needs to run <a href="https://nixos.org/nixos/manual/index.html#sec-nix-gc" rel="noopener external nofollow noreferrer">garbage collector</a> from time to time.</p><p>Since <a href="#Unattended-upgrade">unattended upgrade</a> is executed on 00:00, I delay garbage collection to 01:00 to avoid time conflict. The order doesn’t matter, but there should be at least 15 minutes buffer.</p><pre><code class="hljs nix"><span class="hljs-comment">## Garbage collector</span>
+nix.<span class="hljs-attr">gc</span> = &#123;
+  <span class="hljs-attr">automatic</span> = <span class="hljs-literal">true</span>;
+  <span class="hljs-comment"># Every Monday 01:00 (UTC)</span>
+  <span class="hljs-attr">dates</span> = <span class="hljs-string">&quot;Monday 01:00 UTC&quot;</span>;
+  <span class="hljs-attr">options</span> = <span class="hljs-string">&quot;--delete-older-than 7d&quot;</span>;
+&#125;;
+
+<span class="hljs-comment"># Run garbage collection whenever there is less than 500MB free space left</span>
+nix.<span class="hljs-attr">extraOptions</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">  min-free = <span class="hljs-subst">$&#123;<span class="hljs-built_in">toString</span> (<span class="hljs-number">500</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>)&#125;</span></span>
+<span class="hljs-string">&#x27;&#x27;</span>;</code><button class="copy-button">Copy</button></pre><h2 id="Complete-configuration-nix">Complete configuration.nix <a href="#Complete-configuration-nix" class="headerlink" title="Complete configuration.nix">§</a></h2><pre><div class="caption"><span>/etc/nixos/configuration.nix</span></div><code class="hljs nix">&#123; config, pkgs, ... &#125;:
+
+&#123;
+  <span class="hljs-attr">imports</span> =
+    [ <span class="hljs-comment"># Include the results of the hardware scan.</span>
+      ./hardware-configuration.nix
+    ];
+
+  <span class="hljs-comment"># The global useDHCP flag is deprecated, therefore explicitly set to false here.</span>
+  <span class="hljs-comment"># Per-interface useDHCP will be mandatory in the future, so this generated config</span>
+  <span class="hljs-comment"># replicates the default behaviour.</span>
+  networking.<span class="hljs-attr">useDHCP</span> = <span class="hljs-literal">false</span>;
+  networking.interfaces.ens3.<span class="hljs-attr">useDHCP</span> = <span class="hljs-literal">true</span>;
+
+  environment.<span class="hljs-attr">systemPackages</span> = <span class="hljs-keyword">with</span> pkgs; [
+    dnsutils wormhole-william p7zip
+  ];
+
+  environment.<span class="hljs-attr">shellAliases</span> = &#123;
+    <span class="hljs-attr">ls</span> = <span class="hljs-string">&quot;ls -l&quot;</span>;
+    <span class="hljs-attr">la</span> = <span class="hljs-string">&quot;ls -a&quot;</span>;
+    <span class="hljs-attr">wormhole</span> = <span class="hljs-string">&quot;wormhole-william&quot;</span>;
+  &#125;;
+
+  time.<span class="hljs-attr">timeZone</span> = <span class="hljs-string">&quot;UTC&quot;</span>;
+
+  <span class="hljs-comment">## Unattended upgrade</span>
+  system.<span class="hljs-attr">autoUpgrade</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">allowReboot</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">dates</span> = <span class="hljs-string">&quot;weekly UTC&quot;</span>;
+  &#125;;
+
+  <span class="hljs-comment">## Garbage collection</span>
+  <span class="hljs-comment"># https://nixos.wiki/wiki/Storage_optimization#Automation</span>
+  nix.<span class="hljs-attr">gc</span> = &#123;
+    <span class="hljs-attr">automatic</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">dates</span> = <span class="hljs-string">&quot;Monday 01:00 UTC&quot;</span>;
+    <span class="hljs-attr">options</span> = <span class="hljs-string">&quot;--delete-older-than 7d&quot;</span>;
+  &#125;;
+
+  <span class="hljs-comment"># Run garbage collection whenever there is less than 500MB free space left</span>
+  nix.<span class="hljs-attr">extraOptions</span> = <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">    min-free = <span class="hljs-subst">$&#123;<span class="hljs-built_in">toString</span> (<span class="hljs-number">500</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>)&#125;</span></span>
+<span class="hljs-string">  &#x27;&#x27;</span>;
+
+  <span class="hljs-comment">## Optional: Clear &gt;1 month-old logs</span>
+  <span class="hljs-attr">systemd</span> = &#123;
+    services.<span class="hljs-attr">clear-log</span> = &#123;
+      <span class="hljs-attr">description</span> = <span class="hljs-string">&quot;Clear &gt;1 month-old logs every week&quot;</span>;
+      <span class="hljs-attr">serviceConfig</span> = &#123;
+        <span class="hljs-attr">Type</span> = <span class="hljs-string">&quot;oneshot&quot;</span>;
+        <span class="hljs-attr">ExecStart</span> = <span class="hljs-string">&quot;<span class="hljs-subst">$&#123;pkgs.systemd&#125;</span>/bin/journalctl --vacuum-time=30d&quot;</span>;
+      &#125;;
+    &#125;;
+    timers.<span class="hljs-attr">clear-log</span> = &#123;
+      <span class="hljs-attr">wantedBy</span> = [ <span class="hljs-string">&quot;timers.target&quot;</span> ];
+      <span class="hljs-attr">partOf</span> = [ <span class="hljs-string">&quot;clear-log.service&quot;</span> ];
+      timerConfig.<span class="hljs-attr">OnCalendar</span> = <span class="hljs-string">&quot;weekly UTC&quot;</span>;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-comment">## Hardened kernel</span>
+  boot.<span class="hljs-attr">kernelPackages</span> = pkgs.linuxPackages_hardened;
+
+  <span class="hljs-comment">## Enable BBR</span>
+  boot.<span class="hljs-attr">kernelModules</span> = [ <span class="hljs-string">&quot;tcp_bbr&quot;</span> ];
+
+  <span class="hljs-comment">## Network hardening and performance</span>
+  boot.kernel.<span class="hljs-attr">sysctl</span> = &#123;
+    <span class="hljs-comment"># Disable magic SysRq key</span>
+    <span class="hljs-string">&quot;kernel.sysrq&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-comment"># Ignore ICMP broadcasts to avoid participating in Smurf attacks</span>
+    <span class="hljs-string">&quot;net.ipv4.icmp_echo_ignore_broadcasts&quot;</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-comment"># Ignore bad ICMP errors</span>
+    <span class="hljs-string">&quot;net.ipv4.icmp_ignore_bogus_error_responses&quot;</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-comment"># Reverse-path filter for spoof protection</span>
+    <span class="hljs-string">&quot;net.ipv4.conf.default.rp_filter&quot;</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-string">&quot;net.ipv4.conf.all.rp_filter&quot;</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-comment"># SYN flood protection</span>
+    <span class="hljs-string">&quot;net.ipv4.tcp_syncookies&quot;</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-comment"># Do not accept ICMP redirects (prevent MITM attacks)</span>
+    <span class="hljs-string">&quot;net.ipv4.conf.all.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-string">&quot;net.ipv4.conf.default.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-string">&quot;net.ipv4.conf.all.secure_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-string">&quot;net.ipv4.conf.default.secure_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-string">&quot;net.ipv6.conf.all.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-string">&quot;net.ipv6.conf.default.accept_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-comment"># Do not send ICMP redirects (we are not a router)</span>
+    <span class="hljs-string">&quot;net.ipv4.conf.all.send_redirects&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-comment"># Do not accept IP source route packets (we are not a router)</span>
+    <span class="hljs-string">&quot;net.ipv4.conf.all.accept_source_route&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-string">&quot;net.ipv6.conf.all.accept_source_route&quot;</span> = <span class="hljs-number">0</span>;
+    <span class="hljs-comment"># Protect against tcp time-wait assassination hazards</span>
+    <span class="hljs-string">&quot;net.ipv4.tcp_rfc1337&quot;</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-comment"># Latency reduction</span>
+    <span class="hljs-string">&quot;net.ipv4.tcp_fastopen&quot;</span> = <span class="hljs-number">3</span>;
+    <span class="hljs-comment">## Bufferfloat mitigations</span>
+    <span class="hljs-comment"># Requires &gt;= 4.9 &amp; kernel module</span>
+    <span class="hljs-string">&quot;net.ipv4.tcp_congestion_control&quot;</span> = <span class="hljs-string">&quot;bbr&quot;</span>;
+    <span class="hljs-comment"># Requires &gt;= 4.19</span>
+    <span class="hljs-string">&quot;net.core.default_qdisc&quot;</span> = <span class="hljs-string">&quot;cake&quot;</span>;
+  &#125;;
+
+  <span class="hljs-comment">## USBGuard</span>
+  <span class="hljs-comment"># Load &quot;/var/lib/usbguard/rules.conf&quot; by default</span>
+  services.usbguard.<span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+
+  <span class="hljs-comment">## DNS-over-TLS</span>
+  services.<span class="hljs-attr">stubby</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">settings</span> = &#123;
+      <span class="hljs-attr">listen_addresses</span> = [ <span class="hljs-string">&quot;127.0.0.1&quot;</span> <span class="hljs-string">&quot;0::1&quot;</span> ];
+      <span class="hljs-comment"># https://github.com/getdnsapi/stubby/blob/develop/stubby.yml.example</span>
+      <span class="hljs-attr">resolution_type</span> = <span class="hljs-string">&quot;GETDNS_RESOLUTION_STUB&quot;</span>;
+      <span class="hljs-attr">dns_transport_list</span> = [ <span class="hljs-string">&quot;GETDNS_TRANSPORT_TLS&quot;</span> ];
+      <span class="hljs-attr">tls_authentication</span> = <span class="hljs-string">&quot;GETDNS_AUTHENTICATION_REQUIRED&quot;</span>;
+      <span class="hljs-attr">tls_query_padding_blocksize</span> = <span class="hljs-number">128</span>;
+      <span class="hljs-attr">idle_timeout</span> = <span class="hljs-number">10000</span>;
+      <span class="hljs-attr">round_robin_upstreams</span> = <span class="hljs-number">1</span>;
+      <span class="hljs-attr">tls_min_version</span> = <span class="hljs-string">&quot;GETDNS_TLS1_3&quot;</span>;
+      <span class="hljs-attr">dnssec</span> = <span class="hljs-string">&quot;GETDNS_EXTENSION_TRUE&quot;</span>;
+      <span class="hljs-attr">upstream_recursive_servers</span> = [
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;1.1.1.2&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;1.0.0.2&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2606:4700:4700::1112&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2606:4700:4700::1002&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;cloudflare-dns.com&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;9.9.9.9&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;149.112.112.112&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2620:fe::fe&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+        &#125;
+        &#123;
+          <span class="hljs-attr">address_data</span> = <span class="hljs-string">&quot;2620:fe::9&quot;</span>;
+          <span class="hljs-attr">tls_auth_name</span> = <span class="hljs-string">&quot;dns.quad9.net&quot;</span>;
+        &#125;
+      ];
+    &#125;;
+  &#125;;
+
+  networking.<span class="hljs-attr">nameservers</span> = [ <span class="hljs-string">&quot;::1&quot;</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span> ];
+  services.<span class="hljs-attr">resolved</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">fallbackDns</span> = [ <span class="hljs-string">&quot;2606:4700:4700::1111&quot;</span> <span class="hljs-string">&quot;2606:4700:4700::1001&quot;</span> <span class="hljs-string">&quot;1.1.1.1&quot;</span> <span class="hljs-string">&quot;1.0.0.1&quot;</span> ];
+  &#125;;
+
+  <span class="hljs-comment">## Port forwarding</span>
+  networking.<span class="hljs-attr">firewall</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    interfaces.<span class="hljs-attr">ens3</span> = &#123;
+      <span class="hljs-attr">allowedTCPPorts</span> = [ <span class="hljs-number">443</span> <span class="hljs-number">4430</span> ];
+    &#125;;
+    <span class="hljs-attr">extraCommands</span> =
+      <span class="hljs-string">&#x27;&#x27;</span>
+<span class="hljs-string">        ip6tables -t nat -I PREROUTING -i ens3 -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 4430</span>
+<span class="hljs-string">      &#x27;&#x27;</span>;
+  &#125;;
+
+  <span class="hljs-comment">## Create service users</span>
+  <span class="hljs-attr">users</span> = &#123;
+    <span class="hljs-attr">mutableUsers</span> = <span class="hljs-literal">false</span>; <span class="hljs-comment"># Disable passwd</span>
+
+    <span class="hljs-attr">users</span> = &#123;
+      <span class="hljs-attr">root</span> = &#123;
+        <span class="hljs-attr">hashedPassword</span> = <span class="hljs-string">&quot;*&quot;</span>; <span class="hljs-comment"># Disable root password</span>
+      &#125;;
+      <span class="hljs-attr">nixos</span> = &#123;
+        <span class="hljs-attr">passwordFile</span> = <span class="hljs-string">&quot;/etc/nixos/nixos.password&quot;</span>;
+        <span class="hljs-attr">isNormalUser</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">extraGroups</span> = [ <span class="hljs-string">&quot;wheel&quot;</span> ]; <span class="hljs-comment"># Enable ‘sudo’ for the user.</span>
+      &#125;;
+      <span class="hljs-attr">caddyProxy</span> = &#123;
+        <span class="hljs-attr">home</span> = <span class="hljs-string">&quot;/var/lib/caddyProxy&quot;</span>;
+        <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">isSystemUser</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyProxy&quot;</span>;
+      &#125;;
+      <span class="hljs-attr">caddyTor</span> = &#123;
+        <span class="hljs-attr">home</span> = <span class="hljs-string">&quot;/var/lib/caddyTor&quot;</span>;
+        <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">isSystemUser</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyTor&quot;</span>;
+      &#125;;
+      <span class="hljs-attr">caddyI2p</span> = &#123;
+        <span class="hljs-attr">home</span> = <span class="hljs-string">&quot;/var/lib/caddyI2p&quot;</span>;
+        <span class="hljs-attr">createHome</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">isSystemUser</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">group</span> = <span class="hljs-string">&quot;caddyI2p&quot;</span>;
+      &#125;;
+    &#125;;
+
+    <span class="hljs-attr">groups</span> = &#123;
+      <span class="hljs-attr">caddyProxy</span> = &#123;
+        <span class="hljs-attr">members</span> = [ <span class="hljs-string">&quot;caddyProxy&quot;</span> ];
+      &#125;;
+      <span class="hljs-attr">caddyTor</span> = &#123;
+        <span class="hljs-attr">members</span> = [ <span class="hljs-string">&quot;caddyTor&quot;</span> ];
+      &#125;;
+      <span class="hljs-attr">caddyI2p</span> = &#123;
+        <span class="hljs-attr">members</span> = [ <span class="hljs-string">&quot;caddyI2p&quot;</span> ];
+      &#125;;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-comment">## Requires OTP to login &amp; sudo</span>
+  security.<span class="hljs-attr">pam</span> = &#123;
+    services.login.googleAuthenticator.<span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    services.sudo.googleAuthenticator.<span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+  &#125;;
+
+  <span class="hljs-comment">### The rest will be explained in the next articles</span>
+  <span class="hljs-comment">## Caddy web server</span>
+  <span class="hljs-attr">require</span> = [
+    /etc/caddy/caddyProxy.nix
+    /etc/caddy/caddyTor.nix
+    /etc/caddy/caddyI2p.nix
+  ];
+  services.<span class="hljs-attr">caddyProxy</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/etc/caddy/caddyProxy.conf&quot;</span>;
+  &#125;;
+  services.<span class="hljs-attr">caddyTor</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/etc/caddy/caddyTor.conf&quot;</span>;
+  &#125;;
+  services.<span class="hljs-attr">caddyI2p</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-attr">config</span> = <span class="hljs-string">&quot;/etc/caddy/caddyI2p.conf&quot;</span>;
+  &#125;;
+
+  <span class="hljs-comment">## Tor onion</span>
+  services.<span class="hljs-attr">tor</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">enableGeoIP</span> = <span class="hljs-literal">false</span>;
+    relay.<span class="hljs-attr">onionServices</span> = &#123;
+      <span class="hljs-attr">proxy</span> = &#123;
+        <span class="hljs-attr">version</span> = <span class="hljs-number">3</span>;
+        <span class="hljs-attr">map</span> = [&#123;
+          <span class="hljs-attr">port</span> = <span class="hljs-number">80</span>;
+          <span class="hljs-attr">target</span> = &#123;
+            <span class="hljs-attr">addr</span> = <span class="hljs-string">&quot;[::1]&quot;</span>;
+            <span class="hljs-attr">port</span> = <span class="hljs-number">8080</span>;
+          &#125;;
+        &#125;];
+      &#125;;
+    &#125;;
+    <span class="hljs-attr">settings</span> = &#123;
+      <span class="hljs-attr">ClientUseIPv4</span> = <span class="hljs-literal">false</span>;
+      <span class="hljs-attr">ClientUseIPv6</span> = <span class="hljs-literal">true</span>;
+      <span class="hljs-attr">ClientPreferIPv6ORPort</span> = <span class="hljs-literal">true</span>;
+    &#125;;
+  &#125;;
+
+  <span class="hljs-comment">## I2P Eepsite</span>
+  services.<span class="hljs-attr">i2pd</span> = &#123;
+    <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">enableIPv4</span> = <span class="hljs-literal">false</span>;
+    <span class="hljs-attr">enableIPv6</span> = <span class="hljs-literal">true</span>;
+    <span class="hljs-attr">ifname</span> = <span class="hljs-string">&quot;ens3&quot;</span>;
+    <span class="hljs-attr">address</span> = <span class="hljs-string">&quot;xxxx&quot;</span>;
+    <span class="hljs-attr">inTunnels</span> = &#123;
+      <span class="hljs-attr">proxy</span> = &#123;
+        <span class="hljs-attr">enable</span> = <span class="hljs-literal">true</span>;
+        <span class="hljs-attr">keys</span> = <span class="hljs-string">&quot;proxy-keys.dat&quot;</span>;
+        <span class="hljs-attr">inPort</span> = <span class="hljs-number">80</span>;
+        <span class="hljs-attr">address</span> = <span class="hljs-string">&quot;::1&quot;</span>;
+        <span class="hljs-attr">destination</span> = <span class="hljs-string">&quot;::1&quot;</span>;
+        <span class="hljs-attr">port</span> = <span class="hljs-number">8081</span>;
+      &#125;;
+    &#125;;
+  &#125;;
+&#125;</code><button class="copy-button">Copy</button></pre></div><footer class="article-footer"><ul class="article-meta"><li><span class="label">Last Updated:</span> <time class="dt-updated" datetime="2022-12-03T00:00:00.000Z" itemprop="dateModified">3 Dec 2022</time></li><li><span class="label">Published Date:</span> <time class="dt-published" datetime="2020-03-04T00:00:00.000Z" itemprop="datePublished">4 <a href="/blog/2020/03/" title="See March 2020's posts">Mar</a> <a href="/blog/2020/" title="See 2020's posts">2020</a></time></li><li><span class="label">Tag:</span><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/caddy/" rel="tag">Caddy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nixos/" rel="tag">Nixos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/" rel="tag">Server</a></li></ul></li><li><span class="label">Source:</span> <a href="https://gitlab.com/curben/blog/-/blob/master/source/_posts/caddy-nixos-part-2.md" rel="noopener external nofollow noreferrer">caddy-nixos-part-2.md</a></li><hr></ul></footer></div><nav id="article-nav" class="article-nav"><span class="article-nav-link-wrap newer"><strong>Newer</strong> <a href="/blog/2020/03/14/caddy-nixos-part-3/"><div class="article-nav-title">Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)</div></a></span><span class="article-nav-link-wrap older"><strong>Older</strong> <a href="/blog/2020/02/23/caddy-nixos-part-1/"><div class="article-nav-title">Setup Caddy as a reverse proxy on NixOS (Part 1: Installation)</div></a></span></nav></article></div><footer id="footer" class="post-footer footer"><hr><div id="copyright" class="copyright">&copy; 2018-2024 Ming Di Leom. <a href="https://gitlab.com/curben/blog" rel="noopener external nofollow noreferrer">Powered by </a><a href="https://hexo.io/" rel="noopener external nofollow noreferrer">Hexo</a> with <a href="https://gitlab.com/curben/blog/tree/master/themes/chameleon" rel="noopener external nofollow noreferrer">Chameleon</a> theme.<br>Content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener external nofollow noreferrer license" itemprop="license">CC-BY-SA 4.0</a>, unless indicated otherwise.<br><a class="main-nav-link" href="/disclaimer/">Disclaimer</a> <a class="main-nav-link" href="https://stats.uptimerobot.com/1394zup2LQ" rel="noopener external nofollow noreferrer">Status</a> <a class="main-nav-link" href="https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/" rel="noopener external nofollow noreferrer">Onion</a> <a class="main-nav-link" href="https://gitlab.com/curben/blog#mirrors" rel="noopener external nofollow noreferrer">Eepsite</a></div></footer><script src="/libs/clipboard-2.0.6.min.js" defer></script><script src="/js/copy-button.js"></script><script src="/js/chameleon.js"></script></body></html>

@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://mdleom.com/blog/2024/02/24/splunk-app-acl/</loc>
+    
+    <lastmod>2024-02-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2023/10/01/splunk-ldapsearch-useraccountcontrol/</loc>
+    
+    <lastmod>2023-10-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2023/08/27/saml-scim/</loc>
+    
+    <lastmod>2023-08-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2023/07/17/ctrl-h-backspace/</loc>
+    
+    <lastmod>2023-07-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2023/06/17/json-splunk-uf/</loc>
+    
+    <lastmod>2024-01-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2023/04/16/splunk-lookup-malware-filter/</loc>
+    
+    <lastmod>2023-04-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2023/02/13/ssh-certificate-cloudflare-tunnel/</loc>
+    
+    <lastmod>2023-02-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2022/11/27/grub-luks2-argon2/</loc>
+    
+    <lastmod>2022-11-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2022/08/09/remove-gitlab-artifacts/</loc>
+    
+    <lastmod>2022-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/12/27/caddy-plugins-nixos/</loc>
+    
+    <lastmod>2023-02-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/12/25/nginx-splunk-field-extractor/</loc>
+    
+    <lastmod>2021-12-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/12/17/log4shell-log4j-unbound-dns/</loc>
+    
+    <lastmod>2022-02-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/10/08/cloud-control-config/</loc>
+    
+    <lastmod>2021-10-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/09/17/aws-config/</loc>
+    
+    <lastmod>2021-09-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/07/23/aws-waf-wcu/</loc>
+    
+    <lastmod>2021-07-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/07/04/ecdsa-tls-tor-caddy/</loc>
+    
+    <lastmod>2021-07-04</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/07/02/custom-package-nixos-module/</loc>
+    
+    <lastmod>2021-07-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/06/27/aws-waf/</loc>
+    
+    <lastmod>2021-09-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/06/15/cloudflare-argo-nixos/</loc>
+    
+    <lastmod>2021-06-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/06/13/upgrade-note-nixos-21-05/</loc>
+    
+    <lastmod>2021-06-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/04/20/python-venv/</loc>
+    
+    <lastmod>2021-04-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/03/20/urlhaus-phishing-snort-suricata/</loc>
+    
+    <lastmod>2021-04-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/03/15/rsync-setup-nixos/</loc>
+    
+    <lastmod>2021-03-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/03/09/nixos-oracle/</loc>
+    
+    <lastmod>2021-03-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2021/02/15/cloudflare-pages/</loc>
+    
+    <lastmod>2021-02-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/11/22/cloudflare-hsts/</loc>
+    
+    <lastmod>2021-03-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/11/21/cloudflare-html-cache/</loc>
+    
+    <lastmod>2020-11-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/11/12/caddy2-pre-compressed/</loc>
+    
+    <lastmod>2022-05-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/10/21/busybox-httpd-aws/</loc>
+    
+    <lastmod>2020-10-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/08/30/override-smartypants-marked/</loc>
+    
+    <lastmod>2020-08-30</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/08/19/snap-node-spawn/</loc>
+    
+    <lastmod>2020-08-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/07/31/dedup-array-object-javascript/</loc>
+    
+    <lastmod>2020-07-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/07/18/git-sign-commit-ed25519/</loc>
+    
+    <lastmod>2020-07-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/07/11/dns-filtering/</loc>
+    
+    <lastmod>2020-09-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/07/07/phishing-filter/</loc>
+    
+    <lastmod>2020-07-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/06/03/onion-location-redirect/</loc>
+    
+    <lastmod>2020-07-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/05/24/caddy-v2-nixos/</loc>
+    
+    <lastmod>2020-11-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/05/23/caddy-upgrade-v2-proxy/</loc>
+    
+    <lastmod>2021-02-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/04/21/gitlab-github-mirror/</loc>
+    
+    <lastmod>2020-04-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/03/21/i2p-eepsite-nixos/</loc>
+    
+    <lastmod>2020-11-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/03/16/tor-hidden-onion-nixos/</loc>
+    
+    <lastmod>2022-08-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/03/14/caddy-nixos-part-3/</loc>
+    
+    <lastmod>2022-07-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/03/04/caddy-nixos-part-2/</loc>
+    
+    <lastmod>2022-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/02/23/caddy-nixos-part-1/</loc>
+    
+    <lastmod>2021-02-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2020/01/20/how-to-use-camaro-xml/</loc>
+    
+    <lastmod>2020-01-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/12/30/unit-testing-jest/</loc>
+    
+    <lastmod>2020-09-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/12/08/github-referer-firefox/</loc>
+    
+    <lastmod>2019-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/10/03/git-ssh-gitlab-ci/</loc>
+    
+    <lastmod>2020-04-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/09/26/rhythmbox-aac/</loc>
+    
+    <lastmod>2019-09-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/about/</loc>
+    
+    <lastmod>2022-08-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/09/05/cloudflare-registrar/</loc>
+    
+    <lastmod>2019-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/08/12/firefox-containers/</loc>
+    
+    <lastmod>2019-08-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/06/28/view-image-dark-reader-firefox/</loc>
+    
+    <lastmod>2019-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/disclaimer/</loc>
+    
+    <lastmod>2019-06-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/06/09/engadget-redirect-guce/</loc>
+    
+    <lastmod>2019-06-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/06/01/embed-svg-img/</loc>
+    
+    <lastmod>2020-08-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/05/25/firefox-doh-cloudflare/</loc>
+    
+    <lastmod>2019-05-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/04/07/firefox-instances-profiles/</loc>
+    
+    <lastmod>2019-08-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/04/04/doh-tls-privacy/</loc>
+    
+    <lastmod>2019-04-04</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/02/28/aliexpress-no-login-firefox/</loc>
+    
+    <lastmod>2019-04-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/02/09/statistical-test/</loc>
+    
+    <lastmod>2019-02-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/01/15/replace-truecrypt-keepassx-adblock-plus/</loc>
+    
+    <lastmod>2019-01-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/01/12/microg-google-play-replacement/</loc>
+    
+    <lastmod>2021-09-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/01/07/recommended-android-apps/</loc>
+    
+    <lastmod>2021-06-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2019/01/05/make-pdf-files-smaller/</loc>
+    
+    <lastmod>2019-01-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/12/31/facebook-instagram-whatsapp-china/</loc>
+    
+    <lastmod>2019-10-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/11/10/hexo-blog-github/</loc>
+    
+    <lastmod>2020-11-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/11/08/unix-tools-line-endings/</loc>
+    
+    <lastmod>2018-11-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/31/snyk-patch-alpine-docker/</loc>
+    
+    <lastmod>2019-03-09</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/31/word-break-limesurvey/</loc>
+    
+    <lastmod>2018-10-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/25/validity-gitlab-ci-config/</loc>
+    
+    <lastmod>2018-10-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/24/disable-control-alt-s-mate-shortcut/</loc>
+    
+    <lastmod>2018-10-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/24/running-locally-installed-node-packages/</loc>
+    
+    <lastmod>2018-10-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/18/edit-multiple-questions-limesurvey/</loc>
+    
+    <lastmod>2018-10-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/14/spellcheck-language-ghostwriter/</loc>
+    
+    <lastmod>2019-06-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/13/gnu-vs-busybox-tools/</loc>
+    
+    <lastmod>2021-04-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/10/binaries-alpine-docker/</loc>
+    
+    <lastmod>2021-01-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/02/hide-folders-caja-side-pane/</loc>
+    
+    <lastmod>2018-10-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/10/01/secure-node-modules-snyk/</loc>
+    
+    <lastmod>2019-06-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/09/28/make-hexo-blog-smaller/</loc>
+    
+    <lastmod>2018-10-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/09/26/how-to-remove-windows-10-default-apps/</loc>
+    
+    <lastmod>2019-03-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/blog/2018/09/21/how-to-create-a-hexo-blog/</loc>
+    
+    <lastmod>2020-11-17</lastmod>
+    
+  </url>
+  
+
+  
+  <url>
+    <loc>https://mdleom.com/</loc>
+    <lastmod>2024-02-24</lastmod>
+  </url>
+
+  
+  <url>
+    <loc>https://mdleom.com/blog/</loc>
+    <lastmod>2024-02-24</lastmod>
+   </url>
+  
+  
+  <url>
+    <loc>https://mdleom.com/tags/firefox/</loc>
+    <lastmod>2019-04-29</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/aws/</loc>
+    <lastmod>2021-09-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/security/</loc>
+    <lastmod>2021-09-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/aws-config/</loc>
+    <lastmod>2021-09-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/linux/</loc>
+    <lastmod>2021-01-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/alpine/</loc>
+    <lastmod>2021-01-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/busybox/</loc>
+    <lastmod>2021-01-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/server/</loc>
+    <lastmod>2021-02-22</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/caddy/</loc>
+    <lastmod>2021-02-22</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/nixos/</loc>
+    <lastmod>2021-02-22</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/cloudflare/</loc>
+    <lastmod>2022-07-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/zsh/</loc>
+    <lastmod>2023-07-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/powershell/</loc>
+    <lastmod>2023-07-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/javascript/</loc>
+    <lastmod>2020-07-31</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/privacy/</loc>
+    <lastmod>2019-04-04</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/doh/</loc>
+    <lastmod>2019-04-04</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/tor/</loc>
+    <lastmod>2021-07-04</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/stats/</loc>
+    <lastmod>2018-10-26</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/limesurvey/</loc>
+    <lastmod>2018-10-26</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/svg/</loc>
+    <lastmod>2020-08-29</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/web/</loc>
+    <lastmod>2020-08-29</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/censorship/</loc>
+    <lastmod>2019-10-23</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/gitlab/</loc>
+    <lastmod>2020-07-18</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/manjaro/</loc>
+    <lastmod>2022-11-27</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/arch/</loc>
+    <lastmod>2022-11-27</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/luks/</loc>
+    <lastmod>2022-11-27</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/hexo/</loc>
+    <lastmod>2020-11-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/netlify/</loc>
+    <lastmod>2020-11-17</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/windows/</loc>
+    <lastmod>2019-03-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/i2p/</loc>
+    <lastmod>2020-11-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/splunk/</loc>
+    <lastmod>2024-01-05</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/pdf/</loc>
+    <lastmod>2019-01-05</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/android/</loc>
+    <lastmod>2021-09-18</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/nginx/</loc>
+    <lastmod>2021-12-25</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/oci/</loc>
+    <lastmod>2021-03-09</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/media/</loc>
+    <lastmod>2019-09-26</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/node-js/</loc>
+    <lastmod>2018-10-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/sso/</loc>
+    <lastmod>2023-08-27</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/servicenow/</loc>
+    <lastmod>2023-08-27</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/azure-ad/</loc>
+    <lastmod>2023-08-27</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/snyk/</loc>
+    <lastmod>2019-06-11</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://mdleom.com/tags/markdown/</loc>
+    <lastmod>2019-06-06</lastmod>
+  </url>
+  
+</urlset>
