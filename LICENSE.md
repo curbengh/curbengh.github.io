@@ -1,7 +1,7 @@
 MIT License
 
-Copyright (c) 2016-2018 GeekPlux <geekplux@gmail.com> (Typing theme)
-Copyright (c) 2018-2022 Ming Di Leom
+Copyright (c) 2016-2018 GeekPlux <geekplux@gmail.com> ([Typing](https://github.com/geekplux/hexo-theme-typing) theme)
+Copyright (c) 2018-2024 Ming Di Leom
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
