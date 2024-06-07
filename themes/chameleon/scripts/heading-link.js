@@ -3,20 +3,22 @@
 
 /*
 * Add Link button next to a heading
+* based on https://github.com/hexojs/hexo-renderer-marked/blob/master/lib/renderer.js
 */
 
-const { slugize, stripHTML } = require('hexo-util')
+const { slugize, stripHTML, unescapeHTML: unescape } = require('hexo-util')
 
 const anchorId = (str, transformOption) => {
-  return slugize(str.trim(), { transform: transformOption })
+  return slugize(stripHTML(unescape(str)).trim(), { transform: transformOption });
 }
 
 hexo.extend.filter.register('marked:renderer', function (renderer) {
   const { config } = this
   renderer.heading = function (text, level) {
-    const transformOption = config.marked.modifyAnchors
-    let id = anchorId(stripHTML(text), transformOption)
-    const headingId = this._headingId
+    const { modifyAnchors } = config.marked
+    const transformOption = modifyAnchors;
+    let id = anchorId(text, transformOption)
+    const headingId = {};
 
     // Add a number after id if repeated
     if (headingId[id]) {
