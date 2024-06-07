@@ -15,12 +15,11 @@ jobs:
         with:
           node-version-file: ".nvmrc"
       - name: Cache NPM dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.OS }}-npm-cache
-          restore-keys: |
-            ${{ runner.OS }}-npm-cache
+          key: ${{ runner.os }}-npm-cache
+          restore-keys: ${{ runner.os }}-npm-cache
       - name: Install Dependencies
         run: npm install --include=optional --force
       - name: Build
