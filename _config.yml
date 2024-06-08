@@ -112,3 +112,5 @@ minify:
   svg:
     plugins:
       cleanupIds: false
+  zstd:
+    enable: true
