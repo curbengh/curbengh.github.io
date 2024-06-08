@@ -76,20 +76,14 @@ updated_option: empty
 per_page: 10
 pagination_dir: page
 
+marked:
+  descriptionLists: false
+  modifyAnchors: 1
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: chameleon
-
-# https://github.com/curbengh/hexo-yam
-minify:
-  svg:
-    plugins:
-      cleanupIds: false
-
-marked:
-  descriptionLists: false
-  modifyAnchors: 1
 
 feed:
   icon: "/svg/favicon.svg"
@@ -112,3 +106,9 @@ theme_config:
 
   # Load forkawesome icons?
   icons: false
+
+# https://github.com/curbengh/hexo-yam
+minify:
+  svg:
+    plugins:
+      cleanupIds: false
