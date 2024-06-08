@@ -9,16 +9,16 @@
 const { slugize, stripHTML, unescapeHTML: unescape } = require('hexo-util')
 
 const anchorId = (str, transformOption) => {
-  return slugize(stripHTML(unescape(str)).trim(), { transform: transformOption });
+  return slugize(stripHTML(unescape(str)).trim(), { transform: transformOption })
 }
 
 hexo.extend.filter.register('marked:renderer', function (renderer) {
   const { config } = this
+  const headingId = {}
   renderer.heading = function (text, level) {
     const { modifyAnchors } = config.marked
-    const transformOption = modifyAnchors;
+    const transformOption = modifyAnchors
     let id = anchorId(text, transformOption)
-    const headingId = {};
 
     // Add a number after id if repeated
     if (headingId[id]) {
