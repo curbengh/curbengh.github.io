@@ -148,7 +148,7 @@ On your GitLab repository, navigate to **Settings** -> **CI / CD** -> **Variable
 
 ![CI variable](20200421/ci-variable.png)
 
-Add another Var variable named `SSH_KNOWN_HOSTS` and the output of `ssh-keyscan github.com 2>&1 | grep -vE '^#'`. I explained the necessity of this step in [previous section](#Add-GitLab-and-Github-as-trusted-hosts).
+Add another Var variable named `SSH_KNOWN_HOSTS` and the output of `ssh-keyscan github.com 2>&1 | grep -vE '^#'`. I explained the necessity of this step in [previous section](#add-gitLab-and-github-as-trusted-hosts).
 
 Add a new job named `mirror` in your repository's **.gitlab-ci.yml**. Optionally, you could move _Import SSH key_ step to `before_script` if preferred, it does not make any practical difference. However, if you want to use _Update GitHub mirror_ step in `after_script`, _Import SSH key_  has to be moved there as well--`before_script` and `script` are executed in the same shell, while `after_script` is executed in a [_different_ shell](https://docs.gitlab.com/ee/ci/yaml/#before_script-and-after_script).
 
@@ -195,4 +195,3 @@ mirror:
     - if: '$CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "web"'
       when: always
 ```
-

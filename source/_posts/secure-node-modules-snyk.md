@@ -11,9 +11,9 @@ tags:
 ---
 
 ## Intro
-> Click [here](#Installation) to go straight to installation guide.
+> Click [here](#installation) to go straight to installation guide.
 
-Node.js is infamous for the [left-pad](https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068) [controversy](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), removing just a single package can break many websites. 
+Node.js is infamous for the [left-pad](https://medium.com/commitlog/the-internet-is-at-the-mercy-of-a-handful-of-people-73fac4bc5068) [controversy](https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm), removing just a single package can break many websites.
 
 The package dependency can also cause security issue ([example 1](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes), [example 2](https://blog.npmjs.org/post/173526807575/reported-malicious-module-getcookies), [example 3](https://blog.npmjs.org/post/185397814280/plot-to-steal-cryptocurrency-foiled-by-the-npm)).
 
@@ -37,10 +37,10 @@ So, you fork, fix it and republish with a new name. Cool. Here comes the fun par
 Practically, you can use Snyk to patch it, *if* possible like this [hexo-all-minifier](https://snyk.io/test/npm/hexo-all-minifier). Snyk is [free](https://snyk.io/plans) for open-source projects. Much like any other security products, Snyk is not a silver bullet to the NodeJS issue. Some like [hexo-fs](https://snyk.io/test/npm/hexo-fs) can't be fixed (at the time of writing).
 
 1. [Sign up](https://app.snyk.io/signup) for a new Snyk account.
-2. Snyk only supports [SSO](https://en.wikipedia.org/wiki/Single_sign-on), no e-mail sign up. You need to have GitHub, Bitbucket, or Google account. It can be a separate account from your current GitHub account. Linking your current GitHub repo to Snyk is *optional*. 
+2. Snyk only supports [SSO](https://en.wikipedia.org/wiki/Single_sign-on), no e-mail sign up. You need to have GitHub, Bitbucket, or Google account. It can be a separate account from your current GitHub account. Linking your current GitHub repo to Snyk is *optional*.
 3. Once you signed up, go to your account setting, grab the API token and save it in your password manager (or somewhere safe).
 ![Snyk API token](20181001/snyk-api.png)
-4. Install Snyk, 
+4. Install Snyk,
 ```bash
 $ npm install snyk
 # Add 'node_modules/.bin' to $PATH, if you haven't done so. Check ~/.profile before running the following command.

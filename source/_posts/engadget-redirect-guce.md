@@ -7,7 +7,7 @@ tags:
 - web
 ---
 
-> Skip to [solution](#Block-cookie).
+> Skip to [solution](#block-cookie).
 
 Whenever I try to open an Engadget article, it will automatically redirect me to `guce.advertising.com/...` which is (thankfully) blocked by uBO.
 

@@ -19,7 +19,7 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 3. Shared Runners should be enabled. Go to your (forked) project `Settings -> CI / CD -> Shared Runners`.
 4. Change project website to a user website. This is so that the website's home page is <b>*username*.gitlab.io</b>, instead of username.gitlab.io/hexo.
     Go to `Settings -> General -> Advanced -> Change path`. Change the value to <b>*username*.gitlab.io</b>, where username is your username on GitLab.
-5. You can start writing a new post straight away without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#Naming)).
+5. You can start writing a new post straight away without [installing](#installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
     1. To create a new post (through GitLab.com), create a new `<post-title>.md` file in `source/_posts` folder.
     2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
@@ -40,7 +40,7 @@ Create a website/blog using Hexo on [GitLab Pages](https://about.gitlab.com/feat
 1. Having Hexo means you can debug locally, rather than waiting for [CI](https://docs.gitlab.com/ee/ci/). You can even run a local server to preview your blog (see step 6 below).
 2. Clone your repo to your workstation.
 3. Install Node.js and Hexo using the [official guide](https://hexo.io/docs/).
-4. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
+4. Create a [new post](#writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 
 ```
 $ hexo generate
@@ -67,7 +67,7 @@ $ git push -u
     3. The config now has two parts. To use in gitlab page, simply uncomment the second part and comment out the first part.
     4. Make sure you {% post_link validity-gitlab-ci-config 'double-check' %} the CI config before you push.
 
-8. Check the build status by going to your project `CI /CD -> Pipelines`. Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
+8. Check the build status by going to your project `CI /CD -> Pipelines`. Due to the limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`.
 9.  If there is no error, the generated website can be accessed on `<your-username>.gitlab.io/` or the link shown on your project `Settings -> Pages`.
 
 ## Writing
@@ -109,8 +109,8 @@ Change the theme's setting:
 menu:
   GitLab: <your-gitlab-project-link>
 # Customize /about page
-nickname: 
-description: 
+nickname:
+description:
 ```
 
 ### Favicon
@@ -131,7 +131,7 @@ If you prefer to have a project page on GitLab:
 1. Commit and push.
 
 ### Remove fork relationship
-If you don't have any plan to send merge requests to the upstream, you can remove fork relationship permanently by going to `Settings -> General -> Advanced -> Remove fork relationship`. 
+If you don't have any plan to send merge requests to the upstream, you can remove fork relationship permanently by going to `Settings -> General -> Advanced -> Remove fork relationship`.
 
 ## Useful links:
 Configuration files for this blog deployment:

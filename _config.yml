@@ -81,16 +81,15 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: chameleon
 
-# hexo-yam
-## https://github.com/curbengh/hexo-yam
+# https://github.com/curbengh/hexo-yam
 minify:
   svg:
     plugins:
       cleanupIds: false
 
 marked:
-  # https://github.com/hexojs/hexo-renderer-marked/pull/179
   descriptionLists: false
+  modifyAnchors: 1
 
 feed:
   icon: "/svg/favicon.svg"

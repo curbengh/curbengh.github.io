@@ -74,7 +74,7 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
   * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80.
 5. `address` is location of your server where the Eepsite is hosted. For most use cases, set it to the loopback **127.0.0.1** (default). In my case, it is the IPv6 loopback "::1".
 6. `destination` is the location of your website where Eeepsite will forward the request to. It can be a loopback (if website and Eepsite are hosted within the same server), an IP address, a domain or even another eepsite.
-  * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. For separation of privilege, it is recommended to have a web server that is dedicated for Eepsite only. The [next section](#caddyI2p.nix) shows how to set up the web server.
+  * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. For separation of privilege, it is recommended to have a web server that is dedicated for Eepsite only. The [next section](#caddyi2pnix) shows how to set up the web server.
 7. `port` is the port number that your web server listens to.
 8. `enableIPv4` and `enableIPv6` are optional. I enable both.
 9. (Optional) If your website is not behind a CDN, meaning the server's IP address is publicly known (in DNS A/AAAA record), I recommend setting both `inbound.length` and `outbound.length` to 1 (from the default 3). This can significantly decrease the latency of your Eepsite by reducing the hops. This [diagram](https://geti2p.net/en/faq#slow) illustrates the effect of hops.
@@ -113,7 +113,7 @@ $ head -c 391 <name>-keys.dat | sha256sum | cut -f1 -d\  | xxd -r -p | base64 | 
 
 ## caddyI2p.nix
 
-I set up another Caddy-powered reverse proxy which is separate from the {% post_link caddy-nixos-part-3 "mdleom.com's" %}. It's similar to [caddyTor.nix](/blog/2020/03/16/tor-hidden-onion-nixos/#caddyTor.nix) (which in turn is based on [caddyProxy.nix](/blog/2020/03/14/caddy-nix-part-3/#caddyProxy.nix)), except I replace "caddyTor" with "caddyI2p". This Nix file exposes `services.caddyI2p` so that I can enable the I2p-dedicated Caddy service from "configuration.nix".
+I set up another Caddy-powered reverse proxy which is separate from the {% post_link caddy-nixos-part-3 "mdleom.com's" %}. It's similar to [caddyTor.nix](/blog/2020/03/16/tor-hidden-onion-nixos/#caddytornix) (which in turn is based on [caddyProxy.nix](/blog/2020/03/14/caddy-nix-part-3/#caddyproxynix)), except I replace "caddyTor" with "caddyI2p". This Nix file exposes `services.caddyI2p` so that I can enable the I2p-dedicated Caddy service from "configuration.nix".
 
 ``` plain /etc/caddy/caddyI2p.nix
 { config, lib, pkgs, ... }:
@@ -227,9 +227,9 @@ http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p:8081 http://
 }
 ```
 
-Update the B32 address as per the value derived from the [previous section](#B32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service as a shortcut to my B32 address (see [next section](#Register-domain-i2p) for guide). HTTPS is disabled by specifying `http://` prefix, HTTPS is not applicable since Eepsite already encrypts the traffic. No CA is going to validate your .i2p anyway. `strict-transport-security` (HSTS) needs to be removed to prevent the browser from attempting to connect to HTTPS. It binds to IPv6 loopback so it only listens to localhost, use `bind 127.0.0.1 ::1` if you need IPv4.
+Update the B32 address as per the value derived from the [previous section](#b32-address). `mdleom.i2p` is my I2P domain that I registered with a jump service as a shortcut to my B32 address (see [next section](#register-domaini2p) for guide). HTTPS is disabled by specifying `http://` prefix, HTTPS is not applicable since Eepsite already encrypts the traffic. No CA is going to validate your .i2p anyway. `strict-transport-security` (HSTS) needs to be removed to prevent the browser from attempting to connect to HTTPS. It binds to IPv6 loopback so it only listens to localhost, use `bind 127.0.0.1 ::1` if you need IPv4.
 
-The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos/#caddyTor.conf)" and "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
+The rest are similar to "[caddyTor.conf](/blog/2020/03/16/tor-hidden-onion-nixos/#caddytorconf)" and "[caddyProxy.conf](/blog/2020/03/14/caddy-nix-part-3/#complete-caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#complete-caddyfile).
 
 ``` plain /etc/caddy/caddyI2p.conf
 import common.conf

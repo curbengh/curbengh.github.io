@@ -33,9 +33,9 @@ Stop included games like Candy Crush and Minecraft to reappear after you remove 
 
 
 ## Uninstall all preinstalled apps
-This is the easiest method to remove all preinstalled apps. Note: this will remove **ALL** apps listed at the next [section](#Uninstall-specific-preinstalled-app).
+This is the easiest method to remove all preinstalled apps. Note: this will remove **ALL** apps listed at the next [section](#uninstall-specific-preinstalled-app).
 1. Launch PowerShell as administrator (right click `Run as administrator`).
-    1.1. Windows 10 Home user might not have it, install [here](https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6). 
+    1.1. Windows 10 Home user might not have it, install [here](https://docs.microsoft.com/en-us/powershell/scripting/setup/installing-powershell-core-on-windows?view=powershell-6).
 2. Run the following command:
   ```
   Get-AppxPackage -AllUsers | Remove-AppxPackage
@@ -95,7 +95,7 @@ Your Phone | yourphone
 
 ## Prevent removed default apps from returning during an update
 1. No, you are not done yet. Those removed apps can return during an update.
-2. To make sure they stay removed, create a registry `.reg` file ([how-to](#Windows-10-Home)). Remove any entry to keep the app.
+2. To make sure they stay removed, create a registry `.reg` file ([how-to](#windows-10-home)). Remove any entry to keep the app.
   ```
   Windows Registry Editor Version 5.00
   ;1709 Registry Keys
@@ -187,8 +187,7 @@ On a side note, version 1809 (October 2018 Update) is able to uninstall:
 - Tips
 - Weather
 
-**Update (*01/03/2019*):** Windows 10 version 1809 (released in October 2018) includes Your Phone app. [Instruction](#Uninstall-specific-preinstalled-app) has been updated.
+**Update (*01/03/2019*):** Windows 10 version 1809 (released in October 2018) includes Your Phone app. [Instruction](#uninstall-specific-preinstalled-app) has been updated.
 
 
 Source: [1](https://www.howtogeek.com/224798/how-to-uninstall-windows-10s-built-in-apps-and-how-to-reinstall-them/), [2](https://www.addictivetips.com/windows-tips/remove-default-windows-10-apps-using-powershell/), [3](https://docs.microsoft.com/en-us/windows/application-management/remove-provisioned-apps-during-update), [4](https://docs.microsoft.com/en-gb/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services)
-

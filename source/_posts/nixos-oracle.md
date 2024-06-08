@@ -9,7 +9,7 @@ tags:
 - oci
 ---
 
-> Skip to [first step](#Build-a-kexec-tarball)
+> Skip to [first step](#build-a-kexec-tarball)
 
 A few weeks ago, there was an active discussion on [HN](http://news.ycombinator.com/item?id=26239711) about the [Free For Dev](https://free-for.dev/) page which compile a list of free tier (or at least free _trial_) resources that are useful for developers. The page mentioned Oracle Cloud provides two _always free_ VMs ([specification](https://docs.oracle.com/en-us/iaas/Content/FreeTier/resourceref.htm#ariaid-title2)), whereas big three only offer one VM for a year. While I knew about this offering for a while, but I've always been sceptical about it.
 
@@ -205,7 +205,7 @@ ssh root@somehost
 
 ## Installation
 
-This installation is slightly different from the [usual steps](/blog/2020/02/23/caddy-nixos-part-1/#Installation).
+This installation is slightly different from the [usual steps](/blog/2020/02/23/caddy-nixos-part-1/#installation).
 
 ### Partition
 
@@ -242,7 +242,7 @@ Type: uefi
 # Verify
 Command: p
 Disk /dev/sda: 46.58 GiB, 50010783744 bytes, 97677312 sectors
-Disk model: BlockVolume     
+Disk model: BlockVolume
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 4096 bytes
 I/O size (minimum/optimal): 4096 bytes / 1048576 bytes

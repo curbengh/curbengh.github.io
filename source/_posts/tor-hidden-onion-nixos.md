@@ -68,7 +68,7 @@ The first step is to bring up a Tor hidden service to get an onion address. Add 
   * There is no need to grant CAP_NET_BIND_SERVICE capability nor open port 80. Tor has NAT traversal capability and can function without opening any inbound port.
   * Add port 443 if your onion service is also available in HTTPS; I wrote {% post_link ecdsa-tls-tor-caddy 'a guide' %} on purchasing a .onion SSL certificate and the subsequent configuration.
 5. `toHost` is location of your web server. In my case, it is the IPv6 loopback **[::1]**. If your server supports IPv4 (mine doesn't), you can set it to "127.0.0.1" or "localhost". If it's an IPv6 address, you need to wrap the address with square brackets **[]**.
-  * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. Tor recommends to have a separate web server that is dedicated for Tor hidden service only. The [next section](#caddyTor.nix) shows how to set up the web server.
+  * You can even set your domain here and skip the rest of the sections. However, this can double the latency, especially if the website is behind a CDN. Tor recommends to have a separate web server that is dedicated for Tor hidden service only. The [next section](#caddytornix) shows how to set up the web server.
 6. `toPort` is the port number that your web server listens to.
 7. `extraConfig` is optional. The options I use here are only applicable if the server is IPv6 only.
 
@@ -82,7 +82,7 @@ Run `# nixos-rebuild switch` and three important files will be generated in the 
 
 ## caddyTor.nix
 
-I set up another Caddy-powered reverse proxy which is separate from the {% post_link caddy-nixos-part-3 "mdleom.com's" %}. It's similar to [caddyProxy.nix](/blog/2020/03/14/caddy-nix-part-3/#caddyProxy.nix), except I replace "caddyProxy" with "caddyTor". This Nix file exposes `services.caddyTor` so that I can enable the Tor-related Caddy service from "configuration.nix".
+I set up another Caddy-powered reverse proxy which is separate from the {% post_link caddy-nixos-part-3 "mdleom.com's" %}. It's similar to [caddyProxy.nix](/blog/2020/03/14/caddy-nix-part-3/#caddyproxynix), except I replace "caddyProxy" with "caddyTor". This Nix file exposes `services.caddyTor` so that I can enable the Tor-related Caddy service from "configuration.nix".
 
 ``` nix /etc/caddy/CaddyTor.nix
 { config, lib, pkgs, ... }:
@@ -204,9 +204,9 @@ http://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion:8080 {
 }
 ```
 
-Update the onion address to the value shown in "[/var/lib/tor/onion/myOnion/hostname](#configuration.nix)". HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Tor hidden service already encrypts the traffic. Let's Encrypt doesn't support validating a .onion address. The only way is to purchase the cert from [Digicert](https://www.digicert.com/blog/ordering-a-onion-certificate-from-digicert/). Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
+Update the onion address to the value shown in "/var/lib/tor/onion/myOnion/hostname". HTTPS is disabled by specifying `http://` prefix, HTTPS is not necessary as Tor hidden service already encrypts the traffic. Let's Encrypt doesn't support validating a .onion address. The only way is to purchase the cert from [Digicert](https://www.digicert.com/blog/ordering-a-onion-certificate-from-digicert/). Since HTTPS is not enabled, `strict-transport-security` (HSTS) no longer applies and the header needs to be removed to prevent the browser from attempting to connect to `https://`. It binds to IPv6 loopback so it only listens to localhost, specify `bind 127.0.0.1 ::1` if you need IPv4.
 
-The rest are similar to "[caddyProxy.conf](blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#Complete-Caddyfile).
+The rest are similar to "[caddyProxy.conf](blog/2020/03/14/caddy-nix-part-3/#complete-caddyfile)". Content of "common.conf" is available at [this section](/blog/2020/03/14/caddy-nix-part-3/#complete-caddyfile).
 
 ``` Caddyfile /etc/caddy/caddyTor.conf
 import common.conf

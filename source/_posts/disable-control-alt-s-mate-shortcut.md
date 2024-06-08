@@ -8,7 +8,7 @@ tags:
 
 Control+Alt+S shortcut is used for toggling shaded state in MATE desktop environment. Once toggled, a window's content is hidden except for the title bar. It's useful for peeking at the content behind a window. I personally never use it as I usually just Alt+Tab or place two windows side by side. I prefer to disable it so I can use the 'Save As' shortcut in Notepad++.
 
-There are two methods of disabling the shortcut. Use the [second](#Method-2) method if Compiz is enabled with CCSM (CompizConfig Settings Manager).
+There are two methods of disabling the shortcut. Use the [second](#method-2) method if Compiz is enabled with CCSM (CompizConfig Settings Manager).
 
 ## Method 1
 

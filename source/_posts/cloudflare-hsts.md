@@ -11,7 +11,7 @@ tags:
 HTTP Strict Transport Security ([HSTS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)) preload is used to instruct browsers to always use HTTPS for your website. Browsers will initiate and connect to any site in the preloaded HSTS list through HTTPS only. The list is currently maintained by [Chromium](https://cs.chromium.org/chromium/src/net/http/transport_security_state_static.json) (GitHub mirror [link](https://github.com/chromium/chromium/raw/master/net/http/transport_security_state_static.json)) and the list is utilised by all [supported](https://caniuse.com/stricttransportsecurity) browsers. Eligible website can request to be included at [hstspreload.org](https://hstspreload.org/). In order to be accepted to the HSTS preload list through this form, your site must satisfy the following set of requirements:
 
 1. Serve a valid certificate.
-2. Redirect from HTTP to HTTPS on the **same host**, if you are listening on port 80. (see [next section](#Redirect))
+2. Redirect from HTTP to HTTPS on the **same host**, if you are listening on port 80. (see [next section](#redirect))
 3. Serve all subdomains over HTTPS.
     1. In particular, you must support HTTPS for the **www** subdomain if a DNS record for that subdomain exists.
 4. Serve an HSTS header on the base domain for HTTPS requests:
@@ -72,7 +72,7 @@ This website is now included in the Chromium's preload list after I submitted a 
 
 ```
 $ curl -L https://github.com/chromium/chromium/raw/master/net/http/transport_security_state_static.json -o hsts-chromium.json
-$ grep mdleom.com hsts-chromium.json 
+$ grep mdleom.com hsts-chromium.json
   { "name": "mdleom.com", "policy": "bulk-1-year", "mode": "force-https", "include_subdomains": true },
 ```
 

@@ -44,7 +44,7 @@ deploy:
   local-dir: public
 ```
 
-10. You can start writing a new post straightaway without [installing](#Installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
+10. You can start writing a new post straightaway without [installing](#installation) Hexo. You still need to change the blog's name and favicon though ([how-to](#naming)).
     1. To create a new post (through [GitHub.com](https://help.github.com/en/articles/creating-new-files)), create a new `<post-title>.md` file in `source/_posts` folder.
     2. Start with the following header/[front-matter](https://hexo.io/docs/front-matter):
 
@@ -65,7 +65,7 @@ deploy:
 1. Having Hexo means you can debug locally, rather than waiting for [Travis](https://travis-ci.com/). You can even run a local server to preview your blog (see step 6 below).
 2. Clone your repo to your workstation.
 3. Install Node.js and Hexo using the [official guide](https://hexo.io/docs/).
-4. Create a [new post](#Writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
+4. Create a [new post](#writing). Then generate static files to check for any error. You should always do this before pushing/merging commits to the `master` branch.
 
 ```bash
 $ hexo generate
@@ -85,7 +85,7 @@ $ git commit -a -m 'Commit Message'
 $ git push -u
 ```
 
-7. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to a limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`. 
+7. Check the build status by going to your project in [Travis](https://travis-ci.com/). Due to a limitation of `hexo`, the build will always pass even when there is error. Check the Jobs log, look for any error after `$ hexo deploy`.
 8.  If there is no error, the generated website can be accessed on <b>*username*.github.io</b>
 
 ## Writing
@@ -129,8 +129,8 @@ author:
 menu:
   GitHub: <your-github-project-link>
 # Customize /about page
-nickname: 
-description: 
+nickname:
+description:
 ```
 
 ### Favicon

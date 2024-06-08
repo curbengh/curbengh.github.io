@@ -8,7 +8,7 @@ tags:
 - nixos
 ---
 
-> [Previous method](#Custom-package) no longer works on 22.11. Refer to [xcaddy](#xcaddy) section instead.
+> [Previous method](#custom-package) no longer works on 22.11. Refer to [xcaddy](#xcaddy) section instead.
 
 Caddy, like any other web servers, is extensible through plugins. Plugin is usually installed using [xcaddy](https://github.com/caddyserver/xcaddy); using it is as easy as `$ xcaddy build --with github.com/caddyserver/ntlm-transport` to build the latest caddy binary with [ntlm-transport](https://github.com/caddyserver/ntlm-transport) plugin.
 
@@ -173,4 +173,4 @@ If you prefer to specify a version, modify the following lines:
   ${xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
 ```
 
-To install the above package, use the same config shown in the [Install custom package](#Install-custom-package) but remove the `vendorSha256` line. Remember to `nixos-rebuild` again.
+To install the above package, use the same config shown in the [Install custom package](#install-custom-package) but remove the `vendorSha256` line. Remember to `nixos-rebuild` again.

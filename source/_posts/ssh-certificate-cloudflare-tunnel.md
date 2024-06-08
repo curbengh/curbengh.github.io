@@ -93,7 +93,7 @@ Navigate to **Access** -> **Tunnels**
 **Route tunnel** tab,
 
 - Public hostname: test.yourdomain.com
-  - This is the application domain in the [Add an application](#Add-an-application) step.
+  - This is the application domain in the [Add an application](#add-an-application) step.
 - Service
   - SSH type: URL = localhost:22
     - Replace 22 with the custom SSH port you are going to use.
@@ -202,9 +202,9 @@ Save the output to `$HOME/.ssh/config`.
 
 Now, the moment of truth.
 
-`ssh loremipsum@test.yourdomain.com` (replace the username with the one you created in [Create a test user](#Create-a-test-user) step.)
+`ssh loremipsum@test.yourdomain.com` (replace the username with the one you created in [Create a test user](#create-a-test-user) step.)
 
-The terminal should launch a website to _team-name_.cloudflareaccess.com. Enter the email you configured in [Add an application](#Add-an-application) step and then enter the received 6-digit PIN.
+The terminal should launch a website to _team-name_.cloudflareaccess.com. Enter the email you configured in [Add an application](#add-an-application) step and then enter the received 6-digit PIN.
 
 Back to the terminal, wait for at least 5 seconds and you should see the usual SSH authentication.
 
@@ -212,7 +212,7 @@ Back to the terminal, wait for at least 5 seconds and you should see the usual S
 
 ## Browser-based shell
 
-As a bonus, head to test.yourdomain.com (see [Add an application](#Add-an-application) step) which will redirect you to a login page just the previous step. After login with a 6-digit PIN, you shall see a browser-based shell.
+As a bonus, head to test.yourdomain.com (see [Add an application](#add-an-application) step) which will redirect you to a login page just the previous step. After login with a 6-digit PIN, you shall see a browser-based shell.
 
 ## Usage monitoring
 

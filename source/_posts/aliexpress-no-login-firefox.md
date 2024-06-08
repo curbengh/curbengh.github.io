@@ -11,7 +11,7 @@ AliExpress login doesn't show up on Firefox when there is a strict cross-origin 
 
 ## Background
 
-> Click [**here**](#My-Orders) to go straight to the workarounds.
+> Click [**here**](#my-orders) to go straight to the workarounds.
 
 Firefox can restrict the referrer to the same origin only ([docs](https://wiki.mozilla.org/Security/Referrer)), by setting `network.http.referer.XOriginPolicy` value to 2 in `about:config`. Initially, I figured this would break many websites. But to my surprise, I have yet to encounter any issue; well, *except* for AliExpress.
 
@@ -36,7 +36,7 @@ From the Network inspection (`Ctrl + Shift + E`), `https://passport.aliexpress.c
 
 ## My Orders
 
-**Edit:** This step alone doesn't work anymore, requires resetting referer policy. See [next section](#Reset-referer-policy).
+**Edit:** This step alone doesn't work anymore, requires resetting referer policy. See [next section](#reset-referer-policy).
 
 To use the old login page, mouse-over on the **Account** link at the top right corner and click on **My Orders**. It should redirects to `https://login.aliexpress.com/...`
 

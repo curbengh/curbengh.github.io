@@ -11,7 +11,7 @@ tags:
 
 ## Intro
 
-> Skip to the [list](#List).
+> Skip to the [list](#list).
 
 Alpine Linux is known for its minimal size. The '[mini root filesystem](https://www.alpinelinux.org/downloads/)' flavour is only 2MB. This size makes it suitable as a Docker image, so CI job can start running script sooner instead of downloading larger image like Ubuntu.
 

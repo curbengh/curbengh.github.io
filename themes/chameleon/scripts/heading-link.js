@@ -9,7 +9,7 @@
 const { slugize, stripHTML, unescapeHTML: unescape } = require('hexo-util')
 
 const anchorId = (str, transformOption) => {
-  return slugize(stripHTML(unescape(str)).trim(), { transform: transformOption })
+  return slugize(stripHTML(unescape(str.replace('.', ''))).trim(), { transform: transformOption })
 }
 
 hexo.extend.filter.register('marked:renderer', function (renderer) {

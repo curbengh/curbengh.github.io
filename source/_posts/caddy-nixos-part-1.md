@@ -23,7 +23,7 @@ This post is Part 1 of a series of articles that show you how I set up Caddy, To
 
 ## Background
 
-> Skip to [Installation](#Installation) part.
+> Skip to [Installation](#installation) part.
 
 I set up this website with JAMstack architecture. Before moving to the current domain, I set four requirements:
 

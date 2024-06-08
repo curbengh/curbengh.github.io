@@ -397,7 +397,7 @@ _NixOS [defaults](https://nixos.wiki/wiki/Linux_kernel) to the latest LTS kernel
 
 Since my web server has limited disk space, it needs to run [garbage collector](https://nixos.org/nixos/manual/index.html#sec-nix-gc) from time to time.
 
-Since [unattended upgrade](#Unattended-upgrade) is executed on 00:00, I delay garbage collection to 01:00 to avoid time conflict. The order doesn't matter, but there should be at least 15 minutes buffer.
+Since [unattended upgrade](#unattended-upgrade) is executed on 00:00, I delay garbage collection to 01:00 to avoid time conflict. The order doesn't matter, but there should be at least 15 minutes buffer.
 
 ```nix
   ## Garbage collector

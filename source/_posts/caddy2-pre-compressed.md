@@ -13,7 +13,7 @@ Caddy v0.9.4+ and v1.0.0+ support pre-compressed gzip and brotli files automatic
 
 ## Default usage
 
-This configuration supports URL normalisation; when a URL has a trailing slash `http://localhost:8080/about/`, Caddy will serve `http://localhost:8080/about/index.html` using _internal/transparent_ redirect (without 301/302 redirect). If you need to internal redirect `http://localhost:8080/bio` to `http://localhost:8080/bio.html`, refer to the [next section](#Pretty-URLs).
+This configuration supports URL normalisation; when a URL has a trailing slash `http://localhost:8080/about/`, Caddy will serve `http://localhost:8080/about/index.html` using _internal/transparent_ redirect (without 301/302 redirect). If you need to internal redirect `http://localhost:8080/bio` to `http://localhost:8080/bio.html`, refer to the [next section](#pretty-urls).
 
 ``` plain Caddyfile
 http://localhost:8080 {

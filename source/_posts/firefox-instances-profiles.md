@@ -12,7 +12,7 @@ Running more than one Firefox instance allows you to use multiple cookies for a 
 
 For example, you are looking for item A and B at a shopping website using the private window but you prefer to keep the browsing separate as not to let the website knows that you are browsing both of them. Or you want to login to more than two accounts of a website.
 
-**Edit:** Similar functionality can be achieved by using [Multi-Account Containers](#Multi-Account-Containers).
+**Edit:** Similar functionality can be achieved by using [Multi-Account Containers](#multi-account-containers).
 
 A useful feature of Firefox is that it allows more than one profile, which otherwise would requires multiple operating system accounts. The feature even allows you to run multiple profiles at the same time by having multiple instances.
 

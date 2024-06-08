@@ -74,7 +74,7 @@ TIME_FORMAT = %s
 # MAX_DAYS_AGO = 3560
 ```
 
-The directive name should be the **sourcetype** value specified in the [inputs.conf](#App-specific-inputs-conf). The following configs apply to the universal forwarder is because [`INDEXED_EXTRACTIONS`](https://docs.splunk.com/Documentation/Splunk/latest/Data/Extractfieldsfromfileswithstructureddata#Field_extraction_settings_for_forwarded_structured_data_must_be_configured_on_the_forwarder) is used.
+The directive name should be the **sourcetype** value specified in the [inputs.conf](#uf-inputsconf). The following configs apply to the universal forwarder is because [`INDEXED_EXTRACTIONS`](https://docs.splunk.com/Documentation/Splunk/latest/Data/Extractfieldsfromfileswithstructureddata#Field_extraction_settings_for_forwarded_structured_data_must_be_configured_on_the_forwarder) is used.
 
 - LINE_BREAKER: Search for string that matches the regex and replace only the capturing group with newline (\n). This is to separate each event into separate line.
   - `}(,){\"datetime\"` searches for `},{"datetime"` and replaces "," with "\n".

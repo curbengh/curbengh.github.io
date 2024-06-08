@@ -14,7 +14,7 @@ series: true
 
 > 8 Jul 2022: Updated to Caddy 2.5 syntax.
 
-In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#Caddyfile) section.
+In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#caddyfile) section.
 
 This post is Part 2 of a series of articles that show you how I set up Caddy and Tor hidden service on NixOS:
 
@@ -59,7 +59,7 @@ caddy.nix grants `CAP_NET_BIND_SERVICE` capability which is not needed in my use
 
 ## caddyProxy.nix
 
-I created another nix file which is similar to "caddy.nix", but without `CAP_NET_BIND_SERVICE` capability. I also removed Let's Encrypt-related options since I'm using Cloudflare origin certificate. I renamed the `options.services.caddy` to `options.services.caddyProxy` to avoid clash with "caddy.nix". Save the file to "/etc/caddy/caddyProxy.nix" with root as owner. We'll revisit this file in "[configuration.nix](#configuration.nix)" section later in this guide.
+I created another nix file which is similar to "caddy.nix", but without `CAP_NET_BIND_SERVICE` capability. I also removed Let's Encrypt-related options since I'm using Cloudflare origin certificate. I renamed the `options.services.caddy` to `options.services.caddyProxy` to avoid clash with "caddy.nix". Save the file to "/etc/caddy/caddyProxy.nix" with root as owner. We'll revisit this file in "[configuration.nix](#configurationnix)" section later in this guide.
 
 ``` nix /etc/caddy/caddyProxy.nix
 { config, lib, pkgs, ... }:
@@ -182,7 +182,7 @@ Move the files to home folder of "caddyProxy" user, which is "/var/lib/caddyProx
 # chmod 600 /var/lib/caddyProxy/*
 ```
 
-If you followed my {% post_link caddy-nixos-part-2 'Part 2' %} guide, you should have `caddyProxy` user and group before executing chown and chmod. If you haven't, check out [this section](/blog/2020/03/04/caddy-nixos-part-2/#Run-each-service-as-different-user) of Part 2.
+If you followed my {% post_link caddy-nixos-part-2 'Part 2' %} guide, you should have `caddyProxy` user and group before executing chown and chmod. If you haven't, check out [this section](/blog/2020/03/04/caddy-nixos-part-2/#run-each-service-as-different-user) of Part 2.
 
 ### Initial setup
 
@@ -617,7 +617,7 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
 ## configuration.nix
 
-One last thing to do is to import "[caddyProxy.nix](#caddyProxy.nix)" and enable `services.caddyProxy`.
+One last thing to do is to import "[caddyProxy.nix](#caddyproxynix)" and enable `services.caddyProxy`.
 
 ``` nix /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyProxy.nix ];
