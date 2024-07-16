@@ -2,7 +2,12 @@
 title: Short Posts
 layout: page
 date: 2024-07-15
+updated: 2024-07-16
 ---
+
+## 16 Jul 2024
+
+If a scheduled task has been failing for a while and no one bats an eye, just disable it.
 
 ## 15 Jul 2024
 
