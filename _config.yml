@@ -94,6 +94,7 @@ theme_config:
   menu:
     Home: /
     Blog: /blog/
+    Short: /short/
     About: /about/
     Feed: /atom.xml
     GitLab: https://gitlab.com/curben/blog
