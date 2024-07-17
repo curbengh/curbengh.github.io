@@ -2,6 +2,7 @@
 title: CentOS Stream does not support dnf-automatic security updates
 excerpt: The repository lacks updateinfo to provide errata
 date: 2024-07-15
+updated: 2024-07-17
 tags:
   - centos
 ---
@@ -45,6 +46,8 @@ I remembered when dnf attempts to refresh a repository, the first thing it looks
 ```
 
 I also searched and discovered updateinfo is also available on [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/repodata/) and [Fedora](https://dl.fedoraproject.org/pub/fedora/linux/updates/40/Everything/x86_64/repodata/). Looking at Fedora's [repomd.xml], I learned that the updateinfo.xml is available in gzip, xzip and zchunk (`updateinfo_zck`) formats. By then, I was sure that dnf cannot apply security (nor [bugfix/feature](https://access.redhat.com/articles/explaining_redhat_errata))-specific updates in CentOS Stream.
+
+CentOS used to have updateinfo prior to CentOS 7; after it was removed in CentOS 7, there was a [third-party repository](https://updateinfo.cefs.steve-meier.de/) that filled the gap but it never supported CentOS Stream.
 
 ## Enable automatic updates
 
