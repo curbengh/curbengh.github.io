@@ -2,8 +2,12 @@
 title: Short Posts
 layout: page
 date: 2024-07-15
-updated: 2024-07-16
+updated: 2024-07-18
 ---
+
+## 18 Jul 2024
+
+At least 30% of `PUT` traffic in a Cloudtrail bucket is still TLS 1.2. Don't set [`minimum_tls_version=1.3`](https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_s3/Bucket.html) on that bucket yet.
 
 ## 16 Jul 2024
 
