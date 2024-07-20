@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2022-08-01
+updated: 2024-07-20
 ---
 
 ## About Me
@@ -58,15 +58,9 @@ More details are available in the following series of posts:
 
 ## Services
 
-- [Nitter](https://github.com/zedeus/nitter): A free and open source lightweight alternative Twitter front-end focused on privacy.
-  - [Onion](http://su7dlbyavmg5sailmmgkxdcazkqznnc7mr7ibcnr32ctduiqfb7pvkad.onion)
-  - [Eepsite](http://u6ikd6zndl3c4dsdq4mmujpntgeevdk5qzkfb57r4tnfeccrn2qa.b32.i2p)
 - [Teddit](https://codeberg.org/teddit/teddit): A free and open source alternative Reddit front-end focused on privacy.
   - [Onion](http://clnxvdfthhcmvwhauaadincmitimhawq7nee4dmqkk4nfkpfi3orsgad.onion)
   - [Eepsite](http://xugoqcf2pftm76vbznx4xuhrzyb5b6zwpizpnw2hysexjdn5l2tq.b32.i2p)
-- [Libreddit](https://github.com/spikecodes/libreddit): A private front-end for Reddit. No JavaScript, no ads, no tracking, no bloat.
-  - [Onion](http://f4x7ntxrmn4yc7immgqpdu6dt7kakz4i4bxrve7sdipg62lukrga5uad.onion)
-  - [Eepsite](http://gv47huyjz6esmu4q7ps6twvsn6pe7punuuzxa5cgwor2ubbt5jea.b32.i2p)
 - [SimplyTranslate](https://simple-web.org/projects/simplytranslate.html): Provide fast and private translations to the user without wasting much overhead for extensive styling or JavaScript. Supports Google Translate engine.
   - [Onion](http://fmgp3rg56ng6mtb5gvu5hgzwwdyzgkmnanettwnmbnueues7ndw2fkyd.onion)
   - [Eepsite](http://mmiyv57bfhgc7p4pipk7jjqv5meuz5rjijoviquplvhxl3v7aoba.b32.i2p)
