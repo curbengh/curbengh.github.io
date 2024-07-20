@@ -27,7 +27,7 @@ updated: 2024-07-20
 
   - [**botnet-filter**](https://gitlab.com/malware-filter/botnet-filter): A set of blocklists to restrict botnet IPs used as command and control (C2) servers. Based on [Feodo Tracker](https://feodotracker.abuse.ch/). Recommend to use the [upstream blocklist](https://feodotracker.abuse.ch/blocklist/) whenever possible, it has much more frequent update (every 5 minutes).
 
-  - [**splunk-malware-filter**](https://gitlab.com/malware-filter/splunk-malware-filter): A Splunk add-on for update malware-filter lookups.
+  - [**splunk-malware-filter**](https://gitlab.com/malware-filter/splunk-malware-filter): A [Splunk add-on](https://splunkbase.splunk.com/app/6970) to update malware-filter lookups.
 
 - [**splunk-scripts**](https://gitlab.com/curben/splunk-scripts): Miscellaneous python scripts for Splunk.
 
