@@ -94,6 +94,12 @@ More details are available in the following series of posts:
 - [Redlib](https://github.com/redlib-org/redlib): Private front-end for Reddit.
   - [Onion](http://dzfahc2b6rbt6zqos4xdfhdzoes25vbsquupge3dcni7rnft7s6fvjyd.onion)
   - [Eepsite](http://qmab3wkogmb6xscouvzpjzaeetemcfikpj7g7vk6wuho4pk7jutq.b32.i2p)
+- [BiblioReads](https://github.com/nesaku/BiblioReads): An Alternative Private Goodreads Front-End.
+  - [Onion](http://j5lebkdzxk7qtmoopdljgbxced6pgukiisoym4547hrlw7zfxhzd27qd.onion)
+  - [Eepsite](http://zgci5oiqqheg4tn3jg7p4765fnea4dwgt3dta24kkwlbfh74ddzq.b32.i2p)
+- [Mozhi](https://github.com/nesaku/BiblioReads): Alternative-frontend for many translation engines.
+  - [Onion](http://larrc5gh4dldbu4z5ytp7opoek7gstgxfumkagpb7iv6q6kozwiaalqd.onion)
+  - [Eepsite](http://fcfaoj2glfht36f56fnyjanhwqeuweq52nm6d5a4j4ldphoxlfgq.b32.i2p)
 
 ## Publications
 
