@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2024-07-20
+updated: 2024-07-22
 ---
 
 ## About Me
@@ -97,9 +97,15 @@ More details are available in the following series of posts:
 - [BiblioReads](https://github.com/nesaku/BiblioReads): An Alternative Private Goodreads Front-End.
   - [Onion](http://j5lebkdzxk7qtmoopdljgbxced6pgukiisoym4547hrlw7zfxhzd27qd.onion)
   - [Eepsite](http://zgci5oiqqheg4tn3jg7p4765fnea4dwgt3dta24kkwlbfh74ddzq.b32.i2p)
-- [Mozhi](https://github.com/nesaku/BiblioReads): Alternative-frontend for many translation engines.
+- [Mozhi](https://codeberg.org/aryak/mozhi): Alternative-frontend for many translation engines.
   - [Onion](http://larrc5gh4dldbu4z5ytp7opoek7gstgxfumkagpb7iv6q6kozwiaalqd.onion)
   - [Eepsite](http://fcfaoj2glfht36f56fnyjanhwqeuweq52nm6d5a4j4ldphoxlfgq.b32.i2p)
+- [dumb](https://github.com/rramiachraf/dumb): Private alternative front-end for Genius.
+  - [Onion](http://45wl7huszlmd3ikrzstqkgqg2w5sv7uljyzclknbi4oqulqebgb356ad.onion)
+  - [Eepsite](http://e5ko75gniu662loixesw56uie52ho23fmc3gm35i3kshl4kra6tq.b32.i2p)
+- [Intellectual](https://github.com/Insprill/intellectual): Alternate frontend for Genius focused on privacy and simplicity.
+  - [Onion](http://36hoiwja5ehvnwlxbqwmikao6g4szi5kbz6niwgdvzvkolmq4kyuphid.onion)
+  - [Eepsite](http://7y3j5s7b6jt3jzjxfxdbfcbww3l6ndre62ek4t6uninc4n6l3qca.b32.i2p)
 
 ## Publications
 
