@@ -2,8 +2,12 @@
 title: Short Posts
 layout: page
 date: 2024-07-15
-updated: 2024-07-18
+updated: 2024-07-22
 ---
+
+## 22 Jul 2024
+
+In OpenAI ChatGPT, it is now possible to disable [model training](https://help.openai.com/en/articles/7730893-data-controls-faq) while still keeping the chat history. [Previously](https://openai.com/index/new-ways-to-manage-your-data-in-chatgpt/), both had to be disabled together.
 
 ## 18 Jul 2024
 
