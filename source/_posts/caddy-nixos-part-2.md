@@ -29,10 +29,10 @@ Following diagram shows the architecture behind this website.
 
 ## Prerequisites
 
-Before proceeding to the rest of this guide, there are some system packages that you need to install.
+Before proceeding to the rest of this guide, there are some packages that you need to install.
 
 ```
-$ nix-env -f '<nixpkgs>' -iA google-authenticator p7zip usbguard wormhole-william
+$ nix-shell -p google-authenticator p7zip usbguard wormhole-william
 ```
 
 ## Disable mutableUsers

@@ -4,11 +4,11 @@ excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
 updated: 2022-07-08
 tags:
-- server
-- linux
-- caddy
-- nixos
-- cloudflare
+  - server
+  - linux
+  - caddy
+  - nixos
+  - cloudflare
 series: true
 ---
 
@@ -30,7 +30,7 @@ This post is Part 2 of a series of articles that show you how I set up Caddy and
 
 In NixOS, Caddy can be easily configured through "configuration.nix", without even touching a Caddyfile, if you have a rather simple setup. For example, to serve static files from "/var/www/" folder,
 
-``` nix configuration.nix
+```nix configuration.nix
 services.caddy = {
   enable = true;
   email = example@example.com;
@@ -53,7 +53,7 @@ A package is installed in `/nix/store/<hash>/` folder and that hash is what make
 
 1. Locate the binary in "/nix/store" by checking `$ systemctl status caddy`. This is only available when caddy service is enabled in "configuration.nix". Disabling the service will remove the package.
 2. Install it as a system package using `environment.systemPackages`.
-3. Install it as a user package using `$ nix-env -f '<nixpkgs>' -iA caddy`.
+3. Install it as a user package using Home Manager (recommended), [ad-hoc shell](https://nix.dev/tutorials/first-steps/ad-hoc-shell-environments.html) or `$ nix-env -iA nixpkgs.caddy` ([discouraged](https://stop-using-nix-env.privatevoid.net/)).
 
 caddy.nix grants `CAP_NET_BIND_SERVICE` capability which is not needed in my use case because I'm not binding caddy to port < 1024.
 
@@ -61,7 +61,7 @@ caddy.nix grants `CAP_NET_BIND_SERVICE` capability which is not needed in my use
 
 I created another nix file which is similar to "caddy.nix", but without `CAP_NET_BIND_SERVICE` capability. I also removed Let's Encrypt-related options since I'm using Cloudflare origin certificate. I renamed the `options.services.caddy` to `options.services.caddyProxy` to avoid clash with "caddy.nix". Save the file to "/etc/caddy/caddyProxy.nix" with root as owner. We'll revisit this file in "[configuration.nix](#configurationnix)" section later in this guide.
 
-``` nix /etc/caddy/caddyProxy.nix
+```nix /etc/caddy/caddyProxy.nix
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -186,9 +186,9 @@ If you followed my {% post_link caddy-nixos-part-2 'Part 2' %} guide, you should
 
 ### Initial setup
 
-Set up Caddy to listen on apex domain and www.* on port 4430
+Set up Caddy to listen on apex domain and www.\* on port 4430
 
-``` plain Caddyfile
+```plain Caddyfile
 mdleom.com:4430 www.mdleom.com:4430 {
 
 }
@@ -234,7 +234,7 @@ If you prefer to redirect apex to www,
 
 Aside from reverse proxy to curben.netlify.app, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current [config](https://gitlab.com/curben/blog) is:
 
-``` plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
+```plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
 /img/* https://cdn.statically.io/img/:splat 200
 /screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
 /files/* https://gitlab.com/curben/blog/-/raw/site/:splat 200
@@ -242,7 +242,7 @@ Aside from reverse proxy to curben.netlify.app, I also configured my Netlify web
 
 In Caddyfile, the config can be expressed as:
 
-``` plain
+```plain
   handle /img/* {
     reverse_proxy https://cdn.statically.io
   }
@@ -270,38 +270,39 @@ In Caddyfile, the config can be expressed as:
 To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_up` option,
 
 {% codeblock mark:5,13,18 %}
-  handle /img/* {
+handle /img/\* {
+reverse_proxy https://cdn.statically.io {
+header_up Host cdn.statically.io
+}
+}
+
+handle*path /screenshot/* {
+rewrite \_ /screenshot/mdleom.com{path}
+
     reverse_proxy https://cdn.statically.io {
       header_up Host cdn.statically.io
     }
-  }
 
-  handle_path /screenshot/* {
-    rewrite * /screenshot/mdleom.com{path}
+}
 
-    reverse_proxy https://cdn.statically.io {
-      header_up Host cdn.statically.io
-    }
-  }
-
-  reverse_proxy https://curben.netlify.app {
-    header_up Host curben.netlify.app
-  }
+reverse_proxy https://curben.netlify.app {
+header_up Host curben.netlify.app
+}
 {% endcodeblock %}
 
 If there are multiple backends for the reverse_proxy, it's better to use a placeholder instead of hardcording the `Host` header.
 
 {% codeblock mark:2 %}
-  reverse_proxy https://curben.pages.dev https://curben.netlify.app {
-    header_up Host {http.reverse_proxy.upstream.host}
-  }
+reverse_proxy https://curben.pages.dev https://curben.netlify.app {
+header_up Host {http.reverse_proxy.upstream.host}
+}
 {% endcodeblock %}
 
 ### Add or remove headers
 
 To prevent any unnecessary request headers from being sent to the upstreams, I use `header_up`. I use it to remove cookie, referer and [other headers](https://support.cloudflare.com/hc/en-us/articles/200170986-How-does-Cloudflare-handle-HTTP-Request-headers-) added by Cloudflare. Since there are many headers to remove, I group them as a global variable. I apply it to all `reverse_proxy` directives.
 
-``` Caddyfile
+```Caddyfile
 (removeHeaders) {
   header_up -cdn-loop
   header_up -cf-cache-status
@@ -417,7 +418,7 @@ I also add the `Cache-Control` and `Referrer-Policy` to the response header. Use
 
 Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor Onion' %} and {% post_link i2p-eepsite-nixos 'I2P Eepsite' %}, I refactor most of the configuration into "common.conf" and import it into "caddyProxy.conf".
 
-``` plain common.conf
+```plain common.conf
 {
   ## disable admin endpoint
   # admin off
@@ -587,7 +588,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
 }
 ```
 
-``` plain caddyProxy.conf
+```plain caddyProxy.conf
 import common.conf
 
 ## mdleom.com
@@ -619,7 +620,7 @@ mdleom.com:4430 www.mdleom.com:4430 {
 
 One last thing to do is to import "[caddyProxy.nix](#caddyproxynix)" and enable `services.caddyProxy`.
 
-``` nix /etc/nixos/configuration.nix
+```nix /etc/nixos/configuration.nix
   require = [ /etc/caddy/caddyProxy.nix ];
   services.caddyProxy = {
     enable = true;

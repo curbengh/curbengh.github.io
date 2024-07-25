@@ -4,10 +4,10 @@ excerpt: "Part 1: Installing NixOS"
 date: 2020-02-23
 updated: 2021-02-22
 tags:
-- server
-- linux
-- caddy
-- nixos
+  - server
+  - linux
+  - caddy
+  - nixos
 series: first
 ---
 
@@ -58,13 +58,13 @@ NixOS has a detailed installation [guide](https://nixos.org/nixos/manual/index.h
 
 1. The LiveCD automatically login as "nixos". Simply switch to the root shell. You could setup SSH before installation. Personally I can accept the KVM console latency and I didn't want to open another port, so I never bother.
 
-``` sh
+```sh
 sudo -s
 ```
 
 2. Create the necessary partitions. I went with the classic MBR since my VPS provider still supports it and I don't need 2 TB partition. I set up a "swap" partition due to having a tiny RAM; if you have less than 2 GB RAM, it's better to have it, otherwise the `nixos-install` step would fail.
 
-``` sh
+```sh
 # Most KVM-powered VPS use "/dev/vda" naming scheme (instead of "/dev/sda")
 # Check the output of `ls /dev/` to make sure
 parted /dev/vda -- mklabel msdos
@@ -79,7 +79,7 @@ parted /dev/vda -- mkpart primary linux-swap -1GiB 100%
 
 3. Format the partitions.
 
-``` sh
+```sh
 mkfs.btrfs -L nixos /dev/vda1
 # Or "mkfs.ext4" if preferred
 
@@ -88,35 +88,35 @@ mkswap -L swap /dev/vda2
 
 4. Mount the partitions.
 
-``` sh
+```sh
 mount /dev/disk/by-label/nixos /mnt
 swapon /dev/vda2
 ```
 
 5. Generate the configs. This generates "configuration.nix" and "hardware-configuration.nix".
 
-``` sh
+```sh
 nixos-generate-config --root /mnt
 ```
 
 6. I replaced the generated "configuration.nix" with my own "configuration.nix". Before uploading the config to the server, I did the following change,
 
-    1. Replace "/dev/sda" with "/dev/vda" in `boot.loader.grub.device`
-    2. Replace "eth0" to "ens3" in firewall config (check output of `ifconfig`)
-    3. Encrypt the file using 7zip before upload.
+   1. Replace "/dev/sda" with "/dev/vda" in `boot.loader.grub.device`
+   2. Replace "eth0" to "ens3" in firewall config (check output of `ifconfig`)
+   3. Encrypt the file using 7zip before upload.
 
-    ``` sh
-    # This is much less memory-intensive than `nix-env -i package`
-    # wormhole-william is Go-implementation of magic-wormhole
-    # Available in 20.09+
-    nix-env -f '<nixpkgs>' -iA google-authenticator p7zip usbguard wormhole-william
+   ```sh
+   # This is much less memory-intensive than `nix-env -i package`
+   # wormhole-william is Go-implementation of magic-wormhole
+   # Available in 20.09+
+   nix-shell -p google-authenticator p7zip usbguard wormhole-william
 
-    cd /tmp
-    wormhole-william receive configuration.7z
-    7z x configuration.7z
+   cd /tmp
+   wormhole-william receive configuration.7z
+   7z x configuration.7z
 
-    cp configuration.nix /mnt/etc/nixos/
-    ```
+   cp configuration.nix /mnt/etc/nixos/
+   ```
 
 7. Install it without setting root password (so that root remains disabled)
 
@@ -128,7 +128,7 @@ nixos-install --no-root-passwd
 
 9. Once the installation is done, before shutting down, secure delete the downloaded files.
 
-``` sh
+```sh
 shred -uz configuration.7z configuration.nix
 ```
 
@@ -136,7 +136,7 @@ shred -uz configuration.7z configuration.nix
 
 Following is my "configuration.nix". I'll show you how to secure NixOS using hashed password, firewall, DNS-over-TLS and USBGuard in my next post. After that, I'll show you how to setup Caddy and Tor (they are disabled for now).
 
-``` nix /etc/nixos/configuration.nix
+```nix /etc/nixos/configuration.nix
 { config, pkgs, ... }:
 
 {
