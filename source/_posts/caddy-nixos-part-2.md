@@ -59,17 +59,7 @@ User's password can be configured by `users.<name>.password`, obviously this mea
 users.<name>.hashedPassword = "xxxx";
 ```
 
-Use `openssl passwd -6` to generate the SHA512-hashed password. Alternatively, you could also use `mkpasswd -m sha-512` (bundled with `whois` package). To ensure password is entered correctly in `mkpasswd` (it only prompts once), copy the salt value which is the second section where each section is separated by `$` ($6$**salt**$hashedpassword).
-
-```
-mkpasswd -m sha-512 --salt 'saltvalue'
-```
-
-Both outputs of `mkpasswd` should be the same.
-
-### yescript
-
-NixOS 22.11 onwards support yescrypt, a more secure password hashing algorithm than SHA512. It can generated using `mkpasswd -m yescrypt`, openssl passwd doesn't support it yet. mkpasswd generates it with "5" compute cost by default, you can change it using `--round` option with a value from 1 to 11. Increasing the value will make it more resistant to brute-force, but password verification will also be slower.
+Use `mkpasswd -m yescrypt` to generate the yescrypt-hashed password. mkpasswd generates it with "5" compute cost by default, you can change it using `--round` option with a value from 1 to 11. Increasing the value will make it more resistant to brute-force, but password verification will also be slower.
 
 To verify the output, `--salt` option cannot be used for yescrypt due to [a bug](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1003151). As a workaround, copy the output from the first `$` until the forth.
 
@@ -77,7 +67,7 @@ To verify the output, `--salt` option cannot be used for yescrypt due to [a bug]
 printf "Password: " && read -s var && mkpasswd "$var" '$y$parameter$salt$' && var=""
 ```
 
-Replace the single-quoted value `''` with the copied value.
+Replace the single-quoted value `''` with the copied value. It should have similar output as the previous mkpasswd.
 
 ### passwordFile
 
