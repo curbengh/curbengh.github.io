@@ -2,7 +2,7 @@
 title: CentOS Stream does not support dnf-automatic security updates
 excerpt: The repository lacks updateinfo to provide errata
 date: 2024-07-15
-updated: 2024-07-17
+updated: 2024-08-16
 tags:
   - centos
 ---
@@ -45,7 +45,7 @@ I remembered when dnf attempts to refresh a repository, the first thing it looks
   </data>
 ```
 
-I also searched and discovered updateinfo is also available on [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/repodata/) and [Fedora](https://dl.fedoraproject.org/pub/fedora/linux/updates/40/Everything/x86_64/repodata/). Looking at Fedora's [repomd.xml], I learned that the updateinfo.xml is available in gzip, xzip and zchunk (`updateinfo_zck`) formats. By then, I was sure that dnf cannot apply security (nor [bugfix/feature](https://access.redhat.com/articles/explaining_redhat_errata))-specific updates in CentOS Stream.
+I also searched and discovered updateinfo is also available on [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/repodata/), [Oracle Linux](https://yum.oracle.com/repo/OracleLinux/OL9/baseos/latest/x86_64/repodata/) and [Fedora](https://dl.fedoraproject.org/pub/fedora/linux/updates/40/Everything/x86_64/repodata/). Looking at Fedora's [repomd.xml], I learned that the updateinfo.xml can be available in gzip, xzip and zchunk (`updateinfo_zck`) formats. By then, I was sure that dnf cannot apply security (nor [bugfix/feature](https://access.redhat.com/articles/explaining_redhat_errata))-specific updates in CentOS Stream.
 
 CentOS used to have updateinfo prior to CentOS 7; after it was removed in CentOS 7, there was a [third-party repository](https://updateinfo.cefs.steve-meier.de/) that filled the gap but it never supported CentOS Stream.
 
@@ -59,7 +59,7 @@ upgrade_type = default
 apply_updates = yes
 ```
 
-Automatic security updates are available on RHEL, AlmaLinux, Rocky Linux and Fedora. Fedora's updateinfo does not include a CVE reference (e.g. `<reference href="https://access.redhat.com/security/cve/CVE-2024-6387" id="CVE-2024-6387" type="cve" title="CVE-2024-6387"/>`), thus unable to [filter](https://docs.oracle.com/en/learn/ol-dnf-security/#filter-the-list-of-security-updates) by CVE ID (`dnf updateinfo list --cve CVE-2024-6387 --installed`).
+Automatic security-only updates are available on RHEL, AlmaLinux, Rocky Linux, Oracle Linux and Fedora. Fedora's updateinfo does not include a CVE reference (e.g. `<reference href="https://access.redhat.com/security/cve/CVE-2024-6387" id="CVE-2024-6387" type="cve" title="CVE-2024-6387"/>`), thus unable to [filter](https://docs.oracle.com/en/learn/ol-dnf-security/#filter-the-list-of-security-updates) by CVE ID (`dnf updateinfo list --cve CVE-2024-6387 --installed`).
 
 ## Unattended upgrades in Debian/Ubuntu
 
