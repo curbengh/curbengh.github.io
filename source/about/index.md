@@ -29,9 +29,9 @@ updated: 2024-07-22
 
   - [**splunk-malware-filter**](https://gitlab.com/malware-filter/splunk-malware-filter): A [Splunk add-on](https://splunkbase.splunk.com/app/6970) to update malware-filter lookups.
 
-- [**splunk-scripts**](https://gitlab.com/curben/splunk-scripts): Miscellaneous python scripts for Splunk.
+- [**splunk-scripts**](https://gitlab.com/curben/splunk-scripts): Splunk add-ons, patches and setup scripts.
 
-- [**aws-scripts**](https://gitlab.com/curben/aws-scripts): Security-related python scripts for AWS.
+- [**aws-scripts**](https://gitlab.com/curben/aws-scripts): AWS CDK templates and security audit scripts.
 
 - (Inactive) Core contributor of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
 
