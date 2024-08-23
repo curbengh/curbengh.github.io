@@ -2,8 +2,12 @@
 title: Short Posts
 layout: page
 date: 2024-07-15
-updated: 2024-07-22
+updated: 2024-08-23
 ---
+
+## 23 Aug 2024
+
+Huawei USB 4G modem E3372h-608 firmware 10.0.5.1 works out-of-the-box as a tethering connection with GL.iNet Creta AR750 firmware 4.3.17 running OpenWrt 22.03.4 r20123-38ccc47687.
 
 ## 22 Jul 2024
 
