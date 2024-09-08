@@ -7,7 +7,7 @@ updated: 2024-09-08
 
 ## 8 Sep 2024
 
-After converting from CentOS 9 to AlmaLinux 9, uninstall CentOS kernels (> kernel-5.14.0-427.x). Otherwise, the higher version of CentOS kernels (5.14.0-x) will prevent dnf from installing newer Alma kernels (5.14.0-427.x).
+After converting from CentOS 9 to AlmaLinux 9, uninstall CentOS kernels which would otherwise prevent dnf from installing newer Alma kernel due to higher version of CentOS kernel.
 
 ## 23 Aug 2024
 
