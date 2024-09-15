@@ -5,6 +5,10 @@ date: 2024-07-15
 updated: 2024-09-15
 ---
 
+## 15 Sep 2024
+
+If you are using any of these [removable eSIMs](https://euicc-manual.osmocom.org/docs/lpa/known-card/#product), when adding a new profile, check the SM-DP+ address has `81370f5125d0b1d408d4c3b232e6d25e795bebfb` (GSM Association - RSP2 Root CI1) as one of its issuer(s) in the [registry.csv](https://github.com/CursedHardware/gsma-rsp-certificates/blob/main/registry.csv).
+
 ## 8 Sep 2024
 
 After converting from CentOS to AlmaLinux, uninstall CentOS kernels which would otherwise prevent dnf from installing newer Alma kernel due to higher version of CentOS kernel.
