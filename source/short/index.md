@@ -2,12 +2,12 @@
 title: Short Posts
 layout: page
 date: 2024-07-15
-updated: 2024-09-08
+updated: 2024-09-15
 ---
 
 ## 8 Sep 2024
 
-After converting from CentOS 9 to AlmaLinux 9, uninstall CentOS kernels which would otherwise prevent dnf from installing newer Alma kernel due to higher version of CentOS kernel.
+After converting from CentOS to AlmaLinux, uninstall CentOS kernels which would otherwise prevent dnf from installing newer Alma kernel due to higher version of CentOS kernel.
 
 ## 23 Aug 2024
 
