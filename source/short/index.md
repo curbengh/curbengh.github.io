@@ -2,8 +2,14 @@
 title: Short Posts
 layout: page
 date: 2024-07-15
-updated: 2024-09-16
+updated: 2024-09-24
 ---
+
+## 24 Sep 2024
+
+In Splunk Connect for Syslog ([SC4S](https://splunk.github.io/splunk-connect-for-syslog/main/)), [`SC4S_DEST_GLOBAL_ALTERNATES`](https://splunk.github.io/splunk-connect-for-syslog/1.110.1/configuration/#configuration-of-alternate-destinations) has been deprecated since version 2. Instead, enable [`SC4S_ARCHIVE_GLOBAL`](https://splunk.github.io/splunk-connect-for-syslog/3.30.1/configuration/#archive-file-configuration) which stores a copy of events locally, not only for archiving (if that's what you intend) but also useful for troubleshooting dropped events.
+
+If [`compliance_meta_by_source.conf`](https://splunk.github.io/splunk-connect-for-syslog/3.30.1/configuration/#override-index-or-metadata-based-on-host-ip-or-subnet-compliance-overrides) is not working, you may have to create a [custom post-filter](https://splunk.github.io/splunk-connect-for-syslog/3.30.1/create-parser/#create-a-parser_1) in "/opt/sc4s/local/config/filters/" instead.
 
 ## 15 Sep 2024
 
