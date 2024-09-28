@@ -1,6 +1,6 @@
 ---
 title: Azure AD/Entra ID SSO integration with ServiceNow
-excerpt: Difference of SAML and SCIM
+excerpt: Difference between SAML and SCIM
 date: 2023-08-27
 updated: 2024-09-28
 tags:
@@ -17,7 +17,7 @@ In an enterprise environment, SSO provides convenience to the staff and several 
 2. During offboarding, disabling an account from the identity provider will also revoke access to SSO-enabled systems, thus providing better security.
 3. Identity provider is much more likely to support multi-factor authentication (MFA), enabling more systems to be MFA-secured.
 
-SSO does not necessarily provide better security all the time. Threat actor can utilise a compromised account to access any SSO-enabled system that the account has access prior, leading to wider blast radius. There are three mitigations to reduce such risk:
+SSO does not necessarily provide better security all the time. Threat actor can utilise a compromised account to access any SSO-enabled system that the account has prior access, leading to wider blast radius. There are three mitigations to reduce such risk:
 
 1. Enforce MFA to minimise the chance of accounts being compromised.
 2. Limit access to SSO-enabled systems through access control list (ACL).
