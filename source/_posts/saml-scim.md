@@ -1,7 +1,8 @@
 ---
-title: Azure AD SSO integration with ServiceNow
+title: Azure AD/Entra ID SSO integration with ServiceNow
 excerpt: Difference of SAML and SCIM
 date: 2023-08-27
+updated: 2024-09-28
 tags:
   - sso
   - servicenow
@@ -24,7 +25,7 @@ SSO does not necessarily provide better security all the time. Threat actor can 
 
 ## SSO in Azure AD
 
-Configuring a system to utilise Azure Active Directory (AAD) involves setting up [SAML](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) and optionally [SCIM](https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management). SCIM is only used to provision users, SAML can supply the necessary information (email, name, phone, etc) to the SSO-enabled system to create users on-demand upon first login (of that user) and update the user information in subsequent logins. In ServiceNow SAML configuration, under "User Provisioning" tab, on-demand user provision can be enabled by ticking "Auto Provisioning User" and "Update User Record Upon Each Login".
+Configuring a system to utilise Azure Active Directory (AAD)/Entra ID involves setting up [SAML](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) and optionally [SCIM](https://en.wikipedia.org/wiki/System_for_Cross-domain_Identity_Management). SCIM is only used to provision users, SAML can supply the necessary information (email, name, phone, etc) to the SSO-enabled system to create users on-demand upon first login (of that user) and update the user information in subsequent logins. In ServiceNow SAML configuration, under "User Provisioning" tab, on-demand user provision can be enabled by ticking "Auto Provisioning User" and "Update User Record Upon Each Login".
 
 During the initial SAML setup in ServiceNow, it requires a successful test login (using an AAD account, in this case) before SSO can be activated. This will fail if the user does not exist in ServiceNow yet. To pass it, simply create a new ServiceNow user that has the same email as the test AAD account. If you are confident the SAML setting is correct, the test login can be [made optional](https://docs.servicenow.com/en-US/bundle/vancouver-platform-security/page/integrate/single-sign-on/task/t_TestIdPConnections.html). It is easier to utilise the "[Automatically configure](https://learn.microsoft.com/en-us/azure/active-directory/saas-apps/servicenow-tutorial#configure-servicenow) ServiceNow" option because it will also configure the transform mapping in ServiceNow which enables it to map SAML attributes (emailaddress, name, etc) to the respective ServiceNow's sys_user table columns.
 
@@ -75,9 +76,9 @@ Steps to configure:
 
 ## Single-space value
 
-An interesting issue I encountered which was ultimately caused by an AAD attribute that had a value of just a single space. I initially configured a SCIM mapping as follow: Coalesce([attributeA], [attributeB]) -> u*column_z. Coalesce() returns the first non-empty value. I knew attributeB is never empty, however somehow some users had *(blank)\_ value in their u_column_z.
+An interesting issue I encountered which was ultimately caused by an AAD attribute that had a value of just a single space. I initially configured a SCIM mapping as follow: `Coalesce([attributeA], [attributeB]) -> u_column_z` where `Coalesce()` returns the first non-empty attribute. I knew attributeB is never empty, however somehow some users had _(blank)_ value in their "u_column_z" field.
 
-I fired up the Expression Builder in AAD SCIM and tried "Coalesce([attributeA], [attributeB])" on one of the affected users. It returned "Your expression is valid, but your expression evaluated to an empty string". Tried "ToUpper([attributeA])", same. Tried "IsNullorEmpty([attributeA])", got "false". If an attribute has empty value, it will return "null". So, this meant attributeA is not empty. But what could it be?
+I fired up the Expression Builder in AAD SCIM and tried `Coalesce([attributeA], [attributeB])` on one of the affected users. It returned "Your expression is valid, but your expression evaluated to an empty string". Tried `ToUpper([attributeA])`, same. Tried `IsNullorEmpty([attributeA])`, got "false". If an attribute has empty value, it will return "null". So, this meant attributeA is not empty. But what could it be?
 
 ```
 IIF([attributeA]=" ", "space", "no space")
