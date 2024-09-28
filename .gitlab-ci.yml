@@ -37,7 +37,7 @@ test:
     - sh check-homepage.sh
 
   rules:
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "microblog" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
       when: always
 
   artifacts:
