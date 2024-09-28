@@ -14,7 +14,7 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://mdleom.com
 root: /
-permalink: microblog/:title/
+permalink: microblog/:year/:month/:day/:post_title/
 permalink_defaults:
 pretty_urls:
   trailing_index: false
