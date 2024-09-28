@@ -1,0 +1,14 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-HTMLMINIFIER-3091181:
+    - "*":
+        reason: Patch unavailable
+        expires: "2024-06-30T00:00:00.000Z"
+  SNYK-JS-HEXO-5889980:
+    - "*":
+        reason: "https://github.com/hexojs/hexo/pull/5251"
+        expires: "2024-06-30T00:00:00.000Z"
+# patches apply the minimum changes required to fix a vulnerability
+patch:

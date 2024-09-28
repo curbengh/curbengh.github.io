@@ -1,0 +1,73 @@
+image: node:alpine # Use latest version of Node.js on Alpine
+
+cache:
+  paths:
+    - node_modules/
+
+variables:
+  NODE_ENV: "production"
+
+# Rename to 'pages' for gitlab pages
+build:
+  stage: build
+
+  before_script:
+    - apk update && apk add git
+    - npm install --include=optional --force
+
+  script:
+    # Generate site
+    - npm run build
+
+  rules:
+    # Only trigger through push & "Run pipeline" events not in "site" branch; Skip in renovate job
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME != "site" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+      when: always
+
+  artifacts:
+    paths:
+      - public/
+    expire_in: 30 days
+
+test:
+  stage: test
+
+  script:
+    # /microblog/ should exist and non-empty
+    - sh check-homepage.sh
+
+  rules:
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+      when: always
+
+  artifacts:
+    paths:
+      - public/
+    expire_in: 30 days
+
+deploy:
+  stage: deploy
+
+  before_script:
+    - apk update && apk add openssh-client rsync
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo "$SSH_KEY_1" > ~/.ssh/id_host_1
+    - chmod 600 ~/.ssh/id_host_1
+    - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
+    - chmod 600 ~/.ssh/id_host_2
+    - echo "$SSH_CONFIG" > ~/.ssh/config
+    - chmod 600 ~/.ssh/config
+
+  script:
+    - rsync -azvh --delete public/microblog/ host-1:/var/www/microblog/
+    - rsync -azvh --delete public/microblog/ host-2:/var/www/microblog/
+
+  rules:
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "microblog" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+      when: always
+
+include:
+  - template: Security/Secret-Detection.gitlab-ci.yml

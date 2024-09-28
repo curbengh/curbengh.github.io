@@ -1,0 +1,10 @@
+<div class="archive-container">
+  <%- partial('_partial/header', {}, { cache: true }) %>
+  <hr class="header-hr"/>
+  <h2>Tags:</h2>
+  <%- list_tags({
+    amount: 0,
+    class: 'index',
+    transform: titleCase
+  }) %>
+</div>

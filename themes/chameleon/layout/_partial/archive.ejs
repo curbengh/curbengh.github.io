@@ -1,0 +1,22 @@
+<% page.posts.each((post, i) => { %>
+  <section class="archives-wrap">
+    <div class="archives">
+  <%- partial('archive-post', { post }) %>
+<% }) %>
+<% if (page.posts.length) { %>
+    </div>
+  </section>
+<% } %>
+<% if (page.total > 1) { %>
+  <nav id="page-nav" class="page-nav">
+    <% 
+    const prev_text = '&laquo; ' + __('prev')
+    const next_text = __('next') + ' &raquo;'
+    %>
+    <%- paginator({
+      prev_text: prev_text,
+      next_text: next_text,
+      escape: false
+    }) %>
+  </nav>
+<% } %>

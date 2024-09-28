@@ -1,0 +1,66 @@
+<head>
+  <meta charset="utf-8">
+<%
+let title = page.title
+
+if (is_archive()) {
+  title = titleCase(config.archive_dir)
+
+  if (is_month()) {
+    title += ': ' + page.year + '/' + page.month
+  } else if (is_year()) {
+    title += ': ' + page.year
+  } else if (page.current_url) {
+    const pageNum = Number(page.current_url.charAt(page.current_url.length - 2))
+    if (Number.isInteger(pageNum)) title += ': Page ' + pageNum
+  }
+} else if (is_category()) {
+  title = __('category') + ': ' + page.category
+} else if (is_tag()) {
+  title = __('tag') + ': ' + page.tag
+}
+%>
+  <title><% if (title) { %><%= title %> | <% } %><%= config.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="<%- full_url_for(path) %>">
+  <%/* Add Open Graph meta tags for easier sharing on social networking sites */%>
+  <%/* Modified from original source for compatibility with my blog */%>
+  <%- openGraph() %>
+<% if (config.feed) { %>
+  <%- feed_tag() %>
+<% } else if (theme.rss) { %>
+  <%- feed_tag(theme.rss) %>
+<% } %>
+  <%/* Favicon */%>
+  <%/* https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs */%>
+  <link rel="icon" href="<%- url_for('/favicon.ico') %>">
+  <link rel="icon" href="<%- url_for('/svg/favicon.svg') %>" type="image/svg+xml" sizes="any">
+  <link rel="apple-touch-icon" href="<%- url_for('/apple-touch-icon-180x180.png') %>">
+  <link rel="manifest" href="<%- url_for('/site.webmanifest') %>">
+
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="<%- url_for('/sitemap.xml') %>">
+
+  <%/* CSS of Chameleon theme */%>
+  <%- css('/css/chameleon.css') %>
+
+  <% if (theme.icons) { %>
+    <%- css('/libs/forkawesome/css/forkawesome-1.1.7.min.css') %>
+  <% } %>
+<% if (is_post() && page.series) { %>
+  <%
+  if (page.series !== 'first' && page.next?.path?.startsWith(`${config.archive_dir}/`)) {
+    const pageTitle = page.next.title
+  %>
+  <%/* page.next is not a typo */%>
+  <link rel="prev" href="<%- url_for(page.next.path) %>" title="<%= pageTitle %>">
+  <% } %>
+  <%
+  if (page.series !== 'last' && page.prev?.path?.startsWith(`${config.archive_dir}/`)) {
+    const pageTitle = page.prev.title
+  %>
+  <link rel="next" href="<%- url_for(page.prev.path) %>" title="<%= pageTitle %>">
+  <% } %>
+<% } %>
+
+  <meta name="yandex-verification" content="e026a03a5dd06730" />
+</head>

@@ -1,0 +1,4 @@
+[context.production]
+  environment = { NODE_ENV = "production" }
+  publish = "public"
+  command = "npm run build"

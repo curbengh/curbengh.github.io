@@ -1,0 +1,3 @@
+<%/* User-specified updated date */%>
+<%/* default post.updated is (almost) always is the time 'hexo generate' is executed */%>
+<time class="dt-updated" datetime="<%= date(post.updated, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="dateModified"><%= date(post.updated, 'D MMM YYYY') %></time>

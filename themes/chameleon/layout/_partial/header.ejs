@@ -1,0 +1,51 @@
+<header id="header" class="header">
+  <%/* Nav menu for desktop */%>
+  <nav class="main-nav">
+    <% if (!theme.menu) { %><a class="main-nav-link" href="<%- config.root %>">Home</a>
+    <% } else { %>
+    <% for (const i in theme.menu) { %>
+      <a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+    <% }} %>
+
+    <div class="search-container">
+      <form id="searchForm" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search">
+      <input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search">
+      <input type="hidden" name="sites" value="<%- config.url.replace(/^http(s)?:\/\//, '') %>">
+      <input type="hidden" name="kd" value="-1">
+      <input type="hidden" name="kg" value="p">
+      <input type="hidden" name="kae" value="#000">
+      <a class="search-button" id="search-click">
+        <img src="/svg/search.svg">
+      </a>
+      </form>
+    </div>
+  </nav>
+  <%/* Nav menu for mobile */%>
+  <nav class="mobile-nav">
+    <a class="site-title" href="<%- config.root %>"><%- config.url.replace(/^http(s)?:\/\//, '') %></a>
+    <ul class="mobile-nav-menu">
+    <label for="mobile-menu-toggle"><a class="no-underline" id="menu-button">&#9776;</a></label>
+    <input id="mobile-menu-toggle" type="checkbox"/>
+    <ul id="mobile-nav-link">
+      <div class="search-container">
+        <form id="searchFormMob" method="post" action="https://duckduckgo.com/" rel="noopener external nofollow noreferrer" role="search">
+        <input type="search" name="q" class="search-box" placeholder="Search..." title="Powered by DuckDuckGo" enterkeyhint="search">
+        <input type="hidden" name="sites" value="<%- config.url.replace(/^http(s)?:\/\//, '') %>">
+        <input type="hidden" name="kd" value="-1">
+        <input type="hidden" name="kg" value="p">
+        <input type="hidden" name="kae" value="#000">
+        <a class="search-button" id="search-click-mobile">
+          <img src="/svg/search.svg">
+        </a>
+        </form>
+      </div>
+      <i>Powered by DuckDuckGo</i>
+      <% if (!theme.menu) { %><a class="mobile-nav-link-a" href="<%- config.root %>">Home</a>
+      <% } else { %>
+      <% for (const i in theme.menu) { %>
+        <a class="mobile-nav-link-a" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+      <% }} %>
+    </ul>
+    </ul>
+  </nav>
+</header>

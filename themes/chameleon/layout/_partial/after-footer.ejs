@@ -1,0 +1,9 @@
+<% if (is_post()) { %>
+<%- js([
+  { src: '/libs/clipboard-2.0.6.min.js', defer: true },
+  '/js/copy-button.js'
+  ]) %>
+<% } %>
+
+<%/* javascript of Chameleon theme */%>
+<%- js('/js/chameleon.js') %>

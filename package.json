@@ -1,0 +1,26 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "private": true,
+  "hexo": {
+    "version": "7.2.0"
+  },
+  "scripts": {
+    "build": "hexo generate",
+    "snyk": "snyk auth $SNYK_TOKEN && snyk-protect && snyk test && snyk monitor",
+    "renovate": "renovate --platform 'gitlab' --autodiscover false --onboarding false --update-lock-files false --labels 'renovate' --require-config='ignored' \"$CI_PROJECT_PATH\""
+  },
+  "dependencies": {
+    "hexo": "^7.0.0",
+    "hexo-filter-nofollow": "hexojs/hexo-filter-nofollow",
+    "hexo-generator-archive": "hexojs/hexo-generator-archive",
+    "hexo-generator-index": "hexojs/hexo-generator-index",
+    "hexo-generator-tag": "hexojs/hexo-generator-tag",
+    "hexo-renderer-ejs": "hexojs/hexo-renderer-ejs",
+    "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
+    "hexo-yam": "curbengh/hexo-yam"
+  },
+  "devDependencies": {
+    "hexo-server": "hexojs/hexo-server"
+  }
+}
