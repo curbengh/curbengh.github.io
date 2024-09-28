@@ -81,6 +81,10 @@ theme: chameleon
 
 feed:
   icon: "/svg/favicon.svg"
+  path: atom-microblog.xml
+
+sitemap:
+  path: sitemap-microblog.xml
 
 # theme config
 theme_config:

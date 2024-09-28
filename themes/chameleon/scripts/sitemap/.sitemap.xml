@@ -10,23 +10,4 @@
     {% endif %}
   </url>
   {% endfor %}
-
-  {# home page #}
-  <url>
-    <loc>{{ config.root | fullUrlFor }}</loc>
-    <lastmod>{% if posts[0].updated %}{{ posts[0].updated | formatDate }}{% else %}{{ posts[0].date | formatDate }}{% endif %}</lastmod>
-  </url>
-
-  {# archive page #}
-  <url>
-    <loc>{{ config.archive_dir | fullUrlFor + '/' }}</loc>
-    <lastmod>{% if posts[0].updated %}{{ posts[0].updated | formatDate }}{% else %}{{ posts[0].date | formatDate }}{% endif %}</lastmod>
-   </url>
-  
-  {% for tag in tags %}
-  <url>
-    <loc>{{ tag.permalink }}</loc>
-    <lastmod>{% if tag.posts.first().updated %}{{ tag.posts.first().updated | formatDate }}{% else %}{{ tag.posts.first().date | formatDate }}{% endif %}</lastmod>
-  </url>
-  {% endfor %}
 </urlset>
