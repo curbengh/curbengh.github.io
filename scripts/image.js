@@ -20,18 +20,16 @@ hexo.extend.filter.register('marked:renderer', (renderer) => {
     // embed external image
     if (href.startsWith('http')) return `<img src="${href}" alt="${alt}" title="${title}">`
 
-    const fLink = (path, width) => {
-      const query = new URLSearchParams('f=auto')
-      if (typeof width === 'number') query.set('width', width)
-      const url = new URL('http://example.com/' + join('img', path) + '?' + query)
+    const fLink = (path, width = '') => {
+      const url = new URL(join('images', width, path), 'http://example.com/')
 
-      return url.pathname + url.search
+      return url.pathname
     }
 
     return `<a href="${join('/img', href)}">` +
-      `<img srcset="${fLink(href, 320)} 320w,` +
-      `${fLink(href, 468)} 468w,` +
-      `${fLink(href, 768)} 768w,` +
+      `<img srcset="${fLink(href, '320')} 320w,` +
+      `${fLink(href, '468')} 468w,` +
+      `${fLink(href, '768')} 768w,` +
       `${fLink(href)} 800w"` +
       ' sizes="(max-width: 320px) 320px,' +
       '(max-width: 468px) 468px,' +

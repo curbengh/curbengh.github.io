@@ -6,3 +6,5 @@ node_modules/
 package-lock.json
 public/
 .deploy*/
+bun.lockb
+.wrangler/

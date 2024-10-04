@@ -1,0 +1,7 @@
+name = "cf-images"
+main = "cf-images/index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = [ "nodejs_compat" ]
+send_metrics = false
+
+route = { pattern = "https://mdleom.com/images/*", zone_name = "mdleom.com" }
