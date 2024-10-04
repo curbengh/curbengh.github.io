@@ -63,8 +63,8 @@ deploy:
     - chmod 600 ~/.ssh/config
 
   script:
-    - rsync -azvh --delete --exclude "microblog" public/ host-1:/var/www/
-    - rsync -azvh --delete --exclude "microblog" public/ host-2:/var/www/
+    - rsync -azvh --delete --exclude-from "rsync-exclude.txt" public/ host-1:/var/www/
+    - rsync -azvh --delete --exclude-from "rsync-exclude.txt" public/ host-2:/var/www/
 
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
