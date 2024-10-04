@@ -5,7 +5,12 @@
 [![Build Status](https://gitlab.com/curben/blog/badges/master/pipeline.svg)](https://gitlab.com/curben/blog/-/jobs)
 [![Hexo version](https://img.shields.io/badge/hexo-hexojs/hexo-brightgreen.svg)](https://github.com/hexojs/hexo)
 
-### Plugins
+## Branches
+
+- [`site`](https://gitlab.com/curben/blog/-/tree/site): images deployed to https://curben.gitlab.io/blog/
+- [`microblog`](https://gitlab.com/curben/blog/-/tree/microblog): microblog deployed to https://mdleom.com/microblog/
+
+## Plugins
 
 - Installed [hexo-yam](https://github.com/curbengh/hexo-yam) (author) to pre-compress static assets (html, css, js and svg).
 - Installed [hexo-nofollow](https://github.com/curbengh/hexo-nofollow) for SEO purpose to prevent search engines from following external links.
@@ -27,8 +32,6 @@ The following are the major changes I made compared to the upstream.
 - [All packages](package.json) are installed from their respective master branch, instead of npm published version.
 - Removed unused packages, [hexo-generator-category](https://github.com/hexojs/hexo-generator-category) and [hexo-renderer-stylus](https://github.com/hexojs/hexo-renderer-stylus) from the [default packages](https://github.com/hexojs/hexo-starter/blob/571320ba41a83e065d7560e050eb3fa63ad74a57/package.json#L9-L17).
 - Replaced the bundled Landscape theme with Typing theme.
-- Add `lastUpdated` to the front-matter to manually set updated time of a post, instead of using `post.updated`.
-  - This is no longer necessary, thanks to [`updated_option`](https://github.com/hexojs/hexo/pull/4278) feature.
 
 ### [Chameleon theme](/themes/chameleon)
 
