@@ -101,10 +101,8 @@ export default {
       const { readable, writable } = new TransformStream()
       const { status, statusText } = response
 
-      const htmlHeader = new Headers({
-        ...Object.fromEntries(request.headers),
-        Accept: 'text/html'
-      })
+      const htmlHeader = new Headers(request.headers)
+      if (!/text\/html/.test(accept)) htmlHeader.append('Accept', 'text/html')
       const page404 = new Request('https://mdleom.com/404', {
         headers: htmlHeader
       })
