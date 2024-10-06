@@ -102,7 +102,7 @@ export default {
       const { status, statusText } = response
 
       const htmlHeader = new Headers({
-        ...request.headers,
+        ...Object.fromEntries(request.headers),
         Accept: 'text/html'
       })
       const page404 = new Request('https://mdleom.com/404', {
