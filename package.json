@@ -6,7 +6,7 @@
     "version": "7.3.0"
   },
   "scripts": {
-    "build": "hexo generate",
+    "build": "sh build.sh",
     "snyk": "snyk auth $SNYK_TOKEN && snyk-protect && snyk test && snyk monitor",
     "renovate": "renovate --platform 'gitlab' --autodiscover false --onboarding false --update-lock-files false --labels 'renovate' --require-config='ignored' \"$CI_PROJECT_PATH\"",
     "deploy-cf-images": "npx wrangler deploy"

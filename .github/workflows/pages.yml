@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  NODE_ENV: production
+
 jobs:
   build:
     runs-on: ubuntu-latest
