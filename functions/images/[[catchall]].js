@@ -6,9 +6,5 @@ export async function onRequestGet (context) {
   const imageRequest = new Request(imageURL, {
     headers
   })
-  // return fetch(imageRequest)
-
-  // CF_IMAGES binds to cf-images worker
-  // configured in the pages dashboard
-  return context.env.CF_IMAGES.fetch(imageRequest)
+  return fetch(imageRequest)
 }
