@@ -72,7 +72,7 @@ export default {
 
     // Build a request that passes through request headers
     // Images are stored on https://gitlab.com/curben/blog/-/tree/site
-    const imageURL = new URL(imgPath, 'https://curben.gitlab.io/blog/')
+    const imageURL = new URL(imgPath, 'https://curben.gitlab.io/')
     const imageRequest = new Request(imageURL, {
       headers: request.headers
     })
