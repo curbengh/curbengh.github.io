@@ -72,7 +72,9 @@ export default {
 
     // Build a request that passes through request headers
     // Images are stored on https://gitlab.com/curben/blog/-/tree/site
-    const imageURL = new URL(imgPath, 'https://curben.gitlab.io/')
+    // curben.pages.dev returns 502 error
+    // curben.gitlab.io returns 403 error
+    const imageURL = new URL(imgPath, 'https://curbengh.github.io/')
     const imageRequest = new Request(imageURL, {
       headers: request.headers
     })
@@ -88,6 +90,7 @@ export default {
       response.headers.set('Vary', 'Accept')
       return response
     } else if (response.status === 404) {
+      const { readable, writable } = new TransformStream()
       // Custom 404 page
       const { status, statusText } = response
 
@@ -95,16 +98,17 @@ export default {
         ...request.headers,
         Accept: 'text/html'
       })
-      const page404 = new Request('https://curben.pages.dev/404', {
+      const page404 = new Request('https://curbengh.github.io/404', {
         headers: htmlHeader
       })
-      response = await fetch(page404)
-      const html = await response.text()
-      return new Response(html, {
+      const res404 = await fetch(page404)
+      res404.body.pipeTo(writable)
+
+      return new Response(readable, {
         status,
         statusText,
         headers: {
-          ...response.headers,
+          ...res404.headers,
           'Cache-Control': 'no-cache',
           'Content-Type': 'text/html; charset=utf-8'
         }
