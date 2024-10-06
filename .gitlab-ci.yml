@@ -49,7 +49,7 @@ deploy:
   stage: deploy
 
   trigger:
-    project: curben/blog
+    project: curben/curben.gitlab.io
     branch: master
     strategy: depend
 
