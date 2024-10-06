@@ -48,10 +48,11 @@ test:
 deploy:
   stage: deploy
 
-  trigger:
-    project: curben/curben.gitlab.io
-    branch: master
-    strategy: depend
+  before_script:
+    - apk update && apk add curl
+
+  script:
+    - curl -X POST --fail -F token=$TRIGGER_PAGES_TOKEN -F ref=master ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "microblog" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
