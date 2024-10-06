@@ -62,8 +62,8 @@ deploy:
     - chmod 600 ~/.ssh/config
 
   script:
-    - rsync -azvh --delete --exclude-from "rsync-exclude.txt" public/ host-1:/var/www/
-    - rsync -azvh --delete --exclude-from "rsync-exclude.txt" public/ host-2:/var/www/
+    - rsync -azvh --delete public/ host-1:/var/www/
+    - rsync -azvh --delete public/ host-2:/var/www/
     - npm run deploy-cf-images
 
   rules:
