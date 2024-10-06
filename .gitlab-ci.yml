@@ -21,7 +21,7 @@ build:
 
   rules:
     # Only trigger through push & "Run pipeline" events not in "site" branch; Skip in renovate job
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME != "site" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME != "site" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api")'
       when: always
 
   artifacts:
@@ -37,7 +37,7 @@ test:
     - sh check-homepage.sh
 
   rules:
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api")'
       when: always
 
   artifacts:
@@ -67,7 +67,7 @@ deploy:
     - npm run deploy-cf-images
 
   rules:
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api")'
       when: always
 
 deploy_pages:
@@ -79,7 +79,7 @@ deploy_pages:
     strategy: depend
 
   rules:
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
+    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api")'
       when: always
 
 # Check dependency update
