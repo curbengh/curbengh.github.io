@@ -1,0 +1,3 @@
+microblog/***
+atom-microblog.xml*
+sitemap-microblog.xml*
