@@ -1,11 +1,11 @@
 /microblog/* https://mdleom.com/microblog/:splat 200
 # Fallback for non-cf-worker-routed mirrors
-/images/320/* https://curben.gitlab.io/blog/:splat 200
-/images/468/* https://curben.gitlab.io/blog/:splat 200
-/images/768/* https://curben.gitlab.io/blog/:splat 200
-/images/* https://curben.gitlab.io/blog/:splat 200
-/img/* https://curben.gitlab.io/blog/:splat 200
-/files/* https://curben.gitlab.io/blog/:splat 200
+/images/320/* https://curben.gitlab.io/:splat 200
+/images/468/* https://curben.gitlab.io/:splat 200
+/images/768/* https://curben.gitlab.io/:splat 200
+/images/* https://curben.gitlab.io/:splat 200
+/img/* https://curben.gitlab.io/:splat 200
+/files/* https://curben.gitlab.io/:splat 200
 # https://statically.discourse.group/t/mobile-version-not-working-on-screenshot/225
 # /screenshot/* https://cdn.statically.io/screenshot/device=mobile/curben.netlify.app/:splat 200
 /screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
