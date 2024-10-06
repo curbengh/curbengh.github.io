@@ -40,6 +40,7 @@ skip_render:
 include:
   - "_headers" # Netlify header rule
   - "_redirects" # Netlify redirects rule
+  - "_routes.json" # Cloudflare Pages function
 
 # Writing
 new_post_name: :title.md # File name of new posts

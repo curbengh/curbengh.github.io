@@ -4,4 +4,10 @@ compatibility_date = "2024-09-23"
 compatibility_flags = [ "nodejs_compat" ]
 send_metrics = false
 
+# worker
 route = { pattern = "https://mdleom.com/images/*", zone_name = "mdleom.com" }
+
+# pages function
+[[services]]
+binding = "CF_IMAGES"
+service = "cf-images"
