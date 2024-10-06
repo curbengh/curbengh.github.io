@@ -48,22 +48,10 @@ test:
 deploy:
   stage: deploy
 
-  before_script:
-    - apk update && apk add openssh-client rsync
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - echo "$SSH_KEY_1" > ~/.ssh/id_host_1
-    - chmod 600 ~/.ssh/id_host_1
-    - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
-    - chmod 600 ~/.ssh/id_host_2
-    - echo "$SSH_CONFIG" > ~/.ssh/config
-    - chmod 600 ~/.ssh/config
-
-  script:
-    - rsync -azvh --delete --include-from rsync-include.txt --exclude='*' public/ host-1:/var/www/
-    - rsync -azvh --delete --include-from rsync-include.txt --exclude='*' public/ host-2:/var/www/
+  trigger:
+    project: curben/blog
+    branch: master
+    strategy: depend
 
   rules:
     - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "microblog" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web")'
