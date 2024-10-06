@@ -8,3 +8,5 @@ public/
 .deploy*/
 bun.lockb
 .wrangler/
+site/
+microblog/
