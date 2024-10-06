@@ -17,6 +17,15 @@ export default {
       })
     }
 
+    if (/image-resizing/.test(request.headers.get("via"))) {
+      return new Response('Request loop', {
+        status: 403,
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
+    }
+
     // https://developers.cloudflare.com/images/url-format#supported-formats-and-limitations
     if (!/\.(jpe?g|png|gif|webp)$/i.test(pathname)) {
       return new Response('Invalid file extension', {
@@ -72,9 +81,7 @@ export default {
 
     // Build a request that passes through request headers
     // Images are stored on https://gitlab.com/curben/blog/-/tree/site
-    // curben.pages.dev returns 502 error
-    // curben.gitlab.io returns 403 error
-    const imageURL = new URL(imgPath, 'https://curbengh.github.io/')
+    const imageURL = new URL(imgPath, 'https://mdleom.com/')
     const imageRequest = new Request(imageURL, {
       headers: request.headers
     })
@@ -90,15 +97,15 @@ export default {
       response.headers.set('Vary', 'Accept')
       return response
     } else if (response.status === 404) {
-      const { readable, writable } = new TransformStream()
       // Custom 404 page
+      const { readable, writable } = new TransformStream()
       const { status, statusText } = response
 
       const htmlHeader = new Headers({
         ...request.headers,
         Accept: 'text/html'
       })
-      const page404 = new Request('https://curbengh.github.io/404', {
+      const page404 = new Request('https://mdleom.com/404', {
         headers: htmlHeader
       })
       const res404 = await fetch(page404)
