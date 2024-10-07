@@ -7,7 +7,7 @@
 
 ## Branches
 
-- [`site`](https://gitlab.com/curben/blog/-/tree/site): images deployed to https://curben.gitlab.io/blog/
+- [`site`](https://gitlab.com/curben/blog/-/tree/site): images deployed to https://curben.gitlab.io/
 - [`microblog`](https://gitlab.com/curben/blog/-/tree/microblog): microblog deployed to https://mdleom.com/microblog/
 
 ## Plugins
