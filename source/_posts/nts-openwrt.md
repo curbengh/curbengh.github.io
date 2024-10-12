@@ -44,6 +44,25 @@ uci set chrony.netnod.iburst='yes'
 uci set chrony.netnod.nts='yes'
 ```
 
+Use NTS only.
+
+```plain /var/etc/chrony.d/20-nts.conf
+# Require at least 2 reachable sources
+minsources 2
+
+# Use NTS sources only
+authselectmode require
+
+# Disable chronyc remote access
+cmdport 0
+```
+
+Preserve the config during upgrade.
+
+```
+echo "/var/etc/chrony.d/20-nts.conf" >> /etc/sysupgrade.conf
+```
+
 Commit the changes and restart the daemon.
 
 ```
@@ -86,6 +105,25 @@ config makestep
 config nts
 	option rtccheck 'yes'
 	option systemcerts 'yes'
+```
+
+```
+cat /var/etc/chrony.d/10-uci.conf
+
+server time.cloudflare.com iburst nts
+server nts.netnod.se iburst nts
+allow 192.168.1.1/24
+makestep 1.0 3
+nocerttimecheck 1
+```
+
+```
+chronyc sources
+
+MS Name/IP address         Stratum Poll Reach LastRx Last sample
+===============================================================================
+^* time.cloudflare.com           3   6    17    13  -1188us[-1395us] +/-   11ms
+^- nts.netnod.se                 2   6    17    13   +229us[  +22us] +/-   85ms
 ```
 
 Lastly, highly recommend to hardcode the IP address of the chosen NTP servers into "/etc/hosts", especially when using DNSSEC-validating DNS client, to avoid unresolvable NTS domains when the time is not correct.
