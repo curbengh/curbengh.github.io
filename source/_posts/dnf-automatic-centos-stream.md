@@ -9,7 +9,7 @@ tags:
 
 If you have configured dnf-automatic to only apply security updates on CentOS Stream, it will not install any updates.
 
-```conf /etc/dnf/automatic.conf
+```plain /etc/dnf/automatic.conf
 [commands]
 upgrade_type = security
 ```
@@ -53,7 +53,7 @@ CentOS used to have updateinfo prior to CentOS 7; after it was removed in CentOS
 
 Automatic updates only works in CentOS Stream with this config:
 
-```conf /etc/dnf/automatic.conf
+```plain /etc/dnf/automatic.conf
 [commands]
 upgrade_type = default
 apply_updates = yes

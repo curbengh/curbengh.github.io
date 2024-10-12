@@ -8,7 +8,7 @@ tags:
 
 When I first started creating custom Splunk app, I had an incorrect understanding of access control list (ACLs) configured using [default.meta.conf](https://docs.splunk.com/Documentation/Splunk/latest/Admin/Defaultmetaconf) (located at app_folder/metadata/default.meta) whereby I could grant read access to a role like this:
 
-```conf
+```plain
 []
 access = read : [ roleA ], write : [ ]
 
@@ -18,7 +18,7 @@ access = read : [ roleA, roleB ], write : [ ]
 
 Or like this:
 
-```conf
+```plain
 []
 access = read : [ roleA ], write : [ ]
 
@@ -42,7 +42,7 @@ None of the above configs will grant roleB read access to lookupB.csv. For the r
 
 Notice a role must at least have read access to the app. The simplest way to grant roleB read access is,
 
-```conf
+```plain
 []
 access = read : [ roleA, roleB ], write : [ ]
 ```
@@ -51,7 +51,7 @@ While the above config is effective, but it does not meet the access requirement
 
 roleB can be restricted as such:
 
-```conf
+```plain
 []
 access = read : [ roleA, roleB ], write : [ ]
 
@@ -71,12 +71,12 @@ It is effective and meets the requirement, but there is an issue. Every new look
 
 How to implement default-deny ACL? We can achieve it by separating into two apps: appA is accessible to roleA only, appB is accessible to roleA and roleB. Any object we want to share with roleA and roleB, we put it in appB instead.
 
-```conf appA
+```plain appA
 []
 access = read : [ roleA ], write : [ ]
 ```
 
-```conf appB
+```plain appB
 []
 access = read : [ roleA, roleB ], write : [ ]
 ```
@@ -87,7 +87,7 @@ In this approach, every new objects created in appA will not be accessible to ro
 
 I noticed lookup files that have object-level ACL, e.g.
 
-```conf
+```plain
 [lookups/lookupC.csv]
 access = read : [ roleA ], write : [ ]
 ```
