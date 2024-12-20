@@ -1,7 +1,8 @@
 ---
-title: Splunk app-level changes during an app upgrade
+title: Updating lookup and dashboard through Splunk app upgrade
 excerpt: Splunk Cloud and Enterprise behave differently
 date: 2024-12-12
+updated: 2024-12-20
 tags:
   - splunk
 ---
