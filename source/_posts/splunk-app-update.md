@@ -1,8 +1,8 @@
 ---
-title: Updating lookup and dashboard through Splunk app upgrade
+title: Updating lookup and dashboard through Splunk app update
 excerpt: Splunk Cloud and Enterprise behave differently
 date: 2024-12-12
-updated: 2024-12-20
+updated: 2025-01-05
 tags:
   - splunk
 ---
@@ -31,4 +31,4 @@ In Splunk Enterprise, any change to the lookups of the app package will always r
 
 ## Dashboards
 
-In Splunk Cloud, even if a dashboard is never modified through Splunk Web, installing a newer app version does not replace existing ones, as if the dashboard XML in the `default` is automatically copied to the `local` folder upon installation. Since there is no way to delete the dashboards (in order to _restore_ them to the original `default`), the only way I can think of is through app reinstallation (uninstall then install). Since reinstallation is rather drastic as it results in temporary lost of [alerts](https://gitlab.com/curben/splunk-scripts/-/tree/main/threat-hunting) and lookups depended by them, I create separate apps that only have dashboards, then another set of apps for everything else.
+In Splunk Cloud, even if a dashboard was never modified through Splunk Web, installing a newer app version does not replace existing ones, as if the dashboard XML in the `default` is automatically copied to the `local` folder upon installation. Since there is no way to delete the dashboards (in order to _restore_ them to the original `default`), the only way I can think of is through app reinstallation (uninstall then install). Since reinstallation is rather drastic as it results in temporary lost of [alerts](https://gitlab.com/curben/splunk-scripts/-/tree/main/threat-hunting) and lookups depended by them, I create separate apps that only have dashboards, then another set of apps for everything else.
