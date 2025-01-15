@@ -270,23 +270,22 @@ In Caddyfile, the config can be expressed as:
 To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_up` option,
 
 {% codeblock mark:5,13,18 %}
-handle /img/\* {
-reverse_proxy https://cdn.statically.io {
-header_up Host cdn.statically.io
+handle /img/* {
+  reverse_proxy https://cdn.statically.io {
+    header_up Host cdn.statically.io
+  }
 }
-}
 
-handle*path /screenshot/* {
-rewrite \_ /screenshot/mdleom.com{path}
+handle_path /screenshot/* {
+  rewrite * /screenshot/mdleom.com{path}
 
-    reverse_proxy https://cdn.statically.io {
-      header_up Host cdn.statically.io
-    }
-
+  reverse_proxy https://cdn.statically.io {
+    header_up Host cdn.statically.io
+  }
 }
 
 reverse_proxy https://curben.netlify.app {
-header_up Host curben.netlify.app
+  header_up Host curben.netlify.app
 }
 {% endcodeblock %}
 
@@ -294,7 +293,7 @@ If there are multiple backends for the reverse_proxy, it's better to use a place
 
 {% codeblock mark:2 %}
 reverse_proxy https://curben.pages.dev https://curben.netlify.app {
-header_up Host {http.reverse_proxy.upstream.host}
+  header_up Host {http.reverse_proxy.upstream.host}
 }
 {% endcodeblock %}
 
@@ -304,34 +303,9 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
 
 ```Caddyfile
 (removeHeaders) {
-  header_up -cdn-loop
-  header_up -cf-cache-status
-  header_up -cf-connecting-ip
-  header_up -cf-ipcountry
-  header_up -cf-ray
-  header_up -cf-request-id
-  header_up -cf-visitor
-  header_up -cf-worker
-  header_up -client-ip
   header_up -cookie
-  header_up -forwarded
   header_up -referer
-  # https://user-agent-client-hints.glitch.me/
-  header_up -sec-ch-ua-arch
-  header_up -sec-ch-ua-bitness
-  header_up -sec-ch-ua-full-version
-  header_up -sec-ch-ua-ua
-  header_up -sec-ch-ua-ua-mobile
-  header_up -sec-ch-ua-ua-model
-  header_up -sec-ch-ua-ua-platform
-  header_up -sec-ch-ua-ua-platform-version
-  header_up -true-client-ip
-  header_up -via
-  header_up -x-forwarded-for
-  header_up -x-forwarded-proto
-  header_up -x-proxyuser-ip
-  header_up Host {http.reverse_proxy.upstream.host}
-  header_up User-Agent "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+  (see the last section)
 }
 
 mdleom.com {
@@ -359,41 +333,9 @@ The upstream locations insert some information into the response headers that ar
 
 ```
   header {
-    -access-control-allow-origin
-    -access-control-expose-headers
-    -alt-svc
-    -cdn-cache
-    -cdn-cachedat
-    -cdn-edgestorageid
-    -cdn-pullzone
-    -cdn-requestcountrycode
-    -cdn-requestid
-    -cdn-uid
-    -cf-bgj
     -cf-cache-status
-    -cf-polished
     -cf-ray
-    -cf-request-id
-    -content-disposition
-    -etag
-    -expect-ct
-    -server
-    -set-cookie
-    -timing-allow-origin
-    -via
-    -x-bytes-saved
-    -x-cache
-    -x-cache-hits
-    -x-nf-request-id
-    -x-served-by
-    -x-timer
-    Content-Security-Policy "default-src 'self'; child-src 'none'; connect-src 'none'; font-src 'none'; frame-src 'none'; img-src 'self'; manifest-src 'self'; media-src 'none'; object-src 'none'; prefetch-src 'none'; script-src 'self'; style-src 'self'; worker-src 'none'; base-uri 'none'; form-action https://duckduckgo.com https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion; frame-ancestors 'none'; block-all-mixed-content"
-    Expires "0"
-    Permissions-Policy "accelerometer=(), ambient-light-sensor=(), attribution-reporting=(), autoplay=(), bluetooth=(), browsing-topics=(), camera=(), compute-pressure=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), fullscreen=(), gamepad=(), geolocation=(), gyroscope=(), hid=(), identity-credentials-get=(), idle-detection=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), otp-credentials=(), payment=(), picture-in-picture=(), publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), usb=(), web-share=(self), window-management=(), xr-spatial-tracking=(), interest-cohort=()"
-    Referrer-Policy "no-referrer"
-    X-Content-Type-Options "nosniff"
-    X-Frame-Options "DENY"
-    X-XSS-Protection "1; mode=block"
+    (see the last section)
     defer
   }
 ```
