@@ -634,6 +634,7 @@ SPL:
 ## Heavy Forwarder Status Monitor
 
 Description: heavy_fwd is either down or unable to forward logs to Splunk Cloud for more than 15 minutes.
+Caveat: Require custom [data model](https://gitlab.com/curben/splunk-scripts/-/blob/main/threat-hunting/datamodels.json).
 SPL:
 
 ```spl
@@ -1287,6 +1288,7 @@ SPL:
 ## Splunk License Monitoring
 
 Description: Alert when Splunk is ingesting more than 90% of license. License rollover at 00:00 UTC (Cloud) or timezone of the license master (Enterprise). Pay attention to the timezones of the app's owner and the license master. Adjust `cron_schedule` and also `earliest_time` to account for daylight saving.
+Caveat: Require custom [data model](https://gitlab.com/curben/splunk-scripts/-/blob/main/threat-hunting/datamodels.json).
 SPL:
 
 ```spl
