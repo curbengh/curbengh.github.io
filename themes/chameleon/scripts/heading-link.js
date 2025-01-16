@@ -15,7 +15,8 @@ const anchorId = (str, transformOption) => {
 hexo.extend.filter.register('marked:renderer', function (renderer) {
   const { config } = this
   const headingId = {}
-  renderer.heading = function ({ text, depth: level }) {
+  renderer.heading = function ({ tokens, depth: level }) {
+    const text = this.parser.parseInline(tokens)
     const { modifyAnchors } = config.marked
     const transformOption = modifyAnchors
     let id = anchorId(text, transformOption)
