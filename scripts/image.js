@@ -11,7 +11,7 @@
 const { join } = require('path').posix
 
 hexo.extend.filter.register('marked:renderer', (renderer) => {
-  renderer.image = (href, title, alt) => {
+  renderer.image = ({ href, title, text: alt }) => {
     if (!alt) alt = ''
     if (!title) title = alt
 
