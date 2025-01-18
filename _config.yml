@@ -98,13 +98,13 @@ theme_config:
     Microblog: /microblog/
     About: /about/
     Feed: /atom.xml
-    GitLab: https://gitlab.com/curben/blog
 
   footer:
     Disclaimer: /disclaimer/
     Status: https://stats.uptimerobot.com/1394zup2LQ
     Onion: https://xw226dvxac7jzcpsf4xb64r4epr6o5hgn46dxlqk7gnjptakik6xnzqd.onion/
     Eepsite: https://gitlab.com/curben/blog#mirrors
+    GitLab: https://gitlab.com/curben/blog
 
   # Load forkawesome icons?
   icons: false
