@@ -58,9 +58,6 @@ More details are available in the following series of posts:
 
 ## Services
 
-- [Teddit](https://codeberg.org/teddit/teddit): A free and open source alternative Reddit front-end focused on privacy.
-  - [Onion](http://clnxvdfthhcmvwhauaadincmitimhawq7nee4dmqkk4nfkpfi3orsgad.onion)
-  - [Eepsite](http://xugoqcf2pftm76vbznx4xuhrzyb5b6zwpizpnw2hysexjdn5l2tq.b32.i2p)
 - [SimplyTranslate](https://simple-web.org/projects/simplytranslate.html): Provide fast and private translations to the user without wasting much overhead for extensive styling or JavaScript. Supports Google Translate engine.
   - [Onion](http://fmgp3rg56ng6mtb5gvu5hgzwwdyzgkmnanettwnmbnueues7ndw2fkyd.onion)
   - [Eepsite](http://mmiyv57bfhgc7p4pipk7jjqv5meuz5rjijoviquplvhxl3v7aoba.b32.i2p)
@@ -100,7 +97,7 @@ More details are available in the following series of posts:
 - [Mozhi](https://codeberg.org/aryak/mozhi): Alternative-frontend for many translation engines.
   - [Onion](http://larrc5gh4dldbu4z5ytp7opoek7gstgxfumkagpb7iv6q6kozwiaalqd.onion)
   - [Eepsite](http://fcfaoj2glfht36f56fnyjanhwqeuweq52nm6d5a4j4ldphoxlfgq.b32.i2p)
-- [dumb](https://github.com/rramiachraf/dumb): Private alternative front-end for Genius.
+- [Dumb](https://github.com/rramiachraf/dumb): Private alternative front-end for Genius.
   - [Onion](http://45wl7huszlmd3ikrzstqkgqg2w5sv7uljyzclknbi4oqulqebgb356ad.onion)
   - [Eepsite](http://e5ko75gniu662loixesw56uie52ho23fmc3gm35i3kshl4kra6tq.b32.i2p)
 - [Intellectual](https://github.com/Insprill/intellectual): Alternate frontend for Genius focused on privacy and simplicity.
