@@ -371,7 +371,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
     level ERROR
     format filter {
       wrap json {
-        time_format iso8601
+        time_format rfc3339
       }
       fields {
         request>remote_ip delete
@@ -400,6 +400,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
         request>headers>User-Agent delete
         request>headers>Via delete
         request>headers>X-Forwarded-For delete
+        request>headers>X-Forwarded-Host delete
         request>headers>X-Forwarded-Proto delete
         request>headers>X-ProxyUser-Ip delete
       }
@@ -408,6 +409,7 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
 }
 
 (setHeaders) {
+  -accept-ch
   -access-control-allow-origin
   -access-control-expose-headers
   -alt-svc
@@ -417,31 +419,50 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   -cdn-pullzone
   -cdn-requestcountrycode
   -cdn-requestid
+  -cdn-requestpullcode
+  -cdn-requestpullsuccess
   -cdn-uid
   -cf-bgj
   -cf-cache-status
+  -cf-chl-out
+  -cf-mitigated
   -cf-polished
   -cf-ray
   -cf-request-id
   -content-disposition
+  -critical-ch
   -etag
   -expect-ct
+  -fly-request-id
   -gitlab-lb
   -gitlab-sv
+  -nel
+  -origin-agent-cluster
+  -report-to
   -server
+  -server-timing
   -set-cookie
+  -st-cache
+  -st-id
+  -strict_sni
+  -strict_sni_header
   -timing-allow-origin
   -via
+  -x-amz-server-side-encryption
   -x-bytes-saved
   -x-cache
   -x-cache-hits
   -x-download-options
   -x-gitlab-feature-category
+  -x-nextjs-cache
   -x-nf-request-id
   -x-permitted-cross-domain-policies
+  -x-powered-by
   -x-request-id
+  -x-robots-tag
   -x-runtime
   -x-served-by
+  -x-server
   -x-timer
   -x-ua-compatible
   Cache-Control "max-age=86400, public"
@@ -476,9 +497,11 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   header_up -sec-ch-ua-ua-model
   header_up -sec-ch-ua-ua-platform
   header_up -sec-ch-ua-ua-platform-version
+  header_up -sec-gpc
   header_up -true-client-ip
   header_up -via
   header_up -x-forwarded-for
+  header_up -x-forwarded-host
   header_up -x-forwarded-proto
   header_up -x-proxyuser-ip
   header_up Host {http.reverse_proxy.upstream.host}
@@ -525,7 +548,12 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
   # Multiple mirrors
   reverse_proxy https://curben.pages.dev https://curben.netlify.app https://curben.gitlab.io https://curbengh.github.io {
     import removeHeaders
-    lb_policy first
+
+    lb_policy random
+    lb_retries 2
+    health_uri /
+    health_interval 30s
+    health_status 2xx
   }
 }
 ```
