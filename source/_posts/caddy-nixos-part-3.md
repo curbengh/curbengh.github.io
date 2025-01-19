@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
-updated: 2024-07-25
+updated: 2025-01-19
 tags:
   - server
   - linux
@@ -232,20 +232,14 @@ If you prefer to redirect apex to www,
 
 ### Reverse proxy
 
-Aside from reverse proxy to curben.netlify.app, I also configured my Netlify website to use Statically CDN for on-the-fly image processing. My current [config](https://gitlab.com/curben/blog) is:
+Aside from reverse proxy to random mirrors, I utilise [Cloudflare Images](https://gitlab.com/curben/blog/-/blob/master/cf-images/index.js) (hosted at `mdleom.com/images/*`) for on-the-fly image processing. However, this service is not available on my website in the {% post_link tor-hidden-onion-nixos 'dark' %} {% post_link i2p-eepsite-nixos 'web' %} since the traffic is not proxied through Cloudflare.
 
-```plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
-/img/* https://cdn.statically.io/img/:splat 200
-/screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
-/files/* https://gitlab.com/curben/blog/-/raw/site/:splat 200
-```
-
-In Caddyfile, the config can be expressed as:
+As a workaround, I configured Caddy to route `/images/*` to curben.pages.dev (which will then route to [`mdleom.com/images/*`](https://gitlab.com/curben/blog/-/blob/master/functions/images/%5B%5Bcatchall%5D%5D.js)). I could route directly to `mdleom.com/images/*`, but that could cause [request loops](https://developers.cloudflare.com/images/transform-images/transform-via-workers/#prevent-request-loops).
 
 ```plain
-  handle /img/* {
-    reverse_proxy https://cdn.statically.io
-  }
+	handle /images/* {
+		import reverseProxy curben.pages.dev
+	}
 
   handle_path /screenshot/* {
     # "curben.netlify.app" is updated to "mdleom.com"
@@ -260,36 +254,25 @@ In Caddyfile, the config can be expressed as:
     reverse_proxy https://gitlab.com
   }
 
-  reverse_proxy https://curben.netlify.app
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app {
+    (see the last section for load-balancing)
+  }
 ```
 
-`rewrite` directive is necessary to remove `img/` and `screenshot/*` from the path, so that "mdleom.com/img/foo.jpg" is linked to "https://cdn.statically.io/img/foo.jpg", not "https://cdn.statically.io/img/img/foo.jpg".
+`rewrite` directive is necessary to remove `screenshot/*` and `files/*` from the path, so that "mdleom.com/files/foo.pdf" is linked to "https://cdn.statically.io/files/foo.pdf", not "https://cdn.statically.io/files/files/foo.pdf".
+
+Another issue is navigating to a mirror that does not route through Cloudflare (Images) nor Caddy, so image resizing does not work, e.g. https://curben.netlify.app/images/foo.jpg will return 404. My workaround is to route `/images/*` to the [root path](https://gitlab.com/curben/blog/-/blob/400cceb7834e0d7e2c6626ff728f9741b04d98f3/build.sh#L16-L17) which is where the [original images](https://gitlab.com/curben/blog/-/tree/site) are hosted.
+
+```plain source/_redirects https://gitlab.com/curben/blog/-/blob/master/source/_redirects _redirects
+/images/* /:splat 200
+/screenshot/* https://cdn.statically.io/screenshot/curben.netlify.app/:splat 200
+/files/* /:splat 200
+```
+
 
 ### Host header
 
 To make sure Caddy sends the correct `Host:` header to the upstream/backend locations, I use `header_up` option,
-
-{% codeblock mark:5,13,18 %}
-handle /img/* {
-  reverse_proxy https://cdn.statically.io {
-    header_up Host cdn.statically.io
-  }
-}
-
-handle_path /screenshot/* {
-  rewrite * /screenshot/mdleom.com{path}
-
-  reverse_proxy https://cdn.statically.io {
-    header_up Host cdn.statically.io
-  }
-}
-
-reverse_proxy https://curben.netlify.app {
-  header_up Host curben.netlify.app
-}
-{% endcodeblock %}
-
-If there are multiple backends for the reverse_proxy, it's better to use a placeholder instead of hardcording the `Host` header.
 
 {% codeblock mark:2 %}
 reverse_proxy https://curben.pages.dev https://curben.netlify.app {
@@ -305,24 +288,10 @@ To prevent any unnecessary request headers from being sent to the upstreams, I u
 (removeHeaders) {
   header_up -cookie
   header_up -referer
-  (see the last section)
+  (see the last section for complete headers)
 }
 
 mdleom.com {
-  handle /img/* {
-    reverse_proxy https://cdn.statically.io {
-      import removeHeaders
-    }
-  }
-
-  handle_path /screenshot/* {
-    rewrite * /screenshot/mdleom.com{path}
-
-    reverse_proxy https://cdn.statically.io {
-      import removeHeaders
-    }
-  }
-
   reverse_proxy https://curben.pages.dev https://curben.netlify.app {
     import removeHeaders
   }
@@ -335,7 +304,7 @@ The upstream locations insert some information into the response headers that ar
   header {
     -cf-cache-status
     -cf-ray
-    (see the last section)
+    (see the last section for complete headers)
     defer
   }
 ```
@@ -529,9 +498,10 @@ Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor O
     defer
   }
 
-  handle /img/* {
-    import reverseProxy cdn.statically.io
-  }
+	# resize image on darkweb
+	handle /images/* {
+		import reverseProxy curben.pages.dev
+	}
 
   handle_path /screenshot/* {
     rewrite * /screenshot/mdleom.com{path}
