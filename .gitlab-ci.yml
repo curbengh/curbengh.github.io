@@ -20,8 +20,8 @@ build:
     - npm run build
 
   rules:
-    # Only trigger through push & "Run pipeline" events not in "site" branch; Skip in renovate job
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipeline")'
+    # Only trigger through push & "Run pipeline" events only in the master branch; Skip in renovate job; Merge request where master branch is the target
+    - if: '$RENOVATE != "true" && (($CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipeline")) || ($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"))'
       when: always
 
   artifacts:
@@ -37,7 +37,7 @@ test:
     - sh check-homepage.sh
 
   rules:
-    - if: '$RENOVATE != "true" && $CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipeline")'
+    - if: '$RENOVATE != "true" && (($CI_COMMIT_REF_NAME == "master" && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "pipeline")) || ($CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"))'
       when: always
 
   artifacts:
