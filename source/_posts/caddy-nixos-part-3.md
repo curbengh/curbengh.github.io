@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 3: Caddy)"
 excerpt: "Part 3: Configure Caddy"
 date: 2020-03-14
-updated: 2025-01-19
+updated: 2025-01-26
 tags:
   - server
   - linux
@@ -12,7 +12,7 @@ tags:
 series: true
 ---
 
-> 8 Jul 2022: Updated to Caddy 2.5 syntax.
+> 26 Jan 2025: Added [health check](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#active-health-checks) to the reverse proxy.
 
 In this segment, I show you how I set up this website (mdleom.com) to reverse proxy to curben.netlify.app using Caddy on NixOS (see above diagram). If you're not using NixOS, simply skip to the [Caddyfile](#caddyfile) section.
 
@@ -325,7 +325,20 @@ I also add the `Cache-Control` and `Referrer-Policy` to the response header. Use
   }
 ```
 
-### Complete Caddyfile
+### Intercept HTTP 302 redirect
+
+GitLab Pages returns [HTTP 302](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302) to redirect to `https://projects.gitlab.io/auth?domain=https://<username>.gitlab.io&state=<random-base64>` when navigating to an invalid path (e.g. `https://curben.gitlab.io/blog/invalid-path`). To prevent the redirect, I configured Caddy to [intercept](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#intercepting-responses) any HTTP 300-399 and return HTTP 404 instead.
+
+```
+  reverse_proxy https://curben.pages.dev https://curben.netlify.app {
+    @error3xx status 3xx
+    handle_response @error3xx {
+      respond "" {rp.status_code}
+    }
+  }
+```
+
+## Complete Caddyfile
 
 Since I also set up reverse proxy for {% post_link tor-hidden-onion-nixos 'Tor Onion' %} and {% post_link i2p-eepsite-nixos 'I2P Eepsite' %}, I refactor most of the configuration into "common.conf" and import it into "caddyProxy.conf".
 
