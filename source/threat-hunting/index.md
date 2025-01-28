@@ -1447,6 +1447,19 @@ SPL:
 | table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
 ```
 
+## Unusual printui.exe path
+
+References: [1](https://redcanary.com/blog/threat-intelligence/tangerine-turkey/)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process_name="printui.exe" Processes.process_path!="C:\\Windows\\System32\\printui.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
+| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
+| lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
+| table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
+```
+
 ## User Login with Local Credentials
 
 Description: Interactive logins should use domain credentials. Detect when a new user logs on with local credentials.
