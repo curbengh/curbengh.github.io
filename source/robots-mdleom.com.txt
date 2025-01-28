@@ -2,5 +2,8 @@
 User-agent: *
 Disallow: /404
 Disallow: /404.html
+Disallow: _headers
+Disallow: _redirects
+Disallow: _routes.json
 
 Sitemap: https://mdleom.com/sitemap.xml
