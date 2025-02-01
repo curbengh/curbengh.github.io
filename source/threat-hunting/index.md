@@ -2,6 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
+updated: 2025-02-01
 ---
 
 ## Generate ad_users.csv
@@ -629,17 +630,6 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, process, user, Name, Email
-```
-
-## Heavy Forwarder Status Monitor
-
-Description: heavy_fwd is either down or unable to forward logs to Splunk Cloud for more than 15 minutes.
-Caveat: Require custom [data model](https://gitlab.com/curben/splunk-scripts/-/blob/main/threat-hunting/datamodels.json).
-SPL:
-
-```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Splunk_Internal.Server WHERE index=_internal nodename=Server.Metrics.Tcpin_Connections host=heavy_fwd
-| where count==0
 ```
 
 ## ie4uinit.exe/msxsl.exe abuse
@@ -1285,34 +1275,6 @@ SPL:
 | table Time, info, user, search_type, savedsearch_name, app, search
 ```
 
-## Splunk License Monitoring
-
-Description: Alert when Splunk is ingesting more than 90% of license. License rollover at 00:00 UTC (Cloud) or timezone of the license master (Enterprise). Pay attention to the timezones of the app's owner and the license master. Adjust `cron_schedule` and also `earliest_time` to account for daylight saving.
-Caveat: Require custom [data model](https://gitlab.com/curben/splunk-scripts/-/blob/main/threat-hunting/datamodels.json).
-SPL:
-
-```spl
-| tstats summariesonly=true allow_old_summaries=true sum(Server.Licenser.Daily_Usage.gb) AS GB FROM datamodel=Splunk_Internal.Server WHERE index=_internal nodename=Server.Licenser.Daily_Usage BY host
-| join host type=inner
-  ```ingest entitlement is updated every 6 hours```
-  [| tstats summariesonly=true allow_old_summaries=true latest(Server.Licenser.Entitlements.ingest_license) AS Licensed FROM datamodel=Splunk_Internal.Server WHERE earliest=-7h index=summary nodename=Server.Licenser.Entitlements BY host]
-| addinfo
-| eval percent=round(GB/Licensed*100, 1), GB=round(GB,1), offset=ltrim(strftime(info_min_time,"%:z"),"+"), "Time Range"=strftime(info_min_time-86400,"%d/%m/%Y")." ".offset." - ".strftime(info_min_time,"%d/%m/%Y")." ".offset
-| table "Time Range", GB, Licensed, percent
-| where percent>=90
-```
-
-## Splunk Scheduled Searches Skipped
-
-Description: Monitor for scheduled searches
-SPL:
-
-```spl
-index=_internal sourcetype=scheduler app=mycompany* savedsearch_name=* status=skipped
-| eval Time=strftime(_time,"%Y-%m-%d %H:%M:%S %z"), savedsearch_type=if(window_time=-1, "Alert", "Report")
-| table Time, app, savedsearch_name, savedsearch_type, reason
-```
-
 ## SafeDllSearchMode is modified
 
 References: [1](https://car.mitre.org/analytics/CAR-2021-11-001/), [2](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order#standard-search-order-for-unpackaged-apps)
@@ -1324,19 +1286,6 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
-```
-
-## Windows Splunk Forwarder Monitoring
-
-Description: Monitor the windows splunk forwarder service and alerts if it is down
-SPL:
-
-```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4689 Processes.process_name="splunkd.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.process, Processes.user, _time span=1s
-| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
-| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
-| lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
-| table Time, index, host, EventCode, EventDescription, process, user, Name, Email
 ```
 
 ## Suspicious Logon/Logoff Events
