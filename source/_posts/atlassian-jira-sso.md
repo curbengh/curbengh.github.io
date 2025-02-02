@@ -2,6 +2,7 @@
 title: Atlassian and Jira portal-only SSO
 excerpt: SAML vs OAuth
 date: 2025-02-02
+updated: 2025-02-03
 tags:
   - jira
   - sso
@@ -33,9 +34,9 @@ In that situation, an alternative is to configure portal-only customer SSO inste
 
 A notable caveat of portal-only customer SSO is that only applies to _customers_. If organisation-wide SSO is not configured, service desk would logon using an Atlassian account to respond to tickets. When an agent access a portal (`xxx.atlassian.net/servicedesk/customer/portals`) and enter their email, the logon button is shown as "Continue with Atlassian account", instead of "Continue with single sign-on".
 
-How does a Jira portal detect whether an email is associated to an agent? It doesn't. Instead, it checks whether that email exists as a _user_ in the Atlassian organisation of a portal. If an email exists as a user under the Directory tab of Atlassian Administration (admin.atlassian.com) — regardless whether that user is an organisation/Jira admin or not — then "Continue with Atlassian account" will always appear. For "Continue with single sign-on" to appear, that email can only exists as a Jira [portal-only customer](https://support.atlassian.com/user-management/docs/manage-jira-service-management-customer-accounts/), not an organisation user or _agent_ — paid user that counts toward Atlassian subscription. The email does not even need to exist as a customer (portal-only account) if it has not been used to logon to that portal. User (or rather, _customer_) management will be mainly handled by the IdP — under the application management. Jira admin can then choose whether to automatically or manually approve customer access.
+How does a Jira portal detect whether an email should login with Atlassian account or SSO? It checks whether that email exists as a _user_ in the Atlassian organisation of a portal who is also known as an _agent_ — paid user that counts toward Atlassian subscription. If an email exists as a user under the Directory tab of Atlassian Administration (admin.atlassian.com) — regardless whether that user is an organisation/Jira admin or not — then "Continue with Atlassian account" will always appear. For "Continue with single sign-on" to appear, that email can only exists as a Jira [portal-only customer](https://support.atlassian.com/user-management/docs/manage-jira-service-management-customer-accounts/), not an agent. The email does not even need to exist as a customer (portal-only account) if it has not been used to logon to that portal. User (or rather, _customer_) management will be mainly handled by the IdP under the enterprise application configuration. Jira admin can then choose whether to automatically or manually approve customer access.
 
-What if organisation-wide SSO is configured? How does Jira portal logon look like if customer is part of the same organisation? I'm not sure. I'd imagine "Continue with Atlassian account" will be shown and then redirect to SAML logon URL.
+What if organisation-wide SSO is configured? How does Jira portal logon look like if a customer is part of the same organisation? I'm not sure. I'd imagine "Continue with Atlassian account" will be shown and then redirect to SAML logon URL.
 
 ### Atlassian Guard
 
