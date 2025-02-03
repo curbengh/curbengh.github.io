@@ -5,6 +5,8 @@ date: 2025-01-15
 updated: 2025-02-01
 ---
 
+Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
+
 ## Generate ad_users.csv
 
 Description: Prepare data for ad_users.csv. Excludes disabled account.
@@ -227,12 +229,12 @@ SPL:
 ```VPN login uses email instead of sAMAccountName```
 | lookup ad_users mail AS user OUTPUT sAMAccountName, displayName AS displayName2
 ```machine tunnel uses hostname instead sAMAccountName/email```
-| lookup snow_cmdb_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName3
+| lookup cmdb_ci_list_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName3
 | eval Name=coalesce(displayName, displayName2, displayName3), vpn_ip=replace(vserver, ":\d{1,5}$", "")
 | lookup netscaler-servers ip AS vpn_ip OUTPUT server AS "VPN Server"
 | lookup ad_users displayName AS Name OUTPUT sAMAccountName AS sAMAccountName2
 | eval "First Attempt"=strftime(first_attempt,"%Y-%m-%d %H:%M:%S %z"), Username=user, "Source IP"=src, "Source Index"=index, "VPN Server IP"=vpn_ip, "Destination IP"=dests, Username=user, "AD Username"=coalesce(sAMAccountName, sAMAccountName2)
-```Name field can be an empty string (not null) when it matches a software in snow_cmdb_lookup, e.g. "git"```
+```Name field can be an empty string (not null) when it matches a software in cmdb_ci_list_lookup, e.g. "git"```
 | where isnull('AD Username')
 | table "First Attempt", "Source Index", "VPN Server IP", "VPN Server", "Destination IP", app, Username, "Source IP", City, Country, Count
 ```
@@ -270,13 +272,13 @@ SPL:
 ```VPN login uses email instead of sAMAccountName```
 | lookup ad_users mail AS user OUTPUT sAMAccountName, displayName AS displayName2, company AS company2, department AS department2, mail AS mail2, jobTitle AS jobTitle2, managerMail AS managerMail2
 ```machine tunnel uses hostname instead sAMAccountName/email```
-| lookup snow_cmdb_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName3
+| lookup cmdb_ci_list_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName3
 | eval Name=coalesce(displayName, displayName2, displayName3), vpn_ip=replace(vserver, ":\d{1,5}$", "")
 | lookup ad_users displayName AS Name OUTPUT sAMAccountName AS sAMAccountName2, company AS company3, department AS department3, mail AS mail3, jobTitle AS jobTitle3, managerMail AS managerMail3
 | lookup netscaler-servers ip AS vpn_ip OUTPUT server AS "VPN Server"
 | eval "First Attempt"=strftime(first_attempt,"%Y-%m-%d %H:%M:%S %z"), "VPN Server IP"=vpn_ip, "Destination IP"=dest, Username=user, "Source IP"=src, "Source Index"=index
 | eval Company=coalesce(company, company2, company3), Department=coalesce(department, department2, department3), Email=coalesce(mail, mail2, mail3)=coalesce(jobTitle, jobTitle2, jobTitle3), "AD Username"=coalesce(sAMAccountName, sAMAccountName2), Manager=coalesce(managerMail, managerMail2, managerMail3)
-| lookup snow_cmdb_lookup dv_assigned_to AS Name OUTPUT name AS "Assigned Asset"
+| lookup cmdb_ci_list_lookup dv_assigned_to AS Name OUTPUT name AS "Assigned Asset"
 | where isnotnull('AD Username')
 | dedup "AD Username", Country SORTBY -first_attempt
 | table "First Attempt", Username, Name, "Source Index", "VPN Server IP", "VPN Server", "Destination IP", app, "Source IP", City, Country, "AD Username", "Assigned Asset", Email, Department, Company, Manager, Count
@@ -298,12 +300,12 @@ SPL:
 ```VPN login uses email instead of sAMAccountName```
 | lookup ad_users mail AS user OUTPUT sAMAccountName AS sAMAccountName2, displayName AS displayName2, company AS company2, department AS department2, mail AS mail2, jobTitle AS jobTitle2, domain AS domain2, managerMail AS managerMail2
 ```machine tunnel uses hostname instead sAMAccountName/email```
-| lookup snow_cmdb_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName3
+| lookup cmdb_ci_list_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName3
 | lookup ad_users displayName AS displayName3 OUTPUT sAMAccountName AS sAMAccountName3, company AS company3, department AS department3, mail AS mail3, jobTitle AS jobTitle3, domain AS domain3, managerMail AS managerMail3
 | eval Time=strftime(_time,"%Y-%m-%d %H:%M:%S %z"), Username=user, "Source IP"=src, vpn_ip=replace(dest, ":\d{1,5}$", ""), "VPN Server IP"=vpn_ip, "VPN Type"=category, "Destination Host"=site, "URL Path"=uri_path
 | lookup netscaler-servers ip AS vpn_ip OUTPUT server AS "VPN Server"
 | eval Name=coalesce(displayName, displayName2, displayName3), Company=coalesce(company, company2, company3), Department=coalesce(department, department2, department3), Email=coalesce(mail, mail2, mail3)=coalesce(jobTitle, jobTitle2, jobTitle3), "AD Username"=coalesce(sAMAccountName2, sAMAccountName3, user), Domain=coalesce(domain, domain2, domain3), Manager=coalesce(managerMail, managerMail2, managerMail3)
-| lookup snow_cmdb_lookup dv_assigned_to AS Name OUTPUT name AS "Assigned Asset"
+| lookup cmdb_ci_list_lookup dv_assigned_to AS Name OUTPUT name AS "Assigned Asset"
 | table Time, Username, Name, "Source IP", "VPN Server IP", "VPN Server", "VPN Type", "Destination Host", "URL Path", City, Country, "AD Username", Domain, "Assigned Asset", Email, Department, Company, Manager
 ```
 
@@ -520,7 +522,7 @@ SPL:
 ```spl
 index="windows" source="XmlWinEventLog:Application" Name="'SecurityCenter'" EventCode=15 EventData_Xml!="<Data>Windows Defender</Data>*"
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
-| lookup snow_cmdb_lookup name AS host OUTPUT dv_assigned_to AS "Last Active User"
+| lookup cmdb_ci_list_lookup name AS host OUTPUT dv_assigned_to AS "Last Active User"
 | table Time, index, host, EventCode, EventData_Xml, "Last Active User"
 ```
 
@@ -582,8 +584,8 @@ SPL:
 | sort -event_count
 | eval Time=strftime(_time, "%Y-%m-%d %H:%M:%S %z"), user_lookup=replace(Username,"^(\w+)_admin","\1")
 | lookup ad_users sAMAccountName AS user_lookup OUTPUT displayName AS Name, mail AS Email, pwdLastSet_localtime AS "Password Last Changed"
-| lookup snow_cmdb_lookup name AS Asset OUTPUT dv_assigned_to AS "Asset Assigned To"
-| lookup snow_cmdb_lookup dv_assigned_to AS Name OUTPUT name AS "User-assigned Asset(s)"
+| lookup cmdb_ci_list_lookup name AS Asset OUTPUT dv_assigned_to AS "Asset Assigned To"
+| lookup cmdb_ci_list_lookup dv_assigned_to AS Name OUTPUT name AS "User-assigned Asset(s)"
 | rename Asset AS "Affected Asset", event_count AS Count
 | table Domain, EventCode, EventName, "Affected Asset", "Asset Assigned To", Username, "Password Last Changed", Name, "User-assigned Asset(s)", Email, BizUnit, Company, Count
 ```
@@ -971,7 +973,7 @@ index="nmap" state="open" portid=53
 | lookup dhcp_lookup ip AS addr OUTPUT dns AS dns3
 | eval dns=coalesce(hostname, dns2, dns3)
 | rex field=dns "(?<asset_lookup>^\w+)"
-| lookup snow_cmdb_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName
+| lookup cmdb_ci_list_lookup name AS asset_lookup OUTPUT dv_assigned_to AS displayName
 | lookup ad_users displayName OUTPUT sAMAccountName, mail
 | lookup nmap-targets Target AS addr OUTPUT Comment AS subnet
 | table addr, protocol, portid, hostname, dns, product, version, ostype, devicetype, extrainfo, state, subnet
