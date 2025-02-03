@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-02-01
+updated: 2025-02-03
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -1220,6 +1220,18 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, process, user, Name, Email
+```
+
+## Rundll32 Scheduled Task
+
+References: [1](https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/#persistence)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Change.All_Changes WHERE index="windows" All_Changes.result_id=4698 All_Changes.object_attrs="*rundll32*" BY host, All_Changes.command, All_Changes.object, All_Changes.object_attrs, All_Changes.result, All_Changes.result_id, All_Changes.user, _time span=1s
+| rename All_Changes.* AS *, object AS TaskName, result AS EventDescription, result_id AS EventCode, object_attrs AS TaskAttributes
+| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
+| table Time, host, TaskName, command, EventCode, EventDescription, user, TaskAttributes
 ```
 
 ## SAM Credential Dump
