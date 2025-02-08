@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-02-03
+updated: 2025-02-08
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -452,11 +452,11 @@ SPL:
 
 ## cmd.exe auto-start
 
-References: [1](https://thedfirreport.com/2024/08/26/blacksuit-ransomware/#execution)
+References: [1](https://thedfirreport.com/2024/08/26/blacksuit-ransomware/#execution), [2](https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/#lateral-movement)
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Services WHERE index="windows" Services.signature_id="7045" Services.process IN ("*comspec*", "*cmd.exe*") BY index, host, Services.signature_id, Services.signature, Services.process, Services.service_name, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Services WHERE index="windows" Services.signature_id="7045" Services.process IN ("*comspec*", "*cmd*") BY index, host, Services.signature_id, Services.signature, Services.process, Services.service_name, _time span=1s
 | rename Services.* AS *, signature_id AS EventCode, signature AS EventDescription
 | eval Time=strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | table Time, host, EventCode, EventDescription, service_name, process, index
