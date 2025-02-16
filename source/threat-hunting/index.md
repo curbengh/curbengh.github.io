@@ -413,6 +413,19 @@ SPL:
 | table Time, index, host, EventCode, EventDescription, process, user, Name, Email
 ```
 
+## CDB.exe execution
+
+References: [1](https://www.elastic.co/security-labs/fragile-web-ref7707), [2](https://lolbas-project.github.io/lolbas/OtherMSBinaries/Cdb/)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process_name="cdb.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
+| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
+| lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
+| table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
+```
+
 ## CVE-2023-23397 Outlook SMB
 
 References: [1](https://www.microsoft.com/en-us/security/blog/2023/03/24/guidance-for-investigating-attacks-using-cve-2023-23397/)
