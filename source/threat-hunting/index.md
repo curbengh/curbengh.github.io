@@ -1583,3 +1583,16 @@ SPL:
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, host, process, parent_process, EventCode, EventDescription, user, Name, Email, index
 ```
+
+## WinrsHost.exe execution
+
+References: [1](https://www.elastic.co/security-labs/fragile-web-ref7707), [2](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/winrs)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 (Processes.parent_process_name="winrshost.exe" OR Processes.process_name="winrs.exe") BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
+| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
+| lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
+| table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
+```
