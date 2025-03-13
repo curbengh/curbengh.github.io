@@ -502,6 +502,25 @@ index="windows" EventCode=4662 Properties IN ("*{1131f6ad-9c07-11d1-f79f-00c04fc
 | table Time, host, SubjectUserName, EventCode, EventDescription, ObjectName, Properties, Name, Email
 ```
 
+## Defender Incident
+
+Description: Alert Defender incidents queried using Graph API.
+References: [1](https://splunkbase.splunk.com/app/6207)
+SPL:
+
+```spl
+index="defender" sourcetype="ms365:defender:incident:alerts"
+| dedup incidentId sortby -_time
+| eval created=strptime(createdDateTime." +0000", "%Y-%m-%dT%H:%M:%S.%QZ %z")
+```today```
+| where created>=relative_time(now(), "@d")
+| rename evidence{}.* AS *, fileDetails.* AS *, userAccount.* AS *
+| lookup ad_users sAMAccountName AS accountName OUTPUT displayName AS accountUser
+| lookup cmdb_ci_list_lookup dv_name AS hostName OUTPUT dv_assigned_to AS lastActiveUser
+| eval Time=strftime(created, "%Y-%m-%d %H:%M:%S %z"), "Last Updated"=strftime(_time, "%Y-%m-%d %H:%M:%S %z"), file_path=if(isnotnull(sha1), mvindex(filePath,0)."\\".mvindex(fileName,0), ""), hostName=if(hostName=="null", deviceDnsName, hostName), evidenceType=if(isnotnull(url), "#microsoft.graph.security.urlEvidence", "#microsoft.graph.security.fileEvidence"), remediationStatus=mvindex(remediationStatus, mvfind('@odata.type', evidenceType))
+| table Time, "Last Updated", status, severity, remediationStatus, incidentId, title, threatDisplayName, accountUser, hostName, lastActiveUser, file_path, sha1, url, incidentWebUrl
+```
+
 ## Defender traffic blocked by Windows Firewall
 
 References: [1](https://github.com/netero1010/EDRSilencer), [2](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-5157), [3](https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=5157)
