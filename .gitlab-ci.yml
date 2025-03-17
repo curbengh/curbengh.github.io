@@ -52,13 +52,13 @@ deploy:
     - apk update && apk add openssh-client rsync
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - echo "$SSH_KNOWN_HOSTS" | base64 --decode > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-    - echo "$SSH_KEY_1" > ~/.ssh/id_host_1
+    - echo "$SSH_KEY_1" | base64 --decode > ~/.ssh/id_host_1
     - chmod 600 ~/.ssh/id_host_1
-    - echo "$SSH_KEY_2" > ~/.ssh/id_host_2
+    - echo "$SSH_KEY_2" | base64 --decode > ~/.ssh/id_host_2
     - chmod 600 ~/.ssh/id_host_2
-    - echo "$SSH_CONFIG" > ~/.ssh/config
+    - echo "$SSH_CONFIG" | base64 --decode > ~/.ssh/config
     - chmod 600 ~/.ssh/config
 
   script:
