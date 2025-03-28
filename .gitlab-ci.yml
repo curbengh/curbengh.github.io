@@ -49,16 +49,21 @@ deploy:
   stage: deploy
 
   before_script:
-    - apk update && apk add openssh-client rsync
+    - apk update && apk add openrc tailscale openssh-client rsync
+    - mkdir -p /run/openrc/
+    - touch /run/openrc/softlevel
+    - rc-service -Z tailscale start
+    - rc-service tailscale start
+    - tailscale up --auth-key="${TAILSCALE_OAUTH}?ephemeral=true&preauthorized=true" --advertise-tags=tag:gl-ci --hostname="gitlab-$(cat /etc/hostname)" --accept-routes
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" | base64 --decode > ~/.ssh/known_hosts
+    - echo "$SSH_KNOWN_HOSTS" | base64 -d > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-    - echo "$SSH_KEY_1" | base64 --decode > ~/.ssh/id_host_1
+    - echo "$SSH_KEY_1" | base64 -d > ~/.ssh/id_host_1
     - chmod 600 ~/.ssh/id_host_1
-    - echo "$SSH_KEY_2" | base64 --decode > ~/.ssh/id_host_2
+    - echo "$SSH_KEY_2" | base64 -d > ~/.ssh/id_host_2
     - chmod 600 ~/.ssh/id_host_2
-    - echo "$SSH_CONFIG" | base64 --decode > ~/.ssh/config
+    - echo "$SSH_CONFIG" | base64 -d > ~/.ssh/config
     - chmod 600 ~/.ssh/config
 
   script:
