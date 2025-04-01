@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-03-29
+updated: 2025-04-01
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -394,7 +394,7 @@ References: [1](https://detect.fyi/hunting-clickfix-initial-access-techniques-8c
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Registry WHERE Registry.registry_key_name="*\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU*" Registry.registry_value_data IN ("*powershell*", "*pwsh*", "*cmd*", "*mshta*") (Registry.registry_value_data IN ("*start-process*", "*hidden*", "*command*", "*bypass*", "*new-object*", "*http*", "*invoke*", "*iex*", "*-exec*", "*verification*", "*classname*", "*cimmethod*", "*methodname*", "*win32_process*", "*system.diagnostics.process*", "*system.management.automation*", "*Reflection.Assembly*", "*FromBase64String*", "*import-module*", "*add-type*", "*webclient*") OR Registry.registry_value_data IN ("*http*", "*javascript:*", "*verification*", "*eval*", "*.js*", "*.vbs*", "*.hta*", "*.bat*")) NOT Registry.registry_key_name="*\\MRUList" BY Registry.dest, Registry.registry_value_data, Registry.action,  Registry.process_guid, Registry.process_id, Registry.registry_key_name, Registry.user
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Registry WHERE index="windows" Registry.registry_key_name="*\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU*" Registry.registry_value_data IN ("*powershell*", "*pwsh*", "*cmd*", "*mshta*") (Registry.registry_value_data IN ("*start-process*", "*hidden*", "*command*", "*bypass*", "*new-object*", "*http*", "*invoke*", "*iex*", "*-exec*", "*verification*", "*classname*", "*cimmethod*", "*methodname*", "*win32_process*", "*system.diagnostics.process*", "*system.management.automation*", "*Reflection.Assembly*", "*FromBase64String*", "*import-module*", "*add-type*", "*webclient*") OR Registry.registry_value_data IN ("*http*", "*javascript:*", "*verification*", "*eval*", "*.js*", "*.vbs*", "*.hta*", "*.bat*")) NOT Registry.registry_key_name="*\\MRUList" BY Registry.dest, Registry.registry_value_data, Registry.action,  Registry.process_guid, Registry.process_id, Registry.registry_key_name, Registry.user
 | rename Registry.* AS *
 | where len(registry_value_data) >= 50
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
@@ -728,6 +728,17 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
+```
+
+## InnoDownloadPlugin user-agent observed
+
+References: [1](https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/#execution)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Web WHERE index="proxy" Web.http_user_agent="*InnoDownloadPlugin*"
+BY Web.user, Web.src, Web.dest, Web.url_domain, Web.url, Web.category, Web.action, _time span=1s
+| rename Web.* AS *
 ```
 
 ## Kerberos Certificate Spoofing
