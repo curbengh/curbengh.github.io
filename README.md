@@ -50,7 +50,7 @@ Refer to [this post](https://mdleom.com/2018/09/21/how-to-create-a-hexo-blog/) f
 
 ## License
 
-Copyright (c) 2018-2024 Ming Di Leom
+Copyright (c) 2018-2025 Ming Di Leom
 
 The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license, and the underlying source code used to format and display that content is licensed under an [MIT license](LICENSE.md), unless indicated otherwise.
 
