@@ -52,7 +52,7 @@ deploy:
     - apk update && apk add tailscale openssh-client rsync
     - export PATH="/usr/libexec/tailscale:$PATH"
     - export TS_DEBUG_FIREWALL_MODE=nftables
-    - tailscaled --socket=/run/tailscale/tailscaled.sock --state=/var/lib/tailscale/tailscaled.state --port=41641 --no-logs-no-support >/dev/null 2>&1 &
+    - tailscaled --socket=/run/tailscale/tailscaled.sock --state="mem:" --port=41641 --no-logs-no-support >/dev/null 2>&1 &
     - tailscale up --auth-key="${TAILSCALE_OAUTH}?ephemeral=true&preauthorized=true" --advertise-tags=tag:gl-ci --hostname="gitlab-$(cat /etc/hostname)" --accept-routes
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
