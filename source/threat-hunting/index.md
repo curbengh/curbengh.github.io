@@ -477,13 +477,13 @@ SPL:
 | table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
 ```
 
-## cmd.exe auto-start
+## cmd.exe/powershell.exe auto-start
 
-References: [1](https://thedfirreport.com/2024/08/26/blacksuit-ransomware/#execution), [2](https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/#lateral-movement)
+References: [1](https://thedfirreport.com/2024/08/26/blacksuit-ransomware/#execution), [2](https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/#lateral-movement), [3](https://www.unh4ck.com/detection-engineering-and-threat-hunting/lateral-movement/detecting-conti-cobaltstrike-lateral-movement-techniques-part-1#cobaltstrike-jump-psexec_psh)
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Services WHERE index="windows" Services.signature_id="7045" Services.process IN ("*comspec*", "*cmd*") BY index, host, Services.signature_id, Services.signature, Services.process, Services.service_name, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Services WHERE index="windows" Services.signature_id="7045" Services.process IN ("*comspec*", "*cmd*", "*powershell*", "*pwsh*") BY index, host, Services.signature_id, Services.signature, Services.process, Services.service_name, _time span=1s
 | rename Services.* AS *, signature_id AS EventCode, signature AS EventDescription
 | eval Time=strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | table Time, host, EventCode, EventDescription, service_name, process, index
@@ -1085,14 +1085,14 @@ SPL:
 | table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
 ```
 
-## Possible ShareFinder/Sharphound/CobaltStrike Usage
+## Possible ShareFinder/Netscan/Sharphound/CobaltStrike Usage
 
-Description: SharedFinder/Netscan/Sharphound/CobaltStrike is commonly used to discover shares in a network.
+Description: SharedFinder/Netscan/Sharphound/Netscan/CobaltStrike is commonly used to discover shares in a network.
 References: [1](https://thedfirreport.com/2023/01/23/sharefinder-how-threat-actors-discover-file-shares/#htoc-file-share-access), [2](https://thedfirreport.com/2024/01/29/buzzing-on-christmas-eve-trigona-ransomware-in-3-hours/#discovery), [3](https://thedfirreport.com/2024/08/26/blacksuit-ransomware/#credential-access), [4](https://www.unh4ck.com/detection-engineering-and-threat-hunting/lateral-movement/detecting-conti-cobaltstrike-lateral-movement-techniques-part-1#cobaltstrike-jump-psexec_psh)
 SPL:
 
 ```spl
-index="windows" source="XmlWinEventLog:Security" EventCode=5145 RelativeTargetName IN ("delete.me", "MSSE-*", "status_*", "postex_ssh_*", "msagent_*", "postex_*", "mojo*", "wkssvc*", "ntsvcs*", "DserNamePipe*", "SearchTextHarvester*", "scerpc*", "mypipe-*", "windows.update.manager*")
+index="windows" source="XmlWinEventLog:Security" EventCode=5145 (ShareName IN ("\\\\*\\C", "\\\\*\\ADMIN", "\\\\*\\IPC") OR RelativeTargetName IN ("delete.me", "MSSE-*", "status_*", "postex_ssh_*", "msagent_*", "postex_*", "mojo*", "wkssvc*", "ntsvcs*", "DserNamePipe*", "SearchTextHarvester*", "scerpc*", "mypipe-*", "windows.update.manager*"))
 | rex field=SubjectUserName "(?<lookup_username>[^\d+]+)"
 | eval dst_asset=Computer, lookup_username=upper(lookup_username)
 | lookup ldap_assets ip AS IpAddress OUTPUT dns AS src_asset
@@ -1103,7 +1103,7 @@ index="windows" source="XmlWinEventLog:Security" EventCode=5145 RelativeTargetNa
 With [additional mapping](https://gitlab.com/curben/splunk-scripts/-/commit/cc3e156a75519dbb3a23e0fb833c87b46c0b9409) to Endpoint Filesystem data model:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Filesystem WHERE index="windows" Filesystem.signature_id=5145 Filesystem.file_target IN ("delete.me", "MSSE-*", "status_*", "postex_ssh_*", "msagent_*", "postex_*", "mojo*", "wkssvc*", "ntsvcs*", "DserNamePipe*", "SearchTextHarvester*", "scerpc*", "mypipe-*", "windows.update.manager*") BY index, host, Filesystem.file_target, Filesystem.file_name, Filesystem.file_path, Filesystem.signature_id, Filesystem.signature, Filesystem.src, Filesystem.user, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Filesystem WHERE index="windows" Filesystem.signature_id=5145 (Filesystem.file_name IN ("\\\\*\\C", "\\\\*\\ADMIN", "\\\\*\\IPC") OR Filesystem.file_target IN ("delete.me", "MSSE-*", "status_*", "postex_ssh_*", "msagent_*", "postex_*", "mojo*", "wkssvc*", "ntsvcs*", "DserNamePipe*", "SearchTextHarvester*", "scerpc*", "mypipe-*", "windows.update.manager*")) BY index, host, Filesystem.file_target, Filesystem.file_name, Filesystem.file_path, Filesystem.signature_id, Filesystem.signature, Filesystem.src, Filesystem.user, _time span=1s
 | rename Filesystem.* AS *, signature_id AS EventCode, signature AS EventDescription, file_name AS ShareName, file_path AS ShareLocalPath, file_target AS RelativeTargetName
 ```
 
