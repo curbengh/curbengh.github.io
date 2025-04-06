@@ -453,13 +453,13 @@ SPL:
 | table Time, index, host, EventCode, EventDescription, process, user, Name, Email
 ```
 
-## Cloudflared tunnel detection
+## Cloudflared/Tailscaled tunnel detection
 
 References: [1](https://thedfirreport.com/2024/12/02/the-curious-case-of-an-egg-cellent-resume/#command-and-control), [2](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/deploy-tunnels/tunnel-with-firewall/)
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Web WHERE index="proxy" Web.url_domain IN ("region*.argotunnel.com", "cftunnel.com", "update.argotunnel.com")
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Web WHERE index="proxy" Web.url_domain IN ("region*.argotunnel.com", "cftunnel.com", "update.argotunnel.com", "controlplane.tailscale.com", "derp*-all.tailscale.com")
 BY Web.user, Web.src, Web.dest, Web.url_domain, Web.url, Web.category, Web.action, _time span=1s
 | rename Web.* AS *
 ```
@@ -1466,7 +1466,7 @@ References: [1](https://thedfirreport.com/2024/08/12/threat-actors-toolkit-lever
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process_name IN ("ngrok.exe", "cloudflared.exe") BY index, host, Processes.signature_id, Processes.signature, Processes.process, Processes.user, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process_name IN ("ngrok.exe", "cloudflared.exe", "tailscale*.exe") BY index, host, Processes.signature_id, Processes.signature, Processes.process, Processes.user, _time span=1s
 | rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
