@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-04-01
+updated: 2025-04-06
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -742,7 +742,8 @@ SPL:
 
 ## InnoDownloadPlugin user-agent observed
 
-References: [1](https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/#execution)
+Description: Inno Setup, a free installer for Windows programs. Inno Download Plugin is a component of Inno Setup.
+References: [1](https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/#execution), [2](https://jrsoftware.org/isinfo.php)
 SPL:
 
 ```spl
