@@ -67,12 +67,12 @@ The content of this blog is licensed under a [CC BY-SA 4.0](https://creativecomm
 ## Repository Mirrors
 
 - https://github.com/curbengh
-- https://pagure.io/projects/curben/%2A
-- https://codeberg.org/curben
-- https://git.disroot.org/curben
-- https://git.nixnet.services/curben
 - https://gitea.com/curben
 - https://framagit.org/curben
+- https://pagure.io/projects/curben/%2A
+- https://codeberg.org/curben
+- https://git.nixnet.services/curben
+- https://git.disroot.org/curben
 
 ## Uptime Status
 
