@@ -13,11 +13,13 @@ hexo generate
 
 if [ "$NODE_ENV" = "production" ] && [ -d "public/" ]; then
   # deploy site assets
+  rm -rf "site/"
   git clone --depth 1 --branch site https://gitlab.com/curben/blog.git site
   cp -r site/* "public/"
   rm -f "public/README.md"
 
   # deploy microblog
+  rm -rf "microblog/"
   git clone --depth 1 --branch microblog https://gitlab.com/curben/blog.git microblog
   cd "microblog/"
   export PATH="$PATH:../node_modules/.bin"
