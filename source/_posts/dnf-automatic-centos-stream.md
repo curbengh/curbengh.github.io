@@ -2,12 +2,12 @@
 title: CentOS Stream does not support dnf-automatic security updates
 excerpt: The repository lacks updateinfo to provide errata
 date: 2024-07-15
-updated: 2024-08-16
+updated: 2025-04-08
 tags:
   - centos
 ---
 
-If you have configured dnf-automatic to only apply security updates on CentOS Stream, it will not install any updates.
+If you have configured dnf-automatic to only apply security updates on CentOS Stream, it **will not** install any updates.
 
 ```plain /etc/dnf/automatic.conf
 [commands]
@@ -37,7 +37,7 @@ RedHat [documentation](https://docs.redhat.com/en/documentation/red_hat_enterpri
 
 I then learned that dnf depends on [_errata_](https://forums.rockylinux.org/t/dnf-security-updates/8327) to be able to detect whether a package version is a security update. From [this post](https://www.caseylabs.com/centos-automatic-security-updates-do-not-work/) ([archived](https://web.archive.org/web/20211011104926/https://www.caseylabs.com/centos-automatic-security-updates-do-not-work/)), I discovered errata is published on the repository in the form of updateinfo.xml, which is related to `dnf updateinfo`.
 
-I remembered when dnf attempts to refresh a repository, the first thing it looks for is [/repodata/repomd.xml](https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/repodata/repomd.xml). So, I tried to look for updateinfo.xml in [/repodata/](https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/repodata/) but could not find it. This explained the empty output of `dnf updateinfo` but I wasn't convinced yet. I searched it in [AlmaLinux](https://repo.almalinux.org/almalinux/9/BaseOS/x86_64/os/repodata/) and found `{sha256sum-hash}-updateinfo.xml.gz`. Since the content is updated constantly, how does dnf know which updateinfo.xml to grab? I opened up the [repomd.xml](https://repo.almalinux.org/almalinux/9/BaseOS/x86_64/os/repodata/repomd.xml) and noticed
+When dnf is refreshing metadata, the first thing it looks for is [/repodata/repomd.xml](https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/repodata/repomd.xml). So, I tried to look for updateinfo.xml in [/repodata/](https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/repodata/) but could not find it. This explained the empty output of `dnf updateinfo`. Then, I searched for it in [AlmaLinux](https://repo.almalinux.org/almalinux/9/BaseOS/x86_64/os/repodata/) and found `{sha256sum-hash}-updateinfo.xml.gz`. Since the content is updated constantly, how does dnf know which updateinfo.xml to grab? I opened up the [repomd.xml](https://repo.almalinux.org/almalinux/9/BaseOS/x86_64/os/repodata/repomd.xml) and noticed
 
 ```xml
   <data type="updateinfo">
@@ -45,13 +45,13 @@ I remembered when dnf attempts to refresh a repository, the first thing it looks
   </data>
 ```
 
-I also searched and discovered updateinfo is also available on [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/repodata/), [Oracle Linux](https://yum.oracle.com/repo/OracleLinux/OL9/baseos/latest/x86_64/repodata/) and [Fedora](https://dl.fedoraproject.org/pub/fedora/linux/updates/40/Everything/x86_64/repodata/). Looking at Fedora's [repomd.xml], I learned that the updateinfo.xml can be available in gzip, xzip and zchunk (`updateinfo_zck`) formats. By then, I was sure that dnf cannot apply security (nor [bugfix/feature](https://access.redhat.com/articles/explaining_redhat_errata))-specific updates in CentOS Stream.
+I also searched and discovered updateinfo is also available on [Rocky Linux](https://download.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/repodata/), [Oracle Linux](https://yum.oracle.com/repo/OracleLinux/OL9/baseos/latest/x86_64/repodata/) and [Fedora](https://dl.fedoraproject.org/pub/fedora/linux/updates/40/Everything/x86_64/repodata/). Looking at Fedora's [repomd.xml](https://dl.fedoraproject.org/pub/fedora/linux/updates/40/Everything/x86_64/repodata/repomd.xml), I learned that the updateinfo.xml can be available in gzip, xzip and zchunk (`updateinfo_zck`) formats. Without updateinfo.xml, CentOS Stream could not discern between security and [bugfix/feature](https://access.redhat.com/articles/explaining_redhat_errata) updates.
 
 CentOS used to have updateinfo prior to CentOS 7; after it was removed in CentOS 7, there was a [third-party repository](https://updateinfo.cefs.steve-meier.de/) that filled the gap but it never supported CentOS Stream.
 
 ## Enable automatic updates
 
-Automatic updates only works in CentOS Stream with this config:
+Automatic updates only works in CentOS Stream with this config which installs _all_ available updates, regardless of security/bugfix/feature:
 
 ```plain /etc/dnf/automatic.conf
 [commands]
@@ -85,9 +85,16 @@ Unattended-Upgrade::Allowed-Origins {
 
 Security updates are published to a different uri [`debian-security`](https://archive.debian.org/debian-security/) instead of the primary uri [`debian`](https://archive.debian.org/debian/). A notable implication is that not every [Debian mirror](https://www.debian.org/mirror/list) mirrors `debian-security`.
 
-To enable unattended upgrades, `dpkg-reconfigure --priority=low unattended-upgrades`, select yes and it will create "/etc/apt/apt.conf.d/20auto-upgrades".
+To enable unattended upgrades, `dpkg-reconfigure --priority=low unattended-upgrades` then select yes. Or in a script with:
 
-```plain /etc/apt/apt.conf.d/20auto-upgrades
+```sh
+echo "unattended-upgrades unattended-upgrades/enable_auto_updates boolean true" | debconf-set-selections
+dpkg-reconfigure -f noninteractive unattended-upgrades
+```
+
+To verify, "/etc/apt/apt.conf.d/20auto-upgrades" should have
+
+```plain
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Unattended-Upgrade "1";
 ```
