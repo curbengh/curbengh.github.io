@@ -43,9 +43,11 @@ updated: 2025-04-09
 
 ![Architecture behind mdleom.com](about/website-architecture.png)
 
-mdleom.com is served from two identical VMs hosted in a cloud provider. The VMs are using [NixOS](https://nixos.org/) and [Caddy](https://caddyserver.com/) web server. The web server functions as a file server to serve static website. Each VM has cloudflared to connect the web server to Cloudflare CDN using an outbound tunnel. Each cloudflared instance acts as a [replica](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/deploy-cloudflared-replicas/) that connects to the same tunnel to provide failover.
+mdleom.com is served from two identical VMs hosted in a cloud provider. The VMs are using [NixOS](https://nixos.org/) and [Caddy](https://caddyserver.com/) web server. The web server functions as a file server to serve static website. Each VM has cloudflared to connect the web server to Cloudflare CDN using an outbound tunnel. Each cloudflared instance acts as a [replica](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/deploy-cloudflared-replicas/) that connects to the same tunnel to provide active-passive failover.
 
-The web server is able to failover to mirrors ([Cloudflare Pages](https://curben.pages.dev), [Netlify](https://curben.netlify.app), [GitLab Pages](https://curben.gitlab.io) and [GitHub Pages](https://curbengh.github.io)). Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The source is compiled to static site using [Hexo](https://hexo.io). The repo also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site), images are resized on-the-fly using [Cloudflare Images](https://gitlab.com/curben/blog/-/blob/master/cf-images/index.js). [microblog](/microblog/) source is hosted on the [`microblog`](https://gitlab.com/curben/blog/-/tree/microblog) branch.
+The web server itself is also able to failover to mirrors ([Cloudflare Pages](https://curben.pages.dev), [Netlify](https://curben.netlify.app), [GitLab Pages](https://curben.gitlab.io) and [GitHub Pages](https://curbengh.github.io)). Blog content is deployed from a [GitLab repository](https://gitlab.com/curben/blog) which hosts the source. The source is compiled to static site using [Hexo](https://hexo.io). The compiled site is deployed to the web servers using ssh-secured rsync. SSH/rsync to the servers is only available via Tailscale network.
+
+The GitLab repository also hosts [images and attachments](https://gitlab.com/curben/blog/-/tree/site), images are resized on-the-fly using [Cloudflare Images](https://gitlab.com/curben/blog/-/blob/master/cf-images/index.js). [microblog](/microblog/) source is hosted on the [`microblog`](https://gitlab.com/curben/blog/-/tree/microblog) branch.
 
 More details are available in the following series of posts:
 
@@ -55,6 +57,7 @@ More details are available in the following series of posts:
 - {% post_link tor-hidden-onion-nixos 'Part 4: Setup Tor hidden service' %}
 - {% post_link i2p-eepsite-nixos 'Part 5: Configure I2P' %}
 - {% post_link cloudflare-argo-nixos 'Setup Cloudflare Argo Tunnel in NixOS' %}
+- {% post_link tailscale-alpine 'Running Tailscale in GitLab CI/CD with Alpine container' %}
 
 ## Services
 
