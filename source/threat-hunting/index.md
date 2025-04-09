@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-04-08
+updated: 2025-04-09
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -385,6 +385,16 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, parent_process, parent_process_path, process, user, Name, Email
+```
+
+## Clear-text password search
+
+References: [1](https://blog.talosintelligence.com/uat-5918-targets-critical-infra-in-taiwan/#credential-extraction), [2](https://thedfirreport.com/2024/08/26/blacksuit-ransomware/#collection), [3](https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/#credential-access)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process_name="findstr.exe" Processes.process="*password*" BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 ```
 
 ## ClickFix detection
