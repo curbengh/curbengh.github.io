@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2024-07-22
+updated: 2025-04-09
 ---
 
 ## About Me
@@ -11,7 +11,7 @@ updated: 2024-07-22
 
 ## Projects
 
-[![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben) [![npm handle](/svg/npm.svg)](https://www.npmjs.com/~curben) [![Codeberg handle](/svg/codeberg.svg)](https://codeberg.org/curben/)
+[![GitHub handle](/svg/github.svg)](https://github.com/curbengh) [![GitLab handle](/svg/gitlab.svg)](https://gitlab.com/curben)
 
 - [**malware-filter**](https://gitlab.com/malware-filter): A collection of blocklists:
 
