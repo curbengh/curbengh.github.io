@@ -1547,7 +1547,7 @@ References: [1](https://www.security.com/threat-intelligence/shuckworm-ukraine-g
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true fillnull_value="(null)" count FROM datamodel=Web WHERE index="proxy" NOT Web.http_user_agent IN ("*Chrome*", "*Safari*", "*Safari*") BY Web.user, Web.src, Web.url, Web.url_domain, Web.category, Web.http_user_agent, Web.http_referrer, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="(null)" count FROM datamodel=Web WHERE index="proxy" NOT Web.http_user_agent IN ("*Chrome*", "*Safari*", "*Firefox*") BY Web.user, Web.src, Web.url, Web.url_domain, Web.category, Web.http_user_agent, Web.http_referrer, _time span=1s
 | append
   [| tstats summariesonly=true allow_old_summaries=true fillnull_value="(null)" count FROM datamodel=Web WHERE index="proxy" BY Web.user, Web.src, Web.url, Web.url_domain, Web.category, Web.http_user_agent, Web.http_referrer, _time span=1s
   | where len(Web.http_user_agent) > 130]
