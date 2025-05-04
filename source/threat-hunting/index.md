@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-04-09
+updated: 2025-05-04
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -1539,6 +1539,19 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
+```
+
+## Unusual User Agent
+
+References: [1](https://www.security.com/threat-intelligence/shuckworm-ukraine-gammasteel)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="(null)" count FROM datamodel=Web WHERE index="proxy" NOT Web.http_user_agent IN ("*Chrome*", "*Safari*", "*Safari*") BY Web.user, Web.src, Web.url, Web.url_domain, Web.category, Web.http_user_agent, Web.http_referrer, _time span=1s
+| append
+  [| tstats summariesonly=true allow_old_summaries=true fillnull_value="(null)" count FROM datamodel=Web WHERE index="proxy" BY Web.user, Web.src, Web.url, Web.url_domain, Web.category, Web.http_user_agent, Web.http_referrer, _time span=1s
+  | where len(Web.http_user_agent) > 130]
+| rename Web.* AS *, http_user_agent AS user_agent, http_referrer AS referrer
 ```
 
 ## Unusual printui.exe path
