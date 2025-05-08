@@ -2,6 +2,7 @@
 title: Configuring NTS in OpenWRT
 excerpt: Obtain time in an authenticated manner
 date: 2024-10-12
+updated: 2025-05-08
 tags:
   - openwrt
 ---
@@ -46,7 +47,7 @@ uci set chrony.netnod.nts='yes'
 
 Use NTS only.
 
-```plain /var/etc/chrony.d/20-nts.conf
+```plain /etc/chrony.d/20-nts.conf
 # Require at least 2 reachable sources
 minsources 2
 
@@ -57,10 +58,22 @@ authselectmode require
 cmdport 0
 ```
 
+The actual config is actually in "/var/etc/chrony.d/", but the "/var" folder is not persistent across reboot.
+So, a workaround is to save it into "/etc/chrony.d/", then copy to "/var" after boot.
+
+Append these lines to "/etc/rc.local" before `exit 0`.
+
+```sh /etc/rc.local
+sleep 60
+mkdir -p "/var/etc/chrony.d/"
+cp "/etc/chrony.d/20-nts.conf" "/var/etc/chrony.d/20-nts.conf"
+service chronyd restart
+```
+
 Preserve the config during upgrade.
 
 ```
-echo "/var/etc/chrony.d/20-nts.conf" >> /etc/sysupgrade.conf
+echo "/etc/chrony.d/" >> /etc/sysupgrade.conf
 ```
 
 Commit the changes and restart the daemon.
