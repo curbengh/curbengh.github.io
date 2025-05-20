@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-05-04
+updated: 2025-05-20
 ---
 
 Some searches utilise [cmdb_ci_list_lookup](https://gitlab.com/curben/splunk-scripts/-/tree/main/Splunk_TA_snow) lookup.
@@ -607,6 +607,16 @@ index="windows" source IN ("XmlWinEventLog:Microsoft-Windows-PowerShell/Operatio
 | eval user_lookup=replace(Username,"^(\w+)_admin","\1")
 | lookup ad_users sAMAccountName AS user_lookup OUTPUT displayName AS Name, mail as Email, sAMAccountName AS Username
 | table Time, host, Path, Username, Name, ScriptBlockText, System_Props_Xml
+```
+
+## Disable Microsoft Defender (Registry)
+
+References: [1](https://thedfirreport.com/2025/05/19/another-confluence-bites-the-dust-falling-to-elpaco-team-ransomware/#defense-evasion), [2](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Registry WHERE index="windows" Registry.registry_path="*\\Microsoft\\Windows Defender*" Registry.registry_value_name IN ("DisableAntiSpyware", "DisableAntivirus") Registry.registry_value_data="1" BY Registry.dest, Registry.action, Registry.process_guid, Registry.process_id, Registry.registry_path, Registry.registry_value_name, Registry.registry_value_data, Registry.user
+| rename Registry.* AS *
 ```
 
 ## EvilProxy IoC
