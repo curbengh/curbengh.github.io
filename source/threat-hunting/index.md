@@ -561,8 +561,8 @@ index="defender" sourcetype="ms365:defender:incident:alerts"
 | rename evidence{}.* AS *, fileDetails.* AS *, userAccount.* AS *
 | lookup ad_users sAMAccountName AS accountName OUTPUT displayName AS accountUser
 | lookup cmdb_ci_list_lookup dv_name AS hostName OUTPUT dv_assigned_to AS lastActiveUser
-| eval Time=strftime(created, "%Y-%m-%d %H:%M:%S %z"), "Last Updated"=strftime(_time, "%Y-%m-%d %H:%M:%S %z"), file_path=if(isnotnull(sha1), mvindex(filePath,0)."\\".mvindex(fileName,0), ""), hostName=if(hostName=="null", deviceDnsName, hostName), evidenceType=if(isnotnull(url), "#microsoft.graph.security.urlEvidence", "#microsoft.graph.security.fileEvidence"), remediationStatus=mvindex(remediationStatus, mvfind('@odata.type', evidenceType))
-| table Time, "Last Updated", status, severity, remediationStatus, incidentId, title, threatDisplayName, accountUser, hostName, lastActiveUser, file_path, sha1, url, incidentWebUrl
+| eval Time=strftime(created, "%Y-%m-%d %H:%M:%S %z"), "Last Updated"=strftime(_time, "%Y-%m-%d %H:%M:%S %z"), evidence=if(isnotnull(sha1), mvindex(filePath,0)."\\".mvindex(fileName,0), coalesce(url, processCommandLine, "")), hostName=if(hostName=="null", deviceDnsName, hostName), evidenceType=if(isnotnull(url), "#microsoft.graph.security.urlEvidence", "#microsoft.graph.security.fileEvidence"), remediationStatus=mvindex(remediationStatus, mvfind('@odata.type', evidenceType))
+| table Time, "Last Updated", status, severity, remediationStatus, incidentId, title, threatDisplayName, accountUser, hostName, lastActiveUser, evidence, sha1, incidentWebUrl
 ```
 
 ## Defender traffic blocked by Windows Firewall
