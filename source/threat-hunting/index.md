@@ -1706,6 +1706,16 @@ SPL:
 | rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 ```
 
+## Windows Sandbox execution
+
+References: [1](https://www.welivesecurity.com/en/eset-research/operation-akairyu-mirrorface-invites-europe-expo-2025-revives-anel-backdoor/), [2](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-cli)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process_name="wsb.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
+```
+
 ## Windows Script Executed from Scheduled Task
 
 References: [1](https://redcanary.com/blog/threat-intelligence/intelligence-insights-may-2024/)
