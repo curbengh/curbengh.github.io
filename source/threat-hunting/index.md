@@ -50,7 +50,7 @@ SPL:
 | collect index="ldapsearch"
 ```
 
-## Monthly Domain Admins Report
+## Domain Admins Report
 
 References: [1](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/appendix-b--privileged-accounts-and-groups-in-active-directory#built-in-privileged-accounts-and-groups), [2](http://www.selfadsi.org/ldap-filter.htm#BitAndOr), [3](https://learn.microsoft.com/en-us/troubleshoot/windows-server/identity/useraccountcontrol-manipulate-account-properties#list-of-property-flags), [4](https://learn.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax#operators)
 SPL:
