@@ -354,13 +354,13 @@ SPL:
 | where num_dest_port > 1000 OR num_dest_ip > 1000
 ```
 
-## bitsadmin.exe execution
+## LoLBin execution
 
-References: [1](https://redcanary.com/blog/threat-intelligence/intelligence-insights-june-2024/)
+References: [bitsadmin.exe](https://redcanary.com/blog/threat-intelligence/intelligence-insights-june-2024/), [cdb.exe](https://www.elastic.co/security-labs/fragile-web-ref7707), [cdb.exe](https://lolbas-project.github.io/lolbas/OtherMSBinaries/Cdb/), [winsw.exe](https://www.sentinelone.com/labs/operation-digital-eye-chinese-apt-compromises-critical-digital-infrastructure-via-visual-studio-code-tunnels/), [winsw.exe](https://github.com/winsw/winsw), [winrs.exe](https://www.elastic.co/security-labs/fragile-web-ref7707), [winrs.exe](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/winrs), [cipher.exe](https://blog.talosintelligence.com/fake-ai-tool-installers/#cyberlock-the-powershell-ransomware), [nltest.exe](https://blog.talosintelligence.com/when-legitimate-tools-go-rogue/), [setspn.exe](https://redcanary.com/blog/threat-intelligence/mocha-manakin-nodejs-backdoor/)
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process_name="bitsadmin.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process_name IN ("bitsadmin.exe", "cdb.exe", "cipher.exe", "nltest.exe", "setspn.exe", "winsw.exe", "winrs.exe", "winrshost.exe") BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
 | rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
@@ -395,16 +395,6 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, parent_process, parent_process_path, process, user, Name, Email
-```
-
-## Cipher.exe execution
-
-References: [1](https://blog.talosintelligence.com/fake-ai-tool-installers/#cyberlock-the-powershell-ransomware)
-SPL:
-
-```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process_name="cipher.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.process, Processes.user, _time span=1s
-| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 ```
 
 ## Clear-text password search
@@ -455,19 +445,6 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, index, host, EventCode, EventDescription, process, user, Name, Email
-```
-
-## CDB.exe execution
-
-References: [1](https://www.elastic.co/security-labs/fragile-web-ref7707), [2](https://lolbas-project.github.io/lolbas/OtherMSBinaries/Cdb/)
-SPL:
-
-```spl
-| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process_name="cdb.exe" BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
-| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
-| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
-| lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
-| table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
 ```
 
 ## CVE-2023-23397 Outlook SMB
@@ -1808,17 +1785,4 @@ SPL:
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
 | table Time, host, process, parent_process, EventCode, EventDescription, user, Name, Email, index
-```
-
-## WinrsHost.exe execution
-
-References: [1](https://www.elastic.co/security-labs/fragile-web-ref7707), [2](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/winrs)
-SPL:
-
-```spl
-| tstats summariesonly=true allow_old_summaries=true fillnull_value="unknown" count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 (Processes.parent_process_name="winrshost.exe" OR Processes.process_name="winrs.exe") BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
-| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
-| eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
-| lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
-| table Time, index, host, EventCode, EventDescription, parent_process, process, user, Name, Email
 ```
