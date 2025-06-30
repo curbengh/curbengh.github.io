@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2025-04-09
+updated: 2025-06-30
 ---
 
 ## About Me
@@ -17,17 +17,17 @@ updated: 2025-04-09
 
   - [**urlhaus-filter**](https://gitlab.com/malware-filter/urlhaus-filter): A set of blocklists to restrict malware-hosting websites. Enabled by default in uBlock Origin. Based on [URLhaus](https://urlhaus.abuse.ch/).
 
-  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict phishing websites. Bundled with uBlock Origin, requires manual enablement. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/), [Phishunt](https://phishunt.io) and mitchellkrogza's [Phishing.Database](https://github.com/mitchellkrogza/Phishing.Database).
+  - [**phishing-filter**](https://gitlab.com/malware-filter/phishing-filter): A set of blocklists to restrict phishing websites. Bundled with uBlock Origin, requires manual enablement. Curated from [PhishTank](https://www.phishtank.com/), [OpenPhish](https://openphish.com/) and [IPThreat](https://ipthreat.net/)
 
-  - (Inactive) [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
+  - [**botnet-filter**](https://gitlab.com/malware-filter/botnet-filter): A set of blocklists to restrict malicious IPs such as botnet.
+
+  - [**splunk-malware-filter**](https://gitlab.com/malware-filter/splunk-malware-filter): A [Splunk add-on](https://splunkbase.splunk.com/app/6970) to update malware-filter lookups.
 
   - [**tracking-filter**](https://gitlab.com/malware-filter/tracking-filter): A set of blocklists to restrict javascript links that perform [browser fingerprinting](https://en.wikipedia.org/wiki/Web_tracking). Based on DuckDuckGo [Tracker Radar](https://github.com/duckduckgo/tracker-radar). [Blokada version](https://community.blokada.org/t/introducing-duckduckgo-tracker-radar-to-blokada/469) blocks more tracking links but the trade-off is more false positive; available at [blokada.org](https://blokada.org/blocklists/ddgtrackerradar/standard/hosts.txt).
 
-  - [**vn-badsite-filter**](https://gitlab.com/malware-filter/vn-badsite-filter): A set of blocklists to restrict malicious websites targeting Vietnamese users; also suitable for global users. Based on [Hieu Minh Ngo](https://chongluadao.vn)'s list.
+  - (Inactive) [**vn-badsite-filter**](https://gitlab.com/malware-filter/vn-badsite-filter): A set of blocklists to restrict malicious websites targeting Vietnamese users; also suitable for global users. Based on [Hieu Minh Ngo](https://chongluadao.vn)'s list.
 
-  - [**botnet-filter**](https://gitlab.com/malware-filter/botnet-filter): A set of blocklists to restrict botnet IPs used as command and control (C2) servers. Based on [Feodo Tracker](https://feodotracker.abuse.ch/). Recommend to use the [upstream blocklist](https://feodotracker.abuse.ch/blocklist/) whenever possible, it has much more frequent update (every 5 minutes).
-
-  - [**splunk-malware-filter**](https://gitlab.com/malware-filter/splunk-malware-filter): A [Splunk add-on](https://splunkbase.splunk.com/app/6970) to update malware-filter lookups.
+  - (Inactive) [**pup-filter**](https://gitlab.com/malware-filter/pup-filter): A set of blocklists to restrict websites that host potentially unwanted programs (PUP). Based on [Zhouhan Chen](https://zhouhanc.com/)'s [malware-discoverer](https://github.com/zhouhanc/malware-discoverer).
 
 - [**splunk-scripts**](https://gitlab.com/curben/splunk-scripts): Splunk add-ons, patches, setup scripts and [threat hunting](/threat-hunting/).
 
