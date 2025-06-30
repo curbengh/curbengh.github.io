@@ -1120,6 +1120,16 @@ SPL:
 | rename Filesystem.* AS *, signature_id AS EventCode, signature AS EventDescription, file_name AS ShareName, file_path AS ShareLocalPath, file_target AS RelativeTargetName
 ```
 
+## NodeJS spawning cmd.exe
+
+References: [1](https://redcanary.com/blog/threat-intelligence/intelligence-insights-june-2025/)
+SPL:
+
+```spl
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.parent_process_name="node.exe" Processes.process_name IN ("cmd.exe", "powershell.exe", "pwsh.exe") BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
+```
+
 ## OneNote IOC
 
 References: [1](https://redcanary.com/blog/intelligence-insights-february-2023/)
