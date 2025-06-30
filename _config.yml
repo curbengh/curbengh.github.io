@@ -96,6 +96,7 @@ theme_config:
     Home: /
     Blog: /blog/
     Microblog: /microblog/
+    "Threat Hunting": /threat-hunting/
     About: /about/
     Feed: /atom.xml
 
