@@ -1,6 +1,7 @@
 <%/* Date format is specified to skip timezone conversion */%>
 <time <% if (is_post()) { %>class="dt-published"<% } %> datetime="<%= date(post.date, 'YYYY-MM-DD[T00:00:00.000Z]') %>" itemprop="datePublished">
 <%= date(post.date, 'D') %>
-<a href="/<%= config.archive_dir %>/<%= date(post.date, 'YYYY') %>/<%= date(post.date, 'MM') %>/" title="See <%= date(post.date, 'MMMM') %> <%= date(post.date, 'YYYY') %>'s posts"><%= date(post.date, ' MMM') %></a>
-<a href="/<%= config.archive_dir %>/<%= date(post.date, 'YYYY') %>/" title="See <%= date(post.date, 'YYYY') %>'s posts"><%= date(post.date, ' YYYY') %></a>
+<% if (is_post()) { %><a href="/<%= config.archive_dir %>/<%= date(post.date, 'YYYY') %>/<%= date(post.date, 'MM') %>/" title="See <%= date(post.date, 'MMMM') %> <%= date(post.date, 'YYYY') %>'s posts"><%= date(post.date, ' MMM') %></a>
+<a href="/<%= config.archive_dir %>/<%= date(post.date, 'YYYY') %>/" title="See <%= date(post.date, 'YYYY') %>'s posts"><%= date(post.date, ' YYYY') %></a><% } else { %>
+<%= date(post.date, ' MMM YYYY') %><% } %>
 </time>

@@ -509,10 +509,6 @@ span.index-list-count:after {
   width: 100%;
 }
 
-.article-type-page .article-footer {
-  display: none;
-}
-
 table caption,
 table td,
 td {
