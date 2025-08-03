@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-07-27
+updated: 2025-08-03
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -124,6 +124,5 @@ updated: 2025-07-27
 - [Windows Firewall Modification](windows-firewall-modification)
 - [Windows JScript execution](windows-jscript-execution)
 - [Windows Sandbox execution](windows-sandbox-execution)
-- [Windows Script Executed from Scheduled Task](windows-script-executed-from-scheduled-task)
 - [Windows Script Executed from ZIP](windows-script-executed-from-zip)
 - [WinRAR Spawning Shell Application](winrar-spawning-shell-application)
