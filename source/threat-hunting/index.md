@@ -120,6 +120,7 @@ updated: 2025-08-03
 - [Volume Shadow Copy](volume-shadow-copy)
 - [Volume Shadow Delete](volume-shadow-delete)
 - [Windows Event Log Clearing Events](windows-event-log-clearing-events)
+- [Windows Recovery Environment disabled](windows-recovery-environment-disabled)
 - [Windows System Event Log Clearing Events](windows-system-event-log-clearing-events)
 - [Windows Firewall Modification](windows-firewall-modification)
 - [Windows JScript execution](windows-jscript-execution)
