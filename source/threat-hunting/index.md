@@ -116,6 +116,7 @@ updated: 2025-08-03
 - [Unusual printui.exe path](unusual-printui-exe-path)
 - [User Login with Local Credentials](user-login-with-local-credentials)
 - [VSCode tunnel](vscode-tunnel)
+- [Veeam credential extraction](veeam-credential-extraction)
 - [Volt Typhoon IOC](volt-typhoon-ioc)
 - [Volume Shadow Copy](volume-shadow-copy)
 - [Volume Shadow Delete](volume-shadow-delete)
