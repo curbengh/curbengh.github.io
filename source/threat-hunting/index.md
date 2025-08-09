@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-08-03
+updated: 2025-08-09
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -14,6 +14,7 @@ updated: 2025-08-03
 - [AD Account Deletion](ad-account-deletion)
 - [AD Database Dump](ad-database-dump)
 - [AD Database Read](ad-database-read)
+- [AD integrated DNS zone export](ad-integrated-dns-zone-export)
 - [AD Password Policy Change](ad-password-policy-change)
 - [AD Password Policy Modified](ad-password-policy-modified)
 - [AWS AssumeRoot API operation](aws-assumeroot-api-operation)
