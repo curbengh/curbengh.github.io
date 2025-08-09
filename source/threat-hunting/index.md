@@ -99,6 +99,7 @@ updated: 2025-08-09
 - [Remote Desktop tool scheduled task](remote-desktop-tool-scheduled-task)
 - [RestartManager abuse](restartmanager-abuse)
 - [Restricted Admin Mode Detection](restricted-admin-mode-detection)
+- [Root certificate installation](root-certificate-installation)
 - [Rundll32 Dumping LSASS Memory](rundll32-dumping-lsass-memory)
 - [Rundll32 Scheduled Task](rundll32-scheduled-task)
 - [SIDHistory compromise](sidhistory-compromise)
