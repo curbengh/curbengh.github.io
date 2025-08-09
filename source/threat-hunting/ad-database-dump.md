@@ -2,13 +2,14 @@
 title: AD Database Dump
 layout: page
 date: 2025-07-27
+updated: 2025-08-09
 ---
 
-References: [1](https://redcanary.com/blog/credential-access/), [2](https://www.ired.team/offensive-security/credential-access-and-credential-dumping/ntds.dit-enumeration)
+References: [1](https://redcanary.com/blog/credential-access/), [2](https://www.ired.team/offensive-security/credential-access-and-credential-dumping/ntds.dit-enumeration), [3](https://thedfirreport.com/2025/08/05/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira/)
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process="*ntds*" Processes.process IN ("*ifm create*", "*create full*", "*pro*") BY index, host, Processes.signature_id, Processes.signature, Processes.process, Processes.user, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.signature_id=4688 Processes.process="*ntds*" Processes.process IN ("*ifm create*", "*create full*", "*pro*", "*backup*") BY index, host, Processes.signature_id, Processes.signature, Processes.process, Processes.user, _time span=1s
 | rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
