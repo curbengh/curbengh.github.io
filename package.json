@@ -18,7 +18,7 @@
     "hexo-generator-tag": "hexojs/hexo-generator-tag",
     "hexo-renderer-ejs": "hexojs/hexo-renderer-ejs",
     "hexo-renderer-marked": "hexojs/hexo-renderer-marked",
-    "hexo-yam": "curbengh/hexo-yam"
+    "hexo-yam": "curbengh/hexo-yam#zstd-native"
   },
   "devDependencies": {
     "hexo-server": "hexojs/hexo-server"
