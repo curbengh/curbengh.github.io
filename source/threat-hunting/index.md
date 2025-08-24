@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-08-09
+updated: 2025-08-24
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -110,6 +110,7 @@ updated: 2025-08-09
 - [Suspicious Netscaler CLI](suspicious-netscaler-cli)
 - [Suspicious Network Settings](suspicious-network-settings)
 - [Suspicious WMI](suspicious-wmi)
+- [User Account Control (UAC) policy change](uac-policy-change)
 - [UPnP enablement](upnp-enablement)
 - [Unauthorised Reverse Proxy Tunnel](unauthorised-reverse-proxy-tunnel)
 - [Unauthorised Computer Account Creation](unauthorised-computer-account-creation)
