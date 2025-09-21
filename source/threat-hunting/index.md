@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-08-24
+updated: 2025-09-21
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -104,6 +104,7 @@ updated: 2025-08-24
 - [Rundll32 Scheduled Task](rundll32-scheduled-task)
 - [SIDHistory compromise](sidhistory-compromise)
 - [SQL Server spawning Cmd.exe](sql-server-spawning-cmd-exe)
+- [Suspicious command involving Public folder](suspicious-command-public-folder)
 - [Splunk Events Deletion](splunk-events-deletion)
 - [SafeDllSearchMode is modified](safedllsearchmode-is-modified)
 - [Suspicious Logon/Logoff Events](suspicious-logon-logoff-events)
