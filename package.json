@@ -12,7 +12,7 @@
     "deploy-cf-images": "npx wrangler deploy"
   },
   "dependencies": {
-    "hexo": "^7.0.0",
+    "hexo": "^8.0.0",
     "hexo-filter-nofollow": "hexojs/hexo-filter-nofollow",
     "hexo-generator-archive": "hexojs/hexo-generator-archive",
     "hexo-generator-index": "hexojs/hexo-generator-index",
