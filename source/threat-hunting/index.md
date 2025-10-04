@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-09-21
+updated: 2025-10-05
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -107,6 +107,7 @@ updated: 2025-09-21
 - [Suspicious command involving Public folder](suspicious-command-public-folder)
 - [Splunk Events Deletion](splunk-events-deletion)
 - [SafeDllSearchMode is modified](safedllsearchmode-is-modified)
+- [Secondary Logon service](secondary-logon-service)
 - [Suspicious Logon/Logoff Events](suspicious-logon-logoff-events)
 - [Suspicious Netscaler CLI](suspicious-netscaler-cli)
 - [Suspicious Network Settings](suspicious-network-settings)
