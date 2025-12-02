@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-11-30
+updated: 2025-12-02
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -122,6 +122,7 @@ updated: 2025-11-30
 - [Unusual printui.exe path](unusual-printui-exe-path)
 - [User Login with Local Credentials](user-login-with-local-credentials)
 - [VSCode tunnel](vscode-tunnel)
+- [Veeam backup job deleted](veeam-backup-delete)
 - [Veeam credential extraction](veeam-credential-extraction)
 - [Volt Typhoon IOC](volt-typhoon-ioc)
 - [Volume Shadow Copy](volume-shadow-copy)
