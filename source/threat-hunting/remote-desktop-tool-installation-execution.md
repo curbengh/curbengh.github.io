@@ -2,7 +2,7 @@
 title: Remote Desktop tool installation/execution
 layout: page
 date: 2025-07-27
-updated: 2025-11-30
+updated: 2025-12-16
 ---
 
 Description: Remote desktop software commonly abused by threat actor to deploy ransomware.
@@ -10,7 +10,7 @@ References: [1](https://thedfirreport.com/2024/06/10/icedid-brings-screenconnect
 SPL:
 
 ```spl
-| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process IN ("*ScreenConnect*", "*NetSupport*", "*TeamViewer*", "*AnyDesk*", "*MeshAgent*", "*Splashtop*", "*AteraAgent*", "*LogMeIn*", "*RustDesk*", "*ToDesk*", "*SimpleHelp*", "*Netop*", "*Impero*", "*RealVNC*", "*Dameware*", "*TightVNC*", ""*UltraViewer*", "*Ekran*", "*Syteca*", "*ClassroomSpy*", "*JumpConnect*", "*TinyPilot*", "*AnyViewer*", "*OptiTune*", "*PDQ*", "*ITarian*", "*AWRC*", "*Atelier*") BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
+| tstats summariesonly=true allow_old_summaries=true count FROM datamodel=Endpoint.Processes WHERE index="windows" Processes.process IN ("*ScreenConnect*", "*NetSupport*", "*TeamViewer*", "*AnyDesk*", "*MeshAgent*", "*Splashtop*", "*AteraAgent*", "*LogMeIn*", "*RustDesk*", "*ToDesk*", "*SimpleHelp*", "*Netop*", "*Impero*", "*RealVNC*", "*Dameware*", "*TightVNC*", ""*UltraViewer*", "*Ekran*", "*Syteca*", "*ClassroomSpy*", "*JumpConnect*", "*TinyPilot*", "*AnyViewer*", "*OptiTune*", "*PDQ*", "*ITarian*", "*AWRC*", "*Atelier*", "*FleetDeck*") BY index, host, Processes.signature_id, Processes.signature, Processes.parent_process, Processes.process, Processes.user, _time span=1s
 | rename Processes.* AS *, signature_id AS EventCode, signature AS EventDescription
 | eval Time = strftime(_time, "%Y-%m-%d %H:%M:%S %z")
 | lookup ad_users sAMAccountName AS user OUTPUT displayName AS Name, mail AS Email
