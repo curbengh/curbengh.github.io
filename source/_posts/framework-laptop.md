@@ -2,6 +2,7 @@
 title: Linux on Framework Laptop 13 (AMD Ryzen AI 300)
 excerpt: Issues and fixes
 date: 2025-12-13
+updated: 2025-12-20
 tags:
 - linux
 ---
@@ -26,7 +27,7 @@ I experienced XFCE random freeze/hang/unresponsive at least daily. When it happe
 
 Initially I tried [`amdgpu.dcdebugmask=0x10`](https://gitlab.freedesktop.org/drm/amd/-/issues/4141#note_2894301) kernel parameter but that didn't work for me on Linux 6.12.61 and 6.17.11.
 
-Then, I tried removing xf86-video-amdgpu as suggested [here](https://forum.manjaro.org/t/xfce-amd-igpu-inconsistent-graphical-crashes/182695/10), along with other "xf86-video-*" packages. That worked well, but laptop screen now always revert to the default 120Hz + 1.00 scaling after reboot. The screen also still flickers 2-3 times immediately after login.
+Then, I tried removing xf86-video-amdgpu as suggested [here](https://forum.manjaro.org/t/xfce-amd-igpu-inconsistent-graphical-crashes/182695/10), along with other "xf86-video-*" packages. That worked well, but the screen still flickers 3-4 times immediately after login, probably due to launch of xiccd and redshift.
 
 ## Failed to suspend
 
