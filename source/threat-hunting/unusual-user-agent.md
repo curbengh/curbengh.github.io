@@ -2,9 +2,10 @@
 title: Unusual User Agent
 layout: page
 date: 2025-07-27
+updated: 2025-12-21
 ---
 
-References: [1](https://www.security.com/threat-intelligence/shuckworm-ukraine-gammasteel)
+References: [1](https://www.security.com/threat-intelligence/shuckworm-ukraine-gammasteel), [2](https://blog.talosintelligence.com/new-persistent-attacks-japan/#initial-access), [NanoRemote](https://www.elastic.co/security-labs/nanoremote#network-communication)
 SPL:
 
 ```spl
