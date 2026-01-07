@@ -3,7 +3,7 @@ title: Gunma and Nagano Travel (Part 1)
 excerpt: "Day 1: Haneda Airport, Ueno"
 date: 2026-01-07
 tags:
-- japan
+- travel
 ---
 
 This is a series of blog posts chronicling my Gunma and Nagano travel in 2025:
