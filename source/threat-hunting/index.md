@@ -94,6 +94,7 @@ updated: 2025-12-02
 - [Reboot to safe mode](reboot-to-safe-mode)
 - [Regasm.exe execution](regasm-exe-execution)
 - [Regsvcs.exe process injection](regsvcs-exe-process-injection)
+- [Remote Desktop Protocol (RDP) policy change](rdp-policy-change)
 - [Remote Desktop tool installation/execution](remote-desktop-tool-installation-execution)
 - [Remote Desktop tool auto-start](remote-desktop-tool-auto-start)
 - [Remote Desktop tool scheduled task](remote-desktop-tool-scheduled-task)
