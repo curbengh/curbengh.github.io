@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - microblog
+  workflow_dispatch:
 
 env:
   NODE_ENV: production
