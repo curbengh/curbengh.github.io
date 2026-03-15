@@ -111,5 +111,9 @@ minify:
   svg:
     plugins:
       cleanupIds: false
+    include:
+      - "*.svg"
+      - "!*.min.svg"
+      - "!forkawesome-webfont.svg"
   zstd:
     enable: true
