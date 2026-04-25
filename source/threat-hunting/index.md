@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2025-12-02
+updated: 2026-04-25
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -36,7 +36,7 @@ updated: 2025-12-02
 - [dllFake IoC](dllfake-ioc)
 - [Internal Proxies Creation](internal-proxies-creation)
 - [CVE-2023-23397 Outlook SMB](cve-2023-23397-outlook-smb)
-- [Cloudflared/Tailscaled tunnel detection](cloudflared-tailscaled-tunnel-detection)
+- [Cloudflared/Tailscaled/NetBird tunnel detection](cloudflared-tailscaled-tunnel-detection)
 - [Cobalt Strike IOC](cobalt-strike-ioc)
 - [cmd.exe/powershell.exe auto-start](cmd-exe-powershell-exe-auto-start)
 - [Credential Manager/SAM Dump](credential-manager-sam-dump)
