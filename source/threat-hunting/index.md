@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2026-04-25
+updated: 2026-05-19
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -36,7 +36,7 @@ updated: 2026-04-25
 - [dllFake IoC](dllfake-ioc)
 - [Internal Proxies Creation](internal-proxies-creation)
 - [CVE-2023-23397 Outlook SMB](cve-2023-23397-outlook-smb)
-- [Cloudflared/Tailscaled/NetBird tunnel detection](cloudflared-tailscaled-tunnel-detection)
+- [Cloudflared/Tailscaled/NetBird/Azure-Dev tunnel detection](cloudflared-tailscaled-tunnel-detection)
 - [Cobalt Strike IOC](cobalt-strike-ioc)
 - [cmd.exe/powershell.exe auto-start](cmd-exe-powershell-exe-auto-start)
 - [Credential Manager/SAM Dump](credential-manager-sam-dump)
@@ -122,7 +122,7 @@ updated: 2026-04-25
 - [Unusual User Agent](unusual-user-agent)
 - [Unusual printui.exe path](unusual-printui-exe-path)
 - [User Login with Local Credentials](user-login-with-local-credentials)
-- [VSCode tunnel](vscode-tunnel)
+- [VSCode/Azure-Dev tunnel](vscode-tunnel)
 - [Veeam backup job deleted](veeam-backup-delete)
 - [Veeam credential extraction](veeam-credential-extraction)
 - [Volt Typhoon IOC](volt-typhoon-ioc)
