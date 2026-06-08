@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "hexo": {
-    "version": "7.3.0"
+    "version": "8.1.2"
   },
   "scripts": {
     "build": "sh build.sh",
@@ -12,7 +12,7 @@
     "deploy-cf-images": "npx wrangler deploy"
   },
   "dependencies": {
-    "hexo": "^7.0.0",
+    "hexo": "^8.1.2",
     "hexo-filter-nofollow": "hexojs/hexo-filter-nofollow",
     "hexo-generator-archive": "hexojs/hexo-generator-archive",
     "hexo-generator-index": "hexojs/hexo-generator-index",
