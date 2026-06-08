@@ -101,7 +101,6 @@ updated: 2026-06-08
 - [Restricted Admin Mode Detection](restricted-admin-mode-detection)
 - [Root certificate installation](root-certificate-installation)
 - [Rundll32 Dumping LSASS Memory](rundll32-dumping-lsass-memory)
-- [Rundll32 Scheduled Task](rundll32-scheduled-task)
 - [SIDHistory compromise](sidhistory-compromise)
 - [SQL Server spawning Cmd.exe](sql-server-spawning-cmd-exe)
 - [Suspicious command involving Public folder](suspicious-command-public-folder)
