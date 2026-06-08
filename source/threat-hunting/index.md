@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2026-05-19
+updated: 2026-06-08
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -57,7 +57,6 @@ updated: 2026-05-19
 - [FileFix detection](filefix-detection)
 - [Gootloader IOC](gootloader-ioc)
 - [Headless Browser](headless-browser)
-- [ie4uinit.exe/msxsl.exe abuse](ie4uinit-exe-msxsl-exe-abuse)
 - [Impacket detection](impacket-detection)
 - [InnoDownloadPlugin user-agent observed](innodownloadplugin-user-agent-observed)
 - [Kerberos Certificate Spoofing](kerberos-certificate-spoofing)
