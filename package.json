@@ -23,5 +23,9 @@
   },
   "devDependencies": {
     "hexo-server": "hexojs/hexo-server"
+  },
+  "allowScripts": {
+    "hexo-util@3.3.0": true,
+    "hexo-util@4.0.0": true
   }
 }
