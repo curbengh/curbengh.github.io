@@ -26,7 +26,7 @@ jobs:
           key: ${{ runner.os }}-npm-cache
           restore-keys: ${{ runner.os }}-npm-cache
       - name: Install Dependencies
-        run: npm install --include=optional --force
+        run: npm install
       - name: Build
         run: npm run build
       - name: Upload Pages artifact

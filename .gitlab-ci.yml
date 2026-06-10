@@ -13,7 +13,7 @@ build:
 
   before_script:
     - apk update && apk add git
-    - npm install --include=optional --force
+    - npm install
 
   script:
     # Generate site
