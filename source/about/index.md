@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2025-06-30
+updated: 2026-06-23
 ---
 
 ## About Me
@@ -91,7 +91,7 @@ More details are available in the following series of posts:
 - [LibreTranslate](https://github.com/LibreTranslate/LibreTranslate): Free and Open Source Machine Translation API.
   - [Onion](http://ryp7domnuvrha3sm5fohl75vrj3opolykbfv6rh35hg5i4uo3rrpslid.onion)
   - [Eepsite](http://b5nins66p4rpvspyr3j43x26lapr7e5jm4nnvv53gbtljfcbgihq.b32.i2p)
-- [Redlib](https://github.com/redlib-org/redlib): Private front-end for Reddit.
+- [Redlib](https://github.com/redlib-org/redlib)/[Eddrit](https://github.com/corenting/eddrit): Lightweight alternative frontends for Reddit.
   - [Onion](http://dzfahc2b6rbt6zqos4xdfhdzoes25vbsquupge3dcni7rnft7s6fvjyd.onion)
   - [Eepsite](http://qmab3wkogmb6xscouvzpjzaeetemcfikpj7g7vk6wuho4pk7jutq.b32.i2p)
 - [BiblioReads](https://github.com/nesaku/BiblioReads): An Alternative Private Goodreads Front-End.
