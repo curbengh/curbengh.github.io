@@ -107,6 +107,7 @@ updated: 2026-06-08
 - [Splunk Events Deletion](splunk-events-deletion)
 - [SafeDllSearchMode is modified](safedllsearchmode-is-modified)
 - [Secondary Logon service](secondary-logon-service)
+- [Service Disabling/Process Termination using WMIC](service-process-wmic)
 - [Suspicious Logon/Logoff Events](suspicious-logon-logoff-events)
 - [Suspicious Netscaler CLI](suspicious-netscaler-cli)
 - [Suspicious Network Settings](suspicious-network-settings)
