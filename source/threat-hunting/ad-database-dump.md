@@ -5,7 +5,7 @@ date: 2025-07-27
 updated: 2025-08-09
 ---
 
-References: [1](https://redcanary.com/blog/credential-access/), [2](https://www.ired.team/offensive-security/credential-access-and-credential-dumping/ntds.dit-enumeration), [3](https://thedfirreport.com/2025/08/05/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira/)
+References: [1](https://redcanary.com/blog/credential-access/), [2](https://www.ired.team/offensive-security/credential-access-and-credential-dumping/ntds.dit-enumeration), [3](https://thedfirreport.com/2025/08/05/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira/), [4](https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/#credential-access)
 SPL:
 
 ```spl

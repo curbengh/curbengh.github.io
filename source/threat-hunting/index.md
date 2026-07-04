@@ -2,7 +2,7 @@
 title: Splunk Threat Hunting
 layout: page
 date: 2025-01-15
-updated: 2026-06-08
+updated: 2026-07-04
 ---
 
 - [Generate ad_users.csv](ldap-ad-users)
@@ -102,6 +102,7 @@ updated: 2026-06-08
 - [Root certificate installation](root-certificate-installation)
 - [Rundll32 Dumping LSASS Memory](rundll32-dumping-lsass-memory)
 - [SIDHistory compromise](sidhistory-compromise)
+- [SQL credential extraction](sql-credential-extraction)
 - [SQL Server spawning Cmd.exe](sql-server-spawning-cmd-exe)
 - [Suspicious command involving Public folder](suspicious-command-public-folder)
 - [Splunk Events Deletion](splunk-events-deletion)
@@ -123,7 +124,6 @@ updated: 2026-06-08
 - [User Login with Local Credentials](user-login-with-local-credentials)
 - [VSCode/Azure-Dev tunnel](vscode-tunnel)
 - [Veeam backup job deleted](veeam-backup-delete)
-- [Veeam credential extraction](veeam-credential-extraction)
 - [Volt Typhoon IOC](volt-typhoon-ioc)
 - [Volume Shadow Copy](volume-shadow-copy)
 - [Volume Shadow Delete](volume-shadow-delete)
