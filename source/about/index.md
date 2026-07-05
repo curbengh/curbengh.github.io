@@ -70,7 +70,7 @@ More details are available in the following series of posts:
 - [Wikimore](https://git.private.coffee/privatecoffee/wikimore): A simple frontend for Wikimedia projects.
   - [Onion](http://g6gr4dahewooeelw3h44qhqzr3x2jy475xm6rpve4m6hrsqe467lwxad.onion)
   - [Eepsite](http://hflqp2ejxygpj6cdwo3ogfieqmxw3b56w7dblt7bor2ltwk6kcfa.b32.i2p)
-- [Scribe](https://sr.ht/~edwardloveall/scribe/): Alternative front-end to Medium.com
+- [Small](https://git.private.coffee/PrivateCoffee/small): An alternative frontend for Medium articles.
   - [Onion](http://3xejtix5tkneqclwbcuqi2mysi3bqp6qv2b3jwp466itjzjjptiwhdqd.onion)
   - [Eepsite](http://4dpb7ukgzbmmccrdpeyxkghptrh5ulvxlnfeyxay2ftzgkwf75ca.b32.i2p)
 - [LibMedium](https://git.batsense.net/realaravinth/libmedium): Privacy-focused proxy for medium.com
