@@ -273,7 +273,12 @@ Then I point systemd's resolved to stubby. I do configure it to fallback to unen
   networking.nameservers = [ "::1" "127.0.0.1" ];
   services.resolved = {
     enable = true;
-    fallbackDns = [ "2606:4700:4700::1112" "2606:4700:4700::1002" "1.1.1.2" "1.0.0.2" ];
+    settings.Resolve.FallbackDNS = [
+      "2606:4700:4700::1112"
+      "2606:4700:4700::1002"
+      "1.1.1.2"
+      "1.0.0.2"
+    ];
   };
 ```
 
