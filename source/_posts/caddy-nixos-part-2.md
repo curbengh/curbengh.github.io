@@ -388,22 +388,6 @@ Based on [Ubuntu Wiki](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecurity
 
 TCP Fast Open ([TFO](https://en.wikipedia.org/wiki/Tcp_fast_open)) is enabled by default (`tcp_fastopen = 1`) for outgoing connection since 3.13. As of writing, TFO has limited server support; Caddy, Tor and I2Pd don't support it yet, so enabling it for incoming and outgoing connections (`3`) has no effect.
 
-## Hardened kernel
-
-Kernel compiled with additional security-oriented patch set. [More details](https://wiki.archlinux.org/index.php/Security#Kernel_hardening).
-
-_NixOS [defaults](https://nixos.wiki/wiki/Linux_kernel) to the latest LTS kernel_
-
-```nix
-  # Latest LTS kernel
-  boot.kernelPackages = pkgs.linuxPackages_hardened;
-```
-
-```nix
-  # Latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest_hardened;
-```
-
 ## Remove old, unreferenced packages
 
 Since my web server has limited disk space, it needs to run [garbage collector](https://nixos.org/nixos/manual/index.html#sec-nix-gc) from time to time.
@@ -489,9 +473,6 @@ Since [unattended upgrade](#unattended-upgrade) is executed on 00:00, I delay ga
       timerConfig.OnCalendar = "weekly UTC";
     };
   };
-
-  ## Hardened kernel
-  boot.kernelPackages = pkgs.linuxPackages_hardened;
 
   ## Enable BBR
   boot.kernelModules = [ "tcp_bbr" ];
