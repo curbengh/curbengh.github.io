@@ -11,7 +11,7 @@ tags:
 series: true
 ---
 
-> 6 Jul 2022: Updated to NixOS 22.05 syntax.
+> 5 Jul 2026: Updated to NixOS 26.05 syntax.
 
 In this post, I show you how I securely configure the NixOS, the server OS behind this website.
 
