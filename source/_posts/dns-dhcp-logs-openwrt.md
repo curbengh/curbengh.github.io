@@ -6,7 +6,7 @@ tags:
   - openwrt
 ---
 
-I have several devices that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. For NAT table, I use cron to copy filtered "/proc/net/nf_conntrack" to that drive every minute.
+I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia-mi-robot-vacuum-mop-2-mjst1s-network-requirements/)) that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. For NAT table, I use cron to copy filtered "/proc/net/nf_conntrack" to that drive every minute.
 
 ## Create a new network
 
