@@ -2,6 +2,7 @@
 title: Capture dnsmasq DNS and DHCP logs in OpenWRT using rsyslog
 excerpt: without using Pi-hole
 date: 2026-07-30
+updated: 2026-07-31
 tags:
   - openwrt
 ---
@@ -65,6 +66,13 @@ module(load="imudp")
 input(type="imudp" port="514" address="127.0.0.1")
 $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 if $syslogfacility-text == 'local4' and ($msg contains 'query[A]' or $msg contains 'reply' or $msg contains ' DHCP ') and ($msg contains '192.168.100.') then /mnt/sda1/logs/dns
+```
+
+Verify config and restart rsyslog.
+
+```
+rsyslogd -f /etc/rsyslog.conf -N1
+service rsyslog restart
 ```
 
 Rotate the DNS and NAT log files daily with compression and keep it for 7 days.
