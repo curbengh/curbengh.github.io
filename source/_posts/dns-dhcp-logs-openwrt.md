@@ -2,7 +2,7 @@
 title: Capture dnsmasq DNS and DHCP logs in OpenWRT using rsyslog
 excerpt: without using Pi-hole
 date: 2026-07-30
-updated: 2026-07-31
+updated: 2026-08-01
 tags:
   - openwrt
 ---
@@ -12,6 +12,8 @@ I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia
 ## Create a new network
 
 Here is how I create a separate network without VLAN because I don't need the untrusted network to talk to the main network and vice versa. When referring to LuCI web, I will be using `/admin/network/network` to refer to `http://<router-address>/cgi-bin/luci/admin/network/network`.
+
+Save & Apply in each step.
 
 1. Network > Interfaces ("/admin/network/network") > Interfaces tab > Add new interface.
 
@@ -35,7 +37,16 @@ Here is how I create a separate network without VLAN because I don't need the un
     - Covered networks: untrustedlan
     - Allow forward to destination zones: wan
 
-4. Network > Wireless ("/admin/network/wireless") > radio0 > Add. radio0 is usually associated with 2.4GHz wifi. Skip radio1/5Ghz since many IoT devices don't support it, they also can't connect to SSID with both 2.4G and 5Ghz.
+4. Network > Firewall > Port Forwards tab ("/admin/network/firewall/forwards") > Add. This ensure devices always use the router's DNS, though only applies to plain DNS (port 53) not DoH/DoT/DoQ/DNSCrypt.
+
+    - Name: Intercept-DNS-Untrusted
+    - Restrict to address family: IPv4 and IPv6
+    - Protocol: TCP and UDP
+    - Source zone: untrustedlan
+    - External port: 53
+    - Destination zone: *unspecified*
+
+5. Network > Wireless ("/admin/network/wireless") > radio0 > Add. radio0 is usually associated with 2.4GHz wifi. Skip radio1/5Ghz since many IoT devices don't support it, they also can't connect to SSID with both 2.4G and 5Ghz.
 
     - ESSID: untrustedwifi
     - Network: untrustedlan
@@ -43,7 +54,6 @@ Here is how I create a separate network without VLAN because I don't need the un
         - Encryption: WPA2-PSK (some IoT devices are not compatible with WPA2+WPA3 mixed mode)
         - Key: *changeme*
 
-Save & Apply
 
 ### Assign a LAN port to untrusted network
 
