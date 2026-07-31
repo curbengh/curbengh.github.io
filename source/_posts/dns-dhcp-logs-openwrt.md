@@ -35,7 +35,7 @@ Here is how I create a separate network without VLAN because I don't need the un
     - Covered networks: untrustedlan
     - Allow forward to destination zones: wan
 
-4. Network > Wireless ("/admin/network/wireless") > radio0 > Add.
+4. Network > Wireless ("/admin/network/wireless") > radio0 > Add. radio0 is usually associated with 2.4GHz wifi. Skip radio1/5Ghz since many IoT devices don't support it, they also can't connect to SSID with both 2.4G and 5Ghz.
 
     - ESSID: untrustedwifi
     - Network: untrustedlan
