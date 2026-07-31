@@ -7,7 +7,7 @@ tags:
   - openwrt
 ---
 
-I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia-mi-robot-vacuum-mop-2-mjst1s-network-requirements/)) that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. For NAT table, I use cron to copy filtered "/proc/net/nf_conntrack" to that drive every minute.
+I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia-mi-robot-vacuum-mop-2-mjst1s-network-requirements/), [home battery](/microblog/2026/07/31/goodwe-esa-ess-network-requirements/)) that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. For NAT table, I use cron to copy filtered "/proc/net/nf_conntrack" to that drive every minute.
 
 ## Create a new network
 
@@ -24,6 +24,7 @@ Here is how I create a separate network without VLAN because I don't need the un
     - IPv4 address: 192.168.100.1
     - IPv4 network: 255.255.255.0 (/24)
     - DHCP Server tab > General Setup > untick "Ignore interface".
+    - DHCP Server tab > IPv4 Settings > DHCPv4 Service > enabled.
 
 3. Network > Firewall ("/admin/network/firewall") > General Settings tab > Add a new zone.
 
