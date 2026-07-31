@@ -2,7 +2,7 @@
 title: "Setup Caddy as a reverse proxy on NixOS (Part 2: Hardening)"
 excerpt: "Part 2: Securing NixOS"
 date: 2020-03-04
-updated: 2026-07-05
+updated: 2026-08-01
 tags:
   - server
   - linux
@@ -699,7 +699,6 @@ Since [unattended upgrade](#unattended-upgrade) is executed on 00:00, I delay ga
         keys = "proxy-keys.dat";
         inPort = 80;
         address = "::1";
-        destination = "::1";
         port = 8081;
       };
     };

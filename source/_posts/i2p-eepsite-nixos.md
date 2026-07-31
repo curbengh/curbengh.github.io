@@ -2,18 +2,18 @@
 title: "How to make your website available over I2P Eepsite on NixOS"
 excerpt: "A guide on I2P Eepsite on NixOS"
 date: 2020-03-21
-updated: 2020-11-09
+updated: 2026-08-01
 tags:
-- server
-- linux
-- caddy
-- nixos
-- i2p
-- censorship
+  - server
+  - linux
+  - caddy
+  - nixos
+  - i2p
+  - censorship
 series: last
 ---
 
-> 9 Nov 2020: Updated to Caddy 2.1 syntax. Refer to {% post_link caddy-upgrade-v2-proxy 'this article' %} for upgrade guide.
+> 1 Aug 2026: Updated to NixOS 26.05 syntax.
 
 In this segment, I show you how I set up I2P Eepsite service that reverse proxy to curben.netlify.app. This website can be accessed using this [B32 address](http://ggucqf2jmtfxcw7us5sts3x7u2qljseocfzlhzebfpihkyvhcqfa.b32.i2p) or [mdleom.i2p](http://mdleom.i2p/)
 
@@ -53,7 +53,6 @@ To join the I2P network, I'm using [i2pd](https://i2pd.website/), an (unofficial
         keys = "myEep-keys.dat";
         inPort = 80;
         address = "::1";
-        destination = "::1";
         port = 8081;
         # inbound.length = 1;
         # outbound.length = 1;
