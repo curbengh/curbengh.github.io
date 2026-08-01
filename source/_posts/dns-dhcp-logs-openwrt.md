@@ -7,7 +7,7 @@ tags:
   - openwrt
 ---
 
-I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia-mi-robot-vacuum-mop-2-mjst1s-network-requirements/), [home battery](/microblog/2026/07/31/goodwe-esa-ess-network-requirements/)) that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. For NAT table, I use cron to copy filtered "/proc/net/nf_conntrack" to that drive every minute.
+I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia-mi-robot-vacuum-mop-2-mjst1s-network-requirements/), [home battery](/microblog/2026/07/31/goodwe-esa-ess-network-requirements/)) that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains and ports that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. From NAT table I can track the destination ports, so I use cron to take a copy of filtered "/proc/net/nf_conntrack".
 
 ## Create a new network
 
@@ -91,8 +91,6 @@ Rotate the DNS and NAT log files daily with compression and keep it for 7 days.
 ``` plain /etc/logrotate.d/dns-conntrack.conf
 /mnt/sda1/logs/dns /mnt/sda1/logs/conntrack {
     compress
-    copytruncate
-    delaycompress
     daily
     rotate 7
     missingok
@@ -105,7 +103,7 @@ Rotate the DNS and NAT log files daily with compression and keep it for 7 days.
 }
 ```
 
-Store NAT table every minute filtered to specific subnet/IP. Rotate logs close to midnight (of router timezone).
+Copy NAT table every minute filtered to specific subnet/IP. Rotate logs close to midnight (of router timezone).
 
 Append these two lines.
 
