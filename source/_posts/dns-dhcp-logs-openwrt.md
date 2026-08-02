@@ -9,7 +9,7 @@ tags:
 
 I have several devices (e.g. [vacuum cleaner](/microblog/2026/07/30/xiaomi-mijia-mi-robot-vacuum-mop-2-mjst1s-network-requirements/), [home battery](/microblog/2026/07/31/goodwe-esa-ess-network-requirements/)) that I connect them to untrusted network separated from the main network. Recently, I was interested to know the internet domains and ports that they use. In this setup, I log DNS queries to local rsyslog server which then save to an external USB drive. From NAT table I can track the destination ports, so I use cron to take a copy of filtered "/proc/net/nf_conntrack". From the logs, I use [scripts](#monitor-outgoing-connections) to create a summary of internet connections.
 
-## Create a new network
+## Create a new network and link to wifi ssid
 
 Here is how I create a separate network without VLAN because I don't need the untrusted network to talk to the main network and vice versa. When referring to LuCI web, I will be using `/admin/network/network` to refer to `http://<router-address>/cgi-bin/luci/admin/network/network`.
 
@@ -49,9 +49,9 @@ Save & Apply in each step.
      - Encryption: WPA2-PSK (some IoT devices are not compatible with WPA2+WPA3 mixed mode)
      - Key: _changeme_
 
-### Assign a LAN port to untrusted network
+### Assign a LAN port to untrusted network (if applicable)
 
-If an untrusted device needs wired connection, we can assigned a LAN port to the untrusted network created in the previous section.
+If an untrusted device needs wired connection, we can assign a LAN port to the untrusted network created in the previous section.
 
 1. Network > Interfaces ("/admin/network/network") > Devices tab > Configure "br-lan" > Bridge ports > untick the relevant switch port.
 2. Network > Interfaces ("/admin/network/network") > Interfaces tab > Edit "untrustedlan" > Device row > select the relevant switch port.
