@@ -187,43 +187,34 @@ grep -P -o '[\d.]+ is [^.]+' | \
 sed -r 's| is |\t|' | \
 sort -u > srcip_srchost_dhcp
 
-# dst_host dst_host's IPs
+# src_ip dst_host dst_host's IPs
 cat dns | \
 grep -P -o '[\d.]+\/\d+ reply \S+ is [\d.]+' | \
-# append src_ip>dst_host column to be used as join key
-perl -pe 's|([\d.]+)\/\d+ reply (\S+) is ([\d.]+)|\3\t\2\t\1>\2|' | \
-# google.com 8.8.8.8 192.168.100.123>google.com
-sort -u > dsthost_ip_srcip_dns
+# append src_ip>dst_ip column to be used as join key
+# 192.168.100.123 google.com 8.8.8.8 192.168.100.123>8.8.8.8
+perl -pe 's|([\d.]+)\/\d+ reply (\S+) is ([\d.]+)|\1\t\2\t\3\t\1>\3|' | \
+sort -u | \
+# sort join-key src_ip>dst_ip
+sort -k 4,4 > srcip_dsthost_ip_dns
 
-sort -k 3,3 dsthost_ip_srcip_dns > dsthost_ip_srcip_sorted_link_dns
-
-# src_ip dst_ip protocol dport
+# src_ip dst_ip protocol dport src_ip>dst_ip
 cat conntrack | \
 # -a ignore invalid characters in conntrack
 grep -Poa '^ipv4\s+\d+\s+\w+\s+\d+(?: \d+)? src=[\d.]+ dst=[\d.]+(?: sport=\d+ dport=\d+)?' | \
 # exclude router
 grep -Fa -v '.1 ' | \
-perl -pe 's|^ipv4\s+\d+ (\w+)\s+\d+(?: \d+)?(?: \w+)? src=([\d.]+) dst=([\d.]+)(?: sport=\d+ dport=(\d+))?|\2\t\3\t\1\t\4|' | \
+perl -pe 's|^ipv4\s+\d+ (\w+)\s+\d+(?: \d+)?(?: \w+)? src=([\d.]+) dst=([\d.]+)(?: sport=\d+ dport=(\d+))?|\2\t\3\t\1\t\4\t\2>\3|' | \
 # icmp doesn't have port
-sed -rz 's|\t\n|\t-\n|g' | \
+sed -r 's|\t\t|\t-\t|' | \
 sort -u > srcip_dstip_protocol_dport_nat
 
-# src_ip src_host dst_ip protocol dport
-join -t $'\t' -1 1 -2 1 -o 1.1,2.2,1.2,1.3,1.4 srcip_dstip_protocol_dport_nat srcip_srchost_dhcp > srcip_srchost_dstip_protocol_dport_tmp
-
-# output: src_ip src_host dst_ip dst_host protocol dport
-# sort dst_ip
-sort -k 3,3 srcip_srchost_dstip_protocol_dport_tmp | \
-# join by dst_ip, including dst_ip without corresponding domain
-# may match all domains of a dst_ip, even though src_ip never DNS-queried it
-join -t $'\t' -1 3 -2 1 -a 1 -o 1.1,1.2,1.3,2.2,1.4,1.5 --nocheck-order - dsthost_ip_srcip_dns | \
-# dst_ip with unknown domain "-", connection was made without prior DNS query
-sed -r 's|\t\t|\t-\t|g' | \
-# append src_ip>dst_host column to be used as join key
-sed -r 's|([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)|\1\t\2\t\3\t\4\t\5\t\6\t\1>\4|' | \
-sort -k 7,7 | \
-# check whether src_ip DNS-queried dsthost
-join -t $'\t' -1 7 -2 3 -a 1 -o 1.1,1.2,1.3,1.4,1.5,1.6,2.3 - dsthost_ip_srcip_sorted_link_dns | \
+# src_ip src_host dst_ip protocol dport src_ip>dst_ip
+join -t $'\t' -1 1 -2 1 -o 1.1,2.2,1.2,1.3,1.4,1.5 srcip_dstip_protocol_dport_nat srcip_srchost_dhcp | \
+# sort join-key src_ip>dst_ip
+sort -k 6,6 | \
+join -t $'\t' -1 6 -2 4 -a 1 -o 1.1,1.2,1.3,2.2,1.4,1.5,1.6 - srcip_dsthost_ip_dns | \
+# set unknown dsthost as "-", connection was made without prior DNS query
+sed -r 's|\t\t|\t-\t|' | \
 # include only domains that were DNS-queried by specific src_ip, and unknown domains
 grep -P '(\t-\t|>)' | \
 # remove last column
