@@ -1,8 +1,8 @@
 ---
 title: Monitor traffic in OpenWRT using rsyslog
-excerpt: Store dnsmasq (DHCP & DNS) and conntrack logs using rsyslog
+excerpt: Store dnsmasq (DHCP & DNS) and NAT/conntrack logs using rsyslog then tie everything together
 date: 2026-07-30
-updated: 2026-08-02
+updated: 2026-08-04
 tags:
   - openwrt
 ---
