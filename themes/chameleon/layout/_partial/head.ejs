@@ -31,6 +31,9 @@ if (is_archive()) {
 <% } else if (theme.rss) { %>
   <%- feed_tag(theme.rss) %>
 <% } %>
+<% if (theme.feed2) { %>
+  <%- feed_tag(theme.feed2.path, { title: theme.feed2.title, type: theme.feed2.type }) %>
+<% } %>
   <%/* Favicon */%>
   <%/* https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs */%>
   <link rel="icon" href="<%- url_for('/favicon.ico') %>">

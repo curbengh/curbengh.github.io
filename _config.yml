@@ -111,6 +111,12 @@ theme_config:
   # Load forkawesome icons?
   icons: false
 
+  # secondary feed
+  feed2:
+    path: atom-microblog.xml
+    title: "Ming Di Leom - Microblog"
+    type: atom
+
 # https://github.com/curbengh/hexo-yam
 minify:
   svg:
