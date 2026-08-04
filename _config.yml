@@ -4,7 +4,7 @@
 
 # Site
 title: Ming Di Leom
-subtitle:
+subtitle: Microblog
 description:
 author: "Ming Di Leom"
 language: en-GB
@@ -96,6 +96,7 @@ theme_config:
     Microblog: /microblog/
     About: /about/
     Feed: /atom.xml
+    "Microblog-Feed": /atom-microblog.xml
 
   footer:
     Disclaimer: /disclaimer/
@@ -106,6 +107,12 @@ theme_config:
 
   # Load forkawesome icons?
   icons: false
+
+  # secondary feed
+  feed2:
+    path: atom.xml
+    title: "Ming Di Leom - Blog"
+    type: atom
 
 # https://github.com/curbengh/hexo-yam
 minify:
