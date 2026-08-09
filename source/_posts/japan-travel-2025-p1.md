@@ -2,6 +2,7 @@
 title: Gunma and Nagano Travel (Part 1)
 excerpt: "Day 1: Haneda Airport, Ueno"
 date: 2026-01-07
+updated: 2026-08-09
 tags:
 - travel
 ---
@@ -9,8 +10,8 @@ tags:
 This is a series of blog posts chronicling my Gunma and Nagano travel in 2025:
 
 1. Day 1: Haneda Airport, Ueno
-2. Day 1-2: Takasaki, Maebashi (draft)
-3. and so on.
+2. {% post_link japan-travel-2025-p2 'Day 1: Takasaki, Maebashi' %}
+3. Day 2: Mount Akagi, Mount Haruna
 
 After a visit to Aomori prefecture (青森県) back in 2023 which I enjoyed thoroughly, I decided to visit Japan again this year. This time I visited Gunma (群馬県) and Nagano (長野県) prefectures. According to the official [Japan Tourism Statistics](https://statistics.jnto.go.jp/en/graph/#graph--inbound--prefecture--ranking), Gunma and Nagano had international tourist visit rate of 0.5% and 3.0% in 2024, while Aomori was 1% in 2023.
 
