@@ -56,6 +56,7 @@ updated: 2026-07-04
 - [File hiding using attrib.exe observed](file-hiding-using-attrib-exe-observed)
 - [FileFix detection](filefix-detection)
 - [Gootloader IOC](gootloader-ioc)
+- [Group Policy Object change](gpo-change)
 - [Headless Browser](headless-browser)
 - [Impacket detection](impacket-detection)
 - [InnoDownloadPlugin user-agent observed](innodownloadplugin-user-agent-observed)
