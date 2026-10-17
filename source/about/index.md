@@ -31,6 +31,8 @@ updated: 2026-06-23
 
 - [**splunk-scripts**](https://gitlab.com/curben/splunk-scripts): Splunk add-ons, patches, setup scripts and [threat hunting](/threat-hunting/).
 
+- [**openwrt-scripts**](https://gitlab.com/curben/openwrt-scripts): Miscellaneous scripts for OpenWrt.
+
 - [**aws-scripts**](https://gitlab.com/curben/aws-scripts): AWS CDK templates and security audit scripts.
 
 - (Inactive) Core contributor of [Hexo](https://github.com/hexojs/hexo), a Nodejs-powered static site generator. (This site is created using Hexo)
