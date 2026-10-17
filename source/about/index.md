@@ -2,7 +2,7 @@
 title: About
 layout: page
 date: 2019-09-20
-updated: 2026-06-23
+updated: 2026-10-17
 ---
 
 ## About Me
