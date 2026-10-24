@@ -2,7 +2,7 @@
 title: Monitor traffic in OpenWRT using rsyslog
 excerpt: Store dnsmasq (DHCP & DNS) and NAT/conntrack logs using rsyslog then tie everything together
 date: 2026-07-30
-updated: 2026-08-04
+updated: 2026-10-24
 tags:
   - openwrt
 ---
@@ -76,10 +76,11 @@ if $syslogfacility-text == 'local4' and ($msg contains 'query[A]' or $msg contai
 if $syslogfacility-text == 'kern' and $syslogseverity-text == 'warn' and $msg contains 'Block-Other-Ports' then /mnt/sda1/logs/fw
 ```
 
-Verify config and restart rsyslog.
+Verify config, enable and restart rsyslog.
 
 ```
 rsyslogd -f /etc/rsyslog.conf -N1
+service rsyslog enable
 service rsyslog restart
 ```
 
@@ -92,6 +93,7 @@ Rotate the DNS and NAT log files daily with compression and keep it for 7 days.
     rotate 7
     missingok
     notifempty
+    sharedscripts
     postrotate
         service log restart
         sleep 1
@@ -123,7 +125,8 @@ Append these two lines
 
 2. Network > DNS ("/admin/network/dns") > Log tab, tick "Log queries" and select LOCAL4.
 3. Go to some websites in that untrusted network.
-4. Check "/mnt/sda1/logs/dns" and "/mnt/sda1/logs/conntrack".
+4. Status > System Log ("/admin/status/logs/syslog") > facility: Local 4. If there is no log, restart dnsmasq (`service dnsmasq restart`).
+5. Check "/mnt/sda1/logs/dns" and "/mnt/sda1/logs/conntrack".
 
 ```plain /mnt/sda1/logs/dns
 Jul 30 01:23:40 OpenWrt dnsmasq[1]: 86 127.0.0.1/57738 DHCP 192.168.100.101 is iotxxx.lan
@@ -259,5 +262,5 @@ Save & Apply.
 If there is any outgoing traffic being blocked in the untrustedlan, the log file will show something like this, where traffic to 123.123.123.123 UDP port 8053 has been blocked,
 
 ```plain /mnt/sda1/logs/fw
-Sat Aug  1 01:23:45 2026 kern.warn kernel: [12345.123456] Block-Other-Ports-Untrusted: IN=phy0-ap1 OUT=eth1 MAC=xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx SRC=192.168.100.101 DST=123.123.123.123 LEN=60 TOS=0x00 PREC=0x00 TTL=63 ID=15757 DF PROTO=UDP SPT=54321 DPT=8053 LEN=40
+Aug  1 01:23:45 OpenWRT kernel: [12345.123456] Block-Other-Ports-Untrusted: IN=phy0-ap1 OUT=eth1 MAC=xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx SRC=192.168.100.101 DST=123.123.123.123 LEN=60 TOS=0x00 PREC=0x00 TTL=63 ID=15757 DF PROTO=UDP SPT=54321 DPT=8053 LEN=40
 ```
