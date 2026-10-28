@@ -2,7 +2,7 @@
 title: Configuring NTS in OpenWRT
 excerpt: Obtain time in an authenticated manner
 date: 2024-10-12
-updated: 2025-05-08
+updated: 2026-11-05
 tags:
   - openwrt
 ---
@@ -16,13 +16,22 @@ Disable `sysntpd` so that there is only one NTP client.
 ```
 service sysntpd stop
 service sysntpd disable
+uci set system.ntp.enabled="0"
+uci commit system
+```
+
+Append these lines to "/etc/rc.local" so that it stays disabled even after firmware upgrade.
+
+```
+service sysntpd stop
+service sysntpd disable
 ```
 
 Install `chrony-nts` package, `chrony` package does not support NTS.
 
 ```
-opkg update
-opkg install chrony-nts
+apk update
+apk add chrony-nts
 ```
 
 Disable NTP in chrony.
