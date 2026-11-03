@@ -3,7 +3,11 @@
     <header class="archive-article-header">
       <span class="archive-article-date"><%- partial('post/date') %></span>
       <%- partial('post/title', {class_name: 'archive-article-title'}) %>
-      <span><%- post.more %></span>
+      <span><% if (post.excerpt) { %>
+        <%- post.excerpt %><a href="<%- url_for(post.path) %>">read more</a>
+      <% } else { %>
+        <%- post.content %>
+      <% } %></span>
     </header>
   </div>
 </article>
