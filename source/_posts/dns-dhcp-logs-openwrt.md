@@ -2,7 +2,7 @@
 title: Monitor traffic in OpenWRT using rsyslog
 excerpt: Store dnsmasq (DHCP & DNS) and NAT/conntrack logs using rsyslog then tie everything together
 date: 2026-07-30
-updated: 2026-10-24
+updated: 2026-11-05
 tags:
   - openwrt
 ---
@@ -88,19 +88,20 @@ Rotate the DNS and NAT log files daily with compression and keep it for 7 days.
 
 ```plain /etc/logrotate.d/dns-conntrack-fw.conf
 /mnt/sda1/logs/dns /mnt/sda1/logs/conntrack /mnt/sda1/logs/fw {
-    compress
-    daily
-    rotate 7
-    missingok
-    notifempty
-    sharedscripts
-    postrotate
-        service log restart
-        sleep 1
-        logger -p warn -s "Log rotation complete"
-    endscript
+  compress
+  daily
+  rotate 7
+  missingok
+  notifempty
+  sharedscripts
+  copytruncate
+  postrotate
+    logger -p warn -s "Log rotation complete"
+  endscript
 }
 ```
+
+The above config is based on the OpenWRT [logging guide](https://openwrt.org/docs/guide-user/base-system/log.essentials#logrotate), but I removed `service log restart`. I noticed restarting that service may interrupt [dnsmasq logging](#enable-syslog-and-dnsmasq-logging). `copytruncate` option is necessary when there is no service restart.
 
 Copy NAT table every minute filtered to specific subnet/IP. Rotate logs close to midnight (of router timezone).
 
@@ -118,6 +119,8 @@ Append these two lines
 /etc/logrotate.d/
 ```
 
+## Enable syslog and dnsmasq logging
+
 1. In LuCI, System > System ("/admin/system/system") > Logging tab
    - External system log server: 127.0.0.1
    - External system log server port: 514
@@ -125,7 +128,7 @@ Append these two lines
 
 2. Network > DNS ("/admin/network/dns") > Log tab, tick "Log queries" and select LOCAL4.
 3. Go to some websites in that untrusted network.
-4. Status > System Log ("/admin/status/logs/syslog") > facility: Local 4. If there is no log, restart dnsmasq (`service dnsmasq restart`).
+4. Status > System Log ("/admin/status/logs/syslog") > facility: Local 4.
 5. Check "/mnt/sda1/logs/dns" and "/mnt/sda1/logs/conntrack".
 
 ```plain /mnt/sda1/logs/dns
@@ -150,7 +153,7 @@ grep -P '192\.168\.100\.101/\d+ query\[A\]' dns | cut -d' ' -f9 | grep -F -v '.l
 
 ### List A record queries of all client devices
 
-```sh
+{% codeblock dns-logs.sh lang:sh https://gitlab.com/curben/openwrt-scripts/-/blob/main/monitor-traffic-rsyslog/dns-logs.sh source %}
 #!/bin/sh
 
 # src_ip src_host
@@ -170,7 +173,7 @@ sort -u > srcip_dsthost
 join -t $'\t' -1 1 -2 1 -o 1.1,2.2,1.2 srcip_dsthost srcip_srchost | \
 sort -k 2,2 -k 3,3 | \
 sed '1i srcip\tsrchost\tdsthost' > srcip_srchost_dsthost.tsv
-```
+{% endcodeblock %}
 
 Output
 
@@ -180,7 +183,7 @@ Output
 
 ### List all outbound IP addresses and ports with corresponding domains
 
-```sh
+{% codeblock ip-port-traffic lang:sh https://gitlab.com/curben/openwrt-scripts/-/blob/main/monitor-traffic-rsyslog/ip-port-traffic.sh source %}
 #!/bin/sh
 
 # src_ip src_host
@@ -226,7 +229,7 @@ sort -u | \
 # sort by src_host then dst_host
 sort -k 2,2 -k 4,4 | \
 sed '1i srcip\tsrchost\tdstip\tdsthost\tprotocol\tdport' > srcip_srchost_dstip_dsthost_protocol_dport.tsv
-```
+{% endcodeblock %}
 
 Output
 
