@@ -2,6 +2,7 @@
 title: Obtain HTTPS/TLS certificate in OpenWRT using acme.sh and cloudflared
 excerpt: Avoid opening inbound port
 date: 2026-11-13
+updated: 2026-11-21
 tags:
   - openwrt
   - cloudflare
@@ -182,4 +183,4 @@ It's probably why Caddy still [defaults to](https://caddyserver.com/docs/caddyfi
 
 ## DNS-PERSIST-01
 
-Cloudflare Tunnel is simply a workaround to avoid storing DNS API key for DNS-01 validation and opening up inbound port for HTTP-01 validation. There is an upcoming [DNS-PERSIST-01](https://letsencrypt.org/2026/02/18/dns-persist-01) validation that I'm looking forward to replace this workaround, when it's ready [in 2027](https://www.certkit.io/blog/whats-taking-dns-persist-01-so-long).
+Cloudflare Tunnel is simply a workaround to avoid storing DNS API key for DNS-01 validation or opening up an inbound port for HTTP-01 validation. There is an upcoming [DNS-PERSIST-01](https://letsencrypt.org/2026/02/18/dns-persist-01) validation that I'm looking forward to replace this workaround, when it's ready [in 2027](https://www.certkit.io/blog/whats-taking-dns-persist-01-so-long).
